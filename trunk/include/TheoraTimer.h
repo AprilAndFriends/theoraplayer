@@ -1,9 +1,8 @@
 /************************************************************************************
-This source file is part of the TheoraVideoPlugin ExternalTextureSource PlugIn 
-for OGRE3D (Object-oriented Graphics Rendering Engine)
-For latest info, see http://ogrevideo.sourceforge.net/
+This source file is part of the Theora Video Playback Library
+For latest info, see http://libtheoraplayer.sourceforge.net/
 *************************************************************************************
-Copyright © 2008-2009 Kresimir Spes (kreso@cateia.com)
+Copyright (c) 2008-2009 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License (LGPL) as published by the 
@@ -25,26 +24,21 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include "TheoraExport.h"
 
-namespace Ogre
+
+class TheoraPlayerExport TheoraTimer
 {
-	/**
-		
-	*/
-	class _OgreTheoraExport TheoraTimer
-	{
-	public:
-		float mTime;
-		bool mPaused;
+public:
+	float mTime;
+	bool mPaused;
 
-		TheoraTimer();
+	TheoraTimer();
 
-		virtual float getTime();
-		virtual void update(float time_increase);
-		virtual void pause();
-		virtual void play();
-		virtual bool isPaused();
-		virtual void stop();
-		virtual void seek(float time);
-	};
-}
+	virtual float getTime();
+	virtual void update(float time_increase);
+	virtual void pause();
+	virtual void play();
+	virtual bool isPaused();
+	virtual void stop();
+	virtual void seek(float time);
+};
 #endif

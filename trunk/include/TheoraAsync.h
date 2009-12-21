@@ -18,3 +18,24 @@ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place - Suite 330, Boston, MA 02111-1307, USA, or go to
 http://www.gnu.org/copyleft/lesser.txt.
 *************************************************************************************/
+#ifndef _TheoraAsync_h
+#define _TheoraAsync_h
+
+// WARNING: This code is not yet platform independent. it will be soon enough.
+
+class TheoraMutex
+{
+public:
+	TheoraMutex();
+	void lock();
+	void unlock();
+};
+
+class TheoraThread
+{
+public:
+	virtual void startThread();
+};
+
+
+#endif

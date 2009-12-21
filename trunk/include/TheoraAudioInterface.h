@@ -1,9 +1,8 @@
 /************************************************************************************
-This source file is part of the TheoraVideoPlugin ExternalTextureSource PlugIn 
-for OGRE3D (Object-oriented Graphics Rendering Engine)
-For latest info, see http://ogrevideo.sourceforge.net/
+This source file is part of the Theora Video Playback Library
+For latest info, see http://libtheoraplayer.sourceforge.net/
 *************************************************************************************
-Copyright © 2008-2009 Kresimir Spes (kreso@cateia.com)
+Copyright (c) 2008-2009 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License (LGPL) as published by the 
@@ -24,35 +23,30 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include "TheoraExport.h"
 
-namespace Ogre
+class TheoraVideoClip;
+
+class TheoraPlayerExport TheoraAudioInterface
 {
-	class TheoraVideoClip;
+public:
+	int mFreq;
+	int mNumChannels;
+	TheoraVideoClip* mClip;
 
-	class _OgreTheoraExport TheoraAudioInterface
-	{
-	public:
-		int mFreq;
-		int mNumChannels;
-		TheoraVideoClip* mClip;
+	TheoraAudioInterface(TheoraVideoClip* owner,int nChannels,int freq);
+	~TheoraAudioInterface();
 
-		TheoraAudioInterface(TheoraVideoClip* owner,int nChannels,int freq);
-		~TheoraAudioInterface();
+	virtual void insertData(float** data,int nSamples)=0;
+	virtual void destroy() = 0;
 
-		virtual void insertData(float** data,int nSamples)=0;
-		virtual void destroy() = 0;
+};
 
-	};
+class TheoraPlayerExport TheoraAudioInterfaceFactory
+{
 
-	class _OgreTheoraExport TheoraAudioInterfaceFactory
-	{
+public:
+	virtual TheoraAudioInterface* createInstance(TheoraVideoClip* owner,int nChannels,int freq)=0;
+};
 
-	public:
-		virtual TheoraAudioInterface* createInstance(TheoraVideoClip* owner,int nChannels,int freq)=0;
-	};
-
-
-
-} // end namespace Ogre
 
 #endif
 
