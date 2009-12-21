@@ -22,6 +22,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef _TheoraVideoClip_h
 #define _TheoraVideoClip_h
 
+#include <string>
 #include <theora/theoradec.h>
 #include <vorbis/codec.h>
 
@@ -35,12 +36,11 @@ enum TheoraOutputMode
 };
 
 class TheoraMutex;
-
-
 class TheoraFrameQueue;
 class TheoraTimer;
 class TheoraAudioInterface;
 class TheoraWorkerThread;
+class TheoraDataSource;
 
 
 /**
@@ -54,8 +54,7 @@ class TheoraPlayerExport TheoraVideoClip
 
 	TheoraFrameQueue* mFrameQueue;
 	TheoraAudioInterface* mAudioInterface;
-	DataStreamPtr mStream;
-	TexturePtr mTexture;
+	TheoraDataSource* mStream;
 
 	TheoraTimer *mTimer,*mDefaultTimer;
 
@@ -103,7 +102,7 @@ class TheoraPlayerExport TheoraVideoClip
 	float mUserPriority;
 
 
-	pt::mutex* mAudioMutex; //! syncs audio decoding and extraction
+	TheoraMutex* mAudioMutex; //! syncs audio decoding and extraction
 
 	/**
 	 * Get the priority of a video clip. based on a forumula that includes user
@@ -117,7 +116,7 @@ class TheoraPlayerExport TheoraVideoClip
 	void readTheoraVorbisHeaders();
 	void doSeek(); //! called by WorkerThread to seek to mSeekPos
 public:
-	TheoraVideoClip(std::string name,int nPrecachedFrames);
+	TheoraVideoClip(TheoraDataSource* data_source,int nPrecachedFrames);
 	~TheoraVideoClip();
 
 	std::string getName();
@@ -132,16 +131,9 @@ public:
 	int getTextureWidth();
 	//! return actual height that the texture uses (nearest power of two dimension)
 	int getTextureHeight();
-	//! return texture pointer
-	TexturePtr getTexture();
 
 	TheoraTimer* getTimer();
 	void setTimer(TheoraTimer* timer);
-
-	void createDefinedTexture(
-		const std::string& name, const std::string& material_name,
-		const std::string& group_name, int technique_level, int pass_level, 
-		int tex_level);
 
 	void decodeNextFrame();
 

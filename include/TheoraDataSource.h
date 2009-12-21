@@ -21,7 +21,9 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef _TheoraDataSource_h
 #define _TheoraDataSource_h
 
+#ifndef _FILE_DEFINED
 struct FILE;
+#endif
 #include <string>
 
 /**
@@ -39,8 +41,10 @@ public:
 		Reads nBytes bytes from data source and returns number of read bytes.
 		if function returns less bytes then nBytes, the system assumes EOF is reached.
 	*/
-	virtual int read(int nBytes);
-	
+	virtual int read(void* output,int nBytes)=0;
+	virtual std::string repr()=0;
+	virtual void seek(unsigned long byte_index)=0;
+	unsigned long size();
 };
 
 
@@ -50,10 +54,14 @@ public:
 class TheoraFileDataSource : public TheoraDataSource
 {
 	FILE* mFilePtr;
+	std::string mFilename;
 public:
 	TheoraFileDataSource(std::string filename);
 	
-	int read(int nBytes);
+	int read(void* output,int nBytes);
+	void seek(unsigned long byte_index);
+	std::string repr() { return mFilename; }
+	unsigned long size();
 };
 
 

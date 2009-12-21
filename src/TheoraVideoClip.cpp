@@ -18,14 +18,15 @@ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place - Suite 330, Boston, MA 02111-1307, USA, or go to
 http://www.gnu.org/copyleft/lesser.txt.
 *************************************************************************************/
-#include <ptypes/pasync.h>
-
 #include "TheoraVideoClip.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoFrame.h"
 #include "TheoraFrameQueue.h"
 #include "TheoraAudioInterface.h"
 #include "TheoraTimer.h"
+#include "TheoraDataSource.h"
+#include "TheoraUtil.h"
+#include "TheoraException.h"
 
 int gNameCounter=0;
 
@@ -47,12 +48,12 @@ void memset_uint(void* buffer,unsigned int colour,unsigned int size_in_bytes)
 	}
 }
 
-TheoraVideoClip::TheoraVideoClip(std::string name,int nPrecachedFrames):
+TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,int nPrecachedFrames):
 	mTheoraStreams(0),
 	mVorbisStreams(0),
 	mSeekPos(-1),
 	mDuration(-1),
-	mName(name),
+	mName(data_source->repr()),
 	mOutputMode(TH_RGB),
 	mBackColourChanged(0),
 	mAudioInterface(NULL),
@@ -61,10 +62,9 @@ TheoraVideoClip::TheoraVideoClip(std::string name,int nPrecachedFrames):
 	mEndOfFile(0),
 	mTheoraDecoder(0),
 	mTheoraSetup(0),
-	mTexture(0),
 	mAudioSkipSeekFlag(0)
 {
-	mAudioMutex=new pt::mutex();
+	mAudioMutex=new TheoraMutex;
 
 	mTimer=mDefaultTimer=new TheoraTimer();
 
@@ -90,15 +90,15 @@ TheoraVideoClip::~TheoraVideoClip()
 	// wait untill a worker thread is done decoding the frame
 	while (mAssignedWorkerThread)
 	{
-		pt::psleep(1);
+		psleep(1);
 	}
 
 	delete mDefaultTimer;
 
-	if (!(mStream.isNull()))
+	if (!mStream)
 	{
-		mStream->close();
-		mStream.setNull();
+		delete mStream;
+		mStream=0;
 	}
 
 	if (mFrameQueue) delete mFrameQueue;
@@ -108,14 +108,6 @@ TheoraVideoClip::~TheoraVideoClip()
 
 	if (mTheoraSetup)
 		th_setup_free(mTheoraSetup);
-
-	if (!mTexture.isNull())
-	{
-		std::string name=mTexture->getName();
-		mTexture.setNull();
-		TextureManager::getSingleton().unload(name);
-		
-	}
 
 	if (mAudioInterface)
 	{
@@ -160,7 +152,7 @@ void TheoraVideoClip::decodeNextFrame()
 	ogg_int64_t granulePos;
 	th_ycbcr_buffer buff;
 
-	//LogManager::getSingleton().logMessage("Decoding video "+mName);
+	//writelog("Decoding video "+mName);
 
 	for(;;)
 	{
@@ -282,15 +274,13 @@ void TheoraVideoClip::blitFrameCheck(float time_increase)
 		mSeekPos=-1; // -3 ensures the first frame after seek gets displayed even when the movie is paused
 
 	// use blitFromMemory or smtg faster
-	unsigned char* texData=(unsigned char*) mTexture->getBuffer()->lock(HardwareBuffer::HBL_DISCARD);
-	memcpy(texData,frame->getBuffer(),mTexWidth*mHeight*4);
+//	unsigned char* texData=(unsigned char*) mTexture->getBuffer()->lock(HardwareBuffer::HBL_DISCARD);
+//	memcpy(texData,frame->getBuffer(),mTexWidth*mHeight*4);
 	if (mBackColourChanged)
 	{
-		memset_uint(texData+mTexWidth*mHeight*4,mFrameQueue->getBackColour(),mTexWidth*(mTexHeight-mHeight)*4);
+//		memset_uint(texData+mTexWidth*mHeight*4,mFrameQueue->getBackColour(),mTexWidth*(mTexHeight-mHeight)*4);
 		mBackColourChanged=false;
 	}
-
-	mTexture->getBuffer()->unlock();
 
 	mFrameQueue->pop(); // after transfering frame data to the texture, free the frame
 	                    // so it can be used again
@@ -335,7 +325,7 @@ void TheoraVideoClip::decodedAudioCheck()
 	
 	mAudioMutex->unlock();
 }
-
+/*
 void TheoraVideoClip::createDefinedTexture(const std::string& name, const std::string& material_name,
                           const std::string& group_name, int technique_level, int pass_level, 
 		                  int tex_level)
@@ -377,10 +367,11 @@ void TheoraVideoClip::createDefinedTexture(const std::string& name, const std::s
 	mat.setScale(Vector3((float) mWidth/mTexWidth, (float) mHeight/mTexHeight,1));
 	t->setTextureTransform(mat);
 }
-
+*/
+/*
 void TheoraVideoClip::load(const std::string& file_name,const std::string& group_name)
 {
-	if (!(mStream.isNull()))
+	if (!mStream)
         OGRE_EXCEPT( Exception::ERR_INVALIDPARAMS, "ogg_video "+file_name+" already loded!",
 		             "TheoraVideoClip::load" );
 
@@ -441,7 +432,7 @@ void TheoraVideoClip::load(const std::string& file_name,const std::string& group
 	}
 	if (mDuration < 0)
 	{
-		LogManager::getSingleton().logMessage("TheoraVideoPlugin: unable to determine file duration!");
+		writelog("TheoraVideoPlugin: unable to determine file duration!");
 	}
 	// restore to beginning of stream.
 	// the following solution is temporary and hacky, will be replaced soon
@@ -474,7 +465,7 @@ void TheoraVideoClip::load(const std::string& file_name,const std::string& group
 		if (audio_factory) setAudioInterface(audio_factory->createInstance(this,mVorbisInfo.channels,mVorbisInfo.rate));
 	}
 }
-
+*/
 void TheoraVideoClip::readTheoraVorbisHeaders()
 {
 	ogg_packet tempOggPacket;
@@ -555,12 +546,10 @@ void TheoraVideoClip::readTheoraVorbisHeaders()
 			 ( iSuccess = ogg_stream_packetout( &mTheoraStreamState, &tempOggPacket)) ) 
 		{
 			if( iSuccess < 0 ) 
-				OGRE_EXCEPT( Exception::ERR_INVALIDPARAMS, "Error parsing Theora stream headers.",
-					"TheoraVideoClip::readTheoraVorbisHeaders" );
+				throw TheoraGenericException("Error parsing Theora stream headers.");
 
 			if( !th_decode_headerin(&mTheoraInfo, &mTheoraComment, &mTheoraSetup, &tempOggPacket) )
-				OGRE_EXCEPT( Exception::ERR_INVALIDPARAMS, "invalid stream",
-					"TheoraVideoClip::readTheoraVorbisHeaders ");
+				throw TheoraGenericException("invalid theora stream");
 
 			mTheoraStreams++;			
 		} //end while looking for more theora headers
@@ -571,12 +560,10 @@ void TheoraVideoClip::readTheoraVorbisHeaders()
 			 ( iSuccess=ogg_stream_packetout( &mVorbisStreamState, &tempOggPacket))) 
 		{
 			if(iSuccess < 0) 
-				OGRE_EXCEPT( Exception::ERR_INVALIDPARAMS, "Error parsing vorbis stream headers",
-					"TheoraVideoClip::readTheoraVorbisHeaders ");
+				throw TheoraGenericException("Error parsing vorbis stream headers");
 
 			if(vorbis_synthesis_headerin( &mVorbisInfo, &mVorbisComment,&tempOggPacket)) 
-				OGRE_EXCEPT( Exception::ERR_INVALIDPARAMS, "invalid stream",
-					"TheoraVideoClip::readTheoraVorbisHeaders ");
+				throw TheoraGenericException("invalid stream");
 
 			mVorbisStreams++;
 		} //end while looking for more vorbis headers
@@ -596,14 +583,10 @@ void TheoraVideoClip::readTheoraVorbisHeaders()
 			ogg_sync_wrote( &mOggSyncState, bytesRead );
 
 			if( bytesRead == 0 )
-				OGRE_EXCEPT( Exception::ERR_INVALIDPARAMS, "End of file found prematurely",
-					"TheoraVideoClip::parseVorbisTheoraHeaders " );
+				throw TheoraGenericException("End of file found prematurely");
 		}
 	} //end while looking for all headers
-
-	std::string temp1 = StringConverter::toString( mVorbisStreams );
-	std::string temp2 = StringConverter::toString( mTheoraStreams );
-	LogManager::getSingleton().logMessage("Vorbis Headers: " + temp1 + " Theora Headers : " + temp2);
+//	writelog("Vorbis Headers: " + str(mVorbisHeaders) + " Theora Headers : " + str(mTheoraHeaders));
 }
 
 std::string TheoraVideoClip::getName()
@@ -810,9 +793,4 @@ int TheoraVideoClip::getTextureWidth()
 int TheoraVideoClip::getTextureHeight()
 {
 	return mTexHeight;
-}
-
-TexturePtr TheoraVideoClip::getTexture()
-{
-	return mTexture;
 }

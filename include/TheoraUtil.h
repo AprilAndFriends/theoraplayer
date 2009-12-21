@@ -4,10 +4,8 @@
 #include <string>
 #include <vector>
 
-#define foreach(type,lst) for (std::list<type>::iterator it=lst.begin();it != lst.end(); it++)
-#define foreach_reverse(type,lst) for (std::list<type>::reverse_iterator it=lst.rbegin();it != lst.rend(); it++)
-#define foreach_v(type,lst) for (std::vector<type>::iterator it=lst.begin();it != lst.end(); it++)
-#define foreach_rv(type,lst) for (std::vector<type>::reverse_iterator it=lst.rbegin();it != lst.rend(); it++)
+#define foreach(type,lst) for (std::vector<type>::iterator it=lst.begin();it != lst.end(); it++)
+#define foreach_r(type,lst) for (std::vector<type>::reverse_iterator it=lst.rbegin();it != lst.rend(); it++)
 
 #define foreach_in_map(type,list) for (std::map<std::string,type>::iterator it=list.begin();it != list.end(); it++)
 
@@ -32,4 +30,7 @@ float Cos(float angle);
 float clamp(float value,float min_value,float max_value);
 
 std::string generateName(std::string prefix);
+
+void psleep(int milliseconds);
+void writelog(std::string log_msg);
 #endif

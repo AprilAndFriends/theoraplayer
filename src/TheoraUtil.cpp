@@ -4,6 +4,8 @@
 #include "TheoraUtil.h"
 #include "TheoraException.h"
 
+#include "Windows.h" // for Sleep. todo: make plaftorm independent
+
 std::string str(int i)
 {
     char s[32];
@@ -121,4 +123,14 @@ float clamp(float value,float min_value,float max_value)
 	if      (value < min_value) value=min_value;
 	else if (value > max_value) value=max_value;
 	return value;
+}
+
+void psleep(int milliseconds)
+{
+	Sleep(milliseconds);
+}
+
+void writelog(std::string log_msg)
+{
+	printf((log_msg+"\n").c_str());
 }
