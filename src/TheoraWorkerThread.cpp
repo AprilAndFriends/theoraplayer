@@ -1,9 +1,8 @@
 /************************************************************************************
-This source file is part of the TheoraVideoPlugin ExternalTextureSource PlugIn 
-for OGRE3D (Object-oriented Graphics Rendering Engine)
-For latest info, see http://ogrevideo.sourceforge.net/
+This source file is part of the Theora Video Playback Library
+For latest info, see http://libtheoraplayer.sourceforge.net/
 *************************************************************************************
-Copyright © 2008-2009 Kresimir Spes (kreso@cateia.com)
+Copyright (c) 2008-2009 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License (LGPL) as published by the 
@@ -23,46 +22,43 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip.h"
 
-namespace Ogre
+
+TheoraWorkerThread::TheoraWorkerThread() : pt::thread(false)
 {
-	TheoraWorkerThread::TheoraWorkerThread() : pt::thread(false)
-	{
-		mClip=NULL;
-		mThreadRunning=false;
-	}
+	mClip=NULL;
+	mThreadRunning=false;
+}
 
-	TheoraWorkerThread::~TheoraWorkerThread()
+TheoraWorkerThread::~TheoraWorkerThread()
+{
+	if (mThreadRunning)
 	{
-		if (mThreadRunning)
-		{
-			//Terminate Thread and wait for it to leave
-			mThreadRunning = false;
-			waitfor();
-		}
+		//Terminate Thread and wait for it to leave
+		mThreadRunning = false;
+		waitfor();
 	}
-	
-	void TheoraWorkerThread::execute()
+}
+
+void TheoraWorkerThread::execute()
+{
+	mThreadRunning = true;
+	while (mThreadRunning)
 	{
-		mThreadRunning = true;
-		while (mThreadRunning)
+		mClip=TheoraVideoManager::getSingleton().requestWork(this);
+		if (!mClip)
 		{
-			mClip=TheoraVideoManager::getSingleton().requestWork(this);
-			if (!mClip)
-			{
-				
-				pt::psleep(250);
-				continue;
-			}
 			
-	
-			// if user requested seeking, do that then.
-			if (mClip->mSeekPos >= 0) mClip->doSeek();
-
-			mClip->decodeNextFrame();
-
-			mClip->mAssignedWorkerThread=NULL;
-			pt::psleep(2);
+			pt::psleep(250);
+			continue;
 		}
-	}
+		
 
-} // end namespace Ogre
+		// if user requested seeking, do that then.
+		if (mClip->mSeekPos >= 0) mClip->doSeek();
+
+		mClip->decodeNextFrame();
+
+		mClip->mAssignedWorkerThread=NULL;
+		pt::psleep(2);
+	}
+}

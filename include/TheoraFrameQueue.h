@@ -1,9 +1,8 @@
 /************************************************************************************
-This source file is part of the TheoraVideoPlugin ExternalTextureSource PlugIn 
-for OGRE3D (Object-oriented Graphics Rendering Engine)
-For latest info, see http://ogrevideo.sourceforge.net/
+This source file is part of the Theora Video Playback Library
+For latest info, see http://libtheoraplayer.sourceforge.net/
 *************************************************************************************
-Copyright © 2008-2009 Kresimir Spes (kreso@cateia.com)
+Copyright (c) 2008-2009 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License (LGPL) as published by the 
@@ -23,41 +22,38 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef _TheoraFrameQueue_h
 #define _TheoraFrameQueue_h
 
-#include <ptypes/pasync.h>
-
-namespace Ogre
+class TheoraVideoFrame;
+class TheoraVideoClip;
+class TheoraMutex;
+/**
+	
+*/
+class TheoraFrameQueue
 {
-	class TheoraVideoFrame;
-	class TheoraVideoClip;
-	/**
-		
-	*/
-	class TheoraFrameQueue
-	{
-		TheoraVideoFrame** mQueue;
-		int mSize;
-		TheoraVideoClip* mParent;
-		unsigned int mBackColour;
-		pt::mutex mMutex;
-	public:
-		TheoraFrameQueue(int n,TheoraVideoClip* parent);
-		~TheoraFrameQueue();
+	TheoraVideoFrame** mQueue;
+	int mSize;
+	TheoraVideoClip* mParent;
+	unsigned int mBackColour;
+	TheoraMutex* mMutex;
+public:
+	TheoraFrameQueue(int n,TheoraVideoClip* parent);
+	~TheoraFrameQueue();
 
-		TheoraVideoFrame* getFirstAvailableFrame();
+	TheoraVideoFrame* getFirstAvailableFrame();
 
-		//! do not call directly, this function is used to reset back colour after video clip output mode change
-		void fillBackColour(unsigned int colour);
-		unsigned int getBackColour();
-		int getUsedCount();
+	//! do not call directly, this function is used to reset back colour after video clip output mode change
+	void fillBackColour(unsigned int colour);
+	unsigned int getBackColour();
+	int getUsedCount();
 
-		void pop();
-		void clear(); //! frees all decoded frames for reuse (does not destroy memory, just marks them as free)
-		//! Called by WorkerThreads when they need to unload frame data
-		TheoraVideoFrame* requestEmptyFrame();
-		
+	void pop();
+	void clear(); //! frees all decoded frames for reuse (does not destroy memory, just marks them as free)
+	//! Called by WorkerThreads when they need to unload frame data
+	TheoraVideoFrame* requestEmptyFrame();
+	
 
-		void setSize(int n);
-		int getSize();
-	};
-}
+	void setSize(int n);
+	int getSize();
+};
+
 #endif

@@ -1,9 +1,8 @@
 /************************************************************************************
-This source file is part of the TheoraVideoPlugin ExternalTextureSource PlugIn 
-for OGRE3D (Object-oriented Graphics Rendering Engine)
-For latest info, see http://ogrevideo.sourceforge.net/
+This source file is part of the Theora Video Playback Library
+For latest info, see http://libtheoraplayer.sourceforge.net/
 *************************************************************************************
-Copyright © 2008-2009 Kresimir Spes (kreso@cateia.com)
+Copyright (c) 2008-2009 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License (LGPL) as published by the 
@@ -22,28 +21,25 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef _TheoraWorkerThread_h
 #define _TheoraWorkerThread_h
 
-#include <ptypes/pasync.h>
+#include "TheoraAsync.h"
 
-namespace Ogre
+/**
+	
+*/
+
+class TheoraVideoClip;
+
+class TheoraWorkerThread : public TheoraThread
 {
-	/**
-		
-	*/
+	TheoraVideoClip* mClip;
 
-	class TheoraVideoClip;
+	volatile bool mThreadRunning;
 
-	class TheoraWorkerThread : public pt::thread
-	{
-		TheoraVideoClip* mClip;
+public:
+	TheoraWorkerThread();
+	~TheoraWorkerThread();
 
-		volatile bool mThreadRunning;
-
-	public:
-		TheoraWorkerThread();
-		~TheoraWorkerThread();
-
-	    //! Main Thread Body - do not call directly!
-		void execute();
-	};
-}
+    //! Main Thread Body - do not call directly!
+	void startThread();
+};
 #endif
