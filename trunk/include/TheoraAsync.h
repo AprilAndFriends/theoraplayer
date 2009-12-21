@@ -34,7 +34,8 @@ public:
 class TheoraThread
 {
 public:
-	virtual void startThread();
+	void startThread();
+	void waitforThread();
 };
 
 

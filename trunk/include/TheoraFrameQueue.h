@@ -22,9 +22,11 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef _TheoraFrameQueue_h
 #define _TheoraFrameQueue_h
 
+#include "TheoraAsync.h"
+
 class TheoraVideoFrame;
 class TheoraVideoClip;
-class TheoraMutex;
+
 /**
 	
 */
@@ -34,7 +36,7 @@ class TheoraFrameQueue
 	int mSize;
 	TheoraVideoClip* mParent;
 	unsigned int mBackColour;
-	TheoraMutex* mMutex;
+	TheoraMutex mMutex;
 public:
 	TheoraFrameQueue(int n,TheoraVideoClip* parent);
 	~TheoraFrameQueue();

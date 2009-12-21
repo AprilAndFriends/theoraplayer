@@ -46,8 +46,6 @@ class TheoraPlayerExport TheoraVideoManager
 	//! stores pointers to created video clips		
 	ClipList mClips;
 	int mDefaultNumPrecachedFrames;
-	//! whether the plugin has been initialised
-	bool mbInit;
 
 	TheoraMutex* mWorkMutex;
 

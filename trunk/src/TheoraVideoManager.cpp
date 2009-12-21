@@ -22,35 +22,27 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "TheoraWorkerThread.h"
 #include "TheoraVideoClip.h"
 #include "TheoraAudioInterface.h"
+#include "TheoraUtil.h"
+#include "TheoraDataSource.h"
 
-
+TheoraVideoManager* g_ManagerSingleton=0;
 // declaring function prototype here so I don't have to put it in a header file
 // it only needs to be used by this plugin and called once
 void createYUVtoRGBtables();
 
-// Singleton code
-template<> TheoraVideoManager* Singleton<TheoraVideoManager>::ms_Singleton = 0;
 TheoraVideoManager* TheoraVideoManager::getSingletonPtr(void)
 {
-    return ms_Singleton;
+    return g_ManagerSingleton;
 }
 TheoraVideoManager& TheoraVideoManager::getSingleton(void)
 {  
-    assert( ms_Singleton );  return ( *ms_Singleton );  
+    return *g_ManagerSingleton;  
 }
 
 TheoraVideoManager::TheoraVideoManager()
 {
-	mPlugInName = "TheoraVideoPlugin";
 	mAudioFactory = NULL;
-	mDictionaryName = mPlugInName;
-	mbInit=false;
-	mWorkMutex=new pt::mutex();
-
-	mTechniqueLevel=mPassLevel=mStateLevel=0;
-
-	if (mbInit) return false;
-	addBaseParams(); // ExternalTextureSource's function
+	mWorkMutex=new TheoraMutex();
 
 	// for CPU yuv2rgb decoding
 	createYUVtoRGBtables();
@@ -60,18 +52,14 @@ TheoraVideoManager::TheoraVideoManager()
 	for (int i=0;i<1;i++)
 	{
 		t=new TheoraWorkerThread();
-		t->start();
+		t->startThread();
 		mWorkerThreads.push_back(t);
 	}
-
-	mbInit=true;
-	return true;
 }
 
 TheoraVideoManager::~TheoraVideoManager()
 {
 	mWorkMutex->lock(); // to avoid sync problems. in case a thread is asking for work, and we delete the mutex halfway through
-	if (!mbInit) return;
 
 	ThreadList::iterator ti;
 	for (ti=mWorkerThreads.begin(); ti != mWorkerThreads.end();ti++)
@@ -85,56 +73,10 @@ TheoraVideoManager::~TheoraVideoManager()
 	delete mWorkMutex;
 }
 
-
-bool TheoraVideoManager::setParameter(const std::string &name,const std::string &value)
-{
-    // Hacky stuff used in situations where you don't have access to TheoraVideoManager
-    // eg, like when using the plugin in python (and not using the wrapped version by Python-Ogre)
-    // these parameters are here temporarily and I don't encourage anyone to use them.
-    
-    if (name == "destroy")
-    {
-        // destroys the first video clip.
-        if (mClips.size() > 0)
-        {
-            mWorkMutex->lock();
-            TheoraVideoClip* c=*(mClips.begin());
-            delete c;
-            mClips.clear();
-            mWorkMutex->unlock();
-            
-            LogManager::getSingleton().logMessage("Ending Theora video playback");
-            return 1;
-        }
-    }
-    
-    return ExternalTextureSource::setParameter(name, value);
-}
-
-std::string TheoraVideoManager::getParameter(const std::string &name) const
-{
-    // Hacky stuff used in situations where you don't have access to TheoraVideoManager
-    // eg, like when using the plugin in python (and not using the wrapped version by Python-Ogre)
-    // these parameters are here temporarily and I don't encourage anyone to use them.
-
-    if (name == "started")
-    {
-        return (mClips.size() > 0) ? "1" : "0";
-    }
-    else if (name == "finished")
-    {
-        if (mClips.size() == 0) return "0";
-        TheoraVideoClip* c=*(mClips.begin());
-        return (c->isDone()) ? "1" : "0";
-    }
-    return ExternalTextureSource::getParameter(name);
-}
-
 TheoraVideoClip* TheoraVideoManager::getVideoClipByName(std::string name)
 {
-	ClipList::iterator ci;
-	for (ci=mClips.begin(); ci != mClips.end();ci++)
-		if ((*ci)->getName() == name) return *ci;
+	foreach(TheoraVideoClip*,mClips)
+		if ((*it)->getName() == name) return *it;
 
 	return 0;
 }
@@ -149,48 +91,19 @@ TheoraAudioInterfaceFactory* TheoraVideoManager::getAudioInterfaceFactory()
 	return mAudioFactory;
 }
 
-TheoraVideoClip* TheoraVideoClip::createVideoClip(std::string filename)
+TheoraVideoClip* TheoraVideoManager::createVideoClip(std::string filename)
 {
-
+	TheoraDataSource* src=new TheoraFileDataSource(filename);
+	return createVideoClip(src);
 }
 
-TheoraVideoClip* TheoraVideoClip::createVideoClip(DataSource* data_source)
+TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_source)
 {
 	TheoraVideoClip* clip = NULL;
-
-	LogManager::getSingleton().logMessage("Creating ogg_video texture on material: "+material_name);
-
-	clip = new TheoraVideoClip(material_name,32);
-	try
-	{
-        LogManager::getSingleton().logMessage("video file: "+mInputFileName);
-		clip->createDefinedTexture(mInputFileName, material_name, group_name, mTechniqueLevel,
-					  mPassLevel, mStateLevel);
-
-		//int n=(mNumPrecachedFrames == -1) ? 16 : mNumPrecachedFrames;
-		//clip->setNumPrecachedFrames(n);
-		//clip->setOutputMode(mOutputMode);
-	}
-	catch(...)
-	{
-		LogManager::getSingleton().logMessage("Error creating ogg_video texture!");
-		delete clip;
-		return;
-	}
-
-	/*
-	// reset variables for a new movie
-	mNumPrecachedFrames=-1;
-	mOutputMode=TH_RGB;
-	mInputFileName = "None";
-	mTechniqueLevel = mPassLevel = mStateLevel = 0;
-	mSeekEnabled = false;
-	mAutoUpdate = false;
-    */
-
-	// push the clip into the list at the very end, to ensure worker threads
-	// don't start decoding until the clip is fully initialised
+	writelog("Creating video from data source: "+data_source->repr());
+	clip = new TheoraVideoClip(data_source,32);
 	mClips.push_back(clip);
+	return clip;
 }
 
 void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
@@ -198,12 +111,17 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 	if (clip)
 	{
 		mWorkMutex->lock();
-		mClips.remove(clip);
+		foreach(TheoraVideoClip*,mClips)
+			if ((*it) == clip)
+			{
+				mClips.erase(it);
+				break;
+			}
 		delete clip;
 		mWorkMutex->unlock();
 	}
 }
-
+/*
 bool TheoraVideoManager::frameStarted(const FrameEvent& evt)
 {
 	ClipList::iterator ci;
@@ -214,6 +132,7 @@ bool TheoraVideoManager::frameStarted(const FrameEvent& evt)
 	}
 	return true;
 }
+*/
 
 TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 {
