@@ -53,10 +53,10 @@
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_PLUGIN_EXPORTS;_STLP_DEBUG"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				PrecompiledHeaderFile=".\..\obj\Debug/TheoraVideo.pch"
-				AssemblerListingLocation=".\..\obj\Debug/"
-				ObjectFile=".\..\obj\Debug/"
-				ProgramDataBaseFileName=".\..\obj\Debug/"
+				PrecompiledHeaderFile=".\obj\Debug\TheoraVideo.pch"
+				AssemblerListingLocation=".\obj\Debug\"
+				ObjectFile=".\obj\Debug\"
+				ProgramDataBaseFileName=".\obj\Debug\"
 				BrowseInformation="1"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
@@ -77,8 +77,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="libtheora_static.lib libogg_static.lib libvorbis_static.lib"
-				OutputFile=".\bin\debug\libtheoraplayer.dll"
+				AdditionalDependencies="libtheora.lib libogg.lib libvorbis.lib"
+				OutputFile=".\bin\Debug\libtheoraplayer.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="lib"
@@ -153,9 +153,9 @@
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
 				PrecompiledHeaderFile=".\..\obj\Release/TheoraVideo.pch"
-				AssemblerListingLocation=".\..\obj\Release/"
-				ObjectFile=".\..\obj\Release/"
-				ProgramDataBaseFileName=".\..\obj\Release/"
+				AssemblerListingLocation=".\obj\Release\"
+				ObjectFile=".\obj\Release\"
+				ProgramDataBaseFileName=".\obj\Release\"
 				WarningLevel="1"
 				SuppressStartupBanner="true"
 				CompileAs="0"
@@ -174,8 +174,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="libtheora_static.lib libogg_static.lib libvorbis_static.lib"
-				OutputFile=".\bin\debug\libtheoraplayer.dll"
+				AdditionalDependencies="libtheora.lib libogg.lib libvorbis.lib"
+				OutputFile=".\bin\Release\libtheoraplayer.dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="lib"
@@ -271,7 +271,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="libtheora_static.lib libogg_static.lib libvorbis_static.lib"
+				AdditionalDependencies="libtheora.lib libogg.lib libvorbis.lib"
 				OutputFile=".\bin\debug\libtheoraplayer.dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
@@ -388,6 +388,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\TheoraExport.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\TheoraFrameQueue.h"
 				>
 			</File>
@@ -417,14 +421,6 @@
 			</File>
 			<File
 				RelativePath=".\include\TheoraWorkerThread.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="dll"
-			>
-			<File
-				RelativePath=".\TheoraExport.h"
 				>
 			</File>
 		</Filter>
