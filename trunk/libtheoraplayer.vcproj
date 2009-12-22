@@ -400,6 +400,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\TheoraPlayer.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\TheoraTimer.h"
 				>
 			</File>

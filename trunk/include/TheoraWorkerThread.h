@@ -40,6 +40,6 @@ public:
 	~TheoraWorkerThread();
 
     //! Main Thread Body - do not call directly!
-	void startThread();
+	void executeThread();
 };
 #endif

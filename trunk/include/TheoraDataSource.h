@@ -42,6 +42,7 @@ public:
 	virtual std::string repr()=0;
 	virtual void seek(unsigned long byte_index)=0;
 	virtual unsigned long size()=0;
+	virtual unsigned long tell()=0;
 };
 
 
@@ -52,13 +53,16 @@ class TheoraFileDataSource : public TheoraDataSource
 {
 	FILE* mFilePtr;
 	std::string mFilename;
+	unsigned long mSize;
 public:
 	TheoraFileDataSource(std::string filename);
+	~TheoraFileDataSource();
 	
 	int read(void* output,int nBytes);
 	void seek(unsigned long byte_index);
 	std::string repr() { return mFilename; }
 	unsigned long size();
+	unsigned long tell();
 };
 
 

@@ -18,40 +18,12 @@ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place - Suite 330, Boston, MA 02111-1307, USA, or go to
 http://www.gnu.org/copyleft/lesser.txt.
 *************************************************************************************/
+#ifndef _TheoraPlayer_h
+#define _TheoraPlayer_h
 
-#ifndef _TheoraFrameQueue_h
-#define _TheoraFrameQueue_h
-
-#include "TheoraAsync.h"
-
-class TheoraVideoFrame;
-class TheoraVideoClip;
-
-/**
-	
-*/
-class TheoraFrameQueue
-{
-	TheoraVideoFrame** mQueue;
-	int mSize;
-	TheoraVideoClip* mParent;
-	TheoraMutex mMutex;
-public:
-	TheoraFrameQueue(int n,TheoraVideoClip* parent);
-	~TheoraFrameQueue();
-
-	TheoraVideoFrame* getFirstAvailableFrame();
-
-	int getUsedCount();
-
-	void pop();
-	void clear(); //! frees all decoded frames for reuse (does not destroy memory, just marks them as free)
-	//! Called by WorkerThreads when they need to unload frame data
-	TheoraVideoFrame* requestEmptyFrame();
-	
-
-	void setSize(int n);
-	int getSize();
-};
+#include "TheoraVideoManager.h"
+#include "TheoraVideoClip.h"
+#include "TheoraVideoFrame.h"
 
 #endif
+

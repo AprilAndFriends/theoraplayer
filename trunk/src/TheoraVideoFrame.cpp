@@ -37,7 +37,7 @@ TheoraVideoFrame::TheoraVideoFrame(TheoraVideoClip* parent)
 	mReady=mInUse=false;
 
 	mParent=parent;
-	mBuffer=new unsigned char[mParent->mTexWidth * mParent->mHeight * 4];
+	mBuffer=new unsigned char[mParent->mWidth * mParent->mHeight * 4];
 }
 
 TheoraVideoFrame::~TheoraVideoFrame()
@@ -45,34 +45,30 @@ TheoraVideoFrame::~TheoraVideoFrame()
 	if (mBuffer) delete mBuffer;
 }
 
+int TheoraVideoFrame::getWidth()
+{
+	return mParent->mWidth;
+}
+
+int TheoraVideoFrame::getHeight()
+{
+	return mParent->mHeight;
+}
+
 unsigned char* TheoraVideoFrame::getBuffer()
 {
 	return mBuffer;
 }
 
-void TheoraVideoFrame::fillBackColour(unsigned int colour)
+void TheoraVideoFrame::decodeRGB(void* _yuv)
 {
-	unsigned int* p=(unsigned int*) mBuffer;
-	int x,y;
-	for (y=0;y<mParent->mHeight;y++)
-	{
-		p+=mParent->mWidth;
-		for (x=mParent->mWidth;x<mParent->mTexWidth;x++)
-		{
-			*p=colour;
-			p++;
-		}
-	}
-}
-
-void TheoraVideoFrame::decodeRGB(th_ycbcr_buffer yuv)
-{
+	th_img_plane* yuv=(th_img_plane*) _yuv;
 	int t,y;
 	unsigned char *ySrc=yuv[0].data, *ySrc2=yuv[0].data,*ySrcEnd,
 				  *uSrc=yuv[1].data, *uSrc2=yuv[1].data,
 	              *vSrc=yuv[2].data, *vSrc2=yuv[2].data;
-	unsigned int *out=(unsigned int*) mBuffer;
-	int r, g, b, cu, cy, cv, bU, gUV, rV, rgbY;
+	unsigned char *out=mBuffer;
+	int cu, cy, cv, bU, gUV, rV, rgbY;
 
 	for (y=0;y<yuv[0].height;y++)
 	{
@@ -99,30 +95,26 @@ void TheoraVideoFrame::decodeRGB(th_ycbcr_buffer yuv)
 			}
 			//scale down - brings are values back into the 8 bits of a byte
 #ifndef __APPLE__
-			r = CLIP_RGB_COLOR((rgbY + rV ) >> 13);
-			g = CLIP_RGB_COLOR((rgbY - gUV) >> 13);
-			b = CLIP_RGB_COLOR((rgbY + bU ) >> 13);
+			out[0] = CLIP_RGB_COLOR((rgbY + rV ) >> 13);
+			out[1] = CLIP_RGB_COLOR((rgbY - gUV) >> 13);
+			out[2] = CLIP_RGB_COLOR((rgbY + bU ) >> 13);
 #else
-            r = CLIP_RGB_COLOR(1.164*(cy - 16) + 1.596*(cv - 128));
-            b = CLIP_RGB_COLOR(1.164*(cy - 16)                   + 2.018*(cu - 128));
-            g = CLIP_RGB_COLOR( 1.164*(cy - 16) - 0.813*(cv - 128) - 0.391*(cu - 128));
+            out[0] = CLIP_RGB_COLOR(1.164*(cy - 16) + 1.596*(cv - 128));
+            out[1] = CLIP_RGB_COLOR(1.164*(cy - 16)                   + 2.018*(cu - 128));
+            out[2] = CLIP_RGB_COLOR( 1.164*(cy - 16) - 0.813*(cv - 128) - 0.391*(cu - 128));
 #endif
             
-			*out=(((r << 8) | g) << 8) | b;
-			out++;
+			out+=3;
 			ySrc++;
-		}
-		if (mParent->mTexWidth-mParent->mWidth)
-		{
-			out+=mParent->mTexWidth-mParent->mWidth;
 		}
 		ySrc2+=yuv[0].stride;
 		if (y%2 == 1) { uSrc2+=yuv[1].stride;; vSrc2+=yuv[2].stride; }
 	}
 }
 
-void TheoraVideoFrame::decodeGrey(th_ycbcr_buffer yuv)
+void TheoraVideoFrame::decodeGrey(void* _yuv)
 {
+	th_img_plane* yuv=(th_img_plane*) _yuv;
 	unsigned char*ySrc=yuv[0].data,*ySrc2=yuv[0].data,*ySrcEnd;
 	unsigned int cy;
 	unsigned char* out=mBuffer;
@@ -138,16 +130,13 @@ void TheoraVideoFrame::decodeGrey(th_ycbcr_buffer yuv)
 			out+=4;
 			ySrc++;
 		}
-		if (mParent->mTexWidth-mParent->mWidth)
-		{
-			out+=(mParent->mTexWidth-mParent->mWidth)*4;
-		}
 		ySrc2+=yuv[0].stride;
 	}
 }
 
-void TheoraVideoFrame::decodeYUV(th_ycbcr_buffer yuv)
+void TheoraVideoFrame::decodeYUV(void* _yuv)
 {
+	th_img_plane* yuv=(th_img_plane*) _yuv;
 	int t,y;
 	unsigned char *ySrc=yuv[0].data, *ySrc2=yuv[0].data,*ySrcEnd,
 				  *uSrc=yuv[1].data, *uSrc2=yuv[1].data,
@@ -164,16 +153,12 @@ void TheoraVideoFrame::decodeYUV(th_ycbcr_buffer yuv)
 			ySrc++;
 			if (t=!t == 1) { uSrc++; vSrc++; }
 		}
-		if (mParent->mTexWidth-mParent->mWidth)
-		{
-			out+=mParent->mTexWidth-mParent->mWidth;
-		}
 		ySrc2+=yuv[0].stride;
 		if (y%2 == 1) { uSrc2+=yuv[1].stride;; vSrc2+=yuv[2].stride; }
 	}
 }
 
-void TheoraVideoFrame::decode(th_ycbcr_buffer yuv)
+void TheoraVideoFrame::decode(void* yuv)
 {
 	TheoraOutputMode mode=mParent->getOutputMode();
 	if      (mode == TH_RGB)  decodeRGB(yuv);

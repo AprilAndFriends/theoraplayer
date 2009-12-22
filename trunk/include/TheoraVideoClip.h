@@ -83,19 +83,11 @@ class TheoraPlayerExport TheoraVideoClip
 
 	std::string mName;
 	int mWidth,mHeight;
-	int mTexWidth,mTexHeight;
 	float mDuration;
 
 	float mAudioGain; //! multiplier for audio samples. between 0 and 1
 	float mSeekPos; //! stores desired seek position. next worker thread will do the seeking and reset this var to -1
 	TheoraOutputMode mOutputMode;
-
-	// material binding information
-	std::string mMaterialName;
-	int mTechniqueLevel;
-	int mPassLevel;
-	int mTexLevel;
-	bool mBackColourChanged;
 	bool mAutoRestart;
 	bool mEndOfFile;
 
@@ -115,13 +107,13 @@ class TheoraPlayerExport TheoraVideoClip
 	int calculatePriority();
 	void readTheoraVorbisHeaders();
 	void doSeek(); //! called by WorkerThread to seek to mSeekPos
+
+	void load(TheoraDataSource* source);
 public:
 	TheoraVideoClip(TheoraDataSource* data_source,int nPrecachedFrames);
 	~TheoraVideoClip();
 
 	std::string getName();
-	//! return the material name this video clip is assigned to
-	std::string getMaterialName();
 
 	//! return width in pixels of the video clip
 	int getWidth();
@@ -137,12 +129,11 @@ public:
 
 	void decodeNextFrame();
 
-	//! check if it's time to transfer another frame to the texture
-	void blitFrameCheck(float time_increase);
+	void update(float time_increase);
+	void popFrame();
+	TheoraVideoFrame* getNextFrame();
 	//! check if there is enough audio data decoded to submit to the audio interface
 	void decodedAudioCheck();
-
-	void load(const std::string& file_name,const std::string& group_name);
 
 	void setAudioInterface(TheoraAudioInterface* iface);
 	TheoraAudioInterface* getAudioInterface();
@@ -154,6 +145,8 @@ public:
 	float getAudioGain();
 	void setAutoRestart(bool value);
 	bool getAutoRestart();
+
+
 
 	/**
 	 * sets a user priority factor.
@@ -174,6 +167,7 @@ public:
     bool isDone();
 	void play();
 	void pause();
+	void restart();
 	bool isPaused();
 	void stop();
 	void seek(float time);

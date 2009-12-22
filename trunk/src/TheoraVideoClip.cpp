@@ -28,15 +28,6 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "TheoraUtil.h"
 #include "TheoraException.h"
 
-int gNameCounter=0;
-
-int nextPow2(int x)
-{
-	int y;
-	for (y=1;y<x;y*=2);
-	return y;
-
-}
 //! clears a portion of memory with an unsign
 void memset_uint(void* buffer,unsigned int colour,unsigned int size_in_bytes)
 {
@@ -55,7 +46,6 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,int nPrecachedFra
 	mDuration(-1),
 	mName(data_source->repr()),
 	mOutputMode(TH_RGB),
-	mBackColourChanged(0),
 	mAudioInterface(NULL),
 	mAutoRestart(0),
 	mAudioGain(1),
@@ -83,6 +73,8 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,int nPrecachedFra
 	memset(&mVorbisDSPState, 0, sizeof(vorbis_dsp_state));
 	memset(&mVorbisBlock, 0, sizeof(vorbis_block));
 	memset(&mVorbisComment, 0, sizeof(vorbis_comment));
+
+	load(data_source);
 }
 
 TheoraVideoClip::~TheoraVideoClip()
@@ -124,11 +116,6 @@ TheoraVideoClip::~TheoraVideoClip()
 	delete mAudioMutex;
 
 	//ogg_sync_clear(&mOggSyncState);
-}
-
-std::string TheoraVideoClip::getMaterialName()
-{
-	return mMaterialName;
 }
 
 TheoraTimer* TheoraVideoClip::getTimer()
@@ -232,58 +219,50 @@ void TheoraVideoClip::decodeNextFrame()
 	}
 }
 
-void TheoraVideoClip::blitFrameCheck(float time_increase)
+void TheoraVideoClip::restart()
+{
+	long granule=0;
+	th_decode_ctl(mTheoraDecoder,TH_DECCTL_SET_GRANPOS,&granule,sizeof(granule));
+	th_decode_free(mTheoraDecoder);
+	mTheoraDecoder=th_decode_alloc(&mTheoraInfo,mTheoraSetup);
+	ogg_stream_reset(&mTheoraStreamState);
+	ogg_sync_reset(&mOggSyncState);
+	mStream->seek(0);
+	mTimer->seek(0);
+	mEndOfFile=false;
+	mFrameQueue->clear();
+}
+
+void TheoraVideoClip::update(float time_increase)
 {
 	if (mTimer->isPaused() && mSeekPos != -3) return;
-	TheoraVideoFrame* frame;
 	mTimer->update(time_increase);
-	
-	while (true)
+}
+
+void TheoraVideoClip::popFrame()
+{
+	mFrameQueue->pop(); // after transfering frame data to the texture, free the frame
+						// so it can be used again
+}
+
+TheoraVideoFrame* TheoraVideoClip::getNextFrame()
+{
+	TheoraVideoFrame* frame;
+	float time=mTimer->getTime();
+	for (;;)
 	{
 		frame=mFrameQueue->getFirstAvailableFrame();
-		if (!frame)
-		{
-			if (mEndOfFile && mAutoRestart)
-			{
-				long granule=0;
-				th_decode_ctl(mTheoraDecoder,TH_DECCTL_SET_GRANPOS,&granule,sizeof(granule));
-				th_decode_free(mTheoraDecoder);
-				mTheoraDecoder=th_decode_alloc(&mTheoraInfo,mTheoraSetup);
-				ogg_stream_reset(&mTheoraStreamState);
-				ogg_sync_reset(&mOggSyncState);
-				mStream->seek(0);
-				mTimer->seek(0);
-				mEndOfFile=false;
-				mFrameQueue->clear();
-			}
-			return; // no frames ready
-		}
-		//if (frame->mTimeToDisplay-mTimer->getTime() > 1)
-		//{
-		//	mFrameQueue->pop(); // this happens on Auto restart if there are some leftover frames
-		//	continue;
-		//}
-		if (frame->mTimeToDisplay > mTimer->getTime()) return;
-		if (frame->mTimeToDisplay < mTimer->getTime()-0.1)
+		if (!frame) return 0;
+
+		if (frame->mTimeToDisplay > time) return 0;
+		if (frame->mTimeToDisplay < time-0.1)
 		{
 			mFrameQueue->pop();
 		}
 		else break;
 	}
-	if (mSeekPos == -3)
-		mSeekPos=-1; // -3 ensures the first frame after seek gets displayed even when the movie is paused
+	return frame;
 
-	// use blitFromMemory or smtg faster
-//	unsigned char* texData=(unsigned char*) mTexture->getBuffer()->lock(HardwareBuffer::HBL_DISCARD);
-//	memcpy(texData,frame->getBuffer(),mTexWidth*mHeight*4);
-	if (mBackColourChanged)
-	{
-//		memset_uint(texData+mTexWidth*mHeight*4,mFrameQueue->getBackColour(),mTexWidth*(mTexHeight-mHeight)*4);
-		mBackColourChanged=false;
-	}
-
-	mFrameQueue->pop(); // after transfering frame data to the texture, free the frame
-	                    // so it can be used again
 }
 
 void TheoraVideoClip::decodedAudioCheck()
@@ -325,60 +304,10 @@ void TheoraVideoClip::decodedAudioCheck()
 	
 	mAudioMutex->unlock();
 }
-/*
-void TheoraVideoClip::createDefinedTexture(const std::string& name, const std::string& material_name,
-                          const std::string& group_name, int technique_level, int pass_level, 
-		                  int tex_level)
+
+void TheoraVideoClip::load(TheoraDataSource* source)
 {
-	mName=name;
-	load(name,group_name);
-
-	mMaterialName=material_name;
-	mTechniqueLevel=technique_level;
-	mPassLevel=pass_level;
-	mTexLevel=tex_level;
-	// create texture
-	
-	std::string texname="theora_texture_"+StringConverter::toString(gNameCounter++);
-
-	mTexture = TextureManager::getSingleton().createManual(texname,group_name,TEX_TYPE_2D,
-		mTexWidth,mTexHeight,1,0,PF_X8R8G8B8,TU_DYNAMIC_WRITE_ONLY);
-	// clear it to black
-	unsigned char* texData=(unsigned char*) mTexture->getBuffer()->lock(HardwareBuffer::HBL_DISCARD);
-	if (mOutputMode == TH_YUV)
-		memset_uint(texData,0xFF008080,mTexWidth*mTexHeight*4); // (0,128,128) is YUV->RGB for Black
-	else
-		memset(texData,0,mTexWidth*mTexHeight*4);
-
-	mTexture->getBuffer()->unlock();
-
-	// attach it to a material
-	MaterialPtr material = MaterialManager::getSingleton().getByName(mMaterialName);
-	TextureUnitState* t = material->getTechnique(mTechniqueLevel)->\
-		getPass(mPassLevel)->getTextureUnitState(mTexLevel);
-
-	//Now, attach the texture to the material texture unit (single layer) and setup properties
-	t->setTextureName(texname,TEX_TYPE_2D);
-	t->setTextureFiltering(FO_LINEAR, FO_LINEAR, FO_NONE);
-	t->setTextureAddressingMode(TextureUnitState::TAM_CLAMP);
-
-	// scale tex coords to fit the 0-1 uv range
-	Matrix4 mat=Matrix4::IDENTITY;
-	mat.setScale(Vector3((float) mWidth/mTexWidth, (float) mHeight/mTexHeight,1));
-	t->setTextureTransform(mat);
-}
-*/
-/*
-void TheoraVideoClip::load(const std::string& file_name,const std::string& group_name)
-{
-	if (!mStream)
-        OGRE_EXCEPT( Exception::ERR_INVALIDPARAMS, "ogg_video "+file_name+" already loded!",
-		             "TheoraVideoClip::load" );
-
-	//mEndOfFile = false;
-	mStream = ResourceGroupManager::getSingleton().openResource( file_name, group_name );
-
-
+	mStream=source;
 	readTheoraVorbisHeaders();
 
 
@@ -386,8 +315,6 @@ void TheoraVideoClip::load(const std::string& file_name,const std::string& group
 
 	mWidth=mTheoraInfo.frame_width;
 	mHeight=mTheoraInfo.frame_height;
-	mTexWidth = nextPow2(mWidth);
-	mTexHeight= nextPow2(mHeight);
 
 	mFrameQueue=new TheoraFrameQueue(mNumPrecachedFrames,this);
 	setOutputMode(mOutputMode); // clear the frame backgrounds
@@ -465,7 +392,7 @@ void TheoraVideoClip::load(const std::string& file_name,const std::string& group
 		if (audio_factory) setAudioInterface(audio_factory->createInstance(this,mVorbisInfo.channels,mVorbisInfo.rate));
 	}
 }
-*/
+
 void TheoraVideoClip::readTheoraVorbisHeaders()
 {
 	ogg_packet tempOggPacket;
@@ -601,12 +528,7 @@ TheoraOutputMode TheoraVideoClip::getOutputMode()
 
 void TheoraVideoClip::setOutputMode(TheoraOutputMode mode)
 {
-	// Yuv black is (0,128,128) and grey/rgb (0,0,0) so we need to make sure we
-	// clear our frames to that colour so we won't get border pixels in different colour
-	if (mode == TH_YUV) mFrameQueue->fillBackColour(0xFF008080);
-	else                mFrameQueue->fillBackColour(0xFF000000);
 	mOutputMode=mode;
-	mBackColourChanged=true;
 }
 
 float TheoraVideoClip::getTimePosition()
@@ -783,14 +705,4 @@ int TheoraVideoClip::getWidth()
 int TheoraVideoClip::getHeight()
 {
 	return mHeight;
-}
-
-int TheoraVideoClip::getTextureWidth()
-{
-	return mTexWidth;
-}
-
-int TheoraVideoClip::getTextureHeight()
-{
-	return mTexHeight;
 }

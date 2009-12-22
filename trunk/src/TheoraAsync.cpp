@@ -20,24 +20,40 @@ http://www.gnu.org/copyleft/lesser.txt.
 *************************************************************************************/
 #include "TheoraAsync.h"
 
+// TODO: platform independence
+#include <windows.h>
+
+unsigned long WINAPI theoraAsync_Call(void* param)
+{
+	TheoraThread* t=(TheoraThread*) param;
+	t->executeThread();
+	return 0;
+}
+
 TheoraMutex::TheoraMutex()
 {
+	mHandle=0;
+}
 
+TheoraMutex::~TheoraMutex()
+{
+	if (mHandle) CloseHandle(mHandle);
 }
 
 void TheoraMutex::lock()
 {
-
+	if (!mHandle) mHandle=CreateMutex(0,0,0);
+	WaitForSingleObject(mHandle,INFINITE);
 }
 
 void TheoraMutex::unlock()
 {
-
+	ReleaseMutex(mHandle);
 }
 
 void TheoraThread::startThread()
 {
-
+	CreateThread(0,0,&theoraAsync_Call,this,0,0);
 }
 
 void TheoraThread::waitforThread()

@@ -40,7 +40,7 @@ TheoraWorkerThread::~TheoraWorkerThread()
 	}
 }
 
-void TheoraWorkerThread::startThread()
+void TheoraWorkerThread::executeThread()
 {
 	mThreadRunning = true;
 	while (mThreadRunning)

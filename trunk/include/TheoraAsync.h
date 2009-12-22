@@ -25,8 +25,10 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 class TheoraMutex
 {
+	void* mHandle;
 public:
 	TheoraMutex();
+	~TheoraMutex();
 	void lock();
 	void unlock();
 };
@@ -35,6 +37,7 @@ class TheoraThread
 {
 public:
 	void startThread();
+	virtual void executeThread()=0;
 	void waitforThread();
 };
 
