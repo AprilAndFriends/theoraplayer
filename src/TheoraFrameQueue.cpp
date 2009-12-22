@@ -116,19 +116,6 @@ TheoraVideoFrame* TheoraFrameQueue::requestEmptyFrame()
 	return frame;
 }
 
-void TheoraFrameQueue::fillBackColour(unsigned int colour)
-{
-	mMutex.lock();
-	mBackColour=colour;
-	for (int i=0;i<mSize;i++) mQueue[i]->fillBackColour(colour);
-	mMutex.unlock();
-}
-
-unsigned int TheoraFrameQueue::getBackColour()
-{
-	return mBackColour;
-}
-
 int TheoraFrameQueue::getUsedCount()
 {
 	mMutex.lock();

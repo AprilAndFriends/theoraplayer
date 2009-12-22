@@ -21,20 +21,20 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef _TheoraVideoFrame_h
 #define _TheoraVideoFrame_h
 
-#include <theora/theoradec.h>
+#include <TheoraExport.h>
 
 class TheoraVideoClip;
 /**
 	
 */
-class TheoraVideoFrame
+class TheoraPlayerExport TheoraVideoFrame
 {
 	TheoraVideoClip* mParent;
 	unsigned char* mBuffer;
 
-	void decodeRGB(th_ycbcr_buffer yuv);
-	void decodeGrey(th_ycbcr_buffer yuv);
-	void decodeYUV(th_ycbcr_buffer yuv);
+	void decodeRGB(void* _yuv);
+	void decodeGrey(void* _yuv);
+	void decodeYUV(void* _yuv);
 
 public:
 	float mTimeToDisplay;
@@ -44,11 +44,10 @@ public:
 	TheoraVideoFrame(TheoraVideoClip* parent);
 	~TheoraVideoFrame();
 
-	//! do not call directly, this function is used to reset back colour after video clip output mode change
-	void fillBackColour(unsigned int colour);
-
+	int getWidth();
+	int getHeight();
 	unsigned char* getBuffer();
 
-	void decode(th_ycbcr_buffer yuv);
+	void decode(void* yuv);
 };
 #endif

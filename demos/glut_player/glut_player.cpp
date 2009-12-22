@@ -23,24 +23,61 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <gl\gl.h>
 #include <gl\glu.h>
 #include <gl\glut.h>
-#include "TheoraVideoManager.h"
+#include "TheoraPlayer.h"
 
 unsigned int tex_id;
 TheoraVideoManager* mgr;
+TheoraVideoClip* clip;
+
+int nextPow2(int x)
+{
+	int y;
+	for (y=1;y<x;y*=2);
+	return y;
+}
 
 void display()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 
+	TheoraVideoFrame* f=clip->getNextFrame();
+	if (f)
+	{
+		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,f->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
+		clip->popFrame();
+	}
+
 	glBegin (GL_QUADS);
+	float w=clip->getWidth(),h=clip->getHeight();
+	float tw=nextPow2(w),th=nextPow2(h);
+
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  0.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  0.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f,  1.0f,  0.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f,  0.0f);
+	glTexCoord2f(w/tw, 0.0f); glVertex3f( 1.0f, -1.0f,  0.0f);
+	glTexCoord2f(w/tw, h/th); glVertex3f( 1.0f,  1.0f,  0.0f);
+	glTexCoord2f(0.0f, h/th); glVertex3f(-1.0f,  1.0f,  0.0f);
 	glEnd();
 
 	glutSwapBuffers();
+
+	static unsigned long time=GetTickCount();
+	unsigned long t=GetTickCount();
+
+	mgr->update((t-time)/1000.0f);
+
+	static unsigned long fps_timer=time,fps_counter=0;
+	if (t-fps_timer >= 1000)
+	{
+		char title[256];
+		sprintf(title,"glut_player: %d FPS, %d precached frames",fps_counter,clip->getNumPrecachedFrames());
+		glutSetWindowTitle(title);
+		fps_counter=0;
+		fps_timer=t;
+	}
+	else fps_counter++;
+
+	time=t;
+
 }
 
 void init()
@@ -49,16 +86,21 @@ void init()
 	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 	glEnable(GL_TEXTURE_2D);
 	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
-	glGenTextures(1,&tex_id);
 
+	mgr=new TheoraVideoManager();
+	clip=mgr->createVideoClip("../media/konqi.ogg");
+
+	glGenTextures(1,&tex_id);
 	glBindTexture(GL_TEXTURE_2D,tex_id);
-	unsigned char* b=new unsigned char[512*512*4];
-	memset(b,127,512*512*4);
-	glTexImage2D(GL_TEXTURE_2D,0,3,512,512,0,GL_RGB,GL_UNSIGNED_BYTE,b);
+	int w=nextPow2(clip->getWidth()),h=nextPow2(clip->getHeight());
+	unsigned char* b=new unsigned char[w*h*3];
+	memset(b,0,w*h*3);
+
+	glTexImage2D(GL_TEXTURE_2D,0,3,w,h,0,GL_RGB,GL_UNSIGNED_BYTE,b);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 
-	mgr=new TheoraVideoManager();
+
 }
 
 void destroy()
@@ -72,12 +114,10 @@ void reshape(int w,int h)
 	glLoadIdentity();
     glViewport(0, 0, w, h);
 
-	gluOrtho2D(-1.1f,1.1f,1.1f,-1.1f);
+	gluOrtho2D(-1,1,1,-1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
-
-
 
 void keyboard(unsigned char key,int x,int y)
 {
@@ -92,7 +132,7 @@ void main(int argc,char** argv)
   glutInitDisplayMode( GLUT_DOUBLE|GLUT_RGBA);
   //glutInitWindowPosition(0,0);
   glutInitWindowSize(800,600);
-  glutCreateWindow("glut_player - libtheoraplayer demo");
+  glutCreateWindow("glut_player");
   init();
   glutDisplayFunc(display);
   glutReshapeFunc(reshape);

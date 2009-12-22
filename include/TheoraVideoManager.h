@@ -67,6 +67,8 @@ public:
 	TheoraVideoClip* createVideoClip(std::string filename);
 	TheoraVideoClip* createVideoClip(TheoraDataSource* data_source);
 
+	void update(float time_increase);
+
 	/**
 		@remarks
 			Destroys a video clip

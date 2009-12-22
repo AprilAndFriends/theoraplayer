@@ -41,6 +41,7 @@ TheoraVideoManager& TheoraVideoManager::getSingleton(void)
 
 TheoraVideoManager::TheoraVideoManager()
 {
+	g_ManagerSingleton=this;
 	mAudioFactory = NULL;
 	mWorkMutex=new TheoraMutex();
 
@@ -150,14 +151,6 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 	{
 		for (it=mClips.begin(); it != mClips.end(); it++)
 		{
-			/* priority based scheduling, unstable and experimental at the moment
-			int p,lp=0xfffffff;
-			p=(*it)->getPriority();
-			if (p < lp)
-			{
-				lp=p;
-				c=*it;
-			}*/
 			if (i == 0) { c=*it; break; }
 			i--;
 
@@ -166,4 +159,10 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 	}
 	mWorkMutex->unlock();
 	return c;
+}
+
+void TheoraVideoManager::update(float time_increase)
+{
+	foreach(TheoraVideoClip*,mClips)
+		(*it)->update(time_increase);
 }
