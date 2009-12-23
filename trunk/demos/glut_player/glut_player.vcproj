@@ -17,8 +17,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\bin\Debug"
-			IntermediateDirectory="..\obj\Debug"
+			OutputDirectory="..\..\bin\Debug"
+			IntermediateDirectory="..\..\obj\Debug"
 			ConfigurationType="1"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
@@ -53,10 +53,10 @@
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_PLUGIN_EXPORTS;_STLP_DEBUG"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				PrecompiledHeaderFile=".\..\obj\Debug/TheoraVideo.pch"
-				AssemblerListingLocation=".\..\obj\Debug/"
-				ObjectFile=".\..\obj\Debug/"
-				ProgramDataBaseFileName=".\..\obj\Debug/"
+				PrecompiledHeaderFile=""
+				AssemblerListingLocation="..\..\obj\Debug/"
+				ObjectFile="..\..\obj\Debug/"
+				ProgramDataBaseFileName="..\..\obj\Debug/"
 				BrowseInformation="1"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
@@ -84,10 +84,10 @@
 				AdditionalLibraryDirectories="..\..\lib"
 				ModuleDefinitionFile=""
 				GenerateDebugInformation="true"
-				ProgramDatabaseFile=".\..\bin\Debug/Plugin_TheoraVideoSystem.pdb"
+				ProgramDatabaseFile=""
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary=".\..\bin\Debug/Plugin_TheoraVideoSystem.lib"
+				ImportLibrary=""
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -310,6 +310,10 @@
 	<References>
 	</References>
 	<Files>
+		<File
+			RelativePath="..\demo_basecode.h"
+			>
+		</File>
 		<File
 			RelativePath=".\glut_player.cpp"
 			>
