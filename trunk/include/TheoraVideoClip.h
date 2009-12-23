@@ -23,8 +23,6 @@ http://www.gnu.org/copyleft/lesser.txt.
 #define _TheoraVideoClip_h
 
 #include <string>
-#include <theora/theoradec.h>
-#include <vorbis/codec.h>
 
 #include "TheoraExport.h"
 
@@ -34,6 +32,8 @@ enum TheoraOutputMode
 	TH_GREY,
 	TH_YUV
 };
+
+class TheoraInfoStruct;
 
 class TheoraMutex;
 class TheoraFrameQueue;
@@ -60,22 +60,7 @@ class TheoraPlayerExport TheoraVideoClip
 
 	TheoraWorkerThread* mAssignedWorkerThread;
 
-	// ogg/vorbis/theora variables
-	ogg_sync_state   mOggSyncState;
-	ogg_page         mOggPage;
-	ogg_stream_state mVorbisStreamState;
-	ogg_stream_state mTheoraStreamState;
-	//Theora State
-	th_info        mTheoraInfo;
-	th_comment     mTheoraComment;
-	th_setup_info* mTheoraSetup;
-	th_dec_ctx*    mTheoraDecoder;
-	//th_state     mTheoraState;
-	//Vorbis State
-	vorbis_info      mVorbisInfo;
-	vorbis_dsp_state mVorbisDSPState;
-	vorbis_block     mVorbisBlock;
-	vorbis_comment   mVorbisComment;
+	
 	int mTheoraStreams, mVorbisStreams;	// Keeps track of Theora and Vorbis Streams
 
 	int mNumPrecachedFrames;
@@ -93,6 +78,7 @@ class TheoraPlayerExport TheoraVideoClip
 
 	float mUserPriority;
 
+	TheoraInfoStruct* mInfo; // a pointer is used to avoid having to include theora & vorbis headers
 
 	TheoraMutex* mAudioMutex; //! syncs audio decoding and extraction
 

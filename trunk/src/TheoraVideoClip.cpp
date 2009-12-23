@@ -27,6 +27,35 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "TheoraDataSource.h"
 #include "TheoraUtil.h"
 #include "TheoraException.h"
+#include <ogg/ogg.h>
+#include <vorbis/vorbisfile.h>
+#include <theora/theoradec.h>
+
+class TheoraInfoStruct
+{
+public:
+	// ogg/vorbis/theora variables
+	ogg_sync_state   OggSyncState;
+	ogg_page         OggPage;
+	ogg_stream_state VorbisStreamState;
+	ogg_stream_state TheoraStreamState;
+	//Theora State
+	th_info        TheoraInfo;
+	th_comment     TheoraComment;
+	th_setup_info* TheoraSetup;
+	th_dec_ctx*    TheoraDecoder;
+	//Vorbis State
+	vorbis_info      VorbisInfo;
+	vorbis_dsp_state VorbisDSPState;
+	vorbis_block     VorbisBlock;
+	vorbis_comment   VorbisComment;
+
+	TheoraInfoStruct()
+	{
+		TheoraDecoder=0;
+		TheoraSetup=0;
+	}
+};
 
 //! clears a portion of memory with an unsign
 void memset_uint(void* buffer,unsigned int colour,unsigned int size_in_bytes)
@@ -50,8 +79,7 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,int nPrecachedFra
 	mAutoRestart(0),
 	mAudioGain(1),
 	mEndOfFile(0),
-	mTheoraDecoder(0),
-	mTheoraSetup(0),
+
 	mAudioSkipSeekFlag(0)
 {
 	mAudioMutex=new TheoraMutex;
@@ -62,17 +90,18 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,int nPrecachedFra
 	mAssignedWorkerThread=NULL;
 	mNumPrecachedFrames=nPrecachedFrames;
 
+	mInfo=new TheoraInfoStruct;
 	//Ensure all structures get cleared out.
-	memset(&mOggSyncState, 0, sizeof(ogg_sync_state));
-	memset(&mOggPage, 0, sizeof(ogg_page));
-	memset(&mVorbisStreamState, 0, sizeof(ogg_stream_state));
-	memset(&mTheoraStreamState, 0, sizeof(ogg_stream_state));
-	memset(&mTheoraInfo, 0, sizeof(th_info));
-	memset(&mTheoraComment, 0, sizeof(th_comment));
-	memset(&mVorbisInfo, 0, sizeof(vorbis_info));
-	memset(&mVorbisDSPState, 0, sizeof(vorbis_dsp_state));
-	memset(&mVorbisBlock, 0, sizeof(vorbis_block));
-	memset(&mVorbisComment, 0, sizeof(vorbis_comment));
+	memset(&mInfo->OggSyncState, 0, sizeof(ogg_sync_state));
+	memset(&mInfo->OggPage, 0, sizeof(ogg_page));
+	memset(&mInfo->VorbisStreamState, 0, sizeof(ogg_stream_state));
+	memset(&mInfo->TheoraStreamState, 0, sizeof(ogg_stream_state));
+	memset(&mInfo->TheoraInfo, 0, sizeof(th_info));
+	memset(&mInfo->TheoraComment, 0, sizeof(th_comment));
+	memset(&mInfo->VorbisInfo, 0, sizeof(vorbis_info));
+	memset(&mInfo->VorbisDSPState, 0, sizeof(vorbis_dsp_state));
+	memset(&mInfo->VorbisBlock, 0, sizeof(vorbis_block));
+	memset(&mInfo->VorbisComment, 0, sizeof(vorbis_comment));
 
 	load(data_source);
 }
@@ -95,27 +124,28 @@ TheoraVideoClip::~TheoraVideoClip()
 
 	if (mFrameQueue) delete mFrameQueue;
 
-	if (mTheoraDecoder)
-		th_decode_free(mTheoraDecoder);
+	if (mInfo->TheoraDecoder)
+		th_decode_free(mInfo->TheoraDecoder);
 
-	if (mTheoraSetup)
-		th_setup_free(mTheoraSetup);
+	if (mInfo->TheoraSetup)
+		th_setup_free(mInfo->TheoraSetup);
+	delete mInfo;
 
 	if (mAudioInterface)
 	{
 		mAudioMutex->lock(); // ensure a thread isn't using this mutex
 
 	// probably not necesarry because all it does is memset to 0
-	//	ogg_stream_clear(&mVorbisStreamState);
-	//	vorbis_block_clear(&mVorbisBlock);
-	//	vorbis_dsp_clear(&mVorbisDSPState);
-	//	vorbis_comment_clear(&mVorbisComment);
-	//	vorbis_info_clear(&mVorbisInfo);
+	//	ogg_stream_clear(&mInfo->VorbisStreamState);
+	//	vorbis_block_clear(&mInfo->VorbisBlock);
+	//	vorbis_dsp_clear(&mInfo->VorbisDSPState);
+	//	vorbis_comment_clear(&mInfo->VorbisComment);
+	//	vorbis_info_clear(&mInfo->VorbisInfo);
 		mAudioInterface->destroy(); // notify audio interface it's time to call it a day
 	}
 	delete mAudioMutex;
 
-	//ogg_sync_clear(&mOggSyncState);
+	//ogg_sync_clear(&mInfo->OggSyncState);
 }
 
 TheoraTimer* TheoraVideoClip::getTimer()
@@ -143,12 +173,12 @@ void TheoraVideoClip::decodeNextFrame()
 
 	for(;;)
 	{
-		int ret=ogg_stream_packetout(&mTheoraStreamState,&opTheora);
+		int ret=ogg_stream_packetout(&mInfo->TheoraStreamState,&opTheora);
 
 		if (ret > 0)
 		{
-			if (th_decode_packetin(mTheoraDecoder, &opTheora,&granulePos ) != 0) continue; // 0 means success
-			float time=th_granule_time(mTheoraDecoder,granulePos);
+			if (th_decode_packetin(mInfo->TheoraDecoder, &opTheora,&granulePos ) != 0) continue; // 0 means success
+			float time=th_granule_time(mInfo->TheoraDecoder,granulePos);
 			
 			if (mSeekPos == -2)
 			{	
@@ -160,7 +190,7 @@ void TheoraVideoClip::decodeNextFrame()
 					//if we use audio we must maintain perfect sync
 				/*	if (seek_granule != -1)
 					{
-						float vorbis_time=vorbis_granule_time(&mVorbisDSPState,seek_granule);
+						float vorbis_time=vorbis_granule_time(&mInfo->VorbisDSPState,seek_granule);
 						mTimer->seek(vorbis_time);
 					}
 				*/
@@ -170,15 +200,15 @@ void TheoraVideoClip::decodeNextFrame()
 			
 			if (time < mTimer->getTime()) continue; // drop frame
 			frame->mTimeToDisplay=time;
-			th_decode_ycbcr_out(mTheoraDecoder,buff);
+			th_decode_ycbcr_out(mInfo->TheoraDecoder,buff);
 			frame->decode(buff);
 			break;
 		}
 		else
 		{
-			char *buffer = ogg_sync_buffer( &mOggSyncState, 4096);
+			char *buffer = ogg_sync_buffer( &mInfo->OggSyncState, 4096);
 			int bytesRead = mStream->read( buffer, 4096 );
-			ogg_sync_wrote( &mOggSyncState, bytesRead );
+			ogg_sync_wrote( &mInfo->OggSyncState, bytesRead );
 			if (bytesRead < 4096)
 			{
 				if (bytesRead == 0)
@@ -187,28 +217,28 @@ void TheoraVideoClip::decodeNextFrame()
 					return;
 				}
 			}
-			while ( ogg_sync_pageout( &mOggSyncState, &mOggPage ) > 0 )
+			while ( ogg_sync_pageout( &mInfo->OggSyncState, &mInfo->OggPage ) > 0 )
 			{
-				if (mTheoraStreams) ogg_stream_pagein(&mTheoraStreamState,&mOggPage);
+				if (mTheoraStreams) ogg_stream_pagein(&mInfo->TheoraStreamState,&mInfo->OggPage);
 				if (mAudioInterface)// && mSeekPos != -2)
 				{
 					
 					if (mSeekPos == -2 && !mAudioSkipSeekFlag)
 					{
-						int g=ogg_page_granulepos(&mOggPage);
+						int g=ogg_page_granulepos(&mInfo->OggPage);
 						if (g > -1) { mAudioSkipSeekFlag=1; continue; }
 						if (g == -1) continue;
 					}
 					mAudioMutex->lock();
-					ogg_stream_pagein(&mVorbisStreamState,&mOggPage);
+					ogg_stream_pagein(&mInfo->VorbisStreamState,&mInfo->OggPage);
 					mAudioMutex->unlock();
 				}
 				/*
 				else if (mAudioInterface && mSeekPos == -2)
 				{
-					if ( ogg_page_serialno(&mOggPage) == mVorbisStreamState.serialno)
+					if ( ogg_page_serialno(&mInfo->OggPage) == mInfo->VorbisStreamState.serialno)
 					{
-						int g=ogg_page_granulepos(&mOggPage);
+						int g=ogg_page_granulepos(&mInfo->OggPage);
 						if (g != -1) seek_granule=g;
 						
 					}
@@ -222,11 +252,11 @@ void TheoraVideoClip::decodeNextFrame()
 void TheoraVideoClip::restart()
 {
 	long granule=0;
-	th_decode_ctl(mTheoraDecoder,TH_DECCTL_SET_GRANPOS,&granule,sizeof(granule));
-	th_decode_free(mTheoraDecoder);
-	mTheoraDecoder=th_decode_alloc(&mTheoraInfo,mTheoraSetup);
-	ogg_stream_reset(&mTheoraStreamState);
-	ogg_sync_reset(&mOggSyncState);
+	th_decode_ctl(mInfo->TheoraDecoder,TH_DECCTL_SET_GRANPOS,&granule,sizeof(granule));
+	th_decode_free(mInfo->TheoraDecoder);
+	mInfo->TheoraDecoder=th_decode_alloc(&mInfo->TheoraInfo,mInfo->TheoraSetup);
+	ogg_stream_reset(&mInfo->TheoraStreamState);
+	ogg_sync_reset(&mInfo->OggSyncState);
 	mStream->seek(0);
 	mTimer->seek(0);
 	mEndOfFile=false;
@@ -276,13 +306,13 @@ void TheoraVideoClip::decodedAudioCheck()
 	int len=0;
 	while (1)
 	{
-		len = vorbis_synthesis_pcmout(&mVorbisDSPState,&pcm);
+		len = vorbis_synthesis_pcmout(&mInfo->VorbisDSPState,&pcm);
 		if (!len)
 		{
-			if (ogg_stream_packetout(&mVorbisStreamState,&opVorbis) > 0)
+			if (ogg_stream_packetout(&mInfo->VorbisStreamState,&opVorbis) > 0)
 			{
-				if (vorbis_synthesis(&mVorbisBlock,&opVorbis) == 0)
-					vorbis_synthesis_blockin(&mVorbisDSPState,&mVorbisBlock);
+				if (vorbis_synthesis(&mInfo->VorbisBlock,&opVorbis) == 0)
+					vorbis_synthesis_blockin(&mInfo->VorbisDSPState,&mInfo->VorbisBlock);
 				continue;
 			}
 			else break;
@@ -292,14 +322,14 @@ void TheoraVideoClip::decodedAudioCheck()
 			// gain applied, let's attenuate the samples
 			for (int i=0;i<len;i++)
 			{
-				for (int j=0;j<mVorbisInfo.channels;j++)
+				for (int j=0;j<mInfo->VorbisInfo.channels;j++)
 				{
 					pcm[j][i]*=mAudioGain;
 				}
 			}
 		}
 		mAudioInterface->insertData(pcm,len);
-		vorbis_synthesis_read(&mVorbisDSPState,len);
+		vorbis_synthesis_read(&mInfo->VorbisDSPState,len);
 	}
 	
 	mAudioMutex->unlock();
@@ -311,10 +341,10 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 	readTheoraVorbisHeaders();
 
 
-	mTheoraDecoder=th_decode_alloc(&mTheoraInfo,mTheoraSetup);
+	mInfo->TheoraDecoder=th_decode_alloc(&mInfo->TheoraInfo,mInfo->TheoraSetup);
 
-	mWidth=mTheoraInfo.frame_width;
-	mHeight=mTheoraInfo.frame_height;
+	mWidth=mInfo->TheoraInfo.frame_width;
+	mHeight=mInfo->TheoraInfo.frame_height;
 
 	mFrameQueue=new TheoraFrameQueue(mNumPrecachedFrames,this);
 	setOutputMode(mOutputMode); // clear the frame backgrounds
@@ -328,31 +358,31 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 
 	for (int i=1;i<=10;i++)
 	{
-		ogg_sync_reset(&mOggSyncState);
+		ogg_sync_reset(&mInfo->OggSyncState);
 		mStream->seek(mStream->size()-4096*i);
 
-		char *buffer = ogg_sync_buffer( &mOggSyncState, 4096*i);
+		char *buffer = ogg_sync_buffer( &mInfo->OggSyncState, 4096*i);
 		int bytesRead = mStream->read( buffer, 4096*i);
-		ogg_sync_wrote( &mOggSyncState, bytesRead );
-		long offset=ogg_sync_pageseek(&mOggSyncState,&mOggPage);
+		ogg_sync_wrote( &mInfo->OggSyncState, bytesRead );
+		long offset=ogg_sync_pageseek(&mInfo->OggSyncState,&mInfo->OggPage);
 
 		while (1)
 		{
-			int ret=ogg_sync_pageout( &mOggSyncState, &mOggPage );
+			int ret=ogg_sync_pageout( &mInfo->OggSyncState, &mInfo->OggPage );
 			if (ret < 0)
-				ret=ogg_sync_pageout( &mOggSyncState, &mOggPage );
+				ret=ogg_sync_pageout( &mInfo->OggSyncState, &mInfo->OggPage );
 			if ( ret < 0) break;
 
-			int eos=ogg_page_eos(&mOggPage);
+			int eos=ogg_page_eos(&mInfo->OggPage);
 			if (eos > 0) break;
 
-			int serno=ogg_page_serialno(&mOggPage);
+			int serno=ogg_page_serialno(&mInfo->OggPage);
 			// if page is not a theora page, skip it
-			if (serno != mTheoraStreamState.serialno) continue;
+			if (serno != mInfo->TheoraStreamState.serialno) continue;
 
-			long granule=ogg_page_granulepos(&mOggPage);
+			long granule=ogg_page_granulepos(&mInfo->OggPage);
 			if (granule >= 0)
-				mDuration=th_granule_time(mTheoraDecoder,granule);
+				mDuration=th_granule_time(mInfo->TheoraDecoder,granule);
 		}
 		if (mDuration > 0) break;
 
@@ -364,19 +394,19 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 	// restore to beginning of stream.
 	// the following solution is temporary and hacky, will be replaced soon
 
-	ogg_sync_reset(&mOggSyncState);
+	ogg_sync_reset(&mInfo->OggSyncState);
 	mStream->seek(0);
-	memset(&mOggSyncState, 0, sizeof(ogg_sync_state));
-	memset(&mOggPage, 0, sizeof(ogg_page));
-	memset(&mVorbisStreamState, 0, sizeof(ogg_stream_state));
-	memset(&mTheoraStreamState, 0, sizeof(ogg_stream_state));
-	memset(&mTheoraInfo, 0, sizeof(th_info));
-	memset(&mTheoraComment, 0, sizeof(th_comment));
+	memset(&mInfo->OggSyncState, 0, sizeof(ogg_sync_state));
+	memset(&mInfo->OggPage, 0, sizeof(ogg_page));
+	memset(&mInfo->VorbisStreamState, 0, sizeof(ogg_stream_state));
+	memset(&mInfo->TheoraStreamState, 0, sizeof(ogg_stream_state));
+	memset(&mInfo->TheoraInfo, 0, sizeof(th_info));
+	memset(&mInfo->TheoraComment, 0, sizeof(th_comment));
 	//memset(&mTheoraState, 0, sizeof(th_state));
-	memset(&mVorbisInfo, 0, sizeof(vorbis_info));
-	memset(&mVorbisDSPState, 0, sizeof(vorbis_dsp_state));
-	memset(&mVorbisBlock, 0, sizeof(vorbis_block));
-	memset(&mVorbisComment, 0, sizeof(vorbis_comment));
+	memset(&mInfo->VorbisInfo, 0, sizeof(vorbis_info));
+	memset(&mInfo->VorbisDSPState, 0, sizeof(vorbis_dsp_state));
+	memset(&mInfo->VorbisBlock, 0, sizeof(vorbis_block));
+	memset(&mInfo->VorbisComment, 0, sizeof(vorbis_comment));
 	mTheoraStreams=mVorbisStreams=0;
 	readTheoraVorbisHeaders();
 
@@ -385,11 +415,11 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 	if (mVorbisStreams) // if there is no audio interface factory defined, even though the video
 		                // clip might have audio, it will be ignored
 	{
-		vorbis_synthesis_init(&mVorbisDSPState,&mVorbisInfo);
-		vorbis_block_init(&mVorbisDSPState,&mVorbisBlock);
+		vorbis_synthesis_init(&mInfo->VorbisDSPState,&mInfo->VorbisInfo);
+		vorbis_block_init(&mInfo->VorbisDSPState,&mInfo->VorbisBlock);
 		// create an audio interface instance if available
 		TheoraAudioInterfaceFactory* audio_factory=TheoraVideoManager::getSingleton().getAudioInterfaceFactory();
-		if (audio_factory) setAudioInterface(audio_factory->createInstance(this,mVorbisInfo.channels,mVorbisInfo.rate));
+		if (audio_factory) setAudioInterface(audio_factory->createInstance(this,mInfo->VorbisInfo.channels,mInfo->VorbisInfo.rate));
 	}
 }
 
@@ -399,61 +429,61 @@ void TheoraVideoClip::readTheoraVorbisHeaders()
 	bool done = false;
 	bool decode_audio=TheoraVideoManager::getSingleton().getAudioInterfaceFactory() != NULL;
 	//init Vorbis/Theora Layer
-	ogg_sync_init(&mOggSyncState);
-	th_comment_init(&mTheoraComment);
-	th_info_init(&mTheoraInfo);
-	vorbis_info_init(&mVorbisInfo);
-	vorbis_comment_init(&mVorbisComment);
+	ogg_sync_init(&mInfo->OggSyncState);
+	th_comment_init(&mInfo->TheoraComment);
+	th_info_init(&mInfo->TheoraInfo);
+	vorbis_info_init(&mInfo->VorbisInfo);
+	vorbis_comment_init(&mInfo->VorbisComment);
 
 	while (!done)
 	{
-		char *buffer = ogg_sync_buffer( &mOggSyncState, 4096);
+		char *buffer = ogg_sync_buffer( &mInfo->OggSyncState, 4096);
 		int bytesRead = mStream->read( buffer, 4096 );
-		ogg_sync_wrote( &mOggSyncState, bytesRead );
+		ogg_sync_wrote( &mInfo->OggSyncState, bytesRead );
 	
 		if( bytesRead == 0 )
 			break;
 	
-		while( ogg_sync_pageout( &mOggSyncState, &mOggPage ) > 0 )
+		while( ogg_sync_pageout( &mInfo->OggSyncState, &mInfo->OggPage ) > 0 )
 		{
 			ogg_stream_state OggStateTest;
     		
 			//is this an initial header? If not, stop
-			if( !ogg_page_bos( &mOggPage ) )
+			if( !ogg_page_bos( &mInfo->OggPage ) )
 			{
 				//This is done blindly, because stream only accept them selfs
 				if (mTheoraStreams) 
-					ogg_stream_pagein( &mTheoraStreamState, &mOggPage );
+					ogg_stream_pagein( &mInfo->TheoraStreamState, &mInfo->OggPage );
 				if (mVorbisStreams) 
-					ogg_stream_pagein( &mVorbisStreamState, &mOggPage );
+					ogg_stream_pagein( &mInfo->VorbisStreamState, &mInfo->OggPage );
 				
 				done=true;
 				break;
 			}
 	
-			ogg_stream_init( &OggStateTest, ogg_page_serialno( &mOggPage ) );
-			ogg_stream_pagein( &OggStateTest, &mOggPage );
+			ogg_stream_init( &OggStateTest, ogg_page_serialno( &mInfo->OggPage ) );
+			ogg_stream_pagein( &OggStateTest, &mInfo->OggPage );
 			ogg_stream_packetout( &OggStateTest, &tempOggPacket );
 
 			//identify the codec
 			int ret;
 			if( !mTheoraStreams)
 			{
-				ret=th_decode_headerin( &mTheoraInfo, &mTheoraComment, &mTheoraSetup, &tempOggPacket);
+				ret=th_decode_headerin( &mInfo->TheoraInfo, &mInfo->TheoraComment, &mInfo->TheoraSetup, &tempOggPacket);
 
 				if (ret > 0)
 				{
 					//This is the Theora Header
-					memcpy( &mTheoraStreamState, &OggStateTest, sizeof(OggStateTest));
+					memcpy( &mInfo->TheoraStreamState, &OggStateTest, sizeof(OggStateTest));
 					mTheoraStreams = 1;
 					continue;
 				}
 			}
 			if (decode_audio && !mVorbisStreams &&
-				vorbis_synthesis_headerin(&mVorbisInfo, &mVorbisComment, &tempOggPacket) >=0 )
+				vorbis_synthesis_headerin(&mInfo->VorbisInfo, &mInfo->VorbisComment, &tempOggPacket) >=0 )
 			{
 				//This is vorbis header
-				memcpy( &mVorbisStreamState, &OggStateTest, sizeof(OggStateTest));
+				memcpy( &mInfo->VorbisStreamState, &OggStateTest, sizeof(OggStateTest));
 				mVorbisStreams = 1;
 				continue;
 			}
@@ -470,12 +500,12 @@ void TheoraVideoClip::readTheoraVorbisHeaders()
 		int iSuccess;
 		while( mTheoraStreams && 
 			 ( mTheoraStreams < 3) && 
-			 ( iSuccess = ogg_stream_packetout( &mTheoraStreamState, &tempOggPacket)) ) 
+			 ( iSuccess = ogg_stream_packetout( &mInfo->TheoraStreamState, &tempOggPacket)) ) 
 		{
 			if( iSuccess < 0 ) 
 				throw TheoraGenericException("Error parsing Theora stream headers.");
 
-			if( !th_decode_headerin(&mTheoraInfo, &mTheoraComment, &mTheoraSetup, &tempOggPacket) )
+			if( !th_decode_headerin(&mInfo->TheoraInfo, &mInfo->TheoraComment, &mInfo->TheoraSetup, &tempOggPacket) )
 				throw TheoraGenericException("invalid theora stream");
 
 			mTheoraStreams++;			
@@ -484,30 +514,30 @@ void TheoraVideoClip::readTheoraVorbisHeaders()
 		//look 2nd vorbis header packets
 		while(// mVorbisStreams && 
 			 ( mVorbisStreams < 3 ) && 
-			 ( iSuccess=ogg_stream_packetout( &mVorbisStreamState, &tempOggPacket))) 
+			 ( iSuccess=ogg_stream_packetout( &mInfo->VorbisStreamState, &tempOggPacket))) 
 		{
 			if(iSuccess < 0) 
 				throw TheoraGenericException("Error parsing vorbis stream headers");
 
-			if(vorbis_synthesis_headerin( &mVorbisInfo, &mVorbisComment,&tempOggPacket)) 
+			if(vorbis_synthesis_headerin( &mInfo->VorbisInfo, &mInfo->VorbisComment,&tempOggPacket)) 
 				throw TheoraGenericException("invalid stream");
 
 			mVorbisStreams++;
 		} //end while looking for more vorbis headers
 	
 		//Not finished with Headers, get some more file data
-		if( ogg_sync_pageout( &mOggSyncState, &mOggPage ) > 0 )
+		if( ogg_sync_pageout( &mInfo->OggSyncState, &mInfo->OggPage ) > 0 )
 		{
 			if(mTheoraStreams) 
-				ogg_stream_pagein( &mTheoraStreamState, &mOggPage );
+				ogg_stream_pagein( &mInfo->TheoraStreamState, &mInfo->OggPage );
 			if(mVorbisStreams) 
-				ogg_stream_pagein( &mVorbisStreamState, &mOggPage );
+				ogg_stream_pagein( &mInfo->VorbisStreamState, &mInfo->OggPage );
 		}
 		else
 		{
-			char *buffer = ogg_sync_buffer( &mOggSyncState, 4096);
+			char *buffer = ogg_sync_buffer( &mInfo->OggSyncState, 4096);
 			int bytesRead = mStream->read( buffer, 4096 );
-			ogg_sync_wrote( &mOggSyncState, bytesRead );
+			ogg_sync_wrote( &mInfo->OggSyncState, bytesRead );
 
 			if( bytesRead == 0 )
 				throw TheoraGenericException("End of file found prematurely");
@@ -578,68 +608,68 @@ void TheoraVideoClip::doSeek()
 	ogg_int64_t granule,th_granule;
 
 	mFrameQueue->clear();
-	ogg_stream_reset(&mTheoraStreamState);
-	th_decode_free(mTheoraDecoder);
+	ogg_stream_reset(&mInfo->TheoraStreamState);
+	th_decode_free(mInfo->TheoraDecoder);
 	if (mAudioInterface)
 	{
-		vorbis_synthesis_restart(&mVorbisDSPState);
-		ogg_stream_reset(&mVorbisStreamState);
+		vorbis_synthesis_restart(&mInfo->VorbisDSPState);
+		ogg_stream_reset(&mInfo->VorbisStreamState);
 		mAudioMutex->lock();
 	}
-	mTheoraDecoder=th_decode_alloc(&mTheoraInfo,mTheoraSetup);
+	mInfo->TheoraDecoder=th_decode_alloc(&mInfo->TheoraInfo,mInfo->TheoraSetup);
 
 	for (i=0;i<10;i++) // max 10 seek operations
 	{
 		granule=0;
-		ogg_sync_reset( &mOggSyncState );
+		ogg_sync_reset( &mInfo->OggSyncState );
 		mStream->seek((seek_min+seek_max)/2);
 
-		memset(&mOggPage, 0, sizeof(ogg_page));
-		ogg_sync_pageseek(&mOggSyncState,&mOggPage);
+		memset(&mInfo->OggPage, 0, sizeof(ogg_page));
+		ogg_sync_pageseek(&mInfo->OggSyncState,&mInfo->OggPage);
 		while (1)
 		{
-			int ret=ogg_sync_pageout( &mOggSyncState, &mOggPage );
+			int ret=ogg_sync_pageout( &mInfo->OggSyncState, &mInfo->OggPage );
 			if (ret == 1)
 			{
-				//ogg_stream_pagein( &mTheoraStreamState, &mOggPage );
+				//ogg_stream_pagein( &mInfo->TheoraStreamState, &mInfo->OggPage );
 
-				int serno=ogg_page_serialno(&mOggPage);
-				if (serno == mTheoraStreamState.serialno)
+				int serno=ogg_page_serialno(&mInfo->OggPage);
+				if (serno == mInfo->TheoraStreamState.serialno)
 				{
-					int g=ogg_page_granulepos(&mOggPage);
+					int g=ogg_page_granulepos(&mInfo->OggPage);
 					if (g > -1) th_granule=g;
 				}
 				// if audio is available, use vorbis for time positioning
 				// othervise use theora
-				if ( mAudioInterface && serno == mVorbisStreamState.serialno ||
-					     !mAudioInterface && serno == mTheoraStreamState.serialno)
+				if ( mAudioInterface && serno == mInfo->VorbisStreamState.serialno ||
+					     !mAudioInterface && serno == mInfo->TheoraStreamState.serialno)
 				{
-					if (granule <= 0) granule=ogg_page_granulepos(&mOggPage);
+					if (granule <= 0) granule=ogg_page_granulepos(&mInfo->OggPage);
 					if (granule >= 0 && th_granule >= 0) break;
 				}
 				else continue; // unknown page (could be flac or whatever)
-				int eos=ogg_page_eos(&mOggPage);
+				int eos=ogg_page_eos(&mInfo->OggPage);
 				if (eos > 0) break;
 			}
 			else
 			{
-				char *buffer = ogg_sync_buffer( &mOggSyncState, 4096);
+				char *buffer = ogg_sync_buffer( &mInfo->OggSyncState, 4096);
 				int bytesRead = mStream->read( buffer, 4096);
 				if (bytesRead < 4096) break;
-				ogg_sync_wrote( &mOggSyncState, bytesRead );
+				ogg_sync_wrote( &mInfo->OggSyncState, bytesRead );
 			}
 		}
 		if (mAudioInterface)
-			time=vorbis_granule_time(&mVorbisDSPState,granule);
+			time=vorbis_granule_time(&mInfo->VorbisDSPState,granule);
 		else
-			time=th_granule_time(mTheoraDecoder,granule);
+			time=th_granule_time(mInfo->TheoraDecoder,granule);
 		if (time <= mSeekPos && time-mSeekPos < 0.5 && time-mSeekPos >= 0) break; // ok, we're close enough
 		
 		if (time < mSeekPos) seek_min=(seek_min+seek_max)/2;
 		else				 seek_max=(seek_min+seek_max)/2;
 	}
-	ogg_sync_reset( &mOggSyncState );
-	th_decode_ctl(mTheoraDecoder,TH_DECCTL_SET_GRANPOS,&th_granule,sizeof(th_granule));
+	ogg_sync_reset( &mInfo->OggSyncState );
+	th_decode_ctl(mInfo->TheoraDecoder,TH_DECCTL_SET_GRANPOS,&th_granule,sizeof(th_granule));
 	mTimer->seek(time); // this will be changed in decodeNextFrame when seeking to the next keyframe
 	mStream->seek((seek_min+seek_max)/2);
 	mSeekPos=-2;

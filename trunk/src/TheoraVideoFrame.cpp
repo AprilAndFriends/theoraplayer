@@ -20,7 +20,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 *************************************************************************************/
 #include "TheoraVideoFrame.h"
 #include "TheoraVideoClip.h"
-
+#include <theora/theoradec.h>
 
 #define TH_MAX( a, b ) ((a > b) ? a : b)
 #define TH_MIN( a, b ) ((a < b) ? a : b)
