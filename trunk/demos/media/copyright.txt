@@ -1,0 +1,7 @@
+These sample movies are in the SVN to serve as test media, they have been downloaded
+from the following links:
+
+konqi - http://www.kde.org
+bunny - http://www.bigbuckbunny.org/index.php/download/
+room  - http://commons.wikimedia.org/wiki/File:Geba.ogv
+titan - http://commons.wikimedia.org/wiki/File:Wikititananimation.ogg
