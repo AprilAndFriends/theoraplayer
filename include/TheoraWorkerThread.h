@@ -32,9 +32,6 @@ class TheoraVideoClip;
 class TheoraWorkerThread : public TheoraThread
 {
 	TheoraVideoClip* mClip;
-
-	volatile bool mThreadRunning;
-
 public:
 	TheoraWorkerThread();
 	~TheoraWorkerThread();

@@ -60,11 +60,12 @@ TheoraVideoManager::TheoraVideoManager()
 
 TheoraVideoManager::~TheoraVideoManager()
 {
-	mWorkMutex->lock(); // to avoid sync problems. in case a thread is asking for work, and we delete the mutex halfway through
-
 	ThreadList::iterator ti;
 	for (ti=mWorkerThreads.begin(); ti != mWorkerThreads.end();ti++)
+	{
+		(*ti)->waitforThread();
 		delete (*ti);
+	}
 	mWorkerThreads.clear();
 
 	ClipList::iterator ci;
@@ -102,7 +103,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 {
 	TheoraVideoClip* clip = NULL;
 	writelog("Creating video from data source: "+data_source->repr());
-	clip = new TheoraVideoClip(data_source,32);
+	clip = new TheoraVideoClip(data_source,16);
 	mClips.push_back(clip);
 	return clip;
 }

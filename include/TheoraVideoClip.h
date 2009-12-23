@@ -23,8 +23,16 @@ http://www.gnu.org/copyleft/lesser.txt.
 #define _TheoraVideoClip_h
 
 #include <string>
-
 #include "TheoraExport.h"
+
+// forward class declarations
+class TheoraInfoStruct;
+class TheoraMutex;
+class TheoraFrameQueue;
+class TheoraTimer;
+class TheoraAudioInterface;
+class TheoraWorkerThread;
+class TheoraDataSource;
 
 enum TheoraOutputMode
 {
@@ -33,18 +41,9 @@ enum TheoraOutputMode
 	TH_YUV
 };
 
-class TheoraInfoStruct;
-
-class TheoraMutex;
-class TheoraFrameQueue;
-class TheoraTimer;
-class TheoraAudioInterface;
-class TheoraWorkerThread;
-class TheoraDataSource;
-
-
 /**
-	
+	This object contains all data related to video playback, eg. the open source file,
+	the frame queue etc.
 */
 class TheoraPlayerExport TheoraVideoClip
 {
@@ -60,6 +59,8 @@ class TheoraPlayerExport TheoraVideoClip
 
 	TheoraWorkerThread* mAssignedWorkerThread;
 
+	// benchmark vars
+	int mNumDroppedFrames,mNumDisplayedFrames;
 	
 	int mTheoraStreams, mVorbisStreams;	// Keeps track of Theora and Vorbis Streams
 
@@ -100,6 +101,10 @@ public:
 	~TheoraVideoClip();
 
 	std::string getName();
+
+	// benchmark functions
+	int getNumDisplayedFrames() { return mNumDisplayedFrames; }
+	int getNumDroppedFrames() { return mNumDroppedFrames; }
 
 	//! return width in pixels of the video clip
 	int getWidth();
