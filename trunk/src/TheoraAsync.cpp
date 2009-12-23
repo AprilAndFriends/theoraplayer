@@ -51,12 +51,27 @@ void TheoraMutex::unlock()
 	ReleaseMutex(mHandle);
 }
 
+
+TheoraThread::TheoraThread()
+{
+	mThreadRunning=false;
+	mHandle=0;
+}
+
+TheoraThread::~TheoraThread()
+{
+	if (mHandle) CloseHandle(mHandle);
+}
+
 void TheoraThread::startThread()
 {
-	CreateThread(0,0,&theoraAsync_Call,this,0,0);
+	mThreadRunning=true;
+	mHandle=CreateThread(0,0,&theoraAsync_Call,this,0,0);
 }
 
 void TheoraThread::waitforThread()
 {
-
+	mThreadRunning=false;
+	WaitForSingleObject(mHandle,INFINITE);
+	if (mHandle) { CloseHandle(mHandle); mHandle=0; }
 }

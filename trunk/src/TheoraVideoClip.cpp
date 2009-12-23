@@ -79,7 +79,8 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,int nPrecachedFra
 	mAutoRestart(0),
 	mAudioGain(1),
 	mEndOfFile(0),
-
+	mNumDroppedFrames(0),
+	mNumDisplayedFrames(0),
 	mAudioSkipSeekFlag(0)
 {
 	mAudioMutex=new TheoraMutex;
@@ -179,6 +180,7 @@ void TheoraVideoClip::decodeNextFrame()
 		{
 			if (th_decode_packetin(mInfo->TheoraDecoder, &opTheora,&granulePos ) != 0) continue; // 0 means success
 			float time=th_granule_time(mInfo->TheoraDecoder,granulePos);
+			unsigned long frame_number=th_granule_frame(mInfo->TheoraDecoder,granulePos);
 			
 			if (mSeekPos == -2)
 			{	
@@ -198,8 +200,15 @@ void TheoraVideoClip::decodeNextFrame()
 				
 			}
 			
-			if (time < mTimer->getTime()) continue; // drop frame
+			if (time < mTimer->getTime())
+			{
+				writelog("pre-dropped frame "+str(frame_number));
+				mNumDisplayedFrames++;
+				mNumDroppedFrames++;
+				continue; // drop frame
+			}
 			frame->mTimeToDisplay=time;
+			frame->_setFrameNumber(frame_number);
 			th_decode_ycbcr_out(mInfo->TheoraDecoder,buff);
 			frame->decode(buff);
 			break;
@@ -271,6 +280,7 @@ void TheoraVideoClip::update(float time_increase)
 
 void TheoraVideoClip::popFrame()
 {
+	mNumDisplayedFrames++;
 	mFrameQueue->pop(); // after transfering frame data to the texture, free the frame
 						// so it can be used again
 }
@@ -287,6 +297,9 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 		if (frame->mTimeToDisplay > time) return 0;
 		if (frame->mTimeToDisplay < time-0.1)
 		{
+			writelog("dropped frame "+str(frame->getFrameNumber()));
+			mNumDroppedFrames++;
+			mNumDisplayedFrames++;
 			mFrameQueue->pop();
 		}
 		else break;

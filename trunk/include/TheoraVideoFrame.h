@@ -31,6 +31,7 @@ class TheoraPlayerExport TheoraVideoFrame
 {
 	TheoraVideoClip* mParent;
 	unsigned char* mBuffer;
+	unsigned long mFrameNumber;
 
 	void decodeRGB(void* _yuv);
 	void decodeGrey(void* _yuv);
@@ -43,6 +44,9 @@ public:
 
 	TheoraVideoFrame(TheoraVideoClip* parent);
 	~TheoraVideoFrame();
+
+	void _setFrameNumber(int number) { mFrameNumber=number; }
+	int getFrameNumber() { return mFrameNumber; }
 
 	int getWidth();
 	int getHeight();

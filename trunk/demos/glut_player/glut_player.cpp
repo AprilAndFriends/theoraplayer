@@ -55,13 +55,17 @@ void update(float time_increase)
 
 void setDebugTitle(char* out)
 {
-	sprintf(out,"%d precached frames",clip->getNumPrecachedFrames());
+	int nDropped=clip->getNumDroppedFrames(),nDisplayed=clip->getNumDisplayedFrames();
+	float percent=100*((float) nDropped/nDisplayed);
+	sprintf(out,"%d precached, %d displayed, %d dropped (%.1f %%)",clip->getNumPrecachedFrames(),nDisplayed,nDropped,percent);
 }
 
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip("../media/konqi.ogg");
+	clip=mgr->createVideoClip("../media/bunny.ogg");
+	clip->setOutputMode(TH_GREY);
+
 	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
 }
 

@@ -66,7 +66,10 @@ void display()
 	static unsigned long time=GetTickCount();
 	unsigned long t=GetTickCount();
 
-	update((t-time)/1000.0f);
+	float diff=(t-time)/1000.0f;
+	if (diff > 0.25f)
+		diff=0.05f; // prevent spikes (usually happen on app load)
+	update(diff);
 
 	static unsigned long fps_timer=time,fps_counter=0;
 	if (t-fps_timer >= 1000)

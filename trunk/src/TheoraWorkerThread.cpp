@@ -27,17 +27,11 @@ http://www.gnu.org/copyleft/lesser.txt.
 TheoraWorkerThread::TheoraWorkerThread() : TheoraThread()
 {
 	mClip=NULL;
-	mThreadRunning=false;
 }
 
 TheoraWorkerThread::~TheoraWorkerThread()
 {
-	if (mThreadRunning)
-	{
-		//Terminate Thread and wait for it to leave
-		mThreadRunning = false;
-		waitforThread();
-	}
+
 }
 
 void TheoraWorkerThread::executeThread()
@@ -48,7 +42,6 @@ void TheoraWorkerThread::executeThread()
 		mClip=TheoraVideoManager::getSingleton().requestWork(this);
 		if (!mClip)
 		{
-			
 			psleep(250);
 			continue;
 		}
@@ -60,6 +53,6 @@ void TheoraWorkerThread::executeThread()
 		mClip->decodeNextFrame();
 
 		mClip->mAssignedWorkerThread=NULL;
-		psleep(2);
+		//psleep(2);
 	}
 }

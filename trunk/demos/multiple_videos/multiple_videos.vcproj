@@ -205,7 +205,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy ..\bin\release\*.dll ..\..\demos\player\bin\release&#x0D;&#x0A;copy ..\bin\release\*.dll ..\..\demos\audio_openal\bin\release&#x0D;&#x0A;copy ..\bin\release\*.dll ..\..\demos\multiple_videos\bin\release&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration

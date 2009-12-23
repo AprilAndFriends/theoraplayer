@@ -35,7 +35,6 @@ unsigned int RVTable[256];
 TheoraVideoFrame::TheoraVideoFrame(TheoraVideoClip* parent)
 {
 	mReady=mInUse=false;
-
 	mParent=parent;
 	mBuffer=new unsigned char[mParent->mWidth * mParent->mHeight * 4];
 }
@@ -127,7 +126,7 @@ void TheoraVideoFrame::decodeGrey(void* _yuv)
 		{
 			cy=*ySrc;
 			out[0]=out[1]=out[2]=cy;
-			out+=4;
+			out+=3;
 			ySrc++;
 		}
 		ySrc2+=yuv[0].stride;
@@ -141,15 +140,17 @@ void TheoraVideoFrame::decodeYUV(void* _yuv)
 	unsigned char *ySrc=yuv[0].data, *ySrc2=yuv[0].data,*ySrcEnd,
 				  *uSrc=yuv[1].data, *uSrc2=yuv[1].data,
 	              *vSrc=yuv[2].data, *vSrc2=yuv[2].data;
-	unsigned int *out=(unsigned int*) mBuffer;
+	unsigned char *out=mBuffer;
 
 	for (y=0;y<yuv[0].height;y++)
 	{
 		t=0; ySrc=ySrc2; ySrcEnd=ySrc2+yuv[0].width; uSrc=uSrc2; vSrc=vSrc2;
 		while (ySrc != ySrcEnd)
 		{
-			*out=(((*ySrc << 8) | *uSrc) << 8) | *vSrc;
-			out++;
+			out[0]=*ySrc;
+			out[1]=*uSrc;
+			out[2]=*vSrc;
+			out+=3;
 			ySrc++;
 			if (t=!t == 1) { uSrc++; vSrc++; }
 		}
