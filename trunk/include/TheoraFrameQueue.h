@@ -23,17 +23,18 @@ http://www.gnu.org/copyleft/lesser.txt.
 #define _TheoraFrameQueue_h
 
 #include "TheoraAsync.h"
+#include <list>
 
 class TheoraVideoFrame;
 class TheoraVideoClip;
 
 /**
-	
+	This class handles the frame queue. contains frames and handles their alloctation/deallocation
+	it is designed to be thread-safe
 */
 class TheoraFrameQueue
 {
-	TheoraVideoFrame** mQueue;
-	int mSize;
+	std::list<TheoraVideoFrame*> mQueue;
 	TheoraVideoClip* mParent;
 	TheoraMutex mMutex;
 public:

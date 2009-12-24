@@ -57,14 +57,19 @@ void setDebugTitle(char* out)
 {
 	int nDropped=clip->getNumDroppedFrames(),nDisplayed=clip->getNumDisplayedFrames();
 	float percent=100*((float) nDropped/nDisplayed);
-	sprintf(out,"%d precached, %d displayed, %d dropped (%.1f %%)",clip->getNumPrecachedFrames(),nDisplayed,nDropped,percent);
+	sprintf(out," (%dx%d) %d precached, %d displayed, %d dropped (%.1f %%)",clip->getWidth(),
+		                                                                    clip->getHeight(),
+		                                                                    clip->getNumPrecachedFrames(),
+		                                                                    nDisplayed,
+		                                                                    nDropped,
+		                                                                    percent);
 }
 
 void init()
 {
 	mgr=new TheoraVideoManager();
 	clip=mgr->createVideoClip("../media/bunny.ogg");
-	clip->setOutputMode(TH_GREY);
+	clip->setOutputMode(TH_RGB);
 
 	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
 }

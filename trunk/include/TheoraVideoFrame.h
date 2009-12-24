@@ -48,6 +48,8 @@ public:
 	void _setFrameNumber(int number) { mFrameNumber=number; }
 	int getFrameNumber() { return mFrameNumber; }
 
+	void clear();
+
 	int getWidth();
 	int getHeight();
 	unsigned char* getBuffer();

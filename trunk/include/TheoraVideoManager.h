@@ -23,9 +23,11 @@ http://www.gnu.org/copyleft/lesser.txt.
 #define _TheoraVideoManager_h
 
 #include <vector>
+#include <string>
 #include "TheoraExport.h"
 
 
+#pragma warning( disable: 4251 ) // MSVC++
 // forward class declarations
 class TheoraWorkerThread;
 class TheoraMutex;
@@ -37,6 +39,7 @@ class TheoraAudioInterfaceFactory;
 */
 class TheoraPlayerExport TheoraVideoManager
 {
+protected:
 	friend class TheoraWorkerThread;
 	typedef std::vector<TheoraVideoClip*> ClipList;
 	typedef std::vector<TheoraWorkerThread*> ThreadList;
@@ -48,8 +51,9 @@ class TheoraPlayerExport TheoraVideoManager
 	int mDefaultNumPrecachedFrames;
 
 	TheoraMutex* mWorkMutex;
-
 	TheoraAudioInterfaceFactory* mAudioFactory;
+
+	void (*mLogFuction)(std::string);
 
 	/**
 	 * Called by TheoraWorkerThread to request a TheoraVideoClip instance to work on decoding
@@ -83,6 +87,10 @@ public:
 
 	void setDefaultNumPrecachedFrames(int n);
 	int getDefaultNumPrecachedFrames();
+
+	void logMessage(std::string msg);
+
+	void setLogFunction(void (*fn)(std::string)) { mLogFuction=fn; }
 
 };
 #endif
