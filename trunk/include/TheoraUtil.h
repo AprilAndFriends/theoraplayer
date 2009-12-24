@@ -11,6 +11,7 @@
 #define foreach_in_map(type,list) for (std::map<std::string,type>::iterator it=list.begin();it != list.end(); it++)
 
 std::string str(int i);
+std::string strf(float i);
 void _psleep(int milliseconds);
 
 #endif

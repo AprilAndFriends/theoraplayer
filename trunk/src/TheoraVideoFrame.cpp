@@ -36,12 +36,13 @@ TheoraVideoFrame::TheoraVideoFrame(TheoraVideoClip* parent)
 {
 	mReady=mInUse=false;
 	mParent=parent;
+	mIteration=0;
 	mBuffer=new unsigned char[mParent->mWidth * mParent->mHeight * 4];
 }
 
 TheoraVideoFrame::~TheoraVideoFrame()
 {
-	if (mBuffer) delete mBuffer;
+	if (mBuffer) delete [] mBuffer;
 }
 
 int TheoraVideoFrame::getWidth()

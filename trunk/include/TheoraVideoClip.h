@@ -75,7 +75,8 @@ class TheoraPlayerExport TheoraVideoClip
 	float mSeekPos; //! stores desired seek position. next worker thread will do the seeking and reset this var to -1
 	TheoraOutputMode mOutputMode;
 	bool mAutoRestart;
-	bool mEndOfFile;
+	bool mEndOfFile,mRestarted;
+	int mIteration,mLastIteration; //! used to detect when the video restarted
 
 	float mUserPriority;
 
@@ -96,6 +97,8 @@ class TheoraPlayerExport TheoraVideoClip
 	void doSeek(); //! called by WorkerThread to seek to mSeekPos
 
 	void load(TheoraDataSource* source);
+
+	void _restart(); // resets the decoder and stream but leaves the frame queue intact
 public:
 	TheoraVideoClip(TheoraDataSource* data_source,int nPrecachedFrames);
 	~TheoraVideoClip();
@@ -110,10 +113,6 @@ public:
 	int getWidth();
 	//! return height in pixels of the video clip
 	int getHeight();
-	//! return actual width that the texture uses (nearest power of two dimension)
-	int getTextureWidth();
-	//! return actual height that the texture uses (nearest power of two dimension)
-	int getTextureHeight();
 
 	TheoraTimer* getTimer();
 	void setTimer(TheoraTimer* timer);
@@ -131,6 +130,7 @@ public:
 
 	void setNumPrecachedFrames(int n);
 	int getNumPrecachedFrames();
+	int getNumReadyFrames();
 
 	void setAudioGain(float gain);
 	float getAudioGain();
