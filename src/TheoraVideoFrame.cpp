@@ -168,6 +168,11 @@ void TheoraVideoFrame::decode(void* yuv)
 	mReady=true;
 }
 
+void TheoraVideoFrame::clear()
+{
+	mInUse=mReady=false;
+}
+
 void createYUVtoRGBtables()
 {
 	//used to bring the table into the high side (scale up) so we

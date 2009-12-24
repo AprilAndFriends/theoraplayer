@@ -18,6 +18,7 @@ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place - Suite 330, Boston, MA 02111-1307, USA, or go to
 http://www.gnu.org/copyleft/lesser.txt.
 *************************************************************************************/
+#pragma warning( disable: 4251 ) // MSVC++
 #include "TheoraWorkerThread.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip.h"
@@ -42,7 +43,7 @@ void TheoraWorkerThread::executeThread()
 		mClip=TheoraVideoManager::getSingleton().requestWork(this);
 		if (!mClip)
 		{
-			psleep(250);
+			_psleep(250);
 			continue;
 		}
 		

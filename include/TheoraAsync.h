@@ -46,6 +46,7 @@ public:
 	void startThread();
 	virtual void executeThread()=0;
 	void waitforThread();
+	
 };
 
 

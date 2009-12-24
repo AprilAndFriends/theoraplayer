@@ -112,7 +112,7 @@ TheoraVideoClip::~TheoraVideoClip()
 	// wait untill a worker thread is done decoding the frame
 	while (mAssignedWorkerThread)
 	{
-		psleep(1);
+		_psleep(1);
 	}
 
 	delete mDefaultTimer;
@@ -179,8 +179,8 @@ void TheoraVideoClip::decodeNextFrame()
 		if (ret > 0)
 		{
 			if (th_decode_packetin(mInfo->TheoraDecoder, &opTheora,&granulePos ) != 0) continue; // 0 means success
-			float time=th_granule_time(mInfo->TheoraDecoder,granulePos);
-			unsigned long frame_number=th_granule_frame(mInfo->TheoraDecoder,granulePos);
+			float time=(float) th_granule_time(mInfo->TheoraDecoder,granulePos);
+			unsigned long frame_number=(unsigned long) th_granule_frame(mInfo->TheoraDecoder,granulePos);
 			
 			if (mSeekPos == -2)
 			{	
@@ -202,7 +202,7 @@ void TheoraVideoClip::decodeNextFrame()
 			
 			if (time < mTimer->getTime())
 			{
-				writelog("pre-dropped frame "+str(frame_number));
+				TheoraVideoManager::getSingleton().logMessage("pre-dropped frame "+str(frame_number));
 				mNumDisplayedFrames++;
 				mNumDroppedFrames++;
 				continue; // drop frame
@@ -234,7 +234,7 @@ void TheoraVideoClip::decodeNextFrame()
 					
 					if (mSeekPos == -2 && !mAudioSkipSeekFlag)
 					{
-						int g=ogg_page_granulepos(&mInfo->OggPage);
+						unsigned long g=(unsigned long) ogg_page_granulepos(&mInfo->OggPage);
 						if (g > -1) { mAudioSkipSeekFlag=1; continue; }
 						if (g == -1) continue;
 					}
@@ -297,7 +297,7 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 		if (frame->mTimeToDisplay > time) return 0;
 		if (frame->mTimeToDisplay < time-0.1)
 		{
-			writelog("dropped frame "+str(frame->getFrameNumber()));
+			TheoraVideoManager::getSingleton().logMessage("dropped frame "+str(frame->getFrameNumber()));
 			mNumDroppedFrames++;
 			mNumDisplayedFrames++;
 			mFrameQueue->pop();
@@ -393,16 +393,16 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 			// if page is not a theora page, skip it
 			if (serno != mInfo->TheoraStreamState.serialno) continue;
 
-			long granule=ogg_page_granulepos(&mInfo->OggPage);
+			unsigned long granule=(unsigned long) ogg_page_granulepos(&mInfo->OggPage);
 			if (granule >= 0)
-				mDuration=th_granule_time(mInfo->TheoraDecoder,granule);
+				mDuration=(float) th_granule_time(mInfo->TheoraDecoder,granule);
 		}
 		if (mDuration > 0) break;
 
 	}
 	if (mDuration < 0)
 	{
-		writelog("TheoraVideoPlugin: unable to determine file duration!");
+		TheoraVideoManager::getSingleton().logMessage("TheoraVideoPlugin: unable to determine file duration!");
 	}
 	// restore to beginning of stream.
 	// the following solution is temporary and hacky, will be replaced soon
@@ -649,7 +649,7 @@ void TheoraVideoClip::doSeek()
 				int serno=ogg_page_serialno(&mInfo->OggPage);
 				if (serno == mInfo->TheoraStreamState.serialno)
 				{
-					int g=ogg_page_granulepos(&mInfo->OggPage);
+					unsigned long g=(unsigned long) ogg_page_granulepos(&mInfo->OggPage);
 					if (g > -1) th_granule=g;
 				}
 				// if audio is available, use vorbis for time positioning
@@ -673,9 +673,9 @@ void TheoraVideoClip::doSeek()
 			}
 		}
 		if (mAudioInterface)
-			time=vorbis_granule_time(&mInfo->VorbisDSPState,granule);
+			time=(float) vorbis_granule_time(&mInfo->VorbisDSPState,granule);
 		else
-			time=th_granule_time(mInfo->TheoraDecoder,granule);
+			time=(float) th_granule_time(mInfo->TheoraDecoder,granule);
 		if (time <= mSeekPos && time-mSeekPos < 0.5 && time-mSeekPos >= 0) break; // ok, we're close enough
 		
 		if (time < mSeekPos) seek_min=(seek_min+seek_max)/2;
@@ -700,11 +700,8 @@ void TheoraVideoClip::seek(float time)
 
 float TheoraVideoClip::getPriority()
 {
-	// prioritize based on number of precached frames
-	// this way, we get even distribution of work among worker threads
-	// in the future this function will involve to include user priorities
-	// and to de-prioritize paused videos etc
-	return getNumPrecachedFrames()*10;
+	// TODO
+	return getNumPrecachedFrames()*10.0f;
 }
 
 void TheoraVideoClip::setAudioInterface(TheoraAudioInterface* iface)

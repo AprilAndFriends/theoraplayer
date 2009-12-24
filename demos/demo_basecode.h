@@ -24,6 +24,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <gl\glu.h>
 #include <gl\glut.h>
 #include <string>
+#pragma warning( disable: 4996 ) // MSVC++
 extern std::string window_name;
 
 void init();

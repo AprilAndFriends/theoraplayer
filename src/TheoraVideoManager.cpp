@@ -30,6 +30,12 @@ TheoraVideoManager* g_ManagerSingleton=0;
 // it only needs to be used by this plugin and called once
 void createYUVtoRGBtables();
 
+void theora_writelog(std::string output)
+{
+	printf("%s\n",output.c_str());
+}
+
+
 TheoraVideoManager* TheoraVideoManager::getSingletonPtr(void)
 {
     return g_ManagerSingleton;
@@ -42,6 +48,8 @@ TheoraVideoManager& TheoraVideoManager::getSingleton(void)
 TheoraVideoManager::TheoraVideoManager()
 {
 	g_ManagerSingleton=this;
+	mLogFuction=theora_writelog;
+
 	mAudioFactory = NULL;
 	mWorkMutex=new TheoraMutex();
 
@@ -60,11 +68,10 @@ TheoraVideoManager::TheoraVideoManager()
 
 TheoraVideoManager::~TheoraVideoManager()
 {
-	ThreadList::iterator ti;
-	for (ti=mWorkerThreads.begin(); ti != mWorkerThreads.end();ti++)
+	foreach(TheoraWorkerThread*,mWorkerThreads)
 	{
-		(*ti)->waitforThread();
-		delete (*ti);
+		(*it)->waitforThread();
+		delete (*it);
 	}
 	mWorkerThreads.clear();
 
@@ -73,6 +80,11 @@ TheoraVideoManager::~TheoraVideoManager()
 		delete (*ci);
 	mClips.clear();
 	delete mWorkMutex;
+}
+
+void TheoraVideoManager::logMessage(std::string msg)
+{
+	mLogFuction(msg);
 }
 
 TheoraVideoClip* TheoraVideoManager::getVideoClipByName(std::string name)
@@ -102,7 +114,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(std::string filename)
 TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_source)
 {
 	TheoraVideoClip* clip = NULL;
-	writelog("Creating video from data source: "+data_source->repr());
+	logMessage("Creating video from data source: "+data_source->repr());
 	clip = new TheoraVideoClip(data_source,16);
 	mClips.push_back(clip);
 	return clip;
