@@ -13,6 +13,14 @@ std::string str(int i)
     sprintf(s,"%d",i);
     return std::string(s);
 }
+
+std::string strf(float i)
+{
+    char s[32];
+    sprintf(s,"%.3f",i);
+    return std::string(s);
+}
+
 void _psleep(int milliseconds)
 {
 	Sleep(milliseconds);

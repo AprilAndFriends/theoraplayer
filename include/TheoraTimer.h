@@ -27,10 +27,9 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 class TheoraPlayerExport TheoraTimer
 {
-public:
 	float mTime;
 	bool mPaused;
-
+public:
 	TheoraTimer();
 
 	virtual float getTime();

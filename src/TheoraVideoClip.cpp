@@ -81,7 +81,10 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,int nPrecachedFra
 	mEndOfFile(0),
 	mNumDroppedFrames(0),
 	mNumDisplayedFrames(0),
-	mAudioSkipSeekFlag(0)
+	mAudioSkipSeekFlag(0),
+	mIteration(0),
+	mLastIteration(0),
+	mRestarted(0)
 {
 	mAudioMutex=new TheoraMutex;
 
@@ -181,9 +184,10 @@ void TheoraVideoClip::decodeNextFrame()
 			if (th_decode_packetin(mInfo->TheoraDecoder, &opTheora,&granulePos ) != 0) continue; // 0 means success
 			float time=(float) th_granule_time(mInfo->TheoraDecoder,granulePos);
 			unsigned long frame_number=(unsigned long) th_granule_frame(mInfo->TheoraDecoder,granulePos);
-			
+			if (time > mDuration) mDuration=time; // duration corrections
+
 			if (mSeekPos == -2)
-			{	
+			{
 				if (!th_packet_iskeyframe(&opTheora)) continue; // get keyframe after seek
 				else
 				{
@@ -197,10 +201,9 @@ void TheoraVideoClip::decodeNextFrame()
 					}
 				*/
 				}
-				
 			}
-			
-			if (time < mTimer->getTime())
+
+			if (time < mTimer->getTime() && !mRestarted)
 			{
 				TheoraVideoManager::getSingleton().logMessage("pre-dropped frame "+str(frame_number));
 				mNumDisplayedFrames++;
@@ -208,21 +211,25 @@ void TheoraVideoClip::decodeNextFrame()
 				continue; // drop frame
 			}
 			frame->mTimeToDisplay=time;
+			frame->mIteration=mIteration;
 			frame->_setFrameNumber(frame_number);
 			th_decode_ycbcr_out(mInfo->TheoraDecoder,buff);
 			frame->decode(buff);
+			//_psleep(rand()%20); // temp
 			break;
 		}
 		else
 		{
 			char *buffer = ogg_sync_buffer( &mInfo->OggSyncState, 4096);
 			int bytesRead = mStream->read( buffer, 4096 );
-			ogg_sync_wrote( &mInfo->OggSyncState, bytesRead );
+			ogg_sync_wrote(&mInfo->OggSyncState, bytesRead);
 			if (bytesRead < 4096)
 			{
 				if (bytesRead == 0)
 				{
-					mEndOfFile=true;
+					if (mAutoRestart) _restart();
+					else mEndOfFile=true;
+					frame->mInUse=0;
 					return;
 				}
 			}
@@ -258,7 +265,7 @@ void TheoraVideoClip::decodeNextFrame()
 	}
 }
 
-void TheoraVideoClip::restart()
+void TheoraVideoClip::_restart()
 {
 	long granule=0;
 	th_decode_ctl(mInfo->TheoraDecoder,TH_DECCTL_SET_GRANPOS,&granule,sizeof(granule));
@@ -267,14 +274,42 @@ void TheoraVideoClip::restart()
 	ogg_stream_reset(&mInfo->TheoraStreamState);
 	ogg_sync_reset(&mInfo->OggSyncState);
 	mStream->seek(0);
-	mTimer->seek(0);
 	mEndOfFile=false;
+
+	mRestarted=1;
+}
+
+void TheoraVideoClip::restart()
+{
+	_restart();
+	mTimer->seek(0);
 	mFrameQueue->clear();
 }
 
 void TheoraVideoClip::update(float time_increase)
 {
 	if (mTimer->isPaused() && mSeekPos != -3) return;
+	float time=mTimer->getTime();
+	if (time >= mDuration)
+	{
+		if (mAutoRestart && mRestarted)
+		{
+			mIteration=!mIteration;
+			mTimer->seek(0);
+			mRestarted=0;
+			int n=0;
+			for (;;)
+			{
+				TheoraVideoFrame* f=mFrameQueue->getFirstAvailableFrame();
+				if (!f) break;
+				if (f->mTimeToDisplay > 0.5f) { n++; popFrame(); }
+				else break;
+			}
+			if (n > 0) TheoraVideoManager::getSingleton().logMessage("dropped "+str(n)+" end frames");
+		}
+		else return;
+	}
+	if (time+time_increase > mDuration) time_increase=mDuration-time;
 	mTimer->update(time_increase);
 }
 
@@ -293,7 +328,6 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 	{
 		frame=mFrameQueue->getFirstAvailableFrame();
 		if (!frame) return 0;
-
 		if (frame->mTimeToDisplay > time) return 0;
 		if (frame->mTimeToDisplay < time-0.1)
 		{
@@ -304,6 +338,8 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 		}
 		else break;
 	}
+
+	mLastIteration=frame->mIteration;
 	return frame;
 
 }
@@ -579,6 +615,17 @@ float TheoraVideoClip::getTimePosition()
 	return mTimer->getTime();
 }
 int TheoraVideoClip::getNumPrecachedFrames()
+{
+	return mFrameQueue->getSize();
+}
+
+void TheoraVideoClip::setNumPrecachedFrames(int n)
+{
+	if (mFrameQueue->getSize() != n)
+		mFrameQueue->setSize(n);
+}
+
+int TheoraVideoClip::getNumReadyFrames()
 {
 	return mFrameQueue->getUsedCount();
 }

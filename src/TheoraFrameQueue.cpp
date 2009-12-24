@@ -82,7 +82,7 @@ void TheoraFrameQueue::pop()
 	mQueue.push_back(first);
 	mMutex.unlock();
 }
-	
+
 TheoraVideoFrame* TheoraFrameQueue::requestEmptyFrame()
 {
 	TheoraVideoFrame* frame=0;

@@ -41,7 +41,7 @@ TheoraFileDataSource::~TheoraFileDataSource()
 int TheoraFileDataSource::read(void* output,int nBytes)
 {
 	int n=fread(output,1,nBytes,mFilePtr);
-	return nBytes;
+	return n;
 }
 
 void TheoraFileDataSource::seek(unsigned long byte_index)

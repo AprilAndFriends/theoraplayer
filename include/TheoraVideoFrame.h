@@ -41,6 +41,7 @@ public:
 	float mTimeToDisplay;
 	bool mReady;
 	bool mInUse;
+	int mIteration; //! used to detect when the video restarted
 
 	TheoraVideoFrame(TheoraVideoClip* parent);
 	~TheoraVideoFrame();

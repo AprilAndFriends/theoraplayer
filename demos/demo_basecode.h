@@ -41,6 +41,40 @@ int nextPow2(int x)
 	return y;
 }
 
+void drawColoredQuad(float x,float y,float w,float h,float r,float g,float b,float a)
+{
+	glColor4f(r,g,b,a);
+	glBegin (GL_QUADS);
+	glVertex3f(x,  y,  0.0f);
+	glVertex3f(x+w,y,  0.0f);
+	glVertex3f(x+w,y+h,0.0f);
+	glVertex3f(x,  y+h,0.0f);
+	glEnd();
+	glColor4f(1,1,1,1);
+}
+
+void drawWiredQuad(float x,float y,float w,float h,float r,float g,float b,float a)
+{
+	glColor4f(r,g,b,a);
+	glBegin (GL_LINE_LOOP);
+	glVertex3f(x,  y,  0.0f);
+	glVertex3f(x+w,y,  0.0f);
+	glVertex3f(x+w,y+h,0.0f);
+	glVertex3f(x,  y+h,0.0f);
+	glEnd();
+	glColor4f(1,1,1,1);
+}
+
+void drawTexturedQuad(float x,float y,float w,float h,float sw,float sh)
+{
+	glBegin (GL_QUADS);
+	glTexCoord2f(0,  0); glVertex3f(x,  y,  0.0f);
+	glTexCoord2f(sw, 0); glVertex3f(x+w,y,  0.0f);
+	glTexCoord2f(sw,sh); glVertex3f(x+w,y+h,0.0f);
+	glTexCoord2f(0, sh); glVertex3f(x,  y+h,0.0f);
+	glEnd();
+}
+
 unsigned int createTexture(int w,int h)
 {
 	unsigned int tex_id;
@@ -95,7 +129,7 @@ void reshape(int w,int h)
 	glLoadIdentity();
     glViewport(0, 0, w, h);
 
-	gluOrtho2D(-1,1,1,-1);
+	gluOrtho2D(0,800,600,0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }

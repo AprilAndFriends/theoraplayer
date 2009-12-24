@@ -25,6 +25,7 @@ unsigned int tex_id;
 TheoraVideoManager* mgr;
 TheoraVideoClip* clip;
 std::string window_name="glut_player";
+bool started=1;
 
 void draw()
 {
@@ -37,19 +38,30 @@ void draw()
 		clip->popFrame();
 	}
 
-	glBegin (GL_QUADS);
+	
 	float w=clip->getWidth(),h=clip->getHeight();
 	float tw=nextPow2(w),th=nextPow2(h);
+	
+	glEnable(GL_TEXTURE_2D);
+	drawTexturedQuad(0,0,800,600,w/tw,h/th);
 
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  0.0f);
-	glTexCoord2f(w/tw, 0.0f); glVertex3f( 1.0f, -1.0f,  0.0f);
-	glTexCoord2f(w/tw, h/th); glVertex3f( 1.0f,  1.0f,  0.0f);
-	glTexCoord2f(0.0f, h/th); glVertex3f(-1.0f,  1.0f,  0.0f);
-	glEnd();
+	glDisable(GL_TEXTURE_2D);
+	drawColoredQuad(0,570,800,30,0,0,0,1);
+	drawWiredQuad(0,570,800,30,1,1,1,1);
+
+	float x=clip->getTimePosition()/clip->getDuration();
+	drawColoredQuad(3,573,794*x,24,1,1,1,1);
 }
 
 void update(float time_increase)
 {
+	if (started)
+	{
+		// let's wait until the system caches up a few frames on startup
+		if (clip->getNumReadyFrames() < clip->getNumPrecachedFrames()*0.5f)
+			return;
+		started=0;
+	}
 	mgr->update(time_increase);
 }
 
@@ -68,8 +80,9 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip("../media/bunny.ogg");
+	clip=mgr->createVideoClip("../media/short.ogg");
 	clip->setOutputMode(TH_RGB);
+	clip->setAutoRestart(1);
 
 	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
 }
