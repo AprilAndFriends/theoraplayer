@@ -754,6 +754,11 @@ float TheoraVideoClip::getPriority()
 	return getNumPrecachedFrames()*10.0f;
 }
 
+float TheoraVideoClip::getPriorityIndex()
+{
+	return getNumReadyFrames();
+}
+
 void TheoraVideoClip::setAudioInterface(TheoraAudioInterface* iface)
 {
 	mAudioInterface=iface;

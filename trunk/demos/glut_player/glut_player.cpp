@@ -27,6 +27,7 @@ TheoraVideoManager* mgr;
 TheoraVideoClip* clip;
 std::string window_name="glut_player";
 bool started=1;
+int window_w=800,window_h=600;
 
 void draw()
 {
@@ -66,6 +67,11 @@ void update(float time_increase)
 	mgr->update(time_increase);
 }
 
+void OnKeyPress(int key)
+{
+
+}
+
 void setDebugTitle(char* out)
 {
 	int nDropped=clip->getNumDroppedFrames(),nDisplayed=clip->getNumDisplayedFrames();
@@ -75,7 +81,7 @@ void setDebugTitle(char* out)
 		                                                                    clip->getNumPrecachedFrames(),
 		                                                                    nDisplayed,
 		                                                                    nDropped,
-		                                                                    percent);
+			                                                                    percent);
 }
 
 void init()

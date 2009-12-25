@@ -20,32 +20,47 @@ http://www.gnu.org/copyleft/lesser.txt.
 *************************************************************************************/
 #include "../demo_basecode.h"
 #include "TheoraPlayer.h"
+#include "TheoraDataSource.h"
 
-unsigned int tex_id;
+TheoraVideoClip* clips[4];
+unsigned int textures[4];
 TheoraVideoManager* mgr;
-TheoraVideoClip* clip;
 std::string window_name="multiple_videos";
+int window_w=1024,window_h=768;
 
-void draw()
+void drawVideo(int x,int y,unsigned int tex_id,TheoraVideoClip* clip)
 {
+	glLoadIdentity();
+	glTranslatef(x,y,0);
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 
 	TheoraVideoFrame* f=clip->getNextFrame();
 	if (f)
 	{
-		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,f->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
+		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
 		clip->popFrame();
 	}
-
-	glBegin (GL_QUADS);
+	
 	float w=clip->getWidth(),h=clip->getHeight();
 	float tw=nextPow2(w),th=nextPow2(h);
+	
+	glEnable(GL_TEXTURE_2D);
+	drawTexturedQuad(0,0,395,295,w/tw,h/th);
 
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  0.0f);
-	glTexCoord2f(w/tw, 0.0f); glVertex3f( 1.0f, -1.0f,  0.0f);
-	glTexCoord2f(w/tw, h/th); glVertex3f( 1.0f,  1.0f,  0.0f);
-	glTexCoord2f(0.0f, h/th); glVertex3f(-1.0f,  1.0f,  0.0f);
-	glEnd();
+	glDisable(GL_TEXTURE_2D);
+	drawColoredQuad(0,570/2,395,30/2,0,0,0,1);
+	drawWiredQuad(0,570/2,395,30/2,1,1,1,1);
+
+	float p=clip->getTimePosition()/clip->getDuration();
+	drawColoredQuad(1.5f,573/2,784*p/2,24/2,1,1,1,1);
+}
+
+void draw()
+{
+	drawVideo(0  ,0  ,textures[0],clips[0]);
+	drawVideo(400,0  ,textures[1],clips[1]);
+	drawVideo(0  ,300,textures[2],clips[2]);
+	drawVideo(400,300,textures[3],clips[3]);
 }
 
 void update(float time_increase)
@@ -55,14 +70,36 @@ void update(float time_increase)
 
 void setDebugTitle(char* out)
 {
-	sprintf(out,"%d precached frames",clip->getNumPrecachedFrames());
+	char temp[32];
+	for (int i=0;i<4;i++)
+	{
+		sprintf(temp,"%d/%d  ",clips[i]->getNumReadyFrames(),clips[i]->getNumPrecachedFrames());
+		strcat(out,temp);
+	}
+	sprintf(temp,"(%d worker threads)",mgr->getNumWorkerThreads());
+	strcat(out,temp);
+}
+
+void OnKeyPress(int key)
+{
+	if (key == '1') mgr->setNumWorkerThreads(1);
+	if (key == '2') mgr->setNumWorkerThreads(2);
+	if (key == '3') mgr->setNumWorkerThreads(3);
+	if (key == '4') mgr->setNumWorkerThreads(4);
 }
 
 void init()
 {
-	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip("../media/bunny.ogg");
-	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
+	printf("---\nUSAGE: press buttons 1,2,3 or 4 to change the number of worker threads\n---\n");
+
+	std::string files[]={"short.ogg","konqi.ogg","room.ogg","titan.ogg"};
+	mgr=new TheoraVideoManager(1);
+	for (int i=0;i<4;i++)
+	{
+		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/"+files[i]),TH_RGB);
+		clips[i]->setAutoRestart(1);
+		textures[i]=createTexture(nextPow2(clips[i]->getWidth()),nextPow2(clips[i]->getHeight()));
+	}
 }
 
 void destroy()
