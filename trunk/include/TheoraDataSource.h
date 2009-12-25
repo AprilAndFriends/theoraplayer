@@ -23,6 +23,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include <stdio.h>
 #include <string>
+#include "TheoraExport.h"
 
 /**
 	This is a simple class that provides abstracted data feeding. You can use the
@@ -30,7 +31,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 	internet streaming solution, or a class that uses encrypted datafiles etc.
 	The sky is the limit
 */
-class TheoraDataSource
+class TheoraPlayerExport TheoraDataSource
 {
 public:
 
@@ -49,7 +50,7 @@ public:
 /**
 	provides standard file IO
 */
-class TheoraFileDataSource : public TheoraDataSource
+class TheoraPlayerExport TheoraFileDataSource : public TheoraDataSource
 {
 	FILE* mFilePtr;
 	std::string mFilename;
@@ -64,6 +65,26 @@ public:
 	unsigned long size();
 	unsigned long tell();
 };
+
+/**
+	provides standard file IO
+*/
+class TheoraPlayerExport TheoraMemoryFileDataSource : public TheoraDataSource
+{
+	unsigned char* mData;
+	std::string mFilename;
+	unsigned long mSize,mReadPointer;
+public:
+	TheoraMemoryFileDataSource(std::string filename);
+	~TheoraMemoryFileDataSource();
+	
+	int read(void* output,int nBytes);
+	void seek(unsigned long byte_index);
+	std::string repr() { return "MEM:"+mFilename; }
+	unsigned long size();
+	unsigned long tell();
+};
+
 
 
 
