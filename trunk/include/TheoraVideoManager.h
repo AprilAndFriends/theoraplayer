@@ -67,8 +67,8 @@ public:
 
 	TheoraVideoClip* getVideoClipByName(std::string name);
 
-	TheoraVideoClip* createVideoClip(std::string filename,TheoraOutputMode output_mode=TH_RGB);
-	TheoraVideoClip* createVideoClip(TheoraDataSource* data_source,TheoraOutputMode output_mode=TH_RGB);
+	TheoraVideoClip* createVideoClip(std::string filename,TheoraOutputMode output_mode=TH_RGB,bool usePower2Stride=0);
+	TheoraVideoClip* createVideoClip(TheoraDataSource* data_source,TheoraOutputMode output_mode=TH_RGB,bool usePower2Stride=0);
 
 	void update(float time_increase);
 

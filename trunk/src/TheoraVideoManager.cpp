@@ -105,17 +105,21 @@ TheoraAudioInterfaceFactory* TheoraVideoManager::getAudioInterfaceFactory()
 	return mAudioFactory;
 }
 
-TheoraVideoClip* TheoraVideoManager::createVideoClip(std::string filename,TheoraOutputMode output_mode)
+TheoraVideoClip* TheoraVideoManager::createVideoClip(std::string filename,
+													 TheoraOutputMode output_mode,
+													 bool usePower2Stride)
 {
 	TheoraDataSource* src=new TheoraFileDataSource(filename);
-	return createVideoClip(src,output_mode);
+	return createVideoClip(src,output_mode,usePower2Stride);
 }
 
-TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_source,TheoraOutputMode output_mode)
+TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_source,
+													 TheoraOutputMode output_mode,
+													 bool usePower2Stride)
 {
 	TheoraVideoClip* clip = NULL;
 	logMessage("Creating video from data source: "+data_source->repr());
-	clip = new TheoraVideoClip(data_source,output_mode,16);
+	clip = new TheoraVideoClip(data_source,output_mode,16,usePower2Stride);
 	mClips.push_back(clip);
 	return clip;
 }

@@ -76,7 +76,7 @@ class TheoraPlayerExport TheoraVideoClip
 	int mAudioSkipSeekFlag;
 
 	std::string mName;
-	int mWidth,mHeight;
+	int mWidth,mHeight,mStride;
 	float mDuration;
 
 	float mAudioGain; //! multiplier for audio samples. between 0 and 1
@@ -108,7 +108,10 @@ class TheoraPlayerExport TheoraVideoClip
 
 	void _restart(); // resets the decoder and stream but leaves the frame queue intact
 public:
-	TheoraVideoClip(TheoraDataSource* data_source,TheoraOutputMode output_mode,int nPrecachedFrames);
+	TheoraVideoClip(TheoraDataSource* data_source,
+		            TheoraOutputMode output_mode,
+					int nPrecachedFrames,
+					bool usePower2Stride);
 	~TheoraVideoClip();
 
 	std::string getName();
@@ -118,9 +121,10 @@ public:
 	int getNumDroppedFrames() { return mNumDroppedFrames; }
 
 	//! return width in pixels of the video clip
-	int getWidth();
+	int getWidth() { return mWidth; }
 	//! return height in pixels of the video clip
-	int getHeight();
+	int getHeight() { return mHeight; }
+	int getStride() { return mStride; }
 
 	TheoraTimer* getTimer();
 	void setTimer(TheoraTimer* timer);
@@ -143,7 +147,7 @@ public:
 	void setAudioGain(float gain);
 	float getAudioGain();
 	void setAutoRestart(bool value);
-	bool getAutoRestart();
+	bool getAutoRestart() { return mAutoRestart; }
 
 
 
