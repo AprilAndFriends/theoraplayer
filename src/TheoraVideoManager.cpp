@@ -45,7 +45,8 @@ TheoraVideoManager& TheoraVideoManager::getSingleton(void)
     return *g_ManagerSingleton;  
 }
 
-TheoraVideoManager::TheoraVideoManager()
+TheoraVideoManager::TheoraVideoManager() : 
+	mDefaultNumPrecachedFrames(8)
 {
 	g_ManagerSingleton=this;
 	mLogFuction=theora_writelog;
@@ -107,19 +108,22 @@ TheoraAudioInterfaceFactory* TheoraVideoManager::getAudioInterfaceFactory()
 
 TheoraVideoClip* TheoraVideoManager::createVideoClip(std::string filename,
 													 TheoraOutputMode output_mode,
+													 int numPrecachedOverride,
 													 bool usePower2Stride)
 {
 	TheoraDataSource* src=new TheoraFileDataSource(filename);
-	return createVideoClip(src,output_mode,usePower2Stride);
+	return createVideoClip(src,output_mode,numPrecachedOverride,usePower2Stride);
 }
 
 TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_source,
 													 TheoraOutputMode output_mode,
+													 int numPrecachedOverride,
 													 bool usePower2Stride)
 {
 	TheoraVideoClip* clip = NULL;
+	int nPrecached = numPrecachedOverride ? numPrecachedOverride : mDefaultNumPrecachedFrames;
 	logMessage("Creating video from data source: "+data_source->repr());
-	clip = new TheoraVideoClip(data_source,output_mode,16,usePower2Stride);
+	clip = new TheoraVideoClip(data_source,output_mode,nPrecached,usePower2Stride);
 	mClips.push_back(clip);
 	return clip;
 }

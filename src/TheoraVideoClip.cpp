@@ -124,11 +124,8 @@ TheoraVideoClip::~TheoraVideoClip()
 
 	delete mDefaultTimer;
 
-	if (!mStream)
-	{
-		delete mStream;
-		mStream=0;
-	}
+	if (!mStream) delete mStream;
+
 
 	if (mFrameQueue) delete mFrameQueue;
 

@@ -58,3 +58,47 @@ unsigned long TheoraFileDataSource::tell()
 {
 	return ftell(mFilePtr);
 }
+
+TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) : 
+	mReadPointer(0),
+	mData(0)
+{
+	mFilename=filename;
+	FILE* f=fopen(filename.c_str(),"rb");
+	if (!f) throw TheoraGenericException("Can't open video file: "+filename);
+	fseek(f,0,SEEK_END);
+	mSize=ftell(f);	
+	fseek(f,0,SEEK_SET);
+	mData=new unsigned char[mSize];
+	fread(mData,1,mSize,f);
+	fclose(f);
+}
+
+TheoraMemoryFileDataSource::~TheoraMemoryFileDataSource()
+{
+	if (mData) delete [] mData;
+}
+
+int TheoraMemoryFileDataSource::read(void* output,int nBytes)
+{
+	int n=(mReadPointer+nBytes <= mSize) ? nBytes : mSize-mReadPointer;
+	if (!n) return 0;
+	memcpy(output,mData+mReadPointer,n);
+	mReadPointer+=n;
+	return n;
+}
+
+void TheoraMemoryFileDataSource::seek(unsigned long byte_index)
+{
+	mReadPointer=byte_index;
+}
+
+unsigned long TheoraMemoryFileDataSource::size()
+{
+	return mSize;
+}
+
+unsigned long TheoraMemoryFileDataSource::tell()
+{
+	return mReadPointer;
+}
