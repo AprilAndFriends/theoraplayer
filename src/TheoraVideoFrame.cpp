@@ -43,6 +43,7 @@ void _decodeRGB(th_img_plane* yuv,unsigned char* out,int stride,int nBytes)
 				  *uSrc=yuv[1].data,
 				  *vSrc=yuv[2].data,
 	              *out2=out+stride;
+	stride+=stride-yuv[0].width*nBytes;
 
 	for (y=0;y<yuv[0].height;y+=2)
 	{
@@ -74,57 +75,50 @@ void _decodeRGB(th_img_plane* yuv,unsigned char* out,int stride,int nBytes)
 	}
 }
 
-void decodeRGB(th_img_plane* yuv,unsigned char* out)
+void decodeRGB(th_img_plane* yuv,unsigned char* out,int stride)
 {
-	_decodeRGB(yuv,out,yuv[0].width*3,3);
+	_decodeRGB(yuv,out,stride*3,3);
 }
 
-void decodeRGBA(th_img_plane* yuv,unsigned char* out)
+void decodeRGBA(th_img_plane* yuv,unsigned char* out,int stride)
 {
-	_decodeRGB(yuv,out,yuv[0].width*4,4);
+	_decodeRGB(yuv,out,stride*4,4);
 }
 
-void decodeARGB(th_img_plane* yuv,unsigned char* out)
+void decodeARGB(th_img_plane* yuv,unsigned char* out,int stride)
 {
-	_decodeRGB(yuv,out+1,yuv[0].width*4,4);
+	_decodeRGB(yuv,out+1,stride*4,4);
 }
 
-void decodeGrey(th_img_plane* yuv,unsigned char* out)
+void decodeGrey(th_img_plane* yuv,unsigned char* out,int stride)
 {
 	unsigned char *ySrc=yuv[0].data,*yLineEnd;
-	for (int y=0;y<yuv[0].height;y++,ySrc+=yuv[0].stride-yuv[0].width)
+	for (int y=0;y<yuv[0].height;y++,ySrc+=yuv[0].stride-yuv[0].width,out+=stride-yuv[0].width)
 		for (yLineEnd=ySrc+yuv[0].width;ySrc != yLineEnd;ySrc++,out++)
 			out[0]=*ySrc;
 }
 
-void decodeGrey3(th_img_plane* yuv,unsigned char* out)
+void _decodeGrey3(th_img_plane* yuv,unsigned char* out,int stride,int nBytes)
 {
 	unsigned char *ySrc=yuv[0].data,*yLineEnd;
-	for (int y=0;y<yuv[0].height;y++,ySrc+=yuv[0].stride-yuv[0].width)
-		for (yLineEnd=ySrc+yuv[0].width;ySrc != yLineEnd;ySrc++,out+=3)
+	for (int y=0;y<yuv[0].height;y++,ySrc+=yuv[0].stride-yuv[0].width,out+=stride-yuv[0].width*nBytes)
+		for (yLineEnd=ySrc+yuv[0].width;ySrc != yLineEnd;ySrc++,out+=nBytes)
 			out[0]=out[1]=out[2]=*ySrc;
 }
 
-void decodeGreyX(th_img_plane* yuv,unsigned char* out)
+void decodeGrey3(th_img_plane* yuv,unsigned char* out,int stride)
 {
-	unsigned char *ySrc=yuv[0].data,*yLineEnd;
-	for (int y=0;y<yuv[0].height;y++,ySrc+=yuv[0].stride-yuv[0].width)
-		for (yLineEnd=ySrc+yuv[0].width;ySrc != yLineEnd;ySrc++,out+=4)
-		{
-			out[0]=out[1]=out[2]=*ySrc;
-			out[3]=255;
-		}
+	_decodeGrey3(yuv,out,stride*3,3);
 }
 
-void decodeXGrey(th_img_plane* yuv,unsigned char* out)
+void decodeGreyX(th_img_plane* yuv,unsigned char* out,int stride)
 {
-	unsigned char *ySrc=yuv[0].data,*yLineEnd;
-	for (int y=0;y<yuv[0].height;y++,ySrc+=yuv[0].stride-yuv[0].width)
-		for (yLineEnd=ySrc+yuv[0].width;ySrc != yLineEnd;ySrc++,out+=4)
-		{
-			out[0]=255;
-			out[1]=out[2]=out[3]=*ySrc;
-		}
+	_decodeGrey3(yuv,out,stride*4,4);
+}
+
+void decodeXGrey(th_img_plane* yuv,unsigned char* out,int stride)
+{
+	_decodeGrey3(yuv,out+1,stride*4,4);
 }
 
 
@@ -137,6 +131,8 @@ void _decodeYUV(th_img_plane* yuv,unsigned char* out,int stride,int nBytes)
 				  *vSrc=yuv[2].data,
 	              *out2=out+stride;
 
+	stride+=stride-yuv[0].width*nBytes;
+
 	for (y=0;y<yuv[0].height;y+=2)
 	{
 		for (yLineEnd=ySrc+yuv[0].width,t=0;ySrc != yLineEnd;ySrc++,out+=nBytes,out2+=nBytes,t=!t)
@@ -145,10 +141,8 @@ void _decodeYUV(th_img_plane* yuv,unsigned char* out,int stride,int nBytes)
 			else { uSrc++; vSrc++; }
 			out[0]  = *ySrc;
 			out2[0] = *(ySrc+yuv[0].stride);
-			out[1] = cu;
-			out[2] = cv;
-			out2[1] = cu;
-			out2[2] = cv;
+			out[1] = cu; out2[1] = cu;
+			out[2] = cv; out2[2] = cv;
 		}
 		out+=stride; out2+=stride;
 		ySrc+=yuv[0].stride*2-yuv[0].width;
@@ -157,22 +151,22 @@ void _decodeYUV(th_img_plane* yuv,unsigned char* out,int stride,int nBytes)
 	}
 }
 
-void decodeYUV(th_img_plane* yuv,unsigned char* out)
+void decodeYUV(th_img_plane* yuv,unsigned char* out,int stride)
 {
-	_decodeYUV(yuv,out,yuv[0].width*3,3);
+	_decodeYUV(yuv,out,stride*3,3);
 }
 
-void decodeYUVA(th_img_plane* yuv,unsigned char* out)
+void decodeYUVA(th_img_plane* yuv,unsigned char* out,int stride)
 {
-	_decodeYUV(yuv,out,yuv[0].width*4,4);
+	_decodeYUV(yuv,out,stride*4,4);
 }
 
-void decodeAYUV(th_img_plane* yuv,unsigned char* out)
+void decodeAYUV(th_img_plane* yuv,unsigned char* out,int stride)
 {
-	_decodeYUV(yuv,out+1,yuv[0].width*4,4);
+	_decodeYUV(yuv,out+1,stride*4,4);
 }
 
-void (*conversion_functions[])(th_img_plane*,unsigned char* out)={0,
+void (*conversion_functions[])(th_img_plane*,unsigned char*,int)={0,
     decodeRGB,//TH_RGB
 	decodeRGBA,//TH_RGBA
 	decodeARGB,//TH_ARGB
@@ -192,7 +186,7 @@ TheoraVideoFrame::TheoraVideoFrame(TheoraVideoClip* parent)
 	mIteration=0;
 	// number of bytes based on output mode
 	int bytemap[]={0,3,4,4,1,3,4,4,3,3,4,4};
-	int size=mParent->mWidth * mParent->mHeight * bytemap[mParent->getOutputMode()];
+	int size=mParent->mStride * mParent->mHeight * bytemap[mParent->getOutputMode()];
 	mBuffer=new unsigned char[size];
 	memset(mBuffer,255,size);
 }
@@ -219,7 +213,7 @@ unsigned char* TheoraVideoFrame::getBuffer()
 
 void TheoraVideoFrame::decode(void* yuv)
 {
-	conversion_functions[mParent->getOutputMode()]((th_img_plane*) yuv,mBuffer);
+	conversion_functions[mParent->getOutputMode()]((th_img_plane*) yuv,mBuffer,mParent->mStride);
 	mReady=true;
 }
 

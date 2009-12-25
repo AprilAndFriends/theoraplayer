@@ -25,3 +25,11 @@ void _psleep(int milliseconds)
 {
 	Sleep(milliseconds);
 }
+
+
+int nextPow2(int x)
+{
+	int y;
+	for (y=1;y<x;y*=2);
+	return y;
+}

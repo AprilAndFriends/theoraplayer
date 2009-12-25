@@ -34,7 +34,7 @@ void draw()
 	TheoraVideoFrame* f=clip->getNextFrame();
 	if (f)
 	{
-		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,f->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
+		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
 		clip->popFrame();
 	}
 
@@ -80,7 +80,7 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip("../media/short.ogg",TH_YUV);
+	clip=mgr->createVideoClip("../media/short.ogg",TH_RGB);
 	clip->setAutoRestart(1);
 
 	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));

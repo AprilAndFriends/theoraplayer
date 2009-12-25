@@ -68,7 +68,10 @@ void memset_uint(void* buffer,unsigned int colour,unsigned int size_in_bytes)
 	}
 }
 
-TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,TheoraOutputMode output_mode,int nPrecachedFrames):
+TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
+								 TheoraOutputMode output_mode,
+								 int nPrecachedFrames,
+								 bool usePower2Stride):
 	mTheoraStreams(0),
 	mVorbisStreams(0),
 	mSeekPos(-1),
@@ -84,7 +87,8 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,TheoraOutputMode 
 	mAudioSkipSeekFlag(0),
 	mIteration(0),
 	mLastIteration(0),
-	mRestarted(0)
+	mRestarted(0),
+	mStride(usePower2Stride)
 {
 	mAudioMutex=new TheoraMutex;
 
@@ -394,9 +398,10 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 
 	mWidth=mInfo->TheoraInfo.frame_width;
 	mHeight=mInfo->TheoraInfo.frame_height;
+	mStride=(mStride == 1) ? mStride=nextPow2(mWidth) : mWidth;
 
 	mFrameQueue=new TheoraFrameQueue(mNumPrecachedFrames,this);
-	setOutputMode(mOutputMode); // clear the frame backgrounds
+	
 
 	//return;
 	// find out the duration of the file by seeking to the end
@@ -778,19 +783,4 @@ void TheoraVideoClip::setAutoRestart(bool value)
 {
 	mAutoRestart=value;
 	if (value) mEndOfFile=false;
-}
-
-bool TheoraVideoClip::getAutoRestart()
-{
-	return mAutoRestart;
-}
-
-int TheoraVideoClip::getWidth()
-{
-	return mWidth;	
-}
-
-int TheoraVideoClip::getHeight()
-{
-	return mHeight;
 }

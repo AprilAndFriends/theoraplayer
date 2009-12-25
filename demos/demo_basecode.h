@@ -33,7 +33,6 @@ void update(float);
 void draw();
 void setDebugTitle(char* out);
 
-
 int nextPow2(int x)
 {
 	int y;
