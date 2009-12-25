@@ -45,7 +45,7 @@ TheoraVideoManager& TheoraVideoManager::getSingleton(void)
     return *g_ManagerSingleton;  
 }
 
-TheoraVideoManager::TheoraVideoManager() : 
+TheoraVideoManager::TheoraVideoManager(int num_worker_threads) : 
 	mDefaultNumPrecachedFrames(8)
 {
 	g_ManagerSingleton=this;
@@ -56,25 +56,12 @@ TheoraVideoManager::TheoraVideoManager() :
 
 	// for CPU yuv2rgb decoding
 	createYUVtoRGBtables();
-
-	// create worker threads
-	TheoraWorkerThread* t;
-	for (int i=0;i<1;i++)
-	{
-		t=new TheoraWorkerThread();
-		t->startThread();
-		mWorkerThreads.push_back(t);
-	}
+	createWorkerThreads(num_worker_threads);
 }
 
 TheoraVideoManager::~TheoraVideoManager()
 {
-	foreach(TheoraWorkerThread*,mWorkerThreads)
-	{
-		(*it)->waitforThread();
-		delete (*it);
-	}
-	mWorkerThreads.clear();
+	destroyWorkerThreads();
 
 	ClipList::iterator ci;
 	for (ci=mClips.begin(); ci != mClips.end();ci++)
@@ -120,11 +107,14 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 													 int numPrecachedOverride,
 													 bool usePower2Stride)
 {
+	mWorkMutex->lock();
+
 	TheoraVideoClip* clip = NULL;
 	int nPrecached = numPrecachedOverride ? numPrecachedOverride : mDefaultNumPrecachedFrames;
 	logMessage("Creating video from data source: "+data_source->repr());
 	clip = new TheoraVideoClip(data_source,output_mode,nPrecached,usePower2Stride);
 	mClips.push_back(clip);
+	mWorkMutex->unlock();
 	return clip;
 }
 
@@ -143,18 +133,6 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 		mWorkMutex->unlock();
 	}
 }
-/*
-bool TheoraVideoManager::frameStarted(const FrameEvent& evt)
-{
-	ClipList::iterator ci;
-	for (ci=mClips.begin(); ci != mClips.end();ci++)
-	{
-		(*ci)->blitFrameCheck(evt.timeSinceLastFrame);
-		(*ci)->decodedAudioCheck();
-	}
-	return true;
-}
-*/
 
 TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 {
@@ -162,22 +140,20 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 	mWorkMutex->lock();
 	TheoraVideoClip* c=NULL;
 
-	static unsigned int counter=0;
-	if (counter >= mClips.size()) counter=0;
-	int i=counter;
-	counter++;
-	ClipList::iterator it;
-	if (mClips.size() == 0) c=NULL;
-	else
-	{
-		for (it=mClips.begin(); it != mClips.end(); it++)
-		{
-			if (i == 0) { c=*it; break; }
-			i--;
+	float priority,last_priority=100000;
 
+	foreach(TheoraVideoClip*,mClips)
+	{
+		if ((*it)->mAssignedWorkerThread) continue;
+		priority=(*it)->getPriorityIndex();
+		if (priority < last_priority)
+		{
+			last_priority=priority;
+			c=*it;
 		}
-		c->mAssignedWorkerThread=caller;
 	}
+	if (c) c->mAssignedWorkerThread=caller;
+	
 	mWorkMutex->unlock();
 	return c;
 }
@@ -187,3 +163,39 @@ void TheoraVideoManager::update(float time_increase)
 	foreach(TheoraVideoClip*,mClips)
 		(*it)->update(time_increase);
 }
+
+int TheoraVideoManager::getNumWorkerThreads()
+{
+	return mWorkerThreads.size();
+}
+
+void TheoraVideoManager::createWorkerThreads(int n)
+{
+	TheoraWorkerThread* t;
+	for (int i=0;i<n;i++)
+	{
+		t=new TheoraWorkerThread();
+		t->startThread();
+		mWorkerThreads.push_back(t);
+	}
+}
+
+void TheoraVideoManager::destroyWorkerThreads()
+{
+	foreach(TheoraWorkerThread*,mWorkerThreads)
+	{
+		(*it)->waitforThread();
+		delete (*it);
+	}
+	mWorkerThreads.clear();
+}
+
+void TheoraVideoManager::setNumWorkerThreads(int n)
+{
+	if (n == getNumWorkerThreads()) return;
+	th_writelog("changing number of worker threats to: "+str(n));
+
+	destroyWorkerThreads();
+	createWorkerThreads(n);
+}
+

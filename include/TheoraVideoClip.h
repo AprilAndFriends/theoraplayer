@@ -160,6 +160,7 @@ public:
 	 * @return user set priority
 	 */
 	float getPriority();
+	float getPriorityIndex();
 
 	float getTimePosition();
 	float getDuration();

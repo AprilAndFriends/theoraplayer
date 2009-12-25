@@ -54,6 +54,6 @@ void TheoraWorkerThread::executeThread()
 		mClip->decodeNextFrame();
 
 		mClip->mAssignedWorkerThread=NULL;
-		//psleep(2);
+		_psleep(1);
 	}
 }

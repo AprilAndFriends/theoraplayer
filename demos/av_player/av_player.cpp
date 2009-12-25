@@ -25,6 +25,7 @@ unsigned int tex_id;
 TheoraVideoManager* mgr;
 TheoraVideoClip* clip;
 std::string window_name="av_player";
+int window_w=800,window_h=600;
 
 void draw()
 {
@@ -51,6 +52,11 @@ void draw()
 void update(float time_increase)
 {
 	mgr->update(time_increase);
+}
+
+void OnKeyPress(int key)
+{
+
 }
 
 void setDebugTitle(char* out)

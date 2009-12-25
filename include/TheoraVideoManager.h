@@ -54,12 +54,15 @@ protected:
 
 	void (*mLogFuction)(std::string);
 
+	void createWorkerThreads(int n);
+	void destroyWorkerThreads();
+
 	/**
 	 * Called by TheoraWorkerThread to request a TheoraVideoClip instance to work on decoding
 	 */
 	TheoraVideoClip* requestWork(TheoraWorkerThread* caller);
 public:
-	TheoraVideoManager();
+	TheoraVideoManager(int num_worker_threads=1);
 	~TheoraVideoManager();
 
 	static TheoraVideoManager& getSingleton(void);
@@ -84,8 +87,8 @@ public:
 	int getNumWorkerThreads();
 	void setNumWorkerThreads(int n);
 
-	void setDefaultNumPrecachedFrames(int n);
-	int getDefaultNumPrecachedFrames();
+	void setDefaultNumPrecachedFrames(int n) { mDefaultNumPrecachedFrames=n; }
+	int getDefaultNumPrecachedFrames() { return mDefaultNumPrecachedFrames; }
 
 	void logMessage(std::string msg);
 

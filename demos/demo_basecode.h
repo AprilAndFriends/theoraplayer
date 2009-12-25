@@ -26,12 +26,14 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <string>
 #pragma warning( disable: 4996 ) // MSVC++
 extern std::string window_name;
+extern int window_w,window_h;
 
 void init();
 void destroy();
 void update(float);
 void draw();
 void setDebugTitle(char* out);
+void OnKeyPress(int key);
 
 int nextPow2(int x)
 {
@@ -137,6 +139,7 @@ void keyboard(unsigned char key,int x,int y)
 {
   if (key == 27) // esc
       throw "Exit Requested";
+  else OnKeyPress(key);
 }
 
 
@@ -145,7 +148,7 @@ void main(int argc,char** argv)
 	glutInit(&argc, argv);
 	glutInitDisplayMode( GLUT_DOUBLE|GLUT_RGBA);
 	//glutInitWindowPosition(0,0);
-	glutInitWindowSize(800,600);
+	glutInitWindowSize(window_w,window_h);
 	glutCreateWindow(window_name.c_str());
 	glShadeModel(GL_SMOOTH);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
