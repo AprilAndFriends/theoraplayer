@@ -68,13 +68,13 @@ void memset_uint(void* buffer,unsigned int colour,unsigned int size_in_bytes)
 	}
 }
 
-TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,int nPrecachedFrames):
+TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,TheoraOutputMode output_mode,int nPrecachedFrames):
 	mTheoraStreams(0),
 	mVorbisStreams(0),
 	mSeekPos(-1),
 	mDuration(-1),
 	mName(data_source->repr()),
-	mOutputMode(TH_RGB),
+	mOutputMode(output_mode),
 	mAudioInterface(NULL),
 	mAutoRestart(0),
 	mAudioGain(1),
@@ -205,7 +205,7 @@ void TheoraVideoClip::decodeNextFrame()
 
 			if (time < mTimer->getTime() && !mRestarted)
 			{
-				TheoraVideoManager::getSingleton().logMessage("pre-dropped frame "+str(frame_number));
+				th_writelog("pre-dropped frame "+str(frame_number));
 				mNumDisplayedFrames++;
 				mNumDroppedFrames++;
 				continue; // drop frame
@@ -305,7 +305,7 @@ void TheoraVideoClip::update(float time_increase)
 				if (f->mTimeToDisplay > 0.5f) { n++; popFrame(); }
 				else break;
 			}
-			if (n > 0) TheoraVideoManager::getSingleton().logMessage("dropped "+str(n)+" end frames");
+			if (n > 0) th_writelog("dropped "+str(n)+" end frames");
 		}
 		else return;
 	}
@@ -331,7 +331,7 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 		if (frame->mTimeToDisplay > time) return 0;
 		if (frame->mTimeToDisplay < time-0.1)
 		{
-			TheoraVideoManager::getSingleton().logMessage("dropped frame "+str(frame->getFrameNumber()));
+			th_writelog("dropped frame "+str(frame->getFrameNumber()));
 			mNumDroppedFrames++;
 			mNumDisplayedFrames++;
 			mFrameQueue->pop();
@@ -438,7 +438,7 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 	}
 	if (mDuration < 0)
 	{
-		TheoraVideoManager::getSingleton().logMessage("TheoraVideoPlugin: unable to determine file duration!");
+		th_writelog("TheoraVideoPlugin: unable to determine file duration!");
 	}
 	// restore to beginning of stream.
 	// the following solution is temporary and hacky, will be replaced soon
@@ -607,7 +607,8 @@ TheoraOutputMode TheoraVideoClip::getOutputMode()
 
 void TheoraVideoClip::setOutputMode(TheoraOutputMode mode)
 {
-	mOutputMode=mode;
+	if (mFrameQueue) th_writelog("Warning: Can't change output mode once video has been loaded!");
+	else mOutputMode=mode;
 }
 
 float TheoraVideoClip::getTimePosition()
