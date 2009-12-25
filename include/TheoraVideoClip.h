@@ -36,9 +36,20 @@ class TheoraDataSource;
 
 enum TheoraOutputMode
 {
-	TH_RGB,
-	TH_GREY,
-	TH_YUV
+	// A= full alpha (255), order of letters represents the byte order for a pixel
+	TH_RGB=1,
+	TH_BGR=2,
+	TH_RGBA=3,
+	TH_BGRA=4,
+	TH_ARGB=5,
+	TH_ABGR=6,
+	TH_GREY=7,
+	TH_GREY3=8, // RGB but all three components are luma
+	TH_GREY3A=9,
+	TH_AGREY3=10,
+	TH_YUV=11,
+	TH_YUVA=12,
+	TH_AYUV=13
 };
 
 /**
@@ -100,7 +111,7 @@ class TheoraPlayerExport TheoraVideoClip
 
 	void _restart(); // resets the decoder and stream but leaves the frame queue intact
 public:
-	TheoraVideoClip(TheoraDataSource* data_source,int nPrecachedFrames);
+	TheoraVideoClip(TheoraDataSource* data_source,TheoraOutputMode output_mode,int nPrecachedFrames);
 	~TheoraVideoClip();
 
 	std::string getName();

@@ -25,14 +25,13 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <vector>
 #include <string>
 #include "TheoraExport.h"
-
+#include "TheoraVideoClip.h"
 
 #pragma warning( disable: 4251 ) // MSVC++
 // forward class declarations
 class TheoraWorkerThread;
 class TheoraMutex;
 class TheoraDataSource;
-class TheoraVideoClip;
 class TheoraAudioInterfaceFactory;
 /**
 	This is the main singleton class that handles all playback/sync operations
@@ -68,8 +67,8 @@ public:
 
 	TheoraVideoClip* getVideoClipByName(std::string name);
 
-	TheoraVideoClip* createVideoClip(std::string filename);
-	TheoraVideoClip* createVideoClip(TheoraDataSource* data_source);
+	TheoraVideoClip* createVideoClip(std::string filename,TheoraOutputMode output_mode=TH_RGB);
+	TheoraVideoClip* createVideoClip(TheoraDataSource* data_source,TheoraOutputMode output_mode=TH_RGB);
 
 	void update(float time_increase);
 

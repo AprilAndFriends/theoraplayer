@@ -33,10 +33,6 @@ class TheoraPlayerExport TheoraVideoFrame
 	unsigned char* mBuffer;
 	unsigned long mFrameNumber;
 
-	void decodeRGB(void* _yuv);
-	void decodeGrey(void* _yuv);
-	void decodeYUV(void* _yuv);
-
 public:
 	float mTimeToDisplay;
 	bool mReady;
