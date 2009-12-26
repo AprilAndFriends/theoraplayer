@@ -108,12 +108,12 @@ void display()
 	update(diff);
 
 	static unsigned long fps_timer=time,fps_counter=0;
-	if (t-fps_timer >= 1000)
+	if (t-fps_timer >= 250)
 	{
 		char title[512],debug[256]="";
 		
 		setDebugTitle(debug);
-		sprintf(title,"%s: %d FPS; %s",window_name.c_str(),fps_counter,debug);
+		sprintf(title,"%s: %d FPS; %s",window_name.c_str(),fps_counter*4,debug);
 		glutSetWindowTitle(title);
 		fps_counter=0;
 		fps_timer=t;

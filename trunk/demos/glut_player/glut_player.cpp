@@ -78,7 +78,7 @@ void setDebugTitle(char* out)
 	float percent=100*((float) nDropped/nDisplayed);
 	sprintf(out," (%dx%d) %d precached, %d displayed, %d dropped (%.1f %%)",clip->getWidth(),
 		                                                                    clip->getHeight(),
-		                                                                    clip->getNumPrecachedFrames(),
+		                                                                    clip->getNumReadyFrames(),
 		                                                                    nDisplayed,
 		                                                                    nDropped,
 			                                                                    percent);
