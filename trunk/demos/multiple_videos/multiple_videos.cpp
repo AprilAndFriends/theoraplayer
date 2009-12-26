@@ -80,12 +80,19 @@ void setDebugTitle(char* out)
 	strcat(out,temp);
 }
 
+void playPause(int index)
+{
+	if (clips[index]->isPaused()) clips[index]->play();
+	else                          clips[index]->pause();
+}
+
 void OnKeyPress(int key)
 {
 	if (key == '1') mgr->setNumWorkerThreads(1);
 	if (key == '2') mgr->setNumWorkerThreads(2);
 	if (key == '3') mgr->setNumWorkerThreads(3);
 	if (key == '4') mgr->setNumWorkerThreads(4);
+	if (key >= 1 && key <= 4) playPause(key-1); // Function keys are used for play/pause
 }
 
 void init()
@@ -94,9 +101,10 @@ void init()
 
 	std::string files[]={"short.ogg","konqi.ogg","room.ogg","titan.ogg"};
 	mgr=new TheoraVideoManager(1);
+	mgr->setDefaultNumPrecachedFrames(32);
 	for (int i=0;i<4;i++)
 	{
-		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/"+files[i]),TH_RGB);
+		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/"+files[i]),TH_GREY3);
 		clips[i]->setAutoRestart(1);
 		textures[i]=createTexture(nextPow2(clips[i]->getWidth()),nextPow2(clips[i]->getHeight()));
 	}

@@ -137,9 +137,14 @@ void reshape(int w,int h)
 
 void keyboard(unsigned char key,int x,int y)
 {
-  if (key == 27) // esc
-      throw "Exit Requested";
-  else OnKeyPress(key);
+    if (key == 27) // esc
+        throw "Exit Requested";
+    else OnKeyPress(key);
+}
+
+void keyboard_special(int key,int x,int y)
+{
+    OnKeyPress(key);
 }
 
 
@@ -158,6 +163,7 @@ void main(int argc,char** argv)
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
+	glutSpecialFunc(keyboard_special);
 	glutIdleFunc(display);
 	try { glutMainLoop(); }
 	catch (void*) {}
