@@ -22,8 +22,8 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "TheoraVideoClip.h"
 #include <theora/theoradec.h>
 
-#define TH_MAX( a, b ) ((a > b) ? a : b)
-#define TH_MIN( a, b ) ((a < b) ? a : b)
+//#define TH_MAX( a, b ) ((a > b) ? a : b)
+//#define TH_MIN( a, b ) ((a < b) ? a : b)
 //#define CLIP_RGB_COLOR( rgb_color_test ) TH_MAX( TH_MIN(rgb_color_test, 255), 0 )
 
 // this is the bitwise version of the above code, twice as fast!

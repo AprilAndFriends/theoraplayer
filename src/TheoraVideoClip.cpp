@@ -99,17 +99,6 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	mNumPrecachedFrames=nPrecachedFrames;
 
 	mInfo=new TheoraInfoStruct;
-	//Ensure all structures get cleared out.
-	memset(&mInfo->OggSyncState, 0, sizeof(ogg_sync_state));
-	memset(&mInfo->OggPage, 0, sizeof(ogg_page));
-	memset(&mInfo->VorbisStreamState, 0, sizeof(ogg_stream_state));
-	memset(&mInfo->TheoraStreamState, 0, sizeof(ogg_stream_state));
-	memset(&mInfo->TheoraInfo, 0, sizeof(th_info));
-	memset(&mInfo->TheoraComment, 0, sizeof(th_comment));
-	memset(&mInfo->VorbisInfo, 0, sizeof(vorbis_info));
-	memset(&mInfo->VorbisDSPState, 0, sizeof(vorbis_dsp_state));
-	memset(&mInfo->VorbisBlock, 0, sizeof(vorbis_block));
-	memset(&mInfo->VorbisComment, 0, sizeof(vorbis_comment));
 
 	load(data_source);
 }
@@ -166,7 +155,7 @@ void TheoraVideoClip::setTimer(TheoraTimer* timer)
 
 void TheoraVideoClip::decodeNextFrame()
 {
-	if (mEndOfFile || mTimer->isPaused() && getNumPrecachedFrames() > 0) return;
+	if (mEndOfFile) return;
 	TheoraVideoFrame* frame=mFrameQueue->requestEmptyFrame();
 	if (!frame) return; // max number of precached frames reached
 	long seek_granule=-1;
@@ -185,7 +174,8 @@ void TheoraVideoClip::decodeNextFrame()
 			if (th_decode_packetin(mInfo->TheoraDecoder, &opTheora,&granulePos ) != 0) continue; // 0 means success
 			float time=(float) th_granule_time(mInfo->TheoraDecoder,granulePos);
 			unsigned long frame_number=(unsigned long) th_granule_frame(mInfo->TheoraDecoder,granulePos);
-			if (time > mDuration) mDuration=time; // duration corrections
+			if (time > mDuration)
+				mDuration=time; // duration corrections
 
 			if (mSeekPos == -2)
 			{
@@ -400,7 +390,6 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 	mFrameQueue=new TheoraFrameQueue(mNumPrecachedFrames,this);
 	
 
-	//return;
 	// find out the duration of the file by seeking to the end
 	// having ogg decode pages, extract the granule pos from
 	// the last theora page and seek back to beginning of the file
@@ -412,56 +401,33 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 		ogg_sync_reset(&mInfo->OggSyncState);
 		mStream->seek(mStream->size()-4096*i);
 
-		char *buffer = ogg_sync_buffer( &mInfo->OggSyncState, 4096*i);
-		int bytesRead = mStream->read( buffer, 4096*i);
-		ogg_sync_wrote( &mInfo->OggSyncState, bytesRead );
+		char *buffer = ogg_sync_buffer(&mInfo->OggSyncState, 4096*i);
+		int bytesRead = mStream->read(buffer, 4096*i);
+		ogg_sync_wrote(&mInfo->OggSyncState, bytesRead );
 		long offset=ogg_sync_pageseek(&mInfo->OggSyncState,&mInfo->OggPage);
 
 		while (1)
 		{
 			int ret=ogg_sync_pageout( &mInfo->OggSyncState, &mInfo->OggPage );
-			if (ret < 0)
-				ret=ogg_sync_pageout( &mInfo->OggSyncState, &mInfo->OggPage );
-			if ( ret < 0) break;
-
-			int eos=ogg_page_eos(&mInfo->OggPage);
-			if (eos > 0) break;
-
-			int serno=ogg_page_serialno(&mInfo->OggPage);
+			if (ret == 0) break;
 			// if page is not a theora page, skip it
-			if (serno != mInfo->TheoraStreamState.serialno) continue;
+			if (ogg_page_serialno(&mInfo->OggPage) != mInfo->TheoraStreamState.serialno) continue;
 
 			unsigned long granule=(unsigned long) ogg_page_granulepos(&mInfo->OggPage);
-			if (granule >= 0)
-				mDuration=(float) th_granule_time(mInfo->TheoraDecoder,granule);
+			if (granule >= 0) mDuration=(float) th_granule_time(mInfo->TheoraDecoder,granule);
 		}
 		if (mDuration > 0) break;
 
 	}
 	if (mDuration < 0)
-	{
-		th_writelog("TheoraVideoPlugin: unable to determine file duration!");
-	}
+		th_writelog(mName+": unable to determine file duration!");
+	else
+		th_writelog(mName+": file duration is "+strf(mDuration)+" seconds");
 	// restore to beginning of stream.
-	// the following solution is temporary and hacky, will be replaced soon
-
 	ogg_sync_reset(&mInfo->OggSyncState);
 	mStream->seek(0);
-	memset(&mInfo->OggSyncState, 0, sizeof(ogg_sync_state));
-	memset(&mInfo->OggPage, 0, sizeof(ogg_page));
-	memset(&mInfo->VorbisStreamState, 0, sizeof(ogg_stream_state));
-	memset(&mInfo->TheoraStreamState, 0, sizeof(ogg_stream_state));
-	memset(&mInfo->TheoraInfo, 0, sizeof(th_info));
-	memset(&mInfo->TheoraComment, 0, sizeof(th_comment));
-	//memset(&mTheoraState, 0, sizeof(th_state));
-	memset(&mInfo->VorbisInfo, 0, sizeof(vorbis_info));
-	memset(&mInfo->VorbisDSPState, 0, sizeof(vorbis_dsp_state));
-	memset(&mInfo->VorbisBlock, 0, sizeof(vorbis_block));
-	memset(&mInfo->VorbisComment, 0, sizeof(vorbis_comment));
 	mTheoraStreams=mVorbisStreams=0;
 	readTheoraVorbisHeaders();
-
-	// END HACKY CODE
 
 	if (mVorbisStreams) // if there is no audio interface factory defined, even though the video
 		                // clip might have audio, it will be ignored
@@ -480,6 +446,18 @@ void TheoraVideoClip::readTheoraVorbisHeaders()
 	bool done = false;
 	bool decode_audio=TheoraVideoManager::getSingleton().getAudioInterfaceFactory() != NULL;
 	//init Vorbis/Theora Layer
+	//Ensure all structures get cleared out.
+	memset(&mInfo->OggSyncState, 0, sizeof(ogg_sync_state));
+	memset(&mInfo->OggPage, 0, sizeof(ogg_page));
+	memset(&mInfo->VorbisStreamState, 0, sizeof(ogg_stream_state));
+	memset(&mInfo->TheoraStreamState, 0, sizeof(ogg_stream_state));
+	memset(&mInfo->TheoraInfo, 0, sizeof(th_info));
+	memset(&mInfo->TheoraComment, 0, sizeof(th_comment));
+	memset(&mInfo->VorbisInfo, 0, sizeof(vorbis_info));
+	memset(&mInfo->VorbisDSPState, 0, sizeof(vorbis_dsp_state));
+	memset(&mInfo->VorbisBlock, 0, sizeof(vorbis_block));
+	memset(&mInfo->VorbisComment, 0, sizeof(vorbis_comment));
+
 	ogg_sync_init(&mInfo->OggSyncState);
 	th_comment_init(&mInfo->TheoraComment);
 	th_info_init(&mInfo->TheoraInfo);
@@ -538,7 +516,6 @@ void TheoraVideoClip::readTheoraVorbisHeaders()
 				mVorbisStreams = 1;
 				continue;
 			}
-			
 			//Hmm. I guess it's not a header we support, so erase it
 			ogg_stream_clear(&OggStateTest);
 		}
@@ -756,7 +733,9 @@ float TheoraVideoClip::getPriority()
 
 float TheoraVideoClip::getPriorityIndex()
 {
-	return getNumReadyFrames();
+	float priority=getNumReadyFrames();
+	if (mTimer->isPaused()) priority+=getNumPrecachedFrames()/2;
+	return priority;
 }
 
 void TheoraVideoClip::setAudioInterface(TheoraAudioInterface* iface)
