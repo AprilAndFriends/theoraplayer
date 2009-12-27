@@ -153,6 +153,55 @@ void TheoraVideoClip::setTimer(TheoraTimer* timer)
 	else mTimer=timer;
 }
 
+bool TheoraVideoClip::_readData()
+{
+	int audio_eos=0;
+	float audio_time=0;
+	float time=mTimer->getTime();
+	if (mRestarted) time=0;
+
+	for (;;)
+	{
+		char *buffer = ogg_sync_buffer( &mInfo->OggSyncState, 4096);
+		int bytesRead = mStream->read( buffer, 4096 );
+		ogg_sync_wrote(&mInfo->OggSyncState, bytesRead);
+
+		if (bytesRead < 4096)
+		{
+			if (bytesRead == 0)
+			{
+				if (mAutoRestart) _restart();
+				else mEndOfFile=true;
+				return 0;
+			}
+		}
+		while ( ogg_sync_pageout( &mInfo->OggSyncState, &mInfo->OggPage ) > 0 )
+		{
+			if (mTheoraStreams) ogg_stream_pagein(&mInfo->TheoraStreamState,&mInfo->OggPage);
+			if (mAudioInterface &&
+				ogg_page_serialno(&mInfo->OggPage) == mInfo->VorbisStreamState.serialno)
+			{
+				unsigned long g=(unsigned long) ogg_page_granulepos(&mInfo->OggPage);
+				audio_time=(float) vorbis_granule_time(&mInfo->VorbisDSPState,g);
+				audio_eos=ogg_page_eos(&mInfo->OggPage);
+
+				if (mSeekPos == -2 && !mAudioSkipSeekFlag)
+				{
+					
+					if (g > -1) { mAudioSkipSeekFlag=1; continue; }
+					if (g == -1) continue;
+				}
+				mAudioMutex->lock();
+				ogg_stream_pagein(&mInfo->VorbisStreamState,&mInfo->OggPage);
+				mAudioMutex->unlock();
+			}
+		}
+		if (!(mAudioInterface && !audio_eos && audio_time < time+1.0f))
+			break;
+	}
+	return 1;
+}
+
 void TheoraVideoClip::decodeNextFrame()
 {
 	if (mEndOfFile) return;
@@ -211,47 +260,7 @@ void TheoraVideoClip::decodeNextFrame()
 		}
 		else
 		{
-			char *buffer = ogg_sync_buffer( &mInfo->OggSyncState, 4096);
-			int bytesRead = mStream->read( buffer, 4096 );
-			ogg_sync_wrote(&mInfo->OggSyncState, bytesRead);
-			if (bytesRead < 4096)
-			{
-				if (bytesRead == 0)
-				{
-					if (mAutoRestart) _restart();
-					else mEndOfFile=true;
-					frame->mInUse=0;
-					return;
-				}
-			}
-			while ( ogg_sync_pageout( &mInfo->OggSyncState, &mInfo->OggPage ) > 0 )
-			{
-				if (mTheoraStreams) ogg_stream_pagein(&mInfo->TheoraStreamState,&mInfo->OggPage);
-				if (mAudioInterface)// && mSeekPos != -2)
-				{
-					
-					if (mSeekPos == -2 && !mAudioSkipSeekFlag)
-					{
-						unsigned long g=(unsigned long) ogg_page_granulepos(&mInfo->OggPage);
-						if (g > -1) { mAudioSkipSeekFlag=1; continue; }
-						if (g == -1) continue;
-					}
-					mAudioMutex->lock();
-					ogg_stream_pagein(&mInfo->VorbisStreamState,&mInfo->OggPage);
-					mAudioMutex->unlock();
-				}
-				/*
-				else if (mAudioInterface && mSeekPos == -2)
-				{
-					if ( ogg_page_serialno(&mInfo->OggPage) == mInfo->VorbisStreamState.serialno)
-					{
-						int g=ogg_page_granulepos(&mInfo->OggPage);
-						if (g != -1) seek_granule=g;
-						
-					}
-				}
-				*/
-			}
+			if (!_readData()) frame->mInUse=0;
 		}
 	}
 }
@@ -263,8 +272,24 @@ void TheoraVideoClip::_restart()
 	th_decode_free(mInfo->TheoraDecoder);
 	mInfo->TheoraDecoder=th_decode_alloc(&mInfo->TheoraInfo,mInfo->TheoraSetup);
 	ogg_stream_reset(&mInfo->TheoraStreamState);
+	if (mAudioInterface)
+	{	
+		// empty the DSP buffer
+		//float **pcm;
+		//int len = vorbis_synthesis_pcmout(&mInfo->VorbisDSPState,&pcm);
+		//if (len) vorbis_synthesis_read(&mInfo->VorbisDSPState,len);
+		ogg_packet opVorbis;
+		while (ogg_stream_packetout(&mInfo->VorbisStreamState,&opVorbis) > 0)
+		{
+			if (vorbis_synthesis(&mInfo->VorbisBlock,&opVorbis) == 0)
+				vorbis_synthesis_blockin(&mInfo->VorbisDSPState,&mInfo->VorbisBlock);
+		}
+		ogg_stream_reset(&mInfo->VorbisStreamState);
+	}
+
 	ogg_sync_reset(&mInfo->OggSyncState);
 	mStream->seek(0);
+	//mTimer->seek(0);
 	mEndOfFile=false;
 
 	mRestarted=1;
@@ -349,6 +374,7 @@ void TheoraVideoClip::decodedAudioCheck()
 		len = vorbis_synthesis_pcmout(&mInfo->VorbisDSPState,&pcm);
 		if (!len)
 		{
+			if (mRestarted) break;
 			if (ogg_stream_packetout(&mInfo->VorbisStreamState,&opVorbis) > 0)
 			{
 				if (vorbis_synthesis(&mInfo->VorbisBlock,&opVorbis) == 0)
@@ -733,7 +759,7 @@ float TheoraVideoClip::getPriority()
 
 float TheoraVideoClip::getPriorityIndex()
 {
-	float priority=getNumReadyFrames();
+	float priority=(float) getNumReadyFrames();
 	if (mTimer->isPaused()) priority+=getNumPrecachedFrames()/2;
 	return priority;
 }

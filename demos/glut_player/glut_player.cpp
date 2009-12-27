@@ -69,7 +69,8 @@ void update(float time_increase)
 
 void OnKeyPress(int key)
 {
-
+	if (key == ' ')
+		if (clip->isPaused()) clip->play(); else clip->pause();
 }
 
 void setDebugTitle(char* out)
