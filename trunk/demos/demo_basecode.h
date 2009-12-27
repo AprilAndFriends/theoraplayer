@@ -23,10 +23,27 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <gl\gl.h>
 #include <gl\glu.h>
 #include <gl\glut.h>
+
 #include <string>
 #pragma warning( disable: 4996 ) // MSVC++
 extern std::string window_name;
 extern int window_w,window_h;
+
+bool shader_on=0;
+#define USE_SHADERS
+#ifdef USE_SHADERS
+#include <gl\glext.h>
+PFNGLCREATEPROGRAMPROC glCreateProgram=0;
+PFNGLCREATESHADERPROC glCreateShader=0;
+PFNGLLINKPROGRAMPROC glLinkProgram=0;
+PFNGLSHADERSOURCEPROC glShaderSource=0;
+PFNGLUSEPROGRAMPROC glUseProgram=0;
+PFNGLCOMPILESHADERPROC glCompileShader=0;
+PFNGLATTACHSHADERPROC glAttachShader=0;
+unsigned int program,shader;
+#endif
+
+
 
 void init();
 void destroy();
@@ -34,6 +51,11 @@ void update(float);
 void draw();
 void setDebugTitle(char* out);
 void OnKeyPress(int key);
+
+void psleep(int milliseconds)
+{
+	Sleep(milliseconds);
+}
 
 int nextPow2(int x)
 {
@@ -75,6 +97,69 @@ void drawTexturedQuad(float x,float y,float w,float h,float sw,float sh)
 	glTexCoord2f(0, sh); glVertex3f(x,  y+h,0.0f);
 	glEnd();
 }
+
+void toggle_YUV2RGB_shader()
+{
+#ifdef USE_SHADERS
+	if (!glCreateProgram)
+	{
+		if (!strstr((char*) glGetString(GL_EXTENSIONS),"GL_ARB_fragment_shader"))
+		{
+			printf("Unable to turn on yuv2rgb shader, your OpenGL driver doesn't support GLSL shaders!\n");
+			return;
+		}
+		glCreateProgram=(PFNGLCREATEPROGRAMPROC) wglGetProcAddress("glCreateProgram");
+		glCreateShader = (PFNGLCREATESHADERPROC) wglGetProcAddress("glCreateShader");
+		glLinkProgram=(PFNGLLINKPROGRAMPROC) wglGetProcAddress("glLinkProgram");
+		glShaderSource=(PFNGLSHADERSOURCEPROC) wglGetProcAddress("glShaderSource");
+		glUseProgram=(PFNGLUSEPROGRAMPROC) wglGetProcAddress("glUseProgram");
+		glCompileShader=(PFNGLCOMPILESHADERPROC) wglGetProcAddress("glCompileShader");
+		glAttachShader=(PFNGLATTACHSHADERPROC) wglGetProcAddress("glAttachShader");
+
+		const char* 
+		shader_code="uniform sampler2D diffuseMap;\
+                     void main(void)\
+                     {\
+                         vec3 yuv = texture2D(diffuseMap, gl_TexCoord[0].st).xyz;\
+                         float y,u,v,r,g,b;\
+                         y=1.1643*(yuv.x-0.0625);\
+                         u=yuv.y-0.5;\
+                         v=yuv.z-0.5;\
+                         r=y+1.5958*v;\
+                         g=y-0.39173*u-0.81290*v;\
+                         b=y+2.017*u;\
+                         gl_FragColor = vec4(r,g,b,1.0);\
+                     }";
+
+		
+
+		program = glCreateProgram();
+		shader = glCreateShader(GL_FRAGMENT_SHADER);	
+		glShaderSource(shader,1,&shader_code,NULL);
+		glCompileShader(shader);
+		glAttachShader(program,shader);
+		glLinkProgram(program);
+
+	}
+	shader_on=!shader_on;
+	
+#endif
+}
+
+void enable_shader()
+{
+#ifdef USE_SHADERS
+	glUseProgram(program);
+#endif
+}
+void disable_shader()
+{
+#ifdef USE_SHADERS
+	glUseProgram(0);
+#endif
+}
+
+
 
 unsigned int createTexture(int w,int h)
 {
@@ -144,6 +229,7 @@ void keyboard(unsigned char key,int x,int y)
 
 void keyboard_special(int key,int x,int y)
 {
+	if (key == 10) toggle_YUV2RGB_shader(); // F10
     OnKeyPress(key);
 }
 

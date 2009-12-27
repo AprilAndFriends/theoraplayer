@@ -35,6 +35,7 @@ void draw()
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 
 	TheoraVideoFrame* f=clip->getNextFrame();
+
 	if (f)
 	{
 		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
@@ -46,7 +47,9 @@ void draw()
 	float tw=nextPow2(w),th=nextPow2(h);
 	
 	glEnable(GL_TEXTURE_2D);
+	if (shader_on) enable_shader();
 	drawTexturedQuad(0,0,800,600,w/tw,h/th);
+	if (shader_on) disable_shader();
 
 	glDisable(GL_TEXTURE_2D);
 	drawColoredQuad(0,570,800,30,0,0,0,1);
@@ -66,12 +69,23 @@ void update(float time_increase)
 		started=0;
 	}
 	mgr->update(time_increase);
+
+	// wait for next frames, let the cpu have as much time for decoding video as possible
+	while (!clip->getNextFrame())
+	{
+		psleep(1);
+		mgr->update(1/1000.0f);
+	}
 }
 
 void OnKeyPress(int key)
 {
 	if (key == ' ')
 		if (clip->isPaused()) clip->play(); else clip->pause();
+
+	if (key == 5) clip->setOutputMode(TH_RGB);
+	if (key == 6) clip->setOutputMode(TH_YUV);
+	if (key == 7) clip->setOutputMode(TH_GREY3);
 }
 
 void setDebugTitle(char* out)
@@ -88,6 +102,8 @@ void setDebugTitle(char* out)
 
 void init()
 {
+	
+
 	mgr=new TheoraVideoManager();
 	iface_factory=new OpenAL_AudioInterfaceFactory();
 	mgr->setAudioInterfaceFactory(iface_factory);

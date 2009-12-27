@@ -45,7 +45,9 @@ void drawVideo(int x,int y,unsigned int tex_id,TheoraVideoClip* clip)
 	float tw=nextPow2(w),th=nextPow2(h);
 	
 	glEnable(GL_TEXTURE_2D);
+	if (shader_on) enable_shader();
 	drawTexturedQuad(0,0,395,295,w/tw,h/th);
+	if (shader_on) disable_shader();
 
 	glDisable(GL_TEXTURE_2D);
 	drawColoredQuad(0,570/2,395,30/2,0,0,0,1);
@@ -66,6 +68,14 @@ void draw()
 void update(float time_increase)
 {
 	mgr->update(time_increase);
+
+	// wait for next frames, let the cpu have as much time for decoding video as possible
+	while (!clips[0]->getNextFrame() && !clips[1]->getNextFrame() &&
+		   !clips[2]->getNextFrame() && !clips[3]->getNextFrame())
+	{
+		psleep(1);
+		mgr->update(1/1000.0f);
+	}
 }
 
 void setDebugTitle(char* out)
@@ -93,6 +103,16 @@ void OnKeyPress(int key)
 	if (key == '3') mgr->setNumWorkerThreads(3);
 	if (key == '4') mgr->setNumWorkerThreads(4);
 	if (key >= 1 && key <= 4) playPause(key-1); // Function keys are used for play/pause
+
+	if (key == 5 || key == 6 || key == 7)
+	{
+		TheoraOutputMode mode;
+		if (key == 5) mode=TH_RGB;
+		if (key == 6) mode=TH_YUV;
+		if (key == 7) mode=TH_GREY3;
+
+		for (int i=0;i<4;i++) clips[i]->setOutputMode(mode);
+	}
 }
 
 void init()
@@ -104,7 +124,7 @@ void init()
 	mgr->setDefaultNumPrecachedFrames(32);
 	for (int i=0;i<4;i++)
 	{
-		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/"+files[i]),TH_GREY3);
+		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/"+files[i]));
 		clips[i]->setAutoRestart(1);
 		textures[i]=createTexture(nextPow2(clips[i]->getWidth()),nextPow2(clips[i]->getHeight()));
 	}

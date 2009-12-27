@@ -40,13 +40,14 @@ TheoraVideoManager* TheoraVideoManager::getSingletonPtr(void)
 {
     return g_ManagerSingleton;
 }
+
 TheoraVideoManager& TheoraVideoManager::getSingleton(void)
 {  
     return *g_ManagerSingleton;  
 }
 
 TheoraVideoManager::TheoraVideoManager(int num_worker_threads) : 
-	mDefaultNumPrecachedFrames(16)
+	mDefaultNumPrecachedFrames(8)
 {
 	g_ManagerSingleton=this;
 	mLogFuction=theora_writelog;

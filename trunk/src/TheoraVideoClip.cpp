@@ -612,8 +612,11 @@ TheoraOutputMode TheoraVideoClip::getOutputMode()
 
 void TheoraVideoClip::setOutputMode(TheoraOutputMode mode)
 {
-	if (mFrameQueue) th_writelog("Warning: Can't change output mode once video has been loaded!");
-	else mOutputMode=mode;
+	if (mOutputMode == mode) return;
+	mOutputMode=mode;
+	// discard current frames and recreate them
+	if (mFrameQueue) mFrameQueue->setSize(mFrameQueue->getSize());
+	
 }
 
 float TheoraVideoClip::getTimePosition()
