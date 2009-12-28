@@ -58,6 +58,7 @@ OpenAL_AudioInterface::~OpenAL_AudioInterface()
 
 void OpenAL_AudioInterface::insertData(float** data,int nSamples)
 {
+	printf("got %d bytes, %d buffers queued\n",nSamples,mBufferQueue.size());
 	for (int i=0;i<nSamples;i++)
 	{
 		if (mBuffSize < mMaxBuffSize)
@@ -125,6 +126,8 @@ void OpenAL_AudioInterface::update(float time_increase)
 		mTime=(float) mNumProcessedSamples/mFreq+mTimeOffset;
 		mTimeOffset+=time_increase;
 	}
+
+	if (mTimeOffset > 0) printf("%.2f\n",mTimeOffset);
 
 	float duration=mClip->getDuration();
 	if (mTime > duration) mTime=duration;
