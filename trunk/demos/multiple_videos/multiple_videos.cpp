@@ -115,6 +115,12 @@ void OnKeyPress(int key)
 	}
 }
 
+void OnClick(float x,float y)
+{
+
+}
+
+
 void init()
 {
 	printf("---\nUSAGE: press buttons 1,2,3 or 4 to change the number of worker threads\n---\n");

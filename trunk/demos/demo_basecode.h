@@ -51,6 +51,7 @@ void update(float);
 void draw();
 void setDebugTitle(char* out);
 void OnKeyPress(int key);
+void OnClick(float x,float y);
 
 void psleep(int milliseconds)
 {
@@ -233,6 +234,16 @@ void keyboard_special(int key,int x,int y)
     OnKeyPress(key);
 }
 
+void mouse(int button,int state, int x, int y)
+{
+	if (state == GLUT_UP && button == GLUT_LEFT_BUTTON)
+	{
+		float mx=(float) x/glutGet(GLUT_WINDOW_WIDTH);
+		float my=(float) y/glutGet(GLUT_WINDOW_HEIGHT);
+		OnClick(mx*window_w,my*window_h);
+	}
+}
+
 
 void main(int argc,char** argv)
 {
@@ -249,6 +260,7 @@ void main(int argc,char** argv)
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
+	glutMouseFunc(mouse);
 	glutSpecialFunc(keyboard_special);
 	glutIdleFunc(display);
 	try { glutMainLoop(); }
