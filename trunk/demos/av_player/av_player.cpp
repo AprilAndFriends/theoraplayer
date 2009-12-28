@@ -69,13 +69,6 @@ void update(float time_increase)
 		started=0;
 	}
 	mgr->update(time_increase);
-
-	// wait for next frames, let the cpu have as much time for decoding video as possible
-	while (!clip->getNextFrame())
-	{
-		psleep(1);
-		mgr->update(1/1000.0f);
-	}
 }
 
 void OnKeyPress(int key)
@@ -113,7 +106,7 @@ void init()
 	mgr=new TheoraVideoManager();
 	iface_factory=new OpenAL_AudioInterfaceFactory();
 	mgr->setAudioInterfaceFactory(iface_factory);
-	clip=mgr->createVideoClip("../media/konqi.ogg");
+	clip=mgr->createVideoClip("../media/bunny.ogg");
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short.ogg"),TH_RGB);
 	clip->setAutoRestart(1);
