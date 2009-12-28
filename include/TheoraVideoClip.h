@@ -103,7 +103,7 @@ class TheoraPlayerExport TheoraVideoClip
 	 */
 	int calculatePriority();
 	void readTheoraVorbisHeaders();
-	unsigned long seekPage(int targetFrame);
+	long seekPage(long targetFrame,bool return_keyframe);
 	void doSeek(); //! called by WorkerThread to seek to mSeekPos
 	bool _readData();
 	bool isBusy();
