@@ -86,6 +86,12 @@ void OnKeyPress(int key)
 	if (key == 7) clip->setOutputMode(TH_GREY3);
 }
 
+void OnClick(float x,float y)
+{
+	if (y > 570)
+		clip->seek((x/window_w)*clip->getDuration());
+}
+
 void setDebugTitle(char* out)
 {
 	int nDropped=clip->getNumDroppedFrames(),nDisplayed=clip->getNumDisplayedFrames();
@@ -101,7 +107,7 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip("../media/short.ogg",TH_RGB);
+	clip=mgr->createVideoClip("../media/konqi.ogg",TH_RGB);
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short.ogg"),TH_RGB);
 	clip->setAutoRestart(1);

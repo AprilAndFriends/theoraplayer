@@ -78,6 +78,7 @@ class TheoraPlayerExport TheoraVideoClip
 	std::string mName;
 	int mWidth,mHeight,mStride;
 	float mDuration;
+	unsigned long mNumFrames;
 
 	float mAudioGain; //! multiplier for audio samples. between 0 and 1
 	float mSeekPos; //! stores desired seek position. next worker thread will do the seeking and reset this var to -1
@@ -102,6 +103,7 @@ class TheoraPlayerExport TheoraVideoClip
 	 */
 	int calculatePriority();
 	void readTheoraVorbisHeaders();
+	unsigned long seekPage(int targetFrame);
 	void doSeek(); //! called by WorkerThread to seek to mSeekPos
 	bool _readData();
 
