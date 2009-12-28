@@ -68,14 +68,6 @@ void draw()
 void update(float time_increase)
 {
 	mgr->update(time_increase);
-
-	// wait for next frames, let the cpu have as much time for decoding video as possible
-	while (!clips[0]->getNextFrame() && !clips[1]->getNextFrame() &&
-		   !clips[2]->getNextFrame() && !clips[3]->getNextFrame())
-	{
-		psleep(1);
-		mgr->update(1/1000.0f);
-	}
 }
 
 void setDebugTitle(char* out)

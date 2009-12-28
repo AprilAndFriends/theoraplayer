@@ -82,7 +82,7 @@ class TheoraPlayerExport TheoraVideoClip
 
 	float mAudioGain; //! multiplier for audio samples. between 0 and 1
 	float mSeekPos; //! stores desired seek position. next worker thread will do the seeking and reset this var to -1
-	TheoraOutputMode mOutputMode;
+	TheoraOutputMode mOutputMode,mRequestedOutputMode;
 	bool mAutoRestart;
 	bool mEndOfFile,mRestarted;
 	int mIteration,mLastIteration; //! used to detect when the video restarted
@@ -106,6 +106,7 @@ class TheoraPlayerExport TheoraVideoClip
 	unsigned long seekPage(int targetFrame);
 	void doSeek(); //! called by WorkerThread to seek to mSeekPos
 	bool _readData();
+	bool isBusy();
 
 	void load(TheoraDataSource* source);
 

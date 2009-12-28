@@ -78,6 +78,7 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	mDuration(-1),
 	mName(data_source->repr()),
 	mOutputMode(output_mode),
+	mRequestedOutputMode(output_mode),
 	mAudioInterface(NULL),
 	mAutoRestart(0),
 	mAudioGain(1),
@@ -205,6 +206,7 @@ bool TheoraVideoClip::_readData()
 void TheoraVideoClip::decodeNextFrame()
 {
 	if (mEndOfFile) return;
+
 	TheoraVideoFrame* frame=mFrameQueue->requestEmptyFrame();
 	if (!frame) return; // max number of precached frames reached
 	long seek_granule=-1;
@@ -609,6 +611,11 @@ std::string TheoraVideoClip::getName()
 	return mName;
 }
 
+bool TheoraVideoClip::isBusy()
+{
+	return mAssignedWorkerThread || mOutputMode != mRequestedOutputMode;
+}
+
 TheoraOutputMode TheoraVideoClip::getOutputMode()
 {
 	return mOutputMode;
@@ -617,10 +624,11 @@ TheoraOutputMode TheoraVideoClip::getOutputMode()
 void TheoraVideoClip::setOutputMode(TheoraOutputMode mode)
 {
 	if (mOutputMode == mode) return;
-	mOutputMode=mode;
+	mRequestedOutputMode=mode;
+	while (mAssignedWorkerThread) _psleep(1);
 	// discard current frames and recreate them
-	if (mFrameQueue) mFrameQueue->setSize(mFrameQueue->getSize());
-	
+	mFrameQueue->setSize(mFrameQueue->getSize());
+	mOutputMode=mRequestedOutputMode;
 }
 
 float TheoraVideoClip::getTimePosition()

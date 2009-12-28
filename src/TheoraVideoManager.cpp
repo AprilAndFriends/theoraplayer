@@ -47,7 +47,7 @@ TheoraVideoManager& TheoraVideoManager::getSingleton(void)
 }
 
 TheoraVideoManager::TheoraVideoManager(int num_worker_threads) : 
-	mDefaultNumPrecachedFrames(8)
+	mDefaultNumPrecachedFrames(16)
 {
 	g_ManagerSingleton=this;
 	mLogFuction=theora_writelog;
@@ -145,7 +145,7 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 
 	foreach(TheoraVideoClip*,mClips)
 	{
-		if ((*it)->mAssignedWorkerThread) continue;
+		if ((*it)->isBusy()) continue;
 		priority=(*it)->getPriorityIndex();
 		if (priority < last_priority)
 		{
