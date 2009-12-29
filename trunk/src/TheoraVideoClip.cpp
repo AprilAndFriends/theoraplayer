@@ -302,28 +302,37 @@ void TheoraVideoClip::restart()
 void TheoraVideoClip::update(float time_increase)
 {
 	if (mTimer->isPaused() && mSeekPos != -3) return;
+	mTimer->update(time_increase);
 	float time=mTimer->getTime();
 	if (time >= mDuration)
 	{
 		if (mAutoRestart && mRestarted)
 		{
 			mIteration=!mIteration;
-			mTimer->seek(0);
+			mTimer->seek(time-mDuration);
 			mRestarted=0;
 			int n=0;
 			for (;;)
 			{
 				TheoraVideoFrame* f=mFrameQueue->getFirstAvailableFrame();
 				if (!f) break;
-				if (f->mTimeToDisplay > 0.5f) { n++; popFrame(); }
+				if (f->mTimeToDisplay > 0.5f)
+				{
+					if (n == 0)
+					{
+						f->mTimeToDisplay=time-mDuration;
+						f->mIteration=!f->mIteration;
+					}
+					else
+						popFrame();
+					n++;
+				}
 				else break;
 			}
 			if (n > 0) th_writelog("dropped "+str(n)+" end frames");
 		}
 		else return;
 	}
-	if (time+time_increase > mDuration) time_increase=mDuration-time;
-	mTimer->update(time_increase);
 }
 
 void TheoraVideoClip::popFrame()
@@ -443,7 +452,7 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 			if (granule >= 0)
 			{
 				mDuration=(float) th_granule_time(mInfo->TheoraDecoder,granule);
-				mNumFrames=(unsigned long) th_granule_frame(mInfo->TheoraDecoder,granule);
+				mNumFrames=(unsigned long) th_granule_frame(mInfo->TheoraDecoder,granule)+1;
 			}
 		}
 		if (mDuration > 0) break;

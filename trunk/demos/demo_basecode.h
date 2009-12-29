@@ -29,6 +29,8 @@ http://www.gnu.org/copyleft/lesser.txt.
 extern std::string window_name;
 extern int window_w,window_h;
 
+float mx=0,my=0;
+
 bool shader_on=0;
 #define USE_SHADERS
 #ifdef USE_SHADERS
@@ -162,15 +164,15 @@ void disable_shader()
 
 
 
-unsigned int createTexture(int w,int h)
+unsigned int createTexture(int w,int h,unsigned int format=GL_RGB)
 {
 	unsigned int tex_id;
 	glGenTextures(1,&tex_id);
 	glBindTexture(GL_TEXTURE_2D,tex_id);
-	unsigned char* b=new unsigned char[w*h*3];
-	memset(b,0,w*h*3);
+	unsigned char* b=new unsigned char[w*h*4];
+	memset(b,0,w*h*4);
 
-	glTexImage2D(GL_TEXTURE_2D,0,3,w,h,0,GL_RGB,GL_UNSIGNED_BYTE,b);
+	glTexImage2D(GL_TEXTURE_2D,0,(format == GL_RGB) ? 3 : 4,w,h,0,format,GL_UNSIGNED_BYTE,b);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 	delete b;
@@ -238,12 +240,23 @@ void mouse(int button,int state, int x, int y)
 {
 	if (state == GLUT_UP && button == GLUT_LEFT_BUTTON)
 	{
-		float mx=(float) x/glutGet(GLUT_WINDOW_WIDTH);
-		float my=(float) y/glutGet(GLUT_WINDOW_HEIGHT);
-		OnClick(mx*window_w,my*window_h);
+		mx=((float) x/glutGet(GLUT_WINDOW_WIDTH))*window_w;
+		my=((float) y/glutGet(GLUT_WINDOW_HEIGHT))*window_h;
+		OnClick(mx,my*window_h);
 	}
 }
 
+void motion(int x,int y)
+{
+	mx=((float) x/glutGet(GLUT_WINDOW_WIDTH))*window_w;
+	my=((float) y/glutGet(GLUT_WINDOW_HEIGHT))*window_h;
+}
+
+void getCursorPos(float* xout,float* yout)
+{
+	*xout=mx;
+	*yout=my;
+}
 
 void main(int argc,char** argv)
 {
@@ -261,6 +274,7 @@ void main(int argc,char** argv)
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
 	glutMouseFunc(mouse);
+	glutPassiveMotionFunc(motion);
 	glutSpecialFunc(keyboard_special);
 	glutIdleFunc(display);
 	try { glutMainLoop(); }
