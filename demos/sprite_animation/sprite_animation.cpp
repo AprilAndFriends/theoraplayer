@@ -30,7 +30,6 @@ of this demo program.
 #include "../demo_basecode.h"
 #include "TheoraPlayer.h"
 #include "TheoraDataSource.h"
-#include <math.h>
 
 unsigned int tex_id;
 TheoraVideoManager* mgr;
@@ -54,8 +53,8 @@ void draw()
 			for (x=0;x<203;x++)
 			{
 				i=(y*203+x)*4;
-				j=(y*w+x+4)*3;
-				k=(y*w+x+205+4)*3;
+				j=((y+2)*w+x+4)*3;
+				k=((y+2)*w+x+205+4)*3;
 				buffer[i  ]=src[j];
 				buffer[i+1]=src[j+1];
 				buffer[i+2]=src[j+2];
@@ -114,15 +113,6 @@ void update(float time_increase)
 
 void OnKeyPress(int key)
 {
-	if (key == 5 || key == 6 || key == 7)
-	{
-		TheoraOutputMode mode;
-		if (key == 5) mode=TH_RGB;
-		if (key == 6) mode=TH_YUV;
-		if (key == 7) mode=TH_GREY3;
-
-		for (int i=0;i<8;i++) clips[i]->setOutputMode(mode);
-	}
 }
 
 void OnClick(float x,float y)

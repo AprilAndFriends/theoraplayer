@@ -163,6 +163,30 @@ void disable_shader()
 }
 
 
+#ifdef __DEV_IL
+#include <IL/ilut.h>
+
+unsigned int loadTexture(const char* name)
+{
+	unsigned int texid,image;
+	ilGenImages(1, &texid);
+	ilBindImage(texid);
+	ilLoadImage(name);
+
+	int w=ilGetInteger(IL_IMAGE_WIDTH);
+	int h=ilGetInteger(IL_IMAGE_HEIGHT);
+	glGenTextures(1, &image);
+	glBindTexture(GL_TEXTURE_2D, image);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexImage2D(GL_TEXTURE_2D, 0, ilGetInteger(IL_IMAGE_BPP), w,h, 0, ilGetInteger(IL_IMAGE_FORMAT), GL_UNSIGNED_BYTE,ilGetData());
+	ilDeleteImages(1, &texid);
+
+	return image;
+}
+
+#endif
+
 
 unsigned int createTexture(int w,int h,unsigned int format=GL_RGB)
 {
@@ -181,7 +205,11 @@ unsigned int createTexture(int w,int h,unsigned int format=GL_RGB)
 
 void display()
 {
+#ifdef __ZBUFFER
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+#else
 	glClear(GL_COLOR_BUFFER_BIT);
+#endif
 
 	draw();
 
@@ -217,10 +245,16 @@ void reshape(int w,int h)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
     glViewport(0, 0, w, h);
-
-	gluOrtho2D(0,800,600,0);
+#ifdef __3D_PROJECTION
+    gluPerspective(45,(float) window_w/window_h,10,10000);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+#else
+	gluOrtho2D(0,window_w,window_h,0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+#endif
+
 }
 
 void keyboard(unsigned char key,int x,int y)
@@ -261,7 +295,11 @@ void getCursorPos(float* xout,float* yout)
 void main(int argc,char** argv)
 {
 	glutInit(&argc, argv);
+#ifdef __ZBUFFER
+	glutInitDisplayMode( GLUT_DOUBLE|GLUT_RGBA|GLUT_DEPTH);
+#else
 	glutInitDisplayMode( GLUT_DOUBLE|GLUT_RGBA);
+#endif
 	//glutInitWindowPosition(0,0);
 	glutInitWindowSize(window_w,window_h);
 	glutCreateWindow(window_name.c_str());
@@ -269,6 +307,10 @@ void main(int argc,char** argv)
 	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 	glEnable(GL_TEXTURE_2D);
 	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
+#ifdef __DEV_IL
+	ilInit();
+	ilutRenderer(ILUT_OPENGL);
+#endif
 	init();
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
@@ -277,6 +319,7 @@ void main(int argc,char** argv)
 	glutPassiveMotionFunc(motion);
 	glutSpecialFunc(keyboard_special);
 	glutIdleFunc(display);
+
 	try { glutMainLoop(); }
 	catch (void*) {}
 
