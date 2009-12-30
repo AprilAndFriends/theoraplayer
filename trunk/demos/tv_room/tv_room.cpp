@@ -78,7 +78,7 @@ void draw()
 
 	glPushMatrix();
 	glRotatef(90,0,1,0);
-	glTranslatef(0,0,-420);
+	glTranslatef(0,0,-415);
 	drawTexturedQuad(-2*30,190,4*30,-3*25,w/tw,h/th);
 	glPopMatrix();
 	

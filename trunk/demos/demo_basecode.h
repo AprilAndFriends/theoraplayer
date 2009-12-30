@@ -23,8 +23,8 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <gl\gl.h>
 #include <gl\glu.h>
 #include <gl\glut.h>
-
 #include <string>
+#include "TheoraVideoManager.h"
 #pragma warning( disable: 4996 ) // MSVC++
 extern std::string window_name;
 extern int window_w,window_h;
@@ -312,6 +312,7 @@ void main(int argc,char** argv)
 	ilutRenderer(ILUT_OPENGL);
 #endif
 	init();
+	printf("---\nTheora Playback library version %s\n---\n",TheoraVideoManager::getSingleton().getVersionString().c_str());
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);
