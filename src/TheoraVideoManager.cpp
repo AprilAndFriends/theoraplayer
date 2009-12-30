@@ -203,3 +203,18 @@ void TheoraVideoManager::setNumWorkerThreads(int n)
 	createWorkerThreads(n);
 }
 
+std::string TheoraVideoManager::getVersionString()
+{
+	int a,b,c;
+	getVersion(&a,&b,&c);
+	std::string out=str(a)+"."+str(b);
+	if (c != 0) out+="."+str(c);
+	return out;
+}
+
+void TheoraVideoManager::getVersion(int* a,int* b,int* c)
+{
+	*a=0;
+	*b=9;
+	*c=0;
+}

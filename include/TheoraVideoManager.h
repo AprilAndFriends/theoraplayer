@@ -94,6 +94,8 @@ public:
 
 	void setLogFunction(void (*fn)(std::string)) { mLogFuction=fn; }
 
+	std::string getVersionString();
+	void getVersion(int* a,int* b,int* c);
 };
 #endif
 
