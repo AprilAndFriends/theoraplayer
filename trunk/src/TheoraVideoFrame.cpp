@@ -201,6 +201,11 @@ int TheoraVideoFrame::getWidth()
 	return mParent->mWidth;
 }
 
+int TheoraVideoFrame::getStride()
+{
+	return mParent->mStride;
+}
+
 int TheoraVideoFrame::getHeight()
 {
 	return mParent->mHeight;
