@@ -34,6 +34,9 @@ class TheoraAudioInterface;
 class TheoraWorkerThread;
 class TheoraDataSource;
 
+/**
+    format of the TheoraVideoFrame pixels. Affects decoding time
+ */
 enum TheoraOutputMode
 {
 	// A= full alpha (255), order of letters represents the byte order for a pixel
@@ -120,56 +123,104 @@ public:
 
 	std::string getName();
 
-	// benchmark functions
+	//! benchmark function
 	int getNumDisplayedFrames() { return mNumDisplayedFrames; }
+	//! benchmark function
 	int getNumDroppedFrames() { return mNumDroppedFrames; }
 
 	//! return width in pixels of the video clip
 	int getWidth() { return mWidth; }
 	//! return height in pixels of the video clip
 	int getHeight() { return mHeight; }
+	/**
+	    \brief return stride in pixels
+        
+		If you've specified usePower2Stride when creating the TheoraVideoClip object
+		then this value will be the next power of two size compared to width,
+		eg: w=376, stride=512.
+
+		Otherwise, stride will be equal to width
+	 */
 	int getStride() { return mStride; }
 
+	//! retur the timer objet associated with this object
 	TheoraTimer* getTimer();
+	//! replace the timer object with a new one
 	void setTimer(TheoraTimer* timer);
 
+	//! used by TheoraWorkerThread, do not call directly
 	void decodeNextFrame();
 
+	//! advance time. TheoraVideoManager calls this
 	void update(float time_increase);
+
+	/**
+	    \brief pop the frame from the front of the FrameQueue
+
+		see TheoraFrameQueue::pop() for more details
+	 */
 	void popFrame();
+
+	/**
+	    \brief Returns the first available frame in the queue or NULL if no frames are available.
+
+		see TheoraFrameQueue::getFirstAvailableFrame() for more details
+	*/
 	TheoraVideoFrame* getNextFrame();
-	//! check if there is enough audio data decoded to submit to the audio interface
+	/**
+	    check if there is enough audio data decoded to submit to the audio interface
+
+		TheoraWorkerThread calls this
+	 */
 	void decodedAudioCheck();
 
 	void setAudioInterface(TheoraAudioInterface* iface);
 	TheoraAudioInterface* getAudioInterface();
 
+	/**
+	    \brief resize the frame queues
+
+		Warning: this call discards ready frames in the frame queue
+	 */
 	void setNumPrecachedFrames(int n);
+	//! returns the size of the frame queue
 	int getNumPrecachedFrames();
+	//! returns the number of ready frames in the frame queue
 	int getNumReadyFrames();
 
+	//! if you want to adjust the audio gain. range [0,1]
 	void setAudioGain(float gain);
 	float getAudioGain();
+
+	//! if you want the video to automatically and smoothly restart when the last frame is reached
 	void setAutoRestart(bool value);
 	bool getAutoRestart() { return mAutoRestart; }
 
 
 
 	/**
-	 * sets a user priority factor.
-	 * @param priority must be in range [0,1]
+	    TODO: user priority. Useful only when more than one video is being decoded
 	 */
 	void setPriority(float priority);
-	/**
-	 * @return user set priority
-	 */
 	float getPriority();
+
+	//! Used by TheoraVideoManager to schedule work
 	float getPriorityIndex();
 
+	//! get the current time index from the timer object
 	float getTimePosition();
+	//! get the duration of the movie in seconds
 	float getDuration();
+	//! get the number of frames in this movie
+	int getNumFrames() { return mNumFrames; }
 
+	//! return the current output mode for this video object
 	TheoraOutputMode getOutputMode();
+	/**
+	    set a new output mode
+
+		Warning: this discards the frame queue. ready frames will be lost.
+	 */
 	void setOutputMode(TheoraOutputMode mode);
 
     bool isDone();
@@ -178,8 +229,8 @@ public:
 	void restart();
 	bool isPaused();
 	void stop();
+	//! seek to a given time position
 	void seek(float time);
 };
 
 #endif
-

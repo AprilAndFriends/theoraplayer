@@ -24,7 +24,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 // WARNING: This code is not yet platform independent. it will be soon enough.
 
 /**
- *  This is a Mutex object, used in thread syncronization.
+    This is a Mutex object, used in thread syncronization.
  */
 class TheoraMutex
 {
@@ -40,9 +40,8 @@ public:
 };
 
 /**
- *  This is a Mutex object, used in thread syncronization.
+    This is a Mutex object, used in thread syncronization.
  */
-
 class TheoraThread
 {
 protected:

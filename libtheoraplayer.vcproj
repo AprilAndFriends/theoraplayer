@@ -339,10 +339,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\TheoraMuteAudioInterface.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\TheoraTimer.cpp"
 				>
 			</File>
@@ -393,10 +389,6 @@
 			</File>
 			<File
 				RelativePath=".\include\TheoraFrameQueue.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\TheoraMuteAudioInterface.h"
 				>
 			</File>
 			<File
