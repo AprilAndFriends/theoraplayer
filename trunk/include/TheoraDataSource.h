@@ -40,9 +40,13 @@ public:
 		if function returns less bytes then nBytes, the system assumes EOF is reached.
 	*/
 	virtual int read(void* output,int nBytes)=0;
+    //! returns a string representation of the DataSource, eg 'File: source.ogg'
 	virtual std::string repr()=0;
+	//! position the source pointer to byte_index from the start of the source
 	virtual void seek(unsigned long byte_index)=0;
+	//! return the size of the stream in bytes
 	virtual unsigned long size()=0;
+	//! return the current position of the source pointer
 	virtual unsigned long tell()=0;
 };
 
@@ -67,7 +71,9 @@ public:
 };
 
 /**
-	provides standard file IO
+	Pre-loads the entire file and streams from memory.
+	Very useful if you're continuously displaying a video and want to avoid disk reads.
+	Not very practical for large files.
 */
 class TheoraPlayerExport TheoraMemoryFileDataSource : public TheoraDataSource
 {
@@ -84,8 +90,5 @@ public:
 	unsigned long size();
 	unsigned long tell();
 };
-
-
-
 
 #endif
