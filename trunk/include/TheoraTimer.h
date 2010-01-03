@@ -24,21 +24,45 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include "TheoraExport.h"
 
+/**
+    This is a Timer object, it is used to control the playback of a TheoraVideoClip.
 
+	You can inherit this class and make a timer that eg. plays twice as fast,
+	or playbacks an audio track and uses it's time offset for syncronizing Video etc.
+ */
 class TheoraPlayerExport TheoraTimer
 {
 protected:
+	//! Current time in seconds
 	float mTime;
+	//! Is the timer paused or not
 	bool mPaused;
 public:
 	TheoraTimer();
 
 	virtual float getTime();
+	/**
+	    \brief advance the time.
+		
+		If you're using another synronization system, eg. an audio track,
+		then you can ignore this call or use it to perform other updates.
+		
+		NOTE: this is called by TheoraVideoManager from the main thread
+	 */
 	virtual void update(float time_increase);
+
 	virtual void pause();
 	virtual void play();
 	virtual bool isPaused();
 	virtual void stop();
+
+	/**
+	    \brief change the current time.
+		
+		if you're using another syncronization mechanism, make sure to adjust
+		the time offset there
+	 */
 	virtual void seek(float time);
 };
 #endif
+
