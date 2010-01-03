@@ -9,7 +9,7 @@
 * 
 * <hr>
 * @section notes Release Notes
-* 0.9.0 is the 1.0 Release Candidate 1, please test the library as thorougly as possible.
+* This is the 1.0 Release Candidate 1, please test the library as thorougly as possible.
 * 1.0 goals can be seen on the <a href="https://sourceforge.net/apps/mediawiki/libtheoraplayer/index.php?title=Roadmap">Roadmap</a> section of the Project Wiki.
 * <hr>
 * @section requirements Requirements

@@ -23,12 +23,12 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include "TheoraAsync.h"
 
-/**
-	
-*/
-
 class TheoraVideoClip;
 
+/**
+	This is the worker thread, requests work from TheoraVideoManager
+	and decodes assigned TheoraVideoClip objects
+*/
 class TheoraWorkerThread : public TheoraThread
 {
 	TheoraVideoClip* mClip;

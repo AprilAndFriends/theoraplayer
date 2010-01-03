@@ -65,9 +65,12 @@ public:
 	TheoraVideoManager(int num_worker_threads=1);
 	~TheoraVideoManager();
 
+	//! get the global reference to the manager instance
 	static TheoraVideoManager& getSingleton(void);
+	//! get the global pointer to the manager instance
 	static TheoraVideoManager* getSingletonPtr(void);
 
+	//! search registered clips by name
 	TheoraVideoClip* getVideoClipByName(std::string name);
 
 	TheoraVideoClip* createVideoClip(std::string filename,TheoraOutputMode output_mode=TH_RGB,int numPrecachedOverride=0,bool usePower2Stride=0);
@@ -75,12 +78,8 @@ public:
 
 	void update(float time_increase);
 
-	/**
-		@remarks
-			Destroys a video clip
-	*/
 	void destroyVideoClip(TheoraVideoClip* clip);
-    
+
 	void setAudioInterfaceFactory(TheoraAudioInterfaceFactory* factory);
 	TheoraAudioInterfaceFactory* getAudioInterfaceFactory();
 
@@ -90,11 +89,24 @@ public:
 	void setDefaultNumPrecachedFrames(int n) { mDefaultNumPrecachedFrames=n; }
 	int getDefaultNumPrecachedFrames() { return mDefaultNumPrecachedFrames; }
 
+	//! used by libtheoraplayer functions
 	void logMessage(std::string msg);
 
+	/**
+		\brief you can set your own log function to recieve theora's log calls
+
+		This way you can integrate libtheoraplayer's log messages in your own
+		logging system, prefix them, mute them or whatever you want
+	 */
 	void setLogFunction(void (*fn)(std::string)) { mLogFuction=fn; }
 
+	//! get nicely formated version string
 	std::string getVersionString();
+	/**
+	    \brief get version numbers
+
+		if c is negative, it means it's a release candidate -c
+	 */
 	void getVersion(int* a,int* b,int* c);
 };
 #endif
