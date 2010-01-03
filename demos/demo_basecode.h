@@ -250,7 +250,7 @@ void reshape(int w,int h)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 #else
-	gluOrtho2D(0,window_w,window_h,0);
+	gluOrtho2D(0,800,600,0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 #endif

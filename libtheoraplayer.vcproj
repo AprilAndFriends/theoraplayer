@@ -420,6 +420,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\scripts\doxygen_mainpage.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
