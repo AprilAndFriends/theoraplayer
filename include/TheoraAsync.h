@@ -23,6 +23,9 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 // WARNING: This code is not yet platform independent. it will be soon enough.
 
+/**
+ *  This is a Mutex object, used in thread syncronization.
+ */
 class TheoraMutex
 {
 protected:
@@ -30,24 +33,33 @@ protected:
 public:
 	TheoraMutex();
 	~TheoraMutex();
+	//! Lock the mutex. If another thread has lock, the caller thread will wait until the previous thread unlocks it
 	void lock();
+	//! Unlock the mutex. Use this when you're done with thread-safe sections of your code
 	void unlock();
 };
+
+/**
+ *  This is a Mutex object, used in thread syncronization.
+ */
 
 class TheoraThread
 {
 protected:
 	void* mHandle;
+	//! Indicates whether the thread is running. As long as this is true, the thread runs in a loop
 	volatile bool mThreadRunning;
 public:
 	TheoraThread();
 	virtual ~TheoraThread();
 
+	//! Creates the thread object and runs it
 	void startThread();
+	//! The main thread loop function
 	virtual void executeThread()=0;
+	//! sets mThreadRunning to false and waits for the thread to complete the last cycle
 	void waitforThread();
 	
 };
-
 
 #endif
