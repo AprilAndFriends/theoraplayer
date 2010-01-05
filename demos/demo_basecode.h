@@ -5,8 +5,8 @@ For latest info, see http://libtheoraplayer.sourceforge.net/
 Copyright (c) 2008-2009 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License (LGPL) as published by the 
-Free Software Foundation; either version 2 of the License, or (at your option) 
+the terms of the GNU Lesser General Public License (LGPL) as published by the
+Free Software Foundation; either version 2 of the License, or (at your option)
 any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
@@ -18,7 +18,9 @@ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place - Suite 330, Boston, MA 02111-1307, USA, or go to
 http://www.gnu.org/copyleft/lesser.txt.
 *************************************************************************************/
-#include <windows.h> // todo: make platform independent
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include <stdio.h>
 #include <gl\gl.h>
 #include <gl\glu.h>
@@ -119,7 +121,7 @@ void toggle_YUV2RGB_shader()
 		glCompileShader=(PFNGLCOMPILESHADERPROC) wglGetProcAddress("glCompileShader");
 		glAttachShader=(PFNGLATTACHSHADERPROC) wglGetProcAddress("glAttachShader");
 
-		const char* 
+		const char*
 		shader_code="uniform sampler2D diffuseMap;\
                      void main(void)\
                      {\
@@ -134,10 +136,10 @@ void toggle_YUV2RGB_shader()
                          gl_FragColor = vec4(r,g,b,1.0);\
                      }";
 
-		
+
 
 		program = glCreateProgram();
-		shader = glCreateShader(GL_FRAGMENT_SHADER);	
+		shader = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(shader,1,&shader_code,NULL);
 		glCompileShader(shader);
 		glAttachShader(program,shader);
@@ -145,7 +147,7 @@ void toggle_YUV2RGB_shader()
 
 	}
 	shader_on=!shader_on;
-	
+
 #endif
 }
 
@@ -227,7 +229,7 @@ void display()
 	if (t-fps_timer >= 250)
 	{
 		char title[512],debug[256]="";
-		
+
 		setDebugTitle(debug);
 		sprintf(title,"%s: %d FPS; %s",window_name.c_str(),fps_counter*4,debug);
 		glutSetWindowTitle(title);
