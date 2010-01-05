@@ -5,8 +5,8 @@ For latest info, see http://libtheoraplayer.sourceforge.net/
 Copyright (c) 2008-2009 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License (LGPL) as published by the 
-Free Software Foundation; either version 2 of the License, or (at your option) 
+the terms of the GNU Lesser General Public License (LGPL) as published by the
+Free Software Foundation; either version 2 of the License, or (at your option)
 any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
@@ -18,6 +18,10 @@ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place - Suite 330, Boston, MA 02111-1307, USA, or go to
 http://www.gnu.org/copyleft/lesser.txt.
 *************************************************************************************/
+#include <memory.h>
+#include <ogg/ogg.h>
+#include <vorbis/vorbisfile.h>
+#include <theora/theoradec.h>
 #include "TheoraVideoClip.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoFrame.h"
@@ -27,9 +31,6 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "TheoraDataSource.h"
 #include "TheoraUtil.h"
 #include "TheoraException.h"
-#include <ogg/ogg.h>
-#include <vorbis/vorbisfile.h>
-#include <theora/theoradec.h>
 
 class TheoraInfoStruct
 {
@@ -188,7 +189,7 @@ bool TheoraVideoClip::_readData()
 
 				if (mSeekPos == -2 && !mAudioSkipSeekFlag)
 				{
-					
+
 					if (g > -1) { mAudioSkipSeekFlag=1; continue; }
 					if (g == -1) continue;
 				}
@@ -209,7 +210,7 @@ void TheoraVideoClip::decodeNextFrame()
 
 	TheoraVideoFrame* frame=mFrameQueue->requestEmptyFrame();
 	if (!frame) return; // max number of precached frames reached
-	long seek_granule=-1,nSeekSkippedFrames=0;
+	long nSeekSkippedFrames=0;
 	ogg_packet opTheora;
 	ogg_int64_t granulePos;
 	th_ycbcr_buffer buff;
@@ -222,7 +223,7 @@ void TheoraVideoClip::decodeNextFrame()
 
 		if (ret > 0)
 		{
-	
+
 			if (mSeekPos == -2) // searching for next keyframe
 			{
 				int keyframe=th_packet_iskeyframe(&opTheora);
@@ -270,7 +271,7 @@ void TheoraVideoClip::_restart()
 	mInfo->TheoraDecoder=th_decode_alloc(&mInfo->TheoraInfo,mInfo->TheoraSetup);
 	ogg_stream_reset(&mInfo->TheoraStreamState);
 	if (mAudioInterface)
-	{	
+	{
 		// empty the DSP buffer
 		//float **pcm;
 		//int len = vorbis_synthesis_pcmout(&mInfo->VorbisDSPState,&pcm);
@@ -406,7 +407,7 @@ void TheoraVideoClip::decodedAudioCheck()
 		mAudioInterface->insertData(pcm,len);
 		vorbis_synthesis_read(&mInfo->VorbisDSPState,len);
 	}
-	
+
 	mAudioMutex->unlock();
 }
 
@@ -423,14 +424,11 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 	mStride=(mStride == 1) ? mStride=nextPow2(mWidth) : mWidth;
 
 	mFrameQueue=new TheoraFrameQueue(mNumPrecachedFrames,this);
-	
+
 
 	// find out the duration of the file by seeking to the end
 	// having ogg decode pages, extract the granule pos from
 	// the last theora page and seek back to beginning of the file
-
-	long stream_pos=mStream->tell();
-
 	for (int i=1;i<=10;i++)
 	{
 		ogg_sync_reset(&mInfo->OggSyncState);
@@ -439,7 +437,7 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 		char *buffer = ogg_sync_buffer(&mInfo->OggSyncState, 4096*i);
 		int bytesRead = mStream->read(buffer, 4096*i);
 		ogg_sync_wrote(&mInfo->OggSyncState, bytesRead );
-		long offset=ogg_sync_pageseek(&mInfo->OggSyncState,&mInfo->OggPage);
+		ogg_sync_pageseek(&mInfo->OggSyncState,&mInfo->OggPage);
 
 		while (1)
 		{
@@ -508,27 +506,27 @@ void TheoraVideoClip::readTheoraVorbisHeaders()
 		char *buffer = ogg_sync_buffer( &mInfo->OggSyncState, 4096);
 		int bytesRead = mStream->read( buffer, 4096 );
 		ogg_sync_wrote( &mInfo->OggSyncState, bytesRead );
-	
+
 		if( bytesRead == 0 )
 			break;
-	
+
 		while( ogg_sync_pageout( &mInfo->OggSyncState, &mInfo->OggPage ) > 0 )
 		{
 			ogg_stream_state OggStateTest;
-    		
+
 			//is this an initial header? If not, stop
 			if( !ogg_page_bos( &mInfo->OggPage ) )
 			{
 				//This is done blindly, because stream only accept them selfs
-				if (mTheoraStreams) 
+				if (mTheoraStreams)
 					ogg_stream_pagein( &mInfo->TheoraStreamState, &mInfo->OggPage );
-				if (mVorbisStreams) 
+				if (mVorbisStreams)
 					ogg_stream_pagein( &mInfo->VorbisStreamState, &mInfo->OggPage );
-				
+
 				done=true;
 				break;
 			}
-	
+
 			ogg_stream_init( &OggStateTest, ogg_page_serialno( &mInfo->OggPage ) );
 			ogg_stream_pagein( &OggStateTest, &mInfo->OggPage );
 			ogg_stream_packetout( &OggStateTest, &tempOggPacket );
@@ -565,39 +563,39 @@ void TheoraVideoClip::readTheoraVorbisHeaders()
 	{
 		//Check 2nd'dary headers... Theora First
 		int iSuccess;
-		while( mTheoraStreams && 
-			 ( mTheoraStreams < 3) && 
-			 ( iSuccess = ogg_stream_packetout( &mInfo->TheoraStreamState, &tempOggPacket)) ) 
+		while( mTheoraStreams &&
+			 ( mTheoraStreams < 3) &&
+			 ( iSuccess = ogg_stream_packetout( &mInfo->TheoraStreamState, &tempOggPacket)) )
 		{
-			if( iSuccess < 0 ) 
+			if( iSuccess < 0 )
 				throw TheoraGenericException("Error parsing Theora stream headers.");
 
 			if( !th_decode_headerin(&mInfo->TheoraInfo, &mInfo->TheoraComment, &mInfo->TheoraSetup, &tempOggPacket) )
 				throw TheoraGenericException("invalid theora stream");
 
-			mTheoraStreams++;			
+			mTheoraStreams++;
 		} //end while looking for more theora headers
-	
+
 		//look 2nd vorbis header packets
-		while(// mVorbisStreams && 
-			 ( mVorbisStreams < 3 ) && 
-			 ( iSuccess=ogg_stream_packetout( &mInfo->VorbisStreamState, &tempOggPacket))) 
+		while(// mVorbisStreams &&
+			 ( mVorbisStreams < 3 ) &&
+			 ( iSuccess=ogg_stream_packetout( &mInfo->VorbisStreamState, &tempOggPacket)))
 		{
-			if(iSuccess < 0) 
+			if(iSuccess < 0)
 				throw TheoraGenericException("Error parsing vorbis stream headers");
 
-			if(vorbis_synthesis_headerin( &mInfo->VorbisInfo, &mInfo->VorbisComment,&tempOggPacket)) 
+			if(vorbis_synthesis_headerin( &mInfo->VorbisInfo, &mInfo->VorbisComment,&tempOggPacket))
 				throw TheoraGenericException("invalid stream");
 
 			mVorbisStreams++;
 		} //end while looking for more vorbis headers
-	
+
 		//Not finished with Headers, get some more file data
 		if( ogg_sync_pageout( &mInfo->OggSyncState, &mInfo->OggPage ) > 0 )
 		{
-			if(mTheoraStreams) 
+			if(mTheoraStreams)
 				ogg_stream_pagein( &mInfo->TheoraStreamState, &mInfo->OggPage );
-			if(mVorbisStreams) 
+			if(mVorbisStreams)
 				ogg_stream_pagein( &mInfo->VorbisStreamState, &mInfo->OggPage );
 		}
 		else

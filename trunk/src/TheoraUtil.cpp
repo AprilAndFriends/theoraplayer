@@ -1,11 +1,14 @@
+#include <stdio.h>
 #include <algorithm>
 #include <math.h>
 #include <map>
 #include "TheoraUtil.h"
 #include "TheoraException.h"
-#include <windows.h>
 
+#ifdef _WIN32
+#include <windows.h>
 #pragma warning( disable: 4996 ) // MSVC++
+#endif
 
 std::string str(int i)
 {
@@ -23,7 +26,11 @@ std::string strf(float i)
 
 void _psleep(int milliseconds)
 {
+#ifndef _WIN32
+    usleep(milliseconds*1000);
+#else
 	Sleep(milliseconds);
+#endif
 }
 
 

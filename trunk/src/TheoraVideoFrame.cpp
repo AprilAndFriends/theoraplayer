@@ -5,8 +5,8 @@ For latest info, see http://libtheoraplayer.sourceforge.net/
 Copyright (c) 2008-2009 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License (LGPL) as published by the 
-Free Software Foundation; either version 2 of the License, or (at your option) 
+the terms of the GNU Lesser General Public License (LGPL) as published by the
+Free Software Foundation; either version 2 of the License, or (at your option)
 any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
@@ -18,9 +18,11 @@ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place - Suite 330, Boston, MA 02111-1307, USA, or go to
 http://www.gnu.org/copyleft/lesser.txt.
 *************************************************************************************/
+#include <memory.h>
+#include <theora/theoradec.h>
 #include "TheoraVideoFrame.h"
 #include "TheoraVideoClip.h"
-#include <theora/theoradec.h>
+
 
 //#define TH_MAX( a, b ) ((a > b) ? a : b)
 //#define TH_MIN( a, b ) ((a < b) ? a : b)
@@ -66,7 +68,7 @@ void _decodeRGB(th_img_plane* yuv,unsigned char* out,int stride,int nBytes)
 			rgbY=YTable[*(ySrc+yuv[0].stride)];
 			out2[0] = CLIP_RGB_COLOR((rgbY + rV ) >> 13);
 			out2[1] = CLIP_RGB_COLOR((rgbY - gUV) >> 13);
-			out2[2] = CLIP_RGB_COLOR((rgbY + bU ) >> 13); 
+			out2[2] = CLIP_RGB_COLOR((rgbY + bU ) >> 13);
 		}
 		out+=stride; out2+=stride;
 		ySrc+=yuv[0].stride*2-yuv[0].width;
@@ -235,11 +237,11 @@ void createYUVtoRGBtables()
 //        b = 1.164*(*ySrc - 16)                   + 2.018*(cu - 128);
 //        g = 1.164*(*ySrc - 16) - 0.813*(cv - 128) - 0.391*(cu - 128);
     double scale = 1L << 13, temp;
-	
+
 	for (int i = 0; i < 256; i++)
 	{
 		temp = i - 128;
-		
+
 		YTable[i]  = (unsigned int)((1.164 * scale + 0.5) * (i - 16));	//Calc Y component
 		RVTable[i] = (unsigned int)((1.596 * scale + 0.5) * temp);		//Calc R component
 		GUTable[i] = (unsigned int)((0.391 * scale + 0.5) * temp);		//Calc G u & v components

@@ -5,8 +5,8 @@ For latest info, see http://libtheoraplayer.sourceforge.net/
 Copyright (c) 2008-2009 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License (LGPL) as published by the 
-Free Software Foundation; either version 2 of the License, or (at your option) 
+the terms of the GNU Lesser General Public License (LGPL) as published by the
+Free Software Foundation; either version 2 of the License, or (at your option)
 any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
@@ -21,7 +21,9 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifndef _TheoraAsync_h
 #define _TheoraAsync_h
 
-// WARNING: This code is not yet platform independent. it will be soon enough.
+#ifndef _WIN32
+#include <pthread.h>
+#endif
 
 /**
     This is a Mutex object, used in thread syncronization.
@@ -29,7 +31,11 @@ http://www.gnu.org/copyleft/lesser.txt.
 class TheoraMutex
 {
 protected:
+#ifdef _WIN32
 	void* mHandle;
+#else
+    pthread_mutex_t mHandle;
+#endif
 public:
 	TheoraMutex();
 	~TheoraMutex();
@@ -45,7 +51,11 @@ public:
 class TheoraThread
 {
 protected:
+#ifdef _WIN32
 	void* mHandle;
+#else
+    pthread_t mHandle;
+#endif
 	//! Indicates whether the thread is running. As long as this is true, the thread runs in a loop
 	volatile bool mThreadRunning;
 public:
@@ -58,7 +68,7 @@ public:
 	virtual void executeThread()=0;
 	//! sets mThreadRunning to false and waits for the thread to complete the last cycle
 	void waitforThread();
-	
+
 };
 
 #endif

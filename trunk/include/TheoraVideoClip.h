@@ -5,8 +5,8 @@ For latest info, see http://libtheoraplayer.sourceforge.net/
 Copyright (c) 2008-2009 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License (LGPL) as published by the 
-Free Software Foundation; either version 2 of the License, or (at your option) 
+the terms of the GNU Lesser General Public License (LGPL) as published by the
+Free Software Foundation; either version 2 of the License, or (at your option)
 any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
@@ -33,6 +33,7 @@ class TheoraTimer;
 class TheoraAudioInterface;
 class TheoraWorkerThread;
 class TheoraDataSource;
+class TheoraVideoFrame;
 
 /**
     format of the TheoraVideoFrame pixels. Affects decoding time
@@ -72,7 +73,7 @@ class TheoraPlayerExport TheoraVideoClip
 
 	// benchmark vars
 	int mNumDroppedFrames,mNumDisplayedFrames;
-	
+
 	int mTheoraStreams, mVorbisStreams;	// Keeps track of Theora and Vorbis Streams
 
 	int mNumPrecachedFrames;
@@ -134,7 +135,7 @@ public:
 	int getHeight() { return mHeight; }
 	/**
 	    \brief return stride in pixels
-        
+
 		If you've specified usePower2Stride when creating the TheoraVideoClip object
 		then this value will be the next power of two size compared to width,
 		eg: w=376, stride=512.
