@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/liblibtheoraplayer" prefix_auto="1" extension_auto="1" />
+				<Option output="lib/libtheoraplayer" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -18,7 +18,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/liblibtheoraplayer" prefix_auto="1" extension_auto="1" />
+				<Option output="lib/libtheoraplayer" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
@@ -34,10 +34,32 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add directory="./include" />
 		</Compiler>
-		<Unit filename="main.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="include/TheoraAsync.h" />
+		<Unit filename="include/TheoraAudioInterface.h" />
+		<Unit filename="include/TheoraDataSource.h" />
+		<Unit filename="include/TheoraException.h" />
+		<Unit filename="include/TheoraExport.h" />
+		<Unit filename="include/TheoraFrameQueue.h" />
+		<Unit filename="include/TheoraPlayer.h" />
+		<Unit filename="include/TheoraTimer.h" />
+		<Unit filename="include/TheoraUtil.h" />
+		<Unit filename="include/TheoraVideoClip.h" />
+		<Unit filename="include/TheoraVideoFrame.h" />
+		<Unit filename="include/TheoraVideoManager.h" />
+		<Unit filename="include/TheoraWorkerThread.h" />
+		<Unit filename="src/TheoraAsync.cpp" />
+		<Unit filename="src/TheoraAudioInterface.cpp" />
+		<Unit filename="src/TheoraDataSource.cpp" />
+		<Unit filename="src/TheoraException.cpp" />
+		<Unit filename="src/TheoraFrameQueue.cpp" />
+		<Unit filename="src/TheoraTimer.cpp" />
+		<Unit filename="src/TheoraUtil.cpp" />
+		<Unit filename="src/TheoraVideoClip.cpp" />
+		<Unit filename="src/TheoraVideoFrame.cpp" />
+		<Unit filename="src/TheoraVideoManager.cpp" />
+		<Unit filename="src/TheoraWorkerThread.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

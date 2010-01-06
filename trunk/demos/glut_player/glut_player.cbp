@@ -31,8 +31,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="../../include" />
 		</Compiler>
-		<Unit filename="main.cpp" />
+		<Linker>
+			<Add library="libtheoraplayer" />
+			<Add directory="../../lib" />
+		</Linker>
+		<Unit filename="../demo_basecode.h" />
+		<Unit filename="glut_player.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

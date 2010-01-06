@@ -21,10 +21,15 @@ http://www.gnu.org/copyleft/lesser.txt.
 #ifdef _WIN32
 #include <windows.h>
 #endif
+#include <string.h>
 #include <stdio.h>
-#include <gl\gl.h>
-#include <gl\glu.h>
-#include <gl\glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#ifndef _WIN32
+#include <GL/glx.h>
+#endif
+
 #include <string>
 #include "TheoraVideoManager.h"
 #pragma warning( disable: 4996 ) // MSVC++
@@ -36,7 +41,7 @@ float mx=0,my=0;
 bool shader_on=0;
 #define USE_SHADERS
 #ifdef USE_SHADERS
-#include <gl\glext.h>
+#include <GL/glext.h>
 PFNGLCREATEPROGRAMPROC glCreateProgram=0;
 PFNGLCREATESHADERPROC glCreateShader=0;
 PFNGLLINKPROGRAMPROC glLinkProgram=0;
@@ -59,7 +64,11 @@ void OnClick(float x,float y);
 
 void psleep(int milliseconds)
 {
+#ifdef _WIN32
 	Sleep(milliseconds);
+#else
+    usleep(milliseconds*1000);
+#endif
 }
 
 int nextPow2(int x)
@@ -113,6 +122,8 @@ void toggle_YUV2RGB_shader()
 			printf("Unable to turn on yuv2rgb shader, your OpenGL driver doesn't support GLSL shaders!\n");
 			return;
 		}
+
+#ifdef _WIN32
 		glCreateProgram=(PFNGLCREATEPROGRAMPROC) wglGetProcAddress("glCreateProgram");
 		glCreateShader = (PFNGLCREATESHADERPROC) wglGetProcAddress("glCreateShader");
 		glLinkProgram=(PFNGLLINKPROGRAMPROC) wglGetProcAddress("glLinkProgram");
@@ -120,7 +131,16 @@ void toggle_YUV2RGB_shader()
 		glUseProgram=(PFNGLUSEPROGRAMPROC) wglGetProcAddress("glUseProgram");
 		glCompileShader=(PFNGLCOMPILESHADERPROC) wglGetProcAddress("glCompileShader");
 		glAttachShader=(PFNGLATTACHSHADERPROC) wglGetProcAddress("glAttachShader");
+#else
+		glCreateProgram=(PFNGLCREATEPROGRAMPROC) glXGetProcAddress((GLubyte*) "glCreateProgram");
+		glCreateShader = (PFNGLCREATESHADERPROC) glXGetProcAddress((GLubyte*) "glCreateShader");
+		glLinkProgram=(PFNGLLINKPROGRAMPROC) glXGetProcAddress((GLubyte*) "glLinkProgram");
+		glShaderSource=(PFNGLSHADERSOURCEPROC) glXGetProcAddress((GLubyte*) "glShaderSource");
+		glUseProgram=(PFNGLUSEPROGRAMPROC) glXGetProcAddress((GLubyte*) "glUseProgram");
+		glCompileShader=(PFNGLCOMPILESHADERPROC) glXGetProcAddress((GLubyte*) "glCompileShader");
+		glAttachShader=(PFNGLATTACHSHADERPROC) glXGetProcAddress((GLubyte*) "glAttachShader");
 
+#endif
 		const char*
 		shader_code="uniform sampler2D diffuseMap;\
                      void main(void)\
