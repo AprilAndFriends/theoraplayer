@@ -2,7 +2,7 @@
 This source file is part of the Theora Video Playback Library
 For latest info, see http://libtheoraplayer.sourceforge.net/
 *************************************************************************************
-Copyright (c) 2008-2009 Kresimir Spes (kreso@cateia.com)
+Copyright (c) 2008-2010 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License (LGPL) as published by the
@@ -659,6 +659,11 @@ int TheoraVideoClip::getNumReadyFrames()
 float TheoraVideoClip::getDuration()
 {
 	return mDuration;
+}
+
+int TheoraVideoClip::getFPS()
+{
+	return mInfo->TheoraInfo.fps_numerator;
 }
 
 void TheoraVideoClip::play()
