@@ -28,6 +28,13 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <GL/glut.h>
 #ifndef _WIN32
 #include <GL/glx.h>
+#include <sys/time.h>
+unsigned long GetTickCount()
+{
+    struct timeval tv;
+    if (gettimeofday(&tv, NULL) != 0) return 0;
+    return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+}
 #endif
 
 #include <string>
@@ -314,7 +321,7 @@ void getCursorPos(float* xout,float* yout)
 	*yout=my;
 }
 
-void main(int argc,char** argv)
+int main(int argc,char** argv)
 {
 	glutInit(&argc, argv);
 #ifdef __ZBUFFER
@@ -322,7 +329,7 @@ void main(int argc,char** argv)
 #else
 	glutInitDisplayMode( GLUT_DOUBLE|GLUT_RGBA);
 #endif
-	//glutInitWindowPosition(0,0);
+	glutInitWindowPosition(0,0);
 	glutInitWindowSize(window_w,window_h);
 	glutCreateWindow(window_name.c_str());
 	glShadeModel(GL_SMOOTH);
@@ -347,6 +354,10 @@ void main(int argc,char** argv)
 	catch (void*) {}
 
 	destroy();
+
+    glutDestroyWindow(0);
+
+	return 0;
 }
 
 

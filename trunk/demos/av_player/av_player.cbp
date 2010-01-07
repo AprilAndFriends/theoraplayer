@@ -2,24 +2,21 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="glut_player" />
+		<Option title="av_player" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="./glut_player" prefix_auto="1" extension_auto="1" />
+				<Option output="./av_player" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
-				<Linker>
-					<Add directory="../../bin/Debug" />
-				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="../../bin/Release/glut_player" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/glut_player" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -28,7 +25,6 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add directory="../../bin/Release" />
 				</Linker>
 			</Target>
 		</Build>
@@ -42,15 +38,16 @@
 			<Add library="libGL" />
 			<Add library="libGLU" />
 			<Add library="libglut" />
+			<Add library="libopenal" />
+			<Add directory="../../lib" />
 		</Linker>
+		<Unit filename="../OpenAL_AudioInterface.cpp" />
+		<Unit filename="../OpenAL_AudioInterface.h" />
+		<Unit filename="av_player.cpp" />
 		<Unit filename="../demo_basecode.h" />
-		<Unit filename="glut_player.cpp" />
 		<Extensions>
 			<code_completion />
-			<debugger>
-				<search_path add="../../bin" />
-				<search_path add="../../bin/Debug" />
-			</debugger>
+			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
