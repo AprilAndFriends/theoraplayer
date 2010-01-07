@@ -5,8 +5,8 @@ For latest info, see http://libtheoraplayer.sourceforge.net/
 Copyright (c) 2008-2010 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License (LGPL) as published by the 
-Free Software Foundation; either version 2 of the License, or (at your option) 
+the terms of the GNU Lesser General Public License (LGPL) as published by the
+Free Software Foundation; either version 2 of the License, or (at your option)
 any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
@@ -18,6 +18,7 @@ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place - Suite 330, Boston, MA 02111-1307, USA, or go to
 http://www.gnu.org/copyleft/lesser.txt.
 *************************************************************************************/
+#include <stdio.h>
 #include "OpenAL_AudioInterface.h"
 
 ALCdevice* gDevice=0;
@@ -69,11 +70,11 @@ void OpenAL_AudioInterface::insertData(float** data,int nSamples)
 				mTempBuffer[mBuffSize++]=float2short(data[1][i]);
 		}
 		if (mBuffSize == mFreq*mNumChannels/4)
-		{	
+		{
 			OpenAL_Buffer buff;
 			alGenBuffers(1,&buff.id);
 
-			
+
 			ALuint format = (mNumChannels == 1) ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16;
 			alBufferData(buff.id,format,mTempBuffer,mBuffSize*2,mFreq);
 			alSourceQueueBuffers(mSource, 1, &buff.id);
@@ -172,7 +173,7 @@ OpenAL_AudioInterfaceFactory::OpenAL_AudioInterfaceFactory()
 	// openal init is here used only to simplify samples for this plugin
 	// if you want to use this interface in your own program, you'll
 	// probably want to remove the openal init/destory lines
-	gDevice = alcOpenDevice("Generic Software");
+	gDevice = alcOpenDevice("");
 	if (alcGetError(gDevice) != ALC_NO_ERROR) goto Fail;
 	gContext = alcCreateContext(gDevice, NULL);
 	if (alcGetError(gDevice) != ALC_NO_ERROR) goto Fail;
