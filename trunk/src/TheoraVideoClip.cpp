@@ -73,24 +73,24 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 								 TheoraOutputMode output_mode,
 								 int nPrecachedFrames,
 								 bool usePower2Stride):
-	mTheoraStreams(0),
-	mVorbisStreams(0),
-	mSeekPos(-1),
-	mDuration(-1),
-	mName(data_source->repr()),
-	mOutputMode(output_mode),
-	mRequestedOutputMode(output_mode),
 	mAudioInterface(NULL),
-	mAutoRestart(0),
-	mAudioGain(1),
-	mEndOfFile(0),
 	mNumDroppedFrames(0),
 	mNumDisplayedFrames(0),
+	mTheoraStreams(0),
+	mVorbisStreams(0),
 	mAudioSkipSeekFlag(0),
+	mSeekPos(-1),
+	mDuration(-1),
+    mName(data_source->repr()),
+    mStride(usePower2Stride),
+    mAudioGain(1),
+    mOutputMode(output_mode),
+    mRequestedOutputMode(output_mode),
+    mAutoRestart(0),
+    mEndOfFile(0),
+    mRestarted(0),
 	mIteration(0),
-	mLastIteration(0),
-	mRestarted(0),
-	mStride(usePower2Stride)
+	mLastIteration(0)
 {
 	mAudioMutex=new TheoraMutex;
 
@@ -183,7 +183,7 @@ bool TheoraVideoClip::_readData()
 			if (mAudioInterface &&
 				ogg_page_serialno(&mInfo->OggPage) == mInfo->VorbisStreamState.serialno)
 			{
-				unsigned long g=(unsigned long) ogg_page_granulepos(&mInfo->OggPage);
+				ogg_int64_t g=ogg_page_granulepos(&mInfo->OggPage);
 				audio_time=(float) vorbis_granule_time(&mInfo->VorbisDSPState,g);
 				audio_eos=ogg_page_eos(&mInfo->OggPage);
 

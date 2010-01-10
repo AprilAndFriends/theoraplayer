@@ -5,8 +5,8 @@ For latest info, see http://libtheoraplayer.sourceforge.net/
 Copyright (c) 2008-2010 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License (LGPL) as published by the 
-Free Software Foundation; either version 2 of the License, or (at your option) 
+the terms of the GNU Lesser General Public License (LGPL) as published by the
+Free Software Foundation; either version 2 of the License, or (at your option)
 any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
@@ -39,14 +39,15 @@ protected:
 	bool mPaused;
 public:
 	TheoraTimer();
+	virtual ~TheoraTimer();
 
 	virtual float getTime();
 	/**
 	    \brief advance the time.
-		
+
 		If you're using another synronization system, eg. an audio track,
 		then you can ignore this call or use it to perform other updates.
-		
+
 		NOTE: this is called by TheoraVideoManager from the main thread
 	 */
 	virtual void update(float time_increase);
@@ -58,7 +59,7 @@ public:
 
 	/**
 	    \brief change the current time.
-		
+
 		if you're using another syncronization mechanism, make sure to adjust
 		the time offset there
 	 */

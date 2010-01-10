@@ -5,8 +5,8 @@ For latest info, see http://libtheoraplayer.sourceforge.net/
 Copyright (c) 2008-2010 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License (LGPL) as published by the 
-Free Software Foundation; either version 2 of the License, or (at your option) 
+the terms of the GNU Lesser General Public License (LGPL) as published by the
+Free Software Foundation; either version 2 of the License, or (at your option)
 any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
@@ -26,8 +26,9 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <string>
 #include "TheoraExport.h"
 #include "TheoraVideoClip.h"
-
+#ifdef _WIN32
 #pragma warning( disable: 4251 ) // MSVC++
+#endif
 // forward class declarations
 class TheoraWorkerThread;
 class TheoraMutex;
@@ -45,7 +46,7 @@ protected:
 
 	//! stores pointers to worker threads which are decoding video and audio
 	ThreadList mWorkerThreads;
-	//! stores pointers to created video clips		
+	//! stores pointers to created video clips
 	ClipList mClips;
 	int mDefaultNumPrecachedFrames;
 

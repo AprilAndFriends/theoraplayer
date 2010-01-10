@@ -42,7 +42,7 @@ public:
 	TheoraVideoClip* mClip;
 
 	TheoraAudioInterface(TheoraVideoClip* owner,int nChannels,int freq);
-	~TheoraAudioInterface();
+	virtual ~TheoraAudioInterface();
 
     //! A function that the TheoraVideoClip object calls once more audio packets are decoded
     /*!

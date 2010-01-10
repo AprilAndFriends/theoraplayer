@@ -79,13 +79,13 @@ class TheoraPlayerExport TheoraVideoClip
 	int mNumPrecachedFrames;
 	int mAudioSkipSeekFlag;
 
-	std::string mName;
-	int mWidth,mHeight,mStride;
+	float mSeekPos; //! stores desired seek position. next worker thread will do the seeking and reset this var to -1
 	float mDuration;
+    std::string mName;
+	int mWidth,mHeight,mStride;
 	unsigned long mNumFrames;
 
 	float mAudioGain; //! multiplier for audio samples. between 0 and 1
-	float mSeekPos; //! stores desired seek position. next worker thread will do the seeking and reset this var to -1
 	TheoraOutputMode mOutputMode,mRequestedOutputMode;
 	bool mAutoRestart;
 	bool mEndOfFile,mRestarted;

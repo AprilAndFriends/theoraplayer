@@ -5,8 +5,8 @@ For latest info, see http://libtheoraplayer.sourceforge.net/
 Copyright (c) 2008-2010 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License (LGPL) as published by the 
-Free Software Foundation; either version 2 of the License, or (at your option) 
+the terms of the GNU Lesser General Public License (LGPL) as published by the
+Free Software Foundation; either version 2 of the License, or (at your option)
 any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
@@ -35,6 +35,7 @@ class TheoraPlayerExport TheoraDataSource
 {
 public:
 
+    virtual ~TheoraDataSource();
 	/**
 		Reads nBytes bytes from data source and returns number of read bytes.
 		if function returns less bytes then nBytes, the system assumes EOF is reached.
@@ -62,7 +63,7 @@ class TheoraPlayerExport TheoraFileDataSource : public TheoraDataSource
 public:
 	TheoraFileDataSource(std::string filename);
 	~TheoraFileDataSource();
-	
+
 	int read(void* output,int nBytes);
 	void seek(unsigned long byte_index);
 	std::string repr() { return mFilename; }
@@ -77,13 +78,13 @@ public:
 */
 class TheoraPlayerExport TheoraMemoryFileDataSource : public TheoraDataSource
 {
-	unsigned char* mData;
 	std::string mFilename;
 	unsigned long mSize,mReadPointer;
+	unsigned char* mData;
 public:
 	TheoraMemoryFileDataSource(std::string filename);
 	~TheoraMemoryFileDataSource();
-	
+
 	int read(void* output,int nBytes);
 	void seek(unsigned long byte_index);
 	std::string repr() { return "MEM:"+mFilename; }
