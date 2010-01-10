@@ -1,5 +1,6 @@
 #include "TheoraException.h"
 #include "TheoraUtil.h"
+#include "TheoraVideoManager.h"
 #include <stdio.h>
 
 _TheoraGenericException::_TheoraGenericException(const std::string& errorText,std::string type,std::string file,int line)
@@ -24,5 +25,5 @@ std::string _TheoraGenericException::repr()
 
 void _TheoraGenericException::writeOutput()
 {
-	printf(("----------------\nException Error!\n\n"+repr()+"\n----------------").c_str());
+	th_writelog("----------------\nException Error!\n\n"+repr()+"\n----------------");
 }

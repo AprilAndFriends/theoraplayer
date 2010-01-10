@@ -24,6 +24,11 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "TheoraDataSource.h"
 #include "TheoraException.h"
 
+TheoraDataSource::~TheoraDataSource()
+{
+
+}
+
 TheoraFileDataSource::TheoraFileDataSource(std::string filename)
 {
 	mFilename=filename;
