@@ -5,8 +5,8 @@ For latest info, see http://libtheoraplayer.sourceforge.net/
 Copyright (c) 2008-2010 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License (LGPL) as published by the 
-Free Software Foundation; either version 2 of the License, or (at your option) 
+the terms of the GNU Lesser General Public License (LGPL) as published by the
+Free Software Foundation; either version 2 of the License, or (at your option)
 any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
@@ -29,7 +29,7 @@ COPYRIGHT INFO: The room 3D models and textures are licensed under the terms of 
 #include "../demo_basecode.h"
 #include "TheoraPlayer.h"
 #include "TheoraDataSource.h"
-#include "ObjModel.h"
+#include "../ObjModel.h"
 #include <math.h>
 
 unsigned int tex_id;
@@ -54,7 +54,7 @@ void draw()
 	{
 		unsigned char* data=f->getBuffer();
 		unsigned int n=clip->getWidth()*f->getHeight();
-	
+
 		r=g=b=0;
 		for (unsigned int i=0;i<n;i++)
 		{
@@ -67,10 +67,10 @@ void draw()
 		clip->popFrame();
 	}
 
-	
+
 	float w=clip->getWidth(),h=clip->getHeight();
 	float tw=nextPow2(w),th=nextPow2(h);
-	
+
 	glEnable(GL_TEXTURE_2D);
 	if (shader_on) enable_shader();
 	glColor3f(1,1,1);
@@ -81,7 +81,7 @@ void draw()
 	glTranslatef(0,0,-415);
 	drawTexturedQuad(-2*30,190,4*30,-3*25,w/tw,h/th);
 	glPopMatrix();
-	
+
 	if (shader_on) disable_shader();
 	glColor3f(0.2f+0.8f*(r/255.0f),
 		      0.2f+0.8f*(g/255.0f),
@@ -117,7 +117,7 @@ void update(float time_increase)
 void OnKeyPress(int key)
 {
 	if (key == ' ')
-		if (clip->isPaused()) clip->play(); else clip->pause();
+    { if (clip->isPaused()) clip->play(); else clip->pause(); }
 
 	if (key == 5) clip->setOutputMode(TH_RGB);
 	if (key == 6) clip->setOutputMode(TH_YUV);

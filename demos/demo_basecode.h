@@ -39,7 +39,9 @@ unsigned long GetTickCount()
 
 #include <string>
 #include "TheoraVideoManager.h"
+#ifdef _WIN32
 #pragma warning( disable: 4996 ) // MSVC++
+#endif
 extern std::string window_name;
 extern int window_w,window_h;
 
@@ -252,7 +254,7 @@ void display()
 		diff=0.05f; // prevent spikes (usually happen on app load)
 	update(diff);
 
-	static unsigned long fps_timer=time,fps_counter=0;
+	static unsigned int fps_timer=time,fps_counter=0;
 	if (t-fps_timer >= 250)
 	{
 		char title[512],debug[256]="";

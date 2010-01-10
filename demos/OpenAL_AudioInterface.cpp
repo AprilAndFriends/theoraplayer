@@ -33,7 +33,7 @@ short float2short(float f)
 }
 
 OpenAL_AudioInterface::OpenAL_AudioInterface(TheoraVideoClip* owner,int nChannels,int freq) :
-	TheoraAudioInterface(owner,nChannels,freq)
+	TheoraAudioInterface(owner,nChannels,freq), TheoraTimer()
 {
 	mMaxBuffSize=freq*mNumChannels*2;
 	mBuffSize=0;

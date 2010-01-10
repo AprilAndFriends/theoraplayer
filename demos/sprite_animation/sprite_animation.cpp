@@ -5,8 +5,8 @@ For latest info, see http://libtheoraplayer.sourceforge.net/
 Copyright (c) 2008-2010 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License (LGPL) as published by the 
-Free Software Foundation; either version 2 of the License, or (at your option) 
+the terms of the GNU Lesser General Public License (LGPL) as published by the
+Free Software Foundation; either version 2 of the License, or (at your option)
 any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
@@ -47,7 +47,7 @@ void draw()
 	if (f)
 	{
 		unsigned char* src=f->getBuffer();
-		int i,j,k,x,y,w=f->getWidth(),h=f->getHeight();
+		int i,j,k,x,y,w=f->getWidth();
 		for (y=0;y<300;y++)
 		{
 			for (x=0;x<203;x++)
@@ -65,10 +65,7 @@ void draw()
 		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,203,300,GL_RGBA,GL_UNSIGNED_BYTE,buffer);
 		clips[cClip]->popFrame();
 	}
-	
-	float w=clips[cClip]->getWidth(),h=clips[cClip]->getHeight();
-	float tw=nextPow2(w),th=nextPow2(h);
-	
+
 	glEnable(GL_TEXTURE_2D);
 	drawTexturedQuad(298,150,203,300,203.0f/256.0f,300.0f/512.0f);
 }

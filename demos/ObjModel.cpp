@@ -5,8 +5,8 @@ For latest info, see http://libtheoraplayer.sourceforge.net/
 Copyright (c) 2008-2010 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License (LGPL) as published by the 
-Free Software Foundation; either version 2 of the License, or (at your option) 
+the terms of the GNU Lesser General Public License (LGPL) as published by the
+Free Software Foundation; either version 2 of the License, or (at your option)
 any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
@@ -21,8 +21,11 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "ObjModel.h"
 #include <stdio.h>
 #include <vector>
-#include <windows.h> 
-#include <gl\gl.h>
+#ifdef _WIN32
+#include <windows.h>
+#endif
+#include <string.h>
+#include <GL/gl.h>
 
 struct ObjFace
 {
@@ -38,7 +41,7 @@ void ObjModel::load(std::string filename,unsigned int texture_id)
 {
 	mName=filename;
 	mTexture=texture_id;
-	
+
 	std::vector<ObjVertex> v,t;
 	std::vector<ObjFace> faces;
 	ObjVertex temp;
@@ -46,7 +49,7 @@ void ObjModel::load(std::string filename,unsigned int texture_id)
 	char line[512];
 
 	FILE* f=fopen(filename.c_str(),"r");
-	
+
 	while (fgets(line,512,f))
 	{
 		if (strncmp(line,"v  ",3) == 0)
@@ -91,7 +94,7 @@ void ObjModel::load(std::string filename,unsigned int texture_id)
 
 ObjModel::~ObjModel()
 {
-	if (!mVertices) free(mVertices);
+	if (!mVertices) delete [] mVertices;
 }
 
 void ObjModel::draw()
