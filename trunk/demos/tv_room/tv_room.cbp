@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="av_player" />
+		<Option title="tv_room" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="./av_player" prefix_auto="1" extension_auto="1" />
+				<Option output="./tv_room" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -15,11 +15,11 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add directory="../bin/Debug" />
+					<Add directory="../../bin/Debug" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/glut_player" prefix_auto="1" extension_auto="1" />
+				<Option output="./tv_room" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -28,7 +28,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add directory="../bin/Release" />
+					<Add directory="../../bin/Release" />
 				</Linker>
 			</Target>
 		</Build>
@@ -42,15 +42,20 @@
 			<Add library="libGL" />
 			<Add library="libGLU" />
 			<Add library="libglut" />
-			<Add library="libopenal" />
+			<Add library="libIL" />
+			<Add library="libILU" />
+			<Add library="libILUT" />
 		</Linker>
-		<Unit filename="../OpenAL_AudioInterface.cpp" />
-		<Unit filename="../OpenAL_AudioInterface.h" />
-		<Unit filename="av_player.cpp" />
+		<Unit filename="../ObjModel.cpp" />
+		<Unit filename="../ObjModel.h" />
 		<Unit filename="../demo_basecode.h" />
+		<Unit filename="tv_room.cpp" />
 		<Extensions>
 			<code_completion />
-			<debugger />
+			<debugger>
+				<search_path add="../../bin" />
+				<search_path add="../../bin/Debug" />
+			</debugger>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

@@ -5,8 +5,8 @@ For latest info, see http://libtheoraplayer.sourceforge.net/
 Copyright (c)2008-2010 Kresimir Spes (kreso@cateia.com)
 
 This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU Lesser General Public License (LGPL) as published by the 
-Free Software Foundation; either version 2 of the License, or (at your option) 
+the terms of the GNU Lesser General Public License (LGPL) as published by the
+Free Software Foundation; either version 2 of the License, or (at your option)
 any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
@@ -40,10 +40,10 @@ void draw()
 		clip->popFrame();
 	}
 
-	
+
 	float w=clip->getWidth(),h=clip->getHeight();
 	float tw=nextPow2(w),th=nextPow2(h);
-	
+
 	glEnable(GL_TEXTURE_2D);
 	if (shader_on) enable_shader();
 	drawTexturedQuad(0,0,800,600,w/tw,h/th);
@@ -72,7 +72,7 @@ void update(float time_increase)
 void OnKeyPress(int key)
 {
 	if (key == ' ')
-		if (clip->isPaused()) clip->play(); else clip->pause();
+    { if (clip->isPaused()) clip->play(); else clip->pause(); }
 
 	if (key == 5) clip->setOutputMode(TH_RGB);
 	if (key == 6) clip->setOutputMode(TH_YUV);
