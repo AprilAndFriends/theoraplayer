@@ -110,3 +110,13 @@ int TheoraFrameQueue::getUsedCount()
 	mMutex.unlock();
 	return n;
 }
+
+int TheoraFrameQueue::getReadyCount()
+{
+	mMutex.lock();
+	int n=0;
+	foreach_l(TheoraVideoFrame*,mQueue)
+		if ((*it)->mReady) n++;
+	mMutex.unlock();
+	return n;
+}

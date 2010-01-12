@@ -123,7 +123,15 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 {
 	if (clip)
 	{
+		th_writelog("Destroying video clip: "+clip->getName());
 		mWorkMutex->lock();
+		bool reported=0;
+		while (clip->mAssignedWorkerThread)
+		{
+			if (!reported) { th_writelog("Waiting for WorkerThread to finish decoding in order to destroy"); reported=1; }
+			_psleep(1);
+		}
+		if (reported) th_writelog("WorkerThread done, destroying..");
 		foreach(TheoraVideoClip*,mClips)
 			if ((*it) == clip)
 			{
@@ -131,6 +139,7 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 				break;
 			}
 		delete clip;
+		th_writelog("Destroyed video.");
 		mWorkMutex->unlock();
 	}
 }

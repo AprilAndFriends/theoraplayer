@@ -36,6 +36,8 @@ public:
 	TheoraWorkerThread();
 	~TheoraWorkerThread();
 
+	TheoraVideoClip* getAssignedClip() { return mClip; }
+
     //! Main Thread Body - do not call directly!
 	void executeThread();
 };

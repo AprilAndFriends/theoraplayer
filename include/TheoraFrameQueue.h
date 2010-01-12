@@ -49,8 +49,11 @@ public:
 	*/
 	TheoraVideoFrame* getFirstAvailableFrame();
 
-	//! return the number of ready frames
+	//! return the number of used (not ready) frames
 	int getUsedCount();
+
+	//! return the number of ready frames
+	int getReadyCount();
 
 	/**
 	    \brief remove the first available frame from the queue.
