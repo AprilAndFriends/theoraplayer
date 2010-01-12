@@ -258,7 +258,11 @@ void TheoraVideoClip::decodeNextFrame()
 		}
 		else
 		{
-			if (!_readData()) frame->mInUse=0;
+			if (!_readData())
+			{
+				frame->mInUse=0;
+				return;
+			}
 		}
 	}
 }
@@ -334,6 +338,16 @@ void TheoraVideoClip::update(float time_increase)
 		}
 		else return;
 	}
+}
+
+float TheoraVideoClip::updateToNextFrame()
+{
+	TheoraVideoFrame* f=mFrameQueue->getFirstAvailableFrame();
+	if (!f) return 0;
+
+	float time=f->mTimeToDisplay-mTimer->getTime();
+	update(time);
+	return time;
 }
 
 void TheoraVideoClip::popFrame()
@@ -653,7 +667,7 @@ void TheoraVideoClip::setNumPrecachedFrames(int n)
 
 int TheoraVideoClip::getNumReadyFrames()
 {
-	return mFrameQueue->getUsedCount();
+	return mFrameQueue->getReadyCount();
 }
 
 float TheoraVideoClip::getDuration()

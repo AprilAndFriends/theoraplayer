@@ -154,6 +154,13 @@ public:
 
 	//! advance time. TheoraVideoManager calls this
 	void update(float time_increase);
+	/**
+	    \brief update timer to the display time of the next frame
+
+		useful if you want to grab frames instead of regular display
+		\return time advanced. 0 if no frames are ready
+	*/
+	float updateToNextFrame();
 
 	/**
 	    \brief pop the frame from the front of the FrameQueue
