@@ -59,7 +59,7 @@ OpenAL_AudioInterface::~OpenAL_AudioInterface()
 
 void OpenAL_AudioInterface::insertData(float** data,int nSamples)
 {
-	printf("got %d bytes, %d buffers queued\n",nSamples,mBufferQueue.size());
+	printf("got %d bytes, %d buffers queued\n",nSamples,(int)mBufferQueue.size());
 	for (int i=0;i<nSamples;i++)
 	{
 		if (mBuffSize < mMaxBuffSize)
