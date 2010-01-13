@@ -23,11 +23,23 @@ http://www.gnu.org/copyleft/lesser.txt.
 #endif
 #include <string.h>
 #include <stdio.h>
+
+#ifndef __APPLE__
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
+#else
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#include <GLUT/glut.h>
+#endif
+
+
 #ifndef _WIN32
+#ifndef __APPLE__
 #include <GL/glx.h>
+#endif
+
 #include <sys/time.h>
 unsigned long GetTickCount()
 {
@@ -50,6 +62,14 @@ float mx=0,my=0;
 bool shader_on=0;
 #define USE_SHADERS
 #ifdef USE_SHADERS
+
+#if defined(_WIN32)
+#define pglGetProcAddress(func) wglGetProcAddress(func)
+#elif defined(__APPLE__)
+#define pglGetProcAddress(func) glXGetProcAddress((GLubyte*) func)
+#endif
+
+#ifndef __APPLE__
 #include <GL/glext.h>
 PFNGLCREATEPROGRAMPROC glCreateProgram=0;
 PFNGLCREATESHADERPROC glCreateShader=0;
@@ -58,6 +78,11 @@ PFNGLSHADERSOURCEPROC glShaderSource=0;
 PFNGLUSEPROGRAMPROC glUseProgram=0;
 PFNGLCOMPILESHADERPROC glCompileShader=0;
 PFNGLATTACHSHADERPROC glAttachShader=0;
+
+#else
+#include <OpenGL/glext.h>
+#endif
+
 unsigned int program,shader;
 #endif
 
@@ -131,24 +156,14 @@ void toggle_YUV2RGB_shader()
 			printf("Unable to turn on yuv2rgb shader, your OpenGL driver doesn't support GLSL shaders!\n");
 			return;
 		}
-
-#ifdef _WIN32
-		glCreateProgram=(PFNGLCREATEPROGRAMPROC) wglGetProcAddress("glCreateProgram");
-		glCreateShader = (PFNGLCREATESHADERPROC) wglGetProcAddress("glCreateShader");
-		glLinkProgram=(PFNGLLINKPROGRAMPROC) wglGetProcAddress("glLinkProgram");
-		glShaderSource=(PFNGLSHADERSOURCEPROC) wglGetProcAddress("glShaderSource");
-		glUseProgram=(PFNGLUSEPROGRAMPROC) wglGetProcAddress("glUseProgram");
-		glCompileShader=(PFNGLCOMPILESHADERPROC) wglGetProcAddress("glCompileShader");
-		glAttachShader=(PFNGLATTACHSHADERPROC) wglGetProcAddress("glAttachShader");
-#else
-		glCreateProgram=(PFNGLCREATEPROGRAMPROC) glXGetProcAddress((GLubyte*) "glCreateProgram");
-		glCreateShader = (PFNGLCREATESHADERPROC) glXGetProcAddress((GLubyte*) "glCreateShader");
-		glLinkProgram=(PFNGLLINKPROGRAMPROC) glXGetProcAddress((GLubyte*) "glLinkProgram");
-		glShaderSource=(PFNGLSHADERSOURCEPROC) glXGetProcAddress((GLubyte*) "glShaderSource");
-		glUseProgram=(PFNGLUSEPROGRAMPROC) glXGetProcAddress((GLubyte*) "glUseProgram");
-		glCompileShader=(PFNGLCOMPILESHADERPROC) glXGetProcAddress((GLubyte*) "glCompileShader");
-		glAttachShader=(PFNGLATTACHSHADERPROC) glXGetProcAddress((GLubyte*) "glAttachShader");
-
+#ifndef __APPLE__
+		glCreateProgram=(PFNGLCREATEPROGRAMPROC) pglGetProcAddress("glCreateProgram");
+		glCreateShader = (PFNGLCREATESHADERPROC) pglGetProcAddress("glCreateShader");
+		glLinkProgram=(PFNGLLINKPROGRAMPROC) pglGetProcAddress("glLinkProgram");
+		glShaderSource=(PFNGLSHADERSOURCEPROC) pglGetProcAddress("glShaderSource");
+		glUseProgram=(PFNGLUSEPROGRAMPROC) pglGetProcAddress("glUseProgram");
+		glCompileShader=(PFNGLCOMPILESHADERPROC) pglGetProcAddress("glCompileShader");
+		glAttachShader=(PFNGLATTACHSHADERPROC) pglGetProcAddress("glAttachShader");
 #endif
 		const char*
 		shader_code="uniform sampler2D diffuseMap;\
