@@ -77,7 +77,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="libtheoraplayer.lib glut32.lib"
+				AdditionalDependencies="libtheoraplayer_d.lib glut32.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"

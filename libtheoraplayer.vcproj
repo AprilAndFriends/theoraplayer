@@ -78,7 +78,7 @@
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
 				AdditionalDependencies="libtheora.lib libogg.lib libvorbis.lib"
-				OutputFile=".\bin\Debug\libtheoraplayer.dll"
+				OutputFile=".\bin\Debug\libtheoraplayer_d.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="lib"
@@ -87,7 +87,7 @@
 				ProgramDatabaseFile=".\bin\Debug\libtheoraplayer.pdb"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary=".\lib\libtheoraplayer.lib"
+				ImportLibrary=".\lib\libtheoraplayer_d.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -324,10 +324,6 @@
 			</File>
 			<File
 				RelativePath=".\src\TheoraDataSource.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\TheoraDLLmain.cpp"
 				>
 			</File>
 			<File
