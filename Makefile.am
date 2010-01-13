@@ -1,5 +1,5 @@
 SUBDIRS=src include
 all-am:
-	cp -R src/.libs ./bin
+	-cp -Rf src/.libs ./bin
 clean-am:
 	-rm -rf bin

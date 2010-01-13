@@ -58,8 +58,12 @@ void _decodeRGB(th_img_plane* yuv,unsigned char* out,int stride,int nBytes)
 				gUV  = GUTable[cu] + GVTable[cv];
 				bU   = BUTable[cu];
 			}
-			else { uSrc++; vSrc++; }
-
+			else 
+			{ 
+				uSrc++; 
+				vSrc++; 
+			}
+			
 			rgbY=YTable[*ySrc];
 			out[0] = CLIP_RGB_COLOR((rgbY + rV ) >> 13);
 			out[1] = CLIP_RGB_COLOR((rgbY - gUV) >> 13);
@@ -134,7 +138,7 @@ void _decodeYUV(th_img_plane* yuv,unsigned char* out,int stride,int nBytes)
 	              *out2=out+stride;
 
 	stride+=stride-yuv[0].width*nBytes;
-
+	
 	for (y=0;y<yuv[0].height;y+=2)
 	{
 		for (yLineEnd=ySrc+yuv[0].width,t=0;ySrc != yLineEnd;ySrc++,out+=nBytes,out2+=nBytes,t=!t)
@@ -237,7 +241,7 @@ void createYUVtoRGBtables()
 //        b = 1.164*(*ySrc - 16)                   + 2.018*(cu - 128);
 //        g = 1.164*(*ySrc - 16) - 0.813*(cv - 128) - 0.391*(cu - 128);
     double scale = 1L << 13, temp;
-
+	
 	for (int i = 0; i < 256; i++)
 	{
 		temp = i - 128;
