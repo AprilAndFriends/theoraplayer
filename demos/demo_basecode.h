@@ -306,7 +306,10 @@ void reshape(int w,int h)
 void keyboard(unsigned char key,int x,int y)
 {
     if (key == 27) // esc
-        throw "Exit Requested";
+    {
+        destroy();
+        exit(0);
+    }
     else OnKeyPress(key);
 }
 
