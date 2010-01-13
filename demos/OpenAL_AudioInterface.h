@@ -25,8 +25,13 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "TheoraVideoClip.h"
 #include "TheoraTimer.h"
 
-#include "AL/al.h"
-#include "AL/alc.h"
+#ifndef __APPLE__
+#include <AL/al.h>
+#include <AL/alc.h>
+#else
+#include <OpenAL/al.h>
+#include <OpenAL/alc.h>
+#endif
 #include <queue>
 
 class OpenAL_AudioInterface : public TheoraAudioInterface, TheoraTimer
