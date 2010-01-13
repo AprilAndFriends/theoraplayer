@@ -25,7 +25,11 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include <windows.h>
 #endif
 #include <string.h>
+#ifndef __APPLE__
 #include <GL/gl.h>
+#else
+#include <OpenGL/gl.h>
+#endif
 
 struct ObjFace
 {
