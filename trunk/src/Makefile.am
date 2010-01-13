@@ -6,9 +6,6 @@ libtheoraplayer_la_SOURCES = \
 	TheoraFrameQueue.cpp		TheoraVideoClip.cpp		TheoraWorkerThread.cpp \
 	TheoraVideoFrame.cpp		TheoraAsync.cpp			TheoraDataSource.cpp \
 	TheoraException.cpp			TheoraUtil.cpp
-libtheoraplayer_la_LDFLAGS=-module -avoid-version
-if DARWIN
-libtheoraplayer_la_LDFLAGS += -shrext .bundle
-endif DARWIN
+libtheoraplayer_la_LDFLAGS= #-module -avoid-version
 
 
