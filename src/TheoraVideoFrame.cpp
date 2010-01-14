@@ -31,11 +31,11 @@ http://www.gnu.org/copyleft/lesser.txt.
 // this is the bitwise version of the above code, twice as fast!
 #define CLIP_RGB_COLOR(x) ((x & 0xFFFFFF00) == 0 ? x : (x & 0x80000000 ? 0 : 255))
 
-unsigned int YTable [256];
-unsigned int BUTable[256];
-unsigned int GUTable[256];
-unsigned int GVTable[256];
-unsigned int RVTable[256];
+signed int YTable [256];
+signed int BUTable[256];
+signed int GUTable[256];
+signed int GVTable[256];
+signed int RVTable[256];
 
 void _decodeRGB(th_img_plane* yuv,unsigned char* out,int stride,int nBytes)
 {
@@ -246,10 +246,10 @@ void createYUVtoRGBtables()
 	{
 		temp = i - 128;
 
-		YTable[i]  = (unsigned int)((1.164 * scale + 0.5) * (i - 16));	//Calc Y component
-		RVTable[i] = (unsigned int)((1.596 * scale + 0.5) * temp);		//Calc R component
-		GUTable[i] = (unsigned int)((0.391 * scale + 0.5) * temp);		//Calc G u & v components
-		GVTable[i] = (unsigned int)((0.813 * scale + 0.5) * temp);
-		BUTable[i] = (unsigned int)((2.018 * scale + 0.5) * temp);		//Calc B component
+		YTable[i]  = (signed int)((1.164 * scale + 0.5) * (i - 16));	//Calc Y component
+		RVTable[i] = (signed int)((1.596 * scale + 0.5) * temp);		//Calc R component
+		GUTable[i] = (signed int)((0.391 * scale + 0.5) * temp);		//Calc G u & v components
+		GVTable[i] = (signed int)((0.813 * scale + 0.5) * temp);
+		BUTable[i] = (signed int)((2.018 * scale + 0.5) * temp);		//Calc B component
 	}
 }
