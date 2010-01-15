@@ -24,7 +24,11 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "TheoraVideoClip.h"
 
 // clips a value between [0,255] using fast bitwise operations
+#ifndef __BIG_ENDIAN__
 #define CLIP_RGB_COLOR(x) ((x & 0xFFFFFF00) == 0 ? x : (x & 0x80000000 ? 0 : 255))
+#else
+#define CLIP_RGB_COLOR(x) ((x & 0x00FFFFFF) == 0 ? x : (x & 0x00000080 ? 0 : 255))
+#endif
 
 int YTable [256];
 int BUTable[256];
@@ -58,16 +62,26 @@ void _decodeRGB(th_img_plane* yuv,unsigned char* out,int stride,int nBytes)
 				uSrc++; 
 				vSrc++; 
 			}
-			
-			rgbY=YTable[*ySrc];
-			out[0] = CLIP_RGB_COLOR((rgbY + rV ) >> 13);
-			out[1] = CLIP_RGB_COLOR((rgbY - gUV) >> 13);
-			out[2] = CLIP_RGB_COLOR((rgbY + bU ) >> 13);
 
+			#ifndef __BIG_ENDIAN__
+			#define R 0
+			#define G 1
+			#define B 2
+			#else
+			#define R 2
+			#define G 1
+			#define B 0
+			#endif			
+
+			rgbY=YTable[*ySrc];
+			out[R] = CLIP_RGB_COLOR((rgbY + rV ) >> 13);
+			out[G] = CLIP_RGB_COLOR((rgbY - gUV) >> 13);
+			out[B] = CLIP_RGB_COLOR((rgbY + bU ) >> 13);
+			
 			rgbY=YTable[*(ySrc+yuv[0].stride)];
-			out2[0] = CLIP_RGB_COLOR((rgbY + rV ) >> 13);
-			out2[1] = CLIP_RGB_COLOR((rgbY - gUV) >> 13);
-			out2[2] = CLIP_RGB_COLOR((rgbY + bU ) >> 13);
+			out2[R] = CLIP_RGB_COLOR((rgbY + rV ) >> 13);
+			out2[G] = CLIP_RGB_COLOR((rgbY - gUV) >> 13);
+			out2[B] = CLIP_RGB_COLOR((rgbY + bU ) >> 13);
 		}
 		out+=stride; out2+=stride;
 		ySrc+=yuv[0].stride*2-yuv[0].width;

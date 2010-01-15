@@ -1,4 +1,4 @@
-To build demos under MacOSX, after installing the lib itself, do this:
+#To build demos under MacOSX, after installing the lib itself, do this:
 
 export MACOSX_DEPLOYMENT_TARGET=10.4CFLAGS="-arch i386 -arch ppc -mmacosx-version-min=10.4" CXXFLAGS="-arch i386 -arch ppc -mmacosx-version-min=10.4" LDFLAGS="-ltheoraplayer -framework OpenAL -framework OpenGL -framework GLUT -arch i386 -arch ppc -mmacosx-version-min=10.4"; export CFLAGS; export CXXFLAG
 S; export LDFLAGS
@@ -8,5 +8,3 @@ make
 
 
 
-As of Jan 13, following demos have makefiles:
-* glut_player
