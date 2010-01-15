@@ -349,7 +349,7 @@ int main(int argc,char** argv)
 #else
 	glutInitDisplayMode( GLUT_DOUBLE|GLUT_RGBA);
 #endif
-	glutInitWindowPosition(0,0);
+	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-window_w)/2,(glutGet(GLUT_SCREEN_HEIGHT)-window_h)/2);
 	glutInitWindowSize(window_w,window_h);
 	glutCreateWindow(window_name.c_str());
 	glShadeModel(GL_SMOOTH);
