@@ -23,19 +23,14 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "TheoraVideoFrame.h"
 #include "TheoraVideoClip.h"
 
-
-//#define TH_MAX( a, b ) ((a > b) ? a : b)
-//#define TH_MIN( a, b ) ((a < b) ? a : b)
-//#define CLIP_RGB_COLOR( rgb_color_test ) TH_MAX( TH_MIN(rgb_color_test, 255), 0 )
-
-// this is the bitwise version of the above code, twice as fast!
+// clips a value between [0,255] using fast bitwise operations
 #define CLIP_RGB_COLOR(x) ((x & 0xFFFFFF00) == 0 ? x : (x & 0x80000000 ? 0 : 255))
 
-signed int YTable [256];
-signed int BUTable[256];
-signed int GUTable[256];
-signed int GVTable[256];
-signed int RVTable[256];
+int YTable [256];
+int BUTable[256];
+int GUTable[256];
+int GVTable[256];
+int RVTable[256];
 
 void _decodeRGB(th_img_plane* yuv,unsigned char* out,int stride,int nBytes)
 {
@@ -173,16 +168,16 @@ void decodeAYUV(th_img_plane* yuv,unsigned char* out,int stride)
 }
 
 void (*conversion_functions[])(th_img_plane*,unsigned char*,int)={0,
-    decodeRGB,//TH_RGB
-	decodeRGBA,//TH_RGBA
-	decodeARGB,//TH_ARGB
-	decodeGrey,//TH_GREY
+    decodeRGB,  //TH_RGB
+	decodeRGBA, //TH_RGBA
+	decodeARGB, //TH_ARGB
+	decodeGrey, //TH_GREY
 	decodeGrey3,//TH_GREY3
 	decodeGreyX,//TH_GREY3X
 	decodeXGrey,//TH_XGREY3
-	decodeYUV,//TH_YUV
-	decodeYUVA,//TH_YUVX
-	decodeAYUV,//TH_XYUV
+	decodeYUV,  //TH_YUV
+	decodeYUVA, //TH_YUVX
+	decodeAYUV, //TH_XYUV
 };
 // --------------------------------------------------------------
 TheoraVideoFrame::TheoraVideoFrame(TheoraVideoClip* parent)
@@ -237,19 +232,22 @@ void createYUVtoRGBtables()
 {
 	//used to bring the table into the high side (scale up) so we
 	//can maintain high precision and not use floats (FIXED POINT)
+
+// this is the pseudocode for yuv->rgb conversion
 //        r = 1.164*(*ySrc - 16) + 1.596*(cv - 128);
 //        b = 1.164*(*ySrc - 16)                   + 2.018*(cu - 128);
 //        g = 1.164*(*ySrc - 16) - 0.813*(cv - 128) - 0.391*(cu - 128);
+
     double scale = 1L << 13, temp;
 	
 	for (int i = 0; i < 256; i++)
 	{
 		temp = i - 128;
 
-		YTable[i]  = (signed int)((1.164 * scale + 0.5) * (i - 16));	//Calc Y component
-		RVTable[i] = (signed int)((1.596 * scale + 0.5) * temp);		//Calc R component
-		GUTable[i] = (signed int)((0.391 * scale + 0.5) * temp);		//Calc G u & v components
-		GVTable[i] = (signed int)((0.813 * scale + 0.5) * temp);
-		BUTable[i] = (signed int)((2.018 * scale + 0.5) * temp);		//Calc B component
+		YTable[i]  = (int)((1.164 * scale + 0.5) * (i - 16));	//Calc Y component
+		RVTable[i] = (int)((1.596 * scale + 0.5) * temp);		//Calc R component
+		GUTable[i] = (int)((0.391 * scale + 0.5) * temp);		//Calc G u & v components
+		GVTable[i] = (int)((0.813 * scale + 0.5) * temp);
+		BUTable[i] = (int)((2.018 * scale + 0.5) * temp);		//Calc B component
 	}
 }
