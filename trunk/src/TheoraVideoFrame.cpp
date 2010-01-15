@@ -24,11 +24,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "TheoraVideoClip.h"
 
 // clips a value between [0,255] using fast bitwise operations
-#ifndef __BIG_ENDIAN__
 #define CLIP_RGB_COLOR(x) ((x & 0xFFFFFF00) == 0 ? x : (x & 0x80000000 ? 0 : 255))
-#else
-#define CLIP_RGB_COLOR(x) ((x & 0x00FFFFFF) == 0 ? x : (x & 0x00000080 ? 0 : 255))
-#endif
 
 int YTable [256];
 int BUTable[256];
@@ -63,15 +59,9 @@ void _decodeRGB(th_img_plane* yuv,unsigned char* out,int stride,int nBytes)
 				vSrc++; 
 			}
 
-			#ifndef __BIG_ENDIAN__
 			#define R 0
 			#define G 1
 			#define B 2
-			#else
-			#define R 2
-			#define G 1
-			#define B 0
-			#endif			
 
 			rgbY=YTable[*ySrc];
 			out[R] = CLIP_RGB_COLOR((rgbY + rV ) >> 13);
