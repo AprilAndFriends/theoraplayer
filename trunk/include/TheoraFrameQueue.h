@@ -78,6 +78,11 @@ public:
 	void setSize(int n);
 	//! return the size of the queue
 	int getSize();
+
+	//! lock the queue's mutex manually
+	void lock();
+	//! unlock the queue's mutex manually
+	void unlock();
 };
 
 #endif
