@@ -8,7 +8,7 @@
     <File Name="../ObjModel.cpp"/>
     <File Name="../ObjModel.h"/>
   </VirtualDirectory>
-  <Dependencies Name="Release">
+  <Dependencies Name="Debug">
     <Project Name="libtheoraplayer"/>
   </Dependencies>
   <Settings Type="Executable">
@@ -16,7 +16,10 @@
       <Compiler Options="-g" Required="yes" PreCompiledHeader="">
         <IncludePath Value="."/>
       </Compiler>
-      <Linker Options="" Required="yes"/>
+      <Linker Options="" Required="yes">
+        <LibraryPath Value="../../bin/Debug"/>
+        <Library Value="libtheoraplayer_d"/>
+      </Linker>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName).exe" IntermediateDirectory="../../bin/Debug" Command="../../bin/Debug/$(ProjectName).exe" CommandArguments="" WorkingDirectory="$(ProjectPath)" PauseExecWhenProcTerminates="yes"/>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
@@ -44,7 +47,10 @@
       <Compiler Options="" Required="yes" PreCompiledHeader="">
         <IncludePath Value="."/>
       </Compiler>
-      <Linker Options="-O2" Required="yes"/>
+      <Linker Options="-O2" Required="yes">
+        <LibraryPath Value="../../bin/Release"/>
+        <Library Value="libtheoraplayer"/>
+      </Linker>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName).exe" IntermediateDirectory="../../bin/Release" Command="../../bin/Release/$(ProjectName).exe" CommandArguments="" WorkingDirectory="$(ProjectPath)" PauseExecWhenProcTerminates="yes"/>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
@@ -74,8 +80,6 @@
       </Compiler>
       <Linker Options="">
         <LibraryPath Value="../../lib"/>
-        <LibraryPath Value="../../bin/Debug"/>
-        <Library Value="libtheoraplayer_d"/>
         <Library Value="libOpenGL32"/>
         <Library Value="libglut32"/>
         <Library Value="libglu32"/>
@@ -87,7 +91,7 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
   </Settings>
-  <Dependencies Name="Debug">
+  <Dependencies Name="Release">
     <Project Name="libtheoraplayer"/>
   </Dependencies>
 </CodeLite_Project>
