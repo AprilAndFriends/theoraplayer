@@ -22,7 +22,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #define _theoraVideoExport_H
 
 #ifdef _WIN32
-#ifdef THEORAVIDEO_PLUGIN_EXPORTS
+#ifdef THEORAVIDEO_EXPORTS
 #define TheoraPlayerExport __declspec(dllexport)
 #else
 #define TheoraPlayerExport __declspec(dllimport)

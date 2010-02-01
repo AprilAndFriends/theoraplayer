@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Workspace Name="libtheoraplayer_codelite" Database="./libtheoraplayer_codelite.tags">
+  <Project Name="libtheoraplayer_codelite" Path="libtheoraplayer_codelite.project" Active="No"/>
+  <Project Name="glut_player" Path="demos/glut_player/glut_player.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Project Name="libtheoraplayer_codelite" ConfigName="Debug"/>
+      <Project Name="glut_player" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Project Name="libtheoraplayer_codelite" ConfigName="Release"/>
+      <Project Name="glut_player" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>
