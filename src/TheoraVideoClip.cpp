@@ -242,7 +242,7 @@ void TheoraVideoClip::decodeNextFrame()
 			if (time < mTimer->getTime() && !mRestarted)
 			{
 #ifdef _DEBUG
-				th_writelog("pre-dropped frame "+str(frame_number));
+				th_writelog(mName+": pre-dropped frame "+str(frame_number));
 #endif
 				mNumDisplayedFrames++;
 				mNumDroppedFrames++;
@@ -299,9 +299,13 @@ void TheoraVideoClip::_restart()
 
 void TheoraVideoClip::restart()
 {
+	bool end=mEndOfFile;
+	mEndOfFile=1; //temp, to prevent threads to decode while restarting
+	while (mAssignedWorkerThread) _psleep(1); // wait for assigned thread to do it's work
 	_restart();
 	mTimer->seek(0);
 	mFrameQueue->clear();
+	mEndOfFile=0;
 }
 
 void TheoraVideoClip::update(float time_increase)
@@ -370,7 +374,7 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 		{
 			if (mRestarted && frame->mTimeToDisplay < 2) return 0;
 #ifdef _DEBUG
-			th_writelog("dropped frame "+str(frame->getFrameNumber()));
+			th_writelog(mName+": dropped frame "+str(frame->getFrameNumber()));
 #endif
 			mNumDroppedFrames++;
 			mNumDisplayedFrames++;
@@ -772,7 +776,9 @@ void TheoraVideoClip::doSeek()
 
 	if (targetFrame == 0)
 	{
-		restart();
+		_restart();
+		mTimer->seek(0);
+		mFrameQueue->clear();
 		return;
 	}
 

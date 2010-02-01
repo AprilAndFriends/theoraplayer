@@ -120,3 +120,12 @@ int TheoraFrameQueue::getReadyCount()
 	mMutex.unlock();
 	return n;
 }
+void TheoraFrameQueue::lock()
+{
+	mMutex.lock();
+}
+
+void TheoraFrameQueue::unlock()
+{
+	mMutex.unlock();
+}
