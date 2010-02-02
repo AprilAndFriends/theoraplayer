@@ -306,6 +306,9 @@ void TheoraVideoClip::restart()
 	mTimer->seek(0);
 	mFrameQueue->clear();
 	mEndOfFile=0;
+	mIteration=0;
+	mRestarted=0;
+	mSeekPos=-1;
 }
 
 void TheoraVideoClip::update(float time_increase)
