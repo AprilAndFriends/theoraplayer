@@ -73,6 +73,12 @@ void OnKeyPress(int key)
 {
 	if (key == ' ')
     { if (clip->isPaused()) clip->play(); else clip->pause(); }
+	if (key == 114)
+	{
+		clip->restart();
+		clip->pause();
+		clip->play();
+	}
 
 	if (key == 5) clip->setOutputMode(TH_RGB);
 	if (key == 6) clip->setOutputMode(TH_YUV);
