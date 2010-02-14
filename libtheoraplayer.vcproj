@@ -180,7 +180,7 @@
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="lib"
 				ModuleDefinitionFile=""
-				ProgramDatabaseFile=".\..\bin\Release/Plugin_TheoraVideoSystem.pdb"
+				ProgramDatabaseFile=".\bin\Release\libtheoraplayer.pdb"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				ImportLibrary=".\lib\libtheoraplayer.lib"

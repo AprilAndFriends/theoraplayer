@@ -82,10 +82,10 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
   </Settings>
-  <Dependencies Name="Release">
+  <Dependencies Name="Debug">
     <Project Name="libtheoraplayer"/>
   </Dependencies>
-  <Dependencies Name="Debug">
+  <Dependencies Name="Release">
     <Project Name="libtheoraplayer"/>
   </Dependencies>
 </CodeLite_Project>
