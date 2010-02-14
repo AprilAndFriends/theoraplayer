@@ -35,13 +35,19 @@ void theora_writelog(std::string output)
 	printf("%s\n",output.c_str());
 }
 
+void (*g_LogFuction)(std::string)=theora_writelog;
 
-TheoraVideoManager* TheoraVideoManager::getSingletonPtr(void)
+void TheoraVideoManager::setLogFunction(void (*fn)(std::string))
+{
+	g_LogFuction=fn;
+}
+
+TheoraVideoManager* TheoraVideoManager::getSingletonPtr()
 {
     return g_ManagerSingleton;
 }
 
-TheoraVideoManager& TheoraVideoManager::getSingleton(void)
+TheoraVideoManager& TheoraVideoManager::getSingleton()
 {  
     return *g_ManagerSingleton;  
 }
@@ -50,7 +56,8 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 	mDefaultNumPrecachedFrames(16)
 {
 	g_ManagerSingleton=this;
-	mLogFuction=theora_writelog;
+
+	logMessage("Initializing Theora Playback Library ("+this->getVersionString()+")");
 
 	mAudioFactory = NULL;
 	mWorkMutex=new TheoraMutex();
@@ -73,7 +80,7 @@ TheoraVideoManager::~TheoraVideoManager()
 
 void TheoraVideoManager::logMessage(std::string msg)
 {
-	mLogFuction(msg);
+	g_LogFuction(msg);
 }
 
 TheoraVideoClip* TheoraVideoManager::getVideoClipByName(std::string name)

@@ -361,7 +361,6 @@ int main(int argc,char** argv)
 	ilutRenderer(ILUT_OPENGL);
 #endif
 	init();
-	printf("---\nTheora Playback library version %s\n---\n",TheoraVideoManager::getSingleton().getVersionString().c_str());
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	glutKeyboardFunc(keyboard);

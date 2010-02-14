@@ -44,13 +44,16 @@ enum TheoraOutputMode
 	TH_RGB=1,
 	TH_RGBA=2,
 	TH_ARGB=3,
-	TH_GREY=4,
-	TH_GREY3=5, // RGB but all three components are luma
-	TH_GREY3A=6,
-	TH_AGREY3=7,
-	TH_YUV=8,
-	TH_YUVA=9,
-	TH_AYUV=10
+	TH_BGR=4,
+	TH_BGRA=5,
+	TH_ABGR=6,
+	TH_GREY=7,
+	TH_GREY3=8, // RGB but all three components are luma
+	TH_GREY3A=9,
+	TH_AGREY3=10,
+	TH_YUV=11,
+	TH_YUVA=12,
+	TH_AYUV=13
 };
 
 /**

@@ -53,8 +53,6 @@ protected:
 	TheoraMutex* mWorkMutex;
 	TheoraAudioInterfaceFactory* mAudioFactory;
 
-	void (*mLogFuction)(std::string);
-
 	void createWorkerThreads(int n);
 	void destroyWorkerThreads();
 
@@ -67,9 +65,9 @@ public:
 	virtual ~TheoraVideoManager();
 
 	//! get the global reference to the manager instance
-	static TheoraVideoManager& getSingleton(void);
+	static TheoraVideoManager& getSingleton();
 	//! get the global pointer to the manager instance
-	static TheoraVideoManager* getSingletonPtr(void);
+	static TheoraVideoManager* getSingletonPtr();
 
 	//! search registered clips by name
 	TheoraVideoClip* getVideoClipByName(std::string name);
@@ -99,7 +97,7 @@ public:
 		This way you can integrate libtheoraplayer's log messages in your own
 		logging system, prefix them, mute them or whatever you want
 	 */
-	void setLogFunction(void (*fn)(std::string)) { mLogFuction=fn; }
+	static void setLogFunction(void (*fn)(std::string));
 
 	//! get nicely formated version string
 	std::string getVersionString();
