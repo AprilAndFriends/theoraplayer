@@ -6,12 +6,6 @@
     <File Name="multiple_videos.cpp"/>
     <File Name="../demo_basecode.h"/>
   </VirtualDirectory>
-  <Dependencies Name="Release">
-    <Project Name="libtheoraplayer"/>
-  </Dependencies>
-  <Dependencies Name="Debug">
-    <Project Name="libtheoraplayer"/>
-  </Dependencies>
   <Settings Type="Executable">
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g" Required="yes" PreCompiledHeader="">
@@ -88,4 +82,10 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
   </Settings>
+  <Dependencies Name="Debug">
+    <Project Name="libtheoraplayer"/>
+  </Dependencies>
+  <Dependencies Name="Release">
+    <Project Name="libtheoraplayer"/>
+  </Dependencies>
 </CodeLite_Project>
