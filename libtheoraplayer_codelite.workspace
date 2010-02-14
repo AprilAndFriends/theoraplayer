@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Workspace Name="libtheoraplayer_codelite" Database="./libtheoraplayer_codelite.tags">
   <Project Name="libtheoraplayer_codelite" Path="libtheoraplayer_codelite.project" Active="No"/>
-  <Project Name="glut_player" Path="demos/glut_player/glut_player.project" Active="No"/>
+  <Project Name="glut_player" Path="demos/glut_player/glut_player.project" Active="Yes"/>
   <Project Name="av_player" Path="demos/av_player/av_player.project" Active="No"/>
   <Project Name="multiple_videos" Path="demos/multiple_videos/multiple_videos.project" Active="No"/>
-  <Project Name="sprite_animation" Path="demos/sprite_animation/sprite_animation.project" Active="Yes"/>
+  <Project Name="sprite_animation" Path="demos/sprite_animation/sprite_animation.project" Active="No"/>
   <Project Name="tv_room" Path="demos/tv_room/tv_room.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="no">

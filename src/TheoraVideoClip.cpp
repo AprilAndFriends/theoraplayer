@@ -713,6 +713,16 @@ void TheoraVideoClip::stop()
 	seek(0);
 }
 
+void TheoraVideoClip::setPlaybackSpeed(float speed)
+{
+    mTimer->setSpeed(speed);
+}
+
+float TheoraVideoClip::getPlaybackSpeed()
+{
+    return mTimer->getSpeed();
+}
+
 long TheoraVideoClip::seekPage(long targetFrame,bool return_keyframe)
 {
 	int i,seek_min=0, seek_max=mStream->size();

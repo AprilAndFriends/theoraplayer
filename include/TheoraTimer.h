@@ -34,7 +34,7 @@ class TheoraPlayerExport TheoraTimer
 {
 protected:
 	//! Current time in seconds
-	float mTime;
+	float mTime,mSpeed;
 	//! Is the timer paused or not
 	bool mPaused;
 public:
@@ -56,6 +56,18 @@ public:
 	virtual void play();
 	virtual bool isPaused();
 	virtual void stop();
+	/**
+	    \brief set's playback speed
+
+        1.0 is the default. The speed factor multiplies time advance, thus
+        setting the value higher will increase playback speed etc.
+    
+        NOTE: depending on Timer implementation, it may not support setting the speed
+         
+	 */
+    virtual void setSpeed(float speed);
+    //! return the update speed 1.0 is the default
+    virtual float getSpeed();
 
 	/**
 	    \brief change the current time.

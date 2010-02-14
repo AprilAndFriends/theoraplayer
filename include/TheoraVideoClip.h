@@ -242,6 +242,8 @@ public:
 	void restart();
 	bool isPaused();
 	void stop();
+    void setPlaybackSpeed(float speed);
+    float getPlaybackSpeed();
 	//! seek to a given time position
 	void seek(float time);
 };
