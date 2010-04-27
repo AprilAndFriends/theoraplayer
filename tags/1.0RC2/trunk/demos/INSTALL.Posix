@@ -1,0 +1,7 @@
+
+Under GNU/Linux and other Unix-like OS'es, this should suffice to build
+demos after building the library:
+
+LDFLAGS="-lGL -lglut -ltheoraplayer"
+make
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Workspace Name="libtheoraplayer_codelite" Database="./libtheoraplayer_codelite.tags">
+  <Project Name="libtheoraplayer_codelite" Path="libtheoraplayer_codelite.project" Active="No"/>
+  <Project Name="glut_player" Path="demos/glut_player/glut_player.project" Active="Yes"/>
+  <Project Name="av_player" Path="demos/av_player/av_player.project" Active="No"/>
+  <Project Name="multiple_videos" Path="demos/multiple_videos/multiple_videos.project" Active="No"/>
+  <Project Name="sprite_animation" Path="demos/sprite_animation/sprite_animation.project" Active="No"/>
+  <Project Name="tv_room" Path="demos/tv_room/tv_room.project" Active="No"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="no">
+      <Project Name="libtheoraplayer_codelite" ConfigName="Debug"/>
+      <Project Name="glut_player" ConfigName="Debug"/>
+      <Project Name="av_player" ConfigName="Debug"/>
+      <Project Name="multiple_videos" ConfigName="Debug"/>
+      <Project Name="sprite_animation" ConfigName="Debug"/>
+      <Project Name="tv_room" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Project Name="tv_room" ConfigName="Release"/>
+      <Project Name="sprite_animation" ConfigName="Release"/>
+      <Project Name="multiple_videos" ConfigName="Release"/>
+      <Project Name="libtheoraplayer" ConfigName="Release"/>
+      <Project Name="glut_player" ConfigName="Release"/>
+      <Project Name="av_player" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

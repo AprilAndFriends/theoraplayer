@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_workspace_file>
+  <Workspace title="Workspace">
+    <Project filename="libtheoraplayer.cbp"/>
+    <Project filename="demos/glut_player/glut_player.cbp"/>
+    <Project filename="demos/av_player/av_player.cbp"/>
+    <Project filename="demos/sprite_animation/sprite_animation.cbp"/>
+    <Project filename="demos/tv_room/tv_room.cbp"/>
+    <Project filename="demos/multiple_videos/multiple_videos.cbp" active="1"/>
+  </Workspace>
+</CodeBlocks_workspace_file>

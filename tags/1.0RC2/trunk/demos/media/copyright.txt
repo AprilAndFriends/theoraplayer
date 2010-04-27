@@ -1,0 +1,18 @@
+These sample movies are in the SVN to serve as test media, they have been downloaded
+from the following links:
+
+konqi - http://www.kde.org
+bunny - http://www.bigbuckbunny.org/index.php/download/
+room  - http://commons.wikimedia.org/wiki/File:Geba.ogv
+titan - http://commons.wikimedia.org/wiki/File:Wikititananimation.ogg
+
+
+brawe_X.ogg:
+------------
+Sprite animation has been borrowed with authors permission from the game:
+Kaptain Brawe ( http://www.naphtalite.com )
+Author: Petar Ivancek
+
+These animations ARE NOT ALLOWED to be used in any manner other then for the purpose
+of the sprite_animation demo program included with this project.
+------------

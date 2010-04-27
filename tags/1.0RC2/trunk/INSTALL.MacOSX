@@ -1,0 +1,11 @@
+#After installing ogg, theora and vorbis libraries, you can compile Universal
+#32-bit binary (for PowerPC and Intel) compatible with OSX10.4 (Tiger) using
+#these lines:
+
+export MACOSX_DEPLOYMENT_TARGET=10.4
+CFLAGS="-arch i386 -arch ppc -mmacosx-version-min=10.4" CXXFLAGS="-arch i386 -arch ppc -mmacosx-version-min=10.4" LDFLAGS="-arch i386 -arch ppc -mmacosx-version-min=10.4"; export CFLAGS; export CXXFLAGS; export LDFLAGS
+
+./autogen.sh
+./configure --disable-dependency-tracking
+make
+
