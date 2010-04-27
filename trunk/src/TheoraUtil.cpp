@@ -34,7 +34,7 @@ void _psleep(int milliseconds)
 }
 
 
-int nextPow2(int x)
+int _nextPow2(int x)
 {
 	int y;
 	for (y=1;y<x;y*=2);

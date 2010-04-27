@@ -442,7 +442,7 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 
 	mWidth=mInfo->TheoraInfo.frame_width;
 	mHeight=mInfo->TheoraInfo.frame_height;
-	mStride=(mStride == 1) ? mStride=nextPow2(mWidth) : mWidth;
+	mStride=(mStride == 1) ? mStride=_nextPow2(mWidth) : mWidth;
 
 	mFrameQueue=new TheoraFrameQueue(mNumPrecachedFrames,this);
 
