@@ -22,15 +22,17 @@ http://www.gnu.org/copyleft/lesser.txt.
 #define _theoraVideoExport_H
 
 #ifdef _WIN32
-#ifdef THEORAVIDEO_EXPORTS
-#define TheoraPlayerExport __declspec(dllexport)
+	#ifdef THEORAVIDEO_STATIC
+		#define TheoraPlayerExport
+	#else
+		#ifdef THEORAVIDEO_EXPORTS
+			#define TheoraPlayerExport __declspec(dllexport)
+		#else
+			#define TheoraPlayerExport __declspec(dllimport)
+		#endif
+    #endif
 #else
-#define TheoraPlayerExport __declspec(dllimport)
-#endif
-#else
-
-#define TheoraPlayerExport __attribute__ ((visibility("default")))
-
+	#define TheoraPlayerExport __attribute__ ((visibility("default")))
 #endif
 
 #endif

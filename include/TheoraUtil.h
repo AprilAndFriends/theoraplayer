@@ -34,6 +34,6 @@ http://www.gnu.org/copyleft/lesser.txt.
 std::string str(int i);
 std::string strf(float i);
 void _psleep(int milliseconds);
-int nextPow2(int x);
+int _nextPow2(int x);
 
 #endif
