@@ -331,6 +331,15 @@ void getCursorPos(float* xout,float* yout)
 
 int main(int argc,char** argv)
 {
+#ifdef _MSC_VER // detect a msvc++ build and adjust the working directory
+	char cwd[513];
+	GetCurrentDirectory(512,cwd);
+	if (strstr(cwd,"msvc"))
+	{
+		*(strstr(cwd,"demos")+5)=0;
+		SetCurrentDirectory(cwd);
+	}
+#endif
 	glutInit(&argc, argv);
 #ifdef __ZBUFFER
 	glutInitDisplayMode( GLUT_DOUBLE|GLUT_RGBA|GLUT_DEPTH);

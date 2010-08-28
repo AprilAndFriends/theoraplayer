@@ -110,7 +110,7 @@ void init()
 	mgr->setDefaultNumPrecachedFrames(32);
 	for (int i=0;i<4;i++)
 	{
-		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/"+files[i]));
+		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/"+files[i]));
 		clips[i]->setAutoRestart(1);
 		textures[i]=createTexture(nextPow2(clips[i]->getWidth()),nextPow2(clips[i]->getHeight()));
 	}
