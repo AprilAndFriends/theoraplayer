@@ -7,8 +7,8 @@ This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
 #include "../demo_basecode.h"
-#include "TheoraPlayer.h"
-#include "TheoraDataSource.h"
+#include <theoraplayer/TheoraPlayer.h>
+#include <theoraplayer/TheoraDataSource.h>
 
 unsigned int tex_id;
 TheoraVideoManager* mgr;

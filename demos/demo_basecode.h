@@ -38,7 +38,7 @@ unsigned long GetTickCount()
 #endif
 
 #include <string>
-#include "TheoraVideoManager.h"
+#include "theoraplayer/TheoraVideoManager.h"
 #ifdef _WIN32
 #pragma warning( disable: 4996 ) // MSVC++
 #endif
