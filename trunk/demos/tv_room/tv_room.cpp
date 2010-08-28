@@ -15,8 +15,8 @@ COPYRIGHT INFO: The room 3D models and textures are licensed under the terms of 
 #define __DEV_IL
 #define __ZBUFFER
 #include "../demo_basecode.h"
-#include "TheoraPlayer.h"
-#include "TheoraDataSource.h"
+#include <theoraplayer/TheoraPlayer.h>
+#include <theoraplayer/TheoraDataSource.h>
 #include "../ObjModel.h"
 #include <math.h>
 

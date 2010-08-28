@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="sprite_animation"
-	ProjectGUID="{388E4B0A-0860-40C7-8537-FD6F79E7AB3E}"
-	RootNamespace="sprite_animation"
+	Name="libtheoraplayer"
+	ProjectGUID="{388E4B0F-0860-40C7-8530-FD6F79E7AB3E}"
+	RootNamespace="libtheoraplayer"
 	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
@@ -17,9 +17,9 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\bin\Debug"
-			IntermediateDirectory="..\..\obj\Debug"
-			ConfigurationType="1"
+			OutputDirectory="$(SolutionDir)bin\$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)build\$(ConfigurationName)"
+			ConfigurationType="2"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
@@ -49,18 +49,19 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../include/"
-				PreprocessorDefinitions="_WIN32;_DEBUG"
+				AdditionalIncludeDirectories="..\..\include;..\..\include\theoraplayer"
+				PreprocessorDefinitions="_WIN32;_DEBUG;THEORAVIDEO_EXPORTS"
+				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				PrecompiledHeaderFile=""
-				AssemblerListingLocation="..\..\obj\Debug/"
-				ObjectFile="..\..\obj\Debug/"
-				ProgramDataBaseFileName="..\..\obj\Debug/"
+				PrecompiledHeaderFile=".\obj\Debug\TheoraVideo.pch"
+				AssemblerListingLocation="build\$(ConfigurationName)\"
+				ObjectFile="build\$(ConfigurationName)\"
+				ProgramDataBaseFileName="build\$(ConfigurationName)\"
 				BrowseInformation="1"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="1"
 				CompileAs="0"
 			/>
 			<Tool
@@ -77,17 +78,17 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="libtheoraplayer_d.lib glut32.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).exe"
+				AdditionalDependencies="libtheora.lib libogg.lib libvorbis.lib"
+				OutputFile="$(OutDir)\$(ProjectName)_d.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="..\..\lib"
+				AdditionalLibraryDirectories="lib"
 				ModuleDefinitionFile=""
 				GenerateDebugInformation="true"
-				ProgramDatabaseFile=""
+				ProgramDatabaseFile=".\bin\Debug\libtheoraplayer.pdb"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary=""
+				ImportLibrary="$(OutDir)\libtheoraplayer_d.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -114,12 +115,13 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\bin\Release"
-			IntermediateDirectory="..\..\obj\Release"
-			ConfigurationType="1"
+			OutputDirectory="$(SolutionDir)bin\$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)build\$(ConfigurationName)"
+			ConfigurationType="2"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
+			EnableManagedIncrementalBuild="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -146,18 +148,20 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../include/"
-				PreprocessorDefinitions="_WIN32;NDEBUG"
+				AdditionalIncludeDirectories="..\..\include;..\..\include\theoraplayer"
+				PreprocessorDefinitions="_WIN32;NDEBUG;THEORAVIDEO_EXPORTS"
 				StringPooling="true"
+				MinimalRebuild="false"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile=""
-				AssemblerListingLocation="..\..\obj\Release/"
-				ObjectFile="..\..\obj\Release/"
-				ProgramDataBaseFileName="..\..\obj\Release/"
+				PrecompiledHeaderFile="$(OutDir)\$(ProjectName).pch"
+				AssemblerListingLocation="build\$(ConfigurationName)\"
+				ObjectFile="build\$(ConfigurationName)\"
+				ProgramDataBaseFileName="build\$(ConfigurationName)\"
 				WarningLevel="1"
 				SuppressStartupBanner="true"
+				DebugInformationFormat="1"
 				CompileAs="0"
 			/>
 			<Tool
@@ -174,16 +178,16 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="libtheoraplayer.lib glut32.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).exe"
+				AdditionalDependencies="libtheora.lib libogg.lib libvorbis.lib"
+				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="..\..\lib"
+				AdditionalLibraryDirectories="lib"
 				ModuleDefinitionFile=""
-				ProgramDatabaseFile=""
+				ProgramDatabaseFile="$(OutDir)\libtheoraplayer.pdb"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary=""
+				ImportLibrary="$(OutDir)\libtheoraplayer.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -210,9 +214,9 @@
 		</Configuration>
 		<Configuration
 			Name="Debug_Static|Win32"
-			OutputDirectory="$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			OutputDirectory="$(SolutionDir)bin\$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)build\$(ConfigurationName)"
+			ConfigurationType="4"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
@@ -242,18 +246,19 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../include/"
+				AdditionalIncludeDirectories="..\..\include;..\..\include\theoraplayer"
 				PreprocessorDefinitions="_WIN32;_DEBUG;THEORAVIDEO_STATIC"
+				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				PrecompiledHeaderFile=""
-				AssemblerListingLocation="..\..\obj\Debug/"
-				ObjectFile="..\..\obj\Debug/"
-				ProgramDataBaseFileName="..\..\obj\Debug/"
+				PrecompiledHeaderFile=".\obj\Debug\TheoraVideo.pch"
+				AssemblerListingLocation="build\$(ConfigurationName)\"
+				ObjectFile="build\$(ConfigurationName)\"
+				ProgramDataBaseFileName="build\$(ConfigurationName)\"
 				BrowseInformation="1"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="1"
 				CompileAs="0"
 			/>
 			<Tool
@@ -268,25 +273,11 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLinkerTool"
-				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="libtheoraplayer_static_d.lib glut32.lib  libogg_static.lib libvorbis_static.lib libtheora_static.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).exe"
-				LinkIncremental="2"
-				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="..\..\lib"
-				ModuleDefinitionFile=""
-				GenerateDebugInformation="true"
-				ProgramDatabaseFile=""
-				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
-				ImportLibrary=""
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\$(ProjectName)_static_d.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -298,18 +289,15 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release_Static|Win32"
-			OutputDirectory="$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			OutputDirectory="$(SolutionDir)bin\$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)build\$(ConfigurationName)"
+			ConfigurationType="4"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="2"
@@ -339,18 +327,20 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../include/"
-				PreprocessorDefinitions="_WIN32;NDEBUG;THEORAVIDEO_STATIC"
+				AdditionalIncludeDirectories="..\..\include;..\..\include\theoraplayer"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_STATIC"
 				StringPooling="true"
+				MinimalRebuild="false"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				PrecompiledHeaderFile=""
-				AssemblerListingLocation="..\..\obj\Release/"
-				ObjectFile="..\..\obj\Release/"
-				ProgramDataBaseFileName="..\..\obj\Release/"
+				PrecompiledHeaderFile="$(OutDir)\$(ProjectName).pch"
+				AssemblerListingLocation="build\$(ConfigurationName)\"
+				ObjectFile="build\$(ConfigurationName)\"
+				ProgramDataBaseFileName="build\$(ConfigurationName)\"
 				WarningLevel="1"
 				SuppressStartupBanner="true"
+				DebugInformationFormat="1"
 				CompileAs="0"
 			/>
 			<Tool
@@ -365,24 +355,11 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLinkerTool"
-				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="libtheoraplayer_static.lib glut32.lib  libogg_static.lib libvorbis_static.lib libtheora_static.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).exe"
-				LinkIncremental="1"
-				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="..\..\lib"
-				ModuleDefinitionFile=""
-				ProgramDatabaseFile=""
-				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
-				ImportLibrary=""
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\$(ProjectName)_static.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -394,9 +371,6 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 				CommandLine=""
 			/>
@@ -405,12 +379,118 @@
 	<References>
 	</References>
 	<Files>
-		<File
-			RelativePath="..\demo_basecode.h"
+		<Filter
+			Name="src"
+			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 			>
-		</File>
+			<File
+				RelativePath="..\..\src\Endianess.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\TheoraAsync.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\TheoraAudioInterface.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\TheoraDataSource.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\TheoraException.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\TheoraFrameQueue.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\TheoraTimer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\TheoraUtil.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\TheoraVideoClip.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\TheoraVideoFrame.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\TheoraVideoManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\TheoraWorkerThread.cpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="include"
+			Filter="h;hpp;hxx;hm;inl"
+			>
+			<File
+				RelativePath="..\..\include\theoraplayer\TheoraAsync.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\theoraplayer\TheoraAudioInterface.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\theoraplayer\TheoraDataSource.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\theoraplayer\TheoraException.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\theoraplayer\TheoraExport.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\theoraplayer\TheoraFrameQueue.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\theoraplayer\TheoraPlayer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\theoraplayer\TheoraTimer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\theoraplayer\TheoraUtil.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\theoraplayer\TheoraVideoClip.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\theoraplayer\TheoraVideoFrame.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\theoraplayer\TheoraVideoManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\theoraplayer\TheoraWorkerThread.h"
+				>
+			</File>
+		</Filter>
 		<File
-			RelativePath=".\sprite_animation.cpp"
+			RelativePath="..\scripts\doxygen_mainpage.h"
 			>
 		</File>
 	</Files>

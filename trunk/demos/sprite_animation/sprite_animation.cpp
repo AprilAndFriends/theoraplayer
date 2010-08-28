@@ -16,8 +16,8 @@ These animations ARE NOT ALLOWED to be used in any manner other then for the pur
 of this demo program.
 *************************************************************************************/
 #include "../demo_basecode.h"
-#include "TheoraPlayer.h"
-#include "TheoraDataSource.h"
+#include <theoraplayer/TheoraPlayer.h>
+#include <theoraplayer/TheoraDataSource.h>
 
 unsigned int tex_id;
 TheoraVideoManager* mgr;
