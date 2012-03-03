@@ -30,13 +30,12 @@ void TheoraWorkerThread::executeThread()
 	mThreadRunning = true;
 	while (mThreadRunning)
 	{
-		mClip=TheoraVideoManager::getSingleton().requestWork(this);
+		mClip = TheoraVideoManager::getSingleton().requestWork(this);
 		if (!mClip)
 		{
-			_psleep(250);
+			_psleep(100);
 			continue;
 		}
-
 
 		// if user requested seeking, do that then.
 		if (mClip->mSeekPos >= 0) mClip->doSeek();

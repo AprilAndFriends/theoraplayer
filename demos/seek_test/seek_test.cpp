@@ -28,6 +28,7 @@ void draw()
 		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
 		clip->popFrame();
 		needsSeek = 1;
+		printf("Displayed frame %d\n", f->getFrameNumber());
 	}
 
 	float w=clip->getWidth(),h=clip->getHeight();
@@ -48,7 +49,7 @@ void draw()
 
 void update(float time_increase)
 {
-	if (clip->getNumReadyFrames() >= 1) mgr->update(time_increase/3);
+	mgr->update(time_increase/3);
 	if (needsSeek)
 	{
 		clip->seek((float) cFrame / clip->getFPS());
@@ -82,7 +83,7 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip("media/short.ogg", TH_RGB, 4);
+	clip=mgr->createVideoClip("media/bunny.ogg", TH_RGB, 4);
 	clip->setAutoRestart(1);
 
 	tex_id=createTexture(nextPow2(clip->getWidth()), nextPow2(clip->getHeight()));
