@@ -6,6 +6,8 @@ Copyright (c) 2008-2012 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
+#include <theora/codec.h>
+#include <vorbis/codec.h>
 #include "TheoraVideoManager.h"
 #include "TheoraWorkerThread.h"
 #include "TheoraVideoClip.h"
@@ -43,14 +45,16 @@ TheoraVideoManager& TheoraVideoManager::getSingleton()
 TheoraVideoManager::TheoraVideoManager(int num_worker_threads) : 
 	mDefaultNumPrecachedFrames(16)
 {
-	g_ManagerSingleton=this;
+	g_ManagerSingleton = this;
 
-	logMessage("Initializing Theora Playback Library ("+this->getVersionString()+")");
-
+	logMessage("Initializing Theora Playback Library (" + getVersionString() + ")\n" + 
+	           "  - libtheora version: " + th_version_string() + ")\n" + 
+	           "  - libvorbis version: " + vorbis_version_string() + ")\n" + 
+			   "------------------------------------");
 	mAudioFactory = NULL;
-	mWorkMutex=new TheoraMutex();
+	mWorkMutex = new TheoraMutex();
 
-	// for CPU yuv2rgb decoding
+	// for CPU based yuv2rgb decoding
 	createYUVtoRGBtables();
 	createWorkerThreads(num_worker_threads);
 }
@@ -220,9 +224,9 @@ std::string TheoraVideoManager::getVersionString()
 	return out;
 }
 
-void TheoraVideoManager::getVersion(int* a,int* b,int* c)
+void TheoraVideoManager::getVersion(int* a, int* b, int* c)
 {
 	*a=1;
 	*b=0;
-	*c=-2;
+	*c=-3;
 }

@@ -48,10 +48,10 @@ void draw()
 
 void update(float time_increase)
 {
-	mgr->update(time_increase);
+	if (clip->getNumReadyFrames() >= 1) mgr->update(time_increase/3);
 	if (needsSeek)
 	{
-		clip->seek(cFrame / (clip->getDuration() * clip->getFPS()));
+		clip->seek((float) cFrame / clip->getFPS());
 		needsSeek = 0;
 		cFrame++;
 	}
