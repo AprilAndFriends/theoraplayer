@@ -711,7 +711,7 @@ float TheoraVideoClip::getPlaybackSpeed()
     return mTimer->getSpeed();
 }
 
-long TheoraVideoClip::seekPage(long targetFrame,bool return_keyframe)
+long TheoraVideoClip::seekPage(long targetFrame, bool return_keyframe)
 {
 	int i,seek_min=0, seek_max=mStream->size();
 	long frame;
@@ -773,7 +773,7 @@ long TheoraVideoClip::seekPage(long targetFrame,bool return_keyframe)
 
 void TheoraVideoClip::doSeek()
 {
-	int frame,targetFrame=(int) (mNumFrames*mSeekPos/mDuration);
+	int frame, targetFrame = (int) (mNumFrames * mSeekPos / mDuration);
 
 	if (targetFrame == 0)
 	{
@@ -783,13 +783,13 @@ void TheoraVideoClip::doSeek()
 		return;
 	}
 
-	mEndOfFile=0;
-	mRestarted=0;
+	mEndOfFile = 0;
+	mRestarted = 0;
 
 	mFrameQueue->clear();
 	ogg_stream_reset(&mInfo->TheoraStreamState);
 	th_decode_free(mInfo->TheoraDecoder);
-	mInfo->TheoraDecoder=th_decode_alloc(&mInfo->TheoraInfo,mInfo->TheoraSetup);
+	mInfo->TheoraDecoder = th_decode_alloc(&mInfo->TheoraInfo, mInfo->TheoraSetup);
 
 	if (mAudioInterface)
 	{
@@ -802,59 +802,59 @@ void TheoraVideoClip::doSeek()
 	// previous keyframe and seek to it.
 	// then by setting the correct time, the decoder will skip N frames untill
 	// we get the frame we want.
-	frame=seekPage(targetFrame,1);
-	if (frame != -1) seekPage(std::max(0,frame),0);
+	frame = seekPage(targetFrame, 1);
+	if (frame != -1) seekPage(std::max(0, frame), 0);
 
-	float time=((float) targetFrame/mNumFrames)*mDuration;
+	float time = ((float) targetFrame / mNumFrames) * mDuration;
 
 	if (mAudioInterface)
 	{
 		// let's decode some pages and seek to the appropriate PCM sample
-		ogg_int64_t granule=0;
-		float last_page_time=time;
+		ogg_int64_t granule = 0;
+		float last_page_time = time;
 		for (;;)
 		{
-			int ret=ogg_sync_pageout( &mInfo->OggSyncState, &mInfo->OggPage );
+			int ret = ogg_sync_pageout(&mInfo->OggSyncState, &mInfo->OggPage);
 			if (ret == 1)
 			{
-				int serno=ogg_page_serialno(&mInfo->OggPage);
+				int serno = ogg_page_serialno(&mInfo->OggPage);
 				if (serno == mInfo->VorbisStreamState.serialno)
 				{
-					granule=ogg_page_granulepos(&mInfo->OggPage);
-					float g_time=(float) vorbis_granule_time(&mInfo->VorbisDSPState,granule);
+					granule = ogg_page_granulepos(&mInfo->OggPage);
+					float g_time = (float) vorbis_granule_time(&mInfo->VorbisDSPState, granule);
 					if (g_time > time)
 					{
 						float **pcm;
-						int len = vorbis_synthesis_pcmout(&mInfo->VorbisDSPState,&pcm);
+						int len = vorbis_synthesis_pcmout(&mInfo->VorbisDSPState, &pcm);
 						if (len > 0)
 							break;
 						//ogg_stream_pagein(&mInfo->VorbisStreamState,&mInfo->OggPage);
-						time=g_time;
+						time = g_time;
 						break;
 					}
-					last_page_time=g_time;
+					last_page_time = g_time;
 				}
-				else ogg_stream_pagein(&mInfo->TheoraStreamState,&mInfo->OggPage);
+				else ogg_stream_pagein(&mInfo->TheoraStreamState, &mInfo->OggPage);
 			}
 			else
 			{
-				char *buffer = ogg_sync_buffer( &mInfo->OggSyncState, 4096);
-				int bytesRead = mStream->read( buffer, 4096);
+				char *buffer = ogg_sync_buffer(&mInfo->OggSyncState, 4096);
+				int bytesRead = mStream->read(buffer, 4096);
 				if (bytesRead == 0) break;
-				ogg_sync_wrote( &mInfo->OggSyncState, bytesRead );
+				ogg_sync_wrote(&mInfo->OggSyncState, bytesRead);
 			}
 		}
 	}
 
 	mTimer->seek(time);
-	mSeekPos=-2; // tell the decoder to discard frames until the keyframe is found
+	mSeekPos = -2; // tell the decoder to discard frames until the keyframe is found
 	if (mAudioInterface) mAudioMutex->unlock();
 }
 
 void TheoraVideoClip::seek(float time)
 {
-	mSeekPos=time;
-	mEndOfFile=false;
+	mSeekPos = time;
+	mEndOfFile = false;
 }
 
 float TheoraVideoClip::getPriority()
