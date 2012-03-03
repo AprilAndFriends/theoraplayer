@@ -212,6 +212,8 @@ public:
 	float getDuration();
 	//! return the clips' frame rate
 	int getFPS();
+	//! return the clip's keyframe frequency. ie, how many incomplete frames are placed in between full frames. important for seeking performance
+	int getKeyFrameFreq();
 	//! get the number of frames in this movie
 	int getNumFrames() { return mNumFrames; }
 

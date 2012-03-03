@@ -169,7 +169,7 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 
 void TheoraVideoManager::update(float time_increase)
 {
-	foreach(TheoraVideoClip*,mClips)
+	foreach(TheoraVideoClip*, mClips)
 	{
 		(*it)->update(time_increase);
 		(*it)->decodedAudioCheck();

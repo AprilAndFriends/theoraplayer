@@ -9,7 +9,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #ifndef _TheoraVideoFrame_h
 #define _TheoraVideoFrame_h
 
-#include <TheoraExport.h>
+#include "TheoraExport.h"
 
 class TheoraVideoClip;
 /**
@@ -35,7 +35,7 @@ public:
 	~TheoraVideoFrame();
 
 	//! internal function, do not use directly
-	void _setFrameNumber(int number) { mFrameNumber=number; }
+	void _setFrameNumber(int number) { mFrameNumber = number; }
 	//! returns the frame number of this frame in the theora stream
 	int getFrameNumber() { return mFrameNumber; }
 
