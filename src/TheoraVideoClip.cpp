@@ -431,7 +431,6 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 	mStride = (mStride == 1) ? mStride=_nextPow2(mWidth) : mWidth;
 
 	th_writelog("width: " + str(mWidth) + ", height: " + str(mHeight) + ", fps: " + str(getFPS()));
-	th_writelog("keyframe frequency: every " + str(getKeyFrameFreq()) + " frames.");
 	mFrameQueue = new TheoraFrameQueue(mNumPrecachedFrames, this);
 
 
@@ -676,11 +675,6 @@ int TheoraVideoClip::getFPS()
 	return mInfo->TheoraInfo.fps_numerator;
 }
 
-int TheoraVideoClip::getKeyFrameFreq()
-{
-	return 1 << mInfo->TheoraInfo.keyframe_granule_shift;
-}
-
 void TheoraVideoClip::play()
 {
 	mTimer->play();
@@ -719,7 +713,7 @@ float TheoraVideoClip::getPlaybackSpeed()
 
 long TheoraVideoClip::seekPage(long targetFrame, bool return_keyframe)
 {
-	int i,seek_min = 0, seek_max = mStream->size();
+	int i,seek_min = 0, seek_max = (targetFrame == 0) ? 0 : mStream->size();
 	long frame;
 	ogg_int64_t granule = 0;
 	bool fineseek = 0;
@@ -744,14 +738,12 @@ long TheoraVideoClip::seekPage(long targetFrame, bool return_keyframe)
 					{
 						frame = (long) th_granule_frame(mInfo->TheoraDecoder, granule);
 						// stop binary searching when we're close enough from the target frame
-						if (frame <= targetFrame && targetFrame - frame < 10)
+						if (fineseek || frame <= targetFrame && targetFrame - frame < 10)
 						{
 							// now it's time to do normal file reading until we reach the requested frame
 							fineseek = 1;
-							if (!return_keyframe) break;
+							if (frame >= targetFrame) break;
 						}
-						if (fineseek && frame >= targetFrame)
-							break;
 
 						if (fineseek) continue;
 						// shorten the binary search
@@ -783,10 +775,13 @@ long TheoraVideoClip::seekPage(long targetFrame, bool return_keyframe)
 
 void TheoraVideoClip::doSeek()
 {
-	int frame, targetFrame = (int) (mNumFrames * mSeekPos / mDuration);
+	int frame, target_frame = (int) (mNumFrames * mSeekPos / mDuration);
+	float time = ((float) target_frame / mNumFrames) * mDuration;
+	mTimer->seek(time);
+	mTimer->pause(); // pause until seeking is done
 
 /* commented out temporarily
-	if (targetFrame == 0)
+	if (target_frame == 0)
 	{
 		_restart();
 		mTimer->seek(0);
@@ -814,16 +809,40 @@ void TheoraVideoClip::doSeek()
 	// previous keyframe and seek to it.
 	// then by setting the correct time, the decoder will skip N frames untill
 	// we get the frame we want.
-	frame = seekPage(targetFrame, 1); // find the keyframe nearest to the target frame
-	if (frame != -1)
-	{
-		seekPage(std::max(0, frame), 0); // now, fineseek to the actual keyframe
-#ifdef _DEBUG
-		th_writelog(mName + " [seek]: requested frame " + str(targetFrame) + ", found keyframe: " + str(frame));
-#endif
-	}
-	float time = ((float) targetFrame / mNumFrames) * mDuration;
 
+	frame = seekPage(target_frame, 1); // find the keyframe nearest to the target frame
+#ifdef _DEBUG
+		th_writelog(mName + " [seek]: nearest keyframe for frame " + str(target_frame) + " is frame: " + str(frame));
+#endif
+	seekPage(std::max(0, frame - 2), 0);
+
+		ogg_packet opTheora;
+		ogg_int64_t granulePos;
+		// now that we've found the keyframe that preceeds our desired frame, lets keep on decoding frames until we
+		// reach our target frame.
+		for (;;)
+		{
+			int ret = ogg_stream_packetout(&mInfo->TheoraStreamState, &opTheora);
+
+			if (ret > 0)
+			{
+				if (th_decode_packetin(mInfo->TheoraDecoder, &opTheora, &granulePos) != 0) continue; // 0 means success
+				frame = (int) th_granule_frame(mInfo->TheoraDecoder, granulePos);
+				if (frame >= target_frame - 1) break;
+			}
+			else
+			{
+				if (!_readData())
+				{
+					th_writelog(mName + " [seek]: fineseeking failed, _readData failed!");
+					return;
+				}
+			}
+		}
+
+#ifdef _DEBUG
+		th_writelog(mName + " [seek]: fineseeked to frame " + str(frame + 1) + ", requested: " + str(target_frame));
+#endif
 	if (mAudioInterface)
 	{
 		// let's decode some pages and seek to the appropriate PCM sample
@@ -863,7 +882,7 @@ void TheoraVideoClip::doSeek()
 		}
 	}
 
-	mTimer->seek(time);
+	mTimer->play();
 	mSeekPos = -1;
 	if (mAudioInterface) mAudioMutex->unlock();
 }
