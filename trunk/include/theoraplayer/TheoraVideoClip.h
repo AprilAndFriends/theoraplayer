@@ -98,7 +98,7 @@ class TheoraPlayerExport TheoraVideoClip
 	 */
 	int calculatePriority();
 	void readTheoraVorbisHeaders();
-	long seekPage(long targetFrame,bool return_keyframe);
+	long seekPage(long targetFrame, bool return_keyframe);
 	void doSeek(); //! called by WorkerThread to seek to mSeekPos
 	bool _readData();
 	bool isBusy();
@@ -212,8 +212,6 @@ public:
 	float getDuration();
 	//! return the clips' frame rate
 	int getFPS();
-	//! return the clip's keyframe frequency. ie, how many incomplete frames are placed in between full frames. important for seeking performance
-	int getKeyFrameFreq();
 	//! get the number of frames in this movie
 	int getNumFrames() { return mNumFrames; }
 

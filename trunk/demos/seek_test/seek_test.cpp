@@ -49,7 +49,7 @@ void draw()
 
 void update(float time_increase)
 {
-	mgr->update(time_increase/3);
+	mgr->update(time_increase);
 	if (needsSeek)
 	{
 		clip->seek((float) cFrame / clip->getFPS());
