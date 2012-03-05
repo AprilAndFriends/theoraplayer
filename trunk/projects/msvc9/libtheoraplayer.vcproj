@@ -388,6 +388,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\demos\glut_player\glut_player.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\TheoraAsync.cpp"
 				>
 			</File>

@@ -70,8 +70,8 @@ class TheoraPlayerExport TheoraVideoClip
 	int mNumPrecachedFrames;
 	int mAudioSkipSeekFlag;
 
-	float mSeekPos; //! stores desired seek position. next worker thread will do the seeking and reset this var to -1
-	float mDuration;
+	int mSeekFrame; //! stores desired seek position as a frame number. next worker thread will do the seeking and reset this var to -1
+	float mDuration, mFrameDuration;
     std::string mName;
 	int mWidth,mHeight,mStride;
 	unsigned long mNumFrames;
@@ -99,7 +99,7 @@ class TheoraPlayerExport TheoraVideoClip
 	int calculatePriority();
 	void readTheoraVorbisHeaders();
 	long seekPage(long targetFrame, bool return_keyframe);
-	void doSeek(); //! called by WorkerThread to seek to mSeekPos
+	void doSeek(); //! called by WorkerThread to seek to mSeekFrame
 	bool _readData();
 	bool isBusy();
 
@@ -234,6 +234,8 @@ public:
     float getPlaybackSpeed();
 	//! seek to a given time position
 	void seek(float time);
+	//! seek to a given frame number
+	void seekToFrame(int frame);
 };
 
 #endif

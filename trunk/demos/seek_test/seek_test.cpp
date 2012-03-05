@@ -15,7 +15,7 @@ TheoraVideoManager* mgr;
 TheoraVideoClip* clip;
 std::string window_name="seek_test";
 bool started=1, needsSeek = 1;
-int cFrame = 0;
+int cFrame = 0, nWrongSeeks = 0;
 int window_w=800,window_h=600;
 
 void draw()
@@ -23,13 +23,17 @@ void draw()
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 
 	TheoraVideoFrame* f=clip->getNextFrame();
-	if (f)
+	if (f && !needsSeek)
 	{
 		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
-		clip->popFrame();
 		needsSeek = 1;
+		if (f->getFrameNumber() != cFrame)
+			nWrongSeeks++;
+		cFrame++;
 		printf("Displayed frame %d\n", f->getFrameNumber());
+		clip->popFrame();
 	}
+
 
 	float w=clip->getWidth(),h=clip->getHeight();
 	float tw=nextPow2(w),th=nextPow2(h);
@@ -49,12 +53,12 @@ void draw()
 
 void update(float time_increase)
 {
-	mgr->update(time_increase);
+	mgr->update(time_increase / 10);
 	if (needsSeek)
 	{
-		clip->seek((float) cFrame / clip->getFPS());
+		printf("Requesting seek to frame %d\n", cFrame);
+		clip->seekToFrame(cFrame);
 		needsSeek = 0;
-		cFrame++;
 	}
 }
 
@@ -70,20 +74,13 @@ void OnClick(float x,float y)
 
 void setDebugTitle(char* out)
 {
-	int nDropped=clip->getNumDroppedFrames(),nDisplayed=clip->getNumDisplayedFrames();
-	float percent=100*((float) nDropped/nDisplayed);
-	sprintf(out," (%dx%d) %d precached, %d displayed, %d dropped (%.1f %%)",clip->getWidth(),
-		                                                                    clip->getHeight(),
-		                                                                    clip->getNumReadyFrames(),
-		                                                                    nDisplayed,
-		                                                                    nDropped,
-			                                                                percent);
+	sprintf(out, " (%dx%d@%d) %d wrong seeks", clip->getWidth(), clip->getHeight(), clip->getFPS(), nWrongSeeks);
 }
 
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip("media/bunny.ogg", TH_RGB, 4);
+	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/short.ogg"), TH_RGB, 4);
 	clip->setAutoRestart(1);
 
 	tex_id=createTexture(nextPow2(clip->getWidth()), nextPow2(clip->getHeight()));

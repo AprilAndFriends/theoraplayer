@@ -38,7 +38,7 @@ void TheoraWorkerThread::executeThread()
 		}
 
 		// if user requested seeking, do that then.
-		if (mClip->mSeekPos >= 0) mClip->doSeek();
+		if (mClip->mSeekFrame >= 0) mClip->doSeek();
 
 		mClip->decodeNextFrame();
 

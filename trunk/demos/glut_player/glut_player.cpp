@@ -25,6 +25,7 @@ void draw()
 	if (f)
 	{
 		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
+		printf("Displaying frame %d\n", f->getFrameNumber());
 		clip->popFrame();
 	}
 
@@ -94,7 +95,7 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip("media/bunny.ogg",TH_RGB);
+	clip=mgr->createVideoClip("media/short.ogg", TH_RGB);
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short.ogg"),TH_RGB);
 	clip->setAutoRestart(1);

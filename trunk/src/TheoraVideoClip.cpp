@@ -67,8 +67,9 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	mTheoraStreams(0),
 	mVorbisStreams(0),
 	mAudioSkipSeekFlag(0),
-	mSeekPos(-1),
+	mSeekFrame(-1),
 	mDuration(-1),
+	mFrameDuration(0),
     mName(data_source->repr()),
     mStride(usePower2Stride),
     mAudioGain(1),
@@ -177,7 +178,7 @@ bool TheoraVideoClip::_readData()
 				audio_time = (float) vorbis_granule_time(&mInfo->VorbisDSPState, g);
 				audio_eos = ogg_page_eos(&mInfo->OggPage);
 
-				if (mSeekPos == -2 && !mAudioSkipSeekFlag)
+				if (mSeekFrame == -2 && !mAudioSkipSeekFlag)
 				{
 					if (g > -1) { mAudioSkipSeekFlag = 1; continue; }
 					if (g == -1) continue;
@@ -209,17 +210,7 @@ void TheoraVideoClip::decodeNextFrame()
 		int ret = ogg_stream_packetout(&mInfo->TheoraStreamState, &opTheora);
 
 		if (ret > 0)
-		{/*
-			if (mSeekPos == -2) // searching for next keyframe
-			{
-				int keyframe = th_packet_iskeyframe(&opTheora);
-				if (!keyframe) { nSeekSkippedFrames++; continue; }
-				mSeekPos = -1;
-#ifdef _DEBUG
-				if (nSeekSkippedFrames > 0)
-					th_writelog(mName + " [seek]: skipped " + str(nSeekSkippedFrames) + " frames while searching for keyframe");
-#endif
-			}*/
+		{
 			if (th_decode_packetin(mInfo->TheoraDecoder, &opTheora, &granulePos) != 0) continue; // 0 means success
 			float time = (float) th_granule_time(mInfo->TheoraDecoder, granulePos);
 			unsigned long frame_number = (unsigned long) th_granule_frame(mInfo->TheoraDecoder, granulePos);
@@ -235,7 +226,7 @@ void TheoraVideoClip::decodeNextFrame()
 				mNumDroppedFrames++;
 				continue; // drop frame
 			}
-			frame->mTimeToDisplay = time;
+			frame->mTimeToDisplay = time - mFrameDuration;
 			frame->mIteration     = mIteration;
 			frame->_setFrameNumber(frame_number);
 			th_decode_ycbcr_out(mInfo->TheoraDecoder, buff);
@@ -255,6 +246,8 @@ void TheoraVideoClip::decodeNextFrame()
 
 void TheoraVideoClip::_restart()
 {
+	bool paused = mTimer->isPaused();
+	if (!paused) mTimer->pause();
 	long granule=0;
 	th_decode_ctl(mInfo->TheoraDecoder,TH_DECCTL_SET_GRANPOS,&granule,sizeof(granule));
 	th_decode_free(mInfo->TheoraDecoder);
@@ -277,10 +270,15 @@ void TheoraVideoClip::_restart()
 
 	ogg_sync_reset(&mInfo->OggSyncState);
 	mStream->seek(0);
+	ogg_int64_t granulePos = 0;
+	th_decode_ctl(mInfo->TheoraDecoder, TH_DECCTL_SET_GRANPOS, &granulePos, sizeof(granule));
+
 	//mTimer->seek(0);
 	mEndOfFile=false;
 
 	mRestarted=1;
+
+	if (!paused) mTimer->play();
 }
 
 void TheoraVideoClip::restart()
@@ -294,12 +292,12 @@ void TheoraVideoClip::restart()
 	mEndOfFile=0;
 	mIteration=0;
 	mRestarted=0;
-	mSeekPos=-1;
+	mSeekFrame =- 1;
 }
 
 void TheoraVideoClip::update(float time_increase)
 {
-	if (mTimer->isPaused() && mSeekPos != -3) return;
+	if (mTimer->isPaused()) return;
 	mTimer->update(time_increase);
 	float time=mTimer->getTime();
 	if (time >= mDuration)
@@ -352,6 +350,8 @@ void TheoraVideoClip::popFrame()
 
 TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 {
+	if (mSeekFrame != -1) return 0; // if we are about to seek, then the current frame queue is invalidated
+	                                // (will be cleared when a worker thread does the actual seek)
 	TheoraVideoFrame* frame;
 	float time=mTimer->getTime();
 	for (;;)
@@ -359,7 +359,8 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 		frame=mFrameQueue->getFirstAvailableFrame();
 		if (!frame) return 0;
 		if (frame->mTimeToDisplay > time) return 0;
-		if (frame->mTimeToDisplay < time-0.1)
+		// only drop frames if you have more frames to show. otherwise even the late frame will do..
+		if (time > frame->mTimeToDisplay + mFrameDuration && mFrameQueue->getReadyCount() > 1) 
 		{
 			if (mRestarted && frame->mTimeToDisplay < 2) return 0;
 #ifdef _DEBUG
@@ -483,6 +484,8 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 		TheoraAudioInterfaceFactory* audio_factory = TheoraVideoManager::getSingleton().getAudioInterfaceFactory();
 		if (audio_factory) setAudioInterface(audio_factory->createInstance(this, mInfo->VorbisInfo.channels, mInfo->VorbisInfo.rate));
 	}
+
+	mFrameDuration = 1.0f / getFPS();
 	th_writelog("-----");
 }
 
@@ -662,6 +665,7 @@ void TheoraVideoClip::setNumPrecachedFrames(int n)
 
 int TheoraVideoClip::getNumReadyFrames()
 {
+	if (mSeekFrame != -1) return 0; // we are about to seek, consider frame queue empty even though it will be emptied upon seek
 	return mFrameQueue->getReadyCount();
 }
 
@@ -713,19 +717,19 @@ float TheoraVideoClip::getPlaybackSpeed()
 
 long TheoraVideoClip::seekPage(long targetFrame, bool return_keyframe)
 {
-	int i,seek_min = 0, seek_max = (targetFrame == 0) ? 0 : mStream->size();
+	int i,seek_min = 0, seek_max = mStream->size();
 	long frame;
 	ogg_int64_t granule = 0;
-	bool fineseek = 0;
 
-	for (i = 0; i < 100; i++)
+	if (targetFrame == 0) mStream->seek(0);
+	for (i = (targetFrame == 0) ? 100 : 0; i < 100; i++)
 	{
 		ogg_sync_reset(&mInfo->OggSyncState);
 		mStream->seek((seek_min + seek_max) / 2); // do a binary search
 		memset(&mInfo->OggPage, 0, sizeof(ogg_page));
 		ogg_sync_pageseek(&mInfo->OggSyncState, &mInfo->OggPage);
 
-		for (;;)
+		for (;i < 1000;)
 		{
 			int ret = ogg_sync_pageout(&mInfo->OggSyncState, &mInfo->OggPage);
 			if (ret == 1)
@@ -738,15 +742,13 @@ long TheoraVideoClip::seekPage(long targetFrame, bool return_keyframe)
 					{
 						frame = (long) th_granule_frame(mInfo->TheoraDecoder, granule);
 						// stop binary searching when we're close enough from the target frame
-						if (fineseek || frame <= targetFrame && targetFrame - frame < 10)
+						if (frame < targetFrame && targetFrame - frame < 10)
 						{
-							// now it's time to do normal file reading until we reach the requested frame
-							fineseek = 1;
-							if (frame >= targetFrame) break;
+							// we're close enough, let's break this.
+							i = 1000;
+							break;
 						}
-
-						if (fineseek) continue;
-						// shorten the binary search
+						// we're not close enough, let's shorten the borders of the binary search
 						if (targetFrame - 1 > frame) seek_min = (seek_min + seek_max) / 2;
 						else				         seek_max = (seek_min + seek_max) / 2;
 						break;
@@ -761,13 +763,9 @@ long TheoraVideoClip::seekPage(long targetFrame, bool return_keyframe)
 				ogg_sync_wrote(&mInfo->OggSyncState, bytes_read);
 			}
 		}
-		if (fineseek) break;
 	}
 	if (return_keyframe) return (long) (granule >> mInfo->TheoraInfo.keyframe_granule_shift);
-
-	// feed the frame to the decoder
-	ogg_stream_pagein(&mInfo->TheoraStreamState, &mInfo->OggPage);
-	//granule = frame << mInfo->TheoraInfo.keyframe_granule_shift;
+	// theora requires to set the granule pos after a seek
 	th_decode_ctl(mInfo->TheoraDecoder, TH_DECCTL_SET_GRANPOS, &granule, sizeof(granule));
 
 	return -1;
@@ -775,25 +773,20 @@ long TheoraVideoClip::seekPage(long targetFrame, bool return_keyframe)
 
 void TheoraVideoClip::doSeek()
 {
-	int frame, target_frame = (int) (mNumFrames * mSeekPos / mDuration);
-	float time = ((float) target_frame / mNumFrames) * mDuration;
+#if _DEBUG
+	th_writelog(mName + " [seek]: seeking to frame " + str(mSeekFrame));
+#endif
+	int frame;
+	float time = (float) mSeekFrame / getFPS();
 	mTimer->seek(time);
-	mTimer->pause(); // pause until seeking is done
+	bool paused = mTimer->isPaused();
+	if (!paused) mTimer->pause(); // pause until seeking is done
 
-/* commented out temporarily
-	if (target_frame == 0)
-	{
-		_restart();
-		mTimer->seek(0);
-		mFrameQueue->clear();
-		return;
-	}
-*/
 	mEndOfFile = 0;
 	mRestarted = 0;
 
 	mFrameQueue->clear();
-	// reset the video decoder. not 100% sure if this is necesarry though.
+	// reset the video decoder.
 	ogg_stream_reset(&mInfo->TheoraStreamState);
 	th_decode_free(mInfo->TheoraDecoder);
 	mInfo->TheoraDecoder = th_decode_alloc(&mInfo->TheoraInfo, mInfo->TheoraSetup);
@@ -804,44 +797,40 @@ void TheoraVideoClip::doSeek()
 		ogg_stream_reset(&mInfo->VorbisStreamState);
 		vorbis_synthesis_restart(&mInfo->VorbisDSPState);
 	}
-
 	// first seek to desired frame, then figure out the location of the
 	// previous keyframe and seek to it.
 	// then by setting the correct time, the decoder will skip N frames untill
 	// we get the frame we want.
-
-	frame = seekPage(target_frame, 1); // find the keyframe nearest to the target frame
+	frame = seekPage(mSeekFrame, 1); // find the keyframe nearest to the target frame
 #ifdef _DEBUG
-		th_writelog(mName + " [seek]: nearest keyframe for frame " + str(target_frame) + " is frame: " + str(frame));
+//		th_writelog(mName + " [seek]: nearest keyframe for frame " + str(mSeekFrame) + " is frame: " + str(frame));
 #endif
-	seekPage(std::max(0, frame - 2), 0);
+	seekPage(std::max(0, frame - 1), 0);
 
-		ogg_packet opTheora;
-		ogg_int64_t granulePos;
-		// now that we've found the keyframe that preceeds our desired frame, lets keep on decoding frames until we
-		// reach our target frame.
-		for (;;)
+	ogg_packet opTheora;
+	ogg_int64_t granulePos;
+	// now that we've found the keyframe that preceeds our desired frame, lets keep on decoding frames until we
+	// reach our target frame.
+	for (;mSeekFrame != 0;)
+	{
+		int ret = ogg_stream_packetout(&mInfo->TheoraStreamState, &opTheora);
+		if (ret > 0)
 		{
-			int ret = ogg_stream_packetout(&mInfo->TheoraStreamState, &opTheora);
-
-			if (ret > 0)
+			if (th_decode_packetin(mInfo->TheoraDecoder, &opTheora, &granulePos) != 0) continue; // 0 means success
+			frame = (int) th_granule_frame(mInfo->TheoraDecoder, granulePos);
+			if (frame >= mSeekFrame - 1) break;
+		}
+		else
+		{
+			if (!_readData())
 			{
-				if (th_decode_packetin(mInfo->TheoraDecoder, &opTheora, &granulePos) != 0) continue; // 0 means success
-				frame = (int) th_granule_frame(mInfo->TheoraDecoder, granulePos);
-				if (frame >= target_frame - 1) break;
-			}
-			else
-			{
-				if (!_readData())
-				{
-					th_writelog(mName + " [seek]: fineseeking failed, _readData failed!");
-					return;
-				}
+				th_writelog(mName + " [seek]: fineseeking failed, _readData failed!");
+				return;
 			}
 		}
-
+	}
 #ifdef _DEBUG
-		th_writelog(mName + " [seek]: fineseeked to frame " + str(frame + 1) + ", requested: " + str(target_frame));
+//	th_writelog(mName + " [seek]: fineseeked to frame " + str(frame + 1) + ", requested: " + str(mSeekFrame));
 #endif
 	if (mAudioInterface)
 	{
@@ -882,14 +871,20 @@ void TheoraVideoClip::doSeek()
 		}
 	}
 
-	mTimer->play();
-	mSeekPos = -1;
+	if (!paused) mTimer->play();
+	mSeekFrame = -1;
 	if (mAudioInterface) mAudioMutex->unlock();
 }
 
 void TheoraVideoClip::seek(float time)
 {
-	mSeekPos = time;
+	mSeekFrame = (int) (time * getFPS());
+	mEndOfFile = false;
+}
+
+void TheoraVideoClip::seekToFrame(int frame)
+{
+	mSeekFrame = frame;
 	mEndOfFile = false;
 }
 
