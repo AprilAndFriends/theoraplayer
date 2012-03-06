@@ -48,8 +48,8 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 	g_ManagerSingleton = this;
 
 	logMessage("Initializing Theora Playback Library (" + getVersionString() + ")\n" + 
-	           "  - libtheora version: " + th_version_string() + ")\n" + 
-	           "  - libvorbis version: " + vorbis_version_string() + ")\n" + 
+	           "  - libtheora version: " + th_version_string() + "\n" + 
+	           "  - libvorbis version: " + vorbis_version_string() + "\n" + 
 			   "------------------------------------");
 	mAudioFactory = NULL;
 	mWorkMutex = new TheoraMutex();

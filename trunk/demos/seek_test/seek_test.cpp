@@ -17,21 +17,25 @@ std::string window_name="seek_test";
 bool started=1, needsSeek = 1;
 int cFrame = 0, nWrongSeeks = 0;
 int window_w=800,window_h=600;
+float delay = 0;
 
 void draw()
 {
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 
-	TheoraVideoFrame* f=clip->getNextFrame();
-	if (f && !needsSeek)
+	if (!needsSeek)
 	{
-		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
-		needsSeek = 1;
-		if (f->getFrameNumber() != cFrame)
-			nWrongSeeks++;
-		cFrame++;
-		printf("Displayed frame %d\n", f->getFrameNumber());
-		clip->popFrame();
+		TheoraVideoFrame* f=clip->getNextFrame();
+		if (f)
+		{
+			glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
+			needsSeek = 1;
+			if (f->getFrameNumber() != cFrame)
+				nWrongSeeks++;
+			cFrame++;
+			printf("Displayed frame %d\n", f->getFrameNumber());
+			clip->popFrame();
+		}
 	}
 
 
@@ -56,9 +60,14 @@ void update(float time_increase)
 	mgr->update(time_increase / 10);
 	if (needsSeek)
 	{
-		printf("Requesting seek to frame %d\n", cFrame);
-		clip->seekToFrame(cFrame);
-		needsSeek = 0;
+		delay += time_increase;
+		if (delay >= 0.0f)
+		{
+			delay = 0;
+			printf("Requesting seek to frame %d\n", cFrame);
+			clip->seekToFrame(cFrame);
+			needsSeek = 0;
+		}
 	}
 }
 
