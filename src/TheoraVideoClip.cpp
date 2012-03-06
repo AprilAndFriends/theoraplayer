@@ -741,7 +741,6 @@ long TheoraVideoClip::seekPage(long targetFrame, bool return_keyframe)
 					if (granule >= 0)
 					{
 						frame = (long) th_granule_frame(mInfo->TheoraDecoder, granule);
-						// stop binary searching when we're close enough from the target frame
 						if (frame < targetFrame && targetFrame - frame < 10)
 						{
 							// we're close enough, let's break this.
@@ -765,9 +764,12 @@ long TheoraVideoClip::seekPage(long targetFrame, bool return_keyframe)
 		}
 	}
 	if (return_keyframe) return (long) (granule >> mInfo->TheoraInfo.keyframe_granule_shift);
-	// theora requires to set the granule pos after a seek
-	th_decode_ctl(mInfo->TheoraDecoder, TH_DECCTL_SET_GRANPOS, &granule, sizeof(granule));
 
+	if (targetFrame == 0) return -1;
+	ogg_sync_reset(&mInfo->OggSyncState);
+	mStream->seek((seek_min + seek_max) / 2); // do a binary search
+	memset(&mInfo->OggPage, 0, sizeof(ogg_page));
+	ogg_sync_pageseek(&mInfo->OggSyncState, &mInfo->OggPage);
 	return -1;
 }
 
@@ -809,13 +811,25 @@ void TheoraVideoClip::doSeek()
 
 	ogg_packet opTheora;
 	ogg_int64_t granulePos;
+	bool granule_set = 0;
 	// now that we've found the keyframe that preceeds our desired frame, lets keep on decoding frames until we
 	// reach our target frame.
+
 	for (;mSeekFrame != 0;)
 	{
 		int ret = ogg_stream_packetout(&mInfo->TheoraStreamState, &opTheora);
 		if (ret > 0)
 		{
+				if (!granule_set)
+			{
+				// theora decoder requires to set the granule pos after seek to be able to determine the current frame
+				if (opTheora.granulepos >= 0)
+				{
+					th_decode_ctl(mInfo->TheoraDecoder, TH_DECCTL_SET_GRANPOS, &opTheora.granulepos, sizeof(opTheora.granulepos));
+					granule_set = 1;
+				}
+				else continue; // ignore prev delta frames until we hit a keyframe
+			}
 			if (th_decode_packetin(mInfo->TheoraDecoder, &opTheora, &granulePos) != 0) continue; // 0 means success
 			frame = (int) th_granule_frame(mInfo->TheoraDecoder, granulePos);
 			if (frame >= mSeekFrame - 1) break;
