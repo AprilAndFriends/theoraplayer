@@ -278,7 +278,6 @@ void TheoraVideoClip::_restart()
 	ogg_int64_t granulePos = 0;
 	th_decode_ctl(mInfo->TheoraDecoder, TH_DECCTL_SET_GRANPOS, &granulePos, sizeof(granule));
 
-	//mTimer->seek(0);
 	mEndOfFile=false;
 
 	mRestarted=1;
@@ -600,6 +599,7 @@ bool TheoraVideoClip::isBusy()
 
 void TheoraVideoClip::decodeAudio()
 {
+	if (mRestarted) return;
 	mAudioMutex->lock();
 
 	ogg_packet opVorbis;
@@ -610,7 +610,6 @@ void TheoraVideoClip::decodeAudio()
 		len = vorbis_synthesis_pcmout(&mInfo->VorbisDSPState, &pcm);
 		if (len == 0)
 		{
-			if (mRestarted) break;
 			if (ogg_stream_packetout(&mInfo->VorbisStreamState, &opVorbis) > 0)
 			{
 				if (vorbis_synthesis(&mInfo->VorbisBlock, &opVorbis) == 0)

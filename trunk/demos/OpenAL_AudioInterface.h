@@ -27,7 +27,7 @@ class OpenAL_AudioInterface : public TheoraAudioInterface, TheoraTimer
 	int mMaxBuffSize;
 	int mBuffSize;
 	short *mTempBuffer;
-	float mTimeOffset;
+	float mCurrentTimer;
 
 	struct OpenAL_Buffer
 	{
