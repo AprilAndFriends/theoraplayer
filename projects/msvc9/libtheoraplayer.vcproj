@@ -380,63 +380,6 @@
 	</References>
 	<Files>
 		<Filter
-			Name="src"
-			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
-			>
-			<File
-				RelativePath="..\..\src\Endianess.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\demos\glut_player\glut_player.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\TheoraAsync.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\TheoraAudioInterface.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\TheoraDataSource.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\TheoraException.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\TheoraFrameQueue.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\TheoraTimer.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\TheoraUtil.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\TheoraVideoClip.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\TheoraVideoFrame.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\TheoraVideoManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\TheoraWorkerThread.cpp"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="include"
 			Filter="h;hpp;hxx;hm;inl"
 			>
@@ -492,6 +435,63 @@
 				RelativePath="..\..\include\theoraplayer\TheoraWorkerThread.h"
 				>
 			</File>
+			<Filter
+				Name="src"
+				Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+				>
+				<File
+					RelativePath="..\..\src\Endianess.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\demos\glut_player\glut_player.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\TheoraAsync.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\TheoraAudioInterface.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\TheoraDataSource.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\TheoraException.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\TheoraFrameQueue.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\TheoraTimer.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\TheoraUtil.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\TheoraVideoClip.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\TheoraVideoFrame.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\TheoraVideoManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\TheoraWorkerThread.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\scripts\doxygen_mainpage.h"
