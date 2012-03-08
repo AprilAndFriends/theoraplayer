@@ -26,7 +26,7 @@ OpenAL_AudioInterface::OpenAL_AudioInterface(TheoraVideoClip* owner,int nChannel
 	mMaxBuffSize=freq*mNumChannels*2;
 	mBuffSize=0;
 	mNumProcessedSamples=0;
-	mTimeOffset=0;
+	mCurrentTimer = 0;
 
 	mTempBuffer=new short[mMaxBuffSize];
 	alGenSources(1,&mSource);
@@ -47,7 +47,7 @@ OpenAL_AudioInterface::~OpenAL_AudioInterface()
 
 void OpenAL_AudioInterface::insertData(float* data,int nSamples)
 {
-	printf("got %d bytes, %d buffers queued\n",nSamples,(int)mBufferQueue.size());
+	//printf("got %d bytes, %d buffers queued\n",nSamples,(int)mBufferQueue.size());
 	for (int i = 0; i < nSamples; i++)
 	{
 		if (mBuffSize < mMaxBuffSize)
@@ -90,6 +90,7 @@ void OpenAL_AudioInterface::update(float time_increase)
 	// process played buffers
 
 	alGetSourcei(mSource,AL_BUFFERS_PROCESSED,&nProcessed);
+	
 	for (i=0;i<nProcessed;i++)
 	{
 		buff=mBufferQueue.front();
@@ -98,22 +99,20 @@ void OpenAL_AudioInterface::update(float time_increase)
 		alSourceUnqueueBuffers(mSource,1,&buff.id);
 		alDeleteBuffers(1,&buff.id);
 	}
+	if (nProcessed != 0)
+	{
+		// update offset
+		alGetSourcef(mSource,AL_SEC_OFFSET,&mCurrentTimer);
+	}
 
 	// control playback and return time position
 	alGetSourcei(mSource,AL_SOURCE_STATE,&state);
 	if (state == AL_PLAYING)
 	{
-		alGetSourcef(mSource,AL_SEC_OFFSET,&mTime);
-		mTime+=(float) mNumPlayedSamples/mFreq;
-		mTimeOffset=0;
-	}
-	else
-	{
-		mTime=(float) mNumProcessedSamples/mFreq+mTimeOffset;
-		mTimeOffset+=time_increase;
+		mCurrentTimer += time_increase;
 	}
 
-	if (mTimeOffset > 0) printf("%.2f\n",mTimeOffset);
+	mTime = mCurrentTimer + (float) mNumPlayedSamples/mFreq;
 
 	float duration=mClip->getDuration();
 	if (mTime > duration) mTime=duration;
@@ -148,9 +147,10 @@ void OpenAL_AudioInterface::seek(float time)
 //		if (nProcessed != 0)
 //			nProcessed=nProcessed;
 	mBuffSize=0;
-	mTimeOffset=0;
 
+	mCurrentTimer = 0;
 	mNumPlayedSamples=mNumProcessedSamples=(int) time*mFreq;
+	mTime = mCurrentTimer;
 }
 
 OpenAL_AudioInterfaceFactory::OpenAL_AudioInterfaceFactory()

@@ -52,9 +52,10 @@ void update(float time_increase)
 	if (started)
 	{
 		// let's wait until the system caches up a few frames on startup
-		if (clip->getNumReadyFrames() < clip->getNumPrecachedFrames()*0.5f)
+		if (clip->getNumReadyFrames() < 2)
 			return;
 		started=0;
+		clip->play();
 	}
 	mgr->update(time_increase);
 }
@@ -94,11 +95,11 @@ void init()
 	mgr=new TheoraVideoManager();
 	iface_factory=new OpenAL_AudioInterfaceFactory();
 	mgr->setAudioInterfaceFactory(iface_factory);
-	clip=mgr->createVideoClip("media/bunny.ogg");
+	clip=mgr->createVideoClip("media/bunny.ogg", TH_RGB, 16);
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short.ogg"),TH_RGB);
 	clip->setAutoRestart(1);
-
+	clip->pause();
 	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
 }
 
