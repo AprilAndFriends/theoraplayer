@@ -43,6 +43,15 @@ enum TheoraOutputMode
 	TH_YUVA=12,
 	TH_AYUV=13
 };
+/**
+	This is an internal structure which TheoraVideoClip uses to store audio packets
+*/
+struct TheoraAudioPacket
+{
+	float* pcm;
+	int num_samples; //! size in number of float samples (stereo has twice the number of samples)
+	TheoraAudioPacket* next; // pointer to the next audio packet, to implement a linked list
+};
 
 /**
 	This object contains all data related to video playback, eg. the open source file,
@@ -77,12 +86,14 @@ class TheoraPlayerExport TheoraVideoClip
 	int mNumFrames;
 
 	float mAudioGain; //! multiplier for audio samples. between 0 and 1
-	TheoraOutputMode mOutputMode,mRequestedOutputMode;
-	bool mAutoRestart;
-	bool mEndOfFile,mRestarted;
-	int mIteration,mLastIteration; //! used to detect when the video restarted
+	TheoraAudioPacket* mTheoraAudioPacketQueue;
 
-	float mUserPriority;
+	TheoraOutputMode mOutputMode, mRequestedOutputMode;
+	bool mAutoRestart;
+	bool mEndOfFile, mRestarted;
+	int mIteration, mLastIteration; //! used to detect when the video restarted
+
+	float mUserPriority; //! TODO implementation
 
 	TheoraInfoStruct* mInfo; // a pointer is used to avoid having to include theora & vorbis headers
 
@@ -102,6 +113,15 @@ class TheoraPlayerExport TheoraVideoClip
 	void doSeek(); //! called by WorkerThread to seek to mSeekFrame
 	bool _readData();
 	bool isBusy();
+
+	//! decodes audio from the vorbis stream and stores in packets
+	void decodeAudio();
+	//! adds an audio packet to the packet queue
+	void addAudioPacket(float** buffer, int num_samples);
+	//! return a decoded audio packet or NULL if packet queue is empty
+	TheoraAudioPacket* popAudioPacket();
+	void destroyAudioPacket(TheoraAudioPacket* p);
+	void destroyAllAudioPackets();
 
 	void load(TheoraDataSource* source);
 

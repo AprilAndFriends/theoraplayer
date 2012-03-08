@@ -28,6 +28,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tv_room", "..\..\demos\tv_r
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "seek_test", "..\..\demos\seek_test\msvc9\seek_test.vcproj", "{388E4B0A-0860-4CC1-8530-FD6F79E7AB3E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{388E4B0F-0860-40C7-8530-FD6F79E7AB3E} = {388E4B0F-0860-40C7-8530-FD6F79E7AB3E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

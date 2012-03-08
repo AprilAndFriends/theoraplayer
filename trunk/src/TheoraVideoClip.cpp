@@ -75,6 +75,7 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
     mName(data_source->repr()),
     mStride(usePower2Stride),
     mAudioGain(1),
+	mTheoraAudioPacketQueue(0),
     mOutputMode(output_mode),
     mRequestedOutputMode(output_mode),
     mAutoRestart(0),
@@ -131,6 +132,8 @@ TheoraVideoClip::~TheoraVideoClip()
 		mAudioInterface->destroy(); // notify audio interface it's time to call it a day
 	}
 	delete mAudioMutex;
+
+	destroyAllAudioPackets();
 
 	//ogg_sync_clear(&mInfo->OggSyncState);
 }
@@ -216,8 +219,6 @@ void TheoraVideoClip::decodeNextFrame()
 			if (th_decode_packetin(mInfo->TheoraDecoder, &opTheora, &granulePos) != 0) continue; // 0 means success
 			float time = (float) th_granule_time(mInfo->TheoraDecoder, granulePos);
 			unsigned long frame_number = (unsigned long) th_granule_frame(mInfo->TheoraDecoder, granulePos);
-			if (time > mDuration)
-				mDuration = time; // duration corrections, especcially useful if duration was not found upon opening the stream.
 
 			if (time < mTimer->getTime() && !mRestarted)
 			{
@@ -240,10 +241,12 @@ void TheoraVideoClip::decodeNextFrame()
 			if (!_readData())
 			{
 				frame->mInUse = 0;
-				return;
+				break;
 			}
 		}
 	}
+
+	if (mAudioInterface != NULL) decodeAudio();
 }
 
 void TheoraVideoClip::_restart()
@@ -380,47 +383,6 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 
 }
 
-void TheoraVideoClip::decodedAudioCheck()
-{
-	if (!mAudioInterface || mTimer->isPaused()) return;
-
-	mAudioMutex->lock();
-
-	ogg_packet opVorbis;
-	float **pcm;
-	int len=0;
-	while (1)
-	{
-		len = vorbis_synthesis_pcmout(&mInfo->VorbisDSPState,&pcm);
-		if (!len)
-		{
-			if (mRestarted) break;
-			if (ogg_stream_packetout(&mInfo->VorbisStreamState,&opVorbis) > 0)
-			{
-				if (vorbis_synthesis(&mInfo->VorbisBlock,&opVorbis) == 0)
-					vorbis_synthesis_blockin(&mInfo->VorbisDSPState,&mInfo->VorbisBlock);
-				continue;
-			}
-			else break;
-		}
-		if (mAudioGain < 1)
-		{
-			// gain applied, let's attenuate the samples
-			for (int i=0;i<len;i++)
-			{
-				for (int j=0;j<mInfo->VorbisInfo.channels;j++)
-				{
-					pcm[j][i]*=mAudioGain;
-				}
-			}
-		}
-		mAudioInterface->insertData(pcm,len);
-		vorbis_synthesis_read(&mInfo->VorbisDSPState,len);
-	}
-
-	mAudioMutex->unlock();
-}
-
 void TheoraVideoClip::load(TheoraDataSource* source)
 {
 	th_writelog("-----");
@@ -429,7 +391,7 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 
 	mInfo->TheoraDecoder = th_decode_alloc(&mInfo->TheoraInfo,mInfo->TheoraSetup);
 
-	mWidth = mInfo->TheoraInfo.frame_width;
+	mWidth = mInfo->TheoraInfo.frame_width; // TODO: pic_width should be used and accounted for while decoding
 	mHeight = mInfo->TheoraInfo.frame_height;
 	mStride = (mStride == 1) ? mStride=_nextPow2(mWidth) : mWidth;
 	mFPS = mInfo->TheoraInfo.fps_numerator / (float) mInfo->TheoraInfo.fps_denominator;
@@ -634,6 +596,107 @@ std::string TheoraVideoClip::getName()
 bool TheoraVideoClip::isBusy()
 {
 	return mAssignedWorkerThread || mOutputMode != mRequestedOutputMode;
+}
+
+void TheoraVideoClip::decodeAudio()
+{
+	mAudioMutex->lock();
+
+	ogg_packet opVorbis;
+	float **pcm;
+	int len = 0;
+	for (;;)
+	{
+		len = vorbis_synthesis_pcmout(&mInfo->VorbisDSPState, &pcm);
+		if (len == 0)
+		{
+			if (mRestarted) break;
+			if (ogg_stream_packetout(&mInfo->VorbisStreamState, &opVorbis) > 0)
+			{
+				if (vorbis_synthesis(&mInfo->VorbisBlock, &opVorbis) == 0)
+					vorbis_synthesis_blockin(&mInfo->VorbisDSPState, &mInfo->VorbisBlock);
+				continue;
+			}
+			else break;
+		}
+
+		addAudioPacket(pcm, len);
+		vorbis_synthesis_read(&mInfo->VorbisDSPState, len); // tell vorbis we read a number of samples
+	}
+
+	mAudioMutex->unlock();
+}
+
+void TheoraVideoClip::decodedAudioCheck()
+{
+	if (!mAudioInterface || mTimer->isPaused()) return;
+
+	mAudioMutex->lock();
+
+	for (TheoraAudioPacket* p = popAudioPacket(); p != NULL; p = popAudioPacket())
+	{
+		mAudioInterface->insertData(p->pcm, p->num_samples);
+		destroyAudioPacket(p);
+	}
+	mAudioMutex->unlock();
+}
+
+void TheoraVideoClip::addAudioPacket(float** buffer, int num_samples)
+{
+	TheoraAudioPacket* packet = new TheoraAudioPacket;
+
+	float* data = new float[num_samples * mInfo->VorbisInfo.channels];
+	float* dataptr = data;
+	int i,j;
+
+	if (mAudioGain < 1.0f)
+	{
+		// apply gain, let's attenuate the samples
+		for (i = 0; i < num_samples; i++)
+			for (j = 0; j < mInfo->VorbisInfo.channels; j++, dataptr++)
+				*dataptr = buffer[i][j] * mAudioGain;
+	}
+	else
+	{
+		// do a simple copy, faster then the above method, when gain is 1.0f
+		for (i = 0; i < num_samples; i++)
+			for (j = 0; j < mInfo->VorbisInfo.channels; j++, dataptr++)
+				*dataptr = buffer[j][i];
+	}
+
+	packet->pcm = data;
+	packet->num_samples = num_samples * mInfo->VorbisInfo.channels;
+	packet->next = NULL;
+
+	if (mTheoraAudioPacketQueue == NULL) mTheoraAudioPacketQueue = packet;
+	else
+	{
+		TheoraAudioPacket* last = mTheoraAudioPacketQueue;
+		for (TheoraAudioPacket* p = last; p != NULL; p = p->next)
+			last = p;
+		last->next = packet;
+	}
+}
+
+TheoraAudioPacket* TheoraVideoClip::popAudioPacket()
+{
+	if (mTheoraAudioPacketQueue == NULL) return NULL;
+	TheoraAudioPacket* p = mTheoraAudioPacketQueue;
+	mTheoraAudioPacketQueue = mTheoraAudioPacketQueue->next;
+	return p;
+}
+
+void TheoraVideoClip::destroyAudioPacket(TheoraAudioPacket* p)
+{
+	if (p == NULL) return;
+	delete [] p->pcm;
+	delete p;
+}
+
+void TheoraVideoClip::destroyAllAudioPackets()
+{
+	for (TheoraAudioPacket* p = popAudioPacket(); p != NULL; p = popAudioPacket())
+		destroyAudioPacket(p);
 }
 
 TheoraOutputMode TheoraVideoClip::getOutputMode()

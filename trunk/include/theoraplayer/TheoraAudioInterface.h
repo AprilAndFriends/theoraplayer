@@ -37,7 +37,7 @@ public:
       \param data contains one or two channels of float PCM data in the range [-1,1]
       \param nSamples contains the number of samples that the data parameter contains in each channel
     */
-	virtual void insertData(float** data,int nSamples)=0;
+	virtual void insertData(float* data, int nSamples)=0;
 
 	virtual void destroy() = 0;
 
