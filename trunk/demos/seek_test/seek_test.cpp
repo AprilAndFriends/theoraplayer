@@ -33,6 +33,7 @@ void draw()
 			if (f->getFrameNumber() != cFrame)
 				nWrongSeeks++;
 			cFrame++;
+			if (cFrame >= clip->getNumFrames()) cFrame = 0;
 			printf("Displayed frame %d\n", f->getFrameNumber());
 			clip->popFrame();
 		}
@@ -83,13 +84,13 @@ void OnClick(float x,float y)
 
 void setDebugTitle(char* out)
 {
-	sprintf(out, " (%dx%d@%d) %d wrong seeks", clip->getWidth(), clip->getHeight(), clip->getFPS(), nWrongSeeks);
+	sprintf(out, " (%dx%d@%d) %d wrong seeks", clip->getWidth(), clip->getHeight(), (int) clip->getFPS(), nWrongSeeks);
 }
 
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/short.ogg"), TH_RGB, 4);
+	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/bunny.ogg"), TH_RGB, 4);
 	clip->setAutoRestart(1);
 
 	tex_id=createTexture(nextPow2(clip->getWidth()), nextPow2(clip->getHeight()));

@@ -71,10 +71,10 @@ class TheoraPlayerExport TheoraVideoClip
 	int mAudioSkipSeekFlag;
 
 	int mSeekFrame; //! stores desired seek position as a frame number. next worker thread will do the seeking and reset this var to -1
-	float mDuration, mFrameDuration;
+	float mDuration, mFrameDuration, mFPS;
     std::string mName;
-	int mWidth,mHeight,mStride;
-	unsigned long mNumFrames;
+	int mWidth, mHeight, mStride;
+	int mNumFrames;
 
 	float mAudioGain; //! multiplier for audio samples. between 0 and 1
 	TheoraOutputMode mOutputMode,mRequestedOutputMode;
@@ -210,8 +210,8 @@ public:
 	float getTimePosition();
 	//! get the duration of the movie in seconds
 	float getDuration();
-	//! return the clips' frame rate
-	int getFPS();
+	//! return the clips' frame rate, warning, fps can be a non integer number!
+	float getFPS();
 	//! get the number of frames in this movie
 	int getNumFrames() { return mNumFrames; }
 
@@ -233,9 +233,9 @@ public:
     void setPlaybackSpeed(float speed);
     float getPlaybackSpeed();
 	//! seek to a given time position
-	void seek(float time);
+	void seek(float time, bool wait_for_precache = 1);
 	//! seek to a given frame number
-	void seekToFrame(int frame);
+	void seekToFrame(int frame, bool wait_for_precache = 1);
 };
 
 #endif

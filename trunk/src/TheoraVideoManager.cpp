@@ -43,7 +43,7 @@ TheoraVideoManager& TheoraVideoManager::getSingleton()
 }
 
 TheoraVideoManager::TheoraVideoManager(int num_worker_threads) : 
-	mDefaultNumPrecachedFrames(16)
+	mDefaultNumPrecachedFrames(4)
 {
 	g_ManagerSingleton = this;
 
