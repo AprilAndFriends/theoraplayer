@@ -14,6 +14,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "TheoraAudioInterface.h"
 #include "TheoraUtil.h"
 #include "TheoraDataSource.h"
+#include "TheoraException.h"
 
 TheoraVideoManager* g_ManagerSingleton=0;
 // declaring function prototype here so I don't have to put it in a header file
@@ -45,6 +46,8 @@ TheoraVideoManager& TheoraVideoManager::getSingleton()
 TheoraVideoManager::TheoraVideoManager(int num_worker_threads) : 
 	mDefaultNumPrecachedFrames(8)
 {
+	if (num_worker_threads < 1) throw TheoraGenericException("Unable to create TheoraVideoManager, at least one worker thread is reqired");
+
 	g_ManagerSingleton = this;
 
 	logMessage("Initializing Theora Playback Library (" + getVersionString() + ")\n" + 
@@ -205,6 +208,8 @@ void TheoraVideoManager::destroyWorkerThreads()
 void TheoraVideoManager::setNumWorkerThreads(int n)
 {
 	if (n == getNumWorkerThreads()) return;
+	if (n < 1) throw TheoraGenericException("Unable to change the number of worker threads in TheoraVideoManager, at least one worker thread is reqired");
+
 	th_writelog("changing number of worker threats to: "+str(n));
 
 	destroyWorkerThreads();
