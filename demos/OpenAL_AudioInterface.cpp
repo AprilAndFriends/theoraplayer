@@ -74,7 +74,7 @@ void OpenAL_AudioInterface::insertData(float* data,int nSamples)
 			if (state != AL_PLAYING)
 			{
 				//alSourcef(mSource,AL_PITCH,0.5); // debug
-				alSourcef(mSource,AL_SAMPLE_OFFSET,(float) mNumProcessedSamples-mFreq/4);
+				//alSourcef(mSource,AL_SAMPLE_OFFSET,(float) mNumProcessedSamples-mFreq/4);
 				alSourcePlay(mSource);
 			}
 
@@ -149,8 +149,8 @@ void OpenAL_AudioInterface::seek(float time)
 	mBuffSize=0;
 
 	mCurrentTimer = 0;
-	mNumPlayedSamples=mNumProcessedSamples=(int) time*mFreq;
-	mTime = mCurrentTimer;
+	mNumPlayedSamples=mNumProcessedSamples=(int) (time*mFreq);
+	mTime = time;
 }
 
 OpenAL_AudioInterfaceFactory::OpenAL_AudioInterfaceFactory()

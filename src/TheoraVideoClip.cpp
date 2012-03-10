@@ -183,11 +183,6 @@ bool TheoraVideoClip::_readData()
 				audio_time = (float) vorbis_granule_time(&mInfo->VorbisDSPState, g);
 				audio_eos = ogg_page_eos(&mInfo->OggPage);
 
-				if (mSeekFrame == -2 && !mAudioSkipSeekFlag)
-				{
-					if (g > -1) { mAudioSkipSeekFlag = 1; continue; }
-					if (g == -1) continue;
-				}
 				mAudioMutex->lock();
 				ogg_stream_pagein(&mInfo->VorbisStreamState, &mInfo->OggPage);
 				mAudioMutex->unlock();
@@ -597,14 +592,17 @@ bool TheoraVideoClip::isBusy()
 	return mAssignedWorkerThread || mOutputMode != mRequestedOutputMode;
 }
 
-void TheoraVideoClip::decodeAudio()
+float TheoraVideoClip::decodeAudio(float discard_time)
 {
-	if (mRestarted) return;
-	mAudioMutex->lock();
+	if (mRestarted) return -1;
+	bool lock = discard_time < 0;
+	if (lock) mAudioMutex->lock();
 
 	ogg_packet opVorbis;
 	float **pcm;
 	int len = 0;
+	float discard_ctime = -1.0f, freq = (float) mInfo->VorbisInfo.rate;
+
 	for (;;)
 	{
 		len = vorbis_synthesis_pcmout(&mInfo->VorbisDSPState, &pcm);
@@ -613,17 +611,42 @@ void TheoraVideoClip::decodeAudio()
 			if (ogg_stream_packetout(&mInfo->VorbisStreamState, &opVorbis) > 0)
 			{
 				if (vorbis_synthesis(&mInfo->VorbisBlock, &opVorbis) == 0)
+				{
+					if (discard_time >= 0)
+					{
+						if (discard_ctime < 0 && opVorbis.granulepos >= 0)
+						{
+							discard_ctime = (float) vorbis_granule_time(&mInfo->VorbisDSPState, opVorbis.granulepos);
+						}
+					}
 					vorbis_synthesis_blockin(&mInfo->VorbisDSPState, &mInfo->VorbisBlock);
+				}
 				continue;
 			}
 			else break;
 		}
-
-		addAudioPacket(pcm, len);
+		if (discard_time >= 0)
+		{
+			if (discard_ctime >= 0)
+			{
+				if (discard_ctime >= discard_time) discard_time = -1; 
+				else if (discard_ctime + len / freq >= discard_time)
+				{
+					int offset = (int) ((discard_time - discard_ctime) * freq);
+					addAudioPacket(pcm, len, offset);
+					discard_ctime = discard_time;
+					discard_time = -1;
+				}
+				else discard_ctime += len / freq;
+			}
+		}
+		else
+			addAudioPacket(pcm, len);
 		vorbis_synthesis_read(&mInfo->VorbisDSPState, len); // tell vorbis we read a number of samples
 	}
 
-	mAudioMutex->unlock();
+	if (lock) mAudioMutex->unlock();
+	return discard_ctime;
 }
 
 void TheoraVideoClip::decodedAudioCheck()
@@ -640,31 +663,31 @@ void TheoraVideoClip::decodedAudioCheck()
 	mAudioMutex->unlock();
 }
 
-void TheoraVideoClip::addAudioPacket(float** buffer, int num_samples)
+void TheoraVideoClip::addAudioPacket(float** buffer, int num_samples, int num_skip)
 {
 	TheoraAudioPacket* packet = new TheoraAudioPacket;
 
-	float* data = new float[num_samples * mInfo->VorbisInfo.channels];
+	float* data = new float[(num_samples - num_skip) * mInfo->VorbisInfo.channels];
 	float* dataptr = data;
 	int i,j;
 
 	if (mAudioGain < 1.0f)
 	{
 		// apply gain, let's attenuate the samples
-		for (i = 0; i < num_samples; i++)
+		for (i = num_skip; i < num_samples; i++)
 			for (j = 0; j < mInfo->VorbisInfo.channels; j++, dataptr++)
 				*dataptr = buffer[i][j] * mAudioGain;
 	}
 	else
 	{
 		// do a simple copy, faster then the above method, when gain is 1.0f
-		for (i = 0; i < num_samples; i++)
+		for (i = num_skip; i < num_samples; i++)
 			for (j = 0; j < mInfo->VorbisInfo.channels; j++, dataptr++)
 				*dataptr = buffer[j][i];
 	}
 
 	packet->pcm = data;
-	packet->num_samples = num_samples * mInfo->VorbisInfo.channels;
+	packet->num_samples = (num_samples - num_skip) * mInfo->VorbisInfo.channels;
 	packet->next = NULL;
 
 	if (mTheoraAudioPacketQueue == NULL) mTheoraAudioPacketQueue = packet;
@@ -923,46 +946,11 @@ void TheoraVideoClip::doSeek()
 #endif
 	if (mAudioInterface)
 	{
-		// let's decode some pages and seek to the appropriate PCM sample
-		ogg_int64_t granule = 0;
-		float last_page_time = time;
-		for (;;)
-		{
-			int ret = ogg_sync_pageout(&mInfo->OggSyncState, &mInfo->OggPage);
-			if (ret == 1)
-			{
-				int serno = ogg_page_serialno(&mInfo->OggPage);
-				if (serno == mInfo->VorbisStreamState.serialno)
-				{
-					granule = ogg_page_granulepos(&mInfo->OggPage);
-					float g_time = (float) vorbis_granule_time(&mInfo->VorbisDSPState, granule);
-					if (g_time > time)
-					{
-						float **pcm;
-						int len = vorbis_synthesis_pcmout(&mInfo->VorbisDSPState, &pcm);
-						if (len > 0)
-							break;
-						//ogg_stream_pagein(&mInfo->VorbisStreamState,&mInfo->OggPage);
-						time = g_time;
-						break;
-					}
-					last_page_time = g_time;
-				}
-				else ogg_stream_pagein(&mInfo->TheoraStreamState, &mInfo->OggPage);
-			}
-			else
-			{
-				char *buffer = ogg_sync_buffer(&mInfo->OggSyncState, 4096);
-				int bytes_read = mStream->read(buffer, 4096);
-				if (bytes_read == 0) break;
-				ogg_sync_wrote(&mInfo->OggSyncState, bytes_read);
-			}
-		}
+		float reached = decodeAudio(time);
+		mAudioMutex->unlock();
 	}
-
 	if (!paused) mTimer->play();
 	mSeekFrame = -1;
-	if (mAudioInterface) mAudioMutex->unlock();
 }
 
 void TheoraVideoClip::seek(float time, bool wait_for_precache)

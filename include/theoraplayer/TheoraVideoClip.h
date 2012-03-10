@@ -115,9 +115,9 @@ class TheoraPlayerExport TheoraVideoClip
 	bool isBusy();
 
 	//! decodes audio from the vorbis stream and stores in packets
-	void decodeAudio();
+	float decodeAudio(float discard_time = -1);
 	//! adds an audio packet to the packet queue
-	void addAudioPacket(float** buffer, int num_samples);
+	void addAudioPacket(float** buffer, int num_samples, int num_skip = 0);
 	//! return a decoded audio packet or NULL if packet queue is empty
 	TheoraAudioPacket* popAudioPacket();
 	void destroyAudioPacket(TheoraAudioPacket* p);
