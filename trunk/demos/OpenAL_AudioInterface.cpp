@@ -111,8 +111,8 @@ void OpenAL_AudioInterface::update(float time_increase)
 	}
 
 	// control playback and return time position
-	alGetSourcei(mSource,AL_SOURCE_STATE,&state);
-	if (state == AL_PLAYING)
+	//alGetSourcei(mSource,AL_SOURCE_STATE,&state);
+	//if (state == AL_PLAYING)
 		mCurrentTimer += time_increase;
 
 	mTime = mCurrentTimer + (float) mNumPlayedSamples/mFreq;
