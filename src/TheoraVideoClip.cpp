@@ -165,8 +165,7 @@ bool TheoraVideoClip::_readData()
 		{
 			if (bytes_read == 0)
 			{
-				if (mAutoRestart) _restart();
-				else mEndOfFile = true;
+				if (!mAutoRestart) mEndOfFile = true;
 				return 0;
 			}
 		}
@@ -180,8 +179,7 @@ bool TheoraVideoClip::_readData()
 			{
 				ogg_int64_t g = ogg_page_granulepos(&mInfo->OggPage);
 				audio_time = (float) vorbis_granule_time(&mInfo->VorbisDSPState, g);
-				audio_eos = ogg_page_eos(&mInfo->OggPage);
-
+				audio_eos = ogg_page_eos(&mInfo->OggPage);	
 				mAudioMutex->lock();
 				ogg_stream_pagein(&mInfo->VorbisStreamState, &mInfo->OggPage);
 				mAudioMutex->unlock();
@@ -200,10 +198,10 @@ void TheoraVideoClip::decodeNextFrame()
 	TheoraVideoFrame* frame = mFrameQueue->requestEmptyFrame();
 	if (!frame) return; // max number of precached frames reached
 	long nSeekSkippedFrames = 0;
+	bool should_restart = 0;
 	ogg_packet opTheora;
 	ogg_int64_t granulePos;
 	th_ycbcr_buffer buff;
-
 	for (;;)
 	{
 		int ret = ogg_stream_packetout(&mInfo->TheoraStreamState, &opTheora);
@@ -235,6 +233,7 @@ void TheoraVideoClip::decodeNextFrame()
 			if (!_readData())
 			{
 				frame->mInUse = 0;
+				should_restart = mAutoRestart;
 				break;
 			}
 		}
@@ -246,6 +245,7 @@ void TheoraVideoClip::decodeNextFrame()
 		decodeAudio();
 		mAudioMutex->unlock();
 	}
+	if (should_restart) _restart();
 }
 
 void TheoraVideoClip::_restart()
@@ -967,7 +967,7 @@ void TheoraVideoClip::doSeek()
 				{
 					int n_trim = (int) ((timestamp - queued_time + mTheoraAudioPacketQueue->num_samples / rate - time) * rate);
 					if (mTheoraAudioPacketQueue->num_samples - n_trim <= 0)
-						destroyAudioPacket(popAudioPacket()); // if there's no little data to be left, just destroy it
+						destroyAudioPacket(popAudioPacket()); // if there's no data to be left, just destroy it
 					else
 					{
 						for (int i = n_trim, j = 0; i < mTheoraAudioPacketQueue->num_samples; i++, j++)
