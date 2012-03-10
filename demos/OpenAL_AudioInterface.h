@@ -21,7 +21,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <OpenAL/alc.h>
 #endif
 #include <queue>
-
+	
 class OpenAL_AudioInterface : public TheoraAudioInterface, TheoraTimer
 {
 	int mMaxBuffSize;
@@ -43,6 +43,9 @@ public:
 	~OpenAL_AudioInterface();
 	void insertData(float* data,int nSamples);
 	void destroy();
+
+	//! queued audio buffers, expressed in seconds
+	float getQueuedAudioSize();
 
 	void update(float time_increase);
 

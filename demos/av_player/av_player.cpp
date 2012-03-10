@@ -73,19 +73,18 @@ void OnKeyPress(int key)
 void OnClick(float x,float y)
 {
 	if (y > 570)
+	{
 		clip->seek((x/window_w)*clip->getDuration());
+		clip->waitForCache();
+	}
 }
 
 void setDebugTitle(char* out)
 {
-	int nDropped=clip->getNumDroppedFrames(),nDisplayed=clip->getNumDisplayedFrames();
-	float percent=100*((float) nDropped/nDisplayed);
-	sprintf(out," (%dx%d) %d precached, %d displayed, %d dropped (%.1f %%)",clip->getWidth(),
-		                                                                    clip->getHeight(),
-		                                                                    clip->getNumReadyFrames(),
-		                                                                    nDisplayed,
-		                                                                    nDropped,
-			                                                                percent);
+	int nDropped=clip->getNumDroppedFrames();
+	sprintf(out,"%d precached, %d dropped, buffered audio: %.2f s",
+		clip->getNumReadyFrames(),	nDropped, 
+		((OpenAL_AudioInterface*) clip->getAudioInterface())->getQueuedAudioSize());
 }
 
 void init()

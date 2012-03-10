@@ -77,7 +77,6 @@ class TheoraPlayerExport TheoraVideoClip
 	int mTheoraStreams, mVorbisStreams;	// Keeps track of Theora and Vorbis Streams
 
 	int mNumPrecachedFrames;
-	int mAudioSkipSeekFlag;
 
 	int mSeekFrame; //! stores desired seek position as a frame number. next worker thread will do the seeking and reset this var to -1
 	float mDuration, mFrameDuration, mFPS;
@@ -114,10 +113,16 @@ class TheoraPlayerExport TheoraVideoClip
 	bool _readData();
 	bool isBusy();
 
-	//! decodes audio from the vorbis stream and stores in packets
-	float decodeAudio(float discard_time = -1);
+	/**
+	 * decodes audio from the vorbis stream and stores it in audio packets
+	 * This is an internal function of TheoraVideoClip, called regularly if playing an
+	 * audio enabled video clip.
+	 * @return last decoded timestamp (if found in decoded packet's granule position)
+	 */
+	float decodeAudio();
+	float getAudioPacketQueueLength();
 	//! adds an audio packet to the packet queue
-	void addAudioPacket(float** buffer, int num_samples, int num_skip = 0);
+	void addAudioPacket(float** buffer, int num_samples);
 	//! return a decoded audio packet or NULL if packet queue is empty
 	TheoraAudioPacket* popAudioPacket();
 	void destroyAudioPacket(TheoraAudioPacket* p);
@@ -253,9 +258,11 @@ public:
     void setPlaybackSpeed(float speed);
     float getPlaybackSpeed();
 	//! seek to a given time position
-	void seek(float time, bool wait_for_precache = 1);
+	void seek(float time);
 	//! seek to a given frame number
-	void seekToFrame(int frame, bool wait_for_precache = 1);
+	void seekToFrame(int frame);
+	//! wait max_time for the clip to cache a given percentage of frames, factor in range [0,1]
+	void waitForCache(float desired_cache_factor = 0.5f, float max_wait_time = 1.0f);
 };
 
 #endif
