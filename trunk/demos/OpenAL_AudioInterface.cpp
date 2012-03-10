@@ -45,6 +45,11 @@ OpenAL_AudioInterface::~OpenAL_AudioInterface()
 	if (mTempBuffer) delete mTempBuffer;
 }
 
+float OpenAL_AudioInterface::getQueuedAudioSize()
+{
+	return ((float) (mNumProcessedSamples - mNumPlayedSamples)) / mFreq;
+}
+
 void OpenAL_AudioInterface::insertData(float* data,int nSamples)
 {
 	//printf("got %d bytes, %d buffers queued\n",nSamples,(int)mBufferQueue.size());
@@ -54,7 +59,7 @@ void OpenAL_AudioInterface::insertData(float* data,int nSamples)
 		{
 			mTempBuffer[mBuffSize++]=float2short(data[i]);
 		}
-		if (mBuffSize == mFreq * mNumChannels / 4)
+		if (mBuffSize == mFreq * mNumChannels / 10)
 		{
 			OpenAL_Buffer buff;
 			alGenBuffers(1,&buff.id);
@@ -108,9 +113,7 @@ void OpenAL_AudioInterface::update(float time_increase)
 	// control playback and return time position
 	alGetSourcei(mSource,AL_SOURCE_STATE,&state);
 	if (state == AL_PLAYING)
-	{
 		mCurrentTimer += time_increase;
-	}
 
 	mTime = mCurrentTimer + (float) mNumPlayedSamples/mFreq;
 
