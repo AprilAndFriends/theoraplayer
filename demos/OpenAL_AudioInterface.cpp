@@ -89,7 +89,7 @@ void OpenAL_AudioInterface::insertData(float* data,int nSamples)
 
 void OpenAL_AudioInterface::update(float time_increase)
 {
-	int i,state,nProcessed;
+	int i,/*state,*/nProcessed;
 	OpenAL_Buffer buff;
 
 	// process played buffers

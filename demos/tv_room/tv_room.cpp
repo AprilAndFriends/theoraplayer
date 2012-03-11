@@ -133,18 +133,18 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip("media/bunny.ogg",TH_RGB);
+	clip=mgr->createVideoClip("bunny.ogg",TH_RGB);
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short.ogg"),TH_RGB);
 	clip->setAutoRestart(1);
 
 	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
 
-	chair1.load("media/chair1.obj",loadTexture("media/chair1.jpg"));
-	chair2.load("media/chair2.obj",loadTexture("media/chair2.jpg"));
-	room.load("media/room.obj",loadTexture("media/room.jpg"));
-	table.load("media/table.obj",loadTexture("media/table.jpg"));
-	tv.load("media/tv.obj",loadTexture("media/tv.jpg"));
+	chair1.load("chair1.obj",loadTexture("chair1.jpg"));
+	chair2.load("chair2.obj",loadTexture("chair2.jpg"));
+	room.load("room.obj",loadTexture("room.jpg"));
+	table.load("table.obj",loadTexture("table.jpg"));
+	tv.load("tv.obj",loadTexture("tv.jpg"));
 
 	glDisable(GL_CULL_FACE);
 	glCullFace(GL_BACK);

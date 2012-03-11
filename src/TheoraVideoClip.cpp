@@ -129,6 +129,8 @@ TheoraVideoClip::~TheoraVideoClip()
 	//	vorbis_comment_clear(&mInfo->VorbisComment);
 	//	vorbis_info_clear(&mInfo->VorbisInfo);
 		mAudioInterface->destroy(); // notify audio interface it's time to call it a day
+        
+        mAudioMutex->unlock();
 	}
 	delete mAudioMutex;
 
@@ -180,9 +182,7 @@ bool TheoraVideoClip::_readData()
 				ogg_int64_t g = ogg_page_granulepos(&mInfo->OggPage);
 				audio_time = (float) vorbis_granule_time(&mInfo->VorbisDSPState, g);
 				audio_eos = ogg_page_eos(&mInfo->OggPage);	
-				mAudioMutex->lock();
 				ogg_stream_pagein(&mInfo->VorbisStreamState, &mInfo->OggPage);
-				mAudioMutex->unlock();
 			}
 		}
 		if (!(mAudioInterface && !audio_eos && audio_time < time + 1.0f))
@@ -197,7 +197,6 @@ void TheoraVideoClip::decodeNextFrame()
 
 	TheoraVideoFrame* frame = mFrameQueue->requestEmptyFrame();
 	if (!frame) return; // max number of precached frames reached
-	long nSeekSkippedFrames = 0;
 	bool should_restart = 0;
 	ogg_packet opTheora;
 	ogg_int64_t granulePos;
@@ -286,7 +285,6 @@ void TheoraVideoClip::_restart()
 
 void TheoraVideoClip::restart()
 {
-	bool end=mEndOfFile;
 	mEndOfFile=1; //temp, to prevent threads to decode while restarting
 	while (mAssignedWorkerThread) _psleep(1); // wait for assigned thread to do it's work
 	_restart();
@@ -295,7 +293,7 @@ void TheoraVideoClip::restart()
 	mEndOfFile=0;
 	mIteration=0;
 	mRestarted=0;
-	mSeekFrame =- 1;
+	mSeekFrame = -1;
 }
 
 void TheoraVideoClip::update(float time_increase)
@@ -416,7 +414,7 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 			// if page is not a theora page, skip it
 			if (ogg_page_serialno(&mInfo->OggPage) != mInfo->TheoraStreamState.serialno) continue;
 
-			unsigned long granule = (unsigned long) ogg_page_granulepos(&mInfo->OggPage);
+			ogg_int64_t granule = ogg_page_granulepos(&mInfo->OggPage);
 			if (granule >= 0)
 			{
 				mNumFrames = (unsigned long) th_granule_frame(mInfo->TheoraDecoder, granule) + 1;

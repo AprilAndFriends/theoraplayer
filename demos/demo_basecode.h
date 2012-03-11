@@ -20,6 +20,8 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
+
+void ObjCUtil_setCWD();
 #endif
 
 
@@ -198,8 +200,11 @@ void disable_shader()
 
 
 #ifdef __DEV_IL
-#include <IL/ilut.h>
-
+#ifdef __APPLE__
+    #include <DevIL/ilut.h>
+#else
+    #include <IL/ilut.h>
+#endif
 unsigned int loadTexture(const char* name)
 {
 	unsigned int texid,image;
@@ -336,9 +341,12 @@ int main(int argc,char** argv)
 	GetCurrentDirectory(512,cwd);
 	if (strstr(cwd,"msvc"))
 	{
-		*(strstr(cwd,"demos")+5)=0;
+		*(strstr(cwd,"media")+5)=0;
 		SetCurrentDirectory(cwd);
 	}
+#endif
+#ifdef __APPLE__
+    ObjCUtil_setCWD();
 #endif
 	glutInit(&argc, argv);
 #ifdef __ZBUFFER
@@ -357,6 +365,9 @@ int main(int argc,char** argv)
 	ilInit();
 	ilutRenderer(ILUT_OPENGL);
 #endif
+    
+    
+    
 	init();
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
