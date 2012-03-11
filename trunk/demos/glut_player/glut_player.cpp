@@ -77,7 +77,7 @@ void OnKeyPress(int key)
 void OnClick(float x,float y)
 {
 	if (y > 570)
-		clip->seek((x/window_w)*clip->getDuration(), 1);
+		clip->seek((x/window_w)*clip->getDuration());
 }
 
 void setDebugTitle(char* out)
@@ -95,7 +95,7 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip("media/bunny.ogg", TH_RGB, 16);
+	clip=mgr->createVideoClip("bunny.ogg", TH_RGB, 16);
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short.ogg"),TH_RGB);
 	clip->setAutoRestart(1);

@@ -106,11 +106,11 @@ void init()
 	printf("---\nUSAGE: press buttons 1,2,3 or 4 to change the number of worker threads\n---\n");
 
 	std::string files[]={"short.ogg","konqi.ogg","room.ogg","titan.ogg"};
-	mgr=new TheoraVideoManager(1);
+	mgr=new TheoraVideoManager(4);
 	mgr->setDefaultNumPrecachedFrames(32);
 	for (int i=0;i<4;i++)
 	{
-		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/"+files[i]));
+		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource(files[i]));
 		clips[i]->setAutoRestart(1);
 		textures[i]=createTexture(nextPow2(clips[i]->getWidth()),nextPow2(clips[i]->getHeight()));
 	}

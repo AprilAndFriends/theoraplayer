@@ -94,7 +94,7 @@ void init()
 	mgr=new TheoraVideoManager();
 	iface_factory=new OpenAL_AudioInterfaceFactory();
 	mgr->setAudioInterfaceFactory(iface_factory);
-	clip=mgr->createVideoClip("media/konqi.ogg", TH_RGB, 16);
+	clip=mgr->createVideoClip("bunny.ogg", TH_RGB, 16);
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short.ogg"),TH_RGB);
 	clip->setAutoRestart(1);
