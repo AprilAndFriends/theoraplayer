@@ -184,19 +184,14 @@
 		D14740C9150CB33000B20490 /* tv.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tv.obj; sourceTree = "<group>"; };
 		D14740CA150CB33000B20490 /* YUVTest.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = YUVTest.ogg; sourceTree = "<group>"; };
 		D14740FB150CB45E00B20490 /* av_player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = av_player.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D14740FD150CB45E00B20490 /* glut_player copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "glut_player copy-Info.plist"; path = "/Users/kreso/projects/libtheoraplayer/trunk/projects/xcode/glut_player copy-Info.plist"; sourceTree = "<absolute>"; };
 		D1474100150CB49B00B20490 /* av_player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = av_player.cpp; path = ../../demos/av_player/av_player.cpp; sourceTree = "<group>"; };
 		D1474102150CB4A700B20490 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D1474104150CB4BC00B20490 /* OpenAL_AudioInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenAL_AudioInterface.cpp; path = ../../demos/OpenAL_AudioInterface.cpp; sourceTree = "<group>"; };
 		D1474105150CB4BC00B20490 /* OpenAL_AudioInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenAL_AudioInterface.h; path = ../../demos/OpenAL_AudioInterface.h; sourceTree = "<group>"; };
 		D1474120150CB6F300B20490 /* multiple_videos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = multiple_videos.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1474122150CB6F300B20490 /* av_player copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "av_player copy-Info.plist"; path = "/Users/kreso/projects/libtheoraplayer/trunk/projects/xcode/av_player copy-Info.plist"; sourceTree = "<absolute>"; };
 		D1474139150CB6F600B20490 /* sprite_animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sprite_animation.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D147413B150CB6F700B20490 /* av_player copy copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "av_player copy copy-Info.plist"; path = "/Users/kreso/projects/libtheoraplayer/trunk/projects/xcode/av_player copy copy-Info.plist"; sourceTree = "<absolute>"; };
 		D1474152150CB6F900B20490 /* seek_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seek_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1474154150CB6F900B20490 /* av_player copy copy 2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "av_player copy copy 2-Info.plist"; path = "/Users/kreso/projects/libtheoraplayer/trunk/projects/xcode/av_player copy copy 2-Info.plist"; sourceTree = "<absolute>"; };
 		D147416B150CB70D00B20490 /* tv_room.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tv_room.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D147416D150CB70D00B20490 /* seek_test copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "seek_test copy-Info.plist"; path = "/Users/kreso/projects/libtheoraplayer/trunk/projects/xcode/seek_test copy-Info.plist"; sourceTree = "<absolute>"; };
 		D1474172150CB79900B20490 /* multiple_videos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = multiple_videos.cpp; path = ../../demos/multiple_videos/multiple_videos.cpp; sourceTree = "<group>"; };
 		D1474174150CB7A300B20490 /* seek_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = seek_test.cpp; path = ../../demos/seek_test/seek_test.cpp; sourceTree = "<group>"; };
 		D1474176150CB7AD00B20490 /* sprite_animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sprite_animation.cpp; path = ../../demos/sprite_animation/sprite_animation.cpp; sourceTree = "<group>"; };
@@ -295,17 +290,12 @@
 		D1473F1E150CA69B00B20490 = {
 			isa = PBXGroup;
 			children = (
-				D1474044150CAF1700B20490 /* demos */,
 				D1473F49150CA71500B20490 /* Info.plist */,
+				D1474044150CAF1700B20490 /* demos */,
 				D1473F42150CA6C000B20490 /* src */,
 				D147401F150CAE9600B20490 /* include */,
 				D1473F2C150CA69B00B20490 /* Frameworks */,
 				D1473F2B150CA69B00B20490 /* Products */,
-				D14740FD150CB45E00B20490 /* glut_player copy-Info.plist */,
-				D1474122150CB6F300B20490 /* av_player copy-Info.plist */,
-				D147413B150CB6F700B20490 /* av_player copy copy-Info.plist */,
-				D1474154150CB6F900B20490 /* av_player copy copy 2-Info.plist */,
-				D147416D150CB70D00B20490 /* seek_test copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
