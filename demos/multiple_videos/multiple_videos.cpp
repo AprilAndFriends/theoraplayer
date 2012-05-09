@@ -14,7 +14,7 @@ TheoraVideoClip* clips[4];
 unsigned int textures[4];
 TheoraVideoManager* mgr;
 std::string window_name="multiple_videos";
-int window_w=1024,window_h=768;
+int window_w=800 ,window_h=600;
 
 void drawVideo(int x,int y,unsigned int tex_id,TheoraVideoClip* clip)
 {
