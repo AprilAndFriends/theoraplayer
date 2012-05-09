@@ -139,7 +139,6 @@
 		D12925781534C1F60062A70D /* locv_water.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = locv_water.ogg; sourceTree = "<group>"; };
 		D12C20791534D58500B4904B /* composite_animation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = composite_animation.cpp; path = ../../demos/composite_animation/composite_animation.cpp; sourceTree = "<group>"; };
 		D12C208E1534D58B00B4904B /* composite_animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = composite_animation.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D12C20901534D58C00B4904B /* glut_player copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "glut_player copy-Info.plist"; path = "/Users/kreso/projects/libtheoraplayer/trunk/projects/xcode/glut_player copy-Info.plist"; sourceTree = "<absolute>"; };
 		D12C20931534D7D800B4904B /* locv_main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locv_main.png; sourceTree = "<group>"; };
 		D1473F2A150CA69B00B20490 /* theoraplayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = theoraplayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1473F49150CA71500B20490 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -348,7 +347,6 @@
 				D147401F150CAE9600B20490 /* include */,
 				D1473F2C150CA69B00B20490 /* Frameworks */,
 				D1473F2B150CA69B00B20490 /* Products */,
-				D12C20901534D58C00B4904B /* glut_player copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1075,6 +1073,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = ../../include/theoraplayer;
 				INFOPLIST_FILE = Info.plist;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
@@ -1090,6 +1089,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = ../../include/theoraplayer;
 				INFOPLIST_FILE = Info.plist;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
@@ -1133,6 +1133,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = ../../include/theoraplayer;
 				INFOPLIST_FILE = Info.plist;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
@@ -1169,6 +1170,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = ../../include/theoraplayer;
 				INFOPLIST_FILE = Info.plist;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
@@ -1205,6 +1207,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = ../../include/theoraplayer;
 				INFOPLIST_FILE = Info.plist;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
