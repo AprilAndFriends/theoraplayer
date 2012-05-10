@@ -105,7 +105,10 @@ void init()
 {
 	printf("---\nUSAGE: press buttons 1,2,3 or 4 to change the number of worker threads\n---\n");
 
-	std::string files[]={"short.ogg","konqi.ogg","room.ogg","titan.ogg"};
+	std::string files[] = {"media/short.ogg",
+		                   "media/konqi.ogg",
+		                   "media/room.ogg",
+		                   "media/titan.ogg"};
 	mgr=new TheoraVideoManager(4);
 	mgr->setDefaultNumPrecachedFrames(32);
 	for (int i=0;i<4;i++)

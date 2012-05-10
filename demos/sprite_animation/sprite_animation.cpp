@@ -122,7 +122,7 @@ void init()
 	std::string orientations[]={"N","NE","E","SE","S","SW","W","NW"};
 	for (int i=0;i<8;i++)
 	{
-		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource("brawe_"+orientations[i]+".ogg"),TH_RGB,8);
+		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/brawe/brawe_"+orientations[i]+".ogg"),TH_RGB,8);
 		clips[i]->setAutoRestart(1);
 		if (i != 0) clips[i]->pause();
 	}

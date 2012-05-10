@@ -49,8 +49,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../include/;../../../include/theoraplayer"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_PLUGIN_EXPORTS;_STLP_DEBUG"
+				AdditionalIncludeDirectories="../../../theoraplayer/include/"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -149,8 +149,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../../include/;../../../include/theoraplayer"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_PLUGIN_EXPORTS"
+				AdditionalIncludeDirectories="../../../theoraplayer/include/"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
 				MinimalRebuild="true"
 				RuntimeLibrary="2"
@@ -249,8 +249,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../include/;../../../include/theoraplayer"
-				PreprocessorDefinitions="_WIN32;_DEBUG;THEORAVIDEO_STATIC"
+				AdditionalIncludeDirectories="../../../theoraplayer/include/"
+				PreprocessorDefinitions="_WIN32;_DEBUG;THEORAVIDEO_STATIC;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -349,8 +349,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../../include/;../../../include/theoraplayer"
-				PreprocessorDefinitions="_WIN32;NDEBUG;THEORAVIDEO_STATIC"
+				AdditionalIncludeDirectories="../../../theoraplayer/include/"
+				PreprocessorDefinitions="_WIN32;NDEBUG;THEORAVIDEO_STATIC;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
 				MinimalRebuild="true"
 				RuntimeLibrary="2"

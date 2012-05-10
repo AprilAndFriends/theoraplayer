@@ -72,7 +72,7 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip("locv_water.ogg", TH_RGB, 4);
+	clip=mgr->createVideoClip("media/locv/locv_water.ogg", TH_RGB, 4);
     clip->setPlaybackSpeed(0.5f);
 	clip->setAutoRestart(1);
     
