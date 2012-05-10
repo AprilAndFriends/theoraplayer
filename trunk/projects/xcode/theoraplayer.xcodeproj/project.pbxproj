@@ -1524,6 +1524,7 @@
 					armv7,
 				);
 				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1542,6 +1543,7 @@
 					armv7,
 				);
 				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1560,6 +1562,7 @@
 					armv7,
 				);
 				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1579,6 +1582,7 @@
 					armv7,
 				);
 				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1598,6 +1602,7 @@
 					armv7,
 				);
 				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_LDFLAGS = "-ObjC";
