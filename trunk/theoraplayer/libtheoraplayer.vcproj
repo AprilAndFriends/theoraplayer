@@ -49,7 +49,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\include;..\..\include\theoraplayer;..\..\..\ogg\include;..\..\..\vorbis\include;..\..\..\theora\include"
+				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include"
 				PreprocessorDefinitions="_WIN32;_DEBUG;THEORAVIDEO_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -148,7 +148,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="..\..\include;..\..\include\theoraplayer;..\..\..\ogg\include;..\..\..\vorbis\include;..\..\..\theora\include"
+				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include"
 				PreprocessorDefinitions="_WIN32;NDEBUG;THEORAVIDEO_EXPORTS"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -246,7 +246,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\include;..\..\include\theoraplayer;..\..\..\ogg\include;..\..\..\vorbis\include;..\..\..\theora\include"
+				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include"
 				PreprocessorDefinitions="_WIN32;_DEBUG;THEORAVIDEO_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -327,7 +327,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="..\..\include;..\..\include\theoraplayer;..\..\..\ogg\include;..\..\..\vorbis\include;..\..\..\theora\include"
+				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_STATIC"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -384,55 +384,55 @@
 			Filter="h;hpp;hxx;hm;inl"
 			>
 			<File
-				RelativePath="..\..\include\theoraplayer\TheoraAsync.h"
+				RelativePath=".\include\theoraplayer\TheoraAsync.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\theoraplayer\TheoraAudioInterface.h"
+				RelativePath=".\include\theoraplayer\TheoraAudioInterface.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\theoraplayer\TheoraDataSource.h"
+				RelativePath=".\include\theoraplayer\TheoraDataSource.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\theoraplayer\TheoraException.h"
+				RelativePath=".\include\theoraplayer\TheoraException.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\theoraplayer\TheoraExport.h"
+				RelativePath=".\include\theoraplayer\TheoraExport.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\theoraplayer\TheoraFrameQueue.h"
+				RelativePath=".\include\theoraplayer\TheoraFrameQueue.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\theoraplayer\TheoraPlayer.h"
+				RelativePath=".\include\theoraplayer\TheoraPlayer.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\theoraplayer\TheoraTimer.h"
+				RelativePath=".\include\theoraplayer\TheoraTimer.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\theoraplayer\TheoraUtil.h"
+				RelativePath=".\include\theoraplayer\TheoraUtil.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\theoraplayer\TheoraVideoClip.h"
+				RelativePath=".\include\theoraplayer\TheoraVideoClip.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\theoraplayer\TheoraVideoFrame.h"
+				RelativePath=".\include\theoraplayer\TheoraVideoFrame.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\theoraplayer\TheoraVideoManager.h"
+				RelativePath=".\include\theoraplayer\TheoraVideoManager.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\theoraplayer\TheoraWorkerThread.h"
+				RelativePath=".\include\theoraplayer\TheoraWorkerThread.h"
 				>
 			</File>
 		</Filter>
@@ -441,58 +441,54 @@
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 			>
 			<File
-				RelativePath="..\..\src\Endianess.h"
+				RelativePath=".\src\Endianess.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\TheoraAsync.cpp"
+				RelativePath=".\src\TheoraAsync.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\TheoraAudioInterface.cpp"
+				RelativePath=".\src\TheoraAudioInterface.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\TheoraDataSource.cpp"
+				RelativePath=".\src\TheoraDataSource.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\TheoraException.cpp"
+				RelativePath=".\src\TheoraException.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\TheoraFrameQueue.cpp"
+				RelativePath=".\src\TheoraFrameQueue.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\TheoraTimer.cpp"
+				RelativePath=".\src\TheoraTimer.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\TheoraUtil.cpp"
+				RelativePath=".\src\TheoraUtil.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\TheoraVideoClip.cpp"
+				RelativePath=".\src\TheoraVideoClip.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\TheoraVideoFrame.cpp"
+				RelativePath=".\src\TheoraVideoFrame.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\TheoraVideoManager.cpp"
+				RelativePath=".\src\TheoraVideoManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\TheoraWorkerThread.cpp"
+				RelativePath=".\src\TheoraWorkerThread.cpp"
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\scripts\doxygen_mainpage.h"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

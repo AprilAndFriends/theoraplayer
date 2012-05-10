@@ -1,0 +1,1414 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D12C207F1534D58B00B4904B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
+		D12C20801534D58B00B4904B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
+		D12C20811534D58B00B4904B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
+		D1474049150CAFEB00B20490 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
+		D147405A150CB0E700B20490 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
+		D14740E6150CB3B800B20490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
+		D14740EC150CB45E00B20490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
+		D14740ED150CB45E00B20490 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
+		D14740EE150CB45E00B20490 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
+		D1474103150CB4A700B20490 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
+		D1474110150CB6F300B20490 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
+		D1474111150CB6F300B20490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
+		D1474112150CB6F300B20490 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
+		D1474113150CB6F300B20490 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
+		D1474129150CB6F600B20490 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
+		D147412A150CB6F600B20490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
+		D147412B150CB6F600B20490 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
+		D147412C150CB6F600B20490 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
+		D1474142150CB6F900B20490 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
+		D1474143150CB6F900B20490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
+		D1474144150CB6F900B20490 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
+		D1474145150CB6F900B20490 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
+		D147415B150CB70D00B20490 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
+		D147415C150CB70D00B20490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
+		D147415D150CB70D00B20490 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
+		D147415E150CB70D00B20490 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
+		D16775E8155C50510050EC64 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
+		D167761A155C525F0050EC64 /* glut_player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1677619155C525F0050EC64 /* glut_player.cpp */; };
+		D1677621155C52B40050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+		D16776B7155C55A60050EC64 /* av_player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776B6155C55A60050EC64 /* av_player.cpp */; };
+		D16776B8155C55B60050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+		D16776B9155C55B60050EC64 /* OpenAL_AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */; };
+		D16776BA155C55BD0050EC64 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
+		D16776BC155C55D10050EC64 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
+		D16776BE155C55E40050EC64 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
+		D16776C0155C55F90050EC64 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
+		D16776C2155C560A0050EC64 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
+		D16776C4155C56220050EC64 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
+		D16776C7155C56A70050EC64 /* composite_animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776C6155C56A70050EC64 /* composite_animation.cpp */; };
+		D16776C9155C56B20050EC64 /* multiple_videos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776C8155C56B20050EC64 /* multiple_videos.cpp */; };
+		D16776CB155C56C50050EC64 /* seek_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776CA155C56C50050EC64 /* seek_test.cpp */; };
+		D16776CD155C56D00050EC64 /* sprite_animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776CC155C56D00050EC64 /* sprite_animation.cpp */; };
+		D16776CF155C56D90050EC64 /* tv_room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776CE155C56D90050EC64 /* tv_room.cpp */; };
+		D16776D0155C56FA0050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+		D16776D1155C57040050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+		D16776D2155C570B0050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+		D16776D3155C57120050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+		D16776D4155C571E0050EC64 /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
+		D16776D5155C57290050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D167758A155C4F8F0050EC64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1473F2A150CA69B00B20490;
+			remoteInfo = theoraplayer;
+		};
+		D167758C155C4F8F0050EC64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1BB6FAE150E9E7100EF9400;
+			remoteInfo = "theoraplayer (iOS)";
+		};
+		D16775F1155C510B0050EC64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D16775E9155C510B0050EC64 /* Ogg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D07F2C80486CC7A007CD1D0;
+			remoteInfo = ogg;
+		};
+		D16775F3155C510B0050EC64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D16775E9155C510B0050EC64 /* Ogg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1BB6F2E150E99EE00EF9400;
+			remoteInfo = "ogg (iOS)";
+		};
+		D16775FD155C51130050EC64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D16775F5155C51120050EC64 /* Vorbis.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 730F23F1091827B100AB638C;
+			remoteInfo = vorbis;
+		};
+		D16775FF155C51130050EC64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D16775F5155C51120050EC64 /* Vorbis.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1BB6F49150E9B0E00EF9400;
+			remoteInfo = "vorbis (iOS)";
+		};
+		D167760A155C51190050EC64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677601155C51190050EC64 /* Theora.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D07F2C80486CC7A007CD1D0;
+			remoteInfo = theora;
+		};
+		D167760C155C51190050EC64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677601155C51190050EC64 /* Theora.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 09C8F6430C82FBE500F72188;
+			remoteInfo = "theora (static)";
+		};
+		D167760E155C51190050EC64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677601155C51190050EC64 /* Theora.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1BB6F7E150E9CFD00EF9400;
+			remoteInfo = "theora (iOS)";
+		};
+		D1677610155C51320050EC64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677601155C51190050EC64 /* Theora.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D07F2BC0486CC7A007CD1D0;
+			remoteInfo = theora;
+		};
+		D1677612155C51320050EC64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D16775E9155C510B0050EC64 /* Ogg.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D07F2BC0486CC7A007CD1D0;
+			remoteInfo = ogg;
+		};
+		D1677614155C51320050EC64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1473F29150CA69B00B20490;
+			remoteInfo = theoraplayer;
+		};
+		D1677616155C51320050EC64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D16775F5155C51120050EC64 /* Vorbis.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 730F23A1091827B100AB638C;
+			remoteInfo = vorbis;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D12C208E1534D58B00B4904B /* composite_animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = composite_animation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1474024150CAF0D00B20490 /* glut_player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = glut_player.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1474026150CAF0D00B20490 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		D1474029150CAF0D00B20490 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		D147402A150CAF0D00B20490 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D147402B150CAF0D00B20490 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D1474048150CAFEB00B20490 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		D1474059150CB0E700B20490 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		D14740FB150CB45E00B20490 /* av_player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = av_player.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1474102150CB4A700B20490 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		D1474120150CB6F300B20490 /* multiple_videos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = multiple_videos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1474139150CB6F600B20490 /* sprite_animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sprite_animation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1474152150CB6F900B20490 /* seek_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seek_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D147416B150CB70D00B20490 /* tv_room.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tv_room.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = theoraplayer.xcodeproj; path = theoraplayer/theoraplayer.xcodeproj; sourceTree = "<group>"; };
+		D16775E9155C510B0050EC64 /* Ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Ogg.xcodeproj; path = ../../../Desktop/ogg/macosx/Ogg.xcodeproj; sourceTree = "<group>"; };
+		D16775F5155C51120050EC64 /* Vorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vorbis.xcodeproj; path = ../../../Desktop/vorbis/macosx/Vorbis.xcodeproj; sourceTree = "<group>"; };
+		D1677601155C51190050EC64 /* Theora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Theora.xcodeproj; path = ../../../Desktop/theora/macosx/Theora.xcodeproj; sourceTree = "<group>"; };
+		D1677619155C525F0050EC64 /* glut_player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glut_player.cpp; path = demos/glut_player/glut_player.cpp; sourceTree = "<group>"; };
+		D167761B155C52B40050EC64 /* demo_basecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_basecode.h; path = demos/demo_basecode.h; sourceTree = "<group>"; };
+		D167761C155C52B40050EC64 /* objcUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = objcUtil.mm; path = demos/objcUtil.mm; sourceTree = "<group>"; };
+		D167761D155C52B40050EC64 /* ObjModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ObjModel.cpp; path = demos/ObjModel.cpp; sourceTree = "<group>"; };
+		D167761E155C52B40050EC64 /* ObjModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjModel.h; path = demos/ObjModel.h; sourceTree = "<group>"; };
+		D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenAL_AudioInterface.cpp; path = demos/OpenAL_AudioInterface.cpp; sourceTree = "<group>"; };
+		D1677620155C52B40050EC64 /* OpenAL_AudioInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenAL_AudioInterface.h; path = demos/OpenAL_AudioInterface.h; sourceTree = "<group>"; };
+		D16776B6155C55A60050EC64 /* av_player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = av_player.cpp; path = demos/av_player/av_player.cpp; sourceTree = "<group>"; };
+		D16776C6155C56A70050EC64 /* composite_animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = composite_animation.cpp; path = demos/composite_animation/composite_animation.cpp; sourceTree = "<group>"; };
+		D16776C8155C56B20050EC64 /* multiple_videos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = multiple_videos.cpp; path = demos/multiple_videos/multiple_videos.cpp; sourceTree = "<group>"; };
+		D16776CA155C56C50050EC64 /* seek_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = seek_test.cpp; path = demos/seek_test/seek_test.cpp; sourceTree = "<group>"; };
+		D16776CC155C56D00050EC64 /* sprite_animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sprite_animation.cpp; path = demos/sprite_animation/sprite_animation.cpp; sourceTree = "<group>"; };
+		D16776CE155C56D90050EC64 /* tv_room.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tv_room.cpp; path = demos/tv_room/tv_room.cpp; sourceTree = "<group>"; };
+		D16776D6155C57E90050EC64 /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = demos/media; sourceTree = "<group>"; };
+		D1BB6FAF150E9E7100EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D12C207E1534D58B00B4904B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16776C0155C55F90050EC64 /* theoraplayer.framework in Frameworks */,
+				D12C207F1534D58B00B4904B /* Foundation.framework in Frameworks */,
+				D12C20801534D58B00B4904B /* OpenGL.framework in Frameworks */,
+				D12C20811534D58B00B4904B /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1474021150CAF0D00B20490 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16775E8155C50510050EC64 /* theoraplayer.framework in Frameworks */,
+				D14740E6150CB3B800B20490 /* Foundation.framework in Frameworks */,
+				D147405A150CB0E700B20490 /* OpenGL.framework in Frameworks */,
+				D1474049150CAFEB00B20490 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D14740EB150CB45E00B20490 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16776BA155C55BD0050EC64 /* theoraplayer.framework in Frameworks */,
+				D1474103150CB4A700B20490 /* OpenAL.framework in Frameworks */,
+				D14740EC150CB45E00B20490 /* Foundation.framework in Frameworks */,
+				D14740ED150CB45E00B20490 /* OpenGL.framework in Frameworks */,
+				D14740EE150CB45E00B20490 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D147410F150CB6F300B20490 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16776BC155C55D10050EC64 /* theoraplayer.framework in Frameworks */,
+				D1474110150CB6F300B20490 /* OpenAL.framework in Frameworks */,
+				D1474111150CB6F300B20490 /* Foundation.framework in Frameworks */,
+				D1474112150CB6F300B20490 /* OpenGL.framework in Frameworks */,
+				D1474113150CB6F300B20490 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1474128150CB6F600B20490 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16776BE155C55E40050EC64 /* theoraplayer.framework in Frameworks */,
+				D1474129150CB6F600B20490 /* OpenAL.framework in Frameworks */,
+				D147412A150CB6F600B20490 /* Foundation.framework in Frameworks */,
+				D147412B150CB6F600B20490 /* OpenGL.framework in Frameworks */,
+				D147412C150CB6F600B20490 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1474141150CB6F900B20490 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16776C4155C56220050EC64 /* theoraplayer.framework in Frameworks */,
+				D1474142150CB6F900B20490 /* OpenAL.framework in Frameworks */,
+				D1474143150CB6F900B20490 /* Foundation.framework in Frameworks */,
+				D1474144150CB6F900B20490 /* OpenGL.framework in Frameworks */,
+				D1474145150CB6F900B20490 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D147415A150CB70D00B20490 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16776C2155C560A0050EC64 /* theoraplayer.framework in Frameworks */,
+				D147415B150CB70D00B20490 /* OpenAL.framework in Frameworks */,
+				D147415C150CB70D00B20490 /* Foundation.framework in Frameworks */,
+				D147415D150CB70D00B20490 /* OpenGL.framework in Frameworks */,
+				D147415E150CB70D00B20490 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D12C20781534D4A000B4904B /* composite animation */ = {
+			isa = PBXGroup;
+			children = (
+				D16776C6155C56A70050EC64 /* composite_animation.cpp */,
+			);
+			name = "composite animation";
+			sourceTree = "<group>";
+		};
+		D1473F1E150CA69B00B20490 = {
+			isa = PBXGroup;
+			children = (
+				D16775E9155C510B0050EC64 /* Ogg.xcodeproj */,
+				D16775F5155C51120050EC64 /* Vorbis.xcodeproj */,
+				D1677601155C51190050EC64 /* Theora.xcodeproj */,
+				D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */,
+				D1474109150CB6BD00B20490 /* glut_player */,
+				D1474107150CB6A700B20490 /* av_player */,
+				D147416E150CB74200B20490 /* multiple_videos */,
+				D147416F150CB74B00B20490 /* sprite_animation */,
+				D12C20781534D4A000B4904B /* composite animation */,
+				D1474171150CB76400B20490 /* tv_room */,
+				D1474170150CB75800B20490 /* seek_test */,
+				D16D9DDF150CBC5D001BD35C /* common */,
+				D16776D6155C57E90050EC64 /* media */,
+				D1473F2C150CA69B00B20490 /* Frameworks */,
+				D1473F2B150CA69B00B20490 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D1473F2B150CA69B00B20490 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D1474024150CAF0D00B20490 /* glut_player.app */,
+				D14740FB150CB45E00B20490 /* av_player.app */,
+				D1474120150CB6F300B20490 /* multiple_videos.app */,
+				D1474139150CB6F600B20490 /* sprite_animation.app */,
+				D1474152150CB6F900B20490 /* seek_test.app */,
+				D147416B150CB70D00B20490 /* tv_room.app */,
+				D12C208E1534D58B00B4904B /* composite_animation.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D1473F2C150CA69B00B20490 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D1473F82150CA7F300B20490 /* mac */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D1473F82150CA7F300B20490 /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				D1474059150CB0E700B20490 /* OpenGL.framework */,
+				D1474048150CAFEB00B20490 /* GLUT.framework */,
+				D1474102150CB4A700B20490 /* OpenAL.framework */,
+				D1474026150CAF0D00B20490 /* Cocoa.framework */,
+				D1BB6FAF150E9E7100EF9400 /* Foundation.framework */,
+				D1474029150CAF0D00B20490 /* AppKit.framework */,
+				D147402A150CAF0D00B20490 /* CoreData.framework */,
+				D147402B150CAF0D00B20490 /* Foundation.framework */,
+			);
+			name = mac;
+			sourceTree = "<group>";
+		};
+		D1474107150CB6A700B20490 /* av_player */ = {
+			isa = PBXGroup;
+			children = (
+				D16776B6155C55A60050EC64 /* av_player.cpp */,
+			);
+			name = av_player;
+			sourceTree = "<group>";
+		};
+		D1474109150CB6BD00B20490 /* glut_player */ = {
+			isa = PBXGroup;
+			children = (
+				D1677619155C525F0050EC64 /* glut_player.cpp */,
+			);
+			name = glut_player;
+			sourceTree = "<group>";
+		};
+		D147416E150CB74200B20490 /* multiple_videos */ = {
+			isa = PBXGroup;
+			children = (
+				D16776C8155C56B20050EC64 /* multiple_videos.cpp */,
+			);
+			name = multiple_videos;
+			sourceTree = "<group>";
+		};
+		D147416F150CB74B00B20490 /* sprite_animation */ = {
+			isa = PBXGroup;
+			children = (
+				D16776CC155C56D00050EC64 /* sprite_animation.cpp */,
+			);
+			name = sprite_animation;
+			sourceTree = "<group>";
+		};
+		D1474170150CB75800B20490 /* seek_test */ = {
+			isa = PBXGroup;
+			children = (
+				D16776CA155C56C50050EC64 /* seek_test.cpp */,
+			);
+			name = seek_test;
+			sourceTree = "<group>";
+		};
+		D1474171150CB76400B20490 /* tv_room */ = {
+			isa = PBXGroup;
+			children = (
+				D16776CE155C56D90050EC64 /* tv_room.cpp */,
+			);
+			name = tv_room;
+			sourceTree = "<group>";
+		};
+		D1677575155C4F8F0050EC64 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D167758B155C4F8F0050EC64 /* theoraplayer.framework */,
+				D167758D155C4F8F0050EC64 /* libtheoraplayer.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D16775EA155C510B0050EC64 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D16775F2155C510B0050EC64 /* Ogg.framework */,
+				D16775F4155C510B0050EC64 /* libogg.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D16775F6155C51120050EC64 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D16775FE155C51130050EC64 /* Vorbis.framework */,
+				D1677600155C51130050EC64 /* libvorbis.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D1677602155C51190050EC64 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D167760B155C51190050EC64 /* Theora.framework */,
+				D167760D155C51190050EC64 /* libtheoradec.a */,
+				D167760F155C51190050EC64 /* libtheora.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D16D9DDF150CBC5D001BD35C /* common */ = {
+			isa = PBXGroup;
+			children = (
+				D167761B155C52B40050EC64 /* demo_basecode.h */,
+				D167761C155C52B40050EC64 /* objcUtil.mm */,
+				D167761D155C52B40050EC64 /* ObjModel.cpp */,
+				D167761E155C52B40050EC64 /* ObjModel.h */,
+				D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */,
+				D1677620155C52B40050EC64 /* OpenAL_AudioInterface.h */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D12C207A1534D58B00B4904B /* composite_animation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D12C20881534D58B00B4904B /* Build configuration list for PBXNativeTarget "composite_animation" */;
+			buildPhases = (
+				D12C207B1534D58B00B4904B /* Sources */,
+				D12C207E1534D58B00B4904B /* Frameworks */,
+				D16776C1155C56000050EC64 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = composite_animation;
+			productName = glut_player;
+			productReference = D12C208E1534D58B00B4904B /* composite_animation.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D1474023150CAF0D00B20490 /* glut_player */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D147403E150CAF0D00B20490 /* Build configuration list for PBXNativeTarget "glut_player" */;
+			buildPhases = (
+				D1474020150CAF0D00B20490 /* Sources */,
+				D1474021150CAF0D00B20490 /* Frameworks */,
+				D16776B5155C53D90050EC64 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D1677613155C51320050EC64 /* PBXTargetDependency */,
+				D1677617155C51320050EC64 /* PBXTargetDependency */,
+				D1677611155C51320050EC64 /* PBXTargetDependency */,
+				D1677615155C51320050EC64 /* PBXTargetDependency */,
+			);
+			name = glut_player;
+			productName = glut_player;
+			productReference = D1474024150CAF0D00B20490 /* glut_player.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D14740E7150CB45E00B20490 /* av_player */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D14740F5150CB45E00B20490 /* Build configuration list for PBXNativeTarget "av_player" */;
+			buildPhases = (
+				D14740E8150CB45E00B20490 /* Sources */,
+				D14740EB150CB45E00B20490 /* Frameworks */,
+				D16776BB155C55C20050EC64 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = av_player;
+			productName = glut_player;
+			productReference = D14740FB150CB45E00B20490 /* av_player.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D147410A150CB6F300B20490 /* multiple_videos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D147411A150CB6F300B20490 /* Build configuration list for PBXNativeTarget "multiple_videos" */;
+			buildPhases = (
+				D147410B150CB6F300B20490 /* Sources */,
+				D147410F150CB6F300B20490 /* Frameworks */,
+				D16776BD155C55D70050EC64 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = multiple_videos;
+			productName = glut_player;
+			productReference = D1474120150CB6F300B20490 /* multiple_videos.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D1474123150CB6F600B20490 /* sprite_animation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1474133150CB6F600B20490 /* Build configuration list for PBXNativeTarget "sprite_animation" */;
+			buildPhases = (
+				D1474124150CB6F600B20490 /* Sources */,
+				D1474128150CB6F600B20490 /* Frameworks */,
+				D16776BF155C55EC0050EC64 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sprite_animation;
+			productName = glut_player;
+			productReference = D1474139150CB6F600B20490 /* sprite_animation.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D147413C150CB6F900B20490 /* seek_test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D147414C150CB6F900B20490 /* Build configuration list for PBXNativeTarget "seek_test" */;
+			buildPhases = (
+				D147413D150CB6F900B20490 /* Sources */,
+				D1474141150CB6F900B20490 /* Frameworks */,
+				D16776C5155C56290050EC64 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = seek_test;
+			productName = glut_player;
+			productReference = D1474152150CB6F900B20490 /* seek_test.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D1474155150CB70D00B20490 /* tv_room */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1474165150CB70D00B20490 /* Build configuration list for PBXNativeTarget "tv_room" */;
+			buildPhases = (
+				D1474156150CB70D00B20490 /* Sources */,
+				D147415A150CB70D00B20490 /* Frameworks */,
+				D16776C3155C56150050EC64 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tv_room;
+			productName = glut_player;
+			productReference = D147416B150CB70D00B20490 /* tv_room.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D1473F20150CA69B00B20490 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = D1473F23150CA69B00B20490 /* Build configuration list for PBXProject "theoraplayer_workspace" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D1473F1E150CA69B00B20490;
+			productRefGroup = D1473F2B150CA69B00B20490 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D16775EA155C510B0050EC64 /* Products */;
+					ProjectRef = D16775E9155C510B0050EC64 /* Ogg.xcodeproj */;
+				},
+				{
+					ProductGroup = D1677602155C51190050EC64 /* Products */;
+					ProjectRef = D1677601155C51190050EC64 /* Theora.xcodeproj */;
+				},
+				{
+					ProductGroup = D1677575155C4F8F0050EC64 /* Products */;
+					ProjectRef = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+				},
+				{
+					ProductGroup = D16775F6155C51120050EC64 /* Products */;
+					ProjectRef = D16775F5155C51120050EC64 /* Vorbis.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				D1474023150CAF0D00B20490 /* glut_player */,
+				D14740E7150CB45E00B20490 /* av_player */,
+				D147410A150CB6F300B20490 /* multiple_videos */,
+				D1474123150CB6F600B20490 /* sprite_animation */,
+				D12C207A1534D58B00B4904B /* composite_animation */,
+				D1474155150CB70D00B20490 /* tv_room */,
+				D147413C150CB6F900B20490 /* seek_test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D167758B155C4F8F0050EC64 /* theoraplayer.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = theoraplayer.framework;
+			remoteRef = D167758A155C4F8F0050EC64 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D167758D155C4F8F0050EC64 /* libtheoraplayer.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libtheoraplayer.a;
+			remoteRef = D167758C155C4F8F0050EC64 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D16775F2155C510B0050EC64 /* Ogg.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Ogg.framework;
+			remoteRef = D16775F1155C510B0050EC64 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D16775F4155C510B0050EC64 /* libogg.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libogg.a;
+			remoteRef = D16775F3155C510B0050EC64 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D16775FE155C51130050EC64 /* Vorbis.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Vorbis.framework;
+			remoteRef = D16775FD155C51130050EC64 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D1677600155C51130050EC64 /* libvorbis.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libvorbis.a;
+			remoteRef = D16775FF155C51130050EC64 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D167760B155C51190050EC64 /* Theora.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Theora.framework;
+			remoteRef = D167760A155C51190050EC64 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D167760D155C51190050EC64 /* libtheoradec.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libtheoradec.a;
+			remoteRef = D167760C155C51190050EC64 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D167760F155C51190050EC64 /* libtheora.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libtheora.a;
+			remoteRef = D167760E155C51190050EC64 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D16776B5155C53D90050EC64 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+		};
+		D16776BB155C55C20050EC64 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+		};
+		D16776BD155C55D70050EC64 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+		};
+		D16776BF155C55EC0050EC64 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+		};
+		D16776C1155C56000050EC64 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+		};
+		D16776C3155C56150050EC64 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+		};
+		D16776C5155C56290050EC64 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D12C207B1534D58B00B4904B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16776D2155C570B0050EC64 /* objcUtil.mm in Sources */,
+				D16776C7155C56A70050EC64 /* composite_animation.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1474020150CAF0D00B20490 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D167761A155C525F0050EC64 /* glut_player.cpp in Sources */,
+				D1677621155C52B40050EC64 /* objcUtil.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D14740E8150CB45E00B20490 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16776B8155C55B60050EC64 /* objcUtil.mm in Sources */,
+				D16776B9155C55B60050EC64 /* OpenAL_AudioInterface.cpp in Sources */,
+				D16776B7155C55A60050EC64 /* av_player.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D147410B150CB6F300B20490 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16776D0155C56FA0050EC64 /* objcUtil.mm in Sources */,
+				D16776C9155C56B20050EC64 /* multiple_videos.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1474124150CB6F600B20490 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16776D1155C57040050EC64 /* objcUtil.mm in Sources */,
+				D16776CD155C56D00050EC64 /* sprite_animation.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D147413D150CB6F900B20490 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16776D5155C57290050EC64 /* objcUtil.mm in Sources */,
+				D16776CB155C56C50050EC64 /* seek_test.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1474156150CB70D00B20490 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16776D4155C571E0050EC64 /* ObjModel.cpp in Sources */,
+				D16776D3155C57120050EC64 /* objcUtil.mm in Sources */,
+				D16776CF155C56D90050EC64 /* tv_room.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D1677611155C51320050EC64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = theora;
+			targetProxy = D1677610155C51320050EC64 /* PBXContainerItemProxy */;
+		};
+		D1677613155C51320050EC64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ogg;
+			targetProxy = D1677612155C51320050EC64 /* PBXContainerItemProxy */;
+		};
+		D1677615155C51320050EC64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = theoraplayer;
+			targetProxy = D1677614155C51320050EC64 /* PBXContainerItemProxy */;
+		};
+		D1677617155C51320050EC64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = vorbis;
+			targetProxy = D1677616155C51320050EC64 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D12C20891534D58B00B4904B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = composite_animation;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D12C208A1534D58B00B4904B /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = composite_animation;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-LLVM";
+		};
+		D12C208B1534D58B00B4904B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = composite_animation;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D12C208C1534D58B00B4904B /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = composite_animation;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-LLVM";
+		};
+		D12C208D1534D58B00B4904B /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = composite_animation;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
+		D1473F3D150CA69B00B20490 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../include";
+				INFOPLIST_FILE = theoraplayer_workspace.xcodeproj/workspace.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D1473F3E150CA69B00B20490 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../include";
+				INFOPLIST_FILE = theoraplayer_workspace.xcodeproj/workspace.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D1473F43150CA6CE00B20490 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../include";
+				INFOPLIST_FILE = theoraplayer_workspace.xcodeproj/workspace.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = "Debug-LLVM";
+		};
+		D1473F45150CA6D600B20490 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../include";
+				INFOPLIST_FILE = theoraplayer_workspace.xcodeproj/workspace.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = "App Store";
+		};
+		D1473F47150CA6E200B20490 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../include";
+				INFOPLIST_FILE = theoraplayer_workspace.xcodeproj/workspace.plist;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = "Release-LLVM";
+		};
+		D147403F150CAF0D00B20490 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D1474040150CAF0D00B20490 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-LLVM";
+		};
+		D1474041150CAF0D00B20490 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D1474042150CAF0D00B20490 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-LLVM";
+		};
+		D1474043150CAF0D00B20490 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
+		D14740F6150CB45E00B20490 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = av_player;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D14740F7150CB45E00B20490 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = av_player;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-LLVM";
+		};
+		D14740F8150CB45E00B20490 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = av_player;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D14740F9150CB45E00B20490 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = av_player;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-LLVM";
+		};
+		D14740FA150CB45E00B20490 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = av_player;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
+		D147411B150CB6F300B20490 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = multiple_videos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D147411C150CB6F300B20490 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = multiple_videos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-LLVM";
+		};
+		D147411D150CB6F300B20490 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = multiple_videos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D147411E150CB6F300B20490 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = multiple_videos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-LLVM";
+		};
+		D147411F150CB6F300B20490 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = multiple_videos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
+		D1474134150CB6F600B20490 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = sprite_animation;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D1474135150CB6F600B20490 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = sprite_animation;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-LLVM";
+		};
+		D1474136150CB6F600B20490 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = sprite_animation;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D1474137150CB6F600B20490 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = sprite_animation;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-LLVM";
+		};
+		D1474138150CB6F600B20490 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = sprite_animation;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
+		D147414D150CB6F900B20490 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = seek_test;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D147414E150CB6F900B20490 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = seek_test;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-LLVM";
+		};
+		D147414F150CB6F900B20490 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = seek_test;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D1474150150CB6F900B20490 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = seek_test;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-LLVM";
+		};
+		D1474151150CB6F900B20490 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = seek_test;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
+		D1474166150CB70D00B20490 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = tv_room;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D1474167150CB70D00B20490 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = tv_room;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-LLVM";
+		};
+		D1474168150CB70D00B20490 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = tv_room;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D1474169150CB70D00B20490 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = tv_room;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-LLVM";
+		};
+		D147416A150CB70D00B20490 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				PRODUCT_NAME = tv_room;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D12C20881534D58B00B4904B /* Build configuration list for PBXNativeTarget "composite_animation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D12C20891534D58B00B4904B /* Debug */,
+				D12C208A1534D58B00B4904B /* Debug-LLVM */,
+				D12C208B1534D58B00B4904B /* Release */,
+				D12C208C1534D58B00B4904B /* Release-LLVM */,
+				D12C208D1534D58B00B4904B /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1473F23150CA69B00B20490 /* Build configuration list for PBXProject "theoraplayer_workspace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1473F3D150CA69B00B20490 /* Debug */,
+				D1473F43150CA6CE00B20490 /* Debug-LLVM */,
+				D1473F3E150CA69B00B20490 /* Release */,
+				D1473F47150CA6E200B20490 /* Release-LLVM */,
+				D1473F45150CA6D600B20490 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D147403E150CAF0D00B20490 /* Build configuration list for PBXNativeTarget "glut_player" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D147403F150CAF0D00B20490 /* Debug */,
+				D1474040150CAF0D00B20490 /* Debug-LLVM */,
+				D1474041150CAF0D00B20490 /* Release */,
+				D1474042150CAF0D00B20490 /* Release-LLVM */,
+				D1474043150CAF0D00B20490 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D14740F5150CB45E00B20490 /* Build configuration list for PBXNativeTarget "av_player" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D14740F6150CB45E00B20490 /* Debug */,
+				D14740F7150CB45E00B20490 /* Debug-LLVM */,
+				D14740F8150CB45E00B20490 /* Release */,
+				D14740F9150CB45E00B20490 /* Release-LLVM */,
+				D14740FA150CB45E00B20490 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D147411A150CB6F300B20490 /* Build configuration list for PBXNativeTarget "multiple_videos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D147411B150CB6F300B20490 /* Debug */,
+				D147411C150CB6F300B20490 /* Debug-LLVM */,
+				D147411D150CB6F300B20490 /* Release */,
+				D147411E150CB6F300B20490 /* Release-LLVM */,
+				D147411F150CB6F300B20490 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1474133150CB6F600B20490 /* Build configuration list for PBXNativeTarget "sprite_animation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1474134150CB6F600B20490 /* Debug */,
+				D1474135150CB6F600B20490 /* Debug-LLVM */,
+				D1474136150CB6F600B20490 /* Release */,
+				D1474137150CB6F600B20490 /* Release-LLVM */,
+				D1474138150CB6F600B20490 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D147414C150CB6F900B20490 /* Build configuration list for PBXNativeTarget "seek_test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D147414D150CB6F900B20490 /* Debug */,
+				D147414E150CB6F900B20490 /* Debug-LLVM */,
+				D147414F150CB6F900B20490 /* Release */,
+				D1474150150CB6F900B20490 /* Release-LLVM */,
+				D1474151150CB6F900B20490 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1474165150CB70D00B20490 /* Build configuration list for PBXNativeTarget "tv_room" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1474166150CB70D00B20490 /* Debug */,
+				D1474167150CB70D00B20490 /* Debug-LLVM */,
+				D1474168150CB70D00B20490 /* Release */,
+				D1474169150CB70D00B20490 /* Release-LLVM */,
+				D147416A150CB70D00B20490 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D1473F20150CA69B00B20490 /* Project object */;
+}

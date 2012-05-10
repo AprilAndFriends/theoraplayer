@@ -9,9 +9,9 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #ifndef _OpenAL_AudioInterface_h
 #define _OpenAL_AudioInterface_h
 
-#include "TheoraAudioInterface.h"
-#include "TheoraVideoClip.h"
-#include "TheoraTimer.h"
+#include <theoraplayer/TheoraAudioInterface.h>
+#include <theoraplayer/TheoraVideoClip.h>
+#include <theoraplayer/TheoraTimer.h>
 
 #ifndef __APPLE__
 #include <AL/al.h>

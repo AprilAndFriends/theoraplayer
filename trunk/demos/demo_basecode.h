@@ -342,7 +342,6 @@ int main(int argc,char** argv)
 	if (strstr(cwd,"msvc"))
 	{
 		*(strstr(cwd,"demos")+5)=0;
-		strcat(cwd,"\\media");
 		SetCurrentDirectory(cwd);
 	}
 #endif

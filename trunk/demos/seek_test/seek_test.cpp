@@ -90,7 +90,7 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("bunny.ogg"), TH_RGB, 4);
+	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/bunny.ogg"), TH_RGB, 4);
 	clip->setAutoRestart(1);
 
 	tex_id=createTexture(nextPow2(clip->getWidth()), nextPow2(clip->getHeight()));
