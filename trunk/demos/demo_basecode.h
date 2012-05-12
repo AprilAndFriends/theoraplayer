@@ -126,13 +126,13 @@ void drawWiredQuad(float x,float y,float w,float h,float r,float g,float b,float
 	glColor4f(1,1,1,1);
 }
 
-void drawTexturedQuad(float x,float y,float w,float h,float sw,float sh)
+void drawTexturedQuad(float x,float y,float w,float h,float sw,float sh,float sx=0,float sy=0)
 {
 	glBegin (GL_QUADS);
-	glTexCoord2f(0,  0); glVertex3f(x,  y,  0.0f);
-	glTexCoord2f(sw, 0); glVertex3f(x+w,y,  0.0f);
-	glTexCoord2f(sw,sh); glVertex3f(x+w,y+h,0.0f);
-	glTexCoord2f(0, sh); glVertex3f(x,  y+h,0.0f);
+	glTexCoord2f(sx,   sy);    glVertex3f(x,  y,  0.0f);
+	glTexCoord2f(sx+sw,sy);    glVertex3f(x+w,y,  0.0f);
+	glTexCoord2f(sx+sw,sy+sh); glVertex3f(x+w,y+h,0.0f);
+	glTexCoord2f(sx,   sy+sh); glVertex3f(x,  y+h,0.0f);
 	glEnd();
 }
 
