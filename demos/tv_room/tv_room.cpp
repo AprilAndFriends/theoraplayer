@@ -12,12 +12,12 @@ COPYRIGHT INFO: The room 3D models and textures are licensed under the terms of 
                 GNU General Public License (GPL).
 *************************************************************************************/
 #define __3D_PROJECTION
-#define __DEV_IL
 #define __ZBUFFER
-#include "../demo_basecode.h"
+#include "demo_basecode.h"
 #include <theoraplayer/TheoraPlayer.h>
 #include <theoraplayer/TheoraDataSource.h>
-#include "../ObjModel.h"
+#include "ObjModel.h"
+#include "tga.h"
 #include <math.h>
 
 unsigned int tex_id;
@@ -140,11 +140,11 @@ void init()
 
 	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
 
-	chair1.load("media/tv_room/chair1.obj",loadTexture("media/tv_room/chair1.jpg"));
-	chair2.load("media/tv_room/chair2.obj",loadTexture("media/tv_room/chair2.jpg"));
-	room.load("media/tv_room/room.obj",loadTexture("media/tv_room/room.jpg"));
-	table.load("media/tv_room/table.obj",loadTexture("media/tv_room/table.jpg"));
-	tv.load("media/tv_room/tv.obj",loadTexture("media/tv_room/tv.jpg"));
+	chair1.load("media/tv_room/chair1.obj", loadTexture("media/tv_room/chair1.tga"));
+	chair2.load("media/tv_room/chair2.obj", loadTexture("media/tv_room/chair2.tga"));
+	room.load  ("media/tv_room/room.obj",   loadTexture("media/tv_room/room.tga"));
+	table.load ("media/tv_room/table.obj",  loadTexture("media/tv_room/table.tga"));
+	tv.load    ("media/tv_room/tv.obj",     loadTexture("media/tv_room/tv.tga"));
 
 	glDisable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
