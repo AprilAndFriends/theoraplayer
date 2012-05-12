@@ -198,35 +198,6 @@ void disable_shader()
 #endif
 }
 
-
-#ifdef __DEV_IL
-#ifdef __APPLE__
-    #include <DevIL/ilut.h>
-#else
-    #include <IL/ilut.h>
-#endif
-unsigned int loadTexture(const char* name)
-{
-	unsigned int texid,image;
-	ilGenImages(1, &texid);
-	ilBindImage(texid);
-	ilLoadImage(name);
-
-	int w=ilGetInteger(IL_IMAGE_WIDTH);
-	int h=ilGetInteger(IL_IMAGE_HEIGHT);
-	glGenTextures(1, &image);
-	glBindTexture(GL_TEXTURE_2D, image);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, ilGetInteger(IL_IMAGE_BPP), w,h, 0, ilGetInteger(IL_IMAGE_FORMAT), GL_UNSIGNED_BYTE,ilGetData());
-	ilDeleteImages(1, &texid);
-
-	return image;
-}
-
-#endif
-
-
 unsigned int createTexture(int w,int h,unsigned int format=GL_RGB)
 {
 	unsigned int tex_id;
@@ -361,13 +332,7 @@ int main(int argc,char** argv)
 	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 	glEnable(GL_TEXTURE_2D);
 	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
-#ifdef __DEV_IL
-	ilInit();
-	ilutRenderer(ILUT_OPENGL);
-#endif
-    
-    
-    
+
 	init();
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);

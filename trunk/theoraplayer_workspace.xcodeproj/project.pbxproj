@@ -56,6 +56,8 @@
 		D16776D3155C57120050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
 		D16776D4155C571E0050EC64 /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
 		D16776D5155C57290050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+		D1D098F2155F077C009F6AAA /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
+		D1D098F3155F077C009F6AAA /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,69 +75,6 @@
 			remoteGlobalIDString = D1BB6FAE150E9E7100EF9400;
 			remoteInfo = "theoraplayer (iOS)";
 		};
-		D16775F1155C510B0050EC64 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D16775E9155C510B0050EC64 /* Ogg.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8D07F2C80486CC7A007CD1D0;
-			remoteInfo = ogg;
-		};
-		D16775F3155C510B0050EC64 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D16775E9155C510B0050EC64 /* Ogg.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D1BB6F2E150E99EE00EF9400;
-			remoteInfo = "ogg (iOS)";
-		};
-		D16775FD155C51130050EC64 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D16775F5155C51120050EC64 /* Vorbis.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 730F23F1091827B100AB638C;
-			remoteInfo = vorbis;
-		};
-		D16775FF155C51130050EC64 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D16775F5155C51120050EC64 /* Vorbis.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D1BB6F49150E9B0E00EF9400;
-			remoteInfo = "vorbis (iOS)";
-		};
-		D167760A155C51190050EC64 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1677601155C51190050EC64 /* Theora.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8D07F2C80486CC7A007CD1D0;
-			remoteInfo = theora;
-		};
-		D167760C155C51190050EC64 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1677601155C51190050EC64 /* Theora.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 09C8F6430C82FBE500F72188;
-			remoteInfo = "theora (static)";
-		};
-		D167760E155C51190050EC64 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1677601155C51190050EC64 /* Theora.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D1BB6F7E150E9CFD00EF9400;
-			remoteInfo = "theora (iOS)";
-		};
-		D1677610155C51320050EC64 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1677601155C51190050EC64 /* Theora.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8D07F2BC0486CC7A007CD1D0;
-			remoteInfo = theora;
-		};
-		D1677612155C51320050EC64 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D16775E9155C510B0050EC64 /* Ogg.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8D07F2BC0486CC7A007CD1D0;
-			remoteInfo = ogg;
-		};
 		D1677614155C51320050EC64 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
@@ -143,12 +82,54 @@
 			remoteGlobalIDString = D1473F29150CA69B00B20490;
 			remoteInfo = theoraplayer;
 		};
-		D1677616155C51320050EC64 /* PBXContainerItemProxy */ = {
+		D1D098D1155F05C5009F6AAA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D16775F5155C51120050EC64 /* Vorbis.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 730F23A1091827B100AB638C;
+			containerPortal = D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D07F2C80486CC7A007CD1D0;
+			remoteInfo = ogg;
+		};
+		D1D098D3155F05C5009F6AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1BB6F2E150E99EE00EF9400;
+			remoteInfo = "ogg (iOS)";
+		};
+		D1D098DD155F05CC009F6AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 730F23F1091827B100AB638C;
 			remoteInfo = vorbis;
+		};
+		D1D098DF155F05CC009F6AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1BB6F49150E9B0E00EF9400;
+			remoteInfo = "vorbis (iOS)";
+		};
+		D1D098EA155F05D2009F6AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D07F2C80486CC7A007CD1D0;
+			remoteInfo = theora;
+		};
+		D1D098EC155F05D2009F6AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 09C8F6430C82FBE500F72188;
+			remoteInfo = "theora (static)";
+		};
+		D1D098EE155F05D2009F6AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1BB6F7E150E9CFD00EF9400;
+			remoteInfo = "theora (iOS)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -168,9 +149,6 @@
 		D1474152150CB6F900B20490 /* seek_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seek_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D147416B150CB70D00B20490 /* tv_room.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tv_room.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = theoraplayer.xcodeproj; path = theoraplayer/theoraplayer.xcodeproj; sourceTree = "<group>"; };
-		D16775E9155C510B0050EC64 /* Ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Ogg.xcodeproj; path = ../../../Desktop/ogg/macosx/Ogg.xcodeproj; sourceTree = "<group>"; };
-		D16775F5155C51120050EC64 /* Vorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vorbis.xcodeproj; path = ../../../Desktop/vorbis/macosx/Vorbis.xcodeproj; sourceTree = "<group>"; };
-		D1677601155C51190050EC64 /* Theora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Theora.xcodeproj; path = ../../../Desktop/theora/macosx/Theora.xcodeproj; sourceTree = "<group>"; };
 		D1677619155C525F0050EC64 /* glut_player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glut_player.cpp; path = demos/glut_player/glut_player.cpp; sourceTree = "<group>"; };
 		D167761B155C52B40050EC64 /* demo_basecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_basecode.h; path = demos/demo_basecode.h; sourceTree = "<group>"; };
 		D167761C155C52B40050EC64 /* objcUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = objcUtil.mm; path = demos/objcUtil.mm; sourceTree = "<group>"; };
@@ -186,6 +164,11 @@
 		D16776CE155C56D90050EC64 /* tv_room.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tv_room.cpp; path = demos/tv_room/tv_room.cpp; sourceTree = "<group>"; };
 		D16776D6155C57E90050EC64 /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = demos/media; sourceTree = "<group>"; };
 		D1BB6FAF150E9E7100EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Ogg.xcodeproj; path = ogg/macosx/Ogg.xcodeproj; sourceTree = "<group>"; };
+		D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vorbis.xcodeproj; path = vorbis/macosx/Vorbis.xcodeproj; sourceTree = "<group>"; };
+		D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Theora.xcodeproj; path = theora/macosx/Theora.xcodeproj; sourceTree = "<group>"; };
+		D1D098F0155F077C009F6AAA /* tga.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tga.cpp; path = demos/tga.cpp; sourceTree = "<group>"; };
+		D1D098F1155F077C009F6AAA /* tga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tga.h; path = demos/tga.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,9 +268,9 @@
 		D1473F1E150CA69B00B20490 = {
 			isa = PBXGroup;
 			children = (
-				D16775E9155C510B0050EC64 /* Ogg.xcodeproj */,
-				D16775F5155C51120050EC64 /* Vorbis.xcodeproj */,
-				D1677601155C51190050EC64 /* Theora.xcodeproj */,
+				D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */,
+				D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */,
+				D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */,
 				D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */,
 				D1474109150CB6BD00B20490 /* glut_player */,
 				D1474107150CB6A700B20490 /* av_player */,
@@ -397,37 +380,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D16775EA155C510B0050EC64 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D16775F2155C510B0050EC64 /* Ogg.framework */,
-				D16775F4155C510B0050EC64 /* libogg.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D16775F6155C51120050EC64 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D16775FE155C51130050EC64 /* Vorbis.framework */,
-				D1677600155C51130050EC64 /* libvorbis.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D1677602155C51190050EC64 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D167760B155C51190050EC64 /* Theora.framework */,
-				D167760D155C51190050EC64 /* libtheoradec.a */,
-				D167760F155C51190050EC64 /* libtheora.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		D16D9DDF150CBC5D001BD35C /* common */ = {
 			isa = PBXGroup;
 			children = (
+				D1D098F0155F077C009F6AAA /* tga.cpp */,
+				D1D098F1155F077C009F6AAA /* tga.h */,
 				D167761B155C52B40050EC64 /* demo_basecode.h */,
 				D167761C155C52B40050EC64 /* objcUtil.mm */,
 				D167761D155C52B40050EC64 /* ObjModel.cpp */,
@@ -436,6 +393,34 @@
 				D1677620155C52B40050EC64 /* OpenAL_AudioInterface.h */,
 			);
 			name = common;
+			sourceTree = "<group>";
+		};
+		D1D098CA155F05C5009F6AAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D1D098D2155F05C5009F6AAA /* Ogg.framework */,
+				D1D098D4155F05C5009F6AAA /* libogg.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D1D098D6155F05CB009F6AAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D1D098DE155F05CC009F6AAA /* Vorbis.framework */,
+				D1D098E0155F05CC009F6AAA /* libvorbis.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D1D098E2155F05D1009F6AAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D1D098EB155F05D2009F6AAA /* Theora.framework */,
+				D1D098ED155F05D2009F6AAA /* libtheoradec.a */,
+				D1D098EF155F05D2009F6AAA /* libtheora.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -469,9 +454,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D1677613155C51320050EC64 /* PBXTargetDependency */,
-				D1677617155C51320050EC64 /* PBXTargetDependency */,
-				D1677611155C51320050EC64 /* PBXTargetDependency */,
 				D1677615155C51320050EC64 /* PBXTargetDependency */,
 			);
 			name = glut_player;
@@ -584,20 +566,20 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = D16775EA155C510B0050EC64 /* Products */;
-					ProjectRef = D16775E9155C510B0050EC64 /* Ogg.xcodeproj */;
+					ProductGroup = D1D098CA155F05C5009F6AAA /* Products */;
+					ProjectRef = D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */;
 				},
 				{
-					ProductGroup = D1677602155C51190050EC64 /* Products */;
-					ProjectRef = D1677601155C51190050EC64 /* Theora.xcodeproj */;
+					ProductGroup = D1D098E2155F05D1009F6AAA /* Products */;
+					ProjectRef = D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */;
 				},
 				{
 					ProductGroup = D1677575155C4F8F0050EC64 /* Products */;
 					ProjectRef = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
 				},
 				{
-					ProductGroup = D16775F6155C51120050EC64 /* Products */;
-					ProjectRef = D16775F5155C51120050EC64 /* Vorbis.xcodeproj */;
+					ProductGroup = D1D098D6155F05CB009F6AAA /* Products */;
+					ProjectRef = D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -628,53 +610,53 @@
 			remoteRef = D167758C155C4F8F0050EC64 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D16775F2155C510B0050EC64 /* Ogg.framework */ = {
+		D1D098D2155F05C5009F6AAA /* Ogg.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Ogg.framework;
-			remoteRef = D16775F1155C510B0050EC64 /* PBXContainerItemProxy */;
+			remoteRef = D1D098D1155F05C5009F6AAA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D16775F4155C510B0050EC64 /* libogg.a */ = {
+		D1D098D4155F05C5009F6AAA /* libogg.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libogg.a;
-			remoteRef = D16775F3155C510B0050EC64 /* PBXContainerItemProxy */;
+			remoteRef = D1D098D3155F05C5009F6AAA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D16775FE155C51130050EC64 /* Vorbis.framework */ = {
+		D1D098DE155F05CC009F6AAA /* Vorbis.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Vorbis.framework;
-			remoteRef = D16775FD155C51130050EC64 /* PBXContainerItemProxy */;
+			remoteRef = D1D098DD155F05CC009F6AAA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D1677600155C51130050EC64 /* libvorbis.a */ = {
+		D1D098E0155F05CC009F6AAA /* libvorbis.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libvorbis.a;
-			remoteRef = D16775FF155C51130050EC64 /* PBXContainerItemProxy */;
+			remoteRef = D1D098DF155F05CC009F6AAA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D167760B155C51190050EC64 /* Theora.framework */ = {
+		D1D098EB155F05D2009F6AAA /* Theora.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Theora.framework;
-			remoteRef = D167760A155C51190050EC64 /* PBXContainerItemProxy */;
+			remoteRef = D1D098EA155F05D2009F6AAA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D167760D155C51190050EC64 /* libtheoradec.a */ = {
+		D1D098ED155F05D2009F6AAA /* libtheoradec.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libtheoradec.a;
-			remoteRef = D167760C155C51190050EC64 /* PBXContainerItemProxy */;
+			remoteRef = D1D098EC155F05D2009F6AAA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D167760F155C51190050EC64 /* libtheora.a */ = {
+		D1D098EF155F05D2009F6AAA /* libtheora.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libtheora.a;
-			remoteRef = D167760E155C51190050EC64 /* PBXContainerItemProxy */;
+			remoteRef = D1D098EE155F05D2009F6AAA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -780,6 +762,7 @@
 			files = (
 				D16776D2155C570B0050EC64 /* objcUtil.mm in Sources */,
 				D16776C7155C56A70050EC64 /* composite_animation.cpp in Sources */,
+				D1D098F2155F077C009F6AAA /* tga.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,31 +819,17 @@
 				D16776D4155C571E0050EC64 /* ObjModel.cpp in Sources */,
 				D16776D3155C57120050EC64 /* objcUtil.mm in Sources */,
 				D16776CF155C56D90050EC64 /* tv_room.cpp in Sources */,
+				D1D098F3155F077C009F6AAA /* tga.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D1677611155C51320050EC64 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = theora;
-			targetProxy = D1677610155C51320050EC64 /* PBXContainerItemProxy */;
-		};
-		D1677613155C51320050EC64 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ogg;
-			targetProxy = D1677612155C51320050EC64 /* PBXContainerItemProxy */;
-		};
 		D1677615155C51320050EC64 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = theoraplayer;
 			targetProxy = D1677614155C51320050EC64 /* PBXContainerItemProxy */;
-		};
-		D1677617155C51320050EC64 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = vorbis;
-			targetProxy = D1677616155C51320050EC64 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

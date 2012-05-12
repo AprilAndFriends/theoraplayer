@@ -6,11 +6,12 @@
  This program is free software; you can redistribute it and/or modify it under
  the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
  *************************************************************************************/
-#include "../demo_basecode.h"
+#include "demo_basecode.h"
 #include <theoraplayer/TheoraPlayer.h>
 #include <theoraplayer/TheoraDataSource.h>
+#include "tga.h"
 
-unsigned int tex_id;
+unsigned int locv_main, tex_id;
 TheoraVideoManager* mgr;
 TheoraVideoClip* clip;
 std::string window_name="composite_player";
@@ -19,8 +20,11 @@ int window_w = 1024, window_h = 768;
 
 void draw()
 {
-	glBindTexture(GL_TEXTURE_2D,tex_id);
-    
+	glBindTexture(GL_TEXTURE_2D, locv_main);
+	drawTexturedQuad(0, 0, 1024, 768, 1, 0.75f);
+
+
+	glBindTexture(GL_TEXTURE_2D,tex_id);    
 	TheoraVideoFrame* f=clip->getNextFrame();
 	if (f)
 	{
@@ -77,6 +81,11 @@ void init()
 	clip->setAutoRestart(1);
     
 	tex_id=createTexture(nextPow2(clip->getWidth()), nextPow2(clip->getHeight()));
+	
+	locv_main = loadTexture("media/locv/locv_main.tga");
+	
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void destroy()

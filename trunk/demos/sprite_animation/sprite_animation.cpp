@@ -15,7 +15,7 @@ Author: Petar Ivancek
 These animations ARE NOT ALLOWED to be used in any manner other then for the purpose
 of this demo program.
 *************************************************************************************/
-#include "../demo_basecode.h"
+#include "demo_basecode.h"
 #include <theoraplayer/TheoraPlayer.h>
 #include <theoraplayer/TheoraDataSource.h>
 
