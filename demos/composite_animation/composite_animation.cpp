@@ -6,49 +6,90 @@
  This program is free software; you can redistribute it and/or modify it under
  the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
  *************************************************************************************/
+
+/************************************************************************************
+ COPYRIGHT INFO: Graphics in media/locv have been borrowed
+                 with authors permission from the game:
+ Game:   Legend of Crystal Valley ( http://locv.cateia.com/ )
+ Author: Cateia Games
+ 
+ These grapchics ARE NOT ALLOWED to be used in any manner other then for the purpose
+ of this demo program.
+ *************************************************************************************/
+#include <math.h>
 #include "demo_basecode.h"
 #include <theoraplayer/TheoraPlayer.h>
 #include <theoraplayer/TheoraDataSource.h>
 #include "tga.h"
 
-unsigned int locv_main, tex_id;
+unsigned int locv_main_tex, locv_back_tex, locv_branch_tex, locv_clouds_tex, water_tex, eve_tex;
 TheoraVideoManager* mgr;
-TheoraVideoClip* clip;
+TheoraVideoClip *water, *eve;
 std::string window_name="composite_player";
-bool started = 1;
 int window_w = 1024, window_h = 768;
+unsigned char buffer[256 * 336 * 4];
+float timer = 0;
 
 void draw()
 {
-	glBindTexture(GL_TEXTURE_2D, locv_main);
+	glBindTexture(GL_TEXTURE_2D, locv_back_tex);
+	drawTexturedQuad(0, 0, 1024, 512, 1, 1);
+
+	glBindTexture(GL_TEXTURE_2D, locv_clouds_tex);
+	drawTexturedQuad(0, 200, 1024, 350, 1, 0.6f, timer / 200.0f, 0.4f);
+	
+	glBindTexture(GL_TEXTURE_2D, locv_main_tex);
 	drawTexturedQuad(0, 0, 1024, 768, 1, 0.75f);
 
+	
+	glBindTexture(GL_TEXTURE_2D, locv_branch_tex);
+	glPushMatrix();
+	glTranslatef(1034, -10, 0);
+	glRotatef(sin(timer) * 1, 0, 0, 1);
+	drawTexturedQuad(-510, 0, 510, 254, 510/512.0f, 254/256.0f, 1/512.0f, 1/256.0f);
+	glPopMatrix();
 
-	glBindTexture(GL_TEXTURE_2D,tex_id);    
-	TheoraVideoFrame* f=clip->getNextFrame();
+	glBindTexture(GL_TEXTURE_2D, water_tex);    
+	TheoraVideoFrame* f = water->getNextFrame();
 	if (f)
 	{
-		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
-		//printf("Displaying frame %d\n", f->getFrameNumber());
-		clip->popFrame();
+		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, f->getWidth(), f->getHeight(), GL_RGB, GL_UNSIGNED_BYTE, f->getBuffer());
+		water->popFrame();
 	}
     
-	float w=clip->getWidth(),h=clip->getHeight();
-	float tw=nextPow2(w),th=nextPow2(h);
-    
-	glEnable(GL_TEXTURE_2D);
-	drawTexturedQuad(0, 768 - 176, 1024, 176, w/tw, h/th);
+	drawTexturedQuad(0, 768 - 176, 1024, 176, 1.0f, 176.0f / 256.0f);
+
+	glBindTexture(GL_TEXTURE_2D, eve_tex);    
+	f = eve->getNextFrame();
+	if (f)
+	{
+		unsigned char* src = f->getBuffer();
+		int i, j, k, x, y, w = f->getWidth();
+		for (y = 0; y < 336; y++)
+		{
+			for (x = 0; x < 256; x++)
+			{
+				i = (y * 256 + x) * 4;
+				j = (y * w + x) * 3;
+				k = (y * w + x + 256) * 3;
+				buffer[i    ] = src[j    ];
+				buffer[i + 1] = src[j + 1];
+				buffer[i + 2] = src[j + 2];
+				buffer[i + 3] = src[k    ];
+			}
+		}
+
+		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, f->getWidth() / 2, f->getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+		eve->popFrame();
+	}
+ 
+	drawTexturedQuad(120, 310, 256, 336, 0.5f, 336.0f / 512.0f);
 }
 
 void update(float time_increase)
 {
-	if (started)
-	{
-		if (clip->getNumReadyFrames() < clip->getNumPrecachedFrames()*0.5f)
-			return;
-		started=0;
-	}
 	mgr->update(time_increase);
+	timer += time_increase;
 }
 
 void OnKeyPress(int key)
@@ -63,26 +104,25 @@ void OnClick(float x,float y)
 
 void setDebugTitle(char* out)
 {
-	int nDropped=clip->getNumDroppedFrames(),nDisplayed=clip->getNumDisplayedFrames();
-	float percent=100*((float) nDropped/nDisplayed);
-	sprintf(out," (%dx%d) %d precached, %d displayed, %d dropped (%.1f %%)",clip->getWidth(),
-            clip->getHeight(),
-            clip->getNumReadyFrames(),
-            nDisplayed,
-            nDropped,
-            percent);
+	sprintf(out, "");
 }
 
 void init()
 {
-	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip("media/locv/locv_water.ogg", TH_RGB, 4);
-    clip->setPlaybackSpeed(0.5f);
-	clip->setAutoRestart(1);
+	mgr = new TheoraVideoManager(2);
+	water = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_water.ogg"), TH_RGB, 4);
+    water->setPlaybackSpeed(0.5f);
+	water->setAutoRestart(1);
+
+	eve = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/eve.ogg"), TH_RGB, 4);
+	eve->setAutoRestart(1);
     
-	tex_id=createTexture(nextPow2(clip->getWidth()), nextPow2(clip->getHeight()));
-	
-	locv_main = loadTexture("media/locv/locv_main.tga");
+	water_tex = createTexture(nextPow2(water->getWidth()), nextPow2(water->getHeight()));
+	eve_tex = createTexture(nextPow2(eve->getWidth()), nextPow2(eve->getHeight()), GL_RGBA);
+	locv_main_tex = loadTexture("media/locv/locv_main.tga");
+	locv_back_tex = loadTexture("media/locv/locv_back.tga");
+	locv_branch_tex = loadTexture("media/locv/locv_branch.tga");
+	locv_clouds_tex = loadTexture("media/locv/locv_clouds.tga");
 	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

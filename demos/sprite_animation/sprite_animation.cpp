@@ -9,7 +9,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 
 /************************************************************************************
 COPYRIGHT INFO: Sprite animation has been borrowed with authors permission from the game:
-Game:   Kaptain Brawe ( http://www.naphtalite.com )
+Game:   Kaptain Brawe ( http://kaptainbrawe.cateia.com/ )
 Author: Petar Ivancek
 
 These animations ARE NOT ALLOWED to be used in any manner other then for the purpose
