@@ -22,7 +22,7 @@
 #include <theoraplayer/TheoraDataSource.h>
 #include "tga.h"
 
-unsigned int locv_main_tex, locv_back_tex, locv_branch_tex, locv_clouds_tex, water_tex, eve_tex;
+unsigned int locv_main_tex, locv_back_tex, locv_branch_tex, locv_bush_tex, locv_clouds_tex, water_tex, eve_tex;
 TheoraVideoManager* mgr;
 TheoraVideoClip *water, *eve;
 std::string window_name="composite_player";
@@ -40,7 +40,6 @@ void draw()
 	
 	glBindTexture(GL_TEXTURE_2D, locv_main_tex);
 	drawTexturedQuad(0, 0, 1024, 768, 1, 0.75f);
-
 	
 	glBindTexture(GL_TEXTURE_2D, locv_branch_tex);
 	glPushMatrix();
@@ -56,7 +55,6 @@ void draw()
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, f->getWidth(), f->getHeight(), GL_RGB, GL_UNSIGNED_BYTE, f->getBuffer());
 		water->popFrame();
 	}
-    
 	drawTexturedQuad(0, 768 - 176, 1024, 176, 1.0f, 176.0f / 256.0f);
 
 	glBindTexture(GL_TEXTURE_2D, eve_tex);    
@@ -82,8 +80,11 @@ void draw()
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, f->getWidth() / 2, f->getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 		eve->popFrame();
 	}
- 
 	drawTexturedQuad(120, 310, 256, 336, 0.5f, 336.0f / 512.0f);
+	
+	glBindTexture(GL_TEXTURE_2D, locv_bush_tex);
+	drawTexturedQuad(0, 512, 512, 256, 1, 1);
+
 }
 
 void update(float time_increase)
@@ -114,7 +115,7 @@ void init()
     water->setPlaybackSpeed(0.5f);
 	water->setAutoRestart(1);
 
-	eve = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/eve.ogg"), TH_RGB, 4);
+	eve = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_eve.ogg"), TH_RGB, 4);
 	eve->setAutoRestart(1);
     
 	water_tex = createTexture(nextPow2(water->getWidth()), nextPow2(water->getHeight()));
@@ -122,6 +123,7 @@ void init()
 	locv_main_tex = loadTexture("media/locv/locv_main.tga");
 	locv_back_tex = loadTexture("media/locv/locv_back.tga");
 	locv_branch_tex = loadTexture("media/locv/locv_branch.tga");
+	locv_bush_tex = loadTexture("media/locv/locv_bush.tga");
 	locv_clouds_tex = loadTexture("media/locv/locv_clouds.tga");
 	
 	glEnable(GL_BLEND);
