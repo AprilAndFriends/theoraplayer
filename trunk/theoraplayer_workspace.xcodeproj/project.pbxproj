@@ -7,30 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D12C207F1534D58B00B4904B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
 		D12C20801534D58B00B4904B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
 		D12C20811534D58B00B4904B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
 		D1474049150CAFEB00B20490 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
 		D147405A150CB0E700B20490 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
-		D14740E6150CB3B800B20490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
-		D14740EC150CB45E00B20490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
 		D14740ED150CB45E00B20490 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
 		D14740EE150CB45E00B20490 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
 		D1474103150CB4A700B20490 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
 		D1474110150CB6F300B20490 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
-		D1474111150CB6F300B20490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
 		D1474112150CB6F300B20490 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
 		D1474113150CB6F300B20490 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
 		D1474129150CB6F600B20490 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
-		D147412A150CB6F600B20490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
 		D147412B150CB6F600B20490 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
 		D147412C150CB6F600B20490 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
 		D1474142150CB6F900B20490 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
-		D1474143150CB6F900B20490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
 		D1474144150CB6F900B20490 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
 		D1474145150CB6F900B20490 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
 		D147415B150CB70D00B20490 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
-		D147415C150CB70D00B20490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D147402B150CAF0D00B20490 /* Foundation.framework */; };
 		D147415D150CB70D00B20490 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
 		D147415E150CB70D00B20490 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
 		D16775E8155C50510050EC64 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
@@ -56,6 +49,21 @@
 		D16776D3155C57120050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
 		D16776D4155C571E0050EC64 /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
 		D16776D5155C57290050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+		D1C0151315619DA700FBEF81 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
+		D1C0151415619DD400FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
+		D1C0151515619DDB00FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
+		D1C0151615619DE800FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
+		D1C0151715619DEE00FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
+		D1C0151815619DF200FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
+		D1C0151915619DF600FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
+		D1C0151A15619DFA00FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
+		D1C0151B15619E0700FBEF81 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
+		D1C0151C15619E0700FBEF81 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
+		D1C0151D15619E0700FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6FAF150E9E7100EF9400 /* Foundation.framework */; };
+		D1C0152115619EDC00FBEF81 /* lightmap_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1C0152015619EDC00FBEF81 /* lightmap_demo.cpp */; };
+		D1C0152215619EEE00FBEF81 /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
+		D1C0152315619EEE00FBEF81 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+		D1C0152415619EEE00FBEF81 /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
 		D1D098F2155F077C009F6AAA /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
 		D1D098F3155F077C009F6AAA /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
 /* End PBXBuildFile section */
@@ -74,13 +82,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = D1BB6FAE150E9E7100EF9400;
 			remoteInfo = "theoraplayer (iOS)";
-		};
-		D1677614155C51320050EC64 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D1473F29150CA69B00B20490;
-			remoteInfo = theoraplayer;
 		};
 		D1D098D1155F05C5009F6AAA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -136,10 +137,6 @@
 /* Begin PBXFileReference section */
 		D12C208E1534D58B00B4904B /* composite_animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = composite_animation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1474024150CAF0D00B20490 /* glut_player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = glut_player.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1474026150CAF0D00B20490 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		D1474029150CAF0D00B20490 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		D147402A150CAF0D00B20490 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		D147402B150CAF0D00B20490 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D1474048150CAFEB00B20490 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		D1474059150CB0E700B20490 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		D14740FB150CB45E00B20490 /* av_player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = av_player.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +161,11 @@
 		D16776CE155C56D90050EC64 /* tv_room.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tv_room.cpp; path = demos/tv_room/tv_room.cpp; sourceTree = "<group>"; };
 		D16776D6155C57E90050EC64 /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = demos/media; sourceTree = "<group>"; };
 		D1BB6FAF150E9E7100EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D1C014F315619D4700FBEF81 /* lightmap_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lightmap_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1C014F815619D4700FBEF81 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		D1C014F915619D4700FBEF81 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D1C014FA15619D4700FBEF81 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D1C0152015619EDC00FBEF81 /* lightmap_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lightmap_demo.cpp; path = demos/lightmap_demo/lightmap_demo.cpp; sourceTree = "<group>"; };
 		D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Ogg.xcodeproj; path = ogg/macosx/Ogg.xcodeproj; sourceTree = "<group>"; };
 		D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vorbis.xcodeproj; path = vorbis/macosx/Vorbis.xcodeproj; sourceTree = "<group>"; };
 		D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Theora.xcodeproj; path = theora/macosx/Theora.xcodeproj; sourceTree = "<group>"; };
@@ -176,8 +178,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C0151815619DF200FBEF81 /* Foundation.framework in Frameworks */,
 				D16776C0155C55F90050EC64 /* theoraplayer.framework in Frameworks */,
-				D12C207F1534D58B00B4904B /* Foundation.framework in Frameworks */,
 				D12C20801534D58B00B4904B /* OpenGL.framework in Frameworks */,
 				D12C20811534D58B00B4904B /* GLUT.framework in Frameworks */,
 			);
@@ -187,8 +189,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C0151415619DD400FBEF81 /* Foundation.framework in Frameworks */,
 				D16775E8155C50510050EC64 /* theoraplayer.framework in Frameworks */,
-				D14740E6150CB3B800B20490 /* Foundation.framework in Frameworks */,
 				D147405A150CB0E700B20490 /* OpenGL.framework in Frameworks */,
 				D1474049150CAFEB00B20490 /* GLUT.framework in Frameworks */,
 			);
@@ -198,9 +200,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C0151515619DDB00FBEF81 /* Foundation.framework in Frameworks */,
 				D16776BA155C55BD0050EC64 /* theoraplayer.framework in Frameworks */,
 				D1474103150CB4A700B20490 /* OpenAL.framework in Frameworks */,
-				D14740EC150CB45E00B20490 /* Foundation.framework in Frameworks */,
 				D14740ED150CB45E00B20490 /* OpenGL.framework in Frameworks */,
 				D14740EE150CB45E00B20490 /* GLUT.framework in Frameworks */,
 			);
@@ -210,9 +212,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C0151615619DE800FBEF81 /* Foundation.framework in Frameworks */,
 				D16776BC155C55D10050EC64 /* theoraplayer.framework in Frameworks */,
 				D1474110150CB6F300B20490 /* OpenAL.framework in Frameworks */,
-				D1474111150CB6F300B20490 /* Foundation.framework in Frameworks */,
 				D1474112150CB6F300B20490 /* OpenGL.framework in Frameworks */,
 				D1474113150CB6F300B20490 /* GLUT.framework in Frameworks */,
 			);
@@ -222,9 +224,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C0151715619DEE00FBEF81 /* Foundation.framework in Frameworks */,
 				D16776BE155C55E40050EC64 /* theoraplayer.framework in Frameworks */,
 				D1474129150CB6F600B20490 /* OpenAL.framework in Frameworks */,
-				D147412A150CB6F600B20490 /* Foundation.framework in Frameworks */,
 				D147412B150CB6F600B20490 /* OpenGL.framework in Frameworks */,
 				D147412C150CB6F600B20490 /* GLUT.framework in Frameworks */,
 			);
@@ -234,9 +236,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C0151A15619DFA00FBEF81 /* Foundation.framework in Frameworks */,
 				D16776C4155C56220050EC64 /* theoraplayer.framework in Frameworks */,
 				D1474142150CB6F900B20490 /* OpenAL.framework in Frameworks */,
-				D1474143150CB6F900B20490 /* Foundation.framework in Frameworks */,
 				D1474144150CB6F900B20490 /* OpenGL.framework in Frameworks */,
 				D1474145150CB6F900B20490 /* GLUT.framework in Frameworks */,
 			);
@@ -246,11 +248,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C0151915619DF600FBEF81 /* Foundation.framework in Frameworks */,
 				D16776C2155C560A0050EC64 /* theoraplayer.framework in Frameworks */,
 				D147415B150CB70D00B20490 /* OpenAL.framework in Frameworks */,
-				D147415C150CB70D00B20490 /* Foundation.framework in Frameworks */,
 				D147415D150CB70D00B20490 /* OpenGL.framework in Frameworks */,
 				D147415E150CB70D00B20490 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1C014F015619D4700FBEF81 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1C0151B15619E0700FBEF81 /* OpenGL.framework in Frameworks */,
+				D1C0151C15619E0700FBEF81 /* GLUT.framework in Frameworks */,
+				D1C0151D15619E0700FBEF81 /* Foundation.framework in Frameworks */,
+				D1C0151315619DA700FBEF81 /* theoraplayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +291,7 @@
 				D147416F150CB74B00B20490 /* sprite_animation */,
 				D12C20781534D4A000B4904B /* composite animation */,
 				D1474171150CB76400B20490 /* tv_room */,
+				D1C0151F15619E2B00FBEF81 /* lightmap_demo */,
 				D1474170150CB75800B20490 /* seek_test */,
 				D16D9DDF150CBC5D001BD35C /* common */,
 				D16776D6155C57E90050EC64 /* media */,
@@ -296,6 +310,7 @@
 				D1474152150CB6F900B20490 /* seek_test.app */,
 				D147416B150CB70D00B20490 /* tv_room.app */,
 				D12C208E1534D58B00B4904B /* composite_animation.app */,
+				D1C014F315619D4700FBEF81 /* lightmap_demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -304,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				D1473F82150CA7F300B20490 /* mac */,
+				D1C014F715619D4700FBEF81 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -314,11 +330,7 @@
 				D1474059150CB0E700B20490 /* OpenGL.framework */,
 				D1474048150CAFEB00B20490 /* GLUT.framework */,
 				D1474102150CB4A700B20490 /* OpenAL.framework */,
-				D1474026150CAF0D00B20490 /* Cocoa.framework */,
 				D1BB6FAF150E9E7100EF9400 /* Foundation.framework */,
-				D1474029150CAF0D00B20490 /* AppKit.framework */,
-				D147402A150CAF0D00B20490 /* CoreData.framework */,
-				D147402B150CAF0D00B20490 /* Foundation.framework */,
 			);
 			name = mac;
 			sourceTree = "<group>";
@@ -395,6 +407,24 @@
 			name = common;
 			sourceTree = "<group>";
 		};
+		D1C014F715619D4700FBEF81 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D1C014F815619D4700FBEF81 /* AppKit.framework */,
+				D1C014F915619D4700FBEF81 /* CoreData.framework */,
+				D1C014FA15619D4700FBEF81 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		D1C0151F15619E2B00FBEF81 /* lightmap_demo */ = {
+			isa = PBXGroup;
+			children = (
+				D1C0152015619EDC00FBEF81 /* lightmap_demo.cpp */,
+			);
+			name = lightmap_demo;
+			sourceTree = "<group>";
+		};
 		D1D098CA155F05C5009F6AAA /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,7 +484,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D1677615155C51320050EC64 /* PBXTargetDependency */,
 			);
 			name = glut_player;
 			productName = glut_player;
@@ -546,6 +575,23 @@
 			productReference = D147416B150CB70D00B20490 /* tv_room.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D1C014F215619D4700FBEF81 /* lightmap_demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1C0150D15619D4700FBEF81 /* Build configuration list for PBXNativeTarget "lightmap_demo" */;
+			buildPhases = (
+				D1C014EF15619D4700FBEF81 /* Sources */,
+				D1C014F015619D4700FBEF81 /* Frameworks */,
+				D1C0151E15619E1F00FBEF81 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = lightmap_demo;
+			productName = lightmap_demo;
+			productReference = D1C014F315619D4700FBEF81 /* lightmap_demo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -591,6 +637,7 @@
 				D12C207A1534D58B00B4904B /* composite_animation */,
 				D1474155150CB70D00B20490 /* tv_room */,
 				D147413C150CB6F900B20490 /* seek_test */,
+				D1C014F215619D4700FBEF81 /* lightmap_demo */,
 			);
 		};
 /* End PBXProject section */
@@ -753,6 +800,19 @@
 			shellPath = /bin/sh;
 			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
 		};
+		D1C0151E15619E1F00FBEF81 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\nmkdir \"${DATA_PATH}/Resources\"\nln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -823,15 +883,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D1677615155C51320050EC64 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = theoraplayer;
-			targetProxy = D1677614155C51320050EC64 /* PBXContainerItemProxy */;
+		D1C014EF15619D4700FBEF81 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1C0152215619EEE00FBEF81 /* tga.cpp in Sources */,
+				D1C0152315619EEE00FBEF81 /* objcUtil.mm in Sources */,
+				D1C0152415619EEE00FBEF81 /* ObjModel.cpp in Sources */,
+				D1C0152115619EDC00FBEF81 /* lightmap_demo.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXTargetDependency section */
+/* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		D12C20891534D58B00B4904B /* Debug */ = {
@@ -1278,6 +1341,46 @@
 			};
 			name = "App Store";
 		};
+		D1C0150E15619D4700FBEF81 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D1C0150F15619D4700FBEF81 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-LLVM";
+		};
+		D1C0151015619D4700FBEF81 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D1C0151115619D4700FBEF81 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-LLVM";
+		};
+		D1C0151215619D4700FBEF81 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1376,6 +1479,17 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		D1C0150D15619D4700FBEF81 /* Build configuration list for PBXNativeTarget "lightmap_demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1C0150E15619D4700FBEF81 /* Debug */,
+				D1C0150F15619D4700FBEF81 /* Debug-LLVM */,
+				D1C0151015619D4700FBEF81 /* Release */,
+				D1C0151115619D4700FBEF81 /* Release-LLVM */,
+				D1C0151215619D4700FBEF81 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

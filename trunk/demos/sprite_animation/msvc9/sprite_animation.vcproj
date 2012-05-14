@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="sprite_animation"
+	Name="demo_sprite_animation"
 	ProjectGUID="{388E4B0A-0860-40C7-8537-FD6F79E7AB3E}"
 	RootNamespace="sprite_animation"
 	TargetFrameworkVersion="131072"

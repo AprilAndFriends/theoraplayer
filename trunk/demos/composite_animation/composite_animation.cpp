@@ -83,7 +83,7 @@ void draw()
 	drawTexturedQuad(120, 310, 256, 336, 0.5f, 336.0f / 512.0f);
 	
 	glBindTexture(GL_TEXTURE_2D, locv_bush_tex);
-	drawTexturedQuad(0, 512, 512, 256, 1, 1);
+	drawTexturedQuad(0, 511, 513, 256, 511/512.0f, 1, 0, 1/256.0f);
 
 }
 
