@@ -6,11 +6,6 @@ Copyright (c) 2008-2012 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
-
-/************************************************************************************
-COPYRIGHT INFO: The room 3D models and lightmap textures and textures are licensed
-                under the terms of the GNU General Public License (GPL).
-*************************************************************************************/
 #define __3D_PROJECTION
 #define __ZBUFFER
 #include "demo_basecode.h"
@@ -23,20 +18,20 @@ COPYRIGHT INFO: The room 3D models and lightmap textures and textures are licens
 unsigned int tex_id;
 TheoraVideoManager* mgr;
 TheoraVideoClip* clip;
-std::string window_name="lightmap_demo";
+std::string window_name="environment_mapping";
 bool started=1;
 int window_w=800,window_h=600;
-
-ObjModel room;
-float anglex=0,angley=0;
+float angle = 0;
+ObjModel teapot;
 
 void draw()
 {
 	glBindTexture(GL_TEXTURE_2D,tex_id);
-
+	
 	glLoadIdentity();
-	gluLookAt(sin(anglex)*400-200,angley,cos(anglex)*400,  -200,150,0,  0,1,0);
+	gluLookAt(0,2000,1000,  0,0,0,  0,-1,0);
 
+	glRotatef(angle, 0, 0, 1);
 	TheoraVideoFrame* f=clip->getNextFrame();
 	if (f)
 	{
@@ -44,18 +39,12 @@ void draw()
 		clip->popFrame();
 	}
 
-	glEnable(GL_CULL_FACE);
-	room.draw();
-	glDisable(GL_CULL_FACE);
+	teapot.draw();
 }
 
 void update(float time_increase)
 {
-	float x,y;
-	getCursorPos(&x,&y);
-	anglex=-4*3.14f*x/window_w;
-	angley=1500*(y-300)/window_h;
-
+	angle += time_increase * 20;
 	mgr->update(time_increase);
 }
 
@@ -77,13 +66,18 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lightmap/lightmap.ogg"), TH_RGB);
+	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/environment_mapping/room256.ogg"), TH_RGB);
 	clip->setAutoRestart(1);
 
 	tex_id = createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
 
-	room.load("media/lightmap/room.obj", tex_id);
+	teapot.load("media/environment_mapping/teapot.obj", tex_id, false, true);
 
+	glClearColor(1, 1, 1, 1);
+	glEnable(GL_TEXTURE_GEN_S);
+    glEnable(GL_TEXTURE_GEN_T);
+	glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+	glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
 	glDisable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glEnable(GL_DEPTH_TEST);

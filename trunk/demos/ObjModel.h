@@ -13,7 +13,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 
 struct ObjVertex
 {
-	float x,y,z,u,v;
+	float x,y,z,u,v,nx,ny,nz;
 };
 
 class ObjModel
@@ -22,11 +22,12 @@ class ObjModel
 	unsigned int mTexture;
 	ObjVertex *mVertices;
 	int mNumVertices;
+	bool mQuads, mNormals;
 public:
 	ObjModel();
 	~ObjModel();
 
-	void load(std::string filename,unsigned int texture_id);
+	void load(std::string filename,unsigned int texture_id, bool quads = true, bool normals = false);
 	void draw();
 };
 
