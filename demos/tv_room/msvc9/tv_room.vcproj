@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="tv_room"
+	Name="demo_tv_room"
 	ProjectGUID="{388E4B0A-0861-40C7-8537-FD6F79E7AB3E}"
 	RootNamespace="tv_room"
 	TargetFrameworkVersion="131072"

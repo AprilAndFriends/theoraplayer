@@ -72,14 +72,17 @@ void ObjModel::load(std::string filename,unsigned int texture_id)
 
 	fclose(f);
 
+	int _v, _t;
 	mVertices=new ObjVertex[faces.size()];
 	for (std::vector<ObjFace>::iterator it=faces.begin();it!=faces.end();it++)
 	{
-		mVertices[mNumVertices].x=v[it->v-1].x;
-		mVertices[mNumVertices].y=v[it->v-1].y;
-		mVertices[mNumVertices].z=v[it->v-1].z;
-		mVertices[mNumVertices].u=t[it->t-1].u;
-		mVertices[mNumVertices].v=1-t[it->t-1].v;
+		_v = it->v > 0 ? it->v - 1 : v.size() + it->v;
+		_t = it->t > 0 ? it->t - 1 : t.size() + it->t;
+		mVertices[mNumVertices].x=v[_v].x;
+		mVertices[mNumVertices].y=v[_v].y;
+		mVertices[mNumVertices].z=v[_v].z;
+		mVertices[mNumVertices].u=t[_t].u;
+		mVertices[mNumVertices].v=1-t[_t].v;
 		mNumVertices++;
 	}
 }

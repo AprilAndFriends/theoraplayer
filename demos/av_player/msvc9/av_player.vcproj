@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="av_player"
+	Name="demo_av_player"
 	ProjectGUID="{388E4B0A-0871-40C7-8530-FD6F79E7AB3E}"
 	RootNamespace="av_player"
 	TargetFrameworkVersion="131072"
