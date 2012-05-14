@@ -49,6 +49,14 @@
 		D16776D3155C57120050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
 		D16776D4155C571E0050EC64 /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
 		D16776D5155C57290050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+		D17613831561B21500F645DE /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
+		D17613841561B21500F645DE /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+		D17613851561B21500F645DE /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
+		D17613881561B21500F645DE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
+		D17613891561B21500F645DE /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
+		D176138A1561B21500F645DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6FAF150E9E7100EF9400 /* Foundation.framework */; };
+		D176138B1561B21500F645DE /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
+		D17613981561B2EE00F645DE /* environment_mapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D17613971561B2EE00F645DE /* environment_mapping.cpp */; };
 		D1C0151315619DA700FBEF81 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
 		D1C0151415619DD400FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
 		D1C0151515619DDB00FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
@@ -160,6 +168,8 @@
 		D16776CC155C56D00050EC64 /* sprite_animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sprite_animation.cpp; path = demos/sprite_animation/sprite_animation.cpp; sourceTree = "<group>"; };
 		D16776CE155C56D90050EC64 /* tv_room.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tv_room.cpp; path = demos/tv_room/tv_room.cpp; sourceTree = "<group>"; };
 		D16776D6155C57E90050EC64 /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = demos/media; sourceTree = "<group>"; };
+		D17613931561B21500F645DE /* environment_mapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = environment_mapping.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D17613971561B2EE00F645DE /* environment_mapping.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = environment_mapping.cpp; path = demos/environment_mapping/environment_mapping.cpp; sourceTree = "<group>"; };
 		D1BB6FAF150E9E7100EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D1C014F315619D4700FBEF81 /* lightmap_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lightmap_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C014F815619D4700FBEF81 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -256,6 +266,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D17613871561B21500F645DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D17613881561B21500F645DE /* OpenGL.framework in Frameworks */,
+				D17613891561B21500F645DE /* GLUT.framework in Frameworks */,
+				D176138A1561B21500F645DE /* Foundation.framework in Frameworks */,
+				D176138B1561B21500F645DE /* theoraplayer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D1C014F015619D4700FBEF81 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -290,6 +311,7 @@
 				D147416E150CB74200B20490 /* multiple_videos */,
 				D147416F150CB74B00B20490 /* sprite_animation */,
 				D12C20781534D4A000B4904B /* composite animation */,
+				D17613961561B2AA00F645DE /* environment_mapping */,
 				D1474171150CB76400B20490 /* tv_room */,
 				D1C0151F15619E2B00FBEF81 /* lightmap_demo */,
 				D1474170150CB75800B20490 /* seek_test */,
@@ -311,6 +333,7 @@
 				D147416B150CB70D00B20490 /* tv_room.app */,
 				D12C208E1534D58B00B4904B /* composite_animation.app */,
 				D1C014F315619D4700FBEF81 /* lightmap_demo.app */,
+				D17613931561B21500F645DE /* environment_mapping.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -405,6 +428,14 @@
 				D1677620155C52B40050EC64 /* OpenAL_AudioInterface.h */,
 			);
 			name = common;
+			sourceTree = "<group>";
+		};
+		D17613961561B2AA00F645DE /* environment_mapping */ = {
+			isa = PBXGroup;
+			children = (
+				D17613971561B2EE00F645DE /* environment_mapping.cpp */,
+			);
+			name = environment_mapping;
 			sourceTree = "<group>";
 		};
 		D1C014F715619D4700FBEF81 /* Other Frameworks */ = {
@@ -575,6 +606,23 @@
 			productReference = D147416B150CB70D00B20490 /* tv_room.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D17613811561B21500F645DE /* environment_mapping */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D176138D1561B21500F645DE /* Build configuration list for PBXNativeTarget "environment_mapping" */;
+			buildPhases = (
+				D17613821561B21500F645DE /* Sources */,
+				D17613871561B21500F645DE /* Frameworks */,
+				D176138C1561B21500F645DE /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = environment_mapping;
+			productName = lightmap_demo;
+			productReference = D17613931561B21500F645DE /* environment_mapping.app */;
+			productType = "com.apple.product-type.application";
+		};
 		D1C014F215619D4700FBEF81 /* lightmap_demo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D1C0150D15619D4700FBEF81 /* Build configuration list for PBXNativeTarget "lightmap_demo" */;
@@ -635,8 +683,9 @@
 				D147410A150CB6F300B20490 /* multiple_videos */,
 				D1474123150CB6F600B20490 /* sprite_animation */,
 				D12C207A1534D58B00B4904B /* composite_animation */,
-				D1474155150CB70D00B20490 /* tv_room */,
 				D147413C150CB6F900B20490 /* seek_test */,
+				D17613811561B21500F645DE /* environment_mapping */,
+				D1474155150CB70D00B20490 /* tv_room */,
 				D1C014F215619D4700FBEF81 /* lightmap_demo */,
 			);
 		};
@@ -800,6 +849,19 @@
 			shellPath = /bin/sh;
 			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
 		};
+		D176138C1561B21500F645DE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\nmkdir \"${DATA_PATH}/Resources\"\nln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+		};
 		D1C0151E15619E1F00FBEF81 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -880,6 +942,17 @@
 				D16776D3155C57120050EC64 /* objcUtil.mm in Sources */,
 				D16776CF155C56D90050EC64 /* tv_room.cpp in Sources */,
 				D1D098F3155F077C009F6AAA /* tga.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D17613821561B21500F645DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D17613831561B21500F645DE /* tga.cpp in Sources */,
+				D17613841561B21500F645DE /* objcUtil.mm in Sources */,
+				D17613851561B21500F645DE /* ObjModel.cpp in Sources */,
+				D17613981561B2EE00F645DE /* environment_mapping.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1341,6 +1414,46 @@
 			};
 			name = "App Store";
 		};
+		D176138E1561B21500F645DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = environment_mapping;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D176138F1561B21500F645DE /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = environment_mapping;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-LLVM";
+		};
+		D17613901561B21500F645DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = environment_mapping;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D17613911561B21500F645DE /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = environment_mapping;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-LLVM";
+		};
+		D17613921561B21500F645DE /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = environment_mapping;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
 		D1C0150E15619D4700FBEF81 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1480,6 +1593,18 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		D176138D1561B21500F645DE /* Build configuration list for PBXNativeTarget "environment_mapping" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D176138E1561B21500F645DE /* Debug */,
+				D176138F1561B21500F645DE /* Debug-LLVM */,
+				D17613901561B21500F645DE /* Release */,
+				D17613911561B21500F645DE /* Release-LLVM */,
+				D17613921561B21500F645DE /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D1C0150D15619D4700FBEF81 /* Build configuration list for PBXNativeTarget "lightmap_demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1490,6 +1615,7 @@
 				D1C0151215619D4700FBEF81 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
