@@ -29,9 +29,8 @@ ObjModel::ObjModel()
 	mNumVertices=0; mVertices=0;
 }
 
-void ObjModel::load(std::string filename,unsigned int texture_id, bool quads, bool normals)
+void ObjModel::load(std::string filename,unsigned int texture_id, bool normals)
 {
-	mQuads = quads;
 	mNormals = normals;
 	mName=filename;
 	mTexture=texture_id;
@@ -64,22 +63,59 @@ void ObjModel::load(std::string filename,unsigned int texture_id, bool quads, bo
 		else if (strncmp(line,"f ",2) == 0)
 		{
 			ObjFace f[4];
-			if (quads)
+			int nslash = 0;
+			char* ptr = line - 1;
+			while ((ptr = strstr(ptr + 1, "/"))) nslash++;
+			if (nslash == 4)
+			{
+				sscanf(line+2,"%d/%d %d/%d %d/%d %d/%d",
+					   &f[0].v,&f[0].t,
+					   &f[1].v,&f[1].t,
+					   &f[2].v,&f[2].t,
+					   &f[3].v,&f[3].t);
+				faces.push_back(f[0]);
+				faces.push_back(f[1]);
+				faces.push_back(f[2]);
+				faces.push_back(f[0]);
+				faces.push_back(f[2]);
+				faces.push_back(f[3]);
+			}
+			else if (nslash == 8)
+			{
 				sscanf(line+2,"%d/%d/%d %d/%d/%d %d/%d/%d %d/%d/%d",
-					&f[0].v,&f[0].t,&f[0].n,
-					&f[1].v,&f[1].t,&f[1].n,
-					&f[2].v,&f[2].t,&f[2].n,
-					&f[3].v,&f[3].t,&f[3].n);
+					   &f[0].v,&f[0].t,&f[0].n,
+					   &f[1].v,&f[1].t,&f[1].n,
+					   &f[2].v,&f[2].t,&f[2].n,
+					   &f[3].v,&f[3].t,&f[3].n);
+				faces.push_back(f[0]);
+				faces.push_back(f[1]);
+				faces.push_back(f[2]);
+				faces.push_back(f[0]);
+				faces.push_back(f[2]);
+				faces.push_back(f[3]);
+			}
+			else if (nslash == 3)
+			{
+				sscanf(line+2,"%d/%d %d/%d %d/%d",
+					   &f[0].v,&f[0].t,
+					   &f[1].v,&f[1].t,
+					   &f[2].v,&f[2].t);
+				
+				faces.push_back(f[0]);
+				faces.push_back(f[1]);
+				faces.push_back(f[2]);
+			}
 			else
+			{
 				sscanf(line+2,"%d/%d/%d %d/%d/%d %d/%d/%d",
 					   &f[0].v,&f[0].t,&f[0].n,
 					   &f[1].v,&f[1].t,&f[1].n,
 					   &f[2].v,&f[2].t,&f[2].n);
 
-			faces.push_back(f[0]);
-			faces.push_back(f[1]);
-			faces.push_back(f[2]);
-			if (quads) faces.push_back(f[3]);
+				faces.push_back(f[0]);
+				faces.push_back(f[1]);
+				faces.push_back(f[2]);
+			}
 		}
 	}
 
@@ -112,14 +148,16 @@ ObjModel::~ObjModel()
 	if (!mVertices) delete [] mVertices;
 }
 
-void ObjModel::draw()
+void ObjModel::draw(void (*texfunc)(float, float))
 {
 	glBindTexture(GL_TEXTURE_2D,mTexture);
-	glBegin(mQuads ? GL_QUADS : GL_TRIANGLES);
+	glBegin(GL_TRIANGLES);
 
 	for (int i=0;i<mNumVertices;i++)
 	{
-		glTexCoord2f(mVertices[i].u,mVertices[i].v);
+		if (texfunc) texfunc(mVertices[i].u,mVertices[i].v);
+		else glTexCoord2f(mVertices[i].u,mVertices[i].v);
+
 		if (mNormals) glNormal3f(mVertices[i].nx,mVertices[i].ny,mVertices[i].nz);
 		glVertex3f(mVertices[i].x,mVertices[i].y,mVertices[i].z);
 	}

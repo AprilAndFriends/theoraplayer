@@ -20,22 +20,29 @@ COPYRIGHT INFO: The room 3D models and lightmap textures and textures are licens
 #include "tga.h"
 #include <math.h>
 
-unsigned int tex_id;
+unsigned int tex_id, diffuse_map;
 TheoraVideoManager* mgr;
 TheoraVideoClip* clip;
 std::string window_name="lightmap_demo";
 bool started=1;
-int window_w=800,window_h=600;
+int window_w=1024,window_h=768;
 
 ObjModel room;
 float anglex=0,angley=0;
 
+void multiTexFunc(float u, float v)
+{
+	glMultiTexCoord2fARB(GL_TEXTURE0_ARB, u, v);
+	glMultiTexCoord2fARB(GL_TEXTURE1_ARB, u, v);
+}
+
 void draw()
 {
+	glClearColor(27/255.0f, 188/255.0f, 224/255.0f, 1);
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 
 	glLoadIdentity();
-	gluLookAt(sin(anglex)*400-200,angley,cos(anglex)*400,  -200,150,0,  0,1,0);
+	gluLookAt(sin(anglex)*100-100,angley+50,cos(anglex)*100-100,  -100,50,-100,  0,1,0);
 
 	TheoraVideoFrame* f=clip->getNextFrame();
 	if (f)
@@ -44,8 +51,15 @@ void draw()
 		clip->popFrame();
 	}
 
+	glActiveTextureARB(GL_TEXTURE0_ARB);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, diffuse_map);
+	glActiveTextureARB(GL_TEXTURE1_ARB);
+	glEnable(GL_TEXTURE_2D);
+	glTexEnvi(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_COMBINE);
+	glTexEnvi(GL_TEXTURE_2D, GL_COMBINE_RGB_ARB, GL_MODULATE);
 	glEnable(GL_CULL_FACE);
-	room.draw();
+	room.draw(multiTexFunc);
 	glDisable(GL_CULL_FACE);
 }
 
@@ -79,9 +93,11 @@ void init()
 	mgr=new TheoraVideoManager();
 	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lightmap/lightmap.ogg"), TH_RGB);
 	clip->setAutoRestart(1);
-
+	clip->setPlaybackSpeed(0.5f);
+	
 	tex_id = createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
-
+	diffuse_map = loadTexture("media/lightmap/diffuse_map.tga");
+	
 	room.load("media/lightmap/room.obj", tex_id);
 
 	glDisable(GL_CULL_FACE);
@@ -89,6 +105,7 @@ void init()
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glEnable(GL_COLOR_MATERIAL);
+	getMultiTextureExtensionFuncPointers();
 }
 
 void destroy()
