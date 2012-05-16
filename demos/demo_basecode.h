@@ -68,6 +68,8 @@ PFNGLSHADERSOURCEPROC glShaderSource=0;
 PFNGLUSEPROGRAMPROC glUseProgram=0;
 PFNGLCOMPILESHADERPROC glCompileShader=0;
 PFNGLATTACHSHADERPROC glAttachShader=0;
+PFNGLMULTITEXCOORD2FARBPROC glMultiTexCoord2fARB = 0;
+PFNGLACTIVETEXTUREARBPROC   glActiveTextureARB = 0;
 
 #else
 #include <OpenGL/glext.h>
@@ -153,7 +155,6 @@ void toggle_YUV2RGB_shader()
 		glShaderSource=(PFNGLSHADERSOURCEPROC) pglGetProcAddress("glShaderSource");
 		glUseProgram=(PFNGLUSEPROGRAMPROC) pglGetProcAddress("glUseProgram");
 		glCompileShader=(PFNGLCOMPILESHADERPROC) pglGetProcAddress("glCompileShader");
-		glAttachShader=(PFNGLATTACHSHADERPROC) pglGetProcAddress("glAttachShader");
 #endif
 		const char*
 		shader_code="uniform sampler2D diffuseMap;\
@@ -182,6 +183,15 @@ void toggle_YUV2RGB_shader()
 	}
 	shader_on=!shader_on;
 
+#endif
+}
+
+void getMultiTextureExtensionFuncPointers()
+{
+#if defined(USE_SHADERS) && defined(WIN32)
+	glAttachShader=(PFNGLATTACHSHADERPROC) pglGetProcAddress("glAttachShader");
+	glMultiTexCoord2fARB = (PFNGLMULTITEXCOORD2FARBPROC) pglGetProcAddress("glMultiTexCoord2fARB");
+	glActiveTextureARB = (PFNGLACTIVETEXTUREARBPROC) pglGetProcAddress("glActiveTextureARB");
 #endif
 }
 

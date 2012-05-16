@@ -71,7 +71,7 @@ void init()
 
 	tex_id = createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
 
-	teapot.load("media/environment_mapping/teapot.obj", tex_id, false, true);
+	teapot.load("media/environment_mapping/teapot.obj", tex_id, true);
 
 	glClearColor(1, 1, 1, 1);
 	glEnable(GL_TEXTURE_GEN_S);
