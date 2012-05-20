@@ -22,7 +22,8 @@
 #include <theoraplayer/TheoraDataSource.h>
 #include "tga.h"
 
-unsigned int locv_main_tex, locv_back_tex, locv_branch_tex, locv_bush_tex, locv_clouds_tex, water_tex, eve_tex;
+unsigned int locv_main_tex, locv_back_tex, locv_branch_tex, locv_birds_tex,
+             locv_bush_tex, locv_clouds_tex, water_tex, eve_tex;
 TheoraVideoManager* mgr;
 TheoraVideoClip *water, *eve;
 std::string window_name="composite_player";
@@ -37,7 +38,10 @@ void draw()
 
 	glBindTexture(GL_TEXTURE_2D, locv_clouds_tex);
 	drawTexturedQuad(0, 200, 1024, 350, 1, 0.6f, timer / 200.0f, 0.4f);
-	
+
+	glBindTexture(GL_TEXTURE_2D, locv_birds_tex);
+	drawTexturedQuad(((int) (timer * 30)) % 800 + 300, 50 + sin(timer) * 5, 64, 32, 1, 1);
+
 	glBindTexture(GL_TEXTURE_2D, locv_main_tex);
 	drawTexturedQuad(0, 0, 1024, 768, 1, 0.75f);
 	
@@ -125,6 +129,7 @@ void init()
 	locv_branch_tex = loadTexture("media/locv/locv_branch.tga");
 	locv_bush_tex = loadTexture("media/locv/locv_bush.tga");
 	locv_clouds_tex = loadTexture("media/locv/locv_clouds.tga");
+	locv_birds_tex = loadTexture("media/locv/locv_birds.tga");
 	
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
