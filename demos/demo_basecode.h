@@ -48,6 +48,7 @@ extern std::string window_name;
 extern int window_w,window_h;
 
 float mx=0,my=0;
+float FOVY = 45;
 
 bool shader_on=0;
 #define USE_SHADERS
@@ -266,7 +267,7 @@ void reshape(int w,int h)
 	glLoadIdentity();
     glViewport(0, 0, w, h);
 #ifdef __3D_PROJECTION
-    gluPerspective(45,(float) window_w/window_h,10,10000);
+    gluPerspective(FOVY,(float) window_w/window_h,10,10000);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 #else
