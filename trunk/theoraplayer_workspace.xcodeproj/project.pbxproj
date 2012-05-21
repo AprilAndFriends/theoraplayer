@@ -26,6 +26,14 @@
 		D147415B150CB70D00B20490 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
 		D147415D150CB70D00B20490 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
 		D147415E150CB70D00B20490 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
+		D166335C156ADAE8009E98F1 /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
+		D166335D156ADAE8009E98F1 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+		D166335E156ADAE8009E98F1 /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
+		D1663361156ADAE8009E98F1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
+		D1663362156ADAE8009E98F1 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
+		D1663363156ADAE8009E98F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6FAF150E9E7100EF9400 /* Foundation.framework */; };
+		D1663364156ADAE8009E98F1 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
+		D166336F156ADB6B009E98F1 /* video_lighting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1663359156ADADD009E98F1 /* video_lighting.cpp */; };
 		D16775E8155C50510050EC64 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
 		D167761A155C525F0050EC64 /* glut_player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1677619155C525F0050EC64 /* glut_player.cpp */; };
 		D1677621155C52B40050EC64 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
@@ -153,6 +161,8 @@
 		D1474139150CB6F600B20490 /* sprite_animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sprite_animation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1474152150CB6F900B20490 /* seek_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seek_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D147416B150CB70D00B20490 /* tv_room.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tv_room.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1663359156ADADD009E98F1 /* video_lighting.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = video_lighting.cpp; path = demos/video_lighting/video_lighting.cpp; sourceTree = "<group>"; };
+		D166336C156ADAE8009E98F1 /* video_lighting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = video_lighting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = theoraplayer.xcodeproj; path = theoraplayer/theoraplayer.xcodeproj; sourceTree = "<group>"; };
 		D1677619155C525F0050EC64 /* glut_player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glut_player.cpp; path = demos/glut_player/glut_player.cpp; sourceTree = "<group>"; };
 		D167761B155C52B40050EC64 /* demo_basecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_basecode.h; path = demos/demo_basecode.h; sourceTree = "<group>"; };
@@ -266,6 +276,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D1663360156ADAE8009E98F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1663361156ADAE8009E98F1 /* OpenGL.framework in Frameworks */,
+				D1663362156ADAE8009E98F1 /* GLUT.framework in Frameworks */,
+				D1663363156ADAE8009E98F1 /* Foundation.framework in Frameworks */,
+				D1663364156ADAE8009E98F1 /* theoraplayer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D17613871561B21500F645DE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -314,6 +335,7 @@
 				D17613961561B2AA00F645DE /* environment_mapping */,
 				D1474171150CB76400B20490 /* tv_room */,
 				D1C0151F15619E2B00FBEF81 /* lightmap_demo */,
+				D1663358156ADACE009E98F1 /* video_lighting */,
 				D1474170150CB75800B20490 /* seek_test */,
 				D16D9DDF150CBC5D001BD35C /* common */,
 				D16776D6155C57E90050EC64 /* media */,
@@ -334,6 +356,7 @@
 				D12C208E1534D58B00B4904B /* composite_animation.app */,
 				D1C014F315619D4700FBEF81 /* lightmap_demo.app */,
 				D17613931561B21500F645DE /* environment_mapping.app */,
+				D166336C156ADAE8009E98F1 /* video_lighting.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -404,6 +427,14 @@
 				D16776CE155C56D90050EC64 /* tv_room.cpp */,
 			);
 			name = tv_room;
+			sourceTree = "<group>";
+		};
+		D1663358156ADACE009E98F1 /* video_lighting */ = {
+			isa = PBXGroup;
+			children = (
+				D1663359156ADADD009E98F1 /* video_lighting.cpp */,
+			);
+			name = video_lighting;
 			sourceTree = "<group>";
 		};
 		D1677575155C4F8F0050EC64 /* Products */ = {
@@ -606,6 +637,23 @@
 			productReference = D147416B150CB70D00B20490 /* tv_room.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D166335A156ADAE8009E98F1 /* video_lighting */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1663366156ADAE8009E98F1 /* Build configuration list for PBXNativeTarget "video_lighting" */;
+			buildPhases = (
+				D166335B156ADAE8009E98F1 /* Sources */,
+				D1663360156ADAE8009E98F1 /* Frameworks */,
+				D1663365156ADAE8009E98F1 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = video_lighting;
+			productName = lightmap_demo;
+			productReference = D166336C156ADAE8009E98F1 /* video_lighting.app */;
+			productType = "com.apple.product-type.application";
+		};
 		D17613811561B21500F645DE /* environment_mapping */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D176138D1561B21500F645DE /* Build configuration list for PBXNativeTarget "environment_mapping" */;
@@ -687,6 +735,7 @@
 				D17613811561B21500F645DE /* environment_mapping */,
 				D1474155150CB70D00B20490 /* tv_room */,
 				D1C014F215619D4700FBEF81 /* lightmap_demo */,
+				D166335A156ADAE8009E98F1 /* video_lighting */,
 			);
 		};
 /* End PBXProject section */
@@ -758,6 +807,19 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		D1663365156ADAE8009E98F1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\nmkdir \"${DATA_PATH}/Resources\"\nln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+		};
 		D16776B5155C53D90050EC64 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -942,6 +1004,17 @@
 				D16776D3155C57120050EC64 /* objcUtil.mm in Sources */,
 				D16776CF155C56D90050EC64 /* tv_room.cpp in Sources */,
 				D1D098F3155F077C009F6AAA /* tga.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D166335B156ADAE8009E98F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D166336F156ADB6B009E98F1 /* video_lighting.cpp in Sources */,
+				D166335C156ADAE8009E98F1 /* tga.cpp in Sources */,
+				D166335D156ADAE8009E98F1 /* objcUtil.mm in Sources */,
+				D166335E156ADAE8009E98F1 /* ObjModel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1414,6 +1487,46 @@
 			};
 			name = "App Store";
 		};
+		D1663367156ADAE8009E98F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = video_lighting;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D1663368156ADAE8009E98F1 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = video_lighting;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-LLVM";
+		};
+		D1663369156ADAE8009E98F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = video_lighting;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D166336A156ADAE8009E98F1 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = video_lighting;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-LLVM";
+		};
+		D166336B156ADAE8009E98F1 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = video_lighting;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
 		D176138E1561B21500F645DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1589,6 +1702,18 @@
 				D1474168150CB70D00B20490 /* Release */,
 				D1474169150CB70D00B20490 /* Release-LLVM */,
 				D147416A150CB70D00B20490 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1663366156ADAE8009E98F1 /* Build configuration list for PBXNativeTarget "video_lighting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1663367156ADAE8009E98F1 /* Debug */,
+				D1663368156ADAE8009E98F1 /* Debug-LLVM */,
+				D1663369156ADAE8009E98F1 /* Release */,
+				D166336A156ADAE8009E98F1 /* Release-LLVM */,
+				D166336B156ADAE8009E98F1 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
