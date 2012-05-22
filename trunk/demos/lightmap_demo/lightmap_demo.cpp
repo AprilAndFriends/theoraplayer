@@ -64,7 +64,7 @@ void draw()
 	if (update_tex)
 	{
 		int i, x, y;
-		memset(tex_data, 0, framew * frameh * 3);
+		memset(tex_data, light_switch[0] == 0 && light_switch[1] == 0 && light_switch[2] == 0 ? 255 : 0, framew * frameh * 3);
 		unsigned char *ptr[3] = { light_data[0], light_data[1], light_data[2] };
 		unsigned char *tex;
 		unsigned int r, g, b;
