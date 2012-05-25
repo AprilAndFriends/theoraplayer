@@ -24,7 +24,7 @@ unsigned int tex_id, diffuse_map;
 TheoraVideoManager* mgr;
 TheoraVideoClip *light[3];
 std::string window_name="lightmap_demo";
-bool started=1;
+bool started=1, textures_enabled = 1;
 int window_w=1024,window_h=768;
 
 ObjModel room;
@@ -92,7 +92,10 @@ void draw()
 	}
 	
 	glActiveTextureARB(GL_TEXTURE0_ARB);
-	glEnable(GL_TEXTURE_2D);
+	if (textures_enabled)
+		glEnable(GL_TEXTURE_2D);
+	else
+		glDisable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, diffuse_map);
 	glActiveTextureARB(GL_TEXTURE1_ARB);
 	glEnable(GL_TEXTURE_2D);
@@ -123,6 +126,8 @@ void OnKeyPress(int key)
 		else light[i]->play();
 		update_tex = 1;
 	}
+	if (key == ' ')
+		textures_enabled = !textures_enabled;
 }
 
 void OnClick(float x,float y)
@@ -132,7 +137,7 @@ void OnClick(float x,float y)
 
 void setDebugTitle(char* out)
 {
-	sprintf(out, "lights: %d, %d, %d (press keys 1,2,3 to toggle lights)", (int) light_switch[0], (int) light_switch[1], (int) light_switch[2]);
+	sprintf(out, "lights: %d, %d, %d (press keys 1,2,3 to toggle lights, space to toggle diffuse texture)", (int) light_switch[0], (int) light_switch[1], (int) light_switch[2]);
 }
 
 void init()

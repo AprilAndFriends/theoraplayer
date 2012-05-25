@@ -27,6 +27,12 @@ std::string window_name="video_lighting";
 bool started=1;
 int window_w=800,window_h=600;
 
+struct xyz
+{
+	float x, y, z;
+};
+std::vector<xyz> camera_pos;
+
 ObjModel room;
 float anglex=0,angley=0;
 
@@ -36,21 +42,38 @@ void draw()
 
 	glLoadIdentity();
 	float x1=-224.299f, y1=206.815f, z1=31.883f, x2=-65.147f, y2=80.219f, z2=12.301f;
-	gluLookAt(x1, z1, -y1, x2, z2, -y2,  0,1,0);
+	static int index = 0;
 
-	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);	
+	TheoraVideoFrame* f=clip->getNextFrame();
+	if (f)
+	{
+		index = f->getFrameNumber();
+		glBindTexture(GL_TEXTURE_2D,tex_id);
+		unsigned char* buffer = f->getBuffer();
+		int x, len = f->getWidth() * f->getHeight() * 3;
+		for (int i = 0; i < len; i++)
+		{
+			x = (*buffer) * 0.8f + 255 * 0.2f;
+			if (x > 255) *buffer = 255;
+			else *buffer = x;
+			buffer++;
+		}
+		
+		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,f->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
+		clip->popFrame();
+	}
+	x1 = camera_pos[index].x; y1 = camera_pos[index].y; z1 = camera_pos[index].z;
+	gluLookAt(x1, z1, -y1, x2, z2, -y2,  0,1,0);
+	//gluLookAt(x1, y1, z1, x2, z2, -y2,  0,1,0);
+
 	glBlendFunc(GL_ONE,GL_ZERO);
 	glEnable(GL_CULL_FACE);
 	room.draw();
 	glDisable(GL_CULL_FACE);
-	
+
 	glBindTexture(GL_TEXTURE_2D,tex_id);
-	TheoraVideoFrame* f=clip->getNextFrame();
-	if (f)
-	{
-		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
-		clip->popFrame();
-	}
+
 	glPushMatrix();
 	glLoadIdentity();
 	glMatrixMode(GL_PROJECTION);
@@ -103,11 +126,22 @@ void setDebugTitle(char* out)
 
 void init()
 {
+	FILE* f = fopen("media/lighting/camera.txt", "r");
+
+	xyz pos;
+	while (!feof(f))
+	{
+		fscanf(f, "%f %f %f", &pos.x, &pos.y, &pos.z);
+		camera_pos.push_back(pos);
+	}
+
+	fclose(f);
+	
 	FOVY = 54.495f;
 	mgr=new TheoraVideoManager();
 	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lighting/lighting.ogg"), TH_RGB);
 	clip->setAutoRestart(1);
-	clip->setPlaybackSpeed(0.5f);
+//	clip->setPlaybackSpeed(0.5f);
 	
 	tex_id = createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
 	diffuse_map = loadTexture("media/lighting/diffuse_map.tga");
