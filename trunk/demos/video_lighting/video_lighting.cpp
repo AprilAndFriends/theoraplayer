@@ -24,7 +24,7 @@ unsigned int tex_id, diffuse_map;
 TheoraVideoManager* mgr;
 TheoraVideoClip* clip;
 std::string window_name="video_lighting";
-bool started=1;
+bool started = 1, diffuse_enabled = 1, lighting_enabled = 1;
 int window_w=800,window_h=600;
 
 struct xyz
@@ -41,10 +41,9 @@ void draw()
 	glClearColor(1, 1, 1, 1);
 
 	glLoadIdentity();
-	float x1=-224.299f, y1=206.815f, z1=31.883f, x2=-65.147f, y2=80.219f, z2=12.301f;
+	float x1, y1, z1, x2=-65.147f, y2=80.219f, z2=12.301f;
 	static int index = 0;
 
-	glEnable(GL_TEXTURE_2D);	
 	TheoraVideoFrame* f=clip->getNextFrame();
 	if (f)
 	{
@@ -69,34 +68,40 @@ void draw()
 
 	glBlendFunc(GL_ONE,GL_ZERO);
 	glEnable(GL_CULL_FACE);
+	if (diffuse_enabled) glEnable(GL_TEXTURE_2D);
+	else glDisable(GL_TEXTURE_2D);
 	room.draw();
 	glDisable(GL_CULL_FACE);
 
-	glBindTexture(GL_TEXTURE_2D,tex_id);
+	if (lighting_enabled)
+	{
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D,tex_id);
 
-	glPushMatrix();
-	glLoadIdentity();
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-	
-	glDisable(GL_DEPTH_TEST);
+		glPushMatrix();
+		glLoadIdentity();
+		glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		
+		glDisable(GL_DEPTH_TEST);
 
-	glBlendFunc(GL_DST_COLOR, GL_ZERO);
-	
-	glBegin(GL_QUADS);
+		glBlendFunc(GL_DST_COLOR, GL_ZERO);
+		
+		glBegin(GL_QUADS);
 
-	glTexCoord2f(0,           0);           glVertex3f(-1, 1, 0);
-	glTexCoord2f(800/1024.0f, 0);           glVertex3f( 1, 1, 0);
-	glTexCoord2f(800/1024.0f, 600/1024.0f); glVertex3f( 1,-1, 0);
-	glTexCoord2f(0,           600/1024.0f); glVertex3f(-1,-1, 0);
+		glTexCoord2f(            0,   4 / 1024.0f); glVertex3f(-1, 1, 0);
+		glTexCoord2f(800 / 1024.0f,   4 / 1024.0f); glVertex3f( 1, 1, 0);
+		glTexCoord2f(800 / 1024.0f, 604 / 1024.0f); glVertex3f( 1,-1, 0);
+		glTexCoord2f(            0, 604 / 1024.0f); glVertex3f(-1,-1, 0);
 
-	glEnd();
+		glEnd();
 
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
-	glEnable(GL_DEPTH_TEST);
+		glPopMatrix();
+		glMatrixMode(GL_MODELVIEW);
+		glPopMatrix();
+		glEnable(GL_DEPTH_TEST);
+	}
 }
 
 void update(float time_increase)
@@ -111,7 +116,8 @@ void update(float time_increase)
 
 void OnKeyPress(int key)
 {
-
+	if (key == ' ') diffuse_enabled = !diffuse_enabled;
+	if (key == 13) lighting_enabled = !lighting_enabled; // 13 = ENTER key
 }
 
 void OnClick(float x,float y)
@@ -141,7 +147,7 @@ void init()
 	mgr=new TheoraVideoManager();
 	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lighting/lighting.ogg"), TH_RGB);
 	clip->setAutoRestart(1);
-//	clip->setPlaybackSpeed(0.5f);
+	//clip->setPlaybackSpeed(0.5f);
 	
 	tex_id = createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
 	diffuse_map = loadTexture("media/lighting/diffuse_map.tga");
