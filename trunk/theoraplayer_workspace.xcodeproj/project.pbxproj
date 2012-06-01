@@ -80,6 +80,14 @@
 		D1C0152215619EEE00FBEF81 /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
 		D1C0152315619EEE00FBEF81 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
 		D1C0152415619EEE00FBEF81 /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
+		D1C134B1157972CF005E8A5B /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
+		D1C134B2157972CF005E8A5B /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D167761C155C52B40050EC64 /* objcUtil.mm */; };
+		D1C134B3157972CF005E8A5B /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
+		D1C134B6157972CF005E8A5B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
+		D1C134B7157972CF005E8A5B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
+		D1C134B8157972CF005E8A5B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6FAF150E9E7100EF9400 /* Foundation.framework */; };
+		D1C134B9157972CF005E8A5B /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
+		D1C134C615797387005E8A5B /* parallax_mapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1C134C515797387005E8A5B /* parallax_mapping.cpp */; };
 		D1D098F2155F077C009F6AAA /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
 		D1D098F3155F077C009F6AAA /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
 /* End PBXBuildFile section */
@@ -186,6 +194,8 @@
 		D1C014F915619D4700FBEF81 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D1C014FA15619D4700FBEF81 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D1C0152015619EDC00FBEF81 /* lightmap_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lightmap_demo.cpp; path = demos/lightmap_demo/lightmap_demo.cpp; sourceTree = "<group>"; };
+		D1C134C1157972CF005E8A5B /* parallax_mapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = parallax_mapping.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1C134C515797387005E8A5B /* parallax_mapping.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parallax_mapping.cpp; path = demos/parallax_mapping/parallax_mapping.cpp; sourceTree = "<group>"; };
 		D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Ogg.xcodeproj; path = ogg/macosx/Ogg.xcodeproj; sourceTree = "<group>"; };
 		D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vorbis.xcodeproj; path = vorbis/macosx/Vorbis.xcodeproj; sourceTree = "<group>"; };
 		D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Theora.xcodeproj; path = theora/macosx/Theora.xcodeproj; sourceTree = "<group>"; };
@@ -309,6 +319,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D1C134B5157972CF005E8A5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1C134B6157972CF005E8A5B /* OpenGL.framework in Frameworks */,
+				D1C134B7157972CF005E8A5B /* GLUT.framework in Frameworks */,
+				D1C134B8157972CF005E8A5B /* Foundation.framework in Frameworks */,
+				D1C134B9157972CF005E8A5B /* theoraplayer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -336,6 +357,7 @@
 				D1474171150CB76400B20490 /* tv_room */,
 				D1C0151F15619E2B00FBEF81 /* lightmap_demo */,
 				D1663358156ADACE009E98F1 /* video_lighting */,
+				D1C134C415797376005E8A5B /* parallax_mapping */,
 				D1474170150CB75800B20490 /* seek_test */,
 				D16D9DDF150CBC5D001BD35C /* common */,
 				D16776D6155C57E90050EC64 /* media */,
@@ -357,6 +379,7 @@
 				D1C014F315619D4700FBEF81 /* lightmap_demo.app */,
 				D17613931561B21500F645DE /* environment_mapping.app */,
 				D166336C156ADAE8009E98F1 /* video_lighting.app */,
+				D1C134C1157972CF005E8A5B /* parallax_mapping.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -485,6 +508,14 @@
 				D1C0152015619EDC00FBEF81 /* lightmap_demo.cpp */,
 			);
 			name = lightmap_demo;
+			sourceTree = "<group>";
+		};
+		D1C134C415797376005E8A5B /* parallax_mapping */ = {
+			isa = PBXGroup;
+			children = (
+				D1C134C515797387005E8A5B /* parallax_mapping.cpp */,
+			);
+			name = parallax_mapping;
 			sourceTree = "<group>";
 		};
 		D1D098CA155F05C5009F6AAA /* Products */ = {
@@ -688,6 +719,23 @@
 			productReference = D1C014F315619D4700FBEF81 /* lightmap_demo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D1C134AF157972CF005E8A5B /* parallax_mapping */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1C134BB157972CF005E8A5B /* Build configuration list for PBXNativeTarget "parallax_mapping" */;
+			buildPhases = (
+				D1C134B0157972CF005E8A5B /* Sources */,
+				D1C134B5157972CF005E8A5B /* Frameworks */,
+				D1C134BA157972CF005E8A5B /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = parallax_mapping;
+			productName = lightmap_demo;
+			productReference = D1C134C1157972CF005E8A5B /* parallax_mapping.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -736,6 +784,7 @@
 				D1474155150CB70D00B20490 /* tv_room */,
 				D1C014F215619D4700FBEF81 /* lightmap_demo */,
 				D166335A156ADAE8009E98F1 /* video_lighting */,
+				D1C134AF157972CF005E8A5B /* parallax_mapping */,
 			);
 		};
 /* End PBXProject section */
@@ -937,6 +986,19 @@
 			shellPath = /bin/sh;
 			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\nmkdir \"${DATA_PATH}/Resources\"\nln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
 		};
+		D1C134BA157972CF005E8A5B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\nmkdir \"${DATA_PATH}/Resources\"\nln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1037,6 +1099,17 @@
 				D1C0152315619EEE00FBEF81 /* objcUtil.mm in Sources */,
 				D1C0152415619EEE00FBEF81 /* ObjModel.cpp in Sources */,
 				D1C0152115619EDC00FBEF81 /* lightmap_demo.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1C134B0157972CF005E8A5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1C134B1157972CF005E8A5B /* tga.cpp in Sources */,
+				D1C134B2157972CF005E8A5B /* objcUtil.mm in Sources */,
+				D1C134B3157972CF005E8A5B /* ObjModel.cpp in Sources */,
+				D1C134C615797387005E8A5B /* parallax_mapping.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1607,6 +1680,46 @@
 			};
 			name = "App Store";
 		};
+		D1C134BC157972CF005E8A5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = parallax_mapping;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D1C134BD157972CF005E8A5B /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = parallax_mapping;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug-LLVM";
+		};
+		D1C134BE157972CF005E8A5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = parallax_mapping;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D1C134BF157972CF005E8A5B /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = parallax_mapping;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Release-LLVM";
+		};
+		D1C134C0157972CF005E8A5B /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = parallax_mapping;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1738,6 +1851,18 @@
 				D1C0151015619D4700FBEF81 /* Release */,
 				D1C0151115619D4700FBEF81 /* Release-LLVM */,
 				D1C0151215619D4700FBEF81 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1C134BB157972CF005E8A5B /* Build configuration list for PBXNativeTarget "parallax_mapping" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1C134BC157972CF005E8A5B /* Debug */,
+				D1C134BD157972CF005E8A5B /* Debug-LLVM */,
+				D1C134BE157972CF005E8A5B /* Release */,
+				D1C134BF157972CF005E8A5B /* Release-LLVM */,
+				D1C134C0157972CF005E8A5B /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
