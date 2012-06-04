@@ -201,6 +201,12 @@
 		D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Theora.xcodeproj; path = theora/macosx/Theora.xcodeproj; sourceTree = "<group>"; };
 		D1D098F0155F077C009F6AAA /* tga.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tga.cpp; path = demos/tga.cpp; sourceTree = "<group>"; };
 		D1D098F1155F077C009F6AAA /* tga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tga.h; path = demos/tga.h; sourceTree = "<group>"; };
+		D1FB879F157D4DFD0060641F /* normal_mapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = normal_mapping.frag; path = demos/media/parallax/normal_mapping.frag; sourceTree = "<group>"; };
+		D1FB87A0157D4DFD0060641F /* normal_mapping.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = normal_mapping.vert; path = demos/media/parallax/normal_mapping.vert; sourceTree = "<group>"; };
+		D1FB87A1157D4DFD0060641F /* parallax_mapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = parallax_mapping.frag; path = demos/media/parallax/parallax_mapping.frag; sourceTree = "<group>"; };
+		D1FB87A2157D4DFD0060641F /* parallax_mapping.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = parallax_mapping.vert; path = demos/media/parallax/parallax_mapping.vert; sourceTree = "<group>"; };
+		D1FB87A3157D4DFD0060641F /* per_pixel_lighting.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = per_pixel_lighting.frag; path = demos/media/parallax/per_pixel_lighting.frag; sourceTree = "<group>"; };
+		D1FB87A4157D4DFD0060641F /* per_pixel_lighting.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = per_pixel_lighting.vert; path = demos/media/parallax/per_pixel_lighting.vert; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -514,6 +520,12 @@
 			isa = PBXGroup;
 			children = (
 				D1C134C515797387005E8A5B /* parallax_mapping.cpp */,
+				D1FB87A4157D4DFD0060641F /* per_pixel_lighting.vert */,
+				D1FB87A3157D4DFD0060641F /* per_pixel_lighting.frag */,
+				D1FB87A0157D4DFD0060641F /* normal_mapping.vert */,
+				D1FB879F157D4DFD0060641F /* normal_mapping.frag */,
+				D1FB87A2157D4DFD0060641F /* parallax_mapping.vert */,
+				D1FB87A1157D4DFD0060641F /* parallax_mapping.frag */,
 			);
 			name = parallax_mapping;
 			sourceTree = "<group>";
