@@ -127,7 +127,7 @@ void OnClick(float x,float y)
 
 void setDebugTitle(char* out)
 {
-	sprintf(out, "");
+	sprintf(out, "press SPACE to toggle diffuse map, ENTER to toggle lighting");
 }
 
 void init()
