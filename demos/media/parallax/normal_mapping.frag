@@ -29,5 +29,5 @@ void main(void)
 	vec4 vSpecular = gl_LightSource[0].specular * gl_FrontMaterial.specular * 
 	specular;
 	
-	gl_FragColor =  vec4(2,2,2,1) * ( vAmbient * base + vDiffuse * base) + vSpecular * att;
+	gl_FragColor = vec4(2,2,2,1) * ( vAmbient * base + vDiffuse * base);
 }
