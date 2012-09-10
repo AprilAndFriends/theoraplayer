@@ -9,6 +9,44 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #ifndef APRILVIDEO_H
 #define APRILVIDEO_H
 
+#include <hltypes/hstring.h>
+#include <aprilui/ObjectImageBox.h>
 #include "aprilvideoExport.h"
 
+class TheoraVideoManager;
+class TheoraVideoClip;
+namespace aprilui
+{
+	class Texture;
+	class Image;
+}
+
+namespace aprilvideo
+{
+	class AprilVideoExport VideoObject : public aprilui::ImageBox
+	{
+		bool mUseAlpha;
+		bool mLoop;
+		hstr mClipName;
+		TheoraVideoClip* mClip;
+		aprilui::Texture* mTexture;
+		aprilui::Image* mVideoImage;
+		
+		void destroyResources();
+	public:
+		VideoObject(chstr name, grect rect);
+		static aprilui::Object* createInstance(chstr name, grect rect);
+		~VideoObject();
+		
+		void update(float k);
+
+		void notifyEvent(chstr name, void* params);
+		bool setProperty(chstr name, chstr value);
+		hstr getProperty(chstr name, bool* property_exists);
+
+	};
+	
+	void AprilVideoExport init(int num_worker_threads = 1);
+	void AprilVideoExport destroy();
+}
 #endif

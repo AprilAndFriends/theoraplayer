@@ -49,7 +49,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;include\aprilvideo;..\ogg\include;..\vorbis\include;..\theora\include"
+				AdditionalIncludeDirectories="include;include\aprilvideo;..\ogg\include;..\vorbis\include;..\theora\include;..\theoraplayer\include;..\gtypes\include;..\hltypes\include;..\atres\include;..\april\include;..\aprilui\include"
 				PreprocessorDefinitions="_WIN32;_DEBUG;APRILVIDEO_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -78,7 +78,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="libtheora.lib libogg.lib libvorbis.lib"
+				AdditionalDependencies="libgtypes.lib libhltypes.lib libapril.lib libatres.lib libaprilui.lib libtheoraplayer.lib"
 				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
@@ -148,7 +148,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="include;include\aprilvideo;..\ogg\include;..\vorbis\include;..\theora\include"
+				AdditionalIncludeDirectories="include;include\aprilvideo;..\ogg\include;..\vorbis\include;..\theora\include;..\theoraplayer\include;..\gtypes\include;..\hltypes\include;..\atres\include;..\april\include;..\aprilui\include"
 				PreprocessorDefinitions="_WIN32;NDEBUG;APRILVIDEO_EXPORTS"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -178,7 +178,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/MACHINE:I386"
-				AdditionalDependencies="libtheora.lib libogg.lib libvorbis.lib"
+				AdditionalDependencies="libgtypes.lib libhltypes.lib libapril.lib libatres.lib libaprilui.lib libtheoraplayer.lib"
 				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
