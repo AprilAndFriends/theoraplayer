@@ -11,12 +11,24 @@
 		D1307D8115FC9DC90055BB26 /* aprilvideo.h in Headers */ = {isa = PBXBuildFile; fileRef = D1307D8015FC9DC90055BB26 /* aprilvideo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D1307D8215FC9ECF0055BB26 /* aprilvideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1307D7E15FC9DC00055BB26 /* aprilvideo.cpp */; };
 		D1307D8715FCA0560055BB26 /* aprilvideoExport.h in Headers */ = {isa = PBXBuildFile; fileRef = D1307D8615FCA0560055BB26 /* aprilvideoExport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1307D9E15FCA3920055BB26 /* april.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1307D9915FCA3920055BB26 /* april.framework */; };
+		D1307D9F15FCA3920055BB26 /* atres.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1307D9A15FCA3920055BB26 /* atres.framework */; };
+		D1307DA015FCA3920055BB26 /* gtypes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1307D9B15FCA3920055BB26 /* gtypes.framework */; };
+		D1307DA115FCA3920055BB26 /* hltypes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1307D9C15FCA3920055BB26 /* hltypes.framework */; };
+		D1307DA215FCA3920055BB26 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1307D9D15FCA3920055BB26 /* theoraplayer.framework */; };
+		D1307DA515FCB4630055BB26 /* aprilui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1307DA415FCB4630055BB26 /* aprilui.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D1307D7E15FC9DC00055BB26 /* aprilvideo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = aprilvideo.cpp; path = src/aprilvideo.cpp; sourceTree = "<group>"; };
 		D1307D8015FC9DC90055BB26 /* aprilvideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aprilvideo.h; path = include/aprilvideo/aprilvideo.h; sourceTree = "<group>"; };
 		D1307D8615FCA0560055BB26 /* aprilvideoExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aprilvideoExport.h; path = include/aprilvideo/aprilvideoExport.h; sourceTree = "<group>"; };
+		D1307D9915FCA3920055BB26 /* april.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = april.framework; path = "../../xcode/__build__/products/Debug-LLVM/april.framework"; sourceTree = "<group>"; };
+		D1307D9A15FCA3920055BB26 /* atres.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = atres.framework; path = "../../xcode/__build__/products/Debug-LLVM/atres.framework"; sourceTree = "<group>"; };
+		D1307D9B15FCA3920055BB26 /* gtypes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = gtypes.framework; path = "../../xcode/__build__/products/Debug-LLVM/gtypes.framework"; sourceTree = "<group>"; };
+		D1307D9C15FCA3920055BB26 /* hltypes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = hltypes.framework; path = "../../xcode/__build__/products/Debug-LLVM/hltypes.framework"; sourceTree = "<group>"; };
+		D1307D9D15FCA3920055BB26 /* theoraplayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = theoraplayer.framework; path = "../../xcode/__build__/products/Debug-LLVM/theoraplayer.framework"; sourceTree = "<group>"; };
+		D1307DA415FCB4630055BB26 /* aprilui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = aprilui.framework; path = "../../xcode/__build__/products/Debug-LLVM/aprilui.framework"; sourceTree = "<group>"; };
 		D1473F2A150CA69B00B20490 /* aprilvideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = aprilvideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1BB6FAE150E9E7100EF9400 /* libaprilvideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libaprilvideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -26,6 +38,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1307D9E15FCA3920055BB26 /* april.framework in Frameworks */,
+				D1307DA515FCB4630055BB26 /* aprilui.framework in Frameworks */,
+				D1307D9F15FCA3920055BB26 /* atres.framework in Frameworks */,
+				D1307DA015FCA3920055BB26 /* gtypes.framework in Frameworks */,
+				D1307DA115FCA3920055BB26 /* hltypes.framework in Frameworks */,
+				D1307DA215FCA3920055BB26 /* theoraplayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +88,12 @@
 		D1473F82150CA7F300B20490 /* mac */ = {
 			isa = PBXGroup;
 			children = (
+				D1307DA415FCB4630055BB26 /* aprilui.framework */,
+				D1307D9915FCA3920055BB26 /* april.framework */,
+				D1307D9A15FCA3920055BB26 /* atres.framework */,
+				D1307D9B15FCA3920055BB26 /* gtypes.framework */,
+				D1307D9C15FCA3920055BB26 /* hltypes.framework */,
+				D1307D9D15FCA3920055BB26 /* theoraplayer.framework */,
 			);
 			name = mac;
 			sourceTree = "<group>";
@@ -240,6 +264,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../xcode/__build__/products/Debug-LLVM\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -259,6 +287,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../xcode/__build__/products/Debug-LLVM\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -310,6 +342,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../xcode/__build__/products/Debug-LLVM\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -354,6 +390,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../xcode/__build__/products/Debug-LLVM\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -398,6 +438,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../xcode/__build__/products/Debug-LLVM\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
