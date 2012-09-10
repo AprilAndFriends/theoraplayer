@@ -28,20 +28,30 @@ class TheoraVideoFrame;
  */
 enum TheoraOutputMode
 {
-	// A= full alpha (255), order of letters represents the byte order for a pixel
-	TH_RGB=1,
-	TH_RGBA=2,
-	TH_ARGB=3,
-	TH_BGR=4,
-	TH_BGRA=5,
-	TH_ABGR=6,
-	TH_GREY=7,
-	TH_GREY3=8, // RGB but all three components are luma
-	TH_GREY3A=9,
-	TH_AGREY3=10,
-	TH_YUV=11,
-	TH_YUVA=12,
-	TH_AYUV=13
+	// A = full alpha (255), order of letters represents the byte order for a pixel
+	// A means the image is treated as if it contains an alpha channel, while X formats
+	// just mean that RGB frame is transformed to a 4 byte format
+	TH_RGB    =  1,
+	TH_RGBA   =  2,
+	TH_RGBX   =  3,
+	TH_ARGB   =  4,
+	TH_XRGB   =  5,
+	TH_BGR    =  6,
+	TH_BGRA   =  7,
+	TH_BGRX   =  8,
+	TH_ABGR   =  9,
+	TH_XBGR   = 10,
+	TH_GREY   = 11,
+	TH_GREY3  = 12,
+	TH_GREY3A = 13,
+	TH_GREY3X = 14,
+	TH_AGREY3 = 15,
+	TH_XGREY3 = 16,
+	TH_YUV    = 17,
+	TH_YUVA   = 18,
+	TH_YUVX   = 19,
+	TH_AYUV   = 20,
+	TH_XYUV   = 21
 };
 /**
 	This is an internal structure which TheoraVideoClip uses to store audio packets
@@ -70,7 +80,9 @@ class TheoraPlayerExport TheoraVideoClip
 	TheoraTimer *mTimer,*mDefaultTimer;
 
 	TheoraWorkerThread* mAssignedWorkerThread;
-
+	
+	bool mUseAlpha;
+	
 	// benchmark vars
 	int mNumDroppedFrames,mNumDisplayedFrames;
 
@@ -146,9 +158,9 @@ public:
 	int getNumDroppedFrames() { return mNumDroppedFrames; }
 
 	//! return width in pixels of the video clip
-	int getWidth() { return mWidth; }
+	int getWidth();
 	//! return height in pixels of the video clip
-	int getHeight() { return mHeight; }
+	int getHeight();
 	/**
 	    \brief return stride in pixels
 

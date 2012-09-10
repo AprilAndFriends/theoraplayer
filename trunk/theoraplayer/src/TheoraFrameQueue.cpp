@@ -29,7 +29,7 @@ void TheoraFrameQueue::setSize(int n)
 	mMutex.lock();
 	if (mQueue.size() > 0)
 	{
-		foreach_l(TheoraVideoFrame*,mQueue)
+		foreach_l (TheoraVideoFrame*,mQueue)
 			delete (*it);
 		mQueue.clear();
 	}

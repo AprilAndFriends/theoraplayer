@@ -70,12 +70,12 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	mDuration(-1),
 	mNumFrames(-1),
 	mFPS(1),
+	mUseAlpha(0),
 	mFrameDuration(0),
     mName(data_source->repr()),
     mStride(usePower2Stride),
     mAudioGain(1),
 	mTheoraAudioPacketQueue(0),
-    mOutputMode(output_mode),
     mRequestedOutputMode(output_mode),
     mAutoRestart(0),
     mEndOfFile(0),
@@ -84,12 +84,12 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	mLastIteration(0)
 {
 	mAudioMutex=new TheoraMutex;
-
 	mTimer=mDefaultTimer=new TheoraTimer();
 
 	mFrameQueue=NULL;
 	mAssignedWorkerThread=NULL;
 	mNumPrecachedFrames=nPrecachedFrames;
+	setOutputMode(output_mode);
 
 	mInfo=new TheoraInfoStruct;
 
@@ -349,6 +349,16 @@ void TheoraVideoClip::popFrame()
 						// so it can be used again
 }
 
+int TheoraVideoClip::getWidth()
+{
+	return mUseAlpha ? mWidth / 2 : mWidth;
+}
+
+int TheoraVideoClip::getHeight()
+{
+	return mHeight;
+}
+
 TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 {
 	if (mSeekFrame != -1) return 0; // if we are about to seek, then the current frame queue is invalidated
@@ -389,7 +399,7 @@ void TheoraVideoClip::load(TheoraDataSource* source)
 
 	mWidth = mInfo->TheoraInfo.frame_width; // TODO: pic_width should be used and accounted for while decoding
 	mHeight = mInfo->TheoraInfo.frame_height;
-	mStride = (mStride == 1) ? mStride=_nextPow2(mWidth) : mWidth;
+	mStride = (mStride == 1) ? mStride=_nextPow2(getWidth()) : getWidth();
 	mFPS = mInfo->TheoraInfo.fps_numerator / (float) mInfo->TheoraInfo.fps_denominator;
 
 	th_writelog("width: " + str(mWidth) + ", height: " + str(mHeight) + ", fps: " + str((int) getFPS()));
@@ -720,10 +730,21 @@ TheoraOutputMode TheoraVideoClip::getOutputMode()
 void TheoraVideoClip::setOutputMode(TheoraOutputMode mode)
 {
 	if (mOutputMode == mode) return;
-	mRequestedOutputMode=mode;
-	while (mAssignedWorkerThread) _psleep(1);
-	// discard current frames and recreate them
-	mFrameQueue->setSize(mFrameQueue->getSize());
+	mRequestedOutputMode = mode;
+	mUseAlpha = (mode == TH_RGBA   ||
+				 mode == TH_ARGB   ||
+				 mode == TH_BGRA   ||
+				 mode == TH_ABGR   ||
+				 mode == TH_GREY3A ||
+				 mode == TH_AGREY3 ||
+				 mode == TH_YUVA   ||
+				 mode == TH_AYUV);
+	if (mAssignedWorkerThread)
+	{
+		while (mAssignedWorkerThread) _psleep(1);
+		// discard current frames and recreate them
+		mFrameQueue->setSize(mFrameQueue->getSize());
+	}
 	mOutputMode=mRequestedOutputMode;
 }
 
