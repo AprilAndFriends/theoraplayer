@@ -15,10 +15,17 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 
 class TheoraVideoManager;
 class TheoraVideoClip;
+class TheoraTimer;
 namespace aprilui
 {
 	class Texture;
 	class Image;
+}
+
+namespace xal
+{
+	class Sound;
+	class Player;
 }
 
 namespace aprilvideo
@@ -29,8 +36,15 @@ namespace aprilvideo
 		bool mLoop;
 		hstr mClipName;
 		TheoraVideoClip* mClip;
+		TheoraTimer* mTimer;
 		aprilui::Texture* mTexture;
 		aprilui::Image* mVideoImage;
+		float mSpeed;
+
+		float mAudioSyncOffset;
+		hstr mAudioName;
+		xal::Player* mAudioPlayer;
+		xal::Sound* mSound;
 		
 		void destroyResources();
 	public:

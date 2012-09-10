@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D10E13E215FDD49900B3F07F /* xal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D10E13E115FDD49800B3F07F /* xal.framework */; };
 		D1307D7F15FC9DC00055BB26 /* aprilvideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1307D7E15FC9DC00055BB26 /* aprilvideo.cpp */; };
 		D1307D8115FC9DC90055BB26 /* aprilvideo.h in Headers */ = {isa = PBXBuildFile; fileRef = D1307D8015FC9DC90055BB26 /* aprilvideo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D1307D8215FC9ECF0055BB26 /* aprilvideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1307D7E15FC9DC00055BB26 /* aprilvideo.cpp */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D10E13E115FDD49800B3F07F /* xal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xal.framework; path = "../../xcode/__build__/products/Debug-LLVM/xal.framework"; sourceTree = "<group>"; };
 		D1307D7E15FC9DC00055BB26 /* aprilvideo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = aprilvideo.cpp; path = src/aprilvideo.cpp; sourceTree = "<group>"; };
 		D1307D8015FC9DC90055BB26 /* aprilvideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aprilvideo.h; path = include/aprilvideo/aprilvideo.h; sourceTree = "<group>"; };
 		D1307D8615FCA0560055BB26 /* aprilvideoExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aprilvideoExport.h; path = include/aprilvideo/aprilvideoExport.h; sourceTree = "<group>"; };
@@ -44,6 +46,7 @@
 				D1307DA015FCA3920055BB26 /* gtypes.framework in Frameworks */,
 				D1307DA115FCA3920055BB26 /* hltypes.framework in Frameworks */,
 				D1307DA215FCA3920055BB26 /* theoraplayer.framework in Frameworks */,
+				D10E13E215FDD49900B3F07F /* xal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +97,7 @@
 				D1307D9B15FCA3920055BB26 /* gtypes.framework */,
 				D1307D9C15FCA3920055BB26 /* hltypes.framework */,
 				D1307D9D15FCA3920055BB26 /* theoraplayer.framework */,
+				D10E13E115FDD49800B3F07F /* xal.framework */,
 			);
 			name = mac;
 			sourceTree = "<group>";
@@ -224,6 +228,12 @@
 					"$(SRCROOT)/../ogg/include",
 					"$(SRCROOT)/../vorbis/include",
 					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/../gtypes/include",
+					"$(SRCROOT)/../hltypes/include",
+					"$(SRCROOT)/../april/include",
+					"$(SRCROOT)/../atres/include",
+					"$(SRCROOT)/../aprilui/include",
+					"$(SRCROOT)/../xal/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				ONLY_ACTIVE_ARCH = YES;
@@ -250,6 +260,12 @@
 					"$(SRCROOT)/../ogg/include",
 					"$(SRCROOT)/../vorbis/include",
 					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/../gtypes/include",
+					"$(SRCROOT)/../hltypes/include",
+					"$(SRCROOT)/../april/include",
+					"$(SRCROOT)/../atres/include",
+					"$(SRCROOT)/../aprilui/include",
+					"$(SRCROOT)/../xal/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = macosx;
@@ -264,10 +280,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../xcode/__build__/products/Debug-LLVM\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -287,10 +299,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../xcode/__build__/products/Debug-LLVM\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -327,6 +335,12 @@
 					"$(SRCROOT)/../ogg/include",
 					"$(SRCROOT)/../vorbis/include",
 					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/../gtypes/include",
+					"$(SRCROOT)/../hltypes/include",
+					"$(SRCROOT)/../april/include",
+					"$(SRCROOT)/../atres/include",
+					"$(SRCROOT)/../aprilui/include",
+					"$(SRCROOT)/../xal/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				ONLY_ACTIVE_ARCH = YES;
@@ -342,10 +356,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../xcode/__build__/products/Debug-LLVM\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -376,6 +386,12 @@
 					"$(SRCROOT)/../ogg/include",
 					"$(SRCROOT)/../vorbis/include",
 					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/../gtypes/include",
+					"$(SRCROOT)/../hltypes/include",
+					"$(SRCROOT)/../april/include",
+					"$(SRCROOT)/../atres/include",
+					"$(SRCROOT)/../aprilui/include",
+					"$(SRCROOT)/../xal/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = macosx;
@@ -390,10 +406,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../xcode/__build__/products/Debug-LLVM\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -424,6 +436,12 @@
 					"$(SRCROOT)/../ogg/include",
 					"$(SRCROOT)/../vorbis/include",
 					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/../gtypes/include",
+					"$(SRCROOT)/../hltypes/include",
+					"$(SRCROOT)/../april/include",
+					"$(SRCROOT)/../atres/include",
+					"$(SRCROOT)/../aprilui/include",
+					"$(SRCROOT)/../xal/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = macosx;
@@ -438,10 +456,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../xcode/__build__/products/Debug-LLVM\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
