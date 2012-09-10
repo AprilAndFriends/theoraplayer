@@ -30,10 +30,9 @@ namespace aprilvideo
 	static int _nextPow2(int x)
 	{
 		int y;
-		for (y=1;y<x;y*=2);
+		for (y = 1; y < x; y *= 2);
 		return y;
 	}
-	
 
 	class AudioVideoTimer : public TheoraTimer
 	{
@@ -196,6 +195,10 @@ namespace aprilvideo
 		if (mClip)
 		{
 			gVideoManager->update(k);
+			bool visible = isVisible();
+			if (!visible && !mClip->isPaused()) mClip->pause();
+			else if (visible && mClip->isPaused()) mClip->play();
+			
 			TheoraVideoFrame* f = mClip->getNextFrame();
 			if (f)
 			{
@@ -210,7 +213,7 @@ namespace aprilvideo
 	bool VideoObject::setProperty(chstr name,chstr value)
 	{
 		if      (name == "video") mClipName = value;
-		else if (name == "alpha") mUseAlpha = value;
+		else if (name == "video_alpha") mUseAlpha = value;
 		else if (name == "loop")  mLoop = value;
 		else if (name == "speed") mSpeed = value;
 		else if (name == "audio")
@@ -221,7 +224,6 @@ namespace aprilvideo
 		{
 			mAudioSyncOffset = value;
 		}
-	
 		else return aprilui::ImageBox::setProperty(name, value);
 		return 1;
 	}
@@ -230,7 +232,7 @@ namespace aprilvideo
 	{
 		*property_exists = true;
 		if      (name == "video") return mClipName;
-		else if (name == "alpha") return mUseAlpha ? "1" : "0";
+		else if (name == "video_alpha") return mUseAlpha ? "1" : "0";
 		else if (name == "loop")  return mLoop ? "1" : "0";
 		else if (name == "speed") return mSpeed;
 		else if (name == "audio")  return mAudioName;
