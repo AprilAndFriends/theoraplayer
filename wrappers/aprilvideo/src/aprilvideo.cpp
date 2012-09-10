@@ -98,7 +98,11 @@ namespace aprilvideo
 			hstr path = mDataset->_getFilePath() + "/video/" + mClipName;
 			try
 			{
-				mClip = gVideoManager->createVideoClip(path, mUseAlpha ? (april::rendersys->getName() == "OpenGL" ? TH_RGBA : TH_BGRA) : TH_RGB, 16);
+				TheoraOutputMode mode;
+				if (april::rendersys->getName() == "OpenGL") mode = mUseAlpha ? TH_RGBA : TH_RGB;
+				else                                         mode = mUseAlpha ? TH_BGRA : TH_BGRX;
+
+				mClip = gVideoManager->createVideoClip(path, mode, 16);
 			}
 			catch (_TheoraGenericException& e)
 			{
@@ -111,7 +115,6 @@ namespace aprilvideo
 			april::Texture* tex = april::rendersys->createTexture(_nextPow2(w), _nextPow2(h), april::Texture::FORMAT_ARGB);
 			mTexture = new aprilui::Texture(tex->getFilename(), tex);
 			mVideoImage = new aprilui::Image(mTexture, "video_img", grect(0, 0, w, h));
-			mImage = mVideoImage;
 			mClip->waitForCache(4 / 16.0f, 0.5f);
 		}
 
@@ -121,12 +124,13 @@ namespace aprilvideo
 			TheoraVideoFrame* f = mClip->getNextFrame();
 			if (f)
 			{
+				mImage = mVideoImage;
+				if (april::rendersys->getName() == "DirectX9") mTexture->getRenderTexture()->clear();
 				mTexture->getRenderTexture()->blit(0, 0, f->getBuffer(), f->getWidth(), f->getHeight(), 3 + mUseAlpha, 0, 0, f->getWidth(), f->getHeight());
 				mClip->popFrame();
 			}
 		}
 	}
-
 	
 	bool VideoObject::setProperty(chstr name,chstr value)
 	{
