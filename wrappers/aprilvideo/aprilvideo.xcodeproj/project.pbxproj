@@ -234,6 +234,7 @@
 					"$(SRCROOT)/../atres/include",
 					"$(SRCROOT)/../aprilui/include",
 					"$(SRCROOT)/../xal/include",
+					"$(SRCROOT)/../theoraplayer/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				ONLY_ACTIVE_ARCH = YES;
@@ -266,6 +267,7 @@
 					"$(SRCROOT)/../atres/include",
 					"$(SRCROOT)/../aprilui/include",
 					"$(SRCROOT)/../xal/include",
+					"$(SRCROOT)/../theoraplayer/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = macosx;
@@ -341,6 +343,7 @@
 					"$(SRCROOT)/../atres/include",
 					"$(SRCROOT)/../aprilui/include",
 					"$(SRCROOT)/../xal/include",
+					"$(SRCROOT)/../theoraplayer/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				ONLY_ACTIVE_ARCH = YES;
@@ -392,6 +395,7 @@
 					"$(SRCROOT)/../atres/include",
 					"$(SRCROOT)/../aprilui/include",
 					"$(SRCROOT)/../xal/include",
+					"$(SRCROOT)/../theoraplayer/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = macosx;
@@ -442,6 +446,7 @@
 					"$(SRCROOT)/../atres/include",
 					"$(SRCROOT)/../aprilui/include",
 					"$(SRCROOT)/../xal/include",
+					"$(SRCROOT)/../theoraplayer/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				SDKROOT = macosx;
