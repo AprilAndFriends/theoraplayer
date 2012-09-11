@@ -150,6 +150,7 @@ namespace aprilvideo
 	
 	void VideoObject::update(float k)
 	{
+		ImageBox::update(k);
 		if (mClip == NULL && mClipName != "")
 		{
 			destroyResources();
