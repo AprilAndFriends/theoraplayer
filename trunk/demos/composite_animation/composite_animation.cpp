@@ -65,26 +65,10 @@ void draw()
 	f = eve->getNextFrame();
 	if (f)
 	{
-		unsigned char* src = f->getBuffer();
-		int i, j, k, x, y, w = f->getWidth();
-		for (y = 0; y < 336; y++)
-		{
-			for (x = 0; x < 256; x++)
-			{
-				i = (y * 256 + x) * 4;
-				j = (y * w + x) * 3;
-				k = (y * w + x + 256) * 3;
-				buffer[i    ] = src[j    ];
-				buffer[i + 1] = src[j + 1];
-				buffer[i + 2] = src[j + 2];
-				buffer[i + 3] = src[k    ];
-			}
-		}
-
-		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, f->getWidth() / 2, f->getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, f->getWidth(), f->getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, f->getBuffer());
 		eve->popFrame();
 	}
-	drawTexturedQuad(120, 310, 256, 336, 0.5f, 336.0f / 512.0f);
+	drawTexturedQuad(120, 310, 256, 336, 1, 336.0f / 512.0f);
 	
 	glBindTexture(GL_TEXTURE_2D, locv_bush_tex);
 	drawTexturedQuad(0, 511, 513, 256, 511/512.0f, 1, 0, 1/256.0f);
@@ -119,7 +103,7 @@ void init()
     water->setPlaybackSpeed(0.5f);
 	water->setAutoRestart(1);
 
-	eve = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_eve.ogg"), TH_RGB, 4);
+	eve = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_eve.ogg"), TH_RGBA, 4);
 	eve->setAutoRestart(1);
     
 	water_tex = createTexture(nextPow2(water->getWidth()), nextPow2(water->getHeight()));

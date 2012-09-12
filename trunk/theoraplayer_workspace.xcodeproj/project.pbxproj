@@ -754,7 +754,7 @@
 		D1473F20150CA69B00B20490 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 			};
 			buildConfigurationList = D1473F23150CA69B00B20490 /* Build configuration list for PBXProject "theoraplayer_workspace" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1131,6 +1131,7 @@
 		D12C20891534D58B00B4904B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = composite_animation;
 				WRAPPER_EXTENSION = app;
@@ -1140,6 +1141,7 @@
 		D12C208A1534D58B00B4904B /* Debug-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = composite_animation;
 				WRAPPER_EXTENSION = app;
@@ -1149,6 +1151,7 @@
 		D12C208B1534D58B00B4904B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = composite_animation;
 				WRAPPER_EXTENSION = app;
@@ -1158,6 +1161,7 @@
 		D12C208C1534D58B00B4904B /* Release-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = composite_animation;
 				WRAPPER_EXTENSION = app;
@@ -1167,6 +1171,7 @@
 		D12C208D1534D58B00B4904B /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = composite_animation;
 				WRAPPER_EXTENSION = app;
@@ -1300,6 +1305,7 @@
 		D147403F150CAF0D00B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1310,6 +1316,7 @@
 		D1474040150CAF0D00B20490 /* Debug-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1320,6 +1327,7 @@
 		D1474041150CAF0D00B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1330,6 +1338,7 @@
 		D1474042150CAF0D00B20490 /* Release-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1340,6 +1349,7 @@
 		D1474043150CAF0D00B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1350,6 +1360,7 @@
 		D14740F6150CB45E00B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = av_player;
 				WRAPPER_EXTENSION = app;
@@ -1359,6 +1370,7 @@
 		D14740F7150CB45E00B20490 /* Debug-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = av_player;
 				WRAPPER_EXTENSION = app;
@@ -1368,6 +1380,7 @@
 		D14740F8150CB45E00B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = av_player;
 				WRAPPER_EXTENSION = app;
@@ -1377,6 +1390,7 @@
 		D14740F9150CB45E00B20490 /* Release-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = av_player;
 				WRAPPER_EXTENSION = app;
@@ -1386,6 +1400,7 @@
 		D14740FA150CB45E00B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = av_player;
 				WRAPPER_EXTENSION = app;
@@ -1395,6 +1410,7 @@
 		D147411B150CB6F300B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = multiple_videos;
 				WRAPPER_EXTENSION = app;
@@ -1404,6 +1420,7 @@
 		D147411C150CB6F300B20490 /* Debug-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = multiple_videos;
 				WRAPPER_EXTENSION = app;
@@ -1413,6 +1430,7 @@
 		D147411D150CB6F300B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = multiple_videos;
 				WRAPPER_EXTENSION = app;
@@ -1422,6 +1440,7 @@
 		D147411E150CB6F300B20490 /* Release-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = multiple_videos;
 				WRAPPER_EXTENSION = app;
@@ -1431,6 +1450,7 @@
 		D147411F150CB6F300B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = multiple_videos;
 				WRAPPER_EXTENSION = app;
@@ -1440,6 +1460,7 @@
 		D1474134150CB6F600B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = sprite_animation;
 				WRAPPER_EXTENSION = app;
@@ -1449,6 +1470,7 @@
 		D1474135150CB6F600B20490 /* Debug-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = sprite_animation;
 				WRAPPER_EXTENSION = app;
@@ -1458,6 +1480,7 @@
 		D1474136150CB6F600B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = sprite_animation;
 				WRAPPER_EXTENSION = app;
@@ -1467,6 +1490,7 @@
 		D1474137150CB6F600B20490 /* Release-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = sprite_animation;
 				WRAPPER_EXTENSION = app;
@@ -1476,6 +1500,7 @@
 		D1474138150CB6F600B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = sprite_animation;
 				WRAPPER_EXTENSION = app;
@@ -1485,6 +1510,7 @@
 		D147414D150CB6F900B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = seek_test;
 				WRAPPER_EXTENSION = app;
@@ -1494,6 +1520,7 @@
 		D147414E150CB6F900B20490 /* Debug-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = seek_test;
 				WRAPPER_EXTENSION = app;
@@ -1503,6 +1530,7 @@
 		D147414F150CB6F900B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = seek_test;
 				WRAPPER_EXTENSION = app;
@@ -1512,6 +1540,7 @@
 		D1474150150CB6F900B20490 /* Release-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = seek_test;
 				WRAPPER_EXTENSION = app;
@@ -1521,6 +1550,7 @@
 		D1474151150CB6F900B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = seek_test;
 				WRAPPER_EXTENSION = app;
@@ -1530,6 +1560,7 @@
 		D1474166150CB70D00B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = tv_room;
 				WRAPPER_EXTENSION = app;
@@ -1539,6 +1570,7 @@
 		D1474167150CB70D00B20490 /* Debug-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = tv_room;
 				WRAPPER_EXTENSION = app;
@@ -1548,6 +1580,7 @@
 		D1474168150CB70D00B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = tv_room;
 				WRAPPER_EXTENSION = app;
@@ -1557,6 +1590,7 @@
 		D1474169150CB70D00B20490 /* Release-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = tv_room;
 				WRAPPER_EXTENSION = app;
@@ -1566,6 +1600,7 @@
 		D147416A150CB70D00B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				PRODUCT_NAME = tv_room;
 				WRAPPER_EXTENSION = app;
@@ -1575,6 +1610,7 @@
 		D1663367156ADAE8009E98F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = video_lighting;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1583,6 +1619,7 @@
 		D1663368156ADAE8009E98F1 /* Debug-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = video_lighting;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1591,6 +1628,7 @@
 		D1663369156ADAE8009E98F1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = video_lighting;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1599,6 +1637,7 @@
 		D166336A156ADAE8009E98F1 /* Release-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = video_lighting;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1607,6 +1646,7 @@
 		D166336B156ADAE8009E98F1 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = video_lighting;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1615,6 +1655,7 @@
 		D176138E1561B21500F645DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = environment_mapping;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1623,6 +1664,7 @@
 		D176138F1561B21500F645DE /* Debug-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = environment_mapping;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1631,6 +1673,7 @@
 		D17613901561B21500F645DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = environment_mapping;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1639,6 +1682,7 @@
 		D17613911561B21500F645DE /* Release-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = environment_mapping;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1647,6 +1691,7 @@
 		D17613921561B21500F645DE /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = environment_mapping;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1655,6 +1700,7 @@
 		D1C0150E15619D4700FBEF81 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1663,6 +1709,7 @@
 		D1C0150F15619D4700FBEF81 /* Debug-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1671,6 +1718,7 @@
 		D1C0151015619D4700FBEF81 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1679,6 +1727,7 @@
 		D1C0151115619D4700FBEF81 /* Release-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1687,6 +1736,7 @@
 		D1C0151215619D4700FBEF81 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1695,6 +1745,7 @@
 		D1C134BC157972CF005E8A5B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = parallax_mapping;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1703,6 +1754,7 @@
 		D1C134BD157972CF005E8A5B /* Debug-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = parallax_mapping;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1711,6 +1763,7 @@
 		D1C134BE157972CF005E8A5B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = parallax_mapping;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1719,6 +1772,7 @@
 		D1C134BF157972CF005E8A5B /* Release-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = parallax_mapping;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1727,6 +1781,7 @@
 		D1C134C0157972CF005E8A5B /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = parallax_mapping;
 				WRAPPER_EXTENSION = app;
 			};
