@@ -81,6 +81,7 @@ namespace aprilvideo
 		mAudioPlayer = NULL;
 		mAudioSyncOffset = 0;
 		gRefCount++;
+		mAlphaPauseTreshold = 0;
 		if (!gVideoManager) gVideoManager = new TheoraVideoManager(gNumWorkerThreads);
 	}
 	
@@ -196,9 +197,9 @@ namespace aprilvideo
 		if (mClip)
 		{
 			gVideoManager->update(k);
-			bool visible = isVisible();
-			if (!visible && !mClip->isPaused()) mClip->pause();
-			else if (visible && mClip->isPaused()) mClip->play();
+			bool should_pause = mAlphaPauseTreshold == 0 ? isVisible() : getAlpha() <= mAlphaPauseTreshold;
+			if (should_pause && !mClip->isPaused()) mClip->pause();
+			else if (!should_pause && mClip->isPaused()) mClip->play();
 			
 			TheoraVideoFrame* f = mClip->getNextFrame();
 			if (f)
@@ -211,10 +212,16 @@ namespace aprilvideo
 		}
 	}
 	
+	void VideoObject::setAlphaTreshold(int treshold)
+	{
+		mAlphaPauseTreshold = hclamp(treshold, 0, 255);
+	}
+	
 	bool VideoObject::setProperty(chstr name,chstr value)
 	{
 		if      (name == "video") mClipName = value;
 		else if (name == "video_alpha") mUseAlpha = value;
+		else if (name == "alpha_pause_treshold") setAlphaTreshold(value);
 		else if (name == "loop")  mLoop = value;
 		else if (name == "speed") mSpeed = value;
 		else if (name == "audio")
@@ -234,6 +241,7 @@ namespace aprilvideo
 		*property_exists = true;
 		if      (name == "video") return mClipName;
 		else if (name == "video_alpha") return mUseAlpha ? "1" : "0";
+		else if (name == "alpha_pause_treshold") return mAlphaPauseTreshold;
 		else if (name == "loop")  return mLoop ? "1" : "0";
 		else if (name == "speed") return mSpeed;
 		else if (name == "audio")  return mAudioName;
