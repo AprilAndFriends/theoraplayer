@@ -40,6 +40,7 @@ namespace aprilvideo
 		aprilui::Texture* mTexture;
 		aprilui::Image* mVideoImage;
 		float mSpeed;
+		int mAlphaPauseTreshold;
 
 		float mAudioSyncOffset;
 		hstr mAudioName;
@@ -54,10 +55,11 @@ namespace aprilvideo
 		
 		void update(float k);
 
+		void setAlphaTreshold(int treshold);
+		int getAlphaTreshold() { return mAlphaPauseTreshold; }
 		void notifyEvent(chstr name, void* params);
 		bool setProperty(chstr name, chstr value);
 		hstr getProperty(chstr name, bool* property_exists);
-
 	};
 	
 	void AprilVideoExport init(int num_worker_threads = 1);
