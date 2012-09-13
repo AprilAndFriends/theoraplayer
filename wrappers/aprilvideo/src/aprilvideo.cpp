@@ -71,6 +71,7 @@ namespace aprilvideo
 	VideoObject::VideoObject(chstr name, grect rect) : aprilui::ImageBox(name, rect)
 	{
 		mUseAlpha = 0;
+		mPrevDoneFlag = 0;
 		mLoop = 1;
 		mSpeed = 1.0f;
 		mClip = NULL;
@@ -196,6 +197,12 @@ namespace aprilvideo
 
 		if (mClip)
 		{
+			if (!mLoop)
+			{
+				bool done = mClip->isDone();
+				if (mPrevDoneFlag == 0 && done == 1) triggerEvent("PlaybackDone");
+				mPrevDoneFlag = done;
+			}
 			gVideoManager->update(k);
 			bool should_pause = mAlphaPauseTreshold == 0 ? !isVisible() : getAlpha() <= mAlphaPauseTreshold;
 			if (should_pause && !mClip->isPaused()) mClip->pause();
