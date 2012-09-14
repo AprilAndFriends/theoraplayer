@@ -258,8 +258,17 @@ namespace aprilvideo
 		return ImageBox::getProperty(name, property_exists);
 	}
 
-	void init(int num_worker_threads)
+	static void (*aprilvideo_log_fn)(chstr) = NULL;
+	
+	static void theoraLogMessage(std::string log)
 	{
+		aprilvideo_log_fn("[aprilvideo] " + log);
+	}
+	
+	void init(int num_worker_threads, void (*log_fn)(chstr))
+	{
+		aprilvideo_log_fn = log_fn;
+		if (log_fn != NULL) TheoraVideoManager::setLogFunction(theoraLogMessage);
 		gNumWorkerThreads = num_worker_threads;
 		APRILUI_REGISTER_OBJECT_TYPE(VideoObject);
 	}
