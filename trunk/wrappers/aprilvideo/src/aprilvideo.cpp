@@ -121,15 +121,15 @@ namespace aprilvideo
 			gVideoManager->destroyVideoClip(mClip);
 			mClip = NULL;
 		}
-		if (mSound)
-		{
-			xal::mgr->destroySound(mSound);
-			mSound = NULL;
-		}
 		if (mAudioPlayer)
 		{
 			xal::mgr->destroyPlayer(mAudioPlayer);
 			mAudioPlayer = NULL;
+		}
+		if (mSound)
+		{
+			xal::mgr->destroySound(mSound);
+			mSound = NULL;
 		}
 		
 		if (mTimer)
