@@ -266,7 +266,7 @@ namespace aprilvideo
 	
 	void init(int num_worker_threads)
 	{
-		if (log_fn != NULL) TheoraVideoManager::setLogFunction(theoraLogMessage);
+		TheoraVideoManager::setLogFunction(theoraLogMessage);
 		gNumWorkerThreads = num_worker_threads;
 		APRILUI_REGISTER_OBJECT_TYPE(VideoObject);
 	}
