@@ -63,7 +63,7 @@ namespace aprilvideo
 		hstr getProperty(chstr name, bool* property_exists);
 	};
 	
-	void AprilVideoExport init(int num_worker_threads = 1, void (*log_fn)(chstr) = NULL);
+	void AprilVideoExport init(int num_worker_threads = 1);
 	void AprilVideoExport destroy();
 }
 #endif
