@@ -156,7 +156,7 @@ namespace aprilvideo
 		if (mClip == NULL && mClipName != "")
 		{
 			destroyResources();
-			hstr path = mDataset->_getFilePath() + "/video/" + mClipName;
+			hstr path = mDataset->getFilePath() + "/video/" + mClipName;
 			try
 			{
 				TheoraOutputMode mode;
@@ -184,7 +184,7 @@ namespace aprilvideo
 				{
 					xal::mgr->createCategory("video", xal::ON_DEMAND, xal::DISK);
 				}
-				mSound = xal::mgr->createSound(mDataset->_getFilePath() + "/video/" + mAudioName, "video");
+				mSound = xal::mgr->createSound(mDataset->getFilePath() + "/video/" + mAudioName, "video");
 
 				mAudioPlayer = xal::mgr->createPlayer(mAudioName.replace(".ogg", ""));
 				mTimer = new AudioVideoTimer(mAudioPlayer, mAudioSyncOffset);
