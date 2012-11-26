@@ -41,6 +41,8 @@ namespace aprilvideo
 		aprilui::Texture* mTexture;
 		aprilui::Image* mVideoImage;
 		float mSpeed;
+		int mPrevFrameNumber;
+		bool mSeeked;
 		int mAlphaPauseTreshold;
 
 		float mAudioSyncOffset;

@@ -83,6 +83,8 @@ namespace aprilvideo
 		mAudioSyncOffset = 0;
 		gRefCount++;
 		mAlphaPauseTreshold = 0;
+		mPrevFrameNumber = 0;
+		mSeeked = 0;
 		if (!gVideoManager) gVideoManager = new TheoraVideoManager(gNumWorkerThreads);
 	}
 	
@@ -215,6 +217,16 @@ namespace aprilvideo
 				if (april::rendersys->getName() == "DirectX9") mTexture->getRenderTexture()->clear();
 				mTexture->getRenderTexture()->blit(0, 0, f->getBuffer(), f->getWidth(), f->getHeight(), 3 + mUseAlpha, 0, 0, f->getWidth(), f->getHeight());
 				mClip->popFrame();
+				if (mLoop)
+				{
+					int number = f->getFrameNumber();
+					if (mSeeked) mSeeked = 0;
+					else if (number < mPrevFrameNumber)
+					{
+						triggerEvent("PlaybackDone");
+					}
+					mPrevFrameNumber = number;
+				}
 			}
 		}
 	}
@@ -231,6 +243,12 @@ namespace aprilvideo
 		else if (name == "alpha_pause_treshold") setAlphaTreshold(value);
 		else if (name == "loop")  mLoop = value;
 		else if (name == "speed") mSpeed = value;
+		else if (name == "time" && mClip)
+		{
+			float time = value;
+			mSeeked = 1;
+			mClip->seek(time);
+		}
 		else if (name == "audio")
 		{
 			mAudioName = value;
@@ -252,6 +270,7 @@ namespace aprilvideo
 		else if (name == "loop")  return mLoop ? "1" : "0";
 		else if (name == "speed") return mSpeed;
 		else if (name == "time") return mClip ? hstr(mClip->getTimePosition()) : hstr("0");
+		else if (name == "duration") return mClip ? hstr(mClip->getDuration()) : hstr("0");
 		else if (name == "audio")  return mAudioName;
 		else if (name == "sync_offset")  return mAudioSyncOffset;
 		*property_exists = false;
