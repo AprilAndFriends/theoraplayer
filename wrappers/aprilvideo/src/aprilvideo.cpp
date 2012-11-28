@@ -205,7 +205,8 @@ namespace aprilvideo
 				if (mPrevDoneFlag == 0 && done == 1) triggerEvent("PlaybackDone");
 				mPrevDoneFlag = done;
 			}
-			gVideoManager->update(k);
+			mClip->update(k);
+			mClip->decodedAudioCheck();
 			bool should_pause = mAlphaPauseTreshold == 0 ? !isVisible() : getAlpha() <= mAlphaPauseTreshold;
 			if (should_pause && !mClip->isPaused()) mClip->pause();
 			else if (!should_pause && mClip->isPaused()) mClip->play();
