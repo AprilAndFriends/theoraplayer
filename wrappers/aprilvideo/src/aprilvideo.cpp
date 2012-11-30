@@ -26,6 +26,7 @@ namespace aprilvideo
 {
 	static TheoraVideoManager* gVideoManager = NULL;
 	static int gRefCount = 0, gNumWorkerThreads = 1;
+	hstr logTag = "aprilvideo";
 
 	static int _nextPow2(int x)
 	{
@@ -215,8 +216,12 @@ namespace aprilvideo
 			if (f)
 			{
 				mImage = mVideoImage;
+				grect r = mImage->getSrcRect();
+				r.w = f->getWidth();
+				r.h = f->getHeight();
+				mImage->setSrcRect(r);
 				if (april::rendersys->getName() == "DirectX9") mTexture->getRenderTexture()->clear();
-				mTexture->getRenderTexture()->blit(0, 0, f->getBuffer(), f->getWidth(), f->getHeight(), 3 + mUseAlpha, 0, 0, f->getWidth(), f->getHeight());
+				mTexture->getRenderTexture()->blit(0, 0, f->getBuffer(), r.w, r.h, 3 + mUseAlpha, 0, 0, r.w, r.h);
 				mClip->popFrame();
 				if (mLoop)
 				{
@@ -244,11 +249,16 @@ namespace aprilvideo
 		else if (name == "alpha_pause_treshold") setAlphaTreshold(value);
 		else if (name == "loop")  mLoop = value;
 		else if (name == "speed") mSpeed = value;
-		else if (name == "time" && mClip)
+		else if (name == "time")
 		{
-			float time = value;
-			mSeeked = 1;
-			mClip->seek(time);
+			if (!mClip && mClipName != "") update(0); // try to create the clip if it hasn't been created already
+			if (mClip)
+			{
+				float time = value;
+				mSeeked = 1;
+				mClip->seek(time);
+			}
+			else hlog::warn(logTag, "VideoObject ignoring 'time' param, mClip is NULL");
 		}
 		else if (name == "audio")
 		{
