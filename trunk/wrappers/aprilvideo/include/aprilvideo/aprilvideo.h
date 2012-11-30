@@ -30,6 +30,8 @@ namespace xal
 
 namespace aprilvideo
 {
+	extern hstr logTag;
+
 	class AprilVideoExport VideoObject : public aprilui::ImageBox
 	{
 		bool mPrevDoneFlag;
