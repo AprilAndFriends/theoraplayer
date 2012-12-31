@@ -339,12 +339,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D12C20781534D4A000B4904B /* composite animation */ = {
+		D12C20781534D4A000B4904B /* composite_animation */ = {
 			isa = PBXGroup;
 			children = (
 				D16776C6155C56A70050EC64 /* composite_animation.cpp */,
 			);
-			name = "composite animation";
+			name = composite_animation;
 			sourceTree = "<group>";
 		};
 		D1473F1E150CA69B00B20490 = {
@@ -358,7 +358,7 @@
 				D1474107150CB6A700B20490 /* av_player */,
 				D147416E150CB74200B20490 /* multiple_videos */,
 				D147416F150CB74B00B20490 /* sprite_animation */,
-				D12C20781534D4A000B4904B /* composite animation */,
+				D12C20781534D4A000B4904B /* composite_animation */,
 				D17613961561B2AA00F645DE /* environment_mapping */,
 				D1474171150CB76400B20490 /* tv_room */,
 				D1C0151F15619E2B00FBEF81 /* lightmap_demo */,
