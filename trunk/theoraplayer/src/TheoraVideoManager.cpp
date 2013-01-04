@@ -15,6 +15,12 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "TheoraUtil.h"
 #include "TheoraDataSource.h"
 #include "TheoraException.h"
+#ifdef __THEORA
+#include "TheoraVideoClip_Theora.h"
+#endif
+#ifdef __AVFOUNDATION
+#include "TheoraVideoClip_AVFoundation.h"
+#endif
 
 TheoraVideoManager* g_ManagerSingleton=0;
 // declaring function prototype here so I don't have to put it in a header file
@@ -115,7 +121,8 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 	TheoraVideoClip* clip = NULL;
 	int nPrecached = numPrecachedOverride ? numPrecachedOverride : mDefaultNumPrecachedFrames;
 	logMessage("Creating video from data source: "+data_source->repr());
-	clip = new TheoraVideoClip(data_source,output_mode,nPrecached,usePower2Stride);
+	clip = new TheoraVideoClip_Theora(data_source,output_mode,nPrecached,usePower2Stride);
+	clip->load(data_source);
 	mClips.push_back(clip);
 	mWorkMutex->unlock();
 	return clip;

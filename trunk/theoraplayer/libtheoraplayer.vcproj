@@ -49,8 +49,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include"
-				PreprocessorDefinitions="_WIN32;_DEBUG;THEORAVIDEO_EXPORTS"
+				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora"
+				PreprocessorDefinitions="__THEORA;_WIN32;_DEBUG;THEORAVIDEO_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -148,8 +148,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include"
-				PreprocessorDefinitions="_WIN32;NDEBUG;THEORAVIDEO_EXPORTS"
+				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora"
+				PreprocessorDefinitions="__THEORA;_WIN32;NDEBUG;THEORAVIDEO_EXPORTS"
 				StringPooling="true"
 				MinimalRebuild="true"
 				RuntimeLibrary="2"
@@ -246,8 +246,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include"
-				PreprocessorDefinitions="_WIN32;_DEBUG;THEORAVIDEO_STATIC"
+				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora"
+				PreprocessorDefinitions="__THEORA;_WIN32;_DEBUG;THEORAVIDEO_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -327,8 +327,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_STATIC"
+				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora"
+				PreprocessorDefinitions="__THEORA;WIN32;NDEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_STATIC"
 				StringPooling="true"
 				MinimalRebuild="true"
 				RuntimeLibrary="2"
@@ -488,6 +488,18 @@
 				RelativePath=".\src\TheoraWorkerThread.cpp"
 				>
 			</File>
+			<Filter
+				Name="Theora"
+				>
+				<File
+					RelativePath=".\src\Theora\TheoraVideoClip_Theora.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\Theora\TheoraVideoClip_Theora.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
