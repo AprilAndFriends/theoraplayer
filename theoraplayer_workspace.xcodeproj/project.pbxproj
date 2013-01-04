@@ -107,6 +107,97 @@
 			remoteGlobalIDString = D1BB6FAE150E9E7100EF9400;
 			remoteInfo = "theoraplayer (iOS)";
 		};
+		D1CDFF761696C88F00609AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1CDFF4A1696C79700609AB0;
+			remoteInfo = "theoraplayer (Theora AVFoundation)";
+		};
+		D1CDFF7A1696C88F00609AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1CDFF481696C77A00609AB0;
+			remoteInfo = "theoraplayer (AVFoundation)";
+		};
+		D1CDFF7C1696C88F00609AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1CDFF701696C79700609AB0;
+			remoteInfo = "theoraplayer (Theora AVFoundation)";
+		};
+		D1CDFF7E1696C89300609AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1CDFF4A1696C79700609AB0;
+			remoteInfo = "theoraplayer (Theora AVFoundation)";
+		};
+		D1CDFF801696C89600609AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1CDFF4A1696C79700609AB0;
+			remoteInfo = "theoraplayer (Theora AVFoundation)";
+		};
+		D1CDFF821696C89A00609AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1CDFF4A1696C79700609AB0;
+			remoteInfo = "theoraplayer (Theora AVFoundation)";
+		};
+		D1CDFF841696C89D00609AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1CDFF4A1696C79700609AB0;
+			remoteInfo = "theoraplayer (Theora AVFoundation)";
+		};
+		D1CDFF861696C8A200609AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1CDFF4A1696C79700609AB0;
+			remoteInfo = "theoraplayer (Theora AVFoundation)";
+		};
+		D1CDFF881696C8A600609AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1CDFF4A1696C79700609AB0;
+			remoteInfo = "theoraplayer (Theora AVFoundation)";
+		};
+		D1CDFF8A1696C8A900609AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1CDFF4A1696C79700609AB0;
+			remoteInfo = "theoraplayer (Theora AVFoundation)";
+		};
+		D1CDFF8C1696C8AD00609AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1CDFF4A1696C79700609AB0;
+			remoteInfo = "theoraplayer (Theora AVFoundation)";
+		};
+		D1CDFF8E1696C8B000609AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1CDFF4A1696C79700609AB0;
+			remoteInfo = "theoraplayer (Theora AVFoundation)";
+		};
+		D1CDFF901696C8B300609AB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1CDFF4A1696C79700609AB0;
+			remoteInfo = "theoraplayer (Theora AVFoundation)";
+		};
 		D1D098D1155F05C5009F6AAA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */;
@@ -128,26 +219,12 @@
 			remoteGlobalIDString = 730F23F1091827B100AB638C;
 			remoteInfo = vorbis;
 		};
-		D1D098DF155F05CC009F6AAA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D1BB6F49150E9B0E00EF9400;
-			remoteInfo = "vorbis (iOS)";
-		};
 		D1D098EA155F05D2009F6AAA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8D07F2C80486CC7A007CD1D0;
 			remoteInfo = theora;
-		};
-		D1D098EC155F05D2009F6AAA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 09C8F6430C82FBE500F72188;
-			remoteInfo = "theora (static)";
 		};
 		D1D098EE155F05D2009F6AAA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -470,6 +547,8 @@
 			isa = PBXGroup;
 			children = (
 				D167758B155C4F8F0050EC64 /* theoraplayer.framework */,
+				D1CDFF7B1696C88F00609AB0 /* theoraplayer.framework */,
+				D1CDFF7D1696C88F00609AB0 /* theoraplayer.framework */,
 				D167758D155C4F8F0050EC64 /* libtheoraplayer.a */,
 			);
 			name = Products;
@@ -543,7 +622,6 @@
 			isa = PBXGroup;
 			children = (
 				D1D098DE155F05CC009F6AAA /* Vorbis.framework */,
-				D1D098E0155F05CC009F6AAA /* libvorbis.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -552,7 +630,6 @@
 			isa = PBXGroup;
 			children = (
 				D1D098EB155F05D2009F6AAA /* Theora.framework */,
-				D1D098ED155F05D2009F6AAA /* libtheoradec.a */,
 				D1D098EF155F05D2009F6AAA /* libtheora.a */,
 			);
 			name = Products;
@@ -572,6 +649,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D1CDFF851696C89D00609AB0 /* PBXTargetDependency */,
 			);
 			name = composite_animation;
 			productName = glut_player;
@@ -589,6 +667,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D1CDFF771696C88F00609AB0 /* PBXTargetDependency */,
 			);
 			name = glut_player;
 			productName = glut_player;
@@ -606,6 +685,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D1CDFF7F1696C89300609AB0 /* PBXTargetDependency */,
 			);
 			name = av_player;
 			productName = glut_player;
@@ -623,6 +703,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D1CDFF811696C89600609AB0 /* PBXTargetDependency */,
 			);
 			name = multiple_videos;
 			productName = glut_player;
@@ -640,6 +721,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D1CDFF831696C89A00609AB0 /* PBXTargetDependency */,
 			);
 			name = sprite_animation;
 			productName = glut_player;
@@ -657,6 +739,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D1CDFF871696C8A200609AB0 /* PBXTargetDependency */,
 			);
 			name = seek_test;
 			productName = glut_player;
@@ -674,6 +757,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D1CDFF8B1696C8A900609AB0 /* PBXTargetDependency */,
 			);
 			name = tv_room;
 			productName = glut_player;
@@ -691,6 +775,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D1CDFF8F1696C8B000609AB0 /* PBXTargetDependency */,
 			);
 			name = video_lighting;
 			productName = lightmap_demo;
@@ -708,6 +793,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D1CDFF891696C8A600609AB0 /* PBXTargetDependency */,
 			);
 			name = environment_mapping;
 			productName = lightmap_demo;
@@ -725,6 +811,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D1CDFF8D1696C8AD00609AB0 /* PBXTargetDependency */,
 			);
 			name = lightmap_demo;
 			productName = lightmap_demo;
@@ -742,6 +829,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D1CDFF911696C8B300609AB0 /* PBXTargetDependency */,
 			);
 			name = parallax_mapping;
 			productName = lightmap_demo;
@@ -754,7 +842,7 @@
 		D1473F20150CA69B00B20490 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = D1473F23150CA69B00B20490 /* Build configuration list for PBXProject "theoraplayer_workspace" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -816,6 +904,20 @@
 			remoteRef = D167758C155C4F8F0050EC64 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D1CDFF7B1696C88F00609AB0 /* theoraplayer.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = theoraplayer.framework;
+			remoteRef = D1CDFF7A1696C88F00609AB0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D1CDFF7D1696C88F00609AB0 /* theoraplayer.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = theoraplayer.framework;
+			remoteRef = D1CDFF7C1696C88F00609AB0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		D1D098D2155F05C5009F6AAA /* Ogg.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -837,25 +939,11 @@
 			remoteRef = D1D098DD155F05CC009F6AAA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D1D098E0155F05CC009F6AAA /* libvorbis.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libvorbis.a;
-			remoteRef = D1D098DF155F05CC009F6AAA /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		D1D098EB155F05D2009F6AAA /* Theora.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Theora.framework;
 			remoteRef = D1D098EA155F05D2009F6AAA /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D1D098ED155F05D2009F6AAA /* libtheoradec.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libtheoradec.a;
-			remoteRef = D1D098EC155F05D2009F6AAA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D1D098EF155F05D2009F6AAA /* libtheora.a */ = {
@@ -1126,6 +1214,64 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D1CDFF771696C88F00609AB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theoraplayer (Theora AVFoundation)";
+			targetProxy = D1CDFF761696C88F00609AB0 /* PBXContainerItemProxy */;
+		};
+		D1CDFF7F1696C89300609AB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theoraplayer (Theora AVFoundation)";
+			targetProxy = D1CDFF7E1696C89300609AB0 /* PBXContainerItemProxy */;
+		};
+		D1CDFF811696C89600609AB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theoraplayer (Theora AVFoundation)";
+			targetProxy = D1CDFF801696C89600609AB0 /* PBXContainerItemProxy */;
+		};
+		D1CDFF831696C89A00609AB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theoraplayer (Theora AVFoundation)";
+			targetProxy = D1CDFF821696C89A00609AB0 /* PBXContainerItemProxy */;
+		};
+		D1CDFF851696C89D00609AB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theoraplayer (Theora AVFoundation)";
+			targetProxy = D1CDFF841696C89D00609AB0 /* PBXContainerItemProxy */;
+		};
+		D1CDFF871696C8A200609AB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theoraplayer (Theora AVFoundation)";
+			targetProxy = D1CDFF861696C8A200609AB0 /* PBXContainerItemProxy */;
+		};
+		D1CDFF891696C8A600609AB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theoraplayer (Theora AVFoundation)";
+			targetProxy = D1CDFF881696C8A600609AB0 /* PBXContainerItemProxy */;
+		};
+		D1CDFF8B1696C8A900609AB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theoraplayer (Theora AVFoundation)";
+			targetProxy = D1CDFF8A1696C8A900609AB0 /* PBXContainerItemProxy */;
+		};
+		D1CDFF8D1696C8AD00609AB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theoraplayer (Theora AVFoundation)";
+			targetProxy = D1CDFF8C1696C8AD00609AB0 /* PBXContainerItemProxy */;
+		};
+		D1CDFF8F1696C8B000609AB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theoraplayer (Theora AVFoundation)";
+			targetProxy = D1CDFF8E1696C8B000609AB0 /* PBXContainerItemProxy */;
+		};
+		D1CDFF911696C8B300609AB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theoraplayer (Theora AVFoundation)";
+			targetProxy = D1CDFF901696C8B300609AB0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D12C20891534D58B00B4904B /* Debug */ = {

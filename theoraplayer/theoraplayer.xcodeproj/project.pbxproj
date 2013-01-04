@@ -10,8 +10,6 @@
 		D1473F7F150CA7E000B20490 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7C150CA7E000B20490 /* Ogg.framework */; };
 		D1473F80150CA7E000B20490 /* Theora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7D150CA7E000B20490 /* Theora.framework */; };
 		D1473F81150CA7E000B20490 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7E150CA7E000B20490 /* Vorbis.framework */; };
-		D16775A9155C501D0050EC64 /* Endianess.h in Headers */ = {isa = PBXBuildFile; fileRef = D167759D155C501D0050EC64 /* Endianess.h */; };
-		D16775AA155C501D0050EC64 /* Endianess.h in Headers */ = {isa = PBXBuildFile; fileRef = D167759D155C501D0050EC64 /* Endianess.h */; };
 		D16775AB155C501D0050EC64 /* TheoraAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759E155C501D0050EC64 /* TheoraAsync.cpp */; };
 		D16775AC155C501D0050EC64 /* TheoraAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759E155C501D0050EC64 /* TheoraAsync.cpp */; };
 		D16775AD155C501D0050EC64 /* TheoraAudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */; };
@@ -60,6 +58,122 @@
 		D16775E5155C50280050EC64 /* TheoraVideoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CC155C50280050EC64 /* TheoraVideoManager.h */; };
 		D16775E6155C50280050EC64 /* TheoraWorkerThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CD155C50280050EC64 /* TheoraWorkerThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D16775E7155C50280050EC64 /* TheoraWorkerThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CD155C50280050EC64 /* TheoraWorkerThread.h */; };
+		D1CDFF241696C77A00609AB0 /* TheoraAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759E155C501D0050EC64 /* TheoraAsync.cpp */; };
+		D1CDFF251696C77A00609AB0 /* TheoraAudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */; };
+		D1CDFF261696C77A00609AB0 /* TheoraDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A0155C501D0050EC64 /* TheoraDataSource.cpp */; };
+		D1CDFF271696C77A00609AB0 /* TheoraException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A1155C501D0050EC64 /* TheoraException.cpp */; };
+		D1CDFF281696C77A00609AB0 /* TheoraFrameQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A2155C501D0050EC64 /* TheoraFrameQueue.cpp */; };
+		D1CDFF291696C77A00609AB0 /* TheoraTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A3155C501D0050EC64 /* TheoraTimer.cpp */; };
+		D1CDFF2A1696C77A00609AB0 /* TheoraUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A4155C501D0050EC64 /* TheoraUtil.cpp */; };
+		D1CDFF2B1696C77A00609AB0 /* TheoraVideoClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A5155C501D0050EC64 /* TheoraVideoClip.cpp */; };
+		D1CDFF2C1696C77A00609AB0 /* TheoraVideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A6155C501D0050EC64 /* TheoraVideoFrame.cpp */; };
+		D1CDFF2D1696C77A00609AB0 /* TheoraVideoManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A7155C501D0050EC64 /* TheoraVideoManager.cpp */; };
+		D1CDFF2E1696C77A00609AB0 /* TheoraWorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A8155C501D0050EC64 /* TheoraWorkerThread.cpp */; };
+		D1CDFF301696C77A00609AB0 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7C150CA7E000B20490 /* Ogg.framework */; };
+		D1CDFF311696C77A00609AB0 /* Theora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7D150CA7E000B20490 /* Theora.framework */; };
+		D1CDFF321696C77A00609AB0 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7E150CA7E000B20490 /* Vorbis.framework */; };
+		D1CDFF341696C77A00609AB0 /* TheoraAsync.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C1155C50280050EC64 /* TheoraAsync.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF351696C77A00609AB0 /* TheoraAudioInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C2155C50280050EC64 /* TheoraAudioInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF361696C77A00609AB0 /* TheoraDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C3155C50280050EC64 /* TheoraDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF371696C77A00609AB0 /* TheoraException.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C4155C50280050EC64 /* TheoraException.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF381696C77A00609AB0 /* TheoraExport.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C5155C50280050EC64 /* TheoraExport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF391696C77A00609AB0 /* TheoraFrameQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C6155C50280050EC64 /* TheoraFrameQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF3A1696C77A00609AB0 /* TheoraPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C7155C50280050EC64 /* TheoraPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF3B1696C77A00609AB0 /* TheoraTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C8155C50280050EC64 /* TheoraTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF3C1696C77A00609AB0 /* TheoraUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C9155C50280050EC64 /* TheoraUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF3D1696C77A00609AB0 /* TheoraVideoClip.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CA155C50280050EC64 /* TheoraVideoClip.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF3E1696C77A00609AB0 /* TheoraVideoFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CB155C50280050EC64 /* TheoraVideoFrame.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF3F1696C77A00609AB0 /* TheoraVideoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CC155C50280050EC64 /* TheoraVideoManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF401696C77A00609AB0 /* TheoraWorkerThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CD155C50280050EC64 /* TheoraWorkerThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF4C1696C79700609AB0 /* TheoraAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759E155C501D0050EC64 /* TheoraAsync.cpp */; };
+		D1CDFF4D1696C79700609AB0 /* TheoraAudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */; };
+		D1CDFF4E1696C79700609AB0 /* TheoraDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A0155C501D0050EC64 /* TheoraDataSource.cpp */; };
+		D1CDFF4F1696C79700609AB0 /* TheoraException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A1155C501D0050EC64 /* TheoraException.cpp */; };
+		D1CDFF501696C79700609AB0 /* TheoraFrameQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A2155C501D0050EC64 /* TheoraFrameQueue.cpp */; };
+		D1CDFF511696C79700609AB0 /* TheoraTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A3155C501D0050EC64 /* TheoraTimer.cpp */; };
+		D1CDFF521696C79700609AB0 /* TheoraUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A4155C501D0050EC64 /* TheoraUtil.cpp */; };
+		D1CDFF531696C79700609AB0 /* TheoraVideoClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A5155C501D0050EC64 /* TheoraVideoClip.cpp */; };
+		D1CDFF541696C79700609AB0 /* TheoraVideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A6155C501D0050EC64 /* TheoraVideoFrame.cpp */; };
+		D1CDFF551696C79700609AB0 /* TheoraVideoManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A7155C501D0050EC64 /* TheoraVideoManager.cpp */; };
+		D1CDFF561696C79700609AB0 /* TheoraWorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A8155C501D0050EC64 /* TheoraWorkerThread.cpp */; };
+		D1CDFF581696C79700609AB0 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7C150CA7E000B20490 /* Ogg.framework */; };
+		D1CDFF591696C79700609AB0 /* Theora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7D150CA7E000B20490 /* Theora.framework */; };
+		D1CDFF5A1696C79700609AB0 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7E150CA7E000B20490 /* Vorbis.framework */; };
+		D1CDFF5C1696C79700609AB0 /* TheoraAsync.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C1155C50280050EC64 /* TheoraAsync.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF5D1696C79700609AB0 /* TheoraAudioInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C2155C50280050EC64 /* TheoraAudioInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF5E1696C79700609AB0 /* TheoraDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C3155C50280050EC64 /* TheoraDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF5F1696C79700609AB0 /* TheoraException.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C4155C50280050EC64 /* TheoraException.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF601696C79700609AB0 /* TheoraExport.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C5155C50280050EC64 /* TheoraExport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF611696C79700609AB0 /* TheoraFrameQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C6155C50280050EC64 /* TheoraFrameQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF621696C79700609AB0 /* TheoraPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C7155C50280050EC64 /* TheoraPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF631696C79700609AB0 /* TheoraTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C8155C50280050EC64 /* TheoraTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF641696C79700609AB0 /* TheoraUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C9155C50280050EC64 /* TheoraUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF651696C79700609AB0 /* TheoraVideoClip.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CA155C50280050EC64 /* TheoraVideoClip.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF661696C79700609AB0 /* TheoraVideoFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CB155C50280050EC64 /* TheoraVideoFrame.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF671696C79700609AB0 /* TheoraVideoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CC155C50280050EC64 /* TheoraVideoManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF681696C79700609AB0 /* TheoraWorkerThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CD155C50280050EC64 /* TheoraWorkerThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFF961696D0F000609AB0 /* TheoraVideoClip_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF941696D0F000609AB0 /* TheoraVideoClip_Theora.cpp */; };
+		D1CDFF971696D0F000609AB0 /* TheoraVideoClip_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF941696D0F000609AB0 /* TheoraVideoClip_Theora.cpp */; };
+		D1CDFF981696D0F000609AB0 /* TheoraVideoClip_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF941696D0F000609AB0 /* TheoraVideoClip_Theora.cpp */; };
+		D1CDFF991696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1CDFF951696D0F000609AB0 /* TheoraVideoClip_Theora.h */; };
+		D1CDFF9A1696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1CDFF951696D0F000609AB0 /* TheoraVideoClip_Theora.h */; };
+		D1CDFF9B1696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1CDFF951696D0F000609AB0 /* TheoraVideoClip_Theora.h */; };
+		D1CDFF9E1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF9C1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm */; };
+		D1CDFF9F1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = D1CDFF9D1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.h */; };
+		D1CDFFA21696E1CA00609AB0 /* TheoraAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759E155C501D0050EC64 /* TheoraAsync.cpp */; };
+		D1CDFFA31696E1CA00609AB0 /* TheoraAudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */; };
+		D1CDFFA41696E1CA00609AB0 /* TheoraDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A0155C501D0050EC64 /* TheoraDataSource.cpp */; };
+		D1CDFFA51696E1CA00609AB0 /* TheoraException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A1155C501D0050EC64 /* TheoraException.cpp */; };
+		D1CDFFA61696E1CA00609AB0 /* TheoraFrameQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A2155C501D0050EC64 /* TheoraFrameQueue.cpp */; };
+		D1CDFFA71696E1CA00609AB0 /* TheoraTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A3155C501D0050EC64 /* TheoraTimer.cpp */; };
+		D1CDFFA81696E1CA00609AB0 /* TheoraUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A4155C501D0050EC64 /* TheoraUtil.cpp */; };
+		D1CDFFA91696E1CA00609AB0 /* TheoraVideoClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A5155C501D0050EC64 /* TheoraVideoClip.cpp */; };
+		D1CDFFAA1696E1CA00609AB0 /* TheoraVideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A6155C501D0050EC64 /* TheoraVideoFrame.cpp */; };
+		D1CDFFAB1696E1CA00609AB0 /* TheoraVideoManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A7155C501D0050EC64 /* TheoraVideoManager.cpp */; };
+		D1CDFFAC1696E1CA00609AB0 /* TheoraWorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A8155C501D0050EC64 /* TheoraWorkerThread.cpp */; };
+		D1CDFFB01696E1CA00609AB0 /* TheoraAsync.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C1155C50280050EC64 /* TheoraAsync.h */; };
+		D1CDFFB11696E1CA00609AB0 /* TheoraAudioInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C2155C50280050EC64 /* TheoraAudioInterface.h */; };
+		D1CDFFB21696E1CA00609AB0 /* TheoraDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C3155C50280050EC64 /* TheoraDataSource.h */; };
+		D1CDFFB31696E1CA00609AB0 /* TheoraException.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C4155C50280050EC64 /* TheoraException.h */; };
+		D1CDFFB41696E1CA00609AB0 /* TheoraExport.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C5155C50280050EC64 /* TheoraExport.h */; };
+		D1CDFFB51696E1CA00609AB0 /* TheoraFrameQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C6155C50280050EC64 /* TheoraFrameQueue.h */; };
+		D1CDFFB61696E1CA00609AB0 /* TheoraPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C7155C50280050EC64 /* TheoraPlayer.h */; };
+		D1CDFFB71696E1CA00609AB0 /* TheoraTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C8155C50280050EC64 /* TheoraTimer.h */; };
+		D1CDFFB81696E1CA00609AB0 /* TheoraUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C9155C50280050EC64 /* TheoraUtil.h */; };
+		D1CDFFB91696E1CA00609AB0 /* TheoraVideoClip.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CA155C50280050EC64 /* TheoraVideoClip.h */; };
+		D1CDFFBA1696E1CA00609AB0 /* TheoraVideoFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CB155C50280050EC64 /* TheoraVideoFrame.h */; };
+		D1CDFFBB1696E1CA00609AB0 /* TheoraVideoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CC155C50280050EC64 /* TheoraVideoManager.h */; };
+		D1CDFFBC1696E1CA00609AB0 /* TheoraWorkerThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CD155C50280050EC64 /* TheoraWorkerThread.h */; };
+		D1CDFFBD1696E1CA00609AB0 /* TheoraVideoClip_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1CDFF951696D0F000609AB0 /* TheoraVideoClip_Theora.h */; };
+		D1CDFFC71696E1D700609AB0 /* TheoraAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759E155C501D0050EC64 /* TheoraAsync.cpp */; };
+		D1CDFFC81696E1D700609AB0 /* TheoraAudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */; };
+		D1CDFFC91696E1D700609AB0 /* TheoraDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A0155C501D0050EC64 /* TheoraDataSource.cpp */; };
+		D1CDFFCA1696E1D700609AB0 /* TheoraException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A1155C501D0050EC64 /* TheoraException.cpp */; };
+		D1CDFFCB1696E1D700609AB0 /* TheoraFrameQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A2155C501D0050EC64 /* TheoraFrameQueue.cpp */; };
+		D1CDFFCC1696E1D700609AB0 /* TheoraTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A3155C501D0050EC64 /* TheoraTimer.cpp */; };
+		D1CDFFCD1696E1D700609AB0 /* TheoraUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A4155C501D0050EC64 /* TheoraUtil.cpp */; };
+		D1CDFFCE1696E1D700609AB0 /* TheoraVideoClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A5155C501D0050EC64 /* TheoraVideoClip.cpp */; };
+		D1CDFFCF1696E1D700609AB0 /* TheoraVideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A6155C501D0050EC64 /* TheoraVideoFrame.cpp */; };
+		D1CDFFD01696E1D700609AB0 /* TheoraVideoManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A7155C501D0050EC64 /* TheoraVideoManager.cpp */; };
+		D1CDFFD11696E1D700609AB0 /* TheoraWorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A8155C501D0050EC64 /* TheoraWorkerThread.cpp */; };
+		D1CDFFD21696E1D700609AB0 /* TheoraVideoClip_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF941696D0F000609AB0 /* TheoraVideoClip_Theora.cpp */; };
+		D1CDFFD51696E1D700609AB0 /* TheoraAsync.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C1155C50280050EC64 /* TheoraAsync.h */; };
+		D1CDFFD61696E1D700609AB0 /* TheoraAudioInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C2155C50280050EC64 /* TheoraAudioInterface.h */; };
+		D1CDFFD71696E1D700609AB0 /* TheoraDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C3155C50280050EC64 /* TheoraDataSource.h */; };
+		D1CDFFD81696E1D700609AB0 /* TheoraException.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C4155C50280050EC64 /* TheoraException.h */; };
+		D1CDFFD91696E1D700609AB0 /* TheoraExport.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C5155C50280050EC64 /* TheoraExport.h */; };
+		D1CDFFDA1696E1D700609AB0 /* TheoraFrameQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C6155C50280050EC64 /* TheoraFrameQueue.h */; };
+		D1CDFFDB1696E1D700609AB0 /* TheoraPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C7155C50280050EC64 /* TheoraPlayer.h */; };
+		D1CDFFDC1696E1D700609AB0 /* TheoraTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C8155C50280050EC64 /* TheoraTimer.h */; };
+		D1CDFFDD1696E1D700609AB0 /* TheoraUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C9155C50280050EC64 /* TheoraUtil.h */; };
+		D1CDFFDE1696E1D700609AB0 /* TheoraVideoClip.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CA155C50280050EC64 /* TheoraVideoClip.h */; };
+		D1CDFFDF1696E1D700609AB0 /* TheoraVideoFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CB155C50280050EC64 /* TheoraVideoFrame.h */; };
+		D1CDFFE01696E1D700609AB0 /* TheoraVideoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CC155C50280050EC64 /* TheoraVideoManager.h */; };
+		D1CDFFE11696E1D700609AB0 /* TheoraWorkerThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CD155C50280050EC64 /* TheoraWorkerThread.h */; };
+		D1CDFFE21696E1D700609AB0 /* TheoraVideoClip_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1CDFF951696D0F000609AB0 /* TheoraVideoClip_Theora.h */; };
+		D1CDFFEA1696E24B00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF9C1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm */; };
+		D1CDFFEB1696E24C00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF9C1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm */; };
+		D1CDFFEC1696E24F00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF9C1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,7 +185,6 @@
 		D1474029150CAF0D00B20490 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		D147402A150CAF0D00B20490 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D147402B150CAF0D00B20490 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D167759D155C501D0050EC64 /* Endianess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Endianess.h; path = src/Endianess.h; sourceTree = "<group>"; };
 		D167759E155C501D0050EC64 /* TheoraAsync.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraAsync.cpp; path = src/TheoraAsync.cpp; sourceTree = "<group>"; };
 		D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraAudioInterface.cpp; path = src/TheoraAudioInterface.cpp; sourceTree = "<group>"; };
 		D16775A0155C501D0050EC64 /* TheoraDataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraDataSource.cpp; path = src/TheoraDataSource.cpp; sourceTree = "<group>"; };
@@ -98,6 +211,14 @@
 		D16775CD155C50280050EC64 /* TheoraWorkerThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheoraWorkerThread.h; path = include/theoraplayer/TheoraWorkerThread.h; sourceTree = "<group>"; };
 		D1BB6FAE150E9E7100EF9400 /* libtheoraplayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheoraplayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1BB6FAF150E9E7100EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D1CDFF481696C77A00609AB0 /* theoraplayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = theoraplayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1CDFF701696C79700609AB0 /* theoraplayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = theoraplayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1CDFF941696D0F000609AB0 /* TheoraVideoClip_Theora.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraVideoClip_Theora.cpp; path = src/Theora/TheoraVideoClip_Theora.cpp; sourceTree = "<group>"; };
+		D1CDFF951696D0F000609AB0 /* TheoraVideoClip_Theora.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheoraVideoClip_Theora.h; path = src/Theora/TheoraVideoClip_Theora.h; sourceTree = "<group>"; };
+		D1CDFF9C1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TheoraVideoClip_AVFoundation.mm; path = src/AVFoundation/TheoraVideoClip_AVFoundation.mm; sourceTree = "<group>"; };
+		D1CDFF9D1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheoraVideoClip_AVFoundation.h; path = src/AVFoundation/TheoraVideoClip_AVFoundation.h; sourceTree = "<group>"; };
+		D1CDFFC41696E1CA00609AB0 /* libtheoraplayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheoraplayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1CDFFE91696E1D700609AB0 /* libtheoraplayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheoraplayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,14 +239,48 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D1CDFF2F1696C77A00609AB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CDFF301696C77A00609AB0 /* Ogg.framework in Frameworks */,
+				D1CDFF311696C77A00609AB0 /* Theora.framework in Frameworks */,
+				D1CDFF321696C77A00609AB0 /* Vorbis.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFF571696C79700609AB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CDFF581696C79700609AB0 /* Ogg.framework in Frameworks */,
+				D1CDFF591696C79700609AB0 /* Theora.framework in Frameworks */,
+				D1CDFF5A1696C79700609AB0 /* Vorbis.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFFAE1696E1CA00609AB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFFD31696E1D700609AB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		D1473F1E150CA69B00B20490 = {
 			isa = PBXGroup;
 			children = (
-				D1473F42150CA6C000B20490 /* src */,
 				D147401F150CAE9600B20490 /* include */,
+				D1473F42150CA6C000B20490 /* src */,
 				D1473F2C150CA69B00B20490 /* Frameworks */,
 				D1473F2B150CA69B00B20490 /* Products */,
 			);
@@ -136,6 +291,10 @@
 			children = (
 				D1473F2A150CA69B00B20490 /* theoraplayer.framework */,
 				D1BB6FAE150E9E7100EF9400 /* libtheoraplayer.a */,
+				D1CDFF481696C77A00609AB0 /* theoraplayer.framework */,
+				D1CDFF701696C79700609AB0 /* theoraplayer.framework */,
+				D1CDFFC41696E1CA00609AB0 /* libtheoraplayer.a */,
+				D1CDFFE91696E1D700609AB0 /* libtheoraplayer.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -151,7 +310,9 @@
 		D1473F42150CA6C000B20490 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				D167759D155C501D0050EC64 /* Endianess.h */,
+				D1CDFF931696CF0000609AB0 /* AVFoundation */,
+				D1CDFF921696CEFA00609AB0 /* Theora */,
+				D16775A5155C501D0050EC64 /* TheoraVideoClip.cpp */,
 				D167759E155C501D0050EC64 /* TheoraAsync.cpp */,
 				D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */,
 				D16775A0155C501D0050EC64 /* TheoraDataSource.cpp */,
@@ -159,7 +320,6 @@
 				D16775A2155C501D0050EC64 /* TheoraFrameQueue.cpp */,
 				D16775A3155C501D0050EC64 /* TheoraTimer.cpp */,
 				D16775A4155C501D0050EC64 /* TheoraUtil.cpp */,
-				D16775A5155C501D0050EC64 /* TheoraVideoClip.cpp */,
 				D16775A6155C501D0050EC64 /* TheoraVideoFrame.cpp */,
 				D16775A7155C501D0050EC64 /* TheoraVideoManager.cpp */,
 				D16775A8155C501D0050EC64 /* TheoraWorkerThread.cpp */,
@@ -202,6 +362,24 @@
 			name = include;
 			sourceTree = "<group>";
 		};
+		D1CDFF921696CEFA00609AB0 /* Theora */ = {
+			isa = PBXGroup;
+			children = (
+				D1CDFF951696D0F000609AB0 /* TheoraVideoClip_Theora.h */,
+				D1CDFF941696D0F000609AB0 /* TheoraVideoClip_Theora.cpp */,
+			);
+			name = Theora;
+			sourceTree = "<group>";
+		};
+		D1CDFF931696CF0000609AB0 /* AVFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				D1CDFF9D1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.h */,
+				D1CDFF9C1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm */,
+			);
+			name = AVFoundation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -222,7 +400,7 @@
 				D16775E2155C50280050EC64 /* TheoraVideoFrame.h in Headers */,
 				D16775E4155C50280050EC64 /* TheoraVideoManager.h in Headers */,
 				D16775E6155C50280050EC64 /* TheoraWorkerThread.h in Headers */,
-				D16775A9155C501D0050EC64 /* Endianess.h in Headers */,
+				D1CDFF991696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +408,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D16775AA155C501D0050EC64 /* Endianess.h in Headers */,
 				D16775CF155C50280050EC64 /* TheoraAsync.h in Headers */,
 				D16775D1155C50280050EC64 /* TheoraAudioInterface.h in Headers */,
 				D16775D3155C50280050EC64 /* TheoraDataSource.h in Headers */,
@@ -244,15 +421,100 @@
 				D16775E3155C50280050EC64 /* TheoraVideoFrame.h in Headers */,
 				D16775E5155C50280050EC64 /* TheoraVideoManager.h in Headers */,
 				D16775E7155C50280050EC64 /* TheoraWorkerThread.h in Headers */,
+				D1CDFF9B1696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFF331696C77A00609AB0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CDFF341696C77A00609AB0 /* TheoraAsync.h in Headers */,
+				D1CDFF351696C77A00609AB0 /* TheoraAudioInterface.h in Headers */,
+				D1CDFF361696C77A00609AB0 /* TheoraDataSource.h in Headers */,
+				D1CDFF371696C77A00609AB0 /* TheoraException.h in Headers */,
+				D1CDFF381696C77A00609AB0 /* TheoraExport.h in Headers */,
+				D1CDFF391696C77A00609AB0 /* TheoraFrameQueue.h in Headers */,
+				D1CDFF3A1696C77A00609AB0 /* TheoraPlayer.h in Headers */,
+				D1CDFF3B1696C77A00609AB0 /* TheoraTimer.h in Headers */,
+				D1CDFF3C1696C77A00609AB0 /* TheoraUtil.h in Headers */,
+				D1CDFF3D1696C77A00609AB0 /* TheoraVideoClip.h in Headers */,
+				D1CDFF3E1696C77A00609AB0 /* TheoraVideoFrame.h in Headers */,
+				D1CDFF3F1696C77A00609AB0 /* TheoraVideoManager.h in Headers */,
+				D1CDFF401696C77A00609AB0 /* TheoraWorkerThread.h in Headers */,
+				D1CDFF9F1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFF5B1696C79700609AB0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CDFF5C1696C79700609AB0 /* TheoraAsync.h in Headers */,
+				D1CDFF5D1696C79700609AB0 /* TheoraAudioInterface.h in Headers */,
+				D1CDFF5E1696C79700609AB0 /* TheoraDataSource.h in Headers */,
+				D1CDFF5F1696C79700609AB0 /* TheoraException.h in Headers */,
+				D1CDFF601696C79700609AB0 /* TheoraExport.h in Headers */,
+				D1CDFF611696C79700609AB0 /* TheoraFrameQueue.h in Headers */,
+				D1CDFF621696C79700609AB0 /* TheoraPlayer.h in Headers */,
+				D1CDFF631696C79700609AB0 /* TheoraTimer.h in Headers */,
+				D1CDFF641696C79700609AB0 /* TheoraUtil.h in Headers */,
+				D1CDFF651696C79700609AB0 /* TheoraVideoClip.h in Headers */,
+				D1CDFF661696C79700609AB0 /* TheoraVideoFrame.h in Headers */,
+				D1CDFF671696C79700609AB0 /* TheoraVideoManager.h in Headers */,
+				D1CDFF681696C79700609AB0 /* TheoraWorkerThread.h in Headers */,
+				D1CDFF9A1696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFFAF1696E1CA00609AB0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CDFFB01696E1CA00609AB0 /* TheoraAsync.h in Headers */,
+				D1CDFFB11696E1CA00609AB0 /* TheoraAudioInterface.h in Headers */,
+				D1CDFFB21696E1CA00609AB0 /* TheoraDataSource.h in Headers */,
+				D1CDFFB31696E1CA00609AB0 /* TheoraException.h in Headers */,
+				D1CDFFB41696E1CA00609AB0 /* TheoraExport.h in Headers */,
+				D1CDFFB51696E1CA00609AB0 /* TheoraFrameQueue.h in Headers */,
+				D1CDFFB61696E1CA00609AB0 /* TheoraPlayer.h in Headers */,
+				D1CDFFB71696E1CA00609AB0 /* TheoraTimer.h in Headers */,
+				D1CDFFB81696E1CA00609AB0 /* TheoraUtil.h in Headers */,
+				D1CDFFB91696E1CA00609AB0 /* TheoraVideoClip.h in Headers */,
+				D1CDFFBA1696E1CA00609AB0 /* TheoraVideoFrame.h in Headers */,
+				D1CDFFBB1696E1CA00609AB0 /* TheoraVideoManager.h in Headers */,
+				D1CDFFBC1696E1CA00609AB0 /* TheoraWorkerThread.h in Headers */,
+				D1CDFFBD1696E1CA00609AB0 /* TheoraVideoClip_Theora.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFFD41696E1D700609AB0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CDFFD51696E1D700609AB0 /* TheoraAsync.h in Headers */,
+				D1CDFFD61696E1D700609AB0 /* TheoraAudioInterface.h in Headers */,
+				D1CDFFD71696E1D700609AB0 /* TheoraDataSource.h in Headers */,
+				D1CDFFD81696E1D700609AB0 /* TheoraException.h in Headers */,
+				D1CDFFD91696E1D700609AB0 /* TheoraExport.h in Headers */,
+				D1CDFFDA1696E1D700609AB0 /* TheoraFrameQueue.h in Headers */,
+				D1CDFFDB1696E1D700609AB0 /* TheoraPlayer.h in Headers */,
+				D1CDFFDC1696E1D700609AB0 /* TheoraTimer.h in Headers */,
+				D1CDFFDD1696E1D700609AB0 /* TheoraUtil.h in Headers */,
+				D1CDFFDE1696E1D700609AB0 /* TheoraVideoClip.h in Headers */,
+				D1CDFFDF1696E1D700609AB0 /* TheoraVideoFrame.h in Headers */,
+				D1CDFFE01696E1D700609AB0 /* TheoraVideoManager.h in Headers */,
+				D1CDFFE11696E1D700609AB0 /* TheoraWorkerThread.h in Headers */,
+				D1CDFFE21696E1D700609AB0 /* TheoraVideoClip_Theora.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D1473F29150CA69B00B20490 /* theoraplayer */ = {
+		D1473F29150CA69B00B20490 /* theoraplayer (Theora) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D1473F3F150CA69B00B20490 /* Build configuration list for PBXNativeTarget "theoraplayer" */;
+			buildConfigurationList = D1473F3F150CA69B00B20490 /* Build configuration list for PBXNativeTarget "theoraplayer (Theora)" */;
 			buildPhases = (
 				D1473F25150CA69B00B20490 /* Sources */,
 				D1473F26150CA69B00B20490 /* Frameworks */,
@@ -262,14 +524,14 @@
 			);
 			dependencies = (
 			);
-			name = theoraplayer;
+			name = "theoraplayer (Theora)";
 			productName = theoraplayer;
 			productReference = D1473F2A150CA69B00B20490 /* theoraplayer.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D1BB6FAD150E9E7100EF9400 /* theoraplayer (iOS) */ = {
+		D1BB6FAD150E9E7100EF9400 /* theoraplayer (iOS Theora) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D1BB6FBC150E9E7100EF9400 /* Build configuration list for PBXNativeTarget "theoraplayer (iOS)" */;
+			buildConfigurationList = D1BB6FBC150E9E7100EF9400 /* Build configuration list for PBXNativeTarget "theoraplayer (iOS Theora)" */;
 			buildPhases = (
 				D1BB6FAA150E9E7100EF9400 /* Sources */,
 				D1BB6FAB150E9E7100EF9400 /* Frameworks */,
@@ -279,9 +541,77 @@
 			);
 			dependencies = (
 			);
-			name = "theoraplayer (iOS)";
+			name = "theoraplayer (iOS Theora)";
 			productName = libtheoraplayer;
 			productReference = D1BB6FAE150E9E7100EF9400 /* libtheoraplayer.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D1CDFF221696C77A00609AB0 /* theoraplayer (AVFoundation) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1CDFF421696C77A00609AB0 /* Build configuration list for PBXNativeTarget "theoraplayer (AVFoundation)" */;
+			buildPhases = (
+				D1CDFF231696C77A00609AB0 /* Sources */,
+				D1CDFF2F1696C77A00609AB0 /* Frameworks */,
+				D1CDFF331696C77A00609AB0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "theoraplayer (AVFoundation)";
+			productName = theoraplayer;
+			productReference = D1CDFF481696C77A00609AB0 /* theoraplayer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D1CDFF4A1696C79700609AB0 /* theoraplayer (Theora AVFoundation) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1CDFF6A1696C79700609AB0 /* Build configuration list for PBXNativeTarget "theoraplayer (Theora AVFoundation)" */;
+			buildPhases = (
+				D1CDFF4B1696C79700609AB0 /* Sources */,
+				D1CDFF571696C79700609AB0 /* Frameworks */,
+				D1CDFF5B1696C79700609AB0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "theoraplayer (Theora AVFoundation)";
+			productName = theoraplayer;
+			productReference = D1CDFF701696C79700609AB0 /* theoraplayer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D1CDFFA01696E1CA00609AB0 /* theoraplayer (iOS AVFoundation) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1CDFFBE1696E1CA00609AB0 /* Build configuration list for PBXNativeTarget "theoraplayer (iOS AVFoundation)" */;
+			buildPhases = (
+				D1CDFFA11696E1CA00609AB0 /* Sources */,
+				D1CDFFAE1696E1CA00609AB0 /* Frameworks */,
+				D1CDFFAF1696E1CA00609AB0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "theoraplayer (iOS AVFoundation)";
+			productName = libtheoraplayer;
+			productReference = D1CDFFC41696E1CA00609AB0 /* libtheoraplayer.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D1CDFFC51696E1D700609AB0 /* theoraplayer (iOS Theora AVFoundation) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1CDFFE31696E1D700609AB0 /* Build configuration list for PBXNativeTarget "theoraplayer (iOS Theora AVFoundation)" */;
+			buildPhases = (
+				D1CDFFC61696E1D700609AB0 /* Sources */,
+				D1CDFFD31696E1D700609AB0 /* Frameworks */,
+				D1CDFFD41696E1D700609AB0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "theoraplayer (iOS Theora AVFoundation)";
+			productName = libtheoraplayer;
+			productReference = D1CDFFE91696E1D700609AB0 /* libtheoraplayer.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -304,8 +634,12 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D1473F29150CA69B00B20490 /* theoraplayer */,
-				D1BB6FAD150E9E7100EF9400 /* theoraplayer (iOS) */,
+				D1473F29150CA69B00B20490 /* theoraplayer (Theora) */,
+				D1CDFF221696C77A00609AB0 /* theoraplayer (AVFoundation) */,
+				D1CDFF4A1696C79700609AB0 /* theoraplayer (Theora AVFoundation) */,
+				D1BB6FAD150E9E7100EF9400 /* theoraplayer (iOS Theora) */,
+				D1CDFFA01696E1CA00609AB0 /* theoraplayer (iOS AVFoundation) */,
+				D1CDFFC51696E1D700609AB0 /* theoraplayer (iOS Theora AVFoundation) */,
 			);
 		};
 /* End PBXProject section */
@@ -326,6 +660,7 @@
 				D16775BB155C501D0050EC64 /* TheoraVideoFrame.cpp in Sources */,
 				D16775BD155C501D0050EC64 /* TheoraVideoManager.cpp in Sources */,
 				D16775BF155C501D0050EC64 /* TheoraWorkerThread.cpp in Sources */,
+				D1CDFF961696D0F000609AB0 /* TheoraVideoClip_Theora.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +679,85 @@
 				D16775BC155C501D0050EC64 /* TheoraVideoFrame.cpp in Sources */,
 				D16775BE155C501D0050EC64 /* TheoraVideoManager.cpp in Sources */,
 				D16775C0155C501D0050EC64 /* TheoraWorkerThread.cpp in Sources */,
+				D1CDFF981696D0F000609AB0 /* TheoraVideoClip_Theora.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFF231696C77A00609AB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CDFF241696C77A00609AB0 /* TheoraAsync.cpp in Sources */,
+				D1CDFF251696C77A00609AB0 /* TheoraAudioInterface.cpp in Sources */,
+				D1CDFF261696C77A00609AB0 /* TheoraDataSource.cpp in Sources */,
+				D1CDFF271696C77A00609AB0 /* TheoraException.cpp in Sources */,
+				D1CDFF281696C77A00609AB0 /* TheoraFrameQueue.cpp in Sources */,
+				D1CDFF291696C77A00609AB0 /* TheoraTimer.cpp in Sources */,
+				D1CDFF2A1696C77A00609AB0 /* TheoraUtil.cpp in Sources */,
+				D1CDFF2B1696C77A00609AB0 /* TheoraVideoClip.cpp in Sources */,
+				D1CDFF2C1696C77A00609AB0 /* TheoraVideoFrame.cpp in Sources */,
+				D1CDFF2D1696C77A00609AB0 /* TheoraVideoManager.cpp in Sources */,
+				D1CDFF2E1696C77A00609AB0 /* TheoraWorkerThread.cpp in Sources */,
+				D1CDFF9E1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFF4B1696C79700609AB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CDFF4C1696C79700609AB0 /* TheoraAsync.cpp in Sources */,
+				D1CDFF4D1696C79700609AB0 /* TheoraAudioInterface.cpp in Sources */,
+				D1CDFF4E1696C79700609AB0 /* TheoraDataSource.cpp in Sources */,
+				D1CDFF4F1696C79700609AB0 /* TheoraException.cpp in Sources */,
+				D1CDFF501696C79700609AB0 /* TheoraFrameQueue.cpp in Sources */,
+				D1CDFF511696C79700609AB0 /* TheoraTimer.cpp in Sources */,
+				D1CDFF521696C79700609AB0 /* TheoraUtil.cpp in Sources */,
+				D1CDFF531696C79700609AB0 /* TheoraVideoClip.cpp in Sources */,
+				D1CDFF541696C79700609AB0 /* TheoraVideoFrame.cpp in Sources */,
+				D1CDFF551696C79700609AB0 /* TheoraVideoManager.cpp in Sources */,
+				D1CDFF561696C79700609AB0 /* TheoraWorkerThread.cpp in Sources */,
+				D1CDFF971696D0F000609AB0 /* TheoraVideoClip_Theora.cpp in Sources */,
+				D1CDFFEC1696E24F00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFFA11696E1CA00609AB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CDFFA21696E1CA00609AB0 /* TheoraAsync.cpp in Sources */,
+				D1CDFFA31696E1CA00609AB0 /* TheoraAudioInterface.cpp in Sources */,
+				D1CDFFA41696E1CA00609AB0 /* TheoraDataSource.cpp in Sources */,
+				D1CDFFA51696E1CA00609AB0 /* TheoraException.cpp in Sources */,
+				D1CDFFA61696E1CA00609AB0 /* TheoraFrameQueue.cpp in Sources */,
+				D1CDFFA71696E1CA00609AB0 /* TheoraTimer.cpp in Sources */,
+				D1CDFFA81696E1CA00609AB0 /* TheoraUtil.cpp in Sources */,
+				D1CDFFA91696E1CA00609AB0 /* TheoraVideoClip.cpp in Sources */,
+				D1CDFFAA1696E1CA00609AB0 /* TheoraVideoFrame.cpp in Sources */,
+				D1CDFFAB1696E1CA00609AB0 /* TheoraVideoManager.cpp in Sources */,
+				D1CDFFAC1696E1CA00609AB0 /* TheoraWorkerThread.cpp in Sources */,
+				D1CDFFEA1696E24B00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFFC61696E1D700609AB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CDFFC71696E1D700609AB0 /* TheoraAsync.cpp in Sources */,
+				D1CDFFC81696E1D700609AB0 /* TheoraAudioInterface.cpp in Sources */,
+				D1CDFFC91696E1D700609AB0 /* TheoraDataSource.cpp in Sources */,
+				D1CDFFCA1696E1D700609AB0 /* TheoraException.cpp in Sources */,
+				D1CDFFCB1696E1D700609AB0 /* TheoraFrameQueue.cpp in Sources */,
+				D1CDFFCC1696E1D700609AB0 /* TheoraTimer.cpp in Sources */,
+				D1CDFFCD1696E1D700609AB0 /* TheoraUtil.cpp in Sources */,
+				D1CDFFCE1696E1D700609AB0 /* TheoraVideoClip.cpp in Sources */,
+				D1CDFFCF1696E1D700609AB0 /* TheoraVideoFrame.cpp in Sources */,
+				D1CDFFD01696E1D700609AB0 /* TheoraVideoManager.cpp in Sources */,
+				D1CDFFD11696E1D700609AB0 /* TheoraWorkerThread.cpp in Sources */,
+				D1CDFFD21696E1D700609AB0 /* TheoraVideoClip_Theora.cpp in Sources */,
+				D1CDFFEB1696E24C00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,13 +830,16 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = ../../include/theoraplayer;
-				INFOPLIST_FILE = theoraplayer.xcodeproj/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -435,13 +852,16 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = ../../include/theoraplayer;
-				INFOPLIST_FILE = theoraplayer.xcodeproj/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -486,13 +906,16 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = ../../include/theoraplayer;
-				INFOPLIST_FILE = theoraplayer.xcodeproj/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = "Debug-LLVM";
@@ -531,13 +954,16 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = ../../include/theoraplayer;
-				INFOPLIST_FILE = theoraplayer.xcodeproj/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = "App Store";
@@ -576,13 +1002,16 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = ../../include/theoraplayer;
-				INFOPLIST_FILE = theoraplayer.xcodeproj/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = "Release-LLVM";
@@ -592,8 +1021,11 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					"$(inherited)",
+				);
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -611,8 +1043,11 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					"$(inherited)",
+				);
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -630,8 +1065,11 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					"$(inherited)",
+				);
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -650,8 +1088,11 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					"$(inherited)",
+				);
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -670,8 +1111,467 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					"$(inherited)",
+				);
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theoraplayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+				VERSION_INFO_FILE = kok;
+			};
+			name = "App Store";
+		};
+		D1CDFF431696C77A00609AB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		D1CDFF441696C77A00609AB0 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = "Debug-LLVM";
+		};
+		D1CDFF451696C77A00609AB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		D1CDFF461696C77A00609AB0 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = "Release-LLVM";
+		};
+		D1CDFF471696C77A00609AB0 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = "App Store";
+		};
+		D1CDFF6B1696C79700609AB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		D1CDFF6C1696C79700609AB0 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = "Debug-LLVM";
+		};
+		D1CDFF6D1696C79700609AB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		D1CDFF6E1696C79700609AB0 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = "Release-LLVM";
+		};
+		D1CDFF6F1696C79700609AB0 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = "App Store";
+		};
+		D1CDFFBF1696E1CA00609AB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theoraplayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VERSION_INFO_FILE = kok;
+			};
+			name = Debug;
+		};
+		D1CDFFC01696E1CA00609AB0 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theoraplayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VERSION_INFO_FILE = kok;
+			};
+			name = "Debug-LLVM";
+		};
+		D1CDFFC11696E1CA00609AB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theoraplayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+				VERSION_INFO_FILE = kok;
+			};
+			name = Release;
+		};
+		D1CDFFC21696E1CA00609AB0 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theoraplayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+				VERSION_INFO_FILE = kok;
+			};
+			name = "Release-LLVM";
+		};
+		D1CDFFC31696E1CA00609AB0 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theoraplayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+				VERSION_INFO_FILE = kok;
+			};
+			name = "App Store";
+		};
+		D1CDFFE41696E1D700609AB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theoraplayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VERSION_INFO_FILE = kok;
+			};
+			name = Debug;
+		};
+		D1CDFFE51696E1D700609AB0 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theoraplayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VERSION_INFO_FILE = kok;
+			};
+			name = "Debug-LLVM";
+		};
+		D1CDFFE61696E1D700609AB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theoraplayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+				VERSION_INFO_FILE = kok;
+			};
+			name = Release;
+		};
+		D1CDFFE71696E1D700609AB0 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theoraplayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+				VERSION_INFO_FILE = kok;
+			};
+			name = "Release-LLVM";
+		};
+		D1CDFFE81696E1D700609AB0 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/libtheoraplayer.dst;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__THEORA,
+					__AVFOUNDATION,
+					"$(inherited)",
+				);
+				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -700,7 +1600,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D1473F3F150CA69B00B20490 /* Build configuration list for PBXNativeTarget "theoraplayer" */ = {
+		D1473F3F150CA69B00B20490 /* Build configuration list for PBXNativeTarget "theoraplayer (Theora)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D1473F40150CA69B00B20490 /* Debug */,
@@ -712,7 +1612,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D1BB6FBC150E9E7100EF9400 /* Build configuration list for PBXNativeTarget "theoraplayer (iOS)" */ = {
+		D1BB6FBC150E9E7100EF9400 /* Build configuration list for PBXNativeTarget "theoraplayer (iOS Theora)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D1BB6FB7150E9E7100EF9400 /* Debug */,
@@ -720,6 +1620,54 @@
 				D1BB6FB9150E9E7100EF9400 /* Release */,
 				D1BB6FBA150E9E7100EF9400 /* Release-LLVM */,
 				D1BB6FBB150E9E7100EF9400 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1CDFF421696C77A00609AB0 /* Build configuration list for PBXNativeTarget "theoraplayer (AVFoundation)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1CDFF431696C77A00609AB0 /* Debug */,
+				D1CDFF441696C77A00609AB0 /* Debug-LLVM */,
+				D1CDFF451696C77A00609AB0 /* Release */,
+				D1CDFF461696C77A00609AB0 /* Release-LLVM */,
+				D1CDFF471696C77A00609AB0 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1CDFF6A1696C79700609AB0 /* Build configuration list for PBXNativeTarget "theoraplayer (Theora AVFoundation)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1CDFF6B1696C79700609AB0 /* Debug */,
+				D1CDFF6C1696C79700609AB0 /* Debug-LLVM */,
+				D1CDFF6D1696C79700609AB0 /* Release */,
+				D1CDFF6E1696C79700609AB0 /* Release-LLVM */,
+				D1CDFF6F1696C79700609AB0 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1CDFFBE1696E1CA00609AB0 /* Build configuration list for PBXNativeTarget "theoraplayer (iOS AVFoundation)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1CDFFBF1696E1CA00609AB0 /* Debug */,
+				D1CDFFC01696E1CA00609AB0 /* Debug-LLVM */,
+				D1CDFFC11696E1CA00609AB0 /* Release */,
+				D1CDFFC21696E1CA00609AB0 /* Release-LLVM */,
+				D1CDFFC31696E1CA00609AB0 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1CDFFE31696E1D700609AB0 /* Build configuration list for PBXNativeTarget "theoraplayer (iOS Theora AVFoundation)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1CDFFE41696E1D700609AB0 /* Debug */,
+				D1CDFFE51696E1D700609AB0 /* Debug-LLVM */,
+				D1CDFFE61696E1D700609AB0 /* Release */,
+				D1CDFFE71696E1D700609AB0 /* Release-LLVM */,
+				D1CDFFE81696E1D700609AB0 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
