@@ -121,6 +121,15 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 	TheoraVideoClip* clip = NULL;
 	int nPrecached = numPrecachedOverride ? numPrecachedOverride : mDefaultNumPrecachedFrames;
 	logMessage("Creating video from data source: "+data_source->repr());
+	
+#ifdef __AVFOUNDATION
+	TheoraFileDataSource* fileDataSource = dynamic_cast<TheoraFileDataSource*>(data_source);
+	if (!fileDataSource) throw TheoraGenericException("Unable to load AVFoundation video, only TheoraFileDataSource is supported.");
+	std::string filename = fileDataSource->getFilename();
+	if (filename.size() > 4 && filename.substr(filename.size() - 4, filename.size()) == ".mp4")
+		clip = new TheoraVideoClip_AVFoundation(data_source,output_mode,nPrecached,usePower2Stride);
+	else
+#endif
 	clip = new TheoraVideoClip_Theora(data_source,output_mode,nPrecached,usePower2Stride);
 	clip->load(data_source);
 	mClips.push_back(clip);

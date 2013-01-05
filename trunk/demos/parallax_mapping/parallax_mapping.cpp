@@ -262,7 +262,7 @@ void init()
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/parallax/parallax.ogg"), TH_RGB);
+	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/parallax/parallax" + resourceExtension), TH_RGB);
 	clip->setAutoRestart(1);
 
 	diffuse_map = loadTexture("media/parallax/diffuse_map.tga");

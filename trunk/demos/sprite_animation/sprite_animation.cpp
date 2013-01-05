@@ -123,7 +123,7 @@ void init()
 	for (int i=0;i<8;i++)
 	{
 		// Note - this demo isn't using TH_RGBA for now since the frames in this video are not mod 16 aligned.
-		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/brawe/brawe_"+orientations[i]+".ogg"),TH_RGB,8);
+		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/brawe/brawe_"+orientations[i]+"" + resourceExtension),TH_RGB,8);
 		clips[i]->setAutoRestart(1);
 		if (i != 0) clips[i]->pause();
 	}

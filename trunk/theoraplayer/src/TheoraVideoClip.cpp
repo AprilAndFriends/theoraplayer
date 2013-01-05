@@ -39,7 +39,8 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
     mEndOfFile(0),
     mRestarted(0),
 	mIteration(0),
-	mLastIteration(0)
+	mLastIteration(0),
+	mStream(0)
 {
 	mAudioMutex=new TheoraMutex;
 	mTimer=mDefaultTimer=new TheoraTimer();

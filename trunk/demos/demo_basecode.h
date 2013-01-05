@@ -47,6 +47,13 @@ unsigned long GetTickCount()
 extern std::string window_name;
 extern int window_w,window_h;
 
+std::string resourceExtension =
+#ifdef MP4_VIDEO
+".mp4";
+#else
+".ogg";
+#endif
+
 float mx=0,my=0;
 float FOVY = 45;
 

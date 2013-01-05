@@ -125,7 +125,7 @@ void TheoraVideoClip_Theora::decodeNextFrame()
 			frame->mIteration     = mIteration;
 			frame->_setFrameNumber(frame_number);
 			th_decode_ycbcr_out(mInfo.TheoraDecoder, buff);
-			frame->decode(buff);
+			frame->decodeYUV(buff);
 			break;
 		}
 		else
@@ -179,7 +179,7 @@ void TheoraVideoClip_Theora::_restart()
 	
 	mEndOfFile=false;
 	
-	mRestarted=1;
+	mRestarted = 1;
 	
 	if (!paused) mTimer->play();
 }

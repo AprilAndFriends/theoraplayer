@@ -46,9 +46,9 @@ int TheoraFrameQueue::getSize()
 
 TheoraVideoFrame* TheoraFrameQueue::getFirstAvailableFrame()
 {
-	TheoraVideoFrame* frame=0;
+	TheoraVideoFrame* frame = NULL;
 	mMutex.lock();
-	if (mQueue.front()->mReady) frame=mQueue.front();
+	if (mQueue.front()->mReady) frame = mQueue.front();
 	mMutex.unlock();
 	return frame;
 }
@@ -73,15 +73,15 @@ void TheoraFrameQueue::pop()
 
 TheoraVideoFrame* TheoraFrameQueue::requestEmptyFrame()
 {
-	TheoraVideoFrame* frame=0;
+	TheoraVideoFrame* frame = NULL;
 	mMutex.lock();
-	foreach_l(TheoraVideoFrame*,mQueue)
+	foreach_l (TheoraVideoFrame*, mQueue)
 	{
 		if (!(*it)->mInUse)
 		{
-			(*it)->mInUse=true;
-			(*it)->mReady=false;
-			frame=(*it);
+			(*it)->mInUse = 1;
+			(*it)->mReady = 0;
+			frame = (*it);
 			break;
 		}
 	}

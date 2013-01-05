@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D1473F7F150CA7E000B20490 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7C150CA7E000B20490 /* Ogg.framework */; };
-		D1473F80150CA7E000B20490 /* Theora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7D150CA7E000B20490 /* Theora.framework */; };
-		D1473F81150CA7E000B20490 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7E150CA7E000B20490 /* Vorbis.framework */; };
 		D16775AB155C501D0050EC64 /* TheoraAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759E155C501D0050EC64 /* TheoraAsync.cpp */; };
 		D16775AC155C501D0050EC64 /* TheoraAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759E155C501D0050EC64 /* TheoraAsync.cpp */; };
 		D16775AD155C501D0050EC64 /* TheoraAudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */; };
@@ -58,6 +55,11 @@
 		D16775E5155C50280050EC64 /* TheoraVideoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CC155C50280050EC64 /* TheoraVideoManager.h */; };
 		D16775E6155C50280050EC64 /* TheoraWorkerThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CD155C50280050EC64 /* TheoraWorkerThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D16775E7155C50280050EC64 /* TheoraWorkerThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CD155C50280050EC64 /* TheoraWorkerThread.h */; };
+		D1CD00001696FC0B00609AB0 /* Theora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFFB1696FC0100609AB0 /* Theora.framework */; };
+		D1CD00011696FC0B00609AB0 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF91696FBF700609AB0 /* Vorbis.framework */; };
+		D1CD00021696FC0B00609AB0 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF71696FBF400609AB0 /* Ogg.framework */; };
+		D1CD00041696FF9400609AB0 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CD00031696FF9400609AB0 /* CoreMedia.framework */; };
+		D1CD00051696FF9600609AB0 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CD00031696FF9400609AB0 /* CoreMedia.framework */; };
 		D1CDFF241696C77A00609AB0 /* TheoraAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759E155C501D0050EC64 /* TheoraAsync.cpp */; };
 		D1CDFF251696C77A00609AB0 /* TheoraAudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */; };
 		D1CDFF261696C77A00609AB0 /* TheoraDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A0155C501D0050EC64 /* TheoraDataSource.cpp */; };
@@ -69,9 +71,6 @@
 		D1CDFF2C1696C77A00609AB0 /* TheoraVideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A6155C501D0050EC64 /* TheoraVideoFrame.cpp */; };
 		D1CDFF2D1696C77A00609AB0 /* TheoraVideoManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A7155C501D0050EC64 /* TheoraVideoManager.cpp */; };
 		D1CDFF2E1696C77A00609AB0 /* TheoraWorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A8155C501D0050EC64 /* TheoraWorkerThread.cpp */; };
-		D1CDFF301696C77A00609AB0 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7C150CA7E000B20490 /* Ogg.framework */; };
-		D1CDFF311696C77A00609AB0 /* Theora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7D150CA7E000B20490 /* Theora.framework */; };
-		D1CDFF321696C77A00609AB0 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7E150CA7E000B20490 /* Vorbis.framework */; };
 		D1CDFF341696C77A00609AB0 /* TheoraAsync.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C1155C50280050EC64 /* TheoraAsync.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D1CDFF351696C77A00609AB0 /* TheoraAudioInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C2155C50280050EC64 /* TheoraAudioInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D1CDFF361696C77A00609AB0 /* TheoraDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C3155C50280050EC64 /* TheoraDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -96,9 +95,6 @@
 		D1CDFF541696C79700609AB0 /* TheoraVideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A6155C501D0050EC64 /* TheoraVideoFrame.cpp */; };
 		D1CDFF551696C79700609AB0 /* TheoraVideoManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A7155C501D0050EC64 /* TheoraVideoManager.cpp */; };
 		D1CDFF561696C79700609AB0 /* TheoraWorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A8155C501D0050EC64 /* TheoraWorkerThread.cpp */; };
-		D1CDFF581696C79700609AB0 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7C150CA7E000B20490 /* Ogg.framework */; };
-		D1CDFF591696C79700609AB0 /* Theora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7D150CA7E000B20490 /* Theora.framework */; };
-		D1CDFF5A1696C79700609AB0 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1473F7E150CA7E000B20490 /* Vorbis.framework */; };
 		D1CDFF5C1696C79700609AB0 /* TheoraAsync.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C1155C50280050EC64 /* TheoraAsync.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D1CDFF5D1696C79700609AB0 /* TheoraAudioInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C2155C50280050EC64 /* TheoraAudioInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D1CDFF5E1696C79700609AB0 /* TheoraDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C3155C50280050EC64 /* TheoraDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -174,17 +170,19 @@
 		D1CDFFEA1696E24B00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF9C1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm */; };
 		D1CDFFEB1696E24C00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF9C1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm */; };
 		D1CDFFEC1696E24F00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF9C1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm */; };
+		D1CDFFEE1696FB7200609AB0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFED1696FB7200609AB0 /* AVFoundation.framework */; };
+		D1CDFFF11696FB8900609AB0 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF01696FB8900609AB0 /* CoreVideo.framework */; };
+		D1CDFFF31696FBA800609AB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF21696FBA800609AB0 /* Foundation.framework */; };
+		D1CDFFF41696FBB200609AB0 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF01696FB8900609AB0 /* CoreVideo.framework */; };
+		D1CDFFF51696FBB200609AB0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFED1696FB7200609AB0 /* AVFoundation.framework */; };
+		D1CDFFF61696FBB200609AB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF21696FBA800609AB0 /* Foundation.framework */; };
+		D1CDFFFD1696FC0800609AB0 /* Theora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFFB1696FC0100609AB0 /* Theora.framework */; };
+		D1CDFFFE1696FC0800609AB0 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF91696FBF700609AB0 /* Vorbis.framework */; };
+		D1CDFFFF1696FC0800609AB0 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF71696FBF400609AB0 /* Ogg.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D1473F2A150CA69B00B20490 /* theoraplayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = theoraplayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1473F7C150CA7E000B20490 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = /Library/Frameworks/Ogg.framework; sourceTree = "<absolute>"; };
-		D1473F7D150CA7E000B20490 /* Theora.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Theora.framework; path = /Library/Frameworks/Theora.framework; sourceTree = "<absolute>"; };
-		D1473F7E150CA7E000B20490 /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = /Library/Frameworks/Vorbis.framework; sourceTree = "<absolute>"; };
-		D1474026150CAF0D00B20490 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		D1474029150CAF0D00B20490 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		D147402A150CAF0D00B20490 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		D147402B150CAF0D00B20490 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D167759E155C501D0050EC64 /* TheoraAsync.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraAsync.cpp; path = src/TheoraAsync.cpp; sourceTree = "<group>"; };
 		D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraAudioInterface.cpp; path = src/TheoraAudioInterface.cpp; sourceTree = "<group>"; };
 		D16775A0155C501D0050EC64 /* TheoraDataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraDataSource.cpp; path = src/TheoraDataSource.cpp; sourceTree = "<group>"; };
@@ -210,7 +208,7 @@
 		D16775CC155C50280050EC64 /* TheoraVideoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheoraVideoManager.h; path = include/theoraplayer/TheoraVideoManager.h; sourceTree = "<group>"; };
 		D16775CD155C50280050EC64 /* TheoraWorkerThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheoraWorkerThread.h; path = include/theoraplayer/TheoraWorkerThread.h; sourceTree = "<group>"; };
 		D1BB6FAE150E9E7100EF9400 /* libtheoraplayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheoraplayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1BB6FAF150E9E7100EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D1CD00031696FF9400609AB0 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D1CDFF481696C77A00609AB0 /* theoraplayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = theoraplayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1CDFF701696C79700609AB0 /* theoraplayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = theoraplayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1CDFF941696D0F000609AB0 /* TheoraVideoClip_Theora.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraVideoClip_Theora.cpp; path = src/Theora/TheoraVideoClip_Theora.cpp; sourceTree = "<group>"; };
@@ -219,6 +217,12 @@
 		D1CDFF9D1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheoraVideoClip_AVFoundation.h; path = src/AVFoundation/TheoraVideoClip_AVFoundation.h; sourceTree = "<group>"; };
 		D1CDFFC41696E1CA00609AB0 /* libtheoraplayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheoraplayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1CDFFE91696E1D700609AB0 /* libtheoraplayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheoraplayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1CDFFED1696FB7200609AB0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D1CDFFF01696FB8900609AB0 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		D1CDFFF21696FBA800609AB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D1CDFFF71696FBF400609AB0 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = ../__build__/products/Debug/Ogg.framework; sourceTree = "<group>"; };
+		D1CDFFF91696FBF700609AB0 /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = ../__build__/products/Debug/Vorbis.framework; sourceTree = "<group>"; };
+		D1CDFFFB1696FC0100609AB0 /* Theora.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Theora.framework; path = ../__build__/products/Debug/Theora.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,9 +230,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1473F7F150CA7E000B20490 /* Ogg.framework in Frameworks */,
-				D1473F80150CA7E000B20490 /* Theora.framework in Frameworks */,
-				D1473F81150CA7E000B20490 /* Vorbis.framework in Frameworks */,
+				D1CD00001696FC0B00609AB0 /* Theora.framework in Frameworks */,
+				D1CD00011696FC0B00609AB0 /* Vorbis.framework in Frameworks */,
+				D1CD00021696FC0B00609AB0 /* Ogg.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,9 +247,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1CDFF301696C77A00609AB0 /* Ogg.framework in Frameworks */,
-				D1CDFF311696C77A00609AB0 /* Theora.framework in Frameworks */,
-				D1CDFF321696C77A00609AB0 /* Vorbis.framework in Frameworks */,
+				D1CDFFF41696FBB200609AB0 /* CoreVideo.framework in Frameworks */,
+				D1CDFFF51696FBB200609AB0 /* AVFoundation.framework in Frameworks */,
+				D1CDFFF61696FBB200609AB0 /* Foundation.framework in Frameworks */,
+				D1CD00051696FF9600609AB0 /* CoreMedia.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,9 +258,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1CDFF581696C79700609AB0 /* Ogg.framework in Frameworks */,
-				D1CDFF591696C79700609AB0 /* Theora.framework in Frameworks */,
-				D1CDFF5A1696C79700609AB0 /* Vorbis.framework in Frameworks */,
+				D1CD00041696FF9400609AB0 /* CoreMedia.framework in Frameworks */,
+				D1CDFFF31696FBA800609AB0 /* Foundation.framework in Frameworks */,
+				D1CDFFF11696FB8900609AB0 /* CoreVideo.framework in Frameworks */,
+				D1CDFFEE1696FB7200609AB0 /* AVFoundation.framework in Frameworks */,
+				D1CDFFFD1696FC0800609AB0 /* Theora.framework in Frameworks */,
+				D1CDFFFE1696FC0800609AB0 /* Vorbis.framework in Frameworks */,
+				D1CDFFFF1696FC0800609AB0 /* Ogg.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,14 +339,13 @@
 		D1473F82150CA7F300B20490 /* mac */ = {
 			isa = PBXGroup;
 			children = (
-				D1474026150CAF0D00B20490 /* Cocoa.framework */,
-				D1BB6FAF150E9E7100EF9400 /* Foundation.framework */,
-				D1474029150CAF0D00B20490 /* AppKit.framework */,
-				D147402A150CAF0D00B20490 /* CoreData.framework */,
-				D147402B150CAF0D00B20490 /* Foundation.framework */,
-				D1473F7C150CA7E000B20490 /* Ogg.framework */,
-				D1473F7D150CA7E000B20490 /* Theora.framework */,
-				D1473F7E150CA7E000B20490 /* Vorbis.framework */,
+				D1CD00031696FF9400609AB0 /* CoreMedia.framework */,
+				D1CDFFFB1696FC0100609AB0 /* Theora.framework */,
+				D1CDFFF91696FBF700609AB0 /* Vorbis.framework */,
+				D1CDFFF71696FBF400609AB0 /* Ogg.framework */,
+				D1CDFFF01696FB8900609AB0 /* CoreVideo.framework */,
+				D1CDFFED1696FB7200609AB0 /* AVFoundation.framework */,
+				D1CDFFF21696FBA800609AB0 /* Foundation.framework */,
 			);
 			name = mac;
 			sourceTree = "<group>";
@@ -776,6 +784,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
+					_DEBUG,
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -829,6 +838,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -851,6 +864,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -878,6 +895,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
+					_DEBUG,
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -905,6 +923,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -953,6 +975,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -1001,6 +1027,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -1136,6 +1166,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
@@ -1158,6 +1192,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
@@ -1180,6 +1218,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
@@ -1202,6 +1244,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
@@ -1224,6 +1270,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
@@ -1246,6 +1296,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -1269,6 +1323,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -1292,6 +1350,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -1315,6 +1377,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -1338,6 +1404,10 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../__build__/products/Debug\"",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,

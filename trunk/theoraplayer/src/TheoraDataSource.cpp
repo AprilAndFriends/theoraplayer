@@ -19,37 +19,53 @@ TheoraDataSource::~TheoraDataSource()
 
 TheoraFileDataSource::TheoraFileDataSource(std::string filename)
 {
-	mFilename=filename;
-	mFilePtr=fopen(filename.c_str(),"rb");
-	if (!mFilePtr) throw TheoraGenericException("Can't open video file: "+filename);
-	fseek(mFilePtr,0,SEEK_END);
-	mSize=ftell(mFilePtr);
-	fseek(mFilePtr,0,SEEK_SET);
+	mFilename = filename;
+	mFilePtr = NULL;
 }
 
 TheoraFileDataSource::~TheoraFileDataSource()
 {
-	if (mFilePtr) fclose(mFilePtr);
+	if (mFilePtr)
+	{
+		fclose(mFilePtr);
+		mFilePtr = NULL;
+	}
+}
+
+void TheoraFileDataSource::openFile()
+{
+	if (mFilePtr == NULL)
+	{
+		mFilePtr=fopen(mFilename.c_str(), "rb");
+		if (!mFilePtr) throw TheoraGenericException("Can't open video file: " + mFilename);
+		fseek(mFilePtr, 0, SEEK_END);
+		mSize = ftell(mFilePtr);
+		fseek(mFilePtr, 0, SEEK_SET);
+	}
 }
 
 int TheoraFileDataSource::read(void* output,int nBytes)
 {
-	int n=fread(output,1,nBytes,mFilePtr);
+	if (mFilePtr == NULL) openFile();
+	int n = fread(output, 1, nBytes, mFilePtr);
 	return n;
 }
 
 void TheoraFileDataSource::seek(unsigned long byte_index)
 {
-	fseek(mFilePtr,byte_index,SEEK_SET);
+	if (mFilePtr == NULL) openFile();
+	fseek(mFilePtr, byte_index, SEEK_SET);
 }
 
 unsigned long TheoraFileDataSource::size()
 {
+	if (mFilePtr == NULL) openFile();
 	return mSize;
 }
 
 unsigned long TheoraFileDataSource::tell()
 {
+	if (mFilePtr == NULL) return 0;
 	return ftell(mFilePtr);
 }
 
