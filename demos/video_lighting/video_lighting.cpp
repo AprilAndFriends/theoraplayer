@@ -145,7 +145,7 @@ void init()
 	
 	FOVY = 54.495f;
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lighting/lighting.ogg"), TH_RGB);
+	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lighting/lighting" + resourceExtension), TH_RGB);
 	clip->setAutoRestart(1);
 	//clip->setPlaybackSpeed(0.5f);
 	

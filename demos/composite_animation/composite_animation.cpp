@@ -99,11 +99,11 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr = new TheoraVideoManager(2);
-	water = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_water.ogg"), TH_RGB, 4);
+	water = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_water" + resourceExtension), TH_RGB, 4);
     water->setPlaybackSpeed(0.5f);
 	water->setAutoRestart(1);
 
-	eve = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_eve.ogg"), TH_RGBA, 4);
+	eve = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_eve" + resourceExtension), TH_RGBA, 4);
 	eve->setAutoRestart(1);
     
 	water_tex = createTexture(nextPow2(water->getWidth()), nextPow2(water->getHeight()));

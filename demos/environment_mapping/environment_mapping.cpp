@@ -66,7 +66,7 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/environment_mapping/room256.ogg"), TH_RGB);
+	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/environment_mapping/room256" + resourceExtension), TH_RGB);
 	clip->setAutoRestart(1);
 
 	tex_id = createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));

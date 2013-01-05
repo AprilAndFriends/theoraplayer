@@ -48,6 +48,8 @@ class TheoraPlayerExport TheoraFileDataSource : public TheoraDataSource
 	FILE* mFilePtr;
 	std::string mFilename;
 	unsigned long mSize;
+	
+	void openFile();
 public:
 	TheoraFileDataSource(std::string filename);
 	~TheoraFileDataSource();
@@ -57,6 +59,8 @@ public:
 	std::string repr() { return mFilename; }
 	unsigned long size();
 	unsigned long tell();
+	
+	std::string getFilename() { return mFilename; }
 };
 
 /**

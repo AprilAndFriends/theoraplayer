@@ -143,9 +143,9 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager(3);
-	light[0] = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lightmap/light1.ogg"), TH_RGB);
-	light[1] = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lightmap/light2.ogg"), TH_RGB);
-	light[2] = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lightmap/light3.ogg"), TH_RGB);
+	light[0] = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lightmap/light1" + resourceExtension), TH_RGB);
+	light[1] = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lightmap/light2" + resourceExtension), TH_RGB);
+	light[2] = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lightmap/light3" + resourceExtension), TH_RGB);
 	light[0]->setAutoRestart(1); light[0]->setPlaybackSpeed(1.0f);
 	light[1]->setAutoRestart(1); light[1]->setPlaybackSpeed(0.935f);
 	light[2]->setAutoRestart(1); light[2]->setPlaybackSpeed(0.876f);

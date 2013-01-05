@@ -10,10 +10,10 @@
 #define _TheoraVideoClip_Theora_h
 
 #include "TheoraVideoClip.h"
-
 #include <ogg/ogg.h>
 #include <vorbis/vorbisfile.h>
 #include <theora/theoradec.h>
+
 struct TheoraInfoStruct
 {
 	// ogg/vorbis/theora variables
@@ -48,6 +48,7 @@ class TheoraVideoClip_Theora : public TheoraVideoClip
 protected:
 	TheoraAudioPacket* mTheoraAudioPacketQueue;
 	TheoraInfoStruct mInfo; // a pointer is used to avoid having to include theora & vorbis headers
+
 	float getAudioPacketQueueLength();
 	void addAudioPacket(float** buffer, int num_samples);
 	TheoraAudioPacket* popAudioPacket();
@@ -55,6 +56,7 @@ protected:
 	void destroyAllAudioPackets();
 	long seekPage(long targetFrame, bool return_keyframe);
 	void doSeek();
+	void readTheoraVorbisHeaders();
 public:
 	TheoraVideoClip_Theora(TheoraDataSource* data_source,
 						   TheoraOutputMode output_mode,
@@ -66,7 +68,6 @@ public:
 	void decodeNextFrame();
 	void _restart();
 	void load(TheoraDataSource* source);
-	void readTheoraVorbisHeaders();
 	float decodeAudio();
 	void decodedAudioCheck();
 };

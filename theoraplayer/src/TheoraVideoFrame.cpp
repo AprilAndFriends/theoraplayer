@@ -298,14 +298,14 @@ void (*conversion_functions[])(th_img_plane*,unsigned char*,int)={0,
 // --------------------------------------------------------------
 TheoraVideoFrame::TheoraVideoFrame(TheoraVideoClip* parent)
 {
-	mReady=mInUse=false;
-	mParent=parent;
-	mIteration=0;
+	mReady = mInUse = false;
+	mParent = parent;
+	mIteration = 0;
 	// number of bytes based on output mode
-	int bytemap[]={0,3,4,4,4,4,3,4,4,4,4,1,3,4,4,4,4,3,4,4,4,4};
-	int size=mParent->getStride() * mParent->mHeight * bytemap[mParent->getOutputMode()];
-	mBuffer=new unsigned char[size];
-	memset(mBuffer,255,size);
+	int bytemap[]={0, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4, 1, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4};
+	mSize = mParent->getStride() * mParent->mHeight * bytemap[mParent->getOutputMode()];
+	mBuffer = new unsigned char[mSize];
+	memset(mBuffer, 255, mSize);
 }
 
 TheoraVideoFrame::~TheoraVideoFrame()
@@ -333,10 +333,30 @@ unsigned char* TheoraVideoFrame::getBuffer()
 	return mBuffer;
 }
 
-void TheoraVideoFrame::decode(void* yuv)
+void TheoraVideoFrame::decodeYUV(void* yuv)
 {
 	conversion_functions[mParent->getOutputMode()]((th_img_plane*) yuv,mBuffer,mParent->mStride);
 	mReady=true;
+}
+
+void TheoraVideoFrame::decodeBGRX(void* data)
+{
+	int x, y, w = mParent->getWidth(), h = mParent->getHeight(), stride = mParent->getStride();
+	unsigned char *src, *dst;
+	for (y = 0; y < h; y++)
+	{
+		src = ((unsigned char*) data) + y * stride;
+		dst = mBuffer + y * w * 3;
+		for (x = 0; x < w * 4; x += 4)
+		{
+			dst[0] = src[2];
+			dst[1] = src[1];
+			dst[2] = src[0];
+			src += 4;
+			dst += 3;
+		}
+	}
+	mReady = true;
 }
 
 void TheoraVideoFrame::clear()

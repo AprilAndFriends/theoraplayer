@@ -20,6 +20,7 @@ class TheoraPlayerExport TheoraVideoFrame
 	TheoraVideoClip* mParent;
 	unsigned char* mBuffer;
 	unsigned long mFrameNumber;
+	unsigned int mSize;
 
 public:
 	//! global time in seconds this frame should be displayed on
@@ -48,6 +49,7 @@ public:
 	unsigned char* getBuffer();
 
 	//! Called by TheoraVideoClip to decode a YUV buffer onto itself
-	void decode(void* yuv);
+	void decodeYUV(void* yuv);
+	void decodeBGRX(void* data);
 };
 #endif
