@@ -61,6 +61,9 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 	           "  - libtheora version: " + th_version_string() + "\n" + 
 	           "  - libvorbis version: " + vorbis_version_string() + "\n" +
 #endif
+#ifdef __AVFOUNDATION
+			   "  - using Apple AVFoundation classes\n"
+#endif
 			   "------------------------------------");
 	mAudioFactory = NULL;
 	mWorkMutex = new TheoraMutex();
@@ -126,7 +129,15 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 	
 #ifdef __AVFOUNDATION
 	TheoraFileDataSource* fileDataSource = dynamic_cast<TheoraFileDataSource*>(data_source);
-	std::string filename = (fileDataSource == NULL) ? "" : fileDataSource->getFilename();
+	std::string filename;
+	if (fileDataSource == NULL)
+	{
+		TheoraMemoryFileDataSource* memoryDataSource = dynamic_cast<TheoraMemoryFileDataSource*>(data_source);
+		if (memoryDataSource != NULL) filename = memoryDataSource->getFilename();
+		// if the user has his own data source, it's going to be a problem for AVAssetReader since it only supports reading from files...
+	}
+	else filename = fileDataSource->getFilename();
+
 	if (filename.size() > 4 && filename.substr(filename.size() - 4, filename.size()) == ".mp4")
 	{
 		clip = new TheoraVideoClip_AVFoundation(data_source,output_mode,nPrecached,usePower2Stride);
@@ -256,5 +267,5 @@ void TheoraVideoManager::getVersion(int* a, int* b, int* c)
 {
 	*a=1;
 	*b=0;
-	*c=-3;
+	*c=-4;
 }

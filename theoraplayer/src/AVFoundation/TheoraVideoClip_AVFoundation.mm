@@ -26,6 +26,7 @@ TheoraVideoClip_AVFoundation::TheoraVideoClip_AVFoundation(TheoraDataSource* dat
 											   int nPrecachedFrames,
 											   bool usePower2Stride): TheoraVideoClip(data_source, output_mode, nPrecachedFrames, usePower2Stride)
 {
+	mLoaded = 0;
 	mReader = NULL;
 	mOutput = NULL;
 }
@@ -124,9 +125,17 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	mStream = source;
 	mFrameNumber = 0;
 	TheoraFileDataSource* fileDataSource = dynamic_cast<TheoraFileDataSource*>(source);
-
+	std::string filename;
+	if (fileDataSource != NULL) filename = fileDataSource->getFilename();
+	else
+	{
+		TheoraMemoryFileDataSource* memoryDataSource = dynamic_cast<TheoraMemoryFileDataSource*>(source);
+		if (memoryDataSource != NULL) filename = memoryDataSource->getFilename();
+		else throw TheoraGenericException("Unable to load MP4 file");
+	}
+	
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-	NSString* path = [NSString stringWithUTF8String:fileDataSource->getFilename().c_str()];
+	NSString* path = [NSString stringWithUTF8String:filename.c_str()];
 	NSError* err;
 	NSURL *url = [NSURL fileURLWithPath:path];
 	AVAsset* asset = [[AVURLAsset alloc] initWithURL:url options:nil];
@@ -148,8 +157,21 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	mDuration = (float) CMTimeGetSeconds(asset.duration);
 	if (mFrameQueue == NULL) mFrameQueue = new TheoraFrameQueue(mNumPrecachedFrames, this);
 
+	if (mSeekFrame != -1)
+	{
+		mFrameNumber = mSeekFrame;
+		[mReader setTimeRange: CMTimeRangeMake(CMTimeMakeWithSeconds(mSeekFrame / mFPS, 1), kCMTimePositiveInfinity)];
+	}
+#ifdef _DEBUG
+	else if (!mLoaded)
+	{
+		th_writelog("-----\nwidth: " + str(mWidth) + ", height: " + str(mHeight) + ", fps: " + str((int) getFPS()));
+		th_writelog("duration: " + strf(mDuration) + " seconds\n-----");
+	}
+#endif
 	[mReader startReading];
 	[pool release];
+	mLoaded = 1;
 }
  
 void TheoraVideoClip_AVFoundation::decodedAudioCheck()
@@ -164,6 +186,23 @@ float TheoraVideoClip_AVFoundation::decodeAudio()
 
 void TheoraVideoClip_AVFoundation::doSeek()
 {
+#if _DEBUG
+	th_writelog(mName + " [seek]: seeking to frame " + str(mSeekFrame));
+#endif
+	int frame;
+	float time = mSeekFrame / getFPS();
+	mTimer->seek(time);
+	bool paused = mTimer->isPaused();
+	if (!paused) mTimer->pause(); // pause until seeking is done
 	
+	mEndOfFile = 0;
+	mRestarted = 0;
+	
+	mFrameQueue->clear();
+	unload();
+	load(mStream);
+
+	if (!paused) mTimer->play();
+	mSeekFrame = -1;
 }
 #endif

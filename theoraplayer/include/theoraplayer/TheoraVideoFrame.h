@@ -50,6 +50,10 @@ public:
 
 	//! Called by TheoraVideoClip to decode a YUV buffer onto itself
 	void decodeYUV(void* yuv);
+
+	//! temp, will be transfered to implementation classes
 	void decodeBGRX(void* data);
+	//! temp, will be transfered to implementation classes
+	void decodeBGRA(void* data);
 };
 #endif
