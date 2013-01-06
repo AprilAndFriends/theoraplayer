@@ -6,8 +6,6 @@ Copyright (c) 2008-2013 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
-#include <theora/codec.h>
-#include <vorbis/codec.h>
 #include "TheoraVideoManager.h"
 #include "TheoraWorkerThread.h"
 #include "TheoraVideoClip.h"
@@ -16,10 +14,12 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "TheoraDataSource.h"
 #include "TheoraException.h"
 #ifdef __THEORA
-#include "TheoraVideoClip_Theora.h"
+	#include <theora/codec.h>
+	#include <vorbis/codec.h>
+	#include "TheoraVideoClip_Theora.h"
 #endif
 #ifdef __AVFOUNDATION
-#include "TheoraVideoClip_AVFoundation.h"
+	#include "TheoraVideoClip_AVFoundation.h"
 #endif
 
 TheoraVideoManager* g_ManagerSingleton=0;
@@ -56,9 +56,11 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 
 	g_ManagerSingleton = this;
 
-	logMessage("Initializing Theora Playback Library (" + getVersionString() + ")\n" + 
+	logMessage("Initializing Theora Playback Library (" + getVersionString() + ")\n" +
+#ifdef __THEORA
 	           "  - libtheora version: " + th_version_string() + "\n" + 
-	           "  - libvorbis version: " + vorbis_version_string() + "\n" + 
+	           "  - libvorbis version: " + vorbis_version_string() + "\n" +
+#endif
 			   "------------------------------------");
 	mAudioFactory = NULL;
 	mWorkMutex = new TheoraMutex();
@@ -124,13 +126,18 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 	
 #ifdef __AVFOUNDATION
 	TheoraFileDataSource* fileDataSource = dynamic_cast<TheoraFileDataSource*>(data_source);
-	if (!fileDataSource) throw TheoraGenericException("Unable to load AVFoundation video, only TheoraFileDataSource is supported.");
-	std::string filename = fileDataSource->getFilename();
+	std::string filename = (fileDataSource == NULL) ? "" : fileDataSource->getFilename();
 	if (filename.size() > 4 && filename.substr(filename.size() - 4, filename.size()) == ".mp4")
+	{
 		clip = new TheoraVideoClip_AVFoundation(data_source,output_mode,nPrecached,usePower2Stride);
+	}
+#endif
+#if defined(__AVFOUNDATION) && defined(__THEORA)
 	else
 #endif
-	clip = new TheoraVideoClip_Theora(data_source,output_mode,nPrecached,usePower2Stride);
+#ifdef __THEORA
+		clip = new TheoraVideoClip_Theora(data_source,output_mode,nPrecached,usePower2Stride);
+#endif
 	clip->load(data_source);
 	mClips.push_back(clip);
 	mWorkMutex->unlock();
