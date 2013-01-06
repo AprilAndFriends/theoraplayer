@@ -19,6 +19,7 @@ class AVAssetReaderTrackOutput;
 class TheoraVideoClip_AVFoundation : public TheoraVideoClip
 {
 protected:
+	bool mLoaded;
 	int mFrameNumber;
 	AVAssetReader* mReader;
 	AVAssetReaderTrackOutput* mOutput;

@@ -76,7 +76,9 @@ void OnKeyPress(int key)
 void OnClick(float x,float y)
 {
 	if (y > 570)
+	{
 		clip->seek((x/window_w)*clip->getDuration());
+	}
 }
 
 void setDebugTitle(char* out)

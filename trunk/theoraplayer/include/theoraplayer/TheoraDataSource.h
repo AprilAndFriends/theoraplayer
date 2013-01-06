@@ -82,6 +82,7 @@ public:
 	std::string repr() { return "MEM:"+mFilename; }
 	unsigned long size();
 	unsigned long tell();
+	std::string getFilename() { return mFilename; }
 };
 
 #endif

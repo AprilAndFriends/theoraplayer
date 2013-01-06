@@ -359,6 +359,26 @@ void TheoraVideoFrame::decodeBGRX(void* data)
 	mReady = true;
 }
 
+void TheoraVideoFrame::decodeBGRA(void* data)
+{
+	int x, y, w = mParent->getWidth(), h = mParent->getHeight(), stride = mParent->getStride();
+	unsigned char *src, *dst;
+	for (y = 0; y < h; y++)
+	{
+		src = ((unsigned char*) data) + y * stride;
+		dst = mBuffer + y * w * 4;
+		for (x = 0; x < w * 4; x += 4)
+		{
+			dst[0] = src[2];
+			dst[1] = src[1];
+			dst[2] = src[0];
+			src += 4;
+			dst += 3;
+		}
+	}
+	mReady = true;
+}
+
 void TheoraVideoFrame::clear()
 {
 	mInUse=mReady=false;

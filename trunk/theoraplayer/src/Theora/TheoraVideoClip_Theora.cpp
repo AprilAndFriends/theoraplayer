@@ -189,7 +189,9 @@ void TheoraVideoClip_Theora::_restart()
 
 void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 {
+#ifdef _DEBUG
 	th_writelog("-----");
+#endif
 	mStream = source;
 	readTheoraVorbisHeaders();
 	
@@ -200,7 +202,9 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 	mStride = (mStride == 1) ? mStride=_nextPow2(getWidth()) : getWidth();
 	mFPS = mInfo.TheoraInfo.fps_numerator / (float) mInfo.TheoraInfo.fps_denominator;
 	
+#ifdef _DEBUG
 	th_writelog("width: " + str(mWidth) + ", height: " + str(mHeight) + ", fps: " + str((int) getFPS()));
+#endif
 	mFrameQueue = new TheoraFrameQueue(mNumPrecachedFrames, this);
 	// find out the duration of the file by seeking to the end
 	// having ogg decode pages, extract the granule pos from
@@ -238,7 +242,9 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 	else
 	{
 		mDuration = mNumFrames / mFPS;
+#ifdef _DEBUG
 		th_writelog("duration: " + strf(mDuration) + " seconds");
+#endif
 	}
 	// restore to beginning of stream.
 	ogg_sync_reset(&mInfo.OggSyncState);
@@ -255,7 +261,9 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 	}
 	
 	mFrameDuration = 1.0f / getFPS();
+#ifdef _DEBUG
 	th_writelog("-----");
+#endif
 }
 
 void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
