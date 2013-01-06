@@ -12,15 +12,7 @@ The reason TGA format was choosed for libtheoraplayer's demos is because it's a 
 and portable format.
 
 *************************************************************************************/
-#ifdef _WIN32
-#include <windows.h>
-#endif
-#ifndef __APPLE__
-	#include <GL/gl.h>
-#else
-	#include <OpenGL/gl.h>
-#endif
-#include <stdio.h>
+#include "demo_basecode.h"
 
 // tga header info taken from http://www.organicbit.com/closecombat/formats/tga.html
 typedef unsigned char byte;
@@ -96,7 +88,7 @@ unsigned int loadTexture(const char* filename, int* w_out, int* h_out)
 	glBindTexture(GL_TEXTURE_2D, texid);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, bpp, header.width, header.height, 0,
+	glTexImage2D(GL_TEXTURE_2D, 0, bpp == 3 ? GL_RGB : GL_RGBA, header.width, header.height, 0,
 				 bpp == 3 ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, data);
 
 	delete [] data;

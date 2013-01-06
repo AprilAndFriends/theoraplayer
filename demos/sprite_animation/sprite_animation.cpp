@@ -55,7 +55,7 @@ void draw()
 	}
 
 	glEnable(GL_TEXTURE_2D);
-	drawTexturedQuad(298,150,203,300,203.0f/256.0f,300.0f/512.0f);
+	drawTexturedQuad(tex_id,298,150,203,300,203.0f/256.0f,300.0f/512.0f);
 }
 
 void update(float time_increase)

@@ -18,8 +18,8 @@ int window_w=800 ,window_h=600;
 
 void drawVideo(int x,int y,unsigned int tex_id,TheoraVideoClip* clip)
 {
-	glLoadIdentity();
-	glTranslatef(x,y,0);
+	//glLoadIdentity();
+	//glTranslatef(x,y,0);
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 
 	TheoraVideoFrame* f=clip->getNextFrame();
@@ -34,15 +34,15 @@ void drawVideo(int x,int y,unsigned int tex_id,TheoraVideoClip* clip)
 	
 	glEnable(GL_TEXTURE_2D);
 	if (shader_on) enable_shader();
-	drawTexturedQuad(0,0,395,295,w/tw,h/th);
+	drawTexturedQuad(tex_id, x,y,395,295,w/tw,h/th);
 	if (shader_on) disable_shader();
 
 	glDisable(GL_TEXTURE_2D);
-	drawColoredQuad(0,570/2,395,30/2,0,0,0,1);
-	drawWiredQuad(0,570/2,395,30/2,1,1,1,1);
+	drawColoredQuad(x,y+570/2,395,30/2,0,0,0,1);
+	drawWiredQuad(x,y+570/2,395,30/2,1,1,1,1);
 
 	float p=clip->getTimePosition()/clip->getDuration();
-	drawColoredQuad(1.5f,573/2,784*p/2,24/2,1,1,1,1);
+	drawColoredQuad(x+1.5f,y+573/2,784*p/2,24/2,1,1,1,1);
 }
 
 void draw()
@@ -105,7 +105,7 @@ void init()
 {
 	printf("---\nUSAGE: press buttons 1,2,3 or 4 to change the number of worker threads\n---\n");
 
-	std::string files[] = {"media/short" + resourceExtension,
+	std::string files[] = {"media/bunny" + resourceExtension,
 		                   "media/konqi" + resourceExtension,
 		                   "media/room" + resourceExtension,
 		                   "media/titan" + resourceExtension};
