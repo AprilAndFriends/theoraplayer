@@ -49,7 +49,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../theoraplayer/include/;../../../demos"
+				AdditionalIncludeDirectories="../../../theoraplayer/include/;../../../demos;../../../demos/basecode/util"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_PLUGIN_EXPORTS;_STLP_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -149,7 +149,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../../theoraplayer/include/;../../../demos"
+				AdditionalIncludeDirectories="../../../theoraplayer/include/;../../../demos;../../../demos/basecode/util"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_PLUGIN_EXPORTS"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -228,11 +228,23 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\basecode\glut\glutBasecode.cpp"
+			>
+		</File>
+		<File
 			RelativePath="..\..\tga.cpp"
 			>
 		</File>
 		<File
 			RelativePath="..\..\tga.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\basecode\util\util.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\basecode\util\util.h"
 			>
 		</File>
 	</Files>

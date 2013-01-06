@@ -45,7 +45,7 @@ void draw()
 
 	glEnable(GL_TEXTURE_2D);
 	if (shader_on) enable_shader();
-	drawTexturedQuad(0,0,800,600,w/tw,h/th);
+	drawTexturedQuad(tex_id,0,0,800,600,w/tw,h/th);
 	if (shader_on) disable_shader();
 
 	glDisable(GL_TEXTURE_2D);
