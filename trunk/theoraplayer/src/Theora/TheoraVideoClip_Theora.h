@@ -65,7 +65,7 @@ public:
 	~TheoraVideoClip_Theora();
 
 	bool _readData();
-	void decodeNextFrame();
+	bool decodeNextFrame();
 	void _restart();
 	void load(TheoraDataSource* source);
 	float decodeAudio();

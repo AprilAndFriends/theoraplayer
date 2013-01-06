@@ -92,12 +92,12 @@ bool TheoraVideoClip_Theora::_readData()
 	return 1;
 }
 
-void TheoraVideoClip_Theora::decodeNextFrame()
+bool TheoraVideoClip_Theora::decodeNextFrame()
 {
-	if (mEndOfFile) return;
+	if (mEndOfFile) return 0;
 	
 	TheoraVideoFrame* frame = mFrameQueue->requestEmptyFrame();
-	if (!frame) return; // max number of precached frames reached
+	if (!frame) return 0; // max number of precached frames reached
 	bool should_restart = 0;
 	ogg_packet opTheora;
 	ogg_int64_t granulePos;
@@ -112,8 +112,9 @@ void TheoraVideoClip_Theora::decodeNextFrame()
 			float time = (float) th_granule_time(mInfo.TheoraDecoder, granulePos);
 			unsigned long frame_number = (unsigned long) th_granule_frame(mInfo.TheoraDecoder, granulePos);
 			
-			if (time < mTimer->getTime() && !mRestarted)
+			if (time < mTimer->getTime() && !mRestarted && frame_number % 16 != 0)
 			{
+				// %16 operation is here to prevent a playback halt during video playback if the decoder can't keep up with demand.
 #ifdef _DEBUG
 				th_writelog(mName + ": pre-dropped frame " + str(frame_number));
 #endif
@@ -146,6 +147,8 @@ void TheoraVideoClip_Theora::decodeNextFrame()
 		mAudioMutex->unlock();
 	}
 	if (should_restart) _restart();
+	
+	return 1;
 }
 
 void TheoraVideoClip_Theora::_restart()

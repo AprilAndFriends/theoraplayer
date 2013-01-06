@@ -157,7 +157,7 @@ public:
 	void setTimer(TheoraTimer* timer);
 
 	//! used by TheoraWorkerThread, do not call directly
-	virtual void decodeNextFrame() = 0;
+	virtual bool decodeNextFrame() = 0;
 
 	//! advance time. TheoraVideoManager calls this
 	void update(float time_increase);

@@ -34,15 +34,15 @@ void drawVideo(int x,int y,unsigned int tex_id,TheoraVideoClip* clip)
 	
 	glEnable(GL_TEXTURE_2D);
 	if (shader_on) enable_shader();
-	drawTexturedQuad(tex_id, x,y,395,295,w/tw,h/th);
+	drawTexturedQuad(tex_id, x,y,395,285,w/tw,h/th);
 	if (shader_on) disable_shader();
 
 	glDisable(GL_TEXTURE_2D);
-	drawColoredQuad(x,y+570/2,395,30/2,0,0,0,1);
-	drawWiredQuad(x,y+570/2,395,30/2,1,1,1,1);
+	drawColoredQuad(x,y+285,395,15,0,0,0,1);
+	drawWiredQuad(x,y+285,395,14,1,1,1,1);
 
 	float p=clip->getTimePosition()/clip->getDuration();
-	drawColoredQuad(x+1.5f,y+573/2,784*p/2,24/2,1,1,1,1);
+	drawColoredQuad(x+1.5f,y+574/2,784*p/2,11,1,1,1,1);
 }
 
 void draw()

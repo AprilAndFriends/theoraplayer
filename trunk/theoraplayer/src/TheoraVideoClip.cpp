@@ -109,7 +109,9 @@ void TheoraVideoClip::update(float time_increase)
 		if (mAutoRestart && mRestarted)
 		{
 			mIteration = !mIteration;
-			mTimer->seek(time-mDuration);
+			float seekTime = time-mDuration;
+			if (seekTime > 1.0f) seekTime = 1.0f; // to maintain loop smoothnes but prevent error accumulation
+			mTimer->seek(seekTime);
 			mRestarted = 0;
 			int n = 0;
 			for (;;)
@@ -329,8 +331,9 @@ float TheoraVideoClip::getPriority()
 
 float TheoraVideoClip::getPriorityIndex()
 {
-	float priority=(float) getNumReadyFrames();
-	if (mTimer->isPaused()) priority+=getNumPrecachedFrames()/2;
+	float priority = (float) getNumReadyFrames();
+	if (mTimer->isPaused()) priority += getNumPrecachedFrames() / 2;
+	
 	return priority;
 }
 

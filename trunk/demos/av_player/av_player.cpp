@@ -36,12 +36,12 @@ void draw()
 
 	glEnable(GL_TEXTURE_2D);
 	if (shader_on) enable_shader();
-	drawTexturedQuad(tex_id,0,0,800,600,w/tw,h/th);
+	drawTexturedQuad(tex_id,0,0,800,570,w/tw,h/th);
 	if (shader_on) disable_shader();
 
 	glDisable(GL_TEXTURE_2D);
 	drawColoredQuad(0,570,800,30,0,0,0,1);
-	drawWiredQuad(0,570,800,30,1,1,1,1);
+	drawWiredQuad(0,570,800,29,1,1,1,1);
 
 	float x=clip->getTimePosition()/clip->getDuration();
 	drawColoredQuad(3,573,794*x,24,1,1,1,1);

@@ -33,7 +33,7 @@ public:
 	~TheoraVideoClip_AVFoundation();
 	
 	bool _readData();
-	void decodeNextFrame();
+	bool decodeNextFrame();
 	void _restart();
 	void load(TheoraDataSource* source);
 	float decodeAudio();
