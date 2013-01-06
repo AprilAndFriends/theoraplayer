@@ -173,21 +173,21 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 {
 	if (!mWorkMutex) return NULL;
 	mWorkMutex->lock();
-	TheoraVideoClip* c=NULL;
+	TheoraVideoClip* c = NULL;
 
-	float priority,last_priority=100000;
+	float priority, last_priority = 100000;
 
-	foreach(TheoraVideoClip*,mClips)
+	foreach (TheoraVideoClip*, mClips)
 	{
 		if ((*it)->isBusy()) continue;
-		priority=(*it)->getPriorityIndex();
-		if (priority < last_priority)
+		priority = (*it)->getPriorityIndex();
+		if (priority < last_priority || (priority == last_priority && rand()%2 == 0)) // use randomization to prevent clip starvation in resource demanding situations
 		{
-			last_priority=priority;
-			c=*it;
+			last_priority = priority;
+			c = *it;
 		}
 	}
-	if (c) c->mAssignedWorkerThread=caller;
+	if (c) c->mAssignedWorkerThread = caller;
 	
 	mWorkMutex->unlock();
 	return c;

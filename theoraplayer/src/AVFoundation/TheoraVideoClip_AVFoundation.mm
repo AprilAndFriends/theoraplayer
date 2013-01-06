@@ -12,7 +12,10 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "TheoraDataSource.h"
 #include "TheoraException.h"
 #include "TheoraFrameQueue.h"
+#include "TheoraTimer.h"
+#include "TheoraUtil.h"
 #include "TheoraVideoFrame.h"
+#include "TheoraVideoManager.h"
 #include "TheoraVideoClip_AVFoundation.h"
 
 //AVAssetReader* mReader;
@@ -51,23 +54,35 @@ bool TheoraVideoClip_AVFoundation::_readData()
 	return 1;
 }
 
-void TheoraVideoClip_AVFoundation::decodeNextFrame()
+bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 {
-	if (mReader == NULL || mEndOfFile) return;
+	if (mReader == NULL || mEndOfFile) return 0;
 	TheoraVideoFrame* frame = mFrameQueue->requestEmptyFrame();
-	if (!frame) return;
+	if (!frame) return 0;
 
 	CMSampleBufferRef sampleBuffer = NULL;
 	NSAutoreleasePool* pool = NULL;
 	if ([mReader status] == AVAssetReaderStatusReading)
 	{
 		pool = [[NSAutoreleasePool alloc] init];
-		if ((sampleBuffer = [mOutput copyNextSampleBuffer]))
+		while ((sampleBuffer = [mOutput copyNextSampleBuffer]))
 		{
 			frame->mTimeToDisplay = mFrameNumber / mFPS;
 			frame->mIteration = mIteration;
 			frame->_setFrameNumber(mFrameNumber);
 			mFrameNumber++;
+			if (frame->mTimeToDisplay < mTimer->getTime() && !mRestarted && mFrameNumber % 16 != 0)
+			{
+				// %16 operation is here to prevent a playback halt during video playback if the decoder can't keep up with demand.
+#ifdef _DEBUG
+				th_writelog(mName + ": pre-dropped frame " + str(mFrameNumber - 1));
+#endif
+				mNumDisplayedFrames++;
+				mNumDroppedFrames++;
+				CFRelease(sampleBuffer);
+				sampleBuffer = NULL;
+				continue; // drop frame
+			}
 			
 			CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
 			CVPixelBufferLockBaseAddress(imageBuffer, 0);
@@ -79,6 +94,7 @@ void TheoraVideoClip_AVFoundation::decodeNextFrame()
 			
 			CVPixelBufferUnlockBaseAddress(imageBuffer,0);
 			CFRelease(sampleBuffer);
+			break;
 		}
 	}
 	if (pool) [pool release];
@@ -91,7 +107,9 @@ void TheoraVideoClip_AVFoundation::decodeNextFrame()
 		mReader = NULL;
 		mOutput = NULL;
 		_restart();
+		return 0;
 	}
+	return 1;
 }
 
 void TheoraVideoClip_AVFoundation::_restart()
