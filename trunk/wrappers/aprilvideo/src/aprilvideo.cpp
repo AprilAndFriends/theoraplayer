@@ -26,7 +26,7 @@ namespace aprilvideo
 {
 	static TheoraVideoManager* gVideoManager = NULL;
 	static int gRefCount = 0, gNumWorkerThreads = 1;
-	hstr logTag = "aprilvideo";
+	hstr logTag = "aprilvideo", defaultFileExtension = ".ogv";
 
 	static int _nextPow2(int x)
 	{
@@ -71,6 +71,7 @@ namespace aprilvideo
 
 	VideoObject::VideoObject(chstr name, grect rect) : aprilui::ImageBox(name, rect)
 	{
+		mUsingAVFoundation = 0;
 		mUseAlpha = 0;
 		mPrevDoneFlag = 0;
 		mLoop = 1;
@@ -86,7 +87,15 @@ namespace aprilvideo
 		mAlphaPauseTreshold = 0;
 		mPrevFrameNumber = 0;
 		mSeeked = 0;
-		if (!gVideoManager) gVideoManager = new TheoraVideoManager(gNumWorkerThreads);
+		if (!gVideoManager)
+		{
+			gVideoManager = new TheoraVideoManager(gNumWorkerThreads);
+			std::vector<std::string> lst = gVideoManager->getSupportedDecoders();
+			foreach (std::string, it, lst)
+			{
+				if (*it == "AVFoundation") defaultFileExtension = ".mp4";
+			}
+		}
 	}
 	
 	aprilui::Object* VideoObject::createInstance(chstr name, grect rect)
@@ -160,11 +169,27 @@ namespace aprilvideo
 		{
 			destroyResources();
 			hstr path = mDataset->getFilePath() + "/video/" + mClipName;
+			if (!path.ends_with(".ogg") && !path.ends_with(".ogv") && !path.ends_with(".mp4")) path += defaultFileExtension;
+			
+			mUsingAVFoundation = path.ends_with(".mp4");
 			try
 			{
 				TheoraOutputMode mode;
-				if (april::rendersys->getName() == "OpenGL") mode = mUseAlpha ? TH_RGBA : TH_RGB;
-				else                                         mode = mUseAlpha ? TH_BGRA : TH_BGRX;
+				if (april::rendersys->getName() == "OpenGL")
+				{
+					if (mUseAlpha)
+					{
+						mode = TH_RGBA;
+					}
+					else
+					{
+						mode = mUsingAVFoundation ? TH_BGRX : TH_RGB;
+					}
+				}
+				else
+				{
+					mode = mUseAlpha ? TH_BGRA : TH_BGRX;
+				}
 
 				mClip = gVideoManager->createVideoClip(path, mode, 16);
 			}
@@ -176,7 +201,7 @@ namespace aprilvideo
 			mClip->setAutoRestart(mLoop);
 			
 			float w = mClip->getWidth(), h = mClip->getHeight();
-			april::Texture* tex = april::rendersys->createTexture(_nextPow2(w), _nextPow2(h), april::Texture::FORMAT_ARGB);
+			april::Texture* tex = april::rendersys->createTexture(_nextPow2(w), _nextPow2(h), mUsingAVFoundation ? april::Texture::FORMAT_BGRA : april::Texture::FORMAT_ARGB);
 			mTexture = new aprilui::Texture(tex->getFilename(), tex);
 			mVideoImage = new aprilui::Image(mTexture, "video_img", grect(0, 0, w, h));
 			mClip->waitForCache(4 / 16.0f, 0.5f);
@@ -185,7 +210,7 @@ namespace aprilvideo
 			{
 				if (!xal::mgr->hasCategory("video"))
 				{
-					xal::mgr->createCategory("video", xal::ON_DEMAND, xal::DISK);
+					xal::mgr->createCategory("video", xal::STREAMED, xal::DISK);
 				}
 				mSound = xal::mgr->createSound(mDataset->getFilePath() + "/video/" + mAudioName, "video");
 
@@ -221,7 +246,8 @@ namespace aprilvideo
 				r.h = f->getHeight();
 				mImage->setSrcRect(r);
 				if (april::rendersys->getName() == "DirectX9") mTexture->getRenderTexture()->clear();
-				mTexture->getRenderTexture()->blit(0, 0, f->getBuffer(), r.w, r.h, 3 + mUseAlpha, 0, 0, r.w, r.h);
+				int bpp = mUsingAVFoundation ? 4 : 3 + mUseAlpha;
+				mTexture->getRenderTexture()->write(0, 0, f->getBuffer(), r.w, r.h, bpp);
 				mClip->popFrame();
 				if (mLoop)
 				{

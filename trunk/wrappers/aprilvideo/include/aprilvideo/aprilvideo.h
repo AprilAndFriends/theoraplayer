@@ -34,6 +34,7 @@ namespace aprilvideo
 
 	class AprilVideoExport VideoObject : public aprilui::ImageBox
 	{
+		bool mUsingAVFoundation;
 		bool mPrevDoneFlag;
 		bool mUseAlpha;
 		bool mLoop;
