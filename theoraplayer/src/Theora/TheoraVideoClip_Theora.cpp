@@ -179,7 +179,7 @@ void TheoraVideoClip_Theora::_restart()
 	ogg_int64_t granulePos = 0;
 	th_decode_ctl(mInfo.TheoraDecoder, TH_DECCTL_SET_GRANPOS, &granulePos, sizeof(granule));
 	
-	mEndOfFile=false;
+	mEndOfFile = false;
 	
 	mRestarted = 1;
 	

@@ -195,6 +195,7 @@
 		D1F09DFE169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1F09DF8169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h */; };
 		D1F09DFF169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1F09DF8169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h */; };
 		D1F09E00169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1F09DF8169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h */; };
+		D1F09EB1169AFEFB00DEEC63 /* TheoraVideoClip_AVFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = D1CDFF9D1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -499,8 +500,9 @@
 				D1CDFF671696C79700609AB0 /* TheoraVideoManager.h in Headers */,
 				D1CDFF681696C79700609AB0 /* TheoraWorkerThread.h in Headers */,
 				D1CDFF9A1696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */,
-				D1F09DF3169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h in Headers */,
+				D1F09EB1169AFEFB00DEEC63 /* TheoraVideoClip_AVFoundation.h in Headers */,
 				D1F09DFE169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h in Headers */,
+				D1F09DF3169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,10 +880,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -904,10 +902,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -963,10 +957,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -1015,10 +1005,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -1067,10 +1053,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -1206,10 +1188,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
@@ -1232,10 +1210,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
@@ -1258,10 +1232,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
@@ -1284,10 +1254,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
@@ -1310,10 +1276,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
@@ -1336,10 +1298,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -1363,10 +1321,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -1390,10 +1344,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -1417,10 +1367,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
@@ -1444,10 +1390,6 @@
 				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../__build__/products/Debug\"",
-				);
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
