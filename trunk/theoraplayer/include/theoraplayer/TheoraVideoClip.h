@@ -130,6 +130,8 @@ public:
 	virtual ~TheoraVideoClip();
 
 	std::string getName();
+	//! Returns the string name of the decoder backend (eg. Theora, AVFoundation)
+	virtual std::string getDecoderName() = 0;
 
 	//! benchmark function
 	int getNumDisplayedFrames() { return mNumDisplayedFrames; }

@@ -95,6 +95,9 @@ public:
 		if c is negative, it means it's a release candidate -c
 	 */
 	void getVersion(int* a,int* b,int* c);
+
+	//! returns the supported decoders (eg. Theora, AVFoundation...)
+	std::vector<std::string> getSupportedDecoders();
 };
 #endif
 

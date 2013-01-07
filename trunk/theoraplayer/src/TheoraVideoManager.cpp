@@ -254,20 +254,33 @@ void TheoraVideoManager::setNumWorkerThreads(int n)
 
 std::string TheoraVideoManager::getVersionString()
 {
-	int a,b,c;
-	getVersion(&a,&b,&c);
-	std::string out=str(a)+"."+str(b);
+	int a, b, c;
+	getVersion(&a, &b, &c);
+	std::string out = str(a) + "." + str(b);
 	if (c != 0)
 	{
-		if (c < 0) out+=" RC"+str(-c);
-		else       out+="."+str(c);
+		if (c < 0) out += " RC" + str(-c);
+		else       out += "." + str(c);
 	}
 	return out;
 }
 
-void TheoraVideoManager::getVersion(int* a, int* b, int* c)
+void TheoraVideoManager::getVersion(int* a, int* b, int* c) // TODO, return a struct instead of the current solution.
 {
-	*a=1;
-	*b=0;
-	*c=-4;
+	*a = 1;
+	*b = 0;
+	*c = -4;
+}
+
+std::vector<std::string> TheoraVideoManager::getSupportedDecoders()
+{
+	std::vector<std::string> lst;
+#ifdef __THEORA
+	lst.push_back("Theora");
+#endif
+#ifdef __AVFOUNDATION
+	lst.push_back("AVFoundation");
+#endif
+	
+	return lst;
 }

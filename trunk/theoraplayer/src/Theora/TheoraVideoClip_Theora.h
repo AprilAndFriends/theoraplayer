@@ -70,6 +70,7 @@ public:
 	void load(TheoraDataSource* source);
 	float decodeAudio();
 	void decodedAudioCheck();
+	std::string getDecoderName() { return "Theora"; }
 };
 
 #endif
