@@ -499,6 +499,14 @@
 					RelativePath=".\src\Theora\TheoraVideoClip_Theora.h"
 					>
 				</File>
+				<File
+					RelativePath=".\src\Theora\TheoraVideoFrame_Theora.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\Theora\TheoraVideoFrame_Theora.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 	</Files>
