@@ -34,7 +34,7 @@ unsigned int createTexture(int w,int h,unsigned int format)
 	unsigned char* b=new unsigned char[w*h*4];
 	memset(b,0,w*h*4);
 	
-	glTexImage2D(GL_TEXTURE_2D,0,(format == GL_RGB) ? GL_RGB : GL_RGBA,w,h,0,format,GL_UNSIGNED_BYTE,b);
+	glTexImage2D(GL_TEXTURE_2D,0,format == GL_RGB ? GL_RGB : GL_RGBA,w,h,0,format,GL_UNSIGNED_BYTE,b);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 	delete b;

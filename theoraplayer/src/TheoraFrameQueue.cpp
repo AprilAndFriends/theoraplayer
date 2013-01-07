@@ -11,10 +11,9 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "TheoraUtil.h"
 
 
-TheoraFrameQueue::TheoraFrameQueue(int n,TheoraVideoClip* parent)
+TheoraFrameQueue::TheoraFrameQueue(TheoraVideoClip* parent)
 {
-	mParent=parent;
-	setSize(n);
+	mParent = parent;
 }
 
 TheoraFrameQueue::~TheoraFrameQueue()
@@ -34,7 +33,7 @@ void TheoraFrameQueue::setSize(int n)
 		mQueue.clear();
 	}
 for (int i=0;i<n;i++)
-		mQueue.push_back(new TheoraVideoFrame(mParent));
+		mQueue.push_back(createFrameInstance(mParent));
 
 	mMutex.unlock();
 }

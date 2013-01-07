@@ -9,8 +9,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #ifdef __THEORA
 #include <memory.h>
 #include "TheoraVideoManager.h"
-#include "TheoraVideoFrame.h"
-#include "TheoraFrameQueue.h"
+#include "TheoraVideoFrame_Theora.h"
 #include "TheoraAudioInterface.h"
 #include "TheoraTimer.h"
 #include "TheoraDataSource.h"
@@ -126,7 +125,7 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 			frame->mIteration     = mIteration;
 			frame->_setFrameNumber(frame_number);
 			th_decode_ycbcr_out(mInfo.TheoraDecoder, buff);
-			frame->decodeYUV(buff);
+			frame->decode(buff, TH_YUV);
 			break;
 		}
 		else
@@ -205,7 +204,8 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 #ifdef _DEBUG
 	th_writelog("width: " + str(mWidth) + ", height: " + str(mHeight) + ", fps: " + str((int) getFPS()));
 #endif
-	mFrameQueue = new TheoraFrameQueue(mNumPrecachedFrames, this);
+	mFrameQueue = new TheoraFrameQueue_Theora(this);
+	mFrameQueue->setSize(mNumPrecachedFrames);
 	// find out the duration of the file by seeking to the end
 	// having ogg decode pages, extract the granule pos from
 	// the last theora page and seek back to beginning of the file

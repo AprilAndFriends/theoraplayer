@@ -98,7 +98,6 @@
 		D16A0E7C1698C4B80016DF67 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A0E7B1698C4B80016DF67 /* UIKit.framework */; };
 		D16A0E7E1698C4B80016DF67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A0E7D1698C4B80016DF67 /* Foundation.framework */; };
 		D16A0E801698C4B80016DF67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A0E7F1698C4B80016DF67 /* CoreGraphics.framework */; };
-		D16A0E821698C4B80016DF67 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A0E811698C4B80016DF67 /* GLKit.framework */; };
 		D16A0E841698C4B80016DF67 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A0E831698C4B80016DF67 /* OpenGLES.framework */; };
 		D16A0EB91698C5640016DF67 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = D16A0EAF1698C5640016DF67 /* AppDelegate.mm */; };
 		D16A0EBA1698C5640016DF67 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EB01698C5640016DF67 /* Default-568h@2x.png */; };
@@ -115,7 +114,6 @@
 		D176138A1561B21500F645DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6FAF150E9E7100EF9400 /* Foundation.framework */; };
 		D176138B1561B21500F645DE /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
 		D17613981561B2EE00F645DE /* environment_mapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D17613971561B2EE00F645DE /* environment_mapping.cpp */; };
-		D17621E8169909FD00CB6D6A /* glut_player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1677619155C525F0050EC64 /* glut_player.cpp */; };
 		D1C0151315619DA700FBEF81 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
 		D1C0151415619DD400FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
 		D1C0151515619DDB00FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
@@ -156,6 +154,8 @@
 		D1E39AB0169A445E003A6CB5 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9E169A43BB003A6CB5 /* icon.icns */; };
 		D1E39AB2169A4463003A6CB5 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9E169A43BB003A6CB5 /* icon.icns */; };
 		D1E39AB4169A4469003A6CB5 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9E169A43BB003A6CB5 /* icon.icns */; };
+		D1F09DEB169AB9D900DEEC63 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F09DEA169AB9D900DEEC63 /* GLKit.framework */; };
+		D1F09E09169AE25300DEEC63 /* glut_player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1677619155C525F0050EC64 /* glut_player.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -435,6 +435,7 @@
 		D1E39A9A169A4378003A6CB5 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape.png"; path = "demos/basecode/ios/Default-Landscape.png"; sourceTree = "<group>"; };
 		D1E39A9B169A4378003A6CB5 /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x.png"; path = "demos/basecode/ios/Default-Landscape@2x.png"; sourceTree = "<group>"; };
 		D1E39A9E169A43BB003A6CB5 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		D1F09DEA169AB9D900DEEC63 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/GLKit.framework; sourceTree = DEVELOPER_DIR; };
 		D1FB879F157D4DFD0060641F /* normal_mapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = normal_mapping.frag; path = demos/media/parallax/normal_mapping.frag; sourceTree = "<group>"; };
 		D1FB87A0157D4DFD0060641F /* normal_mapping.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = normal_mapping.vert; path = demos/media/parallax/normal_mapping.vert; sourceTree = "<group>"; };
 		D1FB87A1157D4DFD0060641F /* parallax_mapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = parallax_mapping.frag; path = demos/media/parallax/parallax_mapping.frag; sourceTree = "<group>"; };
@@ -541,6 +542,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F09DEB169AB9D900DEEC63 /* GLKit.framework in Frameworks */,
 				D127F8C61698D0A3007E6835 /* CoreVideo.framework in Frameworks */,
 				D127F8C41698D09E007E6835 /* AVFoundation.framework in Frameworks */,
 				D127F8C21698D09B007E6835 /* CoreMedia.framework in Frameworks */,
@@ -551,7 +553,6 @@
 				D16A0E7C1698C4B80016DF67 /* UIKit.framework in Frameworks */,
 				D16A0E7E1698C4B80016DF67 /* Foundation.framework in Frameworks */,
 				D16A0E801698C4B80016DF67 /* CoreGraphics.framework in Frameworks */,
-				D16A0E821698C4B80016DF67 /* GLKit.framework in Frameworks */,
 				D16A0E841698C4B80016DF67 /* OpenGLES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -606,6 +607,7 @@
 		D127F8C71698D0B3007E6835 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				D1F09DEA169AB9D900DEEC63 /* GLKit.framework */,
 				D127F8C51698D0A3007E6835 /* CoreVideo.framework */,
 				D127F8C31698D09E007E6835 /* AVFoundation.framework */,
 				D127F8C11698D09A007E6835 /* CoreMedia.framework */,
@@ -1623,7 +1625,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D17621E8169909FD00CB6D6A /* glut_player.cpp in Sources */,
+				D1F09E09169AE25300DEEC63 /* glut_player.cpp in Sources */,
 				D16A0EB91698C5640016DF67 /* AppDelegate.mm in Sources */,
 				D16A0EBE1698C5640016DF67 /* main.mm in Sources */,
 				D16A0EBF1698C5640016DF67 /* ViewController.mm in Sources */,
@@ -2311,6 +2313,7 @@
 				PRODUCT_NAME = simple_player;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2331,6 +2334,7 @@
 				PRODUCT_NAME = simple_player;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Debug-LLVM";
@@ -2352,7 +2356,7 @@
 				PRODUCT_NAME = simple_player;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2374,7 +2378,7 @@
 				PRODUCT_NAME = simple_player;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Release-LLVM";
@@ -2396,7 +2400,7 @@
 				PRODUCT_NAME = simple_player;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = "App Store";

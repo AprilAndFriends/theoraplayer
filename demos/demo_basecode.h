@@ -17,7 +17,6 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 	#pragma warning( disable: 4996 ) // MSVC++
 	#include <windows.h>
 	#include <GL/gl.h>
-	#include <GL/glu.h>
 	#include <GL/glut.h>
 #else
 	#include "objcUtil.h"
@@ -26,7 +25,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 		#import <OpenGLES/ES1/glext.h>
 	#else
 		#include <OpenGL/gl.h>
-		#include <OpenGL/glu.h>
+		#include <OpenGL/glext.h>
 		#include <GLUT/glut.h>
 	#endif
 #endif

@@ -74,6 +74,13 @@ GLfloat vertices[] =
     [super dealloc];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	// Return YES for supported orientations
+	return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
+			interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
