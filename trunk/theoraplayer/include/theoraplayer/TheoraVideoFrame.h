@@ -10,18 +10,17 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #define _TheoraVideoFrame_h
 
 #include "TheoraExport.h"
+#include "TheoraVideoClip.h"
 
-class TheoraVideoClip;
 /**
 	
 */
 class TheoraPlayerExport TheoraVideoFrame
 {
+protected:
 	TheoraVideoClip* mParent;
 	unsigned char* mBuffer;
 	unsigned long mFrameNumber;
-	unsigned int mSize;
-
 public:
 	//! global time in seconds this frame should be displayed on
 	float mTimeToDisplay;
@@ -33,7 +32,7 @@ public:
 	int mIteration;
 
 	TheoraVideoFrame(TheoraVideoClip* parent);
-	~TheoraVideoFrame();
+	virtual ~TheoraVideoFrame();
 
 	//! internal function, do not use directly
 	void _setFrameNumber(int number) { mFrameNumber = number; }
@@ -48,12 +47,7 @@ public:
 
 	unsigned char* getBuffer();
 
-	//! Called by TheoraVideoClip to decode a YUV buffer onto itself
-	void decodeYUV(void* yuv);
-
-	//! temp, will be transfered to implementation classes
-	void decodeBGRX(void* data);
-	//! temp, will be transfered to implementation classes
-	void decodeBGRA(void* data);
+	//! Called by TheoraVideoClip to decode a source buffer onto itself
+	virtual void decode(void* src, TheoraOutputMode srcFormat) = 0;
 };
 #endif

@@ -18,6 +18,14 @@ bool started=1;
 int window_w=800,window_h=600;
 OpenAL_AudioInterfaceFactory* iface_factory;
 
+#ifdef MP4_VIDEO
+TheoraOutputMode outputMode = TH_BGRX;
+unsigned int textureFormat = GL_BGRA_EXT;
+#else
+TheoraOutputMode outputMode = TH_RGB;
+unsigned int textureFormat = GL_RGB;
+#endif
+
 void draw()
 {
 	glBindTexture(GL_TEXTURE_2D,tex_id);
@@ -26,7 +34,7 @@ void draw()
 
 	if (f)
 	{
-		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
+		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),textureFormat,GL_UNSIGNED_BYTE,f->getBuffer());
 		clip->popFrame();
 	}
 
@@ -81,10 +89,13 @@ void OnClick(float x,float y)
 
 void setDebugTitle(char* out)
 {
+	float buffer_size = 0;
+	OpenAL_AudioInterface* audio_iface = (OpenAL_AudioInterface*) clip->getAudioInterface();
+	if (audio_iface) buffer_size = audio_iface->getQueuedAudioSize();
 	int nDropped=clip->getNumDroppedFrames();
 	sprintf(out,"%d precached, %d dropped, buffered audio: %.2f s",
 		clip->getNumReadyFrames(),	nDropped, 
-		((OpenAL_AudioInterface*) clip->getAudioInterface())->getQueuedAudioSize());
+		buffer_size);
 }
 
 void init()
@@ -94,12 +105,12 @@ void init()
 	mgr=new TheoraVideoManager();
 	iface_factory=new OpenAL_AudioInterfaceFactory();
 	mgr->setAudioInterfaceFactory(iface_factory);
-	clip=mgr->createVideoClip("media/bunny" + resourceExtension, TH_RGB, 16);
+	clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 16);
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);
 	clip->setAutoRestart(1);
 	clip->pause();
-	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
+	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()), textureFormat);
 }
 
 void destroy()

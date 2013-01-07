@@ -17,6 +17,14 @@ std::string window_name="glut_player";
 bool started=1;
 int window_w=800,window_h=600;
 
+#ifdef MP4_VIDEO
+	TheoraOutputMode outputMode = TH_BGRX;
+	unsigned int textureFormat = GL_BGRA_EXT;
+#else
+	TheoraOutputMode outputMode = TH_RGB;
+	unsigned int textureFormat = GL_RGB;
+#endif
+
 void draw()
 {
 	glBindTexture(GL_TEXTURE_2D,tex_id);
@@ -24,7 +32,7 @@ void draw()
 	TheoraVideoFrame* f=clip->getNextFrame();
 	if (f)
 	{
-		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
+		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),textureFormat,GL_UNSIGNED_BYTE,f->getBuffer());
 		//printf("Displaying frame %d\n", f->getFrameNumber());
 		clip->popFrame();
 	}
@@ -96,12 +104,12 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip("media/bunny" + resourceExtension, TH_RGB, 16);
+	clip=mgr->createVideoClip("media/intro" + resourceExtension, outputMode, 16);
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);
 	clip->setAutoRestart(1);
 
-	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));
+	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()), textureFormat);
 }
 
 void destroy()

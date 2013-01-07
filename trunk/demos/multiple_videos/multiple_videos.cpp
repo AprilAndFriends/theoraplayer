@@ -16,6 +16,16 @@ TheoraVideoManager* mgr;
 std::string window_name="multiple_videos";
 int window_w=800 ,window_h=600;
 
+#ifdef MP4_VIDEO
+TheoraOutputMode outputMode = TH_BGRX;
+unsigned int textureFormat = GL_BGRA_EXT;
+unsigned int uploadFormat = GL_BGRA_EXT;
+#else
+TheoraOutputMode outputMode = TH_RGB;
+unsigned int textureFormat = GL_RGB;
+unsigned int uploadFormat = GL_RGB;
+#endif
+
 void drawVideo(int x,int y,unsigned int tex_id,TheoraVideoClip* clip)
 {
 	//glLoadIdentity();
@@ -25,7 +35,8 @@ void drawVideo(int x,int y,unsigned int tex_id,TheoraVideoClip* clip)
 	TheoraVideoFrame* f=clip->getNextFrame();
 	if (f)
 	{
-		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());
+		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),uploadFormat,GL_UNSIGNED_BYTE,f->getBuffer());
+
 		clip->popFrame();
 	}
 	
@@ -110,17 +121,13 @@ void init()
 		                   "media/room" + resourceExtension,
 		                   "media/titan" + resourceExtension};
 	mgr=new TheoraVideoManager(4);
-	mgr->setDefaultNumPrecachedFrames(32);
+	mgr->setDefaultNumPrecachedFrames(16);
 	for (int i=0;i<4;i++)
 	{
-		clips[i]=mgr->createVideoClip(
-#ifdef MP4_VIDEO
-									  new TheoraFileDataSource(files[i]));
-#else
-									  new TheoraMemoryFileDataSource(files[i]));
-#endif
+		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource(files[i]), outputMode);
+
 		clips[i]->setAutoRestart(1);
-		textures[i]=createTexture(nextPow2(clips[i]->getWidth()),nextPow2(clips[i]->getHeight()));
+		textures[i]=createTexture(nextPow2(clips[i]->getWidth()),nextPow2(clips[i]->getHeight()), textureFormat);
 	}
 }
 

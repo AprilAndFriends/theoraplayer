@@ -22,12 +22,16 @@ class TheoraVideoClip;
 */
 class TheoraFrameQueue
 {
+protected:
 	std::list<TheoraVideoFrame*> mQueue;
 	TheoraVideoClip* mParent;
 	TheoraMutex mMutex;
+	
+	//! implementation function that returns a TheoraVideoFrame instance
+	virtual TheoraVideoFrame* createFrameInstance(TheoraVideoClip* clip) = 0;
 public:
-	TheoraFrameQueue(int n,TheoraVideoClip* parent);
-	~TheoraFrameQueue();
+	TheoraFrameQueue(TheoraVideoClip* parent);
+	virtual ~TheoraFrameQueue();
 
 	/**
 	    \brief Returns the first available frame in the queue or NULL if no frames are available.

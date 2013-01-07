@@ -11,10 +11,9 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #import <AVFoundation/AVFoundation.h>
 #include "TheoraDataSource.h"
 #include "TheoraException.h"
-#include "TheoraFrameQueue.h"
 #include "TheoraTimer.h"
 #include "TheoraUtil.h"
-#include "TheoraVideoFrame.h"
+#include "TheoraVideoFrame_AVFoundation.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip_AVFoundation.h"
 
@@ -91,7 +90,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 			mStride = CVPixelBufferGetBytesPerRow(imageBuffer);
 			size_t width = CVPixelBufferGetWidth(imageBuffer);
 			size_t height = CVPixelBufferGetHeight(imageBuffer);
-			frame->decodeBGRX(baseAddress);
+			frame->decode(baseAddress, TH_BGRX);
 			
 			CVPixelBufferUnlockBaseAddress(imageBuffer,0);
 			CFRelease(sampleBuffer);
@@ -141,7 +140,8 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	AVAsset* asset = [[AVURLAsset alloc] initWithURL:url options:nil];
 	mReader = [[AVAssetReader alloc] initWithAsset:asset error:&err];
 	AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
-	NSDictionary *videoOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:kCVPixelFormatType_32BGRA], kCVPixelBufferPixelFormatTypeKey, nil];
+	bool yuv_output = (mOutputMode == TH_YUV);
+	NSDictionary *videoOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(yuv_output) ? kCVPixelFormatType_420YpCbCr8Planar : kCVPixelFormatType_32BGRA], kCVPixelBufferPixelFormatTypeKey, nil];
 	
 	mOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:videoTrack outputSettings:videoOptions];
 	[mReader addOutput:mOutput];
@@ -155,7 +155,11 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	mHeight = videoTrack.naturalSize.height;
 	mFrameDuration = 1.0f / mFPS;
 	mDuration = (float) CMTimeGetSeconds(asset.duration);
-	if (mFrameQueue == NULL) mFrameQueue = new TheoraFrameQueue(mNumPrecachedFrames, this);
+	if (mFrameQueue == NULL)
+	{
+		mFrameQueue = new TheoraFrameQueue_AVFoundation(this);
+		mFrameQueue->setSize(mNumPrecachedFrames);
+	}
 
 	if (mSeekFrame != -1)
 	{
