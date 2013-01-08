@@ -13,6 +13,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <theoraplayer/TheoraPlayer.h>
 #include <theoraplayer/TheoraTimer.h>
 #include <april/RenderSystem.h>
+#include <april/Platform.h>
 #include <april/Texture.h>
 #include <aprilui/aprilui.h>
 #include <aprilui/Dataset.h>
@@ -191,7 +192,7 @@ namespace aprilvideo
 					mode = mUseAlpha ? TH_BGRA : TH_BGRX;
 				}
 
-				mClip = gVideoManager->createVideoClip(path, mode, 16);
+				mClip = gVideoManager->createVideoClip(path, mode, april::getSystemInfo().ram < 512 ? 8 : 16);
 			}
 			catch (_TheoraGenericException& e)
 			{
@@ -210,7 +211,7 @@ namespace aprilvideo
 			{
 				if (!xal::mgr->hasCategory("video"))
 				{
-					xal::mgr->createCategory("video", xal::STREAMED, xal::DISK);
+					xal::mgr->createCategory("video", xal::ON_DEMAND, xal::DISK);
 				}
 				mSound = xal::mgr->createSound(mDataset->getFilePath() + "/video/" + mAudioName, "video");
 
