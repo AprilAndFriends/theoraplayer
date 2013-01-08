@@ -184,7 +184,7 @@ namespace aprilvideo
 					}
 					else
 					{
-						mode = mUsingAVFoundation ? TH_BGRX : TH_RGB;
+						mode = mUsingAVFoundation ? TH_BGRX : TH_RGBX;
 					}
 				}
 				else
@@ -247,8 +247,7 @@ namespace aprilvideo
 				r.h = f->getHeight();
 				mImage->setSrcRect(r);
 				if (april::rendersys->getName() == "DirectX9") mTexture->getRenderTexture()->clear();
-				int bpp = mUsingAVFoundation ? 4 : 3 + mUseAlpha;
-				mTexture->getRenderTexture()->write(0, 0, f->getBuffer(), r.w, r.h, bpp);
+				mTexture->getRenderTexture()->write(0, 0, f->getBuffer(), r.w, r.h, 4);
 				mClip->popFrame();
 				if (mLoop)
 				{
