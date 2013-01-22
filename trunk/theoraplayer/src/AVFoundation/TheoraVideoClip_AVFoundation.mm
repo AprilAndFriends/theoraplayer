@@ -99,7 +99,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 	}
 	if (pool) [pool release];
 
-	if (sampleBuffer == NULL)
+	if (sampleBuffer == NULL && mReader.status == AVAssetReaderStatusCompleted) // other cases could be app suspended
 	{
 		frame->mInUse = 0;
 		[mOutput release];
