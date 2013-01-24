@@ -54,12 +54,14 @@ namespace aprilvideo
 		xal::Sound* mSound;
 		
 		void destroyResources();
+		void createClip();
 	public:
 		VideoObject(chstr name, grect rect);
 		static aprilui::Object* createInstance(chstr name, grect rect);
 		~VideoObject();
 		
 		void update(float k);
+		void OnDraw();
 
 		void setAlphaTreshold(int treshold);
 		int getAlphaTreshold() { return mAlphaPauseTreshold; }

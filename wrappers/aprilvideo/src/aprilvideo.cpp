@@ -163,66 +163,76 @@ namespace aprilvideo
 		}
 	}
 	
-	void VideoObject::update(float k)
+	void VideoObject::createClip()
 	{
-		ImageBox::update(k);
-		if (mClip == NULL && mClipName != "")
+		destroyResources();
+		hstr path = mDataset->getFilePath() + "/video/" + mClipName;
+		if (!path.ends_with(".ogg") && !path.ends_with(".ogv") && !path.ends_with(".mp4")) path += defaultFileExtension;
+		
+		mUsingAVFoundation = path.ends_with(".mp4");
+		try
 		{
-			destroyResources();
-			hstr path = mDataset->getFilePath() + "/video/" + mClipName;
-			if (!path.ends_with(".ogg") && !path.ends_with(".ogv") && !path.ends_with(".mp4")) path += defaultFileExtension;
-			
-			mUsingAVFoundation = path.ends_with(".mp4");
-			try
+			TheoraOutputMode mode;
+			if (april::rendersys->getName() == "OpenGL")
 			{
-				TheoraOutputMode mode;
-				if (april::rendersys->getName() == "OpenGL")
+				if (mUseAlpha)
 				{
-					if (mUseAlpha)
-					{
-						mode = TH_RGBA;
-					}
-					else
-					{
-						mode = mUsingAVFoundation ? TH_BGRX : TH_RGBX;
-					}
+					mode = TH_RGBA;
 				}
 				else
 				{
-					mode = mUseAlpha ? TH_BGRA : TH_BGRX;
+					mode = mUsingAVFoundation ? TH_BGRX : TH_RGBX;
 				}
-
-				mClip = gVideoManager->createVideoClip(path, mode, april::getSystemInfo().ram < 512 ? 8 : 16);
 			}
-			catch (_TheoraGenericException& e)
+			else
 			{
-				throw hl_exception(e.getErrorText());
+				mode = mUseAlpha ? TH_BGRA : TH_BGRX;
 			}
-			if (mClip->getWidth() == 0) throw hl_exception("Failed to load video file: " + path);
-			mClip->setAutoRestart(mLoop);
 			
-			float w = mClip->getWidth(), h = mClip->getHeight();
-			april::Texture* tex = april::rendersys->createTexture(_nextPow2(w), _nextPow2(h), mUsingAVFoundation ? april::Texture::FORMAT_BGRA : april::Texture::FORMAT_ARGB);
-			mTexture = new aprilui::Texture(tex->getFilename(), tex);
-			mVideoImage = new aprilui::Image(mTexture, "video_img", grect(0, 0, w, h));
-			mClip->waitForCache(4 / 16.0f, 0.5f);
-			
-			if (mAudioName != "")
-			{
-				if (!xal::mgr->hasCategory("video"))
-				{
-					xal::mgr->createCategory("video", xal::ON_DEMAND, xal::DISK);
-				}
-				mSound = xal::mgr->createSound(mDataset->getFilePath() + "/video/" + mAudioName, "video");
-
-				mAudioPlayer = xal::mgr->createPlayer(mAudioName.replace(".ogg", ""));
-				mTimer = new AudioVideoTimer(mAudioPlayer, mAudioSyncOffset);
-				mClip->setTimer(mTimer);
-				
-				mAudioPlayer->play();
-			}
-			else if (mSpeed != 1.0f) mClip->setPlaybackSpeed(mSpeed);
+			mClip = gVideoManager->createVideoClip(path, mode, april::getSystemInfo().ram < 512 ? 8 : 16);
 		}
+		catch (_TheoraGenericException& e)
+		{
+			throw hl_exception(e.getErrorText());
+		}
+		if (mClip->getWidth() == 0) throw hl_exception("Failed to load video file: " + path);
+		mClip->setAutoRestart(mLoop);
+		
+		float w = mClip->getWidth(), h = mClip->getHeight();
+		april::Texture* tex = april::rendersys->createTexture(_nextPow2(w), _nextPow2(h), mUsingAVFoundation ? april::Texture::FORMAT_BGRA : april::Texture::FORMAT_ARGB);
+		mTexture = new aprilui::Texture(tex->getFilename(), tex);
+		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(0, 0, w, h));
+		mClip->waitForCache(4 / 16.0f, 0.5f);
+		
+		if (mAudioName != "")
+		{
+			if (!xal::mgr->hasCategory("video"))
+			{
+				xal::mgr->createCategory("video", xal::ON_DEMAND, xal::DISK);
+			}
+			mSound = xal::mgr->createSound(mDataset->getFilePath() + "/video/" + mAudioName, "video");
+			
+			mAudioPlayer = xal::mgr->createPlayer(mAudioName.replace(".ogg", ""));
+			mTimer = new AudioVideoTimer(mAudioPlayer, mAudioSyncOffset);
+			mClip->setTimer(mTimer);
+			
+			mAudioPlayer->play();
+		}
+		else if (mSpeed != 1.0f) mClip->setPlaybackSpeed(mSpeed);
+		update(0); // to grab the first frame.
+
+	}
+	
+	void VideoObject::OnDraw()
+	{
+		if (mClip == NULL && mClipName != "") createClip();
+
+		ImageBox::OnDraw();
+	}
+	
+	void VideoObject::update(float k)
+	{
+		ImageBox::update(k);
 
 		if (mClip)
 		{
