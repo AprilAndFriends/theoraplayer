@@ -152,9 +152,25 @@ static void decodeAGrey(unsigned char* src, unsigned char* out, int w, int h, in
 }
 
 
-static void _decodeYUV(unsigned char* src,unsigned char* out, int w, int h, int srcStride, int dstStride, int nBytes)
+static void _decodeYUV(unsigned char* src, unsigned char* out, int w, int h, int srcStride, int dstStride, int nBytes)
 {
-	// TODO
+	int y, srcDiff = srcStride - w, dstDiff = dstStride - w * nBytes;
+	unsigned char *psrc = src+32, *dst = out, *srcEnd;
+	for (y = 0; y < h; y++)
+	{
+		dst = out + y * dstStride;
+		srcEnd = psrc + w;
+		while (psrc != srcEnd)
+		{
+			dst[0] = psrc[0];
+			dst[1] = psrc[0];
+			dst[2] = psrc[0];
+			psrc += 1;
+			dst += nBytes;
+		}
+		psrc += 16;//srcDiff;
+		dst += dstDiff;
+	}
 }
 
 static void decodeYUV(unsigned char* src, unsigned char* out, int w, int h, int srcStride)

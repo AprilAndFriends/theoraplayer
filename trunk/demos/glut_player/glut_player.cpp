@@ -20,6 +20,10 @@ int window_w=800,window_h=600;
 #ifdef MP4_VIDEO
 	TheoraOutputMode outputMode = TH_BGRX;
 	unsigned int textureFormat = GL_BGRA_EXT;
+
+// TEMP
+//	TheoraOutputMode outputMode = TH_YUV;
+//	unsigned int textureFormat = GL_RGB;
 #else
 	TheoraOutputMode outputMode = TH_RGB;
 	unsigned int textureFormat = GL_RGB;

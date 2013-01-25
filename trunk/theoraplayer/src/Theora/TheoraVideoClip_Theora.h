@@ -9,10 +9,10 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #if defined(__THEORA) && !defined(_TheoraVideoClip_Theora_h)
 #define _TheoraVideoClip_Theora_h
 
-#include "TheoraVideoClip.h"
 #include <ogg/ogg.h>
 #include <vorbis/vorbisfile.h>
 #include <theora/theoradec.h>
+#include "TheoraVideoClip.h"
 
 struct TheoraInfoStruct
 {

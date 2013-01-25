@@ -23,7 +23,7 @@ class TheoraFrameQueue_Theora : public TheoraFrameQueue
 {
 protected:
 	TheoraVideoFrame* createFrameInstance(TheoraVideoClip* clip);
-	public:
+public:
 	TheoraFrameQueue_Theora(TheoraVideoClip* parent);
 };
 

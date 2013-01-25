@@ -19,7 +19,7 @@ void *theoraAsync_Call(void* param)
 {
 #endif
 
-	TheoraThread* t=(TheoraThread*) param;
+	TheoraThread* t = (TheoraThread*) param;
 	t->executeThread();
 #ifndef _WIN32
     pthread_exit(NULL);
@@ -31,9 +31,9 @@ void *theoraAsync_Call(void* param)
 TheoraMutex::TheoraMutex()
 {
 #ifdef _WIN32
-	mHandle=0;
+	mHandle = 0;
 #else
-    pthread_mutex_init(&mHandle,0);
+    pthread_mutex_init(&mHandle, 0);
 #endif
 }
 
@@ -49,8 +49,8 @@ TheoraMutex::~TheoraMutex()
 void TheoraMutex::lock()
 {
 #ifdef _WIN32
-	if (!mHandle) mHandle=CreateMutex(0,0,0);
-	WaitForSingleObject(mHandle,INFINITE);
+	if (!mHandle) mHandle=CreateMutex(0, 0, 0);
+	WaitForSingleObject(mHandle, INFINITE);
 #else
     pthread_mutex_lock(&mHandle);
 #endif
@@ -68,8 +68,8 @@ void TheoraMutex::unlock()
 
 TheoraThread::TheoraThread()
 {
-	mThreadRunning=false;
-	mHandle=0;
+	mThreadRunning = false;
+	mHandle = 0;
 }
 
 TheoraThread::~TheoraThread()
@@ -81,23 +81,23 @@ TheoraThread::~TheoraThread()
 
 void TheoraThread::startThread()
 {
-	mThreadRunning=true;
+	mThreadRunning = true;
 
 #ifdef _WIN32
-	mHandle=CreateThread(0,0,&theoraAsync_Call,this,0,0);
+	mHandle=CreateThread(0, 0, &theoraAsync_Call, this, 0, 0);
 #else
-    int ret=pthread_create(&mHandle,NULL,&theoraAsync_Call,this);
-    if (ret) printf("ERROR: Unable to create thread!\n");
+    int ret=pthread_create(&mHandle, NULL, &theoraAsync_Call, this);
+    if (ret) printf("ERROR: Unable to create thread!\n"); // <-- TODO: log this, rather then using printf, and remove stdio include.
 #endif
 }
 
 void TheoraThread::waitforThread()
 {
-	mThreadRunning=false;
+	mThreadRunning = false;
 #ifdef _WIN32
-	WaitForSingleObject(mHandle,INFINITE);
-	if (mHandle) { CloseHandle(mHandle); mHandle=0; }
+	WaitForSingleObject(mHandle, INFINITE);
+	if (mHandle) { CloseHandle(mHandle); mHandle = 0; }
 #else
-    pthread_join(mHandle,0);
+    pthread_join(mHandle, 0);
 #endif
 }
