@@ -82,8 +82,8 @@ TheoraTimer* TheoraVideoClip::getTimer()
 
 void TheoraVideoClip::setTimer(TheoraTimer* timer)
 {
-	if (!timer) mTimer=mDefaultTimer;
-	else mTimer=timer;
+	if (!timer) mTimer = mDefaultTimer;
+	else mTimer = timer;
 }
 
 void TheoraVideoClip::restart()
@@ -93,9 +93,9 @@ void TheoraVideoClip::restart()
 	_restart();
 	mTimer->seek(0);
 	mFrameQueue->clear();
-	mEndOfFile=0;
-	mIteration=0;
-	mRestarted=0;
+	mEndOfFile = 0;
+	mIteration = 0;
+	mRestarted = 0;
 	mSeekFrame = -1;
 }
 
@@ -234,6 +234,7 @@ float TheoraVideoClip::getTimePosition()
 {
 	return mTimer->getTime();
 }
+
 int TheoraVideoClip::getNumPrecachedFrames()
 {
 	return mFrameQueue->getSize();

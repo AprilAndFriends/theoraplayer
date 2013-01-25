@@ -17,9 +17,6 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip_AVFoundation.h"
 
-//AVAssetReader* mReader;
-//AVAssetReaderTrackOutput* mOutput;
-
 TheoraVideoClip_AVFoundation::TheoraVideoClip_AVFoundation(TheoraDataSource* data_source,
 											   TheoraOutputMode output_mode,
 											   int nPrecachedFrames,
@@ -87,12 +84,14 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 			CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
 			CVPixelBufferLockBaseAddress(imageBuffer, 0);
 			void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
+			
+		//	CVPlanarPixelBufferInfo_YCbCrPlanar; <-- TODO: use this struct when decoding YUV
 			mStride = CVPixelBufferGetBytesPerRow(imageBuffer);
 			size_t width = CVPixelBufferGetWidth(imageBuffer);
 			size_t height = CVPixelBufferGetHeight(imageBuffer);
 			frame->decode(baseAddress, TH_BGRX);
 			
-			CVPixelBufferUnlockBaseAddress(imageBuffer,0);
+			CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
 			CFRelease(sampleBuffer);
 			break;
 		}
