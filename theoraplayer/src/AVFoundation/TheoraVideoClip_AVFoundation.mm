@@ -17,6 +17,20 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip_AVFoundation.h"
 
+#ifdef _DEBUG
+//#define _BENCHMARK // TEMP, used for development debugging
+#endif
+
+#ifdef _BENCHMARK
+#include <sys/time.h>
+static unsigned long GetTickCount()
+{
+    struct timeval tv;
+    if (gettimeofday(&tv, NULL) != 0) return 0;
+    return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+}
+#endif
+
 TheoraVideoClip_AVFoundation::TheoraVideoClip_AVFoundation(TheoraDataSource* data_source,
 											   TheoraOutputMode output_mode,
 											   int nPrecachedFrames,
@@ -59,6 +73,11 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 
 	CMSampleBufferRef sampleBuffer = NULL;
 	NSAutoreleasePool* pool = NULL;
+#ifdef _BENCHMARK
+	static float avgtime = 0;
+	static int avgdiv = 0;
+	float time = GetTickCount();
+#endif
 	if ([mReader status] == AVAssetReaderStatusReading)
 	{
 		pool = [[NSAutoreleasePool alloc] init];
@@ -85,15 +104,29 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 			CVPixelBufferLockBaseAddress(imageBuffer, 0);
 			void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
 			
-		//	CVPlanarPixelBufferInfo_YCbCrPlanar; <-- TODO: use this struct when decoding YUV
 			mStride = CVPixelBufferGetBytesPerRow(imageBuffer);
 			size_t width = CVPixelBufferGetWidth(imageBuffer);
 			size_t height = CVPixelBufferGetHeight(imageBuffer);
-			frame->decode(baseAddress, TH_BGRX);
-			
+
+			if (mOutputMode == TH_BGRX)
+				frame->decode(baseAddress, TH_BGRX);
+			else
+			{
+				frame->decode(baseAddress, TH_YUV);
+			}
 			CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
 			CFRelease(sampleBuffer);
-			break;
+			
+#ifdef _BENCHMARK
+			float t = GetTickCount();
+			avgtime += t - time;
+			avgdiv++;
+			time = t;
+			
+			if (avgdiv % 50 == 0) printf("%s - Average decoding time: %.1f\n", mName.c_str(), avgtime / avgdiv);
+			
+#endif
+			break; // TODO - should this really be a while loop instead of an if block?
 		}
 	}
 	if (pool) [pool release];

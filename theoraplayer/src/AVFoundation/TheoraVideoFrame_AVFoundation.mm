@@ -7,6 +7,7 @@ This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
 #include "TheoraVideoFrame_AVFoundation.h"
+#import <CoreVideo/CVPixelBuffer.h>
 
 static void _decodeAlpha(unsigned char* src, unsigned char* out, int w, int h, int srcStride, int dstStride)
 {
@@ -151,25 +152,46 @@ static void decodeAGrey(unsigned char* src, unsigned char* out, int w, int h, in
 	// TODO
 }
 
+unsigned int swapByteOrder(unsigned int ui)
+{
+    return (ui >> 24) | ((ui<<8) & 0x00FF0000) | ((ui>>8) & 0x0000FF00) | (ui << 24);
+}
 
 static void _decodeYUV(unsigned char* src, unsigned char* out, int w, int h, int srcStride, int dstStride, int nBytes)
 {
-	int y, srcDiff = srcStride - w, dstDiff = dstStride - w * nBytes;
-	unsigned char *psrc = src+32, *dst = out, *srcEnd;
-	for (y = 0; y < h; y++)
+	CVPlanarPixelBufferInfo_YCbCrPlanar* bigEndianYuv = (CVPlanarPixelBufferInfo_YCbCrPlanar*) src;
+	CVPlanarPixelBufferInfo_YCbCrPlanar yuv;
+	yuv.componentInfoY.offset = swapByteOrder(bigEndianYuv->componentInfoY.offset);
+	yuv.componentInfoY.rowBytes = swapByteOrder(bigEndianYuv->componentInfoY.rowBytes);
+	yuv.componentInfoCb.offset = swapByteOrder(bigEndianYuv->componentInfoCb.offset);
+	yuv.componentInfoCb.rowBytes = swapByteOrder(bigEndianYuv->componentInfoCb.rowBytes);
+	yuv.componentInfoCr.offset = swapByteOrder(bigEndianYuv->componentInfoCr.offset);
+	yuv.componentInfoCr.rowBytes = swapByteOrder(bigEndianYuv->componentInfoCr.rowBytes);
+	
+	int t,y;
+	unsigned char cu,cv;
+	unsigned char *ySrc=src + yuv.componentInfoY.offset, *yLineEnd,
+	*uSrc=src + yuv.componentInfoCr.offset,
+	*vSrc=src + yuv.componentInfoCr.offset,
+	*out2=out+dstStride;
+	
+	dstStride+=dstStride-w*nBytes;
+	
+	for (y=0;y<h;y+=2)
 	{
-		dst = out + y * dstStride;
-		srcEnd = psrc + w;
-		while (psrc != srcEnd)
+		for (yLineEnd=ySrc+w,t=0;ySrc != yLineEnd;ySrc++,out+=nBytes,out2+=nBytes,t=!t)
 		{
-			dst[0] = psrc[0];
-			dst[1] = psrc[0];
-			dst[2] = psrc[0];
-			psrc += 1;
-			dst += nBytes;
+			if (!t) { cu=*uSrc; cv=*vSrc; }
+			else { uSrc++; vSrc++; }
+			out[0]  = *ySrc;
+			out2[0] = *(ySrc+yuv.componentInfoY.rowBytes);
+			out[1] = cu; out2[1] = cu;
+			out[2] = cv; out2[2] = cv;
 		}
-		psrc += 16;//srcDiff;
-		dst += dstDiff;
+		out+=dstStride; out2+=dstStride;
+		ySrc+=yuv.componentInfoY.rowBytes*2-w;
+		uSrc+=yuv.componentInfoCr.rowBytes-w/2;
+		vSrc+=yuv.componentInfoCb.rowBytes-w/2;
 	}
 }
 
