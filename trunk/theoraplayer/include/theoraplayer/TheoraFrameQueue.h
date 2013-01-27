@@ -28,10 +28,10 @@ protected:
 	TheoraMutex mMutex;
 	
 	//! implementation function that returns a TheoraVideoFrame instance
-	virtual TheoraVideoFrame* createFrameInstance(TheoraVideoClip* clip) = 0;
+	TheoraVideoFrame* createFrameInstance(TheoraVideoClip* clip);
 public:
 	TheoraFrameQueue(TheoraVideoClip* parent);
-	virtual ~TheoraFrameQueue();
+	~TheoraFrameQueue();
 
 	/**
 	    \brief Returns the first available frame in the queue or NULL if no frames are available.

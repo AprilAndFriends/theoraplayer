@@ -9,14 +9,15 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #ifdef __THEORA
 #include <memory.h>
 #include "TheoraVideoManager.h"
-#include "TheoraVideoFrame_Theora.h"
+#include "TheoraFrameQueue.h"
+#include "TheoraVideoFrame.h"
 #include "TheoraAudioInterface.h"
 #include "TheoraTimer.h"
 #include "TheoraDataSource.h"
 #include "TheoraUtil.h"
 #include "TheoraException.h"
 #include "TheoraVideoClip_Theora.h"
-
+#include "TheoraPixelTransform.h"
 
 //! clears a portion of memory with an unsign
 void memset_uint(void* buffer,unsigned int colour,unsigned int size_in_bytes)
@@ -125,7 +126,13 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 			frame->mIteration     = mIteration;
 			frame->_setFrameNumber(frame_number);
 			th_decode_ycbcr_out(mInfo.TheoraDecoder, buff);
-			frame->decode(buff, TH_YUV);
+			TheoraPixelTransform t;
+			memset(&t, 0, sizeof(TheoraPixelTransform));
+			
+			t.y = buff[0].data; t.yStride = buff[0].stride;
+			t.u = buff[1].data; t.uStride = buff[1].stride;
+			t.v = buff[2].data; t.vStride = buff[2].stride;
+			frame->decode(&t);
 			break;
 		}
 		else
@@ -204,7 +211,7 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 #ifdef _DEBUG
 	th_writelog("width: " + str(mWidth) + ", height: " + str(mHeight) + ", fps: " + str((int) getFPS()));
 #endif
-	mFrameQueue = new TheoraFrameQueue_Theora(this);
+	mFrameQueue = new TheoraFrameQueue(this);
 	mFrameQueue->setSize(mNumPrecachedFrames);
 	// find out the duration of the file by seeking to the end
 	// having ogg decode pages, extract the granule pos from

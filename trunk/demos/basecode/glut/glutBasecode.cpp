@@ -245,9 +245,9 @@ int main(int argc, char** argv)
 #endif
 	glutInit(&argc, argv);
 #ifdef __ZBUFFER
-	glutInitDisplayMode( GLUT_DOUBLE|GLUT_RGBA|GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA|GLUT_DEPTH);
 #else
-	glutInitDisplayMode( GLUT_DOUBLE|GLUT_RGBA);
+	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA);
 #endif
 	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-window_w)/2,(glutGet(GLUT_SCREEN_HEIGHT)-window_h)/2);
 	glutInitWindowSize(window_w,window_h);

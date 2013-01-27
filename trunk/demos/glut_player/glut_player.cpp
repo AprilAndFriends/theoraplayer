@@ -21,9 +21,11 @@ int window_w=800,window_h=600;
 	TheoraOutputMode outputMode = TH_BGRX;
 	unsigned int textureFormat = GL_BGRA_EXT;
 
-// TEMP
-//	TheoraOutputMode outputMode = TH_YUV;
+// TEST
+//	TheoraOutputMode outputMode = TH_RGB;
 //	unsigned int textureFormat = GL_RGB;
+//	TheoraOutputMode outputMode = TH_GREY;
+//	unsigned int textureFormat = GL_LUMINANCE;
 #else
 	TheoraOutputMode outputMode = TH_RGB;
 	unsigned int textureFormat = GL_RGB;
@@ -108,11 +110,22 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
+	
+	/*/ Benchmark
+	clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 100);
+	unsigned int time = GetTickCount();
+	clip->waitForCache(1.0f, 10000000);
+	printf("Average time per frame: %.2f\n", (GetTickCount() - time) / 100.0f);
+	
+	//sleep(5);
+	//exit(0);
+	//*/
+		
 	clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 16);
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);
 	clip->setAutoRestart(1);
-
+	
 	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()), textureFormat);
 }
 

@@ -120,7 +120,7 @@ void OnKeyPress(int key)
 	if (key == 13) lighting_enabled = !lighting_enabled; // 13 = ENTER key
 }
 
-void OnClick(float x,float y)
+void OnClick(float x, float y)
 {
 
 }

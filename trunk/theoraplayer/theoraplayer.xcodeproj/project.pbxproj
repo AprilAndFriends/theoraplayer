@@ -179,22 +179,42 @@
 		D1CDFFFD1696FC0800609AB0 /* Theora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFFB1696FC0100609AB0 /* Theora.framework */; };
 		D1CDFFFE1696FC0800609AB0 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF91696FBF700609AB0 /* Vorbis.framework */; };
 		D1CDFFFF1696FC0800609AB0 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF71696FBF400609AB0 /* Ogg.framework */; };
-		D1F09DEE169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1F09DEC169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm */; };
-		D1F09DEF169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1F09DEC169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm */; };
-		D1F09DF0169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1F09DEC169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm */; };
-		D1F09DF1169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1F09DEC169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm */; };
-		D1F09DF2169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = D1F09DED169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h */; };
-		D1F09DF3169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = D1F09DED169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h */; };
-		D1F09DF4169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = D1F09DED169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h */; };
-		D1F09DF5169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = D1F09DED169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h */; };
-		D1F09DF9169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1F09DF7169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp */; };
-		D1F09DFA169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1F09DF7169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp */; };
-		D1F09DFB169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1F09DF7169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp */; };
-		D1F09DFC169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1F09DF7169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp */; };
-		D1F09DFD169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1F09DF8169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h */; };
-		D1F09DFE169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1F09DF8169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h */; };
-		D1F09DFF169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1F09DF8169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h */; };
-		D1F09E00169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1F09DF8169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h */; };
+		D1E2718D16B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
+		D1E2718E16B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
+		D1E2718F16B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
+		D1E2719016B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
+		D1E2719116B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
+		D1E2719216B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
+		D1E2719316B46F640046C00C /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
+		D1E2719416B46F640046C00C /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
+		D1E2719516B46F640046C00C /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
+		D1E2719616B46F640046C00C /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
+		D1E2719716B46F640046C00C /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
+		D1E2719816B46F640046C00C /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
+		D1E2719916B46F640046C00C /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
+		D1E2719A16B46F640046C00C /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
+		D1E2719B16B46F640046C00C /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
+		D1E2719C16B46F640046C00C /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
+		D1E2719D16B46F640046C00C /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
+		D1E2719E16B46F640046C00C /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
+		D1E271A516B46F640046C00C /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
+		D1E271A616B46F640046C00C /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
+		D1E271A716B46F640046C00C /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
+		D1E271A816B46F640046C00C /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
+		D1E271A916B46F640046C00C /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
+		D1E271AA16B46F640046C00C /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
+		D1E271AC16B470210046C00C /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
+		D1E271AD16B470210046C00C /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
+		D1E271AE16B470210046C00C /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
+		D1E271AF16B470210046C00C /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
+		D1E271B016B470210046C00C /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
+		D1E271B116B470210046C00C /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
+		D1E271B316B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
+		D1E271B416B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
+		D1E271B516B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
+		D1E271B616B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
+		D1E271B716B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
+		D1E271B816B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
 		D1F09EB1169AFEFB00DEEC63 /* TheoraVideoClip_AVFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = D1CDFF9D1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.h */; };
 /* End PBXBuildFile section */
 
@@ -240,10 +260,12 @@
 		D1CDFFF71696FBF400609AB0 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = ../__build__/products/Debug/Ogg.framework; sourceTree = "<group>"; };
 		D1CDFFF91696FBF700609AB0 /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = ../__build__/products/Debug/Vorbis.framework; sourceTree = "<group>"; };
 		D1CDFFFB1696FC0100609AB0 /* Theora.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Theora.framework; path = ../__build__/products/Debug/Theora.framework; sourceTree = "<group>"; };
-		D1F09DEC169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TheoraVideoFrame_AVFoundation.mm; path = src/AVFoundation/TheoraVideoFrame_AVFoundation.mm; sourceTree = "<group>"; };
-		D1F09DED169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheoraVideoFrame_AVFoundation.h; path = src/AVFoundation/TheoraVideoFrame_AVFoundation.h; sourceTree = "<group>"; };
-		D1F09DF7169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraVideoFrame_Theora.cpp; path = src/Theora/TheoraVideoFrame_Theora.cpp; sourceTree = "<group>"; };
-		D1F09DF8169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheoraVideoFrame_Theora.h; path = src/Theora/TheoraVideoFrame_Theora.h; sourceTree = "<group>"; };
+		D1E2718816B46F640046C00C /* yuv_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv_c.c; path = src/YUV/C/yuv_c.c; sourceTree = "<group>"; };
+		D1E2718916B46F640046C00C /* yuv_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = yuv_c.h; path = src/YUV/C/yuv_c.h; sourceTree = "<group>"; };
+		D1E2718A16B46F640046C00C /* yuv420_grey_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv420_grey_c.c; path = src/YUV/C/yuv420_grey_c.c; sourceTree = "<group>"; };
+		D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv420_yuv_c.c; path = src/YUV/C/yuv420_yuv_c.c; sourceTree = "<group>"; };
+		D1E271AB16B470210046C00C /* yuv420_rgb_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv420_rgb_c.c; path = src/YUV/C/yuv420_rgb_c.c; sourceTree = "<group>"; };
+		D1E271B216B471E80046C00C /* TheoraPixelTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheoraPixelTransform.h; path = include/theoraplayer/TheoraPixelTransform.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +362,7 @@
 		D1473F42150CA6C000B20490 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D1E2718516B46F370046C00C /* YUV */,
 				D1CDFF931696CF0000609AB0 /* AVFoundation */,
 				D1CDFF921696CEFA00609AB0 /* Theora */,
 				D16775A5155C501D0050EC64 /* TheoraVideoClip.cpp */,
@@ -379,6 +402,7 @@
 				D16775C3155C50280050EC64 /* TheoraDataSource.h */,
 				D16775C4155C50280050EC64 /* TheoraException.h */,
 				D16775C5155C50280050EC64 /* TheoraExport.h */,
+				D1E271B216B471E80046C00C /* TheoraPixelTransform.h */,
 				D16775CB155C50280050EC64 /* TheoraVideoFrame.h */,
 				D16775C6155C50280050EC64 /* TheoraFrameQueue.h */,
 				D16775C7155C50280050EC64 /* TheoraPlayer.h */,
@@ -395,9 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				D1CDFF951696D0F000609AB0 /* TheoraVideoClip_Theora.h */,
-				D1F09DF8169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h */,
 				D1CDFF941696D0F000609AB0 /* TheoraVideoClip_Theora.cpp */,
-				D1F09DF7169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp */,
 			);
 			name = Theora;
 			sourceTree = "<group>";
@@ -406,11 +428,29 @@
 			isa = PBXGroup;
 			children = (
 				D1CDFF9D1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.h */,
-				D1F09DED169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h */,
 				D1CDFF9C1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm */,
-				D1F09DEC169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm */,
 			);
 			name = AVFoundation;
+			sourceTree = "<group>";
+		};
+		D1E2718516B46F370046C00C /* YUV */ = {
+			isa = PBXGroup;
+			children = (
+				D1E2718716B46F4F0046C00C /* C */,
+			);
+			name = YUV;
+			sourceTree = "<group>";
+		};
+		D1E2718716B46F4F0046C00C /* C */ = {
+			isa = PBXGroup;
+			children = (
+				D1E2718916B46F640046C00C /* yuv_c.h */,
+				D1E2718816B46F640046C00C /* yuv_c.c */,
+				D1E271AB16B470210046C00C /* yuv420_rgb_c.c */,
+				D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */,
+				D1E2718A16B46F640046C00C /* yuv420_grey_c.c */,
+			);
+			name = C;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,7 +474,8 @@
 				D16775E4155C50280050EC64 /* TheoraVideoManager.h in Headers */,
 				D16775E6155C50280050EC64 /* TheoraWorkerThread.h in Headers */,
 				D1CDFF991696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */,
-				D1F09DFD169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h in Headers */,
+				D1E2719316B46F640046C00C /* yuv_c.h in Headers */,
+				D1E271B316B471E80046C00C /* TheoraPixelTransform.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +497,8 @@
 				D16775E5155C50280050EC64 /* TheoraVideoManager.h in Headers */,
 				D16775E7155C50280050EC64 /* TheoraWorkerThread.h in Headers */,
 				D1CDFF9B1696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */,
-				D1F09DFF169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h in Headers */,
+				D1E2719616B46F640046C00C /* yuv_c.h in Headers */,
+				D1E271B616B471E80046C00C /* TheoraPixelTransform.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,7 +520,8 @@
 				D1CDFF3F1696C77A00609AB0 /* TheoraVideoManager.h in Headers */,
 				D1CDFF401696C77A00609AB0 /* TheoraWorkerThread.h in Headers */,
 				D1CDFF9F1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.h in Headers */,
-				D1F09DF2169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h in Headers */,
+				D1E2719416B46F640046C00C /* yuv_c.h in Headers */,
+				D1E271B416B471E80046C00C /* TheoraPixelTransform.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,8 +544,8 @@
 				D1CDFF681696C79700609AB0 /* TheoraWorkerThread.h in Headers */,
 				D1CDFF9A1696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */,
 				D1F09EB1169AFEFB00DEEC63 /* TheoraVideoClip_AVFoundation.h in Headers */,
-				D1F09DFE169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h in Headers */,
-				D1F09DF3169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h in Headers */,
+				D1E2719516B46F640046C00C /* yuv_c.h in Headers */,
+				D1E271B516B471E80046C00C /* TheoraPixelTransform.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,7 +567,8 @@
 				D1CDFFBB1696E1CA00609AB0 /* TheoraVideoManager.h in Headers */,
 				D1CDFFBC1696E1CA00609AB0 /* TheoraWorkerThread.h in Headers */,
 				D1CDFFBD1696E1CA00609AB0 /* TheoraVideoClip_Theora.h in Headers */,
-				D1F09DF4169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h in Headers */,
+				D1E2719716B46F640046C00C /* yuv_c.h in Headers */,
+				D1E271B716B471E80046C00C /* TheoraPixelTransform.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,8 +590,8 @@
 				D1CDFFE01696E1D700609AB0 /* TheoraVideoManager.h in Headers */,
 				D1CDFFE11696E1D700609AB0 /* TheoraWorkerThread.h in Headers */,
 				D1CDFFE21696E1D700609AB0 /* TheoraVideoClip_Theora.h in Headers */,
-				D1F09DF5169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.h in Headers */,
-				D1F09E00169ABAD600DEEC63 /* TheoraVideoFrame_Theora.h in Headers */,
+				D1E2719816B46F640046C00C /* yuv_c.h in Headers */,
+				D1E271B816B471E80046C00C /* TheoraPixelTransform.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -703,7 +747,10 @@
 				D16775BD155C501D0050EC64 /* TheoraVideoManager.cpp in Sources */,
 				D16775BF155C501D0050EC64 /* TheoraWorkerThread.cpp in Sources */,
 				D1CDFF961696D0F000609AB0 /* TheoraVideoClip_Theora.cpp in Sources */,
-				D1F09DF9169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp in Sources */,
+				D1E2718D16B46F640046C00C /* yuv_c.c in Sources */,
+				D1E2719916B46F640046C00C /* yuv420_grey_c.c in Sources */,
+				D1E271A516B46F640046C00C /* yuv420_yuv_c.c in Sources */,
+				D1E271AC16B470210046C00C /* yuv420_rgb_c.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,7 +770,10 @@
 				D16775BE155C501D0050EC64 /* TheoraVideoManager.cpp in Sources */,
 				D16775C0155C501D0050EC64 /* TheoraWorkerThread.cpp in Sources */,
 				D1CDFF981696D0F000609AB0 /* TheoraVideoClip_Theora.cpp in Sources */,
-				D1F09DFB169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp in Sources */,
+				D1E2719016B46F640046C00C /* yuv_c.c in Sources */,
+				D1E2719C16B46F640046C00C /* yuv420_grey_c.c in Sources */,
+				D1E271A816B46F640046C00C /* yuv420_yuv_c.c in Sources */,
+				D1E271AF16B470210046C00C /* yuv420_rgb_c.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -743,7 +793,10 @@
 				D1CDFF2D1696C77A00609AB0 /* TheoraVideoManager.cpp in Sources */,
 				D1CDFF2E1696C77A00609AB0 /* TheoraWorkerThread.cpp in Sources */,
 				D1CDFF9E1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */,
-				D1F09DEE169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm in Sources */,
+				D1E2718E16B46F640046C00C /* yuv_c.c in Sources */,
+				D1E2719A16B46F640046C00C /* yuv420_grey_c.c in Sources */,
+				D1E271A616B46F640046C00C /* yuv420_yuv_c.c in Sources */,
+				D1E271AD16B470210046C00C /* yuv420_rgb_c.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,8 +817,10 @@
 				D1CDFF561696C79700609AB0 /* TheoraWorkerThread.cpp in Sources */,
 				D1CDFF971696D0F000609AB0 /* TheoraVideoClip_Theora.cpp in Sources */,
 				D1CDFFEC1696E24F00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */,
-				D1F09DEF169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm in Sources */,
-				D1F09DFA169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp in Sources */,
+				D1E2718F16B46F640046C00C /* yuv_c.c in Sources */,
+				D1E2719B16B46F640046C00C /* yuv420_grey_c.c in Sources */,
+				D1E271A716B46F640046C00C /* yuv420_yuv_c.c in Sources */,
+				D1E271AE16B470210046C00C /* yuv420_rgb_c.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,7 +840,10 @@
 				D1CDFFAB1696E1CA00609AB0 /* TheoraVideoManager.cpp in Sources */,
 				D1CDFFAC1696E1CA00609AB0 /* TheoraWorkerThread.cpp in Sources */,
 				D1CDFFEA1696E24B00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */,
-				D1F09DF0169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm in Sources */,
+				D1E2719116B46F640046C00C /* yuv_c.c in Sources */,
+				D1E2719D16B46F640046C00C /* yuv420_grey_c.c in Sources */,
+				D1E271A916B46F640046C00C /* yuv420_yuv_c.c in Sources */,
+				D1E271B016B470210046C00C /* yuv420_rgb_c.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -806,8 +864,10 @@
 				D1CDFFD11696E1D700609AB0 /* TheoraWorkerThread.cpp in Sources */,
 				D1CDFFD21696E1D700609AB0 /* TheoraVideoClip_Theora.cpp in Sources */,
 				D1CDFFEB1696E24C00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */,
-				D1F09DF1169ABACA00DEEC63 /* TheoraVideoFrame_AVFoundation.mm in Sources */,
-				D1F09DFC169ABAD600DEEC63 /* TheoraVideoFrame_Theora.cpp in Sources */,
+				D1E2719216B46F640046C00C /* yuv_c.c in Sources */,
+				D1E2719E16B46F640046C00C /* yuv420_grey_c.c in Sources */,
+				D1E271AA16B46F640046C00C /* yuv420_yuv_c.c in Sources */,
+				D1E271B116B470210046C00C /* yuv420_rgb_c.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,6 +943,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -905,6 +966,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -960,6 +1022,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1008,6 +1071,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1056,6 +1120,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1075,6 +1140,7 @@
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1097,6 +1163,7 @@
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1119,6 +1186,7 @@
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1142,6 +1210,7 @@
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1165,6 +1234,7 @@
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1191,6 +1261,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1213,6 +1284,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1235,6 +1307,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1257,6 +1330,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1279,6 +1353,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1302,6 +1377,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1325,6 +1401,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1348,6 +1425,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1371,6 +1449,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1394,6 +1473,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1413,6 +1493,7 @@
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1436,6 +1517,7 @@
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1459,6 +1541,7 @@
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1483,6 +1566,7 @@
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1507,6 +1591,7 @@
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
+					_YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1532,6 +1617,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
+					YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1555,6 +1641,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
+					YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1578,6 +1665,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
+					YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1602,6 +1690,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
+					YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1626,6 +1715,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
+					YUV_C,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;

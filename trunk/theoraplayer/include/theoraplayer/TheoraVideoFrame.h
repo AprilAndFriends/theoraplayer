@@ -12,6 +12,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "TheoraExport.h"
 #include "TheoraVideoClip.h"
 
+struct TheoraPixelTransform;
 /**
 	
 */
@@ -48,6 +49,6 @@ public:
 	unsigned char* getBuffer();
 
 	//! Called by TheoraVideoClip to decode a source buffer onto itself
-	virtual void decode(void* src, TheoraOutputMode srcFormat) = 0;
+	virtual void decode(struct TheoraPixelTransform* t);
 };
 #endif
