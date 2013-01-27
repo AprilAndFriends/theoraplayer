@@ -76,8 +76,6 @@ protected:
 	// benchmark vars
 	int mNumDroppedFrames, mNumDisplayedFrames;
 
-	int mTheoraStreams, mVorbisStreams;	// Keeps track of Theora and Vorbis Streams
-
 	int mNumPrecachedFrames;
 
 	int mSeekFrame; //! stores desired seek position as a frame number. next worker thread will do the seeking and reset this var to -1

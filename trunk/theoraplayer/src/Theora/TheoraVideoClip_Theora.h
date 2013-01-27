@@ -48,6 +48,7 @@ class TheoraVideoClip_Theora : public TheoraVideoClip
 protected:
 	TheoraAudioPacket* mTheoraAudioPacketQueue;
 	TheoraInfoStruct mInfo; // a pointer is used to avoid having to include theora & vorbis headers
+	int mTheoraStreams, mVorbisStreams;	// Keeps track of Theora and Vorbis Streams
 
 	float getAudioPacketQueueLength();
 	void addAudioPacket(float** buffer, int num_samples);

@@ -23,8 +23,6 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	mAudioInterface(NULL),
 	mNumDroppedFrames(0),
 	mNumDisplayedFrames(0),
-	mTheoraStreams(0),
-	mVorbisStreams(0),
 	mSeekFrame(-1),
 	mDuration(-1),
 	mNumFrames(-1),
@@ -68,7 +66,7 @@ TheoraVideoClip::~TheoraVideoClip()
 	if (mAudioInterface)
 	{
 		mAudioMutex->lock(); // ensure a thread isn't using this mutex
-		mAudioInterface->destroy(); // notify audio interface it's time to call it a day
+		delete mAudioInterface; // notify audio interface it's time to call it a day
         mAudioMutex->unlock();
 	}
 	delete mAudioMutex;
@@ -340,7 +338,7 @@ float TheoraVideoClip::getPriorityIndex()
 
 void TheoraVideoClip::setAudioInterface(TheoraAudioInterface* iface)
 {
-	mAudioInterface=iface;
+	mAudioInterface = iface;
 }
 
 TheoraAudioInterface* TheoraVideoClip::getAudioInterface()

@@ -67,7 +67,15 @@ TheoraVideoFrame::TheoraVideoFrame(TheoraVideoClip* parent)
 	// number of bytes based on output mode
 	int bytemap[]={0, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4, 1, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4};
 	unsigned int size = mParent->getStride() * mParent->mHeight * bytemap[mParent->getOutputMode()];
-	mBuffer = new unsigned char[size];
+	try
+	{
+		mBuffer = new unsigned char[size];
+	}
+	catch (std::bad_alloc)
+	{
+		mBuffer = NULL;
+		return;
+	}
 	memset(mBuffer, 255, size);
 }
 

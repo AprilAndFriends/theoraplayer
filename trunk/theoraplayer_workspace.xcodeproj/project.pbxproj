@@ -137,6 +137,10 @@
 		D1C134C615797387005E8A5B /* parallax_mapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1C134C515797387005E8A5B /* parallax_mapping.cpp */; };
 		D1D098F2155F077C009F6AAA /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
 		D1D098F3155F077C009F6AAA /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
+		D1D88F0016B587B400CCE8CE /* Ogg.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D1D098D2155F05C5009F6AAA /* Ogg.framework */; };
+		D1D88F0116B587B400CCE8CE /* Vorbis.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D1D098DE155F05CC009F6AAA /* Vorbis.framework */; };
+		D1D88F0216B587B400CCE8CE /* Theora.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D1D098EB155F05D2009F6AAA /* Theora.framework */; };
+		D1D88F0316B587B400CCE8CE /* theoraplayer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
 		D1E39A96169A3EC0003A6CB5 /* icon_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A8E169A3E4E003A6CB5 /* icon_iphone.png */; };
 		D1E39A97169A3EC2003A6CB5 /* icon_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A90169A3E55003A6CB5 /* icon_iphone@2x.png */; };
 		D1E39A98169A3ECB003A6CB5 /* icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A92169A3E65003A6CB5 /* icon_ipad.png */; };
@@ -341,6 +345,48 @@
 			remoteGlobalIDString = D1BB6F7E150E9CFD00EF9400;
 			remoteInfo = "theora (iOS)";
 		};
+		D1D88F0616B587D700CCE8CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D07F2BC0486CC7A007CD1D0;
+			remoteInfo = theora;
+		};
+		D1D88F0816B587D700CCE8CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D07F2BC0486CC7A007CD1D0;
+			remoteInfo = ogg;
+		};
+		D1D88F0A16B587D700CCE8CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 730F23A1091827B100AB638C;
+			remoteInfo = vorbis;
+		};
+		D1D88F0C16B591C200CCE8CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D07F2BC0486CC7A007CD1D0;
+			remoteInfo = theora;
+		};
+		D1D88F0E16B591C200CCE8CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D07F2BC0486CC7A007CD1D0;
+			remoteInfo = ogg;
+		};
+		D1D88F1016B591C200CCE8CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 730F23A1091827B100AB638C;
+			remoteInfo = vorbis;
+		};
 		D1F41EFD16977F6E00780A0E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
@@ -356,6 +402,22 @@
 			remoteInfo = "theoraplayer (iOS Theora AVFoundation)";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D1D88EFF16B587A400CCE8CE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D1D88F0016B587B400CCE8CE /* Ogg.framework in CopyFiles */,
+				D1D88F0116B587B400CCE8CE /* Vorbis.framework in CopyFiles */,
+				D1D88F0216B587B400CCE8CE /* Theora.framework in CopyFiles */,
+				D1D88F0316B587B400CCE8CE /* theoraplayer.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D127F7F71698C842007E6835 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cpp; path = demos/basecode/util/util.cpp; sourceTree = "<group>"; };
@@ -641,6 +703,7 @@
 				D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */,
 				D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */,
 				D1474109150CB6BD00B20490 /* glut_player */,
+				D1474107150CB6A700B20490 /* av_player */,
 				D147416E150CB74200B20490 /* multiple_videos */,
 				D147416F150CB74B00B20490 /* sprite_animation */,
 				D12C20781534D4A000B4904B /* composite_animation */,
@@ -716,7 +779,6 @@
 			isa = PBXGroup;
 			children = (
 				D1677619155C525F0050EC64 /* glut_player.cpp */,
-				D1474107150CB6A700B20490 /* av_player */,
 			);
 			name = glut_player;
 			sourceTree = "<group>";
@@ -913,10 +975,14 @@
 				D1474021150CAF0D00B20490 /* Frameworks */,
 				D16776B5155C53D90050EC64 /* ShellScript */,
 				D1E39A9F169A441F003A6CB5 /* Resources */,
+				D1D88EFF16B587A400CCE8CE /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D1D88F0916B587D700CCE8CE /* PBXTargetDependency */,
+				D1D88F0B16B587D700CCE8CE /* PBXTargetDependency */,
+				D1D88F0716B587D700CCE8CE /* PBXTargetDependency */,
 				D1CDFF771696C88F00609AB0 /* PBXTargetDependency */,
 			);
 			name = glut_player;
@@ -936,6 +1002,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				D1D88F0F16B591C200CCE8CE /* PBXTargetDependency */,
+				D1D88F1116B591C200CCE8CE /* PBXTargetDependency */,
+				D1D88F0D16B591C200CCE8CE /* PBXTargetDependency */,
 				D1CDFF7F1696C89300609AB0 /* PBXTargetDependency */,
 			);
 			name = av_player;
@@ -1159,7 +1228,6 @@
 			projectRoot = "";
 			targets = (
 				D1474023150CAF0D00B20490 /* glut_player */,
-				D16A0E781698C4B80016DF67 /* simple_player (iOS) */,
 				D14740E7150CB45E00B20490 /* av_player */,
 				D147410A150CB6F300B20490 /* multiple_videos */,
 				D1474123150CB6F600B20490 /* sprite_animation */,
@@ -1170,6 +1238,7 @@
 				D1C014F215619D4700FBEF81 /* lightmap_demo */,
 				D166335A156ADAE8009E98F1 /* video_lighting */,
 				D1C134AF157972CF005E8A5B /* parallax_mapping */,
+				D16A0E781698C4B80016DF67 /* simple_player (iOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -1751,6 +1820,36 @@
 			isa = PBXTargetDependency;
 			name = "theoraplayer (Theora AVFoundation)";
 			targetProxy = D1CDFF901696C8B300609AB0 /* PBXContainerItemProxy */;
+		};
+		D1D88F0716B587D700CCE8CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = theora;
+			targetProxy = D1D88F0616B587D700CCE8CE /* PBXContainerItemProxy */;
+		};
+		D1D88F0916B587D700CCE8CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ogg;
+			targetProxy = D1D88F0816B587D700CCE8CE /* PBXContainerItemProxy */;
+		};
+		D1D88F0B16B587D700CCE8CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = vorbis;
+			targetProxy = D1D88F0A16B587D700CCE8CE /* PBXContainerItemProxy */;
+		};
+		D1D88F0D16B591C200CCE8CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = theora;
+			targetProxy = D1D88F0C16B591C200CCE8CE /* PBXContainerItemProxy */;
+		};
+		D1D88F0F16B591C200CCE8CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ogg;
+			targetProxy = D1D88F0E16B591C200CCE8CE /* PBXContainerItemProxy */;
+		};
+		D1D88F1116B591C200CCE8CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = vorbis;
+			targetProxy = D1D88F1016B591C200CCE8CE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

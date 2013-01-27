@@ -33,7 +33,7 @@ class OpenAL_AudioInterface : public TheoraAudioInterface, TheoraTimer
 	{
 		ALuint id;
 		int nSamples;
-	}mBuffers[1000];
+	};
 	std::queue<OpenAL_Buffer> mBufferQueue;
 
 	ALuint mSource;
@@ -42,7 +42,6 @@ public:
 	OpenAL_AudioInterface(TheoraVideoClip* owner,int nChannels,int freq);
 	~OpenAL_AudioInterface();
 	void insertData(float* data,int nSamples);
-	void destroy();
 
 	//! queued audio buffers, expressed in seconds
 	float getQueuedAudioSize();

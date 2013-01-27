@@ -100,11 +100,23 @@ void setDebugTitle(char* out)
 
 void init()
 {
-
-
-	mgr=new TheoraVideoManager();
-	iface_factory=new OpenAL_AudioInterfaceFactory();
+	mgr = new TheoraVideoManager();
+	iface_factory = new OpenAL_AudioInterfaceFactory();
 	mgr->setAudioInterfaceFactory(iface_factory);
+	
+	/*/ Test Memory Leaks
+	
+	for (;;)
+	{
+		clip = mgr->createVideoClip("media/bunny.ogg", outputMode, 16);
+		clip->seek((rand()%50)/10.0f);
+//		sleep(1);
+		usleep(rand()%1000000);
+		mgr->update(0);
+		mgr->destroyVideoClip(clip);
+	}
+	
+	//*/
 	clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 16);
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);

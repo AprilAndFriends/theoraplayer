@@ -23,26 +23,31 @@ short float2short(float f)
 OpenAL_AudioInterface::OpenAL_AudioInterface(TheoraVideoClip* owner,int nChannels,int freq) :
 	TheoraAudioInterface(owner,nChannels,freq), TheoraTimer()
 {
-	mMaxBuffSize=freq*mNumChannels*2;
-	mBuffSize=0;
-	mNumProcessedSamples=0;
+	mMaxBuffSize = freq * mNumChannels * 2;
+	mBuffSize = 0;
+	mNumProcessedSamples = 0;
 	mCurrentTimer = 0;
 
-	mTempBuffer=new short[mMaxBuffSize];
-	alGenSources(1,&mSource);
+	mTempBuffer = new short[mMaxBuffSize];
+	alGenSources(1, &mSource);
 	owner->setTimer(this);
-	mNumPlayedSamples=0;
-}
-
-void OpenAL_AudioInterface::destroy()
-{
-	// todo
+	mNumPlayedSamples = 0;
 }
 
 OpenAL_AudioInterface::~OpenAL_AudioInterface()
 {
-	// todo: delete buffers and source
-	if (mTempBuffer) delete mTempBuffer;
+	if (mTempBuffer) delete [] mTempBuffer;
+	
+	if (mSource)
+	{
+		alSourcei(mSource, AL_BUFFER, NULL);
+		alDeleteSources(1, &mSource);
+	}
+	while (mBufferQueue.size() > 0)
+	{
+		alDeleteBuffers(1, &mBufferQueue.front().id);
+		mBufferQueue.pop();
+	}
 }
 
 float OpenAL_AudioInterface::getQueuedAudioSize()
@@ -63,7 +68,6 @@ void OpenAL_AudioInterface::insertData(float* data,int nSamples)
 		{
 			OpenAL_Buffer buff;
 			alGenBuffers(1,&buff.id);
-
 
 			ALuint format = (mNumChannels == 1) ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16;
 			alBufferData(buff.id,format,mTempBuffer,mBuffSize*2,mFreq);

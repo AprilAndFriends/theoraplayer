@@ -117,10 +117,18 @@ void init()
 	clip->waitForCache(1.0f, 10000000);
 	printf("Average time per frame: %.2f\n", (GetTickCount() - time) / 100.0f);
 	
-	//sleep(5);
-	//exit(0);
 	//*/
-		
+	/*/ Test Memory Leaks
+	
+	for (;;)
+	{
+		clip = mgr->createVideoClip("media/bunny.ogg", outputMode, 16);
+		mgr->destroyVideoClip(clip);
+	}
+
+	//*/
+	
+	
 	clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 16);
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);

@@ -33,20 +33,37 @@ void memset_uint(void* buffer,unsigned int colour,unsigned int size_in_bytes)
 TheoraVideoClip_Theora::TheoraVideoClip_Theora(TheoraDataSource* data_source,
 										TheoraOutputMode output_mode,
 										int nPrecachedFrames,
-										bool usePower2Stride): TheoraVideoClip(data_source, output_mode, nPrecachedFrames, usePower2Stride),
-					    mTheoraAudioPacketQueue(0)
+										bool usePower2Stride): TheoraVideoClip(data_source, output_mode, nPrecachedFrames, usePower2Stride)
 {
-	mInfo.TheoraDecoder = 0;
-	mInfo.TheoraSetup = 0;
+	mInfo.TheoraDecoder = NULL;
+	mInfo.TheoraSetup = NULL;
+	mTheoraAudioPacketQueue = NULL;
+	mVorbisStreams = mTheoraStreams = 0;
 }
 
 TheoraVideoClip_Theora::~TheoraVideoClip_Theora()
 {
 	if (mInfo.TheoraDecoder)
+	{
 		th_decode_free(mInfo.TheoraDecoder);
-	
-	if (mInfo.TheoraSetup)
 		th_setup_free(mInfo.TheoraSetup);
+
+		if (mAudioInterface)
+		{
+			vorbis_dsp_clear(&mInfo.VorbisDSPState);
+			vorbis_block_clear(&mInfo.VorbisBlock);
+		}
+
+		ogg_stream_clear(&mInfo.TheoraStreamState);
+		th_comment_clear(&mInfo.TheoraComment);
+		th_info_clear(&mInfo.TheoraInfo);
+		
+		ogg_stream_clear(&mInfo.VorbisStreamState);
+		vorbis_comment_clear(&mInfo.VorbisComment);
+		vorbis_info_clear(&mInfo.VorbisInfo);
+		
+		ogg_sync_clear(&mInfo.OggSyncState);
+	}
 
 	destroyAllAudioPackets();
 }
@@ -299,53 +316,51 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 	
 	while (!done)
 	{
-		char *buffer = ogg_sync_buffer( &mInfo.OggSyncState, 4096);
-		int bytes_read = mStream->read( buffer, 4096 );
-		ogg_sync_wrote( &mInfo.OggSyncState, bytes_read );
+		char *buffer = ogg_sync_buffer(&mInfo.OggSyncState, 4096);
+		int bytes_read = mStream->read(buffer, 4096);
+		ogg_sync_wrote(&mInfo.OggSyncState, bytes_read);
 		
-		if( bytes_read == 0 )
+		if (bytes_read == 0)
 			break;
 		
-		while( ogg_sync_pageout( &mInfo.OggSyncState, &mInfo.OggPage ) > 0 )
+		while (ogg_sync_pageout(&mInfo.OggSyncState, &mInfo.OggPage) > 0)
 		{
 			ogg_stream_state OggStateTest;
 			
 			//is this an initial header? If not, stop
-			if( !ogg_page_bos( &mInfo.OggPage ) )
+			if (!ogg_page_bos(&mInfo.OggPage))
 			{
-				//This is done blindly, because stream only accept them selfs
-				if (mTheoraStreams)
-					ogg_stream_pagein( &mInfo.TheoraStreamState, &mInfo.OggPage );
-				if (mVorbisStreams)
-					ogg_stream_pagein( &mInfo.VorbisStreamState, &mInfo.OggPage );
+				//This is done blindly, because stream only accept themselves
+				if (mTheoraStreams) ogg_stream_pagein(&mInfo.TheoraStreamState, &mInfo.OggPage);
+				if (mVorbisStreams) ogg_stream_pagein(&mInfo.VorbisStreamState, &mInfo.OggPage);
 				
 				done=true;
 				break;
 			}
 			
-			ogg_stream_init( &OggStateTest, ogg_page_serialno( &mInfo.OggPage ) );
-			ogg_stream_pagein( &OggStateTest, &mInfo.OggPage );
-			ogg_stream_packetout( &OggStateTest, &tempOggPacket );
+			ogg_stream_init(&OggStateTest, ogg_page_serialno(&mInfo.OggPage));
+			ogg_stream_pagein(&OggStateTest, &mInfo.OggPage);
+			ogg_stream_packetout(&OggStateTest, &tempOggPacket);
 			
 			//identify the codec
 			int ret;
-			if( !mTheoraStreams)
+			if (!mTheoraStreams)
 			{
-				ret=th_decode_headerin( &mInfo.TheoraInfo, &mInfo.TheoraComment, &mInfo.TheoraSetup, &tempOggPacket);
+				ret = th_decode_headerin(&mInfo.TheoraInfo, &mInfo.TheoraComment, &mInfo.TheoraSetup, &tempOggPacket);
 				
 				if (ret > 0)
 				{
 					//This is the Theora Header
-					memcpy( &mInfo.TheoraStreamState, &OggStateTest, sizeof(OggStateTest));
+					memcpy(&mInfo.TheoraStreamState, &OggStateTest, sizeof(OggStateTest));
 					mTheoraStreams = 1;
 					continue;
 				}
 			}
 			if (decode_audio && !mVorbisStreams &&
-				vorbis_synthesis_headerin(&mInfo.VorbisInfo, &mInfo.VorbisComment, &tempOggPacket) >=0 )
+				vorbis_synthesis_headerin(&mInfo.VorbisInfo, &mInfo.VorbisComment, &tempOggPacket) >=0)
 			{
 				//This is vorbis header
-				memcpy( &mInfo.VorbisStreamState, &OggStateTest, sizeof(OggStateTest));
+				memcpy(&mInfo.VorbisStreamState, &OggStateTest, sizeof(OggStateTest));
 				mVorbisStreams = 1;
 				continue;
 			}
@@ -355,52 +370,46 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 	}
 	
 	while ((mTheoraStreams && (mTheoraStreams < 3)) ||
-		   (mVorbisStreams && (mVorbisStreams < 3)) )
+		   (mVorbisStreams && (mVorbisStreams < 3)))
 	{
 		//Check 2nd'dary headers... Theora First
 		int iSuccess;
-		while( mTheoraStreams &&
-			  ( mTheoraStreams < 3) &&
-			  ( iSuccess = ogg_stream_packetout( &mInfo.TheoraStreamState, &tempOggPacket)) )
+		while (mTheoraStreams && mTheoraStreams < 3 &&
+			  (iSuccess = ogg_stream_packetout(&mInfo.TheoraStreamState, &tempOggPacket)))
 		{
-			if( iSuccess < 0 )
+			if (iSuccess < 0)
 				throw TheoraGenericException("Error parsing Theora stream headers.");
-			
-			if( !th_decode_headerin(&mInfo.TheoraInfo, &mInfo.TheoraComment, &mInfo.TheoraSetup, &tempOggPacket) )
+			if (!th_decode_headerin(&mInfo.TheoraInfo, &mInfo.TheoraComment, &mInfo.TheoraSetup, &tempOggPacket))
 				throw TheoraGenericException("invalid theora stream");
 			
 			mTheoraStreams++;
 		} //end while looking for more theora headers
 		
 		//look 2nd vorbis header packets
-		while(// mVorbisStreams &&
-			  ( mVorbisStreams < 3 ) &&
-			  ( iSuccess=ogg_stream_packetout( &mInfo.VorbisStreamState, &tempOggPacket)))
+		while (mVorbisStreams < 3 && (iSuccess = ogg_stream_packetout(&mInfo.VorbisStreamState, &tempOggPacket)))
 		{
-			if(iSuccess < 0)
+			if (iSuccess < 0)
 				throw TheoraGenericException("Error parsing vorbis stream headers");
 			
-			if(vorbis_synthesis_headerin( &mInfo.VorbisInfo, &mInfo.VorbisComment,&tempOggPacket))
+			if (vorbis_synthesis_headerin(&mInfo.VorbisInfo, &mInfo.VorbisComment,&tempOggPacket))
 				throw TheoraGenericException("invalid stream");
 			
 			mVorbisStreams++;
 		} //end while looking for more vorbis headers
 		
 		//Not finished with Headers, get some more file data
-		if( ogg_sync_pageout( &mInfo.OggSyncState, &mInfo.OggPage ) > 0 )
+		if (ogg_sync_pageout(&mInfo.OggSyncState, &mInfo.OggPage) > 0)
 		{
-			if(mTheoraStreams)
-				ogg_stream_pagein( &mInfo.TheoraStreamState, &mInfo.OggPage );
-			if(mVorbisStreams)
-				ogg_stream_pagein( &mInfo.VorbisStreamState, &mInfo.OggPage );
+			if (mTheoraStreams) ogg_stream_pagein(&mInfo.TheoraStreamState, &mInfo.OggPage);
+			if (mVorbisStreams) ogg_stream_pagein(&mInfo.VorbisStreamState, &mInfo.OggPage);
 		}
 		else
 		{
-			char *buffer = ogg_sync_buffer( &mInfo.OggSyncState, 4096);
-			int bytes_read = mStream->read( buffer, 4096 );
-			ogg_sync_wrote( &mInfo.OggSyncState, bytes_read );
+			char *buffer = ogg_sync_buffer(&mInfo.OggSyncState, 4096);
+			int bytes_read = mStream->read(buffer, 4096);
+			ogg_sync_wrote(&mInfo.OggSyncState, bytes_read);
 			
-			if( bytes_read == 0 )
+			if (bytes_read == 0)
 				throw TheoraGenericException("End of file found prematurely");
 		}
 	} //end while looking for all headers
