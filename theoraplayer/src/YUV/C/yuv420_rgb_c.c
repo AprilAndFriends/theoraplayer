@@ -8,49 +8,6 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
 #include "yuv_c.h"
 
-#if 0 // TEST
-
-#define CLIP_RGB_COLOR(x) ((x & 0xFFFFFF00) == 0 ? x : (x & 0x80000000 ? 0 : 255))
-
-static void _decodeRGB(struct TheoraPixelTransform* t, int stride, int nBytes, int max_width)
-{
-	int rgbY, rV, gUV, bU, i, y, width = max_width == 0 ? t->w : max_width;
-	unsigned char cv,cu;
-	unsigned char *ySrc, *yLineEnd, *uSrc, *vSrc, *out1, *out2;
-	
-	for (y=0;y<t->h;y+=2)
-	{
-		ySrc = t->y + y * t->yStride;
-		uSrc = t->u + y * t->uStride / 2;
-		vSrc = t->v + y * t->vStride / 2;
-		out1 = t->out + y * stride;
-		out2 = t->out + (y + 1) * stride;
-		
-		for (yLineEnd = ySrc + width,i = 0; ySrc != yLineEnd; ySrc++, out1 += nBytes, out2 += nBytes, i = !i)
-		{
-			if (!i)
-			{
-				cu = *uSrc; cv = *vSrc;
-				rV   = RVTable[cv];
-				gUV  = GUTable[cu] + GVTable[cv];
-				bU   = BUTable[cu];
-			}
-			else { uSrc++; vSrc++; }
-			
-			rgbY = YTable[*ySrc];
-			out1[0] = CLIP_RGB_COLOR((rgbY + rV ) >> 13);
-			out1[1] = CLIP_RGB_COLOR((rgbY - gUV) >> 13);
-			out1[2] = CLIP_RGB_COLOR((rgbY + bU ) >> 13);
-			
-			rgbY = YTable[*(ySrc + t->yStride)];
-			out2[0] = CLIP_RGB_COLOR((rgbY + rV ) >> 13);
-			out2[1] = CLIP_RGB_COLOR((rgbY - gUV) >> 13);
-			out2[2] = CLIP_RGB_COLOR((rgbY + bU ) >> 13);
-		}
-	}
-}
-#else
-
 #define CLIP_RGB_COLOR(dst, x) \
 	tmp = (x) >> 13;\
 	if ((tmp & ~0xFF) == 0) dst = tmp;\
@@ -107,7 +64,6 @@ static void _decodeRGB(struct TheoraPixelTransform* t, int stride, int nBytes, i
 		}
 	}
 }
-#endif
 
 void decodeRGB(struct TheoraPixelTransform* t)
 {

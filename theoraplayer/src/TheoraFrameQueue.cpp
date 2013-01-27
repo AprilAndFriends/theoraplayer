@@ -8,6 +8,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
 #include "TheoraFrameQueue.h"
 #include "TheoraVideoFrame.h"
+#include "TheoraVideoManager.h"
 #include "TheoraUtil.h"
 
 
@@ -25,7 +26,13 @@ TheoraFrameQueue::~TheoraFrameQueue()
 
 TheoraVideoFrame* TheoraFrameQueue::createFrameInstance(TheoraVideoClip* clip)
 {
-	return new TheoraVideoFrame(clip);
+	TheoraVideoFrame* frame = new TheoraVideoFrame(clip);
+	if (frame->getBuffer() == NULL) // This can happen if you run out of memory
+	{
+		delete frame;
+		return NULL;
+	}
+	return frame;
 }
 
 void TheoraFrameQueue::setSize(int n)
@@ -37,9 +44,17 @@ void TheoraFrameQueue::setSize(int n)
 			delete (*it);
 		mQueue.clear();
 	}
-for (int i=0;i<n;i++)
-		mQueue.push_back(createFrameInstance(mParent));
-
+	TheoraVideoFrame* frame;
+	for (int i = 0;i < n; i++)
+	{
+		frame = createFrameInstance(mParent);
+		if (frame != NULL) mQueue.push_back(frame);
+		else
+		{
+			TheoraVideoManager::getSingleton().logMessage("TheoraFrameQueue: unable to create " + str(n) + " frames, out of memory. Created " + str(mQueue.size()) + " frames.");
+			break;
+		}
+	}
 	mMutex.unlock();
 }
 
