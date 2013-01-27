@@ -23,6 +23,11 @@ TheoraFrameQueue::~TheoraFrameQueue()
 	mQueue.clear();
 }
 
+TheoraVideoFrame* TheoraFrameQueue::createFrameInstance(TheoraVideoClip* clip)
+{
+	return new TheoraVideoFrame(clip);
+}
+
 void TheoraFrameQueue::setSize(int n)
 {
 	mMutex.lock();

@@ -17,13 +17,16 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 	#include <theora/codec.h>
 	#include <vorbis/codec.h>
 	#include "TheoraVideoClip_Theora.h"
-	// declaring function prototype here so I don't have to put it in a header file
-	// it only needs to be used by this plugin and called once
-	void createYUVtoRGBtables();
 #endif
 #ifdef __AVFOUNDATION
 	#include "TheoraVideoClip_AVFoundation.h"
 #endif
+// declaring function prototype here so I don't have to put it in a header file
+// it only needs to be used by this plugin and called once
+extern "C"
+{
+	void initYUVConversionModule();
+}
 
 TheoraVideoManager* g_ManagerSingleton=0;
 
@@ -68,10 +71,9 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 	mAudioFactory = NULL;
 	mWorkMutex = new TheoraMutex();
 
-#ifdef __THEORA
 	// for CPU based yuv2rgb decoding
-	createYUVtoRGBtables();
-#endif
+	initYUVConversionModule();
+
 	createWorkerThreads(num_worker_threads);
 }
 

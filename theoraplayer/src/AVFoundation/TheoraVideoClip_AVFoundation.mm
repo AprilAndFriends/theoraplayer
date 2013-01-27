@@ -13,23 +13,29 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "TheoraException.h"
 #include "TheoraTimer.h"
 #include "TheoraUtil.h"
-#include "TheoraVideoFrame_AVFoundation.h"
+#include "TheoraFrameQueue.h"
+#include "TheoraVideoFrame.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip_AVFoundation.h"
+#include "TheoraPixelTransform.h"
 
-#ifdef _DEBUG
-//#define _BENCHMARK // TEMP, used for development debugging
-#endif
-
-#ifdef _BENCHMARK
-#include <sys/time.h>
-static unsigned long GetTickCount()
+static unsigned int swapByteOrder(unsigned int ui)
 {
-    struct timeval tv;
-    if (gettimeofday(&tv, NULL) != 0) return 0;
-    return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+    return (ui >> 24) | ((ui<<8) & 0x00FF0000) | ((ui>>8) & 0x0000FF00) | (ui << 24);
 }
-#endif
+
+static CVPlanarPixelBufferInfo_YCbCrPlanar getYUVStruct(void* src)
+{
+	CVPlanarPixelBufferInfo_YCbCrPlanar* bigEndianYuv = (CVPlanarPixelBufferInfo_YCbCrPlanar*) src;
+	CVPlanarPixelBufferInfo_YCbCrPlanar yuv;
+	yuv.componentInfoY.offset = swapByteOrder(bigEndianYuv->componentInfoY.offset);
+	yuv.componentInfoY.rowBytes = swapByteOrder(bigEndianYuv->componentInfoY.rowBytes);
+	yuv.componentInfoCb.offset = swapByteOrder(bigEndianYuv->componentInfoCb.offset);
+	yuv.componentInfoCb.rowBytes = swapByteOrder(bigEndianYuv->componentInfoCb.rowBytes);
+	yuv.componentInfoCr.offset = swapByteOrder(bigEndianYuv->componentInfoCr.offset);
+	yuv.componentInfoCr.rowBytes = swapByteOrder(bigEndianYuv->componentInfoCr.rowBytes);
+	return yuv;
+}
 
 TheoraVideoClip_AVFoundation::TheoraVideoClip_AVFoundation(TheoraDataSource* data_source,
 											   TheoraOutputMode output_mode,
@@ -73,11 +79,6 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 
 	CMSampleBufferRef sampleBuffer = NULL;
 	NSAutoreleasePool* pool = NULL;
-#ifdef _BENCHMARK
-	static float avgtime = 0;
-	static int avgdiv = 0;
-	float time = GetTickCount();
-#endif
 	if ([mReader status] == AVAssetReaderStatusReading)
 	{
 		pool = [[NSAutoreleasePool alloc] init];
@@ -108,24 +109,25 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 			size_t width = CVPixelBufferGetWidth(imageBuffer);
 			size_t height = CVPixelBufferGetHeight(imageBuffer);
 
+			TheoraPixelTransform t;
+			memset(&t, 0, sizeof(TheoraPixelTransform));
 			if (mOutputMode == TH_BGRX)
-				frame->decode(baseAddress, TH_BGRX);
+			{
+				t.raw = (unsigned char*) baseAddress;
+				t.rawStride = mStride;
+			}
 			else
 			{
-				frame->decode(baseAddress, TH_YUV);
+				CVPlanarPixelBufferInfo_YCbCrPlanar yuv = getYUVStruct(baseAddress);
+				
+				t.y = (unsigned char*) baseAddress + yuv.componentInfoY.offset;  t.yStride = yuv.componentInfoY.rowBytes;
+				t.u = (unsigned char*) baseAddress + yuv.componentInfoCb.offset; t.uStride = yuv.componentInfoCb.rowBytes;
+				t.v = (unsigned char*) baseAddress + yuv.componentInfoCr.offset; t.vStride = yuv.componentInfoCr.rowBytes;
 			}
+			frame->decode(&t);
 			CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
 			CFRelease(sampleBuffer);
-			
-#ifdef _BENCHMARK
-			float t = GetTickCount();
-			avgtime += t - time;
-			avgdiv++;
-			time = t;
-			
-			if (avgdiv % 50 == 0) printf("%s - Average decoding time: %.1f\n", mName.c_str(), avgtime / avgdiv);
-			
-#endif
+
 			break; // TODO - should this really be a while loop instead of an if block?
 		}
 	}
@@ -177,7 +179,7 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	AVAsset* asset = [[AVURLAsset alloc] initWithURL:url options:nil];
 	mReader = [[AVAssetReader alloc] initWithAsset:asset error:&err];
 	AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
-	bool yuv_output = (mOutputMode == TH_YUV);
+	bool yuv_output = (mOutputMode != TH_BGRX);
 	NSDictionary *videoOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(yuv_output) ? kCVPixelFormatType_420YpCbCr8Planar : kCVPixelFormatType_32BGRA], kCVPixelBufferPixelFormatTypeKey, nil];
 	
 	mOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:videoTrack outputSettings:videoOptions];
@@ -194,7 +196,7 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	mDuration = (float) CMTimeGetSeconds(asset.duration);
 	if (mFrameQueue == NULL)
 	{
-		mFrameQueue = new TheoraFrameQueue_AVFoundation(this);
+		mFrameQueue = new TheoraFrameQueue(this);
 		mFrameQueue->setSize(mNumPrecachedFrames);
 	}
 
