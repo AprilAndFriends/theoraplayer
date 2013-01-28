@@ -16,16 +16,6 @@ int GUTable[256];
 int GVTable[256];
 int RVTable[256];
 
-struct TheoraPixelTransform* swapUV(struct TheoraPixelTransform* t)
-{
-	// Swap the U, V pointers to avoid copy/pasting the code for BGR operations
-	unsigned char* tmp = t->u;
-	unsigned int tmpStride = t->uStride;
-	t->u = t->v; t->uStride = t->vStride;
-	t->v = tmp;  t->vStride = tmpStride;
-	return t;
-}
-
 struct TheoraPixelTransform* incOut(struct TheoraPixelTransform* t, int n)
 {
 	// used for XRGB, XBGR and similar

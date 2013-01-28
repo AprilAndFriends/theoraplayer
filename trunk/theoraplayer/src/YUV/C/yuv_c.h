@@ -17,7 +17,6 @@ extern int GUTable[256];
 extern int GVTable[256];
 extern int RVTable[256];
 
-struct TheoraPixelTransform* swapUV(struct TheoraPixelTransform* t);
 struct TheoraPixelTransform* incOut(struct TheoraPixelTransform* t, int n);
 void _decodeAlpha(struct TheoraPixelTransform* t, int stride);
 
