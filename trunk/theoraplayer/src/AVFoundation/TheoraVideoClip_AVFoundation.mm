@@ -74,12 +74,32 @@ bool TheoraVideoClip_AVFoundation::_readData()
 bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 {
 	if (mReader == NULL || mEndOfFile) return 0;
+	AVAssetReaderStatus status = [mReader status];
+	if (status == AVAssetReaderStatusFailed)
+	{
+		// This can happen on iOS when you suspend the app... Only happens on the device, iOS simulator seems to work fine.
+		th_writelog("AVAssetReader reading failed, restarting...");
+
+		mSeekFrame = mTimer->getTime() * mFPS;
+		// just in case
+		if (mSeekFrame < 0) mSeekFrame = 0;
+		if (mSeekFrame > mDuration * mFPS - 1) mSeekFrame = mDuration * mFPS - 1;
+		_restart();
+		status = [mReader status];
+		if (status == AVAssetReaderStatusFailed)
+		{
+			th_writelog("AVAssetReader restart failed!");
+			return 0;
+		}
+		th_writelog("AVAssetReader restart succeeded!");
+	}
+
 	TheoraVideoFrame* frame = mFrameQueue->requestEmptyFrame();
 	if (!frame) return 0;
 
 	CMSampleBufferRef sampleBuffer = NULL;
 	NSAutoreleasePool* pool = NULL;
-	if ([mReader status] == AVAssetReaderStatusReading)
+	if (status == AVAssetReaderStatusReading)
 	{
 		pool = [[NSAutoreleasePool alloc] init];
 		while ((sampleBuffer = [mOutput copyNextSampleBuffer]))
@@ -133,9 +153,13 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 	}
 	if (pool) [pool release];
 
-	if (sampleBuffer == NULL && mReader.status == AVAssetReaderStatusCompleted) // other cases could be app suspended
+	if (!frame->mReady) // in case the frame wasn't used
 	{
 		frame->mInUse = 0;
+	}
+
+	if (sampleBuffer == NULL && mReader.status == AVAssetReaderStatusCompleted) // other cases could be app suspended
+	{
 		[mOutput release];
 		[mReader release];
 		mReader = NULL;
@@ -146,6 +170,8 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 			mEndOfFile = 1;
 		return 0;
 	}
+	
+	
 	return 1;
 }
 
