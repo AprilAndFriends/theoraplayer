@@ -10,8 +10,9 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #define EXCEPTION_H
 
 #include <string>
+#include "TheoraExport.h"
 
-class _TheoraGenericException
+class TheoraPlayerExport _TheoraGenericException
 {
 public:
     std::string mErrText,mFile,mType;
