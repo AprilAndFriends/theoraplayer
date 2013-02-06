@@ -31,6 +31,8 @@ public:
 	bool mInUse;
 	//! used to detect when the video restarted to ensure smooth playback
 	int mIteration;
+	
+	int mBpp;
 
 	TheoraVideoFrame(TheoraVideoClip* parent);
 	virtual ~TheoraVideoFrame();

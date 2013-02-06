@@ -114,6 +114,9 @@
 		D176138A1561B21500F645DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6FAF150E9E7100EF9400 /* Foundation.framework */; };
 		D176138B1561B21500F645DE /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
 		D17613981561B2EE00F645DE /* environment_mapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D17613971561B2EE00F645DE /* environment_mapping.cpp */; };
+		D1A48A5016C2F63A00318F58 /* av_player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776B6155C55A60050EC64 /* av_player.cpp */; };
+		D1A48A5116C2F64100318F58 /* OpenAL_AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */; };
+		D1A48A5416C2F64A00318F58 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A48A5316C2F64A00318F58 /* OpenAL.framework */; };
 		D1C0151315619DA700FBEF81 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
 		D1C0151415619DD400FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
 		D1C0151515619DDB00FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
@@ -159,7 +162,6 @@
 		D1E39AB2169A4463003A6CB5 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9E169A43BB003A6CB5 /* icon.icns */; };
 		D1E39AB4169A4469003A6CB5 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9E169A43BB003A6CB5 /* icon.icns */; };
 		D1F09DEB169AB9D900DEEC63 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F09DEA169AB9D900DEEC63 /* GLKit.framework */; };
-		D1F09E09169AE25300DEEC63 /* glut_player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1677619155C525F0050EC64 /* glut_player.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -477,6 +479,7 @@
 		D16A0EC11698C6270016DF67 /* ViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController_iPhone.xib; path = demos/basecode/ios/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		D17613931561B21500F645DE /* environment_mapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = environment_mapping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D17613971561B2EE00F645DE /* environment_mapping.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = environment_mapping.cpp; path = demos/environment_mapping/environment_mapping.cpp; sourceTree = "<group>"; };
+		D1A48A5316C2F64A00318F58 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/OpenAL.framework; sourceTree = DEVELOPER_DIR; };
 		D1BB6FAF150E9E7100EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D1C014F315619D4700FBEF81 /* lightmap_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lightmap_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C014F815619D4700FBEF81 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -604,6 +607,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1A48A5416C2F64A00318F58 /* OpenAL.framework in Frameworks */,
 				D1F09DEB169AB9D900DEEC63 /* GLKit.framework in Frameworks */,
 				D127F8C61698D0A3007E6835 /* CoreVideo.framework in Frameworks */,
 				D127F8C41698D09E007E6835 /* AVFoundation.framework in Frameworks */,
@@ -669,6 +673,7 @@
 		D127F8C71698D0B3007E6835 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				D1A48A5316C2F64A00318F58 /* OpenAL.framework */,
 				D1F09DEA169AB9D900DEEC63 /* GLKit.framework */,
 				D127F8C51698D0A3007E6835 /* CoreVideo.framework */,
 				D127F8C31698D09E007E6835 /* AVFoundation.framework */,
@@ -1694,7 +1699,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1F09E09169AE25300DEEC63 /* glut_player.cpp in Sources */,
+				D1A48A5016C2F63A00318F58 /* av_player.cpp in Sources */,
+				D1A48A5116C2F64100318F58 /* OpenAL_AudioInterface.cpp in Sources */,
 				D16A0EB91698C5640016DF67 /* AppDelegate.mm in Sources */,
 				D16A0EBE1698C5640016DF67 /* main.mm in Sources */,
 				D16A0EBF1698C5640016DF67 /* ViewController.mm in Sources */,
