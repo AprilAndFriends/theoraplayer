@@ -9,6 +9,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #ifdef __AVFOUNDATION
 #define AVFOUNDATION_CLASSES_DEFINED
 #import <AVFoundation/AVFoundation.h>
+#include "TheoraAudioInterface.h"
 #include "TheoraDataSource.h"
 #include "TheoraException.h"
 #include "TheoraTimer.h"
@@ -21,7 +22,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 
 static unsigned int swapByteOrder(unsigned int ui)
 {
-    return (ui >> 24) | ((ui<<8) & 0x00FF0000) | ((ui>>8) & 0x0000FF00) | (ui << 24);
+    return (ui >> 24) | ((ui << 8) & 0x00FF0000) | ((ui >> 8) & 0x0000FF00) | (ui << 24);
 }
 
 static CVPlanarPixelBufferInfo_YCbCrPlanar getYUVStruct(void* src)
@@ -40,11 +41,14 @@ static CVPlanarPixelBufferInfo_YCbCrPlanar getYUVStruct(void* src)
 TheoraVideoClip_AVFoundation::TheoraVideoClip_AVFoundation(TheoraDataSource* data_source,
 											   TheoraOutputMode output_mode,
 											   int nPrecachedFrames,
-											   bool usePower2Stride): TheoraVideoClip(data_source, output_mode, nPrecachedFrames, usePower2Stride)
+											   bool usePower2Stride):
+	TheoraVideoClip(data_source, output_mode, nPrecachedFrames, usePower2Stride),
+	TheoraAudioPacketQueue()
 {
 	mLoaded = 0;
 	mReader = NULL;
-	mOutput = NULL;
+	mOutput = mAudioOutput = NULL;
+	mReadAudioSamples = mAudioFrequency = mNumAudioChannels = 0;
 }
 
 TheoraVideoClip_AVFoundation::~TheoraVideoClip_AVFoundation()
@@ -59,6 +63,13 @@ void TheoraVideoClip_AVFoundation::unload()
 		[mOutput release];
 		mOutput = NULL;
 	}
+	
+	if (mAudioOutput)
+	{
+		[mAudioOutput release];
+		mAudioOutput = NULL;
+	}
+	
 	if (mReader != NULL)
 	{
 		[mReader release];
@@ -99,12 +110,18 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 
 	CMSampleBufferRef sampleBuffer = NULL;
 	NSAutoreleasePool* pool = NULL;
+	CMTime presentationTime;
+	
+	if (mAudioInterface) decodeAudio();
+	
 	if (status == AVAssetReaderStatusReading)
 	{
 		pool = [[NSAutoreleasePool alloc] init];
+		
 		while ((sampleBuffer = [mOutput copyNextSampleBuffer]))
 		{
-			frame->mTimeToDisplay = mFrameNumber / mFPS;
+			presentationTime = CMSampleBufferGetOutputPresentationTimeStamp(sampleBuffer);
+			frame->mTimeToDisplay = (float) CMTimeGetSeconds(presentationTime);
 			frame->mIteration = mIteration;
 			frame->_setFrameNumber(mFrameNumber);
 			mFrameNumber++;
@@ -120,7 +137,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 				sampleBuffer = NULL;
 				continue; // drop frame
 			}
-			
+
 			CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
 			CVPixelBufferLockBaseAddress(imageBuffer, 0);
 			void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
@@ -160,14 +177,13 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 
 	if (sampleBuffer == NULL && mReader.status == AVAssetReaderStatusCompleted) // other cases could be app suspended
 	{
-		[mOutput release];
-		[mReader release];
-		mReader = NULL;
-		mOutput = NULL;
 		if (mAutoRestart)
 			_restart();
 		else
+		{
+			unload();
 			mEndOfFile = 1;
+		}
 		return 0;
 	}
 	
@@ -205,15 +221,17 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	AVAsset* asset = [[AVURLAsset alloc] initWithURL:url options:nil];
 	mReader = [[AVAssetReader alloc] initWithAsset:asset error:&err];
 	AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+
+	NSArray* audioTracks = [asset tracksWithMediaType:AVMediaTypeAudio];
+	AVAssetTrack *audioTrack = audioTracks.count > 0 ? [audioTracks objectAtIndex:0] : NULL;
+	
 	bool yuv_output = (mOutputMode != TH_BGRX);
 	NSDictionary *videoOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(yuv_output) ? kCVPixelFormatType_420YpCbCr8Planar : kCVPixelFormatType_32BGRA], kCVPixelBufferPixelFormatTypeKey, nil];
-	
+
 	mOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:videoTrack outputSettings:videoOptions];
 	[mReader addOutput:mOutput];
 	if ([mOutput respondsToSelector:@selector(setAlwaysCopiesSampleData:)]) // Not supported on < iOS5
-	{
 		mOutput.alwaysCopiesSampleData = NO;
-	}
 
 	mFPS = videoTrack.nominalFrameRate;
 	mWidth = mStride = videoTrack.naturalSize.width;
@@ -231,6 +249,41 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 		mFrameNumber = mSeekFrame;
 		[mReader setTimeRange: CMTimeRangeMake(CMTimeMakeWithSeconds(mSeekFrame / mFPS, 1), kCMTimePositiveInfinity)];
 	}
+	if (audioTrack)
+	{
+		TheoraAudioInterfaceFactory* audio_factory = TheoraVideoManager::getSingleton().getAudioInterfaceFactory();
+		if (audio_factory)
+		{
+			NSDictionary *audioOptions = [NSDictionary dictionaryWithObjectsAndKeys:
+										  [NSNumber numberWithInt:kAudioFormatLinearPCM], AVFormatIDKey,
+										  [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,
+										  [NSNumber numberWithBool:NO], AVLinearPCMIsBigEndianKey,
+										  [NSNumber numberWithBool:YES], AVLinearPCMIsFloatKey,
+										  [NSNumber numberWithInt:32], AVLinearPCMBitDepthKey,
+										  nil];
+
+			mAudioOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:audioTrack outputSettings:audioOptions];
+			[mReader addOutput:mAudioOutput];
+			if ([mAudioOutput respondsToSelector:@selector(setAlwaysCopiesSampleData:)]) // Not supported on < iOS5
+				mAudioOutput.alwaysCopiesSampleData = NO;
+			
+			NSArray* desclst = audioTrack.formatDescriptions;
+			CMAudioFormatDescriptionRef desc = (CMAudioFormatDescriptionRef) [desclst objectAtIndex:0];
+			const AudioStreamBasicDescription* audioDesc = CMAudioFormatDescriptionGetStreamBasicDescription(desc);
+			mAudioFrequency = (unsigned int) audioDesc->mSampleRate;
+			mNumAudioChannels = audioDesc->mChannelsPerFrame;
+			
+			if (mSeekFrame != -1)
+			{
+				mReadAudioSamples = mFrameNumber * (mAudioFrequency * mNumAudioChannels) / mFPS;
+			}
+			else mReadAudioSamples = 0;
+
+			if (mAudioInterface == NULL)
+				setAudioInterface(audio_factory->createInstance(this, mNumAudioChannels, mAudioFrequency));
+		}
+	}
+	
 #ifdef _DEBUG
 	else if (!mLoaded)
 	{
@@ -240,16 +293,79 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 #endif
 	[mReader startReading];
 	[pool release];
-	mLoaded = 1;
+	mLoaded = true;
 }
  
 void TheoraVideoClip_AVFoundation::decodedAudioCheck()
 {
-
+	if (!mAudioInterface || mTimer->isPaused()) return;
+	
+	mAudioMutex->lock();
+	flushAudioPackets(mAudioInterface);
+	mAudioMutex->unlock();
 }
 
 float TheoraVideoClip_AVFoundation::decodeAudio()
 {
+	if (mRestarted) return -1;
+
+	if (mReader == NULL || mEndOfFile) return 0;
+	AVAssetReaderStatus status = [mReader status];
+
+	if (mAudioOutput)
+	{
+		CMSampleBufferRef sampleBuffer = NULL;
+		NSAutoreleasePool* pool = NULL;
+		bool mutexLocked = 0;
+
+		float factor = 1.0f / (mAudioFrequency * mNumAudioChannels);
+		float videoTime = (float) mFrameNumber / mFPS;
+		float min = mFrameQueue->getSize() / mFPS + 1.0f;
+		
+		if (status == AVAssetReaderStatusReading)
+		{
+			pool = [[NSAutoreleasePool alloc] init];
+
+			// always buffer up of audio ahead of the frames
+			while (mReadAudioSamples * factor - videoTime < min)
+			{
+				if ((sampleBuffer = [mAudioOutput copyNextSampleBuffer]))
+				{
+					AudioBufferList audioBufferList;
+					
+					CMBlockBufferRef blockBuffer = NULL;
+					CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sampleBuffer, NULL, &audioBufferList, sizeof(audioBufferList), NULL, NULL, 0, &blockBuffer);
+					
+					for (int y = 0; y < audioBufferList.mNumberBuffers; y++)
+					{
+						AudioBuffer audioBuffer = audioBufferList.mBuffers[y];
+						float *frame = (float*) audioBuffer.mData;
+
+						if (!mutexLocked)
+						{
+							mAudioMutex->lock();
+							mutexLocked = 1;
+						}
+						addAudioPacket(frame, audioBuffer.mDataByteSize / (mNumAudioChannels * sizeof(float)), mAudioGain);
+						
+						mReadAudioSamples += audioBuffer.mDataByteSize / (sizeof(float));
+					}
+
+					CFRelease(blockBuffer);
+					CFRelease(sampleBuffer);
+				}
+				else
+				{
+					[mAudioOutput release];
+					mAudioOutput = nil;
+					break;
+				}
+			}
+			[pool release];
+		}
+		if (mutexLocked) mAudioMutex->unlock();
+	}
+	
 	return -1;
 }
 
@@ -270,6 +386,13 @@ void TheoraVideoClip_AVFoundation::doSeek()
 	mFrameQueue->clear();
 	unload();
 	load(mStream);
+
+	if (mAudioInterface)
+	{
+		mAudioMutex->lock();
+		destroyAllAudioPackets();
+		mAudioMutex->unlock();
+	}
 
 	if (!paused) mTimer->play();
 	mSeekFrame = -1;

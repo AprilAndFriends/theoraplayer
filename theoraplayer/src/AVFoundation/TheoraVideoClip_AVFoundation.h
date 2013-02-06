@@ -9,6 +9,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #if defined(__AVFOUNDATION) && !defined(_TheoraVideoClip_AVFoundation_h)
 #define _TheoraVideoClip_AVFoundation_h
 
+#include "TheoraAudioPacketQueue.h"
 #include "TheoraVideoClip.h"
 
 #ifndef AVFOUNDATION_CLASSES_DEFINED
@@ -16,13 +17,14 @@ class AVAssetReader;
 class AVAssetReaderTrackOutput;
 #endif
 
-class TheoraVideoClip_AVFoundation : public TheoraVideoClip
+class TheoraVideoClip_AVFoundation : public TheoraVideoClip, public TheoraAudioPacketQueue
 {
 protected:
 	bool mLoaded;
 	int mFrameNumber;
 	AVAssetReader* mReader;
-	AVAssetReaderTrackOutput* mOutput;
+	AVAssetReaderTrackOutput *mOutput, *mAudioOutput;
+	unsigned int mReadAudioSamples;
 	
 	void unload();
 	void doSeek();

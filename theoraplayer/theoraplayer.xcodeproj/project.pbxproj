@@ -179,6 +179,15 @@
 		D1CDFFFD1696FC0800609AB0 /* Theora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFFB1696FC0100609AB0 /* Theora.framework */; };
 		D1CDFFFE1696FC0800609AB0 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF91696FBF700609AB0 /* Vorbis.framework */; };
 		D1CDFFFF1696FC0800609AB0 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF71696FBF400609AB0 /* Ogg.framework */; };
+		D1D465D616C2D063007A45AA /* TheoraAudioPacketQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = D1D465D516C2D063007A45AA /* TheoraAudioPacketQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1D465D716C2D063007A45AA /* TheoraAudioPacketQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = D1D465D516C2D063007A45AA /* TheoraAudioPacketQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1D465D816C2D063007A45AA /* TheoraAudioPacketQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = D1D465D516C2D063007A45AA /* TheoraAudioPacketQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1D465DA16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D465D916C2D070007A45AA /* TheoraAudioPacketQueue.cpp */; };
+		D1D465DB16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D465D916C2D070007A45AA /* TheoraAudioPacketQueue.cpp */; };
+		D1D465DC16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D465D916C2D070007A45AA /* TheoraAudioPacketQueue.cpp */; };
+		D1D465DD16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D465D916C2D070007A45AA /* TheoraAudioPacketQueue.cpp */; };
+		D1D465DE16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D465D916C2D070007A45AA /* TheoraAudioPacketQueue.cpp */; };
+		D1D465DF16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D465D916C2D070007A45AA /* TheoraAudioPacketQueue.cpp */; };
 		D1E2718D16B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
 		D1E2718E16B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
 		D1E2718F16B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
@@ -209,9 +218,9 @@
 		D1E271AF16B470210046C00C /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
 		D1E271B016B470210046C00C /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
 		D1E271B116B470210046C00C /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
-		D1E271B316B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
-		D1E271B416B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
-		D1E271B516B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
+		D1E271B316B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1E271B416B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1E271B516B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D1E271B616B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
 		D1E271B716B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
 		D1E271B816B471E80046C00C /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
@@ -260,6 +269,8 @@
 		D1CDFFF71696FBF400609AB0 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = ../__build__/products/Debug/Ogg.framework; sourceTree = "<group>"; };
 		D1CDFFF91696FBF700609AB0 /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = ../__build__/products/Debug/Vorbis.framework; sourceTree = "<group>"; };
 		D1CDFFFB1696FC0100609AB0 /* Theora.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Theora.framework; path = ../__build__/products/Debug/Theora.framework; sourceTree = "<group>"; };
+		D1D465D516C2D063007A45AA /* TheoraAudioPacketQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheoraAudioPacketQueue.h; path = include/theoraplayer/TheoraAudioPacketQueue.h; sourceTree = "<group>"; };
+		D1D465D916C2D070007A45AA /* TheoraAudioPacketQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraAudioPacketQueue.cpp; path = src/TheoraAudioPacketQueue.cpp; sourceTree = "<group>"; };
 		D1E2718816B46F640046C00C /* yuv_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv_c.c; path = src/YUV/C/yuv_c.c; sourceTree = "<group>"; };
 		D1E2718916B46F640046C00C /* yuv_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = yuv_c.h; path = src/YUV/C/yuv_c.h; sourceTree = "<group>"; };
 		D1E2718A16B46F640046C00C /* yuv420_grey_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv420_grey_c.c; path = src/YUV/C/yuv420_grey_c.c; sourceTree = "<group>"; };
@@ -367,6 +378,7 @@
 				D1CDFF921696CEFA00609AB0 /* Theora */,
 				D16775A5155C501D0050EC64 /* TheoraVideoClip.cpp */,
 				D167759E155C501D0050EC64 /* TheoraAsync.cpp */,
+				D1D465D916C2D070007A45AA /* TheoraAudioPacketQueue.cpp */,
 				D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */,
 				D16775A0155C501D0050EC64 /* TheoraDataSource.cpp */,
 				D16775A1155C501D0050EC64 /* TheoraException.cpp */,
@@ -410,6 +422,7 @@
 				D16775C9155C50280050EC64 /* TheoraUtil.h */,
 				D16775CA155C50280050EC64 /* TheoraVideoClip.h */,
 				D16775CC155C50280050EC64 /* TheoraVideoManager.h */,
+				D1D465D516C2D063007A45AA /* TheoraAudioPacketQueue.h */,
 				D16775CD155C50280050EC64 /* TheoraWorkerThread.h */,
 			);
 			name = include;
@@ -473,9 +486,10 @@
 				D16775E2155C50280050EC64 /* TheoraVideoFrame.h in Headers */,
 				D16775E4155C50280050EC64 /* TheoraVideoManager.h in Headers */,
 				D16775E6155C50280050EC64 /* TheoraWorkerThread.h in Headers */,
+				D1D465D616C2D063007A45AA /* TheoraAudioPacketQueue.h in Headers */,
+				D1E271B316B471E80046C00C /* TheoraPixelTransform.h in Headers */,
 				D1CDFF991696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */,
 				D1E2719316B46F640046C00C /* yuv_c.h in Headers */,
-				D1E271B316B471E80046C00C /* TheoraPixelTransform.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,9 +533,10 @@
 				D1CDFF3E1696C77A00609AB0 /* TheoraVideoFrame.h in Headers */,
 				D1CDFF3F1696C77A00609AB0 /* TheoraVideoManager.h in Headers */,
 				D1CDFF401696C77A00609AB0 /* TheoraWorkerThread.h in Headers */,
+				D1E271B416B471E80046C00C /* TheoraPixelTransform.h in Headers */,
+				D1D465D716C2D063007A45AA /* TheoraAudioPacketQueue.h in Headers */,
 				D1CDFF9F1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.h in Headers */,
 				D1E2719416B46F640046C00C /* yuv_c.h in Headers */,
-				D1E271B416B471E80046C00C /* TheoraPixelTransform.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,10 +557,11 @@
 				D1CDFF661696C79700609AB0 /* TheoraVideoFrame.h in Headers */,
 				D1CDFF671696C79700609AB0 /* TheoraVideoManager.h in Headers */,
 				D1CDFF681696C79700609AB0 /* TheoraWorkerThread.h in Headers */,
+				D1E271B516B471E80046C00C /* TheoraPixelTransform.h in Headers */,
+				D1D465D816C2D063007A45AA /* TheoraAudioPacketQueue.h in Headers */,
 				D1CDFF9A1696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */,
 				D1F09EB1169AFEFB00DEEC63 /* TheoraVideoClip_AVFoundation.h in Headers */,
 				D1E2719516B46F640046C00C /* yuv_c.h in Headers */,
-				D1E271B516B471E80046C00C /* TheoraPixelTransform.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -751,6 +767,7 @@
 				D1E2719916B46F640046C00C /* yuv420_grey_c.c in Sources */,
 				D1E271A516B46F640046C00C /* yuv420_yuv_c.c in Sources */,
 				D1E271AC16B470210046C00C /* yuv420_rgb_c.c in Sources */,
+				D1D465DA16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,6 +791,7 @@
 				D1E2719C16B46F640046C00C /* yuv420_grey_c.c in Sources */,
 				D1E271A816B46F640046C00C /* yuv420_yuv_c.c in Sources */,
 				D1E271AF16B470210046C00C /* yuv420_rgb_c.c in Sources */,
+				D1D465DD16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,6 +815,7 @@
 				D1E2719A16B46F640046C00C /* yuv420_grey_c.c in Sources */,
 				D1E271A616B46F640046C00C /* yuv420_yuv_c.c in Sources */,
 				D1E271AD16B470210046C00C /* yuv420_rgb_c.c in Sources */,
+				D1D465DB16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -821,6 +840,7 @@
 				D1E2719B16B46F640046C00C /* yuv420_grey_c.c in Sources */,
 				D1E271A716B46F640046C00C /* yuv420_yuv_c.c in Sources */,
 				D1E271AE16B470210046C00C /* yuv420_rgb_c.c in Sources */,
+				D1D465DC16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -844,6 +864,7 @@
 				D1E2719D16B46F640046C00C /* yuv420_grey_c.c in Sources */,
 				D1E271A916B46F640046C00C /* yuv420_yuv_c.c in Sources */,
 				D1E271B016B470210046C00C /* yuv420_rgb_c.c in Sources */,
+				D1D465DE16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -868,6 +889,7 @@
 				D1E2719E16B46F640046C00C /* yuv420_grey_c.c in Sources */,
 				D1E271AA16B46F640046C00C /* yuv420_yuv_c.c in Sources */,
 				D1E271B116B470210046C00C /* yuv420_rgb_c.c in Sources */,
+				D1D465DF16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

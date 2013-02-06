@@ -12,6 +12,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <ogg/ogg.h>
 #include <vorbis/vorbisfile.h>
 #include <theora/theoradec.h>
+#include "TheoraAudioPacketQueue.h"
 #include "TheoraVideoClip.h"
 
 struct TheoraInfoStruct
@@ -33,31 +34,16 @@ struct TheoraInfoStruct
 	vorbis_comment   VorbisComment;
 };
 
-/**
- This is an internal structure which TheoraVideoClip_Theora uses to store audio packets
- */
-struct TheoraAudioPacket
-{
-	float* pcm;
-	int num_samples; //! size in number of float samples (stereo has twice the number of samples)
-	TheoraAudioPacket* next; // pointer to the next audio packet, to implement a linked list
-};
-
-class TheoraVideoClip_Theora : public TheoraVideoClip
+class TheoraVideoClip_Theora : public TheoraVideoClip, public TheoraAudioPacketQueue
 {
 protected:
-	TheoraAudioPacket* mTheoraAudioPacketQueue;
 	TheoraInfoStruct mInfo; // a pointer is used to avoid having to include theora & vorbis headers
 	int mTheoraStreams, mVorbisStreams;	// Keeps track of Theora and Vorbis Streams
 
-	float getAudioPacketQueueLength();
-	void addAudioPacket(float** buffer, int num_samples);
-	TheoraAudioPacket* popAudioPacket();
-	void destroyAudioPacket(TheoraAudioPacket* p);
-	void destroyAllAudioPackets();
 	long seekPage(long targetFrame, bool return_keyframe);
 	void doSeek();
 	void readTheoraVorbisHeaders();
+	unsigned int mReadAudioSamples, mLastDecodedFrameNumber;
 public:
 	TheoraVideoClip_Theora(TheoraDataSource* data_source,
 						   TheoraOutputMode output_mode,
