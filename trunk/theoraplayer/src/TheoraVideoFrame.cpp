@@ -66,7 +66,8 @@ TheoraVideoFrame::TheoraVideoFrame(TheoraVideoClip* parent)
 	mIteration = 0;
 	// number of bytes based on output mode
 	int bytemap[]={0, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4, 1, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4};
-	unsigned int size = mParent->getStride() * mParent->mHeight * bytemap[mParent->getOutputMode()];
+	mBpp = bytemap[mParent->getOutputMode()];
+	unsigned int size = mParent->getStride() * mParent->mHeight * mBpp;
 	try
 	{
 		mBuffer = new unsigned char[size];
@@ -108,7 +109,20 @@ void TheoraVideoFrame::decode(struct TheoraPixelTransform* t)
 {
 	if (t->raw != NULL)
 	{
-		memcpy(mBuffer, t->raw, t->rawStride * mParent->getHeight());
+		int bufferStride = mParent->getWidth() * mBpp;
+		if (bufferStride == t->rawStride)
+		{
+			memcpy(mBuffer, t->raw, t->rawStride * mParent->getHeight());
+		}
+		else
+		{
+			unsigned char *buff = mBuffer, *src = t->raw;
+			int i, h = mParent->getHeight();
+			for (i = 0; i < h; i++, buff += bufferStride, src += t->rawStride)
+			{
+				memcpy(buff, src, bufferStride);
+			}
+		}
 	}
 	else
 	{
