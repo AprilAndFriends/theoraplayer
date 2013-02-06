@@ -392,6 +392,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\theoraplayer\TheoraAudioPacketQueue.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\theoraplayer\TheoraDataSource.h"
 				>
 			</File>
@@ -450,6 +454,10 @@
 			</File>
 			<File
 				RelativePath=".\src\TheoraAudioInterface.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\TheoraAudioPacketQueue.cpp"
 				>
 			</File>
 			<File

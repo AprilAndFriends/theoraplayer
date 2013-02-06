@@ -117,6 +117,7 @@ void init()
 	}
 	
 	//*/
+	//resourceExtension = ".ogg"; // TEMP
 	clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 16);
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);
