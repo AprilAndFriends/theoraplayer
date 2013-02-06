@@ -40,22 +40,20 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	mLastIteration(0),
 	mStream(0)
 {
-	mAudioMutex=new TheoraMutex;
-	mTimer=mDefaultTimer=new TheoraTimer();
+	mAudioMutex = NULL;
+	mThreadAccessMutex = new TheoraMutex();
+	mTimer = mDefaultTimer = new TheoraTimer();
 
-	mFrameQueue=NULL;
-	mAssignedWorkerThread=NULL;
-	mNumPrecachedFrames=nPrecachedFrames;
+	mFrameQueue = NULL;
+	mAssignedWorkerThread = NULL;
+	mNumPrecachedFrames = nPrecachedFrames;
 	setOutputMode(output_mode);
 }
 
 TheoraVideoClip::~TheoraVideoClip()
 {
 	// wait untill a worker thread is done decoding the frame
-	while (mAssignedWorkerThread)
-	{
-		_psleep(1);
-	}
+	mThreadAccessMutex->lock();
 
 	delete mDefaultTimer;
 
@@ -67,10 +65,13 @@ TheoraVideoClip::~TheoraVideoClip()
 	{
 		mAudioMutex->lock(); // ensure a thread isn't using this mutex
 		delete mAudioInterface; // notify audio interface it's time to call it a day
-        mAudioMutex->unlock();
+        mAudioMutex ->unlock();
+		delete mAudioMutex;
 	}
-	delete mAudioMutex;
+	
+	mThreadAccessMutex->unlock();
 
+	delete mThreadAccessMutex;
 }
 
 TheoraTimer* TheoraVideoClip::getTimer()
@@ -86,8 +87,8 @@ void TheoraVideoClip::setTimer(TheoraTimer* timer)
 
 void TheoraVideoClip::restart()
 {
-	mEndOfFile=1; //temp, to prevent threads to decode while restarting
-	while (mAssignedWorkerThread) _psleep(1); // wait for assigned thread to do it's work
+	mEndOfFile = 1; //temp, to prevent threads to decode while restarting
+	mThreadAccessMutex->lock();
 	_restart();
 	mTimer->seek(0);
 	mFrameQueue->clear();
@@ -95,6 +96,8 @@ void TheoraVideoClip::restart()
 	mIteration = 0;
 	mRestarted = 0;
 	mSeekFrame = -1;
+	mThreadAccessMutex->unlock();
+
 }
 
 void TheoraVideoClip::update(float time_increase)
@@ -221,9 +224,11 @@ void TheoraVideoClip::setOutputMode(TheoraOutputMode mode)
 				 mode == TH_AYUV);
 	if (mAssignedWorkerThread)
 	{
-		while (mAssignedWorkerThread) _psleep(1);
+		mThreadAccessMutex->lock();
 		// discard current frames and recreate them
 		mFrameQueue->setSize(mFrameQueue->getSize());
+		mThreadAccessMutex->unlock();
+
 	}
 	mOutputMode=mRequestedOutputMode;
 }
@@ -339,6 +344,12 @@ float TheoraVideoClip::getPriorityIndex()
 void TheoraVideoClip::setAudioInterface(TheoraAudioInterface* iface)
 {
 	mAudioInterface = iface;
+	if (iface && !mAudioMutex) mAudioMutex = new TheoraMutex;
+	if (!iface && mAudioMutex)
+	{
+		delete mAudioMutex;
+		mAudioMutex = NULL;
+	}
 }
 
 TheoraAudioInterface* TheoraVideoClip::getAudioInterface()

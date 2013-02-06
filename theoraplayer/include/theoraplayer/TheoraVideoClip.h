@@ -94,7 +94,8 @@ protected:
 	float mUserPriority; //! TODO implementation
 
 	TheoraMutex* mAudioMutex; //! syncs audio decoding and extraction
-
+	TheoraMutex* mThreadAccessMutex;
+	
 	/**
 	 * Get the priority of a video clip. based on a forumula that includes user
 	 * priority factor, whether the video is paused or not, how many precached
