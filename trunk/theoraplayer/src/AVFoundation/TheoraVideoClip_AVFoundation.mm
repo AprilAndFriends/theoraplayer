@@ -133,6 +133,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 #endif
 				mNumDisplayedFrames++;
 				mNumDroppedFrames++;
+				CMSampleBufferInvalidate(sampleBuffer);
 				CFRelease(sampleBuffer);
 				sampleBuffer = NULL;
 				continue; // drop frame
@@ -163,6 +164,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 			}
 			frame->decode(&t);
 			CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+			CMSampleBufferInvalidate(sampleBuffer);
 			CFRelease(sampleBuffer);
 
 			break; // TODO - should this really be a while loop instead of an if block?
@@ -352,6 +354,7 @@ float TheoraVideoClip_AVFoundation::decodeAudio()
 					}
 
 					CFRelease(blockBuffer);
+					CMSampleBufferInvalidate(sampleBuffer);
 					CFRelease(sampleBuffer);
 				}
 				else
