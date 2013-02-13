@@ -170,6 +170,9 @@ namespace aprilvideo
 		if (!path.ends_with(".ogg") && !path.ends_with(".ogv") && !path.ends_with(".mp4")) path += defaultFileExtension;
 		
 		mUsingAVFoundation = path.ends_with(".mp4");
+		april::Texture::Format textureFormat;
+		
+//		mUsingAVFoundation ? april::Texture::FORMAT_BGRA :
 		try
 		{
 			TheoraOutputMode mode;
@@ -178,15 +181,19 @@ namespace aprilvideo
 				if (mUseAlpha)
 				{
 					mode = TH_RGBA;
+					textureFormat = april::Texture::FORMAT_ARGB;
 				}
 				else
 				{
 					mode = mUsingAVFoundation ? TH_BGRX : TH_RGBX;
+					textureFormat = mUsingAVFoundation ? april::Texture::FORMAT_BGRA : april::Texture::FORMAT_ARGB;
+
 				}
 			}
 			else
 			{
 				mode = mUseAlpha ? TH_BGRA : TH_BGRX;
+				textureFormat = april::Texture::FORMAT_ARGB;
 			}
 			
 			mClip = gVideoManager->createVideoClip(path, mode, april::getSystemInfo().ram < 512 ? 8 : 16);
@@ -199,7 +206,7 @@ namespace aprilvideo
 		mClip->setAutoRestart(mLoop);
 		
 		float w = mClip->getWidth(), h = mClip->getHeight();
-		april::Texture* tex = april::rendersys->createTexture(_nextPow2(w), _nextPow2(h), mUsingAVFoundation ? april::Texture::FORMAT_BGRA : april::Texture::FORMAT_ARGB);
+		april::Texture* tex = april::rendersys->createTexture(_nextPow2(w), _nextPow2(h), textureFormat);
 		mTexture = new aprilui::Texture(tex->getFilename(), tex);
 		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(0, 0, w, h));
 		mClip->waitForCache(4 / 16.0f, 0.5f);
