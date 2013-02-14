@@ -943,6 +943,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1076,6 +1077,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1127,6 +1129,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1173,6 +1176,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__THEORA,
 					_YUV_C,
 					"$(inherited)",
@@ -1196,6 +1200,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__THEORA,
 					_YUV_C,
 					"$(inherited)",
@@ -1219,6 +1224,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__THEORA,
 					_YUV_C,
 					"$(inherited)",
@@ -1243,6 +1249,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__THEORA,
 					_YUV_C,
 					"$(inherited)",
@@ -1267,6 +1274,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__THEORA,
 					_YUV_C,
 					"$(inherited)",
@@ -1526,6 +1534,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__AVFOUNDATION,
 					_YUV_C,
 					"$(inherited)",
@@ -1550,6 +1559,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__AVFOUNDATION,
 					_YUV_C,
 					"$(inherited)",
@@ -1574,6 +1584,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__AVFOUNDATION,
 					_YUV_C,
 					"$(inherited)",
@@ -1599,6 +1610,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__AVFOUNDATION,
 					_YUV_C,
 					"$(inherited)",
@@ -1624,6 +1636,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__AVFOUNDATION,
 					_YUV_C,
 					"$(inherited)",
@@ -1649,6 +1662,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__THEORA,
 					__AVFOUNDATION,
 					YUV_C,
@@ -1673,6 +1687,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__THEORA,
 					__AVFOUNDATION,
 					YUV_C,
@@ -1697,6 +1712,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__THEORA,
 					__AVFOUNDATION,
 					YUV_C,
@@ -1722,6 +1738,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__THEORA,
 					__AVFOUNDATION,
 					YUV_C,
@@ -1747,6 +1764,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
 					__THEORA,
 					__AVFOUNDATION,
 					YUV_C,
