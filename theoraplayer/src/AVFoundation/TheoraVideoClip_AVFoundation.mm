@@ -20,21 +20,43 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "TheoraVideoClip_AVFoundation.h"
 #include "TheoraPixelTransform.h"
 
-static unsigned int swapByteOrder(unsigned int ui)
+// a fast function developed to use kernel byte swapping calls to optimize alpha decoding.
+// In AVFoundation, BGRX mode conversion is prefered to YUV conversion because apple's YUV
+// conversion on iOS seems to run faster than libtheoraplayer's implementation
+// This may change in the future with more optimizations to libtheoraplayers's YUV conversion
+// code, making this function obsolete.
+static void bgrx2rgba(unsigned char* dest, int w, int h, struct TheoraPixelTransform* t)
 {
-    return (ui >> 24) | ((ui << 8) & 0x00FF0000) | ((ui >> 8) & 0x0000FF00) | (ui << 24);
+	unsigned register int a;
+	unsigned int *dst = (unsigned int*) dest, *dstEnd;
+	unsigned char* src = t->raw;
+	int y, x, ax, bufferStride = w * 4;
+	
+	for (y = 0; y < h; y++, src += t->rawStride)
+	{
+		for (x = 0, ax = w * 4, dstEnd = dst + w; dst != dstEnd; x += 4, ax += 4, dst++)
+		{
+			a = src[ax];
+			if (a < 32) *dst = 0;
+			else
+			{
+				if (a > 224) *dst = (OSReadSwapInt32(src, x) >> 8) | 0xFF000000;
+				else         *dst = (OSReadSwapInt32(src, x) >> 8) | (a << 24);
+			}
+		}
+	}
 }
 
 static CVPlanarPixelBufferInfo_YCbCrPlanar getYUVStruct(void* src)
 {
 	CVPlanarPixelBufferInfo_YCbCrPlanar* bigEndianYuv = (CVPlanarPixelBufferInfo_YCbCrPlanar*) src;
 	CVPlanarPixelBufferInfo_YCbCrPlanar yuv;
-	yuv.componentInfoY.offset = swapByteOrder(bigEndianYuv->componentInfoY.offset);
-	yuv.componentInfoY.rowBytes = swapByteOrder(bigEndianYuv->componentInfoY.rowBytes);
-	yuv.componentInfoCb.offset = swapByteOrder(bigEndianYuv->componentInfoCb.offset);
-	yuv.componentInfoCb.rowBytes = swapByteOrder(bigEndianYuv->componentInfoCb.rowBytes);
-	yuv.componentInfoCr.offset = swapByteOrder(bigEndianYuv->componentInfoCr.offset);
-	yuv.componentInfoCr.rowBytes = swapByteOrder(bigEndianYuv->componentInfoCr.rowBytes);
+	yuv.componentInfoY.offset = OSSwapInt32(bigEndianYuv->componentInfoY.offset);
+	yuv.componentInfoY.rowBytes = OSSwapInt32(bigEndianYuv->componentInfoY.rowBytes);
+	yuv.componentInfoCb.offset = OSSwapInt32(bigEndianYuv->componentInfoCb.offset);
+	yuv.componentInfoCb.rowBytes = OSSwapInt32(bigEndianYuv->componentInfoCb.rowBytes);
+	yuv.componentInfoCr.offset = OSSwapInt32(bigEndianYuv->componentInfoCr.offset);
+	yuv.componentInfoCr.rowBytes = OSSwapInt32(bigEndianYuv->componentInfoCr.rowBytes);
 	return yuv;
 }
 
@@ -58,22 +80,29 @@ TheoraVideoClip_AVFoundation::~TheoraVideoClip_AVFoundation()
 
 void TheoraVideoClip_AVFoundation::unload()
 {
-	if (mOutput != NULL)
+	if (mOutput != NULL || mAudioOutput != NULL || mReader != NULL)
 	{
-		[mOutput release];
-		mOutput = NULL;
-	}
-	
-	if (mAudioOutput)
-	{
-		[mAudioOutput release];
-		mAudioOutput = NULL;
-	}
-	
-	if (mReader != NULL)
-	{
-		[mReader release];
-		mReader = NULL;
+		NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+
+		if (mOutput != NULL)
+		{
+			[mOutput release];
+			mOutput = NULL;
+		}
+		
+		if (mAudioOutput)
+		{
+			[mAudioOutput release];
+			mAudioOutput = NULL;
+		}
+		
+		if (mReader != NULL)
+		{
+			[mReader release];
+			mReader = NULL;
+		}
+		
+		[pool release];
 	}
 }
 
@@ -149,7 +178,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 
 			TheoraPixelTransform t;
 			memset(&t, 0, sizeof(TheoraPixelTransform));
-			if (mOutputMode == TH_BGRX)
+			if (mOutputMode == TH_BGRX || mOutputMode == TH_RGBA)
 			{
 				t.raw = (unsigned char*) baseAddress;
 				t.rawStride = mStride;
@@ -162,7 +191,13 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 				t.u = (unsigned char*) baseAddress + yuv.componentInfoCb.offset; t.uStride = yuv.componentInfoCb.rowBytes;
 				t.v = (unsigned char*) baseAddress + yuv.componentInfoCr.offset; t.vStride = yuv.componentInfoCr.rowBytes;
 			}
-			frame->decode(&t);
+			if (mOutputMode == TH_RGBA)
+			{
+				bgrx2rgba(frame->getBuffer(), mWidth / 2, mHeight, &t);
+				frame->mReady = true;
+			}
+			else frame->decode(&t);
+
 			CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
 			CMSampleBufferInvalidate(sampleBuffer);
 			CFRelease(sampleBuffer);
@@ -227,12 +262,12 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	NSArray* audioTracks = [asset tracksWithMediaType:AVMediaTypeAudio];
 	AVAssetTrack *audioTrack = audioTracks.count > 0 ? [audioTracks objectAtIndex:0] : NULL;
 	
-	bool yuv_output = (mOutputMode != TH_BGRX);
+	bool yuv_output = (mOutputMode != TH_BGRX && mOutputMode != TH_RGBA);
 	NSDictionary *videoOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(yuv_output) ? kCVPixelFormatType_420YpCbCr8Planar : kCVPixelFormatType_32BGRA], kCVPixelBufferPixelFormatTypeKey, nil];
 
 	mOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:videoTrack outputSettings:videoOptions];
 	[mReader addOutput:mOutput];
-	if ([mOutput respondsToSelector:@selector(setAlwaysCopiesSampleData:)]) // Not supported on < iOS5
+	if ([mOutput respondsToSelector:@selector(setAlwaysCopiesSampleData:)]) // Not supported on iOS versions older than 5.0
 		mOutput.alwaysCopiesSampleData = NO;
 
 	mFPS = videoTrack.nominalFrameRate;
@@ -266,7 +301,7 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 
 			mAudioOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:audioTrack outputSettings:audioOptions];
 			[mReader addOutput:mAudioOutput];
-			if ([mAudioOutput respondsToSelector:@selector(setAlwaysCopiesSampleData:)]) // Not supported on < iOS5
+			if ([mAudioOutput respondsToSelector:@selector(setAlwaysCopiesSampleData:)]) // Not supported on iOS versions older than 5.0
 				mAudioOutput.alwaysCopiesSampleData = NO;
 			
 			NSArray* desclst = audioTrack.formatDescriptions;
