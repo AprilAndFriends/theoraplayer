@@ -30,6 +30,7 @@ enum TheoraOutputMode
 	// A = full alpha (255), order of letters represents the byte order for a pixel
 	// A means the image is treated as if it contains an alpha channel, while X formats
 	// just mean that RGB frame is transformed to a 4 byte format
+	TH_UNDEFINED = 0,
 	TH_RGB    =  1,
 	TH_RGBA   =  2,
 	TH_RGBX   =  3,
