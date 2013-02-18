@@ -127,6 +127,12 @@ int TheoraFrameQueue::getReadyCount()
 	mMutex.unlock();
 	return n;
 }
+
+bool TheoraFrameQueue::isFull()
+{
+	return getReadyCount() == mQueue.size();
+}
+
 void TheoraFrameQueue::lock()
 {
 	mMutex.lock();

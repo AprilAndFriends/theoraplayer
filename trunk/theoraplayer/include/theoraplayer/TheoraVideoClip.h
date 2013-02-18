@@ -74,13 +74,16 @@ protected:
 	
 	bool mUseAlpha;
 	
+	bool mWaitingForCache;
+	
 	// benchmark vars
-	int mNumDroppedFrames, mNumDisplayedFrames;
+	int mNumDroppedFrames, mNumDisplayedFrames, mNumPrecachedFrames;
 
-	int mNumPrecachedFrames;
-
+	int mThreadAccessCount; //! counter used by TheoraVideoManager to schedule workload
+	
 	int mSeekFrame; //! stores desired seek position as a frame number. next worker thread will do the seeking and reset this var to -1
 	float mDuration, mFrameDuration, mFPS;
+	float mPriority; //! User assigned priority. Default value is 1
     std::string mName;
 	int mWidth, mHeight, mStride;
 	int mNumFrames;
@@ -91,8 +94,6 @@ protected:
 	bool mAutoRestart;
 	bool mEndOfFile, mRestarted;
 	int mIteration, mLastIteration; //! used to detect when the video restarted
-
-	float mUserPriority; //! TODO implementation
 
 	TheoraMutex* mAudioMutex; //! syncs audio decoding and extraction
 	TheoraMutex* mThreadAccessMutex;
@@ -171,6 +172,9 @@ public:
 	*/
 	float updateToNextFrame();
 
+	
+	TheoraFrameQueue* getFrameQueue();
+	
 	/**
 	    \brief pop the frame from the front of the FrameQueue
 

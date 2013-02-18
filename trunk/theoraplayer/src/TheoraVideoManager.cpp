@@ -9,6 +9,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "TheoraVideoManager.h"
 #include "TheoraWorkerThread.h"
 #include "TheoraVideoClip.h"
+#include "TheoraFrameQueue.h"
 #include "TheoraAudioInterface.h"
 #include "TheoraUtil.h"
 #include "TheoraDataSource.h"
@@ -28,11 +29,17 @@ extern "C"
 	void initYUVConversionModule();
 }
 
-TheoraVideoManager* g_ManagerSingleton=0;
+struct TheoraWorkCandidate
+{
+	TheoraVideoClip* clip;
+	float priority, queuedTime, workTime, entitledTime;
+};
+
+TheoraVideoManager* g_ManagerSingleton = NULL;
 
 void theora_writelog(std::string output)
 {
-	printf("%s\n",output.c_str());
+	printf("%s\n", output.c_str());
 }
 
 void (*g_LogFuction)(std::string)=theora_writelog;
@@ -75,6 +82,10 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 	initYUVConversionModule();
 
 	createWorkerThreads(num_worker_threads);
+#ifdef _DEBUG
+	mThreadAccessCount = 0;
+	mThreadDiagnosticTimer = 0;
+#endif
 }
 
 TheoraVideoManager::~TheoraVideoManager()
@@ -82,7 +93,7 @@ TheoraVideoManager::~TheoraVideoManager()
 	destroyWorkerThreads();
 
 	ClipList::iterator ci;
-	for (ci=mClips.begin(); ci != mClips.end();ci++)
+	for (ci = mClips.begin(); ci != mClips.end(); ci++)
 		delete (*ci);
 	mClips.clear();
 	delete mWorkMutex;
@@ -103,7 +114,7 @@ TheoraVideoClip* TheoraVideoManager::getVideoClipByName(std::string name)
 
 void TheoraVideoManager::setAudioInterfaceFactory(TheoraAudioInterfaceFactory* factory)
 {
-	mAudioFactory=factory;
+	mAudioFactory = factory;
 }
 
 TheoraAudioInterfaceFactory* TheoraVideoManager::getAudioInterfaceFactory()
@@ -163,22 +174,35 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 {
 	if (clip)
 	{
-		th_writelog("Destroying video clip: "+clip->getName());
+		th_writelog("Destroying video clip: " + clip->getName());
 		mWorkMutex->lock();
-		bool reported=0;
+		bool reported = 0;
 		while (clip->mAssignedWorkerThread)
 		{
-			if (!reported) { th_writelog("Waiting for WorkerThread to finish decoding in order to destroy"); reported=1; }
+			if (!reported)
+			{
+				th_writelog("Waiting for WorkerThread to finish decoding in order to destroy");
+				reported = 1;
+			}
 			_psleep(1);
 		}
 		if (reported) th_writelog("WorkerThread done, destroying..");
-		foreach(TheoraVideoClip*,mClips)
+		
+		// erase the clip from the clip list
+		foreach (TheoraVideoClip*, mClips)
+		{
 			if ((*it) == clip)
 			{
 				mClips.erase(it);
 				break;
 			}
+		}
+		// remove all it's references from the work log
+		mWorkLog.remove(clip);
+
+		// delete the actual clip
 		delete clip;
+		
 		th_writelog("Destroyed video.");
 		mWorkMutex->unlock();
 	}
@@ -188,33 +212,129 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 {
 	if (!mWorkMutex) return NULL;
 	mWorkMutex->lock();
-	TheoraVideoClip* c = NULL;
 
-	float priority, last_priority = 100000;
+	TheoraVideoClip* selectedClip = NULL;
+	float maxQueuedTime = 0, totalAccessCount = 0, prioritySum = 0, diff, maxDiff = -1;
+	int nReadyFrames;
+	std::vector<TheoraWorkCandidate> candidates;
+	TheoraFrameQueue* frameQueue;
+	TheoraVideoClip* clip;
+	TheoraWorkCandidate candidate;
 
-	foreach (TheoraVideoClip*, mClips)
+	// first pass is for playing videos, but if no such videos are available for decoding
+	// paused videos are selected in the second pass. Paused videos that are waiting for cache
+	// are considered as playing in the scheduling context
+
+	for (int i = 0; i < 2 && candidates.size() == 0; i++)
 	{
-		if ((*it)->isBusy()) continue;
-		priority = (*it)->getPriorityIndex();
-		if (priority < last_priority || (priority == last_priority && rand()%2 == 0)) // use randomization to prevent clip starvation in resource demanding situations
+		foreach (TheoraVideoClip*, mClips)
 		{
-			last_priority = priority;
-			c = *it;
+			clip = *it;
+			if (clip->isBusy() || (i == 0 && clip->isPaused() && !clip->mWaitingForCache)) continue;
+			frameQueue = clip->getFrameQueue();
+			nReadyFrames = frameQueue->getReadyCount();
+			if (nReadyFrames == frameQueue->getSize()) continue;
+
+			candidate.clip = clip;
+			candidate.priority = clip->getPriority();
+			candidate.queuedTime = (float) nReadyFrames / (clip->getFPS() * clip->getPlaybackSpeed());
+			candidate.workTime = (float) clip->mThreadAccessCount;
+			
+			totalAccessCount += candidate.workTime;
+			if (maxQueuedTime < candidate.queuedTime) maxQueuedTime = candidate.queuedTime;
+
+			candidates.push_back(candidate);
 		}
 	}
-	if (c) c->mAssignedWorkerThread = caller;
-	
+
+	// prevent division by zero
+	if (totalAccessCount == 0) totalAccessCount = 1;
+	if (maxQueuedTime == 0) maxQueuedTime = 1;
+
+	// normalize candidate values
+	foreach (TheoraWorkCandidate, candidates)
+	{
+		it->workTime /= totalAccessCount;
+		// adjust user priorities to favor clips that have fewer frames queued
+		it->priority *= 1.0f - (it->queuedTime / maxQueuedTime) * 0.5f;
+		prioritySum += it->priority;
+	}
+	foreach (TheoraWorkCandidate, candidates)
+	{
+		it->entitledTime = it->priority / prioritySum;
+	}
+
+	// now, based on how much access time has been given to each clip in the work log
+	// and how much time should be given to each clip based on calculated priorities,
+	// we choose a best suited clip for this worker thread to decode next
+	foreach (TheoraWorkCandidate, candidates)
+	{
+		diff = it->entitledTime - it->workTime;
+
+		if (maxDiff < diff)
+		{
+			maxDiff = diff;
+			selectedClip = it->clip;
+		}
+	}
+
+	if (selectedClip)
+	{
+/* -- print debug scheduling statistics, uncomment this when debugging
+#ifdef _DEBUG
+		if (mClips.size() > 1)
+		{
+			int accessCount = mWorkLog.size();
+			if (mThreadDiagnosticTimer > 2.0f)
+			{
+				mThreadDiagnosticTimer = 0;
+				std::string logstr = "-----\nTheora Playback Library debug CPU time analysis (" + str(accessCount) + "):\n";
+				int percent;
+				foreach (TheoraVideoClip*, mClips)
+				{
+					percent = ((float) (*it)->mThreadAccessCount / mWorkLog.size()) * 100.0f;
+					logstr += (*it)->getName() + " (" + str((*it)->getPriority()) + "): " + str((*it)->mThreadAccessCount) + ", " + str(percent) + "%\n";
+				}
+				logstr += "-----";
+				th_writelog(logstr);
+			}
+		}
+#endif
+*/
+		selectedClip->mAssignedWorkerThread = caller;
+		
+		int nClips = mClips.size();
+		unsigned int maxWorkLogSize = (nClips - 1) * 50;
+
+		if (nClips > 1)
+		{
+			mWorkLog.push_front(selectedClip);
+			selectedClip->mThreadAccessCount++;
+		}
+		
+		TheoraVideoClip* c;
+		while (mWorkLog.size() > maxWorkLogSize)
+		{
+			c = mWorkLog.back();
+			mWorkLog.pop_back();
+			c->mThreadAccessCount--;
+		}
+	}
+
 	mWorkMutex->unlock();
-	return c;
+	return selectedClip;
 }
 
 void TheoraVideoManager::update(float time_increase)
 {
-	foreach(TheoraVideoClip*, mClips)
+	foreach (TheoraVideoClip*, mClips)
 	{
 		(*it)->update(time_increase);
 		(*it)->decodedAudioCheck();
 	}
+#ifdef _DEBUG
+	mThreadDiagnosticTimer += time_increase;
+#endif
 }
 
 int TheoraVideoManager::getNumWorkerThreads()
