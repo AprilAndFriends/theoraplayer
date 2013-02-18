@@ -39,6 +39,9 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	mIteration(0),
 	mLastIteration(0),
 	mStream(0),
+	mThreadAccessCount(0),
+	mPriority(1),
+	mWaitingForCache(false),
 	mOutputMode(TH_UNDEFINED)
 {
 	mAudioMutex = NULL;
@@ -147,6 +150,11 @@ float TheoraVideoClip::updateToNextFrame()
 	float time = f->mTimeToDisplay-mTimer->getTime();
 	update(time);
 	return time;
+}
+
+TheoraFrameQueue* TheoraVideoClip::getFrameQueue()
+{
+	return mFrameQueue;
 }
 
 void TheoraVideoClip::popFrame()
@@ -316,6 +324,7 @@ void TheoraVideoClip::seekToFrame(int frame)
 
 void TheoraVideoClip::waitForCache(float desired_cache_factor, float max_wait_time)
 {
+	mWaitingForCache = true;
 	bool paused = mTimer->isPaused();
 	if (!paused) mTimer->pause();
 	int elapsed = 0;
@@ -327,12 +336,17 @@ void TheoraVideoClip::waitForCache(float desired_cache_factor, float max_wait_ti
 		if (elapsed >= max_wait_time * 1000) break;
 	}
 	if (!paused) mTimer->play();
+	mWaitingForCache = false;
 }
 
 float TheoraVideoClip::getPriority()
 {
-	// TODO
-	return getNumPrecachedFrames()*10.0f;
+	return mPriority;
+}
+
+void TheoraVideoClip::setPriority(float priority)
+{
+	mPriority = priority;
 }
 
 float TheoraVideoClip::getPriorityIndex()

@@ -70,7 +70,10 @@ public:
 	void setSize(int n);
 	//! return the size of the queue
 	int getSize();
-
+	
+	//! return whether all frames in the queue are ready for display
+	bool isFull();
+	
 	//! lock the queue's mutex manually
 	void lock();
 	//! unlock the queue's mutex manually
