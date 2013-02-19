@@ -32,7 +32,7 @@ extern "C"
 // --------------------------
 //#define _SCHEDULING_DEBUG
 #ifdef _SCHEDULING_DEBUG
-float gThreadDiagnosticTimer;
+float gThreadDiagnosticTimer = 0;
 #endif
 // --------------------------
 
@@ -89,9 +89,6 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 	initYUVConversionModule();
 
 	createWorkerThreads(num_worker_threads);
-#ifdef _SCHEDULING_DEBUG
-	gThreadDiagnosticTimer = 0;
-#endif
 }
 
 TheoraVideoManager::~TheoraVideoManager()
