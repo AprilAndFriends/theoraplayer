@@ -29,6 +29,13 @@ extern "C"
 	void initYUVConversionModule();
 }
 
+// --------------------------
+//#define _SCHEDULING_DEBUG
+#ifdef _SCHEDULING_DEBUG
+float gThreadDiagnosticTimer;
+#endif
+// --------------------------
+
 struct TheoraWorkCandidate
 {
 	TheoraVideoClip* clip;
@@ -82,9 +89,8 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 	initYUVConversionModule();
 
 	createWorkerThreads(num_worker_threads);
-#ifdef _DEBUG
-	mThreadAccessCount = 0;
-	mThreadDiagnosticTimer = 0;
+#ifdef _SCHEDULING_DEBUG
+	gThreadDiagnosticTimer = 0;
 #endif
 }
 
@@ -280,27 +286,6 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 
 	if (selectedClip)
 	{
-/* -- print debug scheduling statistics, uncomment this when debugging
-#ifdef _DEBUG
-		if (mClips.size() > 1)
-		{
-			int accessCount = mWorkLog.size();
-			if (mThreadDiagnosticTimer > 2.0f)
-			{
-				mThreadDiagnosticTimer = 0;
-				std::string logstr = "-----\nTheora Playback Library debug CPU time analysis (" + str(accessCount) + "):\n";
-				int percent;
-				foreach (TheoraVideoClip*, mClips)
-				{
-					percent = ((float) (*it)->mThreadAccessCount / mWorkLog.size()) * 100.0f;
-					logstr += (*it)->getName() + " (" + str((*it)->getPriority()) + "): " + str((*it)->mThreadAccessCount) + ", " + str(percent) + "%\n";
-				}
-				logstr += "-----";
-				th_writelog(logstr);
-			}
-		}
-#endif
-*/
 		selectedClip->mAssignedWorkerThread = caller;
 		
 		int nClips = mClips.size();
@@ -319,6 +304,26 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 			mWorkLog.pop_back();
 			c->mThreadAccessCount--;
 		}
+#ifdef _SCHEDULING_DEBUG
+		if (mClips.size() > 1)
+		{
+			int accessCount = mWorkLog.size();
+			if (gThreadDiagnosticTimer > 2.0f)
+			{
+				gThreadDiagnosticTimer = 0;
+				std::string logstr = "-----\nTheora Playback Library debug CPU time analysis (" + str(accessCount) + "):\n";
+				int percent;
+				foreach (TheoraVideoClip*, mClips)
+				{
+					percent = ((float) (*it)->mThreadAccessCount / mWorkLog.size()) * 100.0f;
+					logstr += (*it)->getName() + " (" + str((*it)->getPriority()) + "): " + str((*it)->mThreadAccessCount) + ", " + str(percent) + "%\n";
+				}
+				logstr += "-----";
+				th_writelog(logstr);
+			}
+		}
+#endif
+
 	}
 
 	mWorkMutex->unlock();
@@ -332,8 +337,8 @@ void TheoraVideoManager::update(float time_increase)
 		(*it)->update(time_increase);
 		(*it)->decodedAudioCheck();
 	}
-#ifdef _DEBUG
-	mThreadDiagnosticTimer += time_increase;
+#ifdef _SCHEDULING_DEBUG
+	gThreadDiagnosticTimer += time_increase;
 #endif
 }
 
