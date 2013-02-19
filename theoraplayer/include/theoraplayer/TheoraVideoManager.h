@@ -55,11 +55,6 @@ protected:
 	 * Called by TheoraWorkerThread to request a TheoraVideoClip instance to work on decoding
 	 */
 	TheoraVideoClip* requestWork(TheoraWorkerThread* caller);
-	
-#ifdef _DEBUG
-	int mThreadAccessCount;
-	float mThreadDiagnosticTimer;
-#endif
 public:
 	TheoraVideoManager(int num_worker_threads=1);
 	virtual ~TheoraVideoManager();
