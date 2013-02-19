@@ -13,6 +13,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <theoraplayer/TheoraPlayer.h>
 #include <theoraplayer/TheoraTimer.h>
 #include <april/RenderSystem.h>
+#include <april/april.h>
 #include <april/Platform.h>
 #include <april/Texture.h>
 #include <aprilui/aprilui.h>
@@ -176,7 +177,7 @@ namespace aprilvideo
 		try
 		{
 			TheoraOutputMode mode;
-			if (april::rendersys->getName() == "OpenGL")
+			if (april::rendersys->getName().starts_with("OpenGL"))
 			{
 				if (mUseAlpha)
 				{
@@ -263,7 +264,7 @@ namespace aprilvideo
 				r.w = f->getWidth();
 				r.h = f->getHeight();
 				mImage->setSrcRect(r);
-				if (april::rendersys->getName() == "DirectX9") mTexture->getRenderTexture()->clear();
+				if (april::rendersys->getName() == APRIL_RS_DIRECTX9) mTexture->getRenderTexture()->clear();
 				mTexture->getRenderTexture()->write(0, 0, f->getBuffer(), r.w, r.h, 4);
 				mClip->popFrame();
 				if (mLoop)
