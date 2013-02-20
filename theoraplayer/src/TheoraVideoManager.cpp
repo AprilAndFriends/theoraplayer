@@ -220,7 +220,6 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 	float maxQueuedTime = 0, totalAccessCount = 0, prioritySum = 0, diff, maxDiff = -1;
 	int nReadyFrames;
 	std::vector<TheoraWorkCandidate> candidates;
-	TheoraFrameQueue* frameQueue;
 	TheoraVideoClip* clip;
 	TheoraWorkCandidate candidate;
 
@@ -234,9 +233,8 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 		{
 			clip = *it;
 			if (clip->isBusy() || (i == 0 && clip->isPaused() && !clip->mWaitingForCache)) continue;
-			frameQueue = clip->getFrameQueue();
-			nReadyFrames = frameQueue->getReadyCount();
-			if (nReadyFrames == frameQueue->getSize()) continue;
+			nReadyFrames = clip->getNumReadyFrames();
+			if (nReadyFrames == clip->getFrameQueue()->getSize()) continue;
 
 			candidate.clip = clip;
 			candidate.priority = clip->getPriority();
