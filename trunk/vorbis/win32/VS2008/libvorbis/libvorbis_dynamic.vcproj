@@ -1001,10 +1001,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\lib\vorbisenc.c"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\lib\window.c"
 				>
 			</File>
