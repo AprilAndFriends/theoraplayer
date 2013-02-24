@@ -445,10 +445,6 @@
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 			>
 			<File
-				RelativePath=".\src\Endianess.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\TheoraAsync.cpp"
 				>
 			</File>
@@ -532,6 +528,14 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="resources"
+			>
+			<File
+				RelativePath=".\fileproperties.rc"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

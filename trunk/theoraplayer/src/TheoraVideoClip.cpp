@@ -298,6 +298,7 @@ bool TheoraVideoClip::isDone()
 void TheoraVideoClip::stop()
 {
 	pause();
+	mFrameQueue->clear();
 	seek(0);
 }
 
