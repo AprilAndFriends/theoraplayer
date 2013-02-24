@@ -1,0 +1,749 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D176B2861562F1AF00E26F82 /* asm_arm.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B25F1562F1AF00E26F82 /* asm_arm.h */; };
+		D176B2871562F1AF00E26F82 /* asm_arm.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B25F1562F1AF00E26F82 /* asm_arm.h */; };
+		D176B2891562F1AF00E26F82 /* backends.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2611562F1AF00E26F82 /* backends.h */; };
+		D176B28A1562F1AF00E26F82 /* backends.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2611562F1AF00E26F82 /* backends.h */; };
+		D176B28B1562F1AF00E26F82 /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B2621562F1AF00E26F82 /* block.c */; };
+		D176B28C1562F1AF00E26F82 /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B2621562F1AF00E26F82 /* block.c */; };
+		D176B28D1562F1AF00E26F82 /* block.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2631562F1AF00E26F82 /* block.h */; };
+		D176B28E1562F1AF00E26F82 /* block.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2631562F1AF00E26F82 /* block.h */; };
+		D176B2901562F1AF00E26F82 /* codebook.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B2651562F1AF00E26F82 /* codebook.c */; };
+		D176B2911562F1AF00E26F82 /* codebook.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B2651562F1AF00E26F82 /* codebook.c */; };
+		D176B2921562F1AF00E26F82 /* codebook.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2661562F1AF00E26F82 /* codebook.h */; };
+		D176B2931562F1AF00E26F82 /* codebook.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2661562F1AF00E26F82 /* codebook.h */; };
+		D176B2941562F1AF00E26F82 /* codec_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2671562F1AF00E26F82 /* codec_internal.h */; };
+		D176B2951562F1AF00E26F82 /* codec_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2671562F1AF00E26F82 /* codec_internal.h */; };
+		D176B2961562F1AF00E26F82 /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2681562F1AF00E26F82 /* config_types.h */; };
+		D176B2971562F1AF00E26F82 /* config_types.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2681562F1AF00E26F82 /* config_types.h */; };
+		D176B29A1562F1AF00E26F82 /* floor0.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B26B1562F1AF00E26F82 /* floor0.c */; };
+		D176B29B1562F1AF00E26F82 /* floor0.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B26B1562F1AF00E26F82 /* floor0.c */; };
+		D176B29C1562F1AF00E26F82 /* floor1.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B26C1562F1AF00E26F82 /* floor1.c */; };
+		D176B29D1562F1AF00E26F82 /* floor1.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B26C1562F1AF00E26F82 /* floor1.c */; };
+		D176B29E1562F1AF00E26F82 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B26D1562F1AF00E26F82 /* info.c */; };
+		D176B29F1562F1AF00E26F82 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B26D1562F1AF00E26F82 /* info.c */; };
+		D176B2A21562F1AF00E26F82 /* ivorbiscodec.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B26F1562F1AF00E26F82 /* ivorbiscodec.h */; };
+		D176B2A31562F1AF00E26F82 /* ivorbiscodec.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B26F1562F1AF00E26F82 /* ivorbiscodec.h */; };
+		D176B2A61562F1AF00E26F82 /* ivorbisfile.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2711562F1AF00E26F82 /* ivorbisfile.h */; };
+		D176B2A71562F1AF00E26F82 /* ivorbisfile.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2711562F1AF00E26F82 /* ivorbisfile.h */; };
+		D176B2A81562F1AF00E26F82 /* lsp_lookup.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2721562F1AF00E26F82 /* lsp_lookup.h */; };
+		D176B2A91562F1AF00E26F82 /* lsp_lookup.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2721562F1AF00E26F82 /* lsp_lookup.h */; };
+		D176B2AB1562F1AF00E26F82 /* mapping0.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B2741562F1AF00E26F82 /* mapping0.c */; };
+		D176B2AC1562F1AF00E26F82 /* mapping0.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B2741562F1AF00E26F82 /* mapping0.c */; };
+		D176B2AD1562F1AF00E26F82 /* mdct_lookup.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2751562F1AF00E26F82 /* mdct_lookup.h */; };
+		D176B2AE1562F1AF00E26F82 /* mdct_lookup.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2751562F1AF00E26F82 /* mdct_lookup.h */; };
+		D176B2AF1562F1AF00E26F82 /* mdct.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B2761562F1AF00E26F82 /* mdct.c */; };
+		D176B2B01562F1AF00E26F82 /* mdct.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B2761562F1AF00E26F82 /* mdct.c */; };
+		D176B2B11562F1AF00E26F82 /* mdct.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2771562F1AF00E26F82 /* mdct.h */; };
+		D176B2B21562F1AF00E26F82 /* mdct.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2771562F1AF00E26F82 /* mdct.h */; };
+		D176B2B31562F1AF00E26F82 /* misc.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2781562F1AF00E26F82 /* misc.h */; };
+		D176B2B41562F1AF00E26F82 /* misc.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2781562F1AF00E26F82 /* misc.h */; };
+		D176B2B51562F1AF00E26F82 /* os.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2791562F1AF00E26F82 /* os.h */; };
+		D176B2B61562F1AF00E26F82 /* os.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2791562F1AF00E26F82 /* os.h */; };
+		D176B2B81562F1AF00E26F82 /* registry.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B27B1562F1AF00E26F82 /* registry.c */; };
+		D176B2B91562F1AF00E26F82 /* registry.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B27B1562F1AF00E26F82 /* registry.c */; };
+		D176B2BA1562F1AF00E26F82 /* registry.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B27C1562F1AF00E26F82 /* registry.h */; };
+		D176B2BB1562F1AF00E26F82 /* registry.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B27C1562F1AF00E26F82 /* registry.h */; };
+		D176B2BC1562F1AF00E26F82 /* res012.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B27D1562F1AF00E26F82 /* res012.c */; };
+		D176B2BD1562F1AF00E26F82 /* res012.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B27D1562F1AF00E26F82 /* res012.c */; };
+		D176B2BE1562F1AF00E26F82 /* sharedbook.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B27E1562F1AF00E26F82 /* sharedbook.c */; };
+		D176B2BF1562F1AF00E26F82 /* sharedbook.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B27E1562F1AF00E26F82 /* sharedbook.c */; };
+		D176B2C01562F1AF00E26F82 /* synthesis.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B27F1562F1AF00E26F82 /* synthesis.c */; };
+		D176B2C11562F1AF00E26F82 /* synthesis.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B27F1562F1AF00E26F82 /* synthesis.c */; };
+		D176B2C31562F1AF00E26F82 /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B2811562F1AF00E26F82 /* vorbisfile.c */; };
+		D176B2C41562F1AF00E26F82 /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B2811562F1AF00E26F82 /* vorbisfile.c */; };
+		D176B2C61562F1AF00E26F82 /* window_lookup.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2831562F1AF00E26F82 /* window_lookup.h */; };
+		D176B2C71562F1AF00E26F82 /* window_lookup.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2831562F1AF00E26F82 /* window_lookup.h */; };
+		D176B2C81562F1AF00E26F82 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B2841562F1AF00E26F82 /* window.c */; };
+		D176B2C91562F1AF00E26F82 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B2841562F1AF00E26F82 /* window.c */; };
+		D176B2CA1562F1AF00E26F82 /* window.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2851562F1AF00E26F82 /* window.h */; };
+		D176B2CB1562F1AF00E26F82 /* window.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2851562F1AF00E26F82 /* window.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8DC2EF5B0486A6940098B216 /* tremor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tremor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1522F1C140F79500012F290 /* libtremor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtremor.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D176B25F1562F1AF00E26F82 /* asm_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asm_arm.h; sourceTree = "<group>"; };
+		D176B2611562F1AF00E26F82 /* backends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = backends.h; sourceTree = "<group>"; };
+		D176B2621562F1AF00E26F82 /* block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = block.c; sourceTree = "<group>"; };
+		D176B2631562F1AF00E26F82 /* block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = block.h; sourceTree = "<group>"; };
+		D176B2651562F1AF00E26F82 /* codebook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = codebook.c; sourceTree = "<group>"; };
+		D176B2661562F1AF00E26F82 /* codebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = codebook.h; sourceTree = "<group>"; };
+		D176B2671562F1AF00E26F82 /* codec_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = codec_internal.h; sourceTree = "<group>"; };
+		D176B2681562F1AF00E26F82 /* config_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config_types.h; sourceTree = "<group>"; };
+		D176B26B1562F1AF00E26F82 /* floor0.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = floor0.c; sourceTree = "<group>"; };
+		D176B26C1562F1AF00E26F82 /* floor1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = floor1.c; sourceTree = "<group>"; };
+		D176B26D1562F1AF00E26F82 /* info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = info.c; sourceTree = "<group>"; };
+		D176B26F1562F1AF00E26F82 /* ivorbiscodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ivorbiscodec.h; sourceTree = "<group>"; };
+		D176B2711562F1AF00E26F82 /* ivorbisfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ivorbisfile.h; sourceTree = "<group>"; };
+		D176B2721562F1AF00E26F82 /* lsp_lookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lsp_lookup.h; sourceTree = "<group>"; };
+		D176B2741562F1AF00E26F82 /* mapping0.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mapping0.c; sourceTree = "<group>"; };
+		D176B2751562F1AF00E26F82 /* mdct_lookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mdct_lookup.h; sourceTree = "<group>"; };
+		D176B2761562F1AF00E26F82 /* mdct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mdct.c; sourceTree = "<group>"; };
+		D176B2771562F1AF00E26F82 /* mdct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mdct.h; sourceTree = "<group>"; };
+		D176B2781562F1AF00E26F82 /* misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = misc.h; sourceTree = "<group>"; };
+		D176B2791562F1AF00E26F82 /* os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os.h; sourceTree = "<group>"; };
+		D176B27B1562F1AF00E26F82 /* registry.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = registry.c; sourceTree = "<group>"; };
+		D176B27C1562F1AF00E26F82 /* registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registry.h; sourceTree = "<group>"; };
+		D176B27D1562F1AF00E26F82 /* res012.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = res012.c; sourceTree = "<group>"; };
+		D176B27E1562F1AF00E26F82 /* sharedbook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sharedbook.c; sourceTree = "<group>"; };
+		D176B27F1562F1AF00E26F82 /* synthesis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = synthesis.c; sourceTree = "<group>"; };
+		D176B2811562F1AF00E26F82 /* vorbisfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vorbisfile.c; sourceTree = "<group>"; };
+		D176B2831562F1AF00E26F82 /* window_lookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = window_lookup.h; sourceTree = "<group>"; };
+		D176B2841562F1AF00E26F82 /* window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = window.c; sourceTree = "<group>"; };
+		D176B2851562F1AF00E26F82 /* window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = window.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DC2EF560486A6940098B216 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1522F19140F79500012F290 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DC2EF5B0486A6940098B216 /* tremor.framework */,
+				D1522F1C140F79500012F290 /* libtremor.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* libtremor */ = {
+			isa = PBXGroup;
+			children = (
+				7F42F6E811EB0E0600B1C1DF /* include */,
+				7F42F6E711EB0E0200B1C1DF /* src */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = libtremor;
+			sourceTree = "<group>";
+		};
+		7F42F6E711EB0E0200B1C1DF /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D176B2621562F1AF00E26F82 /* block.c */,
+				D176B2651562F1AF00E26F82 /* codebook.c */,
+				D176B26B1562F1AF00E26F82 /* floor0.c */,
+				D176B26C1562F1AF00E26F82 /* floor1.c */,
+				D176B26D1562F1AF00E26F82 /* info.c */,
+				D176B2741562F1AF00E26F82 /* mapping0.c */,
+				D176B2761562F1AF00E26F82 /* mdct.c */,
+				D176B27B1562F1AF00E26F82 /* registry.c */,
+				D176B27D1562F1AF00E26F82 /* res012.c */,
+				D176B27E1562F1AF00E26F82 /* sharedbook.c */,
+				D176B27F1562F1AF00E26F82 /* synthesis.c */,
+				D176B2811562F1AF00E26F82 /* vorbisfile.c */,
+				D176B2841562F1AF00E26F82 /* window.c */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		7F42F6E811EB0E0600B1C1DF /* include */ = {
+			isa = PBXGroup;
+			children = (
+				D176B25F1562F1AF00E26F82 /* asm_arm.h */,
+				D176B2611562F1AF00E26F82 /* backends.h */,
+				D176B2631562F1AF00E26F82 /* block.h */,
+				D176B2661562F1AF00E26F82 /* codebook.h */,
+				D176B2671562F1AF00E26F82 /* codec_internal.h */,
+				D176B2681562F1AF00E26F82 /* config_types.h */,
+				D176B26F1562F1AF00E26F82 /* ivorbiscodec.h */,
+				D176B2711562F1AF00E26F82 /* ivorbisfile.h */,
+				D176B2721562F1AF00E26F82 /* lsp_lookup.h */,
+				D176B2751562F1AF00E26F82 /* mdct_lookup.h */,
+				D176B2771562F1AF00E26F82 /* mdct.h */,
+				D176B2781562F1AF00E26F82 /* misc.h */,
+				D176B2791562F1AF00E26F82 /* os.h */,
+				D176B27C1562F1AF00E26F82 /* registry.h */,
+				D176B2831562F1AF00E26F82 /* window_lookup.h */,
+				D176B2851562F1AF00E26F82 /* window.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8DC2EF500486A6940098B216 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D176B2861562F1AF00E26F82 /* asm_arm.h in Headers */,
+				D176B2891562F1AF00E26F82 /* backends.h in Headers */,
+				D176B28D1562F1AF00E26F82 /* block.h in Headers */,
+				D176B2921562F1AF00E26F82 /* codebook.h in Headers */,
+				D176B2941562F1AF00E26F82 /* codec_internal.h in Headers */,
+				D176B2961562F1AF00E26F82 /* config_types.h in Headers */,
+				D176B2A21562F1AF00E26F82 /* ivorbiscodec.h in Headers */,
+				D176B2A61562F1AF00E26F82 /* ivorbisfile.h in Headers */,
+				D176B2A81562F1AF00E26F82 /* lsp_lookup.h in Headers */,
+				D176B2AD1562F1AF00E26F82 /* mdct_lookup.h in Headers */,
+				D176B2B11562F1AF00E26F82 /* mdct.h in Headers */,
+				D176B2B31562F1AF00E26F82 /* misc.h in Headers */,
+				D176B2B51562F1AF00E26F82 /* os.h in Headers */,
+				D176B2BA1562F1AF00E26F82 /* registry.h in Headers */,
+				D176B2C61562F1AF00E26F82 /* window_lookup.h in Headers */,
+				D176B2CA1562F1AF00E26F82 /* window.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1522F1A140F79500012F290 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D176B2871562F1AF00E26F82 /* asm_arm.h in Headers */,
+				D176B28A1562F1AF00E26F82 /* backends.h in Headers */,
+				D176B28E1562F1AF00E26F82 /* block.h in Headers */,
+				D176B2931562F1AF00E26F82 /* codebook.h in Headers */,
+				D176B2951562F1AF00E26F82 /* codec_internal.h in Headers */,
+				D176B2971562F1AF00E26F82 /* config_types.h in Headers */,
+				D176B2A31562F1AF00E26F82 /* ivorbiscodec.h in Headers */,
+				D176B2A71562F1AF00E26F82 /* ivorbisfile.h in Headers */,
+				D176B2A91562F1AF00E26F82 /* lsp_lookup.h in Headers */,
+				D176B2AE1562F1AF00E26F82 /* mdct_lookup.h in Headers */,
+				D176B2B21562F1AF00E26F82 /* mdct.h in Headers */,
+				D176B2B41562F1AF00E26F82 /* misc.h in Headers */,
+				D176B2B61562F1AF00E26F82 /* os.h in Headers */,
+				D176B2BB1562F1AF00E26F82 /* registry.h in Headers */,
+				D176B2C71562F1AF00E26F82 /* window_lookup.h in Headers */,
+				D176B2CB1562F1AF00E26F82 /* window.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8DC2EF4F0486A6940098B216 /* tremor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "tremor" */;
+			buildPhases = (
+				8DC2EF500486A6940098B216 /* Headers */,
+				8DC2EF520486A6940098B216 /* Resources */,
+				8DC2EF540486A6940098B216 /* Sources */,
+				8DC2EF560486A6940098B216 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tremor;
+			productInstallPath = "$(HOME)/Library/Frameworks";
+			productName = libtremor;
+			productReference = 8DC2EF5B0486A6940098B216 /* tremor.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D1522F1B140F79500012F290 /* tremor (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1522F2B140F79500012F290 /* Build configuration list for PBXNativeTarget "tremor (iOS)" */;
+			buildPhases = (
+				D1522F18140F79500012F290 /* Sources */,
+				D1522F19140F79500012F290 /* Frameworks */,
+				D1522F1A140F79500012F290 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "tremor (iOS)";
+			productName = "libtremor-ios";
+			productReference = D1522F1C140F79500012F290 /* libtremor.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
+			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "Tremor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* libtremor */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DC2EF4F0486A6940098B216 /* tremor */,
+				D1522F1B140F79500012F290 /* tremor (iOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8DC2EF520486A6940098B216 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DC2EF540486A6940098B216 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D176B28B1562F1AF00E26F82 /* block.c in Sources */,
+				D176B2901562F1AF00E26F82 /* codebook.c in Sources */,
+				D176B29A1562F1AF00E26F82 /* floor0.c in Sources */,
+				D176B29C1562F1AF00E26F82 /* floor1.c in Sources */,
+				D176B29E1562F1AF00E26F82 /* info.c in Sources */,
+				D176B2AB1562F1AF00E26F82 /* mapping0.c in Sources */,
+				D176B2AF1562F1AF00E26F82 /* mdct.c in Sources */,
+				D176B2B81562F1AF00E26F82 /* registry.c in Sources */,
+				D176B2BC1562F1AF00E26F82 /* res012.c in Sources */,
+				D176B2BE1562F1AF00E26F82 /* sharedbook.c in Sources */,
+				D176B2C01562F1AF00E26F82 /* synthesis.c in Sources */,
+				D176B2C31562F1AF00E26F82 /* vorbisfile.c in Sources */,
+				D176B2C81562F1AF00E26F82 /* window.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1522F18140F79500012F290 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D176B28C1562F1AF00E26F82 /* block.c in Sources */,
+				D176B2911562F1AF00E26F82 /* codebook.c in Sources */,
+				D176B29B1562F1AF00E26F82 /* floor0.c in Sources */,
+				D176B29D1562F1AF00E26F82 /* floor1.c in Sources */,
+				D176B29F1562F1AF00E26F82 /* info.c in Sources */,
+				D176B2AC1562F1AF00E26F82 /* mapping0.c in Sources */,
+				D176B2B01562F1AF00E26F82 /* mdct.c in Sources */,
+				D176B2B91562F1AF00E26F82 /* registry.c in Sources */,
+				D176B2BD1562F1AF00E26F82 /* res012.c in Sources */,
+				D176B2BF1562F1AF00E26F82 /* sharedbook.c in Sources */,
+				D176B2C11562F1AF00E26F82 /* synthesis.c in Sources */,
+				D176B2C41562F1AF00E26F82 /* vorbisfile.c in Sources */,
+				D176B2C91562F1AF00E26F82 /* window.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB91AE08733DA50010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = tremor;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "i386 x86_64 ppc";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		1DEB91AF08733DA50010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_MODEL_TUNING = G5;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = tremor;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "i386 x86_64 ppc";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		1DEB91B208733DA50010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = 4.0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../ogg/include",
+					.,
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = tremor;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Debug;
+		};
+		1DEB91B308733DA50010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_VERSION = 4.0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../ogg/include",
+					.,
+				);
+				PRODUCT_NAME = tremor;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Release;
+		};
+		7F7A5614129D436D00E0ED12 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_VERSION = 4.2;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../ogg/include",
+					.,
+				);
+				PRODUCT_NAME = tremor;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = "-w";
+			};
+			name = "App Store";
+		};
+		7F7A5615129D436D00E0ED12 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_MODEL_TUNING = G5;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PRODUCT_NAME = tremor;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "i386 x86_64 ppc";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = "App Store";
+		};
+		C9160585132AE60400914FFC /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = 4.0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../ogg/include",
+					.,
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = tremor;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = "-w";
+			};
+			name = "Debug-LLVM";
+		};
+		C9160586132AE60400914FFC /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = "";
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PRODUCT_NAME = tremor;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "i386 x86_64 ppc";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = "Debug-LLVM";
+		};
+		C9160587132AE61000914FFC /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_VERSION = 4.0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${SRCROOT}/../ogg/include",
+					.,
+				);
+				PRODUCT_NAME = tremor;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = "-w";
+			};
+			name = "Release-LLVM";
+		};
+		C9160588132AE61000914FFC /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_MODEL_TUNING = G5;
+				GCC_VERSION = "";
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PRODUCT_NAME = tremor;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "i386 x86_64 ppc";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = "Release-LLVM";
+		};
+		D1522F26140F79500012F290 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/libtremor_ios.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = tremor;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D1522F27140F79500012F290 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/libtremor_ios.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = tremor;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "Debug-LLVM";
+		};
+		D1522F28140F79500012F290 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/libtremor_ios.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = tremor;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D1522F29140F79500012F290 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/libtremor_ios.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = tremor;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-LLVM";
+		};
+		D1522F2A140F79500012F290 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/libtremor_ios.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = tremor;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "App Store";
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "tremor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91AE08733DA50010E9CD /* Debug */,
+				C9160586132AE60400914FFC /* Debug-LLVM */,
+				1DEB91AF08733DA50010E9CD /* Release */,
+				C9160588132AE61000914FFC /* Release-LLVM */,
+				7F7A5615129D436D00E0ED12 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "Tremor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91B208733DA50010E9CD /* Debug */,
+				C9160585132AE60400914FFC /* Debug-LLVM */,
+				1DEB91B308733DA50010E9CD /* Release */,
+				C9160587132AE61000914FFC /* Release-LLVM */,
+				7F7A5614129D436D00E0ED12 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1522F2B140F79500012F290 /* Build configuration list for PBXNativeTarget "tremor (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1522F26140F79500012F290 /* Debug */,
+				D1522F27140F79500012F290 /* Debug-LLVM */,
+				D1522F28140F79500012F290 /* Release */,
+				D1522F29140F79500012F290 /* Release-LLVM */,
+				D1522F2A140F79500012F290 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
