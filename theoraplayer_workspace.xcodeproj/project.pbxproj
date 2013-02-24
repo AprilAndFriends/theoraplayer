@@ -2474,7 +2474,8 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = demos/basecode/ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = simple_player;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2495,7 +2496,8 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = demos/basecode/ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = simple_player;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2516,7 +2518,8 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = demos/basecode/ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = simple_player;
 				SDKROOT = iphoneos;
@@ -2538,7 +2541,8 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = demos/basecode/ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = simple_player;
 				SDKROOT = iphoneos;
@@ -2560,7 +2564,8 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = demos/basecode/ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = simple_player;
 				SDKROOT = iphoneos;
