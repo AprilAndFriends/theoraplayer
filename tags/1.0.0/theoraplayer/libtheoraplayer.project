@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Project Name="libtheoraplayer" InternalType="Library">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00010001N0007Release000000000000]]>
+    </Plugin>
+  </Plugins>
+  <Description/>
+  <Dependencies/>
+  <VirtualDirectory Name="src">
+    <File Name="src/Endianess.h"/>
+    <File Name="src/TheoraAsync.cpp"/>
+    <File Name="src/TheoraAudioInterface.cpp"/>
+    <File Name="src/TheoraDataSource.cpp"/>
+    <File Name="src/TheoraException.cpp"/>
+    <File Name="src/TheoraFrameQueue.cpp"/>
+    <File Name="src/TheoraTimer.cpp"/>
+    <File Name="src/TheoraUtil.cpp"/>
+    <File Name="src/TheoraVideoClip.cpp"/>
+    <File Name="src/TheoraVideoFrame.cpp"/>
+    <File Name="src/TheoraVideoManager.cpp"/>
+    <File Name="src/TheoraWorkerThread.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="include">
+    <File Name="include/TheoraWorkerThread.h"/>
+    <File Name="include/TheoraAsync.h"/>
+    <File Name="include/TheoraAudioInterface.h"/>
+    <File Name="include/TheoraDataSource.h"/>
+    <File Name="include/TheoraException.h"/>
+    <File Name="include/TheoraExport.h"/>
+    <File Name="include/TheoraFrameQueue.h"/>
+    <File Name="include/TheoraPlayer.h"/>
+    <File Name="include/TheoraTimer.h"/>
+    <File Name="include/TheoraUtil.h"/>
+    <File Name="include/TheoraVideoClip.h"/>
+    <File Name="include/TheoraVideoFrame.h"/>
+    <File Name="include/TheoraVideoManager.h"/>
+  </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Settings Type="Dynamic Library">
+    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g" Required="yes" PreCompiledHeader="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/libtheoraplayer_d.dll" IntermediateDirectory="./bin/Debug" Command="" CommandArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="" Required="yes" PreCompiledHeader="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="-O2" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/libtheoraplayer.dll" IntermediateDirectory="./bin/Release" Command="" CommandArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+    </Configuration>
+    <GlobalSettings>
+      <Compiler Options="">
+        <IncludePath Value="./include"/>
+        <Preprocessor Value="_WIN32"/>
+        <Preprocessor Value="THEORAVIDEO_EXPORTS"/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="./lib"/>
+        <Library Value="libogg"/>
+        <Library Value="libvorbis"/>
+        <Library Value="libtheora"/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+  </Settings>
+  <Dependencies Name="Release"/>
+</CodeLite_Project>
