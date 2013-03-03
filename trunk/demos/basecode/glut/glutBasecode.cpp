@@ -5,7 +5,7 @@ float mx = 0, my = 0;
 #define USE_SHADERS
 #ifdef USE_SHADERS
 
-#if defined(_WIN32)
+#if defined(WIN32)
 #define pglGetProcAddress(func) wglGetProcAddress(func)
 #elif defined(__APPLE__)
 #define pglGetProcAddress(func) glXGetProcAddress((GLubyte*) func)
