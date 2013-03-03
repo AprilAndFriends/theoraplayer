@@ -19,6 +19,9 @@ COPYRIGHT INFO: The room 3D models and lightmap textures and textures are licens
 #include "ObjModel.h"
 #include "tga.h"
 #include <math.h>
+#ifdef WIN32
+#include <gl/glext.h>
+#endif
 
 unsigned int tex_id, diffuse_map;
 TheoraVideoManager* mgr;

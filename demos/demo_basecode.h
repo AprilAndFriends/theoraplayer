@@ -13,7 +13,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <stdio.h>
 #include <string>
 
-#ifdef _WIN32
+#ifdef WIN32
 	#pragma warning( disable: 4996 ) // MSVC++
 	#include <windows.h>
 	#include <GL/gl.h>
@@ -28,6 +28,21 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 		#include <OpenGL/glext.h>
 		#include <GLUT/glut.h>
 	#endif
+#endif
+
+#ifndef __APPLE__
+#include <GL/glext.h>
+extern PFNGLCREATEPROGRAMPROC glCreateProgram;
+extern PFNGLCREATESHADERPROC glCreateShader;
+extern PFNGLLINKPROGRAMPROC glLinkProgram;
+extern PFNGLSHADERSOURCEPROC glShaderSource;
+extern PFNGLUSEPROGRAMPROC glUseProgram;
+extern PFNGLCOMPILESHADERPROC glCompileShader;
+extern PFNGLATTACHSHADERPROC glAttachShader;
+extern PFNGLMULTITEXCOORD2FARBPROC glMultiTexCoord2fARB;
+extern PFNGLACTIVETEXTUREARBPROC glActiveTextureARB;
+#else
+#include <OpenGL/glext.h>
 #endif
 
 #include "util.h"

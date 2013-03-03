@@ -16,6 +16,9 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <math.h>
 
 #ifndef __APPLE__
+#include <GL/gl.h>
+#include <GL/glext.h>
+#include <GL/wglext.h>
 PFNGLGETSHADERIVPROC glGetShaderiv;
 PFNGLGETSHADERINFOLOGPROC glGetShaderInfoLog;
 PFNGLGETUNIFORMLOCATIONPROC glGetUniformLocation;
@@ -43,7 +46,7 @@ void setupLighting()
 
 	static float x = 0;
 	x+= 0.01f;
-    GLfloat LightPosition[] = { 0, sin(x)*3, -5, 0};
+    GLfloat LightPosition[] = { 0, (float) sin(x)*3, -5, 0};
 
     glLightfv (GL_LIGHT0, GL_POSITION, LightPosition);
 }
@@ -272,21 +275,6 @@ void init()
 
 	//glEnable(GL_COLOR_MATERIAL);
 	getMultiTextureExtensionFuncPointers();
-	
-#ifndef __APPLE__
-	glCreateProgram=(PFNGLCREATEPROGRAMPROC) pglGetProcAddress("glCreateProgram");
-	glCreateShader = (PFNGLCREATESHADERPROC) pglGetProcAddress("glCreateShader");
-	glLinkProgram=(PFNGLLINKPROGRAMPROC) pglGetProcAddress("glLinkProgram");
-	glShaderSource=(PFNGLSHADERSOURCEPROC) pglGetProcAddress("glShaderSource");
-	glUseProgram=(PFNGLUSEPROGRAMPROC) pglGetProcAddress("glUseProgram");
-	glCompileShader=(PFNGLCOMPILESHADERPROC) pglGetProcAddress("glCompileShader");
-	glGetShaderiv=(PFNGLGETSHADERIVPROC) pglGetProcAddress("glGetShaderiv");
-	glGetShaderInfoLog=(PFNGLGETSHADERINFOLOGPROC) pglGetProcAddress("glGetShaderInfoLog");
-	glGetUniformLocation=(PFNGLGETUNIFORMLOCATIONPROC) pglGetProcAddress("glGetUniformLocation");
-	glUniform1i=(PFNGLUNIFORM1IPROC) pglGetProcAddress("glUniform1i");
-	glClientActiveTextureARB=(PFNGLCLIENTACTIVETEXTUREARBPROC) pglGetProcAddress("glClientActiveTextureARB");
-
-#endif
 	
 	setupShaders();
 }
