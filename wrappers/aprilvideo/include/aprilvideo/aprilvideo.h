@@ -47,6 +47,7 @@ namespace aprilvideo
 		int mPrevFrameNumber;
 		bool mSeeked;
 		int mAlphaPauseTreshold;
+        unsigned char mPrevAlpha;
 
 		float mAudioSyncOffset;
 		hstr mAudioName;
