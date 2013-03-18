@@ -89,6 +89,7 @@ namespace aprilvideo
 		mAlphaPauseTreshold = 0;
 		mPrevFrameNumber = 0;
 		mSeeked = 0;
+        mPrevAlpha = 255;
 		if (!gVideoManager)
 		{
 			gVideoManager = new TheoraVideoManager(gNumWorkerThreads);
@@ -252,10 +253,13 @@ namespace aprilvideo
 			}
 			mClip->update(k);
 			//mClip->decodedAudioCheck();
-			bool should_pause = mAlphaPauseTreshold == 0 ? !isVisible() : getAlpha() <= mAlphaPauseTreshold;
-			if (should_pause && !mClip->isPaused()) mClip->pause();
-			else if (!should_pause && mClip->isPaused()) mClip->play();
-			
+            if (mPrevAlpha != getAlpha())
+            {
+                mPrevAlpha = getAlpha();
+                bool should_pause = mAlphaPauseTreshold == 0 ? !isVisible() : getAlpha() <= mAlphaPauseTreshold;
+                if (should_pause && !mClip->isPaused()) mClip->pause();
+                else if (!should_pause && mClip->isPaused()) mClip->play();
+			}
 			TheoraVideoFrame* f = mClip->getNextFrame();
 			if (f)
 			{
@@ -312,6 +316,18 @@ namespace aprilvideo
 		{
 			mAudioSyncOffset = value;
 		}
+        else if (name == "state")
+        {
+            if (value == "playing")
+            {
+                if (mClip && mClip->isPaused()) mClip->play();
+            }
+            else if (value == "paused")
+            {
+                if (mClip && !mClip->isPaused()) mClip->pause();
+            }
+            else throw hl_exception("VideoObject: unable to set state property to '" + value + "'.");
+        }
 		else return aprilui::ImageBox::setProperty(name, value);
 		return 1;
 	}
@@ -328,6 +344,11 @@ namespace aprilvideo
 		else if (name == "duration") return mClip ? hstr(mClip->getDuration()) : hstr("0");
 		else if (name == "audio")  return mAudioName;
 		else if (name == "sync_offset")  return mAudioSyncOffset;
+        else if (name == "state")
+        {
+            if (!mClip || mClip->isDone()) return "stopped";
+            return (mClip->isPaused()) ? "paused" : "playing";
+        }
 		*property_exists = false;
 		return ImageBox::getProperty(name, property_exists);
 	}
