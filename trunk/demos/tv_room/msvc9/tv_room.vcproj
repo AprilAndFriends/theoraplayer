@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="demo_tv_room"
 	ProjectGUID="{388E4B0A-0861-40C7-8537-FD6F79E7AB3E}"
 	RootNamespace="tv_room"
@@ -49,7 +49,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../theoraplayer/include/;../../../demos;../../../demos/basecode/util"
+				AdditionalIncludeDirectories="../../../theoraplayer/include/;../../../demos;../../../demos/basecode/util;../../../demos/dependencies/win32/glut/include;../../../demos/dependencies/win32/glext"
 				PreprocessorDefinitions="__ZBUFFER;__3D_PROJECTION;WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -82,7 +82,7 @@
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)lib&quot;;&quot;$(SolutionDir)bin\$(PlatformName)&quot;"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)lib&quot;;&quot;$(SolutionDir)bin\$(PlatformName)&quot;;;&quot;$(SolutionDir)demos/dependencies/win32/glut/lib&quot;"
 				ManifestFile="$(IntDir)\$(TargetFileName).intermediate.manifest"
 				ModuleDefinitionFile=""
 				GenerateDebugInformation="true"
@@ -115,7 +115,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine=""
+				CommandLine="xcopy ..\..\dependencies\win32\glut\lib\glut32.dll ..\..\..\bin\$(PlatformName)\ /d /y"
 			/>
 		</Configuration>
 		<Configuration
@@ -152,7 +152,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="../../../theoraplayer/include/;../../../demos;../../../demos/basecode/util"
+				AdditionalIncludeDirectories="../../../theoraplayer/include/;../../../demos;../../../demos/basecode/util;../../../demos/dependencies/win32/glut/include;../../../demos/dependencies/win32/glext"
 				PreprocessorDefinitions="__ZBUFFER;__3D_PROJECTION;WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
 				MinimalRebuild="true"
@@ -186,7 +186,7 @@
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)lib&quot;;&quot;$(SolutionDir)bin\$(PlatformName)&quot;"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)lib&quot;;&quot;$(SolutionDir)bin\$(PlatformName)&quot;;;&quot;$(SolutionDir)demos/dependencies/win32/glut/lib&quot;"
 				ManifestFile="$(IntDir)\$(TargetFileName).intermediate.manifest"
 				ModuleDefinitionFile=""
 				ProgramDatabaseFile=""
@@ -218,7 +218,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine=""
+				CommandLine="xcopy ..\..\dependencies\win32\glut\lib\glut32.dll ..\..\..\bin\$(PlatformName)\ /d /y"
 			/>
 		</Configuration>
 	</Configurations>
