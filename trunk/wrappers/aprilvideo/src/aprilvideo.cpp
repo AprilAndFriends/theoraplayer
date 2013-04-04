@@ -128,6 +128,11 @@ namespace aprilvideo
 		return (mClip == NULL || mClip->isDone());
 	}
 
+	float VideoObject::getTimePosition()
+	{
+		return (mClip != NULL ? mClip->getTimePosition() : 0.0f);
+	}
+
 	aprilui::Object* VideoObject::createInstance(chstr name, grect rect)
 	{
 		return new VideoObject(name, rect);
@@ -356,14 +361,16 @@ namespace aprilvideo
 		else if (name == "alpha_pause_treshold") return mAlphaPauseTreshold;
 		else if (name == "loop")  return mLoop ? "1" : "0";
 		else if (name == "speed") return mSpeed;
-		else if (name == "time") return mClip ? hstr(mClip->getTimePosition()) : hstr("0");
-		else if (name == "duration") return mClip ? hstr(mClip->getDuration()) : hstr("0");
+		else if (name == "time") return this->getTimePosition();
+		else if (name == "duration") return mClip ? hstr(mClip->getDuration()) : hstr(0);
 		else if (name == "audio")  return mAudioName;
 		else if (name == "sync_offset")  return mAudioSyncOffset;
         else if (name == "state")
         {
-            if (!mClip || mClip->isDone()) return "stopped";
-            return (mClip->isPaused()) ? "paused" : "playing";
+			if (this->isPlaying()) return "playing";
+			if (this->isPaused()) return "paused";
+			if (this->isStopped()) return "stopped";
+			return "unknown";
         }
 		*property_exists = false;
 		return ImageBox::getProperty(name, property_exists);

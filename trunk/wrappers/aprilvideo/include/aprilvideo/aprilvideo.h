@@ -64,6 +64,7 @@ namespace aprilvideo
 		bool isPlaying();
 		bool isPaused();
 		bool isStopped();
+		float getTimePosition();
 		
 		void update(float k);
 		void OnDraw();
