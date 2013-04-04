@@ -60,6 +60,10 @@ namespace aprilvideo
 		VideoObject(chstr name, grect rect);
 		static aprilui::Object* createInstance(chstr name, grect rect);
 		~VideoObject();
+
+		bool isPlaying();
+		bool isPaused();
+		bool isStopped();
 		
 		void update(float k);
 		void OnDraw();

@@ -22,6 +22,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <aprilui/Texture.h>
 #include <xal/AudioManager.h>
 #include <xal/Player.h>
+#include <xal/Sound.h>
 #include "aprilvideo.h"
 
 namespace aprilvideo
@@ -101,6 +102,32 @@ namespace aprilvideo
 		}
 	}
 	
+	VideoObject::~VideoObject()
+	{
+		gRefCount--;
+		destroyResources();
+		if (gRefCount <= 0 && gVideoManager)
+		{
+			delete gVideoManager;
+			gVideoManager = NULL;
+		}
+	}
+	
+	bool VideoObject::isPlaying()
+	{
+		return (mClip != NULL && !mClip->isPaused());
+	}
+
+	bool VideoObject::isPaused()
+	{
+		return (mClip != NULL && mClip->isPaused());
+	}
+
+	bool VideoObject::isStopped()
+	{
+		return (mClip == NULL || mClip->isDone());
+	}
+
 	aprilui::Object* VideoObject::createInstance(chstr name, grect rect)
 	{
 		return new VideoObject(name, rect);
@@ -154,17 +181,6 @@ namespace aprilvideo
 		}
 	}
 
-	VideoObject::~VideoObject()
-	{
-		gRefCount--;
-		destroyResources();
-		if (gRefCount <= 0 && gVideoManager)
-		{
-			delete gVideoManager;
-			gVideoManager = NULL;
-		}
-	}
-	
 	void VideoObject::createClip()
 	{
 		destroyResources();
@@ -221,7 +237,7 @@ namespace aprilvideo
 			}
 			mSound = xal::mgr->createSound(mDataset->getFilePath() + "/video/" + mAudioName, "video");
 			
-			mAudioPlayer = xal::mgr->createPlayer(mAudioName.replace(".ogg", ""));
+			mAudioPlayer = xal::mgr->createPlayer(mSound->getName());
 			mTimer = new AudioVideoTimer(mAudioPlayer, mAudioSyncOffset);
 			mClip->setTimer(mTimer);
 			
