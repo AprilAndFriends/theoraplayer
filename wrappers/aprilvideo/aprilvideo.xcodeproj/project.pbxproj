@@ -497,7 +497,6 @@
 				PRODUCT_NAME = aprilvideo;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VERSION_INFO_FILE = kok;
 			};
 			name = Debug;
 		};
@@ -515,7 +514,6 @@
 				PRODUCT_NAME = aprilvideo;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VERSION_INFO_FILE = kok;
 			};
 			name = "Debug-LLVM";
 		};
@@ -534,7 +532,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
-				VERSION_INFO_FILE = kok;
 			};
 			name = Release;
 		};
@@ -553,7 +550,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
-				VERSION_INFO_FILE = kok;
 			};
 			name = "Release-LLVM";
 		};
@@ -572,7 +568,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
-				VERSION_INFO_FILE = kok;
 			};
 			name = "App Store";
 		};
