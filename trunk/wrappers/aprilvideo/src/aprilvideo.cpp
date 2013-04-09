@@ -115,7 +115,7 @@ namespace aprilvideo
 	
 	bool VideoObject::isPlaying()
 	{
-		return (mClip != NULL && !mClip->isPaused());
+		return (mClip != NULL && !mClip->isPaused() && !mClip->isDone());
 	}
 
 	bool VideoObject::isPaused()
