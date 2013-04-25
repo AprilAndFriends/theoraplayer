@@ -2,14 +2,13 @@
 This source file is part of the Theora Video Playback Library
 For latest info, see http://libtheoraplayer.sourceforge.net/
 *************************************************************************************
-Copyright (c) 2008-2012 Kresimir Spes (kspes@cateia.com)
+Copyright (c) 2008-2013 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
 #define THEORAUTIL_NOMACROS
 #include <theoraplayer/TheoraException.h>
 #undef exception_cls
-#include <theoraplayer/TheoraDataSource.h>
 #include <theoraplayer/TheoraPlayer.h>
 #include <theoraplayer/TheoraTimer.h>
 #include <april/RenderSystem.h>
@@ -24,6 +23,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <xal/Player.h>
 #include <xal/Sound.h>
 #include "aprilvideo.h"
+#include "AprilVideoDataSource.h"
 
 namespace aprilvideo
 {
@@ -219,7 +219,11 @@ namespace aprilvideo
 				textureFormat = april::Texture::FORMAT_ARGB;
 			}
 			
-			mClip = gVideoManager->createVideoClip(path, mode, april::getSystemInfo().ram < 512 ? 8 : 16);
+			int precached = april::getSystemInfo().ram < 512 ? 8 : 16;
+			if (path.ends_with("mp4"))
+				mClip = gVideoManager->createVideoClip(path, mode, precached);
+			else
+				mClip = gVideoManager->createVideoClip(new AprilVideoDataSource(path), mode, precached);
 		}
 		catch (_TheoraGenericException& e)
 		{

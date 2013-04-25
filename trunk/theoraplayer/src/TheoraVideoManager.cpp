@@ -391,7 +391,7 @@ void TheoraVideoManager::getVersion(int* a, int* b, int* c) // TODO, return a st
 {
 	*a = 1;
 	*b = 0;
-	*c = -4;
+	*c = 0;
 }
 
 std::vector<std::string> TheoraVideoManager::getSupportedDecoders()
