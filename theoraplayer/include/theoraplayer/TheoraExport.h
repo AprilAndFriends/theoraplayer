@@ -20,7 +20,11 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 		#endif
     #endif
 #else
-	#define TheoraPlayerExport __attribute__ ((visibility("default")))
+	#ifdef THEORAVIDEO_STATIC
+		#define TheoraPlayerExport
+	#else
+		#define TheoraPlayerExport __attribute__ ((visibility("default")))
+	#endif
 #endif
 
 #endif
