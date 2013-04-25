@@ -194,10 +194,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\aprilvideo\aprilvideo.h" />
+    <ClInclude Include="include\aprilvideo\AprilVideoDataSource.h" />
     <ClInclude Include="include\aprilvideo\aprilvideoExport.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\aprilvideo.cpp" />
+    <ClCompile Include="src\AprilVideoDataSource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aprilui\libaprilui.vcxproj">

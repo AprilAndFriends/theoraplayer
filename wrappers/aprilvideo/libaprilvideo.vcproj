@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="libaprilvideo"
 	ProjectGUID="{388E4B0F-0860-40C7-AAA0-FD6F79E7AB3E}"
 	RootNamespace="libaprilvideo"
@@ -225,6 +225,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\aprilvideo\AprilVideoDataSource.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\aprilvideo\aprilvideoExport.h"
 				>
 			</File>
@@ -235,6 +239,10 @@
 			>
 			<File
 				RelativePath=".\src\aprilvideo.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AprilVideoDataSource.cpp"
 				>
 			</File>
 		</Filter>

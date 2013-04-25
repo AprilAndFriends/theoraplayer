@@ -18,6 +18,9 @@
 		D1307DA115FCA3920055BB26 /* hltypes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1307D9C15FCA3920055BB26 /* hltypes.framework */; };
 		D1307DA215FCA3920055BB26 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1307D9D15FCA3920055BB26 /* theoraplayer.framework */; };
 		D1307DA515FCB4630055BB26 /* aprilui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1307DA415FCB4630055BB26 /* aprilui.framework */; };
+		D135539B172962F000583915 /* AprilVideoDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D135539A172962F000583915 /* AprilVideoDataSource.cpp */; };
+		D135539C172962F000583915 /* AprilVideoDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D135539A172962F000583915 /* AprilVideoDataSource.cpp */; };
+		D135539E1729630400583915 /* AprilVideoDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D135539D1729630400583915 /* AprilVideoDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,8 @@
 		D1307D9C15FCA3920055BB26 /* hltypes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = hltypes.framework; path = "../../xcode/__build__/products/Debug-LLVM/hltypes.framework"; sourceTree = "<group>"; };
 		D1307D9D15FCA3920055BB26 /* theoraplayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = theoraplayer.framework; path = "../../xcode/__build__/products/Debug-LLVM/theoraplayer.framework"; sourceTree = "<group>"; };
 		D1307DA415FCB4630055BB26 /* aprilui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = aprilui.framework; path = "../../xcode/__build__/products/Debug-LLVM/aprilui.framework"; sourceTree = "<group>"; };
+		D135539A172962F000583915 /* AprilVideoDataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AprilVideoDataSource.cpp; path = src/AprilVideoDataSource.cpp; sourceTree = "<group>"; };
+		D135539D1729630400583915 /* AprilVideoDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AprilVideoDataSource.h; path = include/aprilvideo/AprilVideoDataSource.h; sourceTree = "<group>"; };
 		D1473F2A150CA69B00B20490 /* aprilvideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = aprilvideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1BB6FAE150E9E7100EF9400 /* libaprilvideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libaprilvideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -83,6 +88,7 @@
 		D1473F42150CA6C000B20490 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D135539A172962F000583915 /* AprilVideoDataSource.cpp */,
 				D1307D7E15FC9DC00055BB26 /* aprilvideo.cpp */,
 			);
 			name = src;
@@ -105,6 +111,7 @@
 		D147401F150CAE9600B20490 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				D135539D1729630400583915 /* AprilVideoDataSource.h */,
 				D1307D8615FCA0560055BB26 /* aprilvideoExport.h */,
 				D1307D8015FC9DC90055BB26 /* aprilvideo.h */,
 			);
@@ -119,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1307D8115FC9DC90055BB26 /* aprilvideo.h in Headers */,
+				D135539E1729630400583915 /* AprilVideoDataSource.h in Headers */,
 				D1307D8715FCA0560055BB26 /* aprilvideoExport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1307D7F15FC9DC00055BB26 /* aprilvideo.cpp in Sources */,
+				D135539B172962F000583915 /* AprilVideoDataSource.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1307D8215FC9ECF0055BB26 /* aprilvideo.cpp in Sources */,
+				D135539C172962F000583915 /* AprilVideoDataSource.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

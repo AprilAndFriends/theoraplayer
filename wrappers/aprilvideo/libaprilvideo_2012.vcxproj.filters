@@ -17,9 +17,15 @@
     <ClInclude Include="include\aprilvideo\aprilvideoExport.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\aprilvideo\AprilVideoDataSource.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\aprilvideo.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AprilVideoDataSource.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
