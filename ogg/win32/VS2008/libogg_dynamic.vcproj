@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="libogg"
 	ProjectGUID="{15CBFEFF-7965-41F5-B4E2-21E8795C9159}"
 	RootNamespace="libogg"
@@ -61,7 +61,7 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="0"
 				Detect64BitPortabilityProblems="false"
-				DebugInformationFormat="3"
+				DebugInformationFormat="4"
 				CallingConvention="0"
 				CompileAs="1"
 			/>
@@ -77,6 +77,8 @@
 			<Tool
 				Name="VCLinkerTool"
 				ModuleDefinitionFile="..\ogg.def"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile="$(OutDir)/libvorbis.pdb"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -138,7 +140,7 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="0"
 				Detect64BitPortabilityProblems="false"
-				DebugInformationFormat="3"
+				DebugInformationFormat="0"
 				CallingConvention="0"
 				CompileAs="1"
 				DisableSpecificWarnings="4244"

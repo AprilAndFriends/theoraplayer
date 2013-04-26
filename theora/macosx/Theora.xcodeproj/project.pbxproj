@@ -49,7 +49,6 @@
 		37CA8E390DD747F1005C8CB6 /* internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 37CA8E380DD747F1005C8CB6 /* internal.h */; };
 		734A751909D76ADD002D8FAE /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734A751809D76ADD002D8FAE /* Ogg.framework */; };
 		734A75BF09D76BB9002D8FAE /* theora.h in Headers */ = {isa = PBXBuildFile; fileRef = 734A75BE09D76BB9002D8FAE /* theora.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8D07F2BE0486CC7A007CD1D0 /* Theora_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32BAE0B70371A74B00C91783 /* Theora_Prefix.pch */; };
 		D1095042162056DB00C5B181 /* collect.c in Sources */ = {isa = PBXBuildFile; fileRef = D109503F162056DB00C5B181 /* collect.c */; };
 		D1095044162056DB00C5B181 /* collect.c in Sources */ = {isa = PBXBuildFile; fileRef = D109503F162056DB00C5B181 /* collect.c */; };
 		D1095045162056DB00C5B181 /* collect.h in Headers */ = {isa = PBXBuildFile; fileRef = D1095040162056DB00C5B181 /* collect.h */; };
@@ -120,7 +119,6 @@
 		084C325B0FE4E5D500117FC9 /* sse2fdct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sse2fdct.c; sourceTree = "<group>"; };
 		097729930BCAC60000303091 /* codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = codec.h; path = ../include/theora/codec.h; sourceTree = SOURCE_ROOT; };
 		097729940BCAC60000303091 /* theoradec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = theoradec.h; path = ../include/theora/theoradec.h; sourceTree = SOURCE_ROOT; };
-		32BAE0B70371A74B00C91783 /* Theora_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theora_Prefix.pch; sourceTree = "<group>"; };
 		37C9B0130EBB831F0046849C /* theoraenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = theoraenc.h; path = ../include/theora/theoraenc.h; sourceTree = SOURCE_ROOT; };
 		37CA8E380DD747F1005C8CB6 /* internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = internal.h; path = ../lib/internal.h; sourceTree = SOURCE_ROOT; };
 		734A751809D76ADD002D8FAE /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = /Library/Frameworks/Ogg.framework; sourceTree = "<absolute>"; };
@@ -254,7 +252,6 @@
 			children = (
 				084C31D80FE4E5BD00117FC9 /* lib */,
 				37CA8E380DD747F1005C8CB6 /* internal.h */,
-				32BAE0B70371A74B00C91783 /* Theora_Prefix.pch */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -285,7 +282,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D07F2BE0486CC7A007CD1D0 /* Theora_Prefix.pch in Headers */,
 				734A75BF09D76BB9002D8FAE /* theora.h in Headers */,
 				097729950BCAC60000303091 /* codec.h in Headers */,
 				097729960BCAC60000303091 /* theoradec.h in Headers */,
@@ -471,9 +467,6 @@
 					/Library/Frameworks,
 				);
 				FRAMEWORK_VERSION = A;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Theora_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
@@ -498,8 +491,6 @@
 					/Library/Frameworks,
 				);
 				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Theora_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
@@ -516,6 +507,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(GCC_PREPROCESSOR_DEFINITIONS)",
@@ -545,7 +538,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_OPTIMIZATION_LEVEL = 3;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(GCC_PREPROCESSOR_DEFINITIONS)",
 					__MACOSX__,
@@ -581,6 +576,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(GCC_PREPROCESSOR_DEFINITIONS)",
@@ -617,9 +614,6 @@
 					/Library/Frameworks,
 				);
 				FRAMEWORK_VERSION = A;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Theora_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
@@ -637,7 +631,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_OPTIMIZATION_LEVEL = 3;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(GCC_PREPROCESSOR_DEFINITIONS)",
 					__MACOSX__,
@@ -680,8 +676,6 @@
 					/Library/Frameworks,
 				);
 				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Theora_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
@@ -698,7 +692,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_OPTIMIZATION_LEVEL = 3;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(GCC_PREPROCESSOR_DEFINITIONS)",
 					__MACOSX__,
@@ -740,8 +736,6 @@
 					/Library/Frameworks,
 				);
 				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Theora_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
@@ -766,7 +760,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
@@ -788,7 +781,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
@@ -808,7 +800,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
@@ -829,7 +820,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
@@ -850,7 +840,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_THUMB_SUPPORT = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";

@@ -11,14 +11,12 @@
 		730F236409181A8D00AB638C /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = 730F236209181A8D00AB638C /* framing.c */; };
 		730F236709181ABE00AB638C /* ogg.h in Headers */ = {isa = PBXBuildFile; fileRef = 730F236509181ABE00AB638C /* ogg.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		730F236809181ABE00AB638C /* os_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 730F236609181ABE00AB638C /* os_types.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8D07F2BE0486CC7A007CD1D0 /* Ogg_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32BAE0B70371A74B00C91783 /* Ogg_Prefix.pch */; };
 		D1BB6F31150E99EE00EF9400 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6F30150E99EE00EF9400 /* Foundation.framework */; };
 		D1BB6F3F150E9A5000EF9400 /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = 730F236109181A8D00AB638C /* bitwise.c */; };
 		D1BB6F40150E9A5000EF9400 /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = 730F236209181A8D00AB638C /* framing.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		32BAE0B70371A74B00C91783 /* Ogg_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ogg_Prefix.pch; sourceTree = "<group>"; };
 		730F236109181A8D00AB638C /* bitwise.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = bitwise.c; path = ../src/bitwise.c; sourceTree = SOURCE_ROOT; };
 		730F236209181A8D00AB638C /* framing.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = framing.c; path = ../src/framing.c; sourceTree = SOURCE_ROOT; };
 		730F236509181ABE00AB638C /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ogg.h; path = ../include/ogg/ogg.h; sourceTree = SOURCE_ROOT; };
@@ -90,7 +88,6 @@
 			children = (
 				730F236109181A8D00AB638C /* bitwise.c */,
 				730F236209181A8D00AB638C /* framing.c */,
-				32BAE0B70371A74B00C91783 /* Ogg_Prefix.pch */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -119,7 +116,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D07F2BE0486CC7A007CD1D0 /* Ogg_Prefix.pch in Headers */,
 				730F236709181ABE00AB638C /* ogg.h in Headers */,
 				730F236809181ABE00AB638C /* os_types.h in Headers */,
 			);
@@ -250,8 +246,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Ogg_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
@@ -273,8 +267,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Ogg_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
@@ -290,6 +282,7 @@
 		730F235909181A3A00AB638C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
@@ -303,6 +296,7 @@
 					ppc,
 					i386,
 				);
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
@@ -322,6 +316,7 @@
 					ppc,
 					i386,
 				);
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
@@ -343,8 +338,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Ogg_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
@@ -364,6 +357,7 @@
 					ppc,
 					i386,
 				);
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
@@ -385,8 +379,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Ogg_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
@@ -401,6 +393,7 @@
 		D186223514F958AA00639D7C /* Debug-LLVM */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
@@ -417,8 +410,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Ogg_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
@@ -437,10 +428,6 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/libogg.dst;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -453,7 +440,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ogg;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -467,10 +453,6 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/libogg.dst;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -483,7 +465,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ogg;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -497,17 +478,12 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/libogg.dst;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ogg;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -522,17 +498,12 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/libogg.dst;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ogg;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -547,17 +518,12 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/libogg.dst;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = ogg;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;

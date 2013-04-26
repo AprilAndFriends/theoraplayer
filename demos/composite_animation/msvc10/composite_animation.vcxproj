@@ -105,6 +105,7 @@
     <PostBuildEvent>
       <Command>xcopy ..\..\dependencies\win32\glut\lib\glut32.dll ..\..\..\bin\$(PlatformName)\ /d /y</Command>
     </PostBuildEvent>
+    <Manifest />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <PreBuildEvent>
@@ -135,7 +136,7 @@
       <ProgramDataBaseFileName>$(IntDir)vc90.pdb</ProgramDataBaseFileName>
       <WarningLevel>Level1</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <CompileAs>Default</CompileAs>
     </ClCompile>
     <ResourceCompile>
