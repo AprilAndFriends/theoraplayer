@@ -72,50 +72,8 @@
     <ClInclude Include="src\Theora\TheoraVideoClip_Theora.h" />
     <ClInclude Include="src\YUV\C\yuv_c.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ogg\win32\VS2012\libogg_dynamic.vcxproj">
-      <Project>{15cbfeff-7965-41f5-b4e2-21e8795c9159}</Project>
-      <Private>false</Private>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
-    </ProjectReference>
-    <ProjectReference Include="..\theora\win32\VS2012\libtheora\libtheora_dynamic.vcxproj">
-      <Project>{653f3841-3f26-49b9-afcf-091db4b67031}</Project>
-      <Private>false</Private>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
-    </ProjectReference>
-    <ProjectReference Include="..\tremor\win32\VS2012\libtremor\libtremor.vcxproj">
-      <Project>{7a8e774e-dd94-43b8-8758-6f9f656cc8d2}</Project>
-      <Private>false</Private>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
-    </ProjectReference>
-    <ProjectReference Include="..\vorbis\win32\VS2012\libvorbisfile\libvorbisfile_dynamic.vcxproj">
-      <Project>{cebde98b-a6aa-46e6-bc79-faaf823db9ec}</Project>
-      <Private>false</Private>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
-    </ProjectReference>
-    <ProjectReference Include="..\vorbis\win32\VS2012\libvorbis\libvorbis_dynamic.vcxproj">
-      <Project>{3a214e06-b95e-4d61-a291-1f8df2ec10fd}</Project>
-      <Private>false</Private>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{ABE6907D-00FF-4198-8D36-65115AF1D868}</ProjectGuid>
+    <ProjectGuid>{9C043B29-DB40-48D5-97D8-1BC44128E3BA}</ProjectGuid>
     <RootNamespace>libtheoraplayer</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <ProjectName>libtheoraplayer</ProjectName>
@@ -151,7 +109,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v110_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>

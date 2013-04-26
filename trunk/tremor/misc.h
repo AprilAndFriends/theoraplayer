@@ -51,6 +51,10 @@ union magic {
 };
 #endif 
 
+#ifndef BIG_ENDIAN
+#define BIG_ENDIAN (LITTLE_ENDIAN + 1)
+#endif
+
 #if BYTE_ORDER==BIG_ENDIAN
 union magic {
   struct {

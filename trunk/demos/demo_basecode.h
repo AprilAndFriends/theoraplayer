@@ -41,8 +41,6 @@ extern PFNGLCOMPILESHADERPROC glCompileShader;
 extern PFNGLATTACHSHADERPROC glAttachShader;
 extern PFNGLMULTITEXCOORD2FARBPROC glMultiTexCoord2fARB;
 extern PFNGLACTIVETEXTUREARBPROC glActiveTextureARB;
-#else
-#include <OpenGL/glext.h>
 #endif
 
 #include "util.h"
