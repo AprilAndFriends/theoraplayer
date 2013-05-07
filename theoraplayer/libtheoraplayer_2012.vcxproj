@@ -73,7 +73,7 @@
     <ClInclude Include="src\YUV\C\yuv_c.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9C043B29-DB40-48D5-97D8-1BC44128E3BA}</ProjectGuid>
+    <ProjectGuid>{DEEC8DA9-DB86-43C7-9DA1-1076E225B791}</ProjectGuid>
     <RootNamespace>libtheoraplayer</RootNamespace>
     <ProjectName>libtheoraplayer</ProjectName>
   </PropertyGroup>
