@@ -32,7 +32,7 @@ namespace aprilvideo
 {
 	extern hstr logTag;
 
-	class AprilVideoExport VideoObject : public aprilui::ImageBox
+	class aprilVideoExport VideoObject : public aprilui::ImageBox
 	{
 		bool mUsingAVFoundation;
 		bool mPrevDoneFlag;
@@ -47,7 +47,7 @@ namespace aprilvideo
 		int mPrevFrameNumber;
 		bool mSeeked;
 		int mAlphaPauseTreshold;
-        unsigned char mPrevAlpha;
+		unsigned char mPrevAlpha;
 
 		float mAudioSyncOffset;
 		hstr mAudioName;
@@ -76,7 +76,7 @@ namespace aprilvideo
 		hstr getProperty(chstr name, bool* property_exists);
 	};
 	
-	void AprilVideoExport init(int num_worker_threads = 1);
-	void AprilVideoExport destroy();
+	void aprilVideoFnExport init(int num_worker_threads = 1);
+	void aprilVideoFnExport destroy();
 }
 #endif
