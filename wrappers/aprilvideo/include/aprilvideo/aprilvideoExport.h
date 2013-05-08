@@ -14,7 +14,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 		#define aprilVideoFnExport
 	#else
 		#ifdef _WIN32
-			#ifdef APRILUI_EXPORTS
+			#ifdef APRILVIDEO_EXPORTS
 				#define aprilVideoExport __declspec(dllexport)
 				#define aprilVideoFnExport __declspec(dllexport)
 			#else
