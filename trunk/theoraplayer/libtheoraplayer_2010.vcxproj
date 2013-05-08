@@ -66,8 +66,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9C043B29-DB40-48D5-97D8-1BC44128E3BA}</ProjectGuid>
-    <RootNamespace>libgtypes</RootNamespace>
-    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>theoraplayer</RootNamespace>
     <ProjectName>libtheoraplayer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
