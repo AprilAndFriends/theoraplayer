@@ -293,7 +293,7 @@ namespace aprilvideo
 				r.w = f->getWidth();
 				r.h = f->getHeight();
 				mImage->setSrcRect(r);
-				if (april::rendersys->getName() == APRIL_RS_DIRECTX9) mTexture->getRenderTexture()->clear();
+				mTexture->load();
 				mTexture->getRenderTexture()->write(0, 0, f->getBuffer(), r.w, r.h, 4);
 				mClip->popFrame();
 				if (mLoop)
