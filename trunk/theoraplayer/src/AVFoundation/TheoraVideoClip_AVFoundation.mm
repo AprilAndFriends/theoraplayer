@@ -257,7 +257,10 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	NSURL *url = [NSURL fileURLWithPath:path];
 	AVAsset* asset = [[AVURLAsset alloc] initWithURL:url options:nil];
 	mReader = [[AVAssetReader alloc] initWithAsset:asset error:&err];
-	AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+	NSArray* tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+	if ([tracks count] == 0)
+		throw TheoraGenericException("Unable to open video file: " + filename);
+	AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
 
 	NSArray* audioTracks = [asset tracksWithMediaType:AVMediaTypeAudio];
 	AVAssetTrack *audioTrack = audioTracks.count > 0 ? [audioTracks objectAtIndex:0] : NULL;
