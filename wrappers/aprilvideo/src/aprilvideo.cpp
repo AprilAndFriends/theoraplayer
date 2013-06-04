@@ -218,10 +218,15 @@ namespace aprilvideo
 				mode = mUseAlpha ? TH_BGRA : TH_BGRX;
 				textureFormat = april::Texture::FORMAT_ARGB;
 			}
-			
 			int precached = april::getSystemInfo().ram < 512 ? 8 : 16;
 			if (path.ends_with("mp4"))
-				mClip = gVideoManager->createVideoClip(path, mode, precached);
+			{
+				
+				if (april::window->getName() == "OpenKODE")
+					mClip = gVideoManager->createVideoClip("res/" + path, mode, precached);
+				else
+					mClip = gVideoManager->createVideoClip(path, mode, precached);
+			}
 			else
 				mClip = gVideoManager->createVideoClip(new AprilVideoDataSource(path), mode, precached);
 		}
