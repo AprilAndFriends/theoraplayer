@@ -298,7 +298,9 @@ namespace aprilvideo
 				r.w = f->getWidth();
 				r.h = f->getHeight();
 				mImage->setSrcRect(r);
+#ifdef _ANDROID
 				mTexture->load();
+#endif
 				mTexture->getRenderTexture()->write(0, 0, f->getBuffer(), r.w, r.h, 4);
 				mClip->popFrame();
 				if (mLoop)
