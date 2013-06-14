@@ -144,7 +144,7 @@ namespace aprilvideo
 		{
 			if (mImage != mVideoImage)
 			{
-				mImage = mDataset->getImage("null");
+				mImage = mDataset->getImage(APRILUI_IMAGE_NAME_NULL);
 			}
 		}
 		ImageBox::notifyEvent(name, params);
@@ -156,7 +156,7 @@ namespace aprilvideo
 		{
 			delete mVideoImage;
 			mVideoImage = NULL;
-			mImage = mDataset->getImage("null");
+			mImage = mDataset->getImage(APRILUI_IMAGE_NAME_NULL);
 		}
 		if (mTexture)
 		{
