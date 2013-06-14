@@ -108,6 +108,7 @@ namespace aprilvideo
 		destroyResources();
 		if (gRefCount <= 0 && gVideoManager)
 		{
+			hlog::write(logTag, "Destroying Video manager, no more active clips found.");
 			delete gVideoManager;
 			gVideoManager = NULL;
 		}
@@ -218,7 +219,8 @@ namespace aprilvideo
 				mode = mUseAlpha ? TH_BGRA : TH_BGRX;
 				textureFormat = april::Texture::FORMAT_ARGB;
 			}
-			int precached = april::getSystemInfo().ram < 512 ? 8 : 16;
+			int ram = april::getSystemInfo().ram;
+			int precached = ram < 512 ? 4 : (ram < 1024 ? 8 : 16);
 			if (path.ends_with("mp4"))
 			{
 				
@@ -229,6 +231,12 @@ namespace aprilvideo
 			}
 			else
 				mClip = gVideoManager->createVideoClip(new AprilVideoDataSource(path), mode, precached);
+			
+			if (precached < 8 && mClip->getWidth() * mClip->getHeight() < 1.5f * 512 * 512)
+			{
+				precached = 8;
+				mClip->setNumPrecachedFrames(precached); // if this is a lower resolution video, allow higher frame precaching on lowmem devices
+			}
 		}
 		catch (_TheoraGenericException& e)
 		{
@@ -241,7 +249,8 @@ namespace aprilvideo
 		april::Texture* tex = april::rendersys->createTexture(_nextPow2(w), _nextPow2(h), textureFormat);
 		mTexture = new aprilui::Texture(tex->getFilename(), tex);
 		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(0, 0, w, h));
-		mClip->waitForCache(4 / 16.0f, 0.5f);
+		mClip->waitForCache(2 / mClip->getNumPrecachedFrames(), 5.0f); // better to wait a while then to display an empty image
+		mClip->waitForCache(0.25f, 0.5f);
 		
 		if (mAudioName != "")
 		{
