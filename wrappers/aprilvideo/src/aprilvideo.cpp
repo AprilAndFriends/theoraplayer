@@ -231,12 +231,6 @@ namespace aprilvideo
 			}
 			else
 				mClip = gVideoManager->createVideoClip(new AprilVideoDataSource(path), mode, precached);
-			
-			if (precached < 8 && mClip->getWidth() * mClip->getHeight() < 1.5f * 512 * 512)
-			{
-				precached = 8;
-				mClip->setNumPrecachedFrames(precached); // if this is a lower resolution video, allow higher frame precaching on lowmem devices
-			}
 		}
 		catch (_TheoraGenericException& e)
 		{
