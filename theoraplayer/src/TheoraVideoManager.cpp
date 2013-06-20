@@ -22,6 +22,9 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #ifdef __AVFOUNDATION
 	#include "TheoraVideoClip_AVFoundation.h"
 #endif
+#ifdef __FFMPEG
+	#include "TheoraVideoClip_FFmpeg.h"
+#endif
 // declaring function prototype here so I don't have to put it in a header file
 // it only needs to be used by this plugin and called once
 extern "C"
@@ -79,7 +82,10 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 	           "  - libvorbis version: " + vorbis_version_string() + "\n" +
 #endif
 #ifdef __AVFOUNDATION
-			   "  - using Apple AVFoundation classes\n"
+			   "  - using Apple AVFoundation classes.\n"
+#endif
+#ifdef __FFMPEG
+			   "  - using FFmpeg library.\n"
 #endif
 			   "------------------------------------");
 	mAudioFactory = NULL;
@@ -158,14 +164,17 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 
 	if (filename.size() > 4 && filename.substr(filename.size() - 4, filename.size()) == ".mp4")
 	{
-		clip = new TheoraVideoClip_AVFoundation(data_source,output_mode,nPrecached,usePower2Stride);
+		clip = new TheoraVideoClip_AVFoundation(data_source, output_mode, nPrecached, usePower2Stride);
 	}
 #endif
 #if defined(__AVFOUNDATION) && defined(__THEORA)
 	else
 #endif
 #ifdef __THEORA
-		clip = new TheoraVideoClip_Theora(data_source,output_mode,nPrecached,usePower2Stride);
+		clip = new TheoraVideoClip_Theora(data_source, output_mode, nPrecached, usePower2Stride);
+#endif
+#ifdef __FFMPEG
+		clip = new TheoraVideoClip_FFmpeg(data_source, output_mode, nPrecached, usePower2Stride);
 #endif
 	clip->load(data_source);
 	mClips.push_back(clip);
@@ -402,6 +411,9 @@ std::vector<std::string> TheoraVideoManager::getSupportedDecoders()
 #endif
 #ifdef __AVFOUNDATION
 	lst.push_back("AVFoundation");
+#endif
+#ifdef __FFMPEG
+	lst.push_back("FFmpeg");
 #endif
 	
 	return lst;

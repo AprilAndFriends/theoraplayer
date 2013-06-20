@@ -35,6 +35,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\AVFoundation\TheoraVideoClip_AVFoundation.mm" />
+    <None Include="src\FFmpeg\TheoraVideoClip_FFmpeg.cpp" />
     <ClCompile Include="src\TheoraAsync.cpp" />
     <ClCompile Include="src\TheoraAudioInterface.cpp" />
     <ClCompile Include="src\TheoraAudioPacketQueue.cpp" />
@@ -69,6 +71,8 @@
     <ClInclude Include="include\theoraplayer\TheoraVideoFrame.h" />
     <ClInclude Include="include\theoraplayer\TheoraVideoManager.h" />
     <ClInclude Include="include\theoraplayer\TheoraWorkerThread.h" />
+    <None Include="src\FFmpeg\TheoraVideoClip_FFmpeg.h" />
+    <None Include="src\AVFoundation\TheoraVideoClip_AVFoundation.h" />
     <ClInclude Include="src\Theora\TheoraVideoClip_Theora.h" />
     <ClInclude Include="src\YUV\C\yuv_c.h" />
   </ItemGroup>
