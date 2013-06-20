@@ -84,6 +84,14 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
 	fclose(f);
 }
 
+TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(unsigned char* data, long size)
+{
+	mFilename="memory";
+	mData = data;
+	mSize = size;
+	mReadPointer = 0;
+}
+
 TheoraMemoryFileDataSource::~TheoraMemoryFileDataSource()
 {
 	if (mData) delete [] mData;

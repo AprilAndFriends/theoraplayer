@@ -13,6 +13,12 @@
     <Filter Include="src\Theora">
       <UniqueIdentifier>{e2cf3716-10e3-453d-bd3f-6e47e8023a09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\FFmpeg">
+      <UniqueIdentifier>{49309935-ea86-4916-90d8-146993c9419d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\AVFoundation">
+      <UniqueIdentifier>{408f1a6a-f1f7-4ebd-be69-35b8b36dcf96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\TheoraAsync.cpp">
@@ -65,6 +71,9 @@
     </ClCompile>
     <ClCompile Include="src\YUV\C\yuv420_yuv_c.c">
       <Filter>src\YUV</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FFmpeg\TheoraVideoClip_FFmpeg.cpp">
+      <Filter>src\FFmpeg</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,5 +128,16 @@
     <ClInclude Include="include\theoraplayer\TheoraWorkerThread.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="src\FFmpeg\TheoraVideoClip_FFmpeg.h">
+      <Filter>src\FFmpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AVFoundation\TheoraVideoClip_AVFoundation.h">
+      <Filter>src\AVFoundation</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\AVFoundation\TheoraVideoClip_AVFoundation.mm">
+      <Filter>src\AVFoundation</Filter>
+    </None>
   </ItemGroup>
 </Project>

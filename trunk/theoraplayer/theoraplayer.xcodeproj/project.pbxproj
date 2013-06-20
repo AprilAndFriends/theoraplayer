@@ -228,6 +228,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D12CA55517734B4200412E5B /* TheoraVideoClip_FFmpeg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraVideoClip_FFmpeg.cpp; path = src/FFmpeg/TheoraVideoClip_FFmpeg.cpp; sourceTree = "<group>"; };
+		D12CA55617734B4200412E5B /* TheoraVideoClip_FFmpeg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TheoraVideoClip_FFmpeg.h; path = src/FFmpeg/TheoraVideoClip_FFmpeg.h; sourceTree = "<group>"; };
 		D1473F2A150CA69B00B20490 /* theoraplayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = theoraplayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D167759E155C501D0050EC64 /* TheoraAsync.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraAsync.cpp; path = src/TheoraAsync.cpp; sourceTree = "<group>"; };
 		D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraAudioInterface.cpp; path = src/TheoraAudioInterface.cpp; sourceTree = "<group>"; };
@@ -339,6 +341,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D12CA55417734B2400412E5B /* FFmpeg */ = {
+			isa = PBXGroup;
+			children = (
+				D12CA55517734B4200412E5B /* TheoraVideoClip_FFmpeg.cpp */,
+				D12CA55617734B4200412E5B /* TheoraVideoClip_FFmpeg.h */,
+			);
+			name = FFmpeg;
+			sourceTree = "<group>";
+		};
 		D1473F1E150CA69B00B20490 = {
 			isa = PBXGroup;
 			children = (
@@ -374,8 +385,9 @@
 			isa = PBXGroup;
 			children = (
 				D1E2718516B46F370046C00C /* YUV */,
-				D1CDFF931696CF0000609AB0 /* AVFoundation */,
 				D1CDFF921696CEFA00609AB0 /* Theora */,
+				D1CDFF931696CF0000609AB0 /* AVFoundation */,
+				D12CA55417734B2400412E5B /* FFmpeg */,
 				D16775A5155C501D0050EC64 /* TheoraVideoClip.cpp */,
 				D167759E155C501D0050EC64 /* TheoraAsync.cpp */,
 				D1D465D916C2D070007A45AA /* TheoraAudioPacketQueue.cpp */,
