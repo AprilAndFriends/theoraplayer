@@ -220,7 +220,20 @@ namespace aprilvideo
 				textureFormat = april::Texture::FORMAT_ARGB;
 			}
 			int ram = april::getSystemInfo().ram;
-			int precached = ram < 512 ? 4 : (ram < 1024 ? 8 : 16);
+			int precached = 16;
+#ifdef _ANDROID
+			// Android libtheoraplayer uses ARM optimized libtheora which is faster but stil slower then
+			// a native hardware accelerated codec. so (for the moment) we use a larger precache to counter it.
+			if (ram > 512) precached = 32;
+#else
+			if      (ram < 384) precached = 4;
+			else if (ram < 512) precached = 6;
+			else if (ram < 1024)
+			{
+				if (path.contains("lowres")) precached = 16;
+				else precached = 8;
+			}
+#endif
 			if (path.ends_with("mp4"))
 			{
 				
@@ -230,7 +243,32 @@ namespace aprilvideo
 					mClip = gVideoManager->createVideoClip(path, mode, precached);
 			}
 			else
+			{
+#ifdef _ANDROID
+				hresource r(path);
+				int size = r.size();
+				TheoraDataSource* source;
+				
+				// additional android optimization: preload file in RAM to speed up decoding, every bit counts on android ;)
+				// but only for "reasonably" sized files
+				if (size < 64 * 1024 * 1024)
+				{
+					hlog::write(logTag, "Preloading video file to memory: " + path);
+					unsigned char* data = new unsigned char[size];
+					r.read_raw(data, size);
+					source = new TheoraMemoryFileDataSource(data, size);
+				}
+				else
+					source = new AprilVideoDataSource(path);
+				
+				mClip = gVideoManager->createVideoClip(source, mode, precached);
+				r.close();
+				hlog::write(logTag, "Created video clip.");
+
+#else
 				mClip = gVideoManager->createVideoClip(new AprilVideoDataSource(path), mode, precached);
+#endif
+			}
 		}
 		catch (_TheoraGenericException& e)
 		{
@@ -243,9 +281,19 @@ namespace aprilvideo
 		april::Texture* tex = april::rendersys->createTexture(_nextPow2(w), _nextPow2(h), textureFormat);
 		mTexture = new aprilui::Texture(tex->getFilename(), tex);
 		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(0, 0, w, h));
+#ifdef _ANDROID
+		hlog::write(logTag, "Waiting for cache: " + path);
+#endif
 		mClip->waitForCache(2 / mClip->getNumPrecachedFrames(), 5.0f); // better to wait a while then to display an empty image
 		mClip->waitForCache(0.25f, 0.5f);
+
+#ifdef _ANDROID
+		if (w * h >= 768 * 384) // best to fill the cache on large videos on android to counter a slower codec
+			mClip->waitForCache(0.9f, 2.0f);
 		
+		hlog::write(logTag, "Initial precache cached " + hstr(mClip->getNumPrecachedFrames()) + " frames");
+#endif
+
 		if (mAudioName != "")
 		{
 			if (!xal::mgr->hasCategory("video"))
