@@ -39,7 +39,7 @@
 		D135539A172962F000583915 /* AprilVideoDataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AprilVideoDataSource.cpp; path = src/AprilVideoDataSource.cpp; sourceTree = "<group>"; };
 		D135539D1729630400583915 /* AprilVideoDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AprilVideoDataSource.h; path = include/aprilvideo/AprilVideoDataSource.h; sourceTree = "<group>"; };
 		D1473F2A150CA69B00B20490 /* aprilvideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = aprilvideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D198F9DF177A32C3002942E3 /* libaprilvideo (iOS) copy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libaprilvideo (iOS) copy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D198F9DF177A32C3002942E3 /* libaprilvideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libaprilvideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1BB6FAE150E9E7100EF9400 /* libaprilvideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libaprilvideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -76,7 +76,7 @@
 			children = (
 				D1473F2A150CA69B00B20490 /* aprilvideo.framework */,
 				D1BB6FAE150E9E7100EF9400 /* libaprilvideo.a */,
-				D198F9DF177A32C3002942E3 /* libaprilvideo (iOS) copy.a */,
+				D198F9DF177A32C3002942E3 /* libaprilvideo.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,7 +167,7 @@
 			);
 			name = "aprilvideo (iOS)";
 			productName = libaprilvideo;
-			productReference = D198F9DF177A32C3002942E3 /* libaprilvideo (iOS) copy.a */;
+			productReference = D198F9DF177A32C3002942E3 /* libaprilvideo.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		D1BB6FAD150E9E7100EF9400 /* aprilvideo (Mac) */ = {
@@ -755,7 +755,7 @@
 				D1473F45150CA6D600B20490 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release-LLVM";
 		};
 		D1473F3F150CA69B00B20490 /* Build configuration list for PBXNativeTarget "aprilvideo" */ = {
 			isa = XCConfigurationList;
@@ -767,7 +767,7 @@
 				D1473F46150CA6D600B20490 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release-LLVM";
 		};
 		D198F9D9177A32C3002942E3 /* Build configuration list for PBXNativeTarget "aprilvideo (iOS)" */ = {
 			isa = XCConfigurationList;
@@ -779,7 +779,7 @@
 				D198F9DE177A32C3002942E3 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release-LLVM";
 		};
 		D1BB6FBC150E9E7100EF9400 /* Build configuration list for PBXNativeTarget "aprilvideo (Mac)" */ = {
 			isa = XCConfigurationList;
@@ -791,7 +791,7 @@
 				D1BB6FBB150E9E7100EF9400 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release-LLVM";
 		};
 /* End XCConfigurationList section */
 	};
