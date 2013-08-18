@@ -14,6 +14,9 @@
 		D1BB6F31150E99EE00EF9400 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6F30150E99EE00EF9400 /* Foundation.framework */; };
 		D1BB6F3F150E9A5000EF9400 /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = 730F236109181A8D00AB638C /* bitwise.c */; };
 		D1BB6F40150E9A5000EF9400 /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = 730F236209181A8D00AB638C /* framing.c */; };
+		D1F27989177A29F900E5C131 /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = 730F236109181A8D00AB638C /* bitwise.c */; };
+		D1F2798A177A29F900E5C131 /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = 730F236209181A8D00AB638C /* framing.c */; };
+		D1F2798C177A29F900E5C131 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6F30150E99EE00EF9400 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +28,7 @@
 		8D07F2C80486CC7A007CD1D0 /* Ogg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ogg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1BB6F2E150E99EE00EF9400 /* libogg.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libogg.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1BB6F30150E99EE00EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		D1F27994177A29F900E5C131 /* libogg.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libogg.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D1F2798B177A29F900E5C131 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1F2798C177A29F900E5C131 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -51,6 +63,7 @@
 			children = (
 				8D07F2C80486CC7A007CD1D0 /* Ogg.framework */,
 				D1BB6F2E150E99EE00EF9400 /* libogg.a */,
+				D1F27994177A29F900E5C131 /* libogg.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,6 +141,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D1F2798D177A29F900E5C131 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -168,6 +188,23 @@
 			productReference = D1BB6F2E150E99EE00EF9400 /* libogg.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		D1F27987177A29F900E5C131 /* ogg (Mac) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1F2798E177A29F900E5C131 /* Build configuration list for PBXNativeTarget "ogg (Mac)" */;
+			buildPhases = (
+				D1F27988177A29F900E5C131 /* Sources */,
+				D1F2798B177A29F900E5C131 /* Frameworks */,
+				D1F2798D177A29F900E5C131 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ogg (Mac)";
+			productName = libogg;
+			productReference = D1F27994177A29F900E5C131 /* libogg.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -189,6 +226,7 @@
 			projectRoot = "";
 			targets = (
 				8D07F2BC0486CC7A007CD1D0 /* ogg */,
+				D1F27987177A29F900E5C131 /* ogg (Mac) */,
 				D1BB6F2D150E99EE00EF9400 /* ogg (iOS) */,
 			);
 		};
@@ -230,6 +268,15 @@
 			files = (
 				D1BB6F3F150E9A5000EF9400 /* bitwise.c in Sources */,
 				D1BB6F40150E9A5000EF9400 /* framing.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1F27988177A29F900E5C131 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1F27989177A29F900E5C131 /* bitwise.c in Sources */,
+				D1F2798A177A29F900E5C131 /* framing.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +578,98 @@
 			};
 			name = "App Store";
 		};
+		D1F2798F177A29F900E5C131 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/libogg.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PRODUCT_NAME = ogg;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D1F27990177A29F900E5C131 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/libogg.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PRODUCT_NAME = ogg;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = "Debug-LLVM";
+		};
+		D1F27991177A29F900E5C131 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/libogg.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PRODUCT_NAME = ogg;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D1F27992177A29F900E5C131 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/libogg.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PRODUCT_NAME = ogg;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-LLVM";
+		};
+		D1F27993177A29F900E5C131 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/libogg.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PRODUCT_NAME = ogg;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "App Store";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -566,6 +705,18 @@
 				D1BB6F3A150E99EE00EF9400 /* Release */,
 				D1BB6F3B150E99EE00EF9400 /* Release-LLVM */,
 				D1BB6F3C150E99EE00EF9400 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1F2798E177A29F900E5C131 /* Build configuration list for PBXNativeTarget "ogg (Mac)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1F2798F177A29F900E5C131 /* Debug */,
+				D1F27990177A29F900E5C131 /* Debug-LLVM */,
+				D1F27991177A29F900E5C131 /* Release */,
+				D1F27992177A29F900E5C131 /* Release-LLVM */,
+				D1F27993177A29F900E5C131 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

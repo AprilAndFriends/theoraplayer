@@ -62,7 +62,7 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="0"
 				Detect64BitPortabilityProblems="false"
-				DebugInformationFormat="3"
+				DebugInformationFormat="4"
 				CallingConvention="0"
 				CompileAs="1"
 			/>
@@ -998,6 +998,10 @@
 			</File>
 			<File
 				RelativePath="..\..\vorbis.def"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\lib\vorbisenc.c"
 				>
 			</File>
 			<File

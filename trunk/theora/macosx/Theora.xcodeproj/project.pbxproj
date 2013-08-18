@@ -58,6 +58,14 @@
 		D109505A1620571200C5B181 /* x86cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = D109504E1620571200C5B181 /* x86cpu.c */; };
 		D109505D1620571200C5B181 /* x86cpu.h in Headers */ = {isa = PBXBuildFile; fileRef = D109504F1620571200C5B181 /* x86cpu.h */; };
 		D109509216206F2200C5B181 /* encoder_disabled.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C324B0FE4E5D500117FC9 /* encoder_disabled.c */; };
+		D139469D17C10DB00091F4A4 /* sse2idct.c in Sources */ = {isa = PBXBuildFile; fileRef = D109504C1620571200C5B181 /* sse2idct.c */; };
+		D139469F17C10DB00091F4A4 /* x86cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = D109504E1620571200C5B181 /* x86cpu.c */; };
+		D13946A117C10DB00091F4A4 /* mmxfrag.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31F00FE4E5BD00117FC9 /* mmxfrag.c */; };
+		D13946A217C10DB00091F4A4 /* mmxidct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31F20FE4E5BD00117FC9 /* mmxidct.c */; };
+		D13946A417C10DB00091F4A4 /* mmxstate.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31F40FE4E5BD00117FC9 /* mmxstate.c */; };
+		D13946A617C10DB00091F4A4 /* x86state.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31F60FE4E5BD00117FC9 /* x86state.c */; };
+		D13946A717C10DB00091F4A4 /* mmxfdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C325A0FE4E5D500117FC9 /* mmxfdct.c */; };
+		D13946A817C10DB00091F4A4 /* sse2fdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C325B0FE4E5D500117FC9 /* sse2fdct.c */; };
 		D1BB6F94150E9D8C00EF9400 /* encoder_disabled.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C324B0FE4E5D500117FC9 /* encoder_disabled.c */; };
 		D1BB6F96150E9D8C00EF9400 /* fdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C324E0FE4E5D500117FC9 /* fdct.c */; };
 		D1BB6F98150E9D8C00EF9400 /* mathops.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32510FE4E5D500117FC9 /* mathops.c */; };
@@ -76,6 +84,25 @@
 		D1BB6FA6150E9D8C00EF9400 /* internal.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EA0FE4E5BD00117FC9 /* internal.c */; };
 		D1BB6FA7150E9D8C00EF9400 /* quant.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EC0FE4E5BD00117FC9 /* quant.c */; };
 		D1BB6FA8150E9D8C00EF9400 /* state.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EE0FE4E5BD00117FC9 /* state.c */; };
+		D1F279BB177A2B3400E5C131 /* encoder_disabled.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C324B0FE4E5D500117FC9 /* encoder_disabled.c */; };
+		D1F279BC177A2B3400E5C131 /* fdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C324E0FE4E5D500117FC9 /* fdct.c */; };
+		D1F279BD177A2B3400E5C131 /* mathops.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32510FE4E5D500117FC9 /* mathops.c */; };
+		D1F279BE177A2B3400E5C131 /* rate.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32550FE4E5D500117FC9 /* rate.c */; };
+		D1F279BF177A2B3400E5C131 /* tokenize.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32560FE4E5D500117FC9 /* tokenize.c */; };
+		D1F279C0177A2B3400E5C131 /* apiwrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31D90FE4E5BD00117FC9 /* apiwrapper.c */; };
+		D1F279C1177A2B3400E5C131 /* bitpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31DB0FE4E5BD00117FC9 /* bitpack.c */; };
+		D1F279C2177A2B3400E5C131 /* decapiwrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31DE0FE4E5BD00117FC9 /* decapiwrapper.c */; };
+		D1F279C3177A2B3400E5C131 /* decinfo.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31DF0FE4E5BD00117FC9 /* decinfo.c */; };
+		D1F279C4177A2B3400E5C131 /* decode.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E10FE4E5BD00117FC9 /* decode.c */; };
+		D1F279C5177A2B3400E5C131 /* dequant.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E20FE4E5BD00117FC9 /* dequant.c */; };
+		D1F279C6177A2B3400E5C131 /* fragment.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E40FE4E5BD00117FC9 /* fragment.c */; };
+		D1F279C7177A2B3400E5C131 /* huffdec.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E50FE4E5BD00117FC9 /* huffdec.c */; };
+		D1F279C8177A2B3400E5C131 /* idct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E80FE4E5BD00117FC9 /* idct.c */; };
+		D1F279C9177A2B3400E5C131 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E90FE4E5BD00117FC9 /* info.c */; };
+		D1F279CA177A2B3400E5C131 /* internal.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EA0FE4E5BD00117FC9 /* internal.c */; };
+		D1F279CB177A2B3400E5C131 /* quant.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EC0FE4E5BD00117FC9 /* quant.c */; };
+		D1F279CC177A2B3400E5C131 /* state.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EE0FE4E5BD00117FC9 /* state.c */; };
+		D1F279CD177A2B3400E5C131 /* collect.c in Sources */ = {isa = PBXBuildFile; fileRef = D109503F162056DB00C5B181 /* collect.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,8 +159,25 @@
 		D109504D1620571200C5B181 /* sse2trans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sse2trans.h; sourceTree = "<group>"; };
 		D109504E1620571200C5B181 /* x86cpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = x86cpu.c; sourceTree = "<group>"; };
 		D109504F1620571200C5B181 /* x86cpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x86cpu.h; sourceTree = "<group>"; };
+		D12CA53C17732E7600412E5B /* armbits.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = armbits.h; path = arm/armbits.h; sourceTree = "<group>"; };
+		D12CA53D17732E7600412E5B /* armbits.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = armbits.s; path = arm/armbits.s; sourceTree = "<group>"; };
+		D12CA53E17732E7600412E5B /* armcpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = armcpu.c; path = arm/armcpu.c; sourceTree = "<group>"; };
+		D12CA53F17732E7600412E5B /* armcpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = armcpu.h; path = arm/armcpu.h; sourceTree = "<group>"; };
+		D12CA54217732E7600412E5B /* armencfrag.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = armencfrag.s; path = arm/armencfrag.s; sourceTree = "<group>"; };
+		D12CA54317732E7600412E5B /* armenquant.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = armenquant.s; path = arm/armenquant.s; sourceTree = "<group>"; };
+		D12CA54417732E7600412E5B /* armfrag.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = armfrag.s; path = arm/armfrag.s; sourceTree = "<group>"; };
+		D12CA54517732E7600412E5B /* armidct.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = armidct.s; path = arm/armidct.s; sourceTree = "<group>"; };
+		D12CA54617732E7600412E5B /* armint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = armint.h; path = arm/armint.h; sourceTree = "<group>"; };
+		D12CA54717732E7600412E5B /* armloop.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = armloop.s; path = arm/armloop.s; sourceTree = "<group>"; };
+		D12CA54917732E7600412E5B /* armstate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = armstate.c; path = arm/armstate.c; sourceTree = "<group>"; };
+		D12CA54A177345FC00412E5B /* armbits.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armbits.asm; path = arm/armbits.asm; sourceTree = "<group>"; };
+		D12CA54B177345FC00412E5B /* armfrag.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armfrag.asm; path = arm/armfrag.asm; sourceTree = "<group>"; };
+		D12CA54C177345FC00412E5B /* armidct.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armidct.asm; path = arm/armidct.asm; sourceTree = "<group>"; };
+		D12CA54D177345FD00412E5B /* armloop.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armloop.asm; path = arm/armloop.asm; sourceTree = "<group>"; };
+		D12CA54E177345FE00412E5B /* armopts-gnu.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = "armopts-gnu.s"; path = "arm/armopts-gnu.s"; sourceTree = "<group>"; };
 		D1BB6F7E150E9CFD00EF9400 /* libtheora.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheora.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1BB6F80150E9CFD00EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D1F279D4177A2B3400E5C131 /* libtheora.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheora.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +197,7 @@
 			children = (
 				8D07F2C80486CC7A007CD1D0 /* Theora.framework */,
 				D1BB6F7E150E9CFD00EF9400 /* libtheora.a */,
+				D1F279D4177A2B3400E5C131 /* libtheora.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -160,6 +205,7 @@
 		084C31D80FE4E5BD00117FC9 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				D12CA53A17732E6D00412E5B /* arm */,
 				084C32570FE4E5D500117FC9 /* x86 */,
 				D109503F162056DB00C5B181 /* collect.c */,
 				D1095040162056DB00C5B181 /* collect.h */,
@@ -267,6 +313,29 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
+		D12CA53A17732E6D00412E5B /* arm */ = {
+			isa = PBXGroup;
+			children = (
+				D12CA54A177345FC00412E5B /* armbits.asm */,
+				D12CA54B177345FC00412E5B /* armfrag.asm */,
+				D12CA54C177345FC00412E5B /* armidct.asm */,
+				D12CA54D177345FD00412E5B /* armloop.asm */,
+				D12CA54E177345FE00412E5B /* armopts-gnu.s */,
+				D12CA53C17732E7600412E5B /* armbits.h */,
+				D12CA53D17732E7600412E5B /* armbits.s */,
+				D12CA53E17732E7600412E5B /* armcpu.c */,
+				D12CA53F17732E7600412E5B /* armcpu.h */,
+				D12CA54217732E7600412E5B /* armencfrag.s */,
+				D12CA54317732E7600412E5B /* armenquant.s */,
+				D12CA54417732E7600412E5B /* armfrag.s */,
+				D12CA54517732E7600412E5B /* armidct.s */,
+				D12CA54617732E7600412E5B /* armint.h */,
+				D12CA54717732E7600412E5B /* armloop.s */,
+				D12CA54917732E7600412E5B /* armstate.c */,
+			);
+			name = arm;
+			sourceTree = "<group>";
+		};
 		D1BB6F7F150E9CFD00EF9400 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +414,21 @@
 			productReference = D1BB6F7E150E9CFD00EF9400 /* libtheora.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		D1F279B9177A2B3400E5C131 /* theora (Mac) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1F279CE177A2B3400E5C131 /* Build configuration list for PBXNativeTarget "theora (Mac)" */;
+			buildPhases = (
+				D1F279BA177A2B3400E5C131 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "theora (Mac)";
+			productName = libtheora;
+			productReference = D1F279D4177A2B3400E5C131 /* libtheora.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -366,6 +450,7 @@
 			projectRoot = ..;
 			targets = (
 				8D07F2BC0486CC7A007CD1D0 /* theora */,
+				D1F279B9177A2B3400E5C131 /* theora (Mac) */,
 				D1BB6F7D150E9CFD00EF9400 /* theora (iOS) */,
 			);
 		};
@@ -452,6 +537,40 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D1F279BA177A2B3400E5C131 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D139469D17C10DB00091F4A4 /* sse2idct.c in Sources */,
+				D139469F17C10DB00091F4A4 /* x86cpu.c in Sources */,
+				D13946A117C10DB00091F4A4 /* mmxfrag.c in Sources */,
+				D13946A217C10DB00091F4A4 /* mmxidct.c in Sources */,
+				D13946A417C10DB00091F4A4 /* mmxstate.c in Sources */,
+				D13946A617C10DB00091F4A4 /* x86state.c in Sources */,
+				D13946A717C10DB00091F4A4 /* mmxfdct.c in Sources */,
+				D13946A817C10DB00091F4A4 /* sse2fdct.c in Sources */,
+				D1F279BB177A2B3400E5C131 /* encoder_disabled.c in Sources */,
+				D1F279BC177A2B3400E5C131 /* fdct.c in Sources */,
+				D1F279BD177A2B3400E5C131 /* mathops.c in Sources */,
+				D1F279BE177A2B3400E5C131 /* rate.c in Sources */,
+				D1F279BF177A2B3400E5C131 /* tokenize.c in Sources */,
+				D1F279C0177A2B3400E5C131 /* apiwrapper.c in Sources */,
+				D1F279C1177A2B3400E5C131 /* bitpack.c in Sources */,
+				D1F279C2177A2B3400E5C131 /* decapiwrapper.c in Sources */,
+				D1F279C3177A2B3400E5C131 /* decinfo.c in Sources */,
+				D1F279C4177A2B3400E5C131 /* decode.c in Sources */,
+				D1F279C5177A2B3400E5C131 /* dequant.c in Sources */,
+				D1F279C6177A2B3400E5C131 /* fragment.c in Sources */,
+				D1F279C7177A2B3400E5C131 /* huffdec.c in Sources */,
+				D1F279C8177A2B3400E5C131 /* idct.c in Sources */,
+				D1F279C9177A2B3400E5C131 /* info.c in Sources */,
+				D1F279CA177A2B3400E5C131 /* internal.c in Sources */,
+				D1F279CB177A2B3400E5C131 /* quant.c in Sources */,
+				D1F279CC177A2B3400E5C131 /* state.c in Sources */,
+				D1F279CD177A2B3400E5C131 /* collect.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -467,7 +586,10 @@
 					/Library/Frameworks,
 				);
 				FRAMEWORK_VERSION = A;
-				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					__MACOSX__,
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
@@ -491,7 +613,10 @@
 					/Library/Frameworks,
 				);
 				FRAMEWORK_VERSION = A;
-				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					__MACOSX__,
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
@@ -614,7 +739,10 @@
 					/Library/Frameworks,
 				);
 				FRAMEWORK_VERSION = A;
-				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					__MACOSX__,
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
@@ -676,7 +804,10 @@
 					/Library/Frameworks,
 				);
 				FRAMEWORK_VERSION = A;
-				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					__MACOSX__,
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
@@ -736,7 +867,10 @@
 					/Library/Frameworks,
 				);
 				FRAMEWORK_VERSION = A;
-				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					__MACOSX__,
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
@@ -850,6 +984,113 @@
 			};
 			name = "App Store";
 		};
+		D1F279CF177A2B3400E5C131 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/libtheora.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theora;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D1F279D0177A2B3400E5C131 /* Debug-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/libtheora.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theora;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = "Debug-LLVM";
+		};
+		D1F279D1177A2B3400E5C131 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/libtheora.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theora;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D1F279D2177A2B3400E5C131 /* Release-LLVM */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/libtheora.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theora;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-LLVM";
+		};
+		D1F279D3177A2B3400E5C131 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/libtheora.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = theora;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "App Store";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -885,6 +1126,18 @@
 				D1BB6F8A150E9CFE00EF9400 /* Release */,
 				D1BB6F8B150E9CFE00EF9400 /* Release-LLVM */,
 				D1BB6F8C150E9CFE00EF9400 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D1F279CE177A2B3400E5C131 /* Build configuration list for PBXNativeTarget "theora (Mac)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1F279CF177A2B3400E5C131 /* Debug */,
+				D1F279D0177A2B3400E5C131 /* Debug-LLVM */,
+				D1F279D1177A2B3400E5C131 /* Release */,
+				D1F279D2177A2B3400E5C131 /* Release-LLVM */,
+				D1F279D3177A2B3400E5C131 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
