@@ -6,7 +6,14 @@ Copyright (c) 2008-2013 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
-#include "yuv_c.h"
+#ifdef _YUV_C
+#include "yuv_util.h"
+
+int YTable [256];
+int BUTable[256];
+int GUTable[256];
+int GVTable[256];
+int RVTable[256];
 
 #define CLIP_RGB_COLOR(dst, x) \
 	tmp = (x) >> 13;\
@@ -194,6 +201,31 @@ void decodeXBGR(struct TheoraPixelTransform* t)
 	_decodeRGB(t, t->w * 4, 4, 0, 3, 2, 1, 7, 6, 5);
 }
 
+void initYUVConversionModule()
+{
+	//used to bring the table into the high side (scale up) so we
+	//can maintain high precision and not use floats (FIXED POINT)
+	
+	// this is the pseudocode for yuv->rgb conversion
+	//        r = 1.164*(*ySrc - 16) + 1.596*(cv - 128);
+	//        b = 1.164*(*ySrc - 16)                   + 2.018*(cu - 128);
+	//        g = 1.164*(*ySrc - 16) - 0.813*(cv - 128) - 0.391*(cu - 128);
+	
+    double scale = 1L << 13, temp;
+	
+	int i;
+	for (i = 0; i < 256; i++)
+	{
+		temp = i - 128;
+		
+		YTable[i]  = (int)((1.164 * scale + 0.5) * (i - 16));	//Calc Y component
+		RVTable[i] = (int)((1.596 * scale + 0.5) * temp);		//Calc R component
+		GUTable[i] = (int)((0.391 * scale + 0.5) * temp);		//Calc G u & v components
+		GVTable[i] = (int)((0.813 * scale + 0.5) * temp);
+		BUTable[i] = (int)((2.018 * scale + 0.5) * temp);		//Calc B component
+	}
+}
+
 /*
  * Below are the function versions of the above macros, use those for debugging, but leave the macros for maximum CPU execution speed
  *
@@ -323,3 +355,4 @@ void _decodeRGBA(struct TheoraPixelTransform* t, int stride, int nBytes, int max
 	}
 }
 */
+#endif

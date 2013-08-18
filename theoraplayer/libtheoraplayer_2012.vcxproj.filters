@@ -19,6 +19,9 @@
     <Filter Include="src\AVFoundation">
       <UniqueIdentifier>{408f1a6a-f1f7-4ebd-be69-35b8b36dcf96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\YUV\C">
+      <UniqueIdentifier>{4bd888e7-5736-4485-aa54-3574f5395d1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\TheoraAsync.cpp">
@@ -60,28 +63,22 @@
     <ClCompile Include="src\Theora\TheoraVideoClip_Theora.cpp">
       <Filter>src\Theora</Filter>
     </ClCompile>
-    <ClCompile Include="src\YUV\C\yuv_c.c">
-      <Filter>src\YUV</Filter>
-    </ClCompile>
     <ClCompile Include="src\YUV\C\yuv420_grey_c.c">
-      <Filter>src\YUV</Filter>
+      <Filter>src\YUV\C</Filter>
     </ClCompile>
     <ClCompile Include="src\YUV\C\yuv420_rgb_c.c">
-      <Filter>src\YUV</Filter>
+      <Filter>src\YUV\C</Filter>
     </ClCompile>
     <ClCompile Include="src\YUV\C\yuv420_yuv_c.c">
-      <Filter>src\YUV</Filter>
+      <Filter>src\YUV\C</Filter>
     </ClCompile>
-    <ClCompile Include="src\FFmpeg\TheoraVideoClip_FFmpeg.cpp">
-      <Filter>src\FFmpeg</Filter>
+    <ClCompile Include="src\YUV\yuv_util.c">
+      <Filter>src\YUV</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Theora\TheoraVideoClip_Theora.h">
       <Filter>src\Theora</Filter>
-    </ClInclude>
-    <ClInclude Include="src\YUV\C\yuv_c.h">
-      <Filter>src\YUV</Filter>
     </ClInclude>
     <ClInclude Include="include\theoraplayer\TheoraAsync.h">
       <Filter>include</Filter>
@@ -128,16 +125,16 @@
     <ClInclude Include="include\theoraplayer\TheoraWorkerThread.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="src\FFmpeg\TheoraVideoClip_FFmpeg.h">
-      <Filter>src\FFmpeg</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AVFoundation\TheoraVideoClip_AVFoundation.h">
-      <Filter>src\AVFoundation</Filter>
+    <ClInclude Include="src\YUV\yuv_util.h">
+      <Filter>src\YUV</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\AVFoundation\TheoraVideoClip_AVFoundation.mm">
       <Filter>src\AVFoundation</Filter>
     </None>
+    <None Include="src\FFmpeg\TheoraVideoClip_FFmpeg.cpp" />
+    <None Include="src\FFmpeg\TheoraVideoClip_FFmpeg.h" />
+    <None Include="src\AVFoundation\TheoraVideoClip_AVFoundation.h" />
   </ItemGroup>
 </Project>

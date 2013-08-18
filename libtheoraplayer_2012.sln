@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual C++ Express 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtheoraplayer", "theoraplayer\libtheoraplayer_2012.vcxproj", "{9C043B29-DB40-48D5-97D8-1BC44128E3BA}"
+# Visual Studio Express 2012 for Windows Desktop
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtheoraplayer", "theoraplayer\libtheoraplayer_2012.vcxproj", "{ABE6907D-00FF-4198-8D36-65115AF1D868}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3A214E06-B95E-4D61-A291-1F8DF2EC10FD} = {3A214E06-B95E-4D61-A291-1F8DF2EC10FD}
 		{653F3841-3F26-49B9-AFCF-091DB4B67031} = {653F3841-3F26-49B9-AFCF-091DB4B67031}
@@ -24,7 +24,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "demo_composite_animation", "demos\composite_animation\msvc11\composite_animation.vcxproj", "{388E4B0A-0860-40CB-85F0-FD6F79E7AB3E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3A214E06-B95E-4D61-A291-1F8DF2EC10FD} = {3A214E06-B95E-4D61-A291-1F8DF2EC10FD}
-		{9C043B29-DB40-48D5-97D8-1BC44128E3BA} = {9C043B29-DB40-48D5-97D8-1BC44128E3BA}
+		{ABE6907D-00FF-4198-8D36-65115AF1D868} = {ABE6907D-00FF-4198-8D36-65115AF1D868}
 		{653F3841-3F26-49B9-AFCF-091DB4B67031} = {653F3841-3F26-49B9-AFCF-091DB4B67031}
 		{15CBFEFF-7965-41F5-B4E2-21E8795C9159} = {15CBFEFF-7965-41F5-B4E2-21E8795C9159}
 	EndProjectSection
@@ -37,14 +37,14 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9C043B29-DB40-48D5-97D8-1BC44128E3BA}.Debug_Static|Win32.ActiveCfg = Debug_Static|Win32
-		{9C043B29-DB40-48D5-97D8-1BC44128E3BA}.Debug_Static|Win32.Build.0 = Debug_Static|Win32
-		{9C043B29-DB40-48D5-97D8-1BC44128E3BA}.Debug|Win32.ActiveCfg = Debug|Win32
-		{9C043B29-DB40-48D5-97D8-1BC44128E3BA}.Debug|Win32.Build.0 = Debug|Win32
-		{9C043B29-DB40-48D5-97D8-1BC44128E3BA}.Release_Static|Win32.ActiveCfg = Release_Static|Win32
-		{9C043B29-DB40-48D5-97D8-1BC44128E3BA}.Release_Static|Win32.Build.0 = Release_Static|Win32
-		{9C043B29-DB40-48D5-97D8-1BC44128E3BA}.Release|Win32.ActiveCfg = Release|Win32
-		{9C043B29-DB40-48D5-97D8-1BC44128E3BA}.Release|Win32.Build.0 = Release|Win32
+		{ABE6907D-00FF-4198-8D36-65115AF1D868}.Debug_Static|Win32.ActiveCfg = Debug_Static|Win32
+		{ABE6907D-00FF-4198-8D36-65115AF1D868}.Debug_Static|Win32.Build.0 = Debug_Static|Win32
+		{ABE6907D-00FF-4198-8D36-65115AF1D868}.Debug|Win32.ActiveCfg = Debug|Win32
+		{ABE6907D-00FF-4198-8D36-65115AF1D868}.Debug|Win32.Build.0 = Debug|Win32
+		{ABE6907D-00FF-4198-8D36-65115AF1D868}.Release_Static|Win32.ActiveCfg = Release_Static|Win32
+		{ABE6907D-00FF-4198-8D36-65115AF1D868}.Release_Static|Win32.Build.0 = Release_Static|Win32
+		{ABE6907D-00FF-4198-8D36-65115AF1D868}.Release|Win32.ActiveCfg = Release|Win32
+		{ABE6907D-00FF-4198-8D36-65115AF1D868}.Release|Win32.Build.0 = Release|Win32
 		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Debug_Static|Win32.ActiveCfg = Debug|Win32
 		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Debug_Static|Win32.Build.0 = Debug|Win32
 		{15CBFEFF-7965-41F5-B4E2-21E8795C9159}.Debug|Win32.ActiveCfg = Debug|Win32

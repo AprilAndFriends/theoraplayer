@@ -35,6 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\YUV\yuv_util.c" />
     <None Include="src\AVFoundation\TheoraVideoClip_AVFoundation.mm" />
     <None Include="src\FFmpeg\TheoraVideoClip_FFmpeg.cpp" />
     <ClCompile Include="src\TheoraAsync.cpp" />
@@ -53,7 +54,6 @@
     <ClCompile Include="src\YUV\C\yuv420_grey_c.c" />
     <ClCompile Include="src\YUV\C\yuv420_rgb_c.c" />
     <ClCompile Include="src\YUV\C\yuv420_yuv_c.c" />
-    <ClCompile Include="src\YUV\C\yuv_c.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\theoraplayer\TheoraAsync.h" />
@@ -71,10 +71,10 @@
     <ClInclude Include="include\theoraplayer\TheoraVideoFrame.h" />
     <ClInclude Include="include\theoraplayer\TheoraVideoManager.h" />
     <ClInclude Include="include\theoraplayer\TheoraWorkerThread.h" />
+    <ClInclude Include="src\YUV\yuv_util.h" />
     <None Include="src\FFmpeg\TheoraVideoClip_FFmpeg.h" />
     <None Include="src\AVFoundation\TheoraVideoClip_AVFoundation.h" />
     <ClInclude Include="src\Theora\TheoraVideoClip_Theora.h" />
-    <ClInclude Include="src\YUV\C\yuv_c.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ABE6907D-00FF-4198-8D36-65115AF1D868}</ProjectGuid>
@@ -157,7 +157,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN32;_DEBUG;__THEORA;_YUV_C;THEORAVIDEO_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -176,7 +176,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN32;_DEBUG;__THEORA;_YUV_C;THEORAVIDEO_EXPORTS;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -240,7 +240,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN32;NDEBUG;__THEORA;_YUV_C;THEORAVIDEO_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -263,7 +263,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN32;NDEBUG;__THEORA;_YUV_C;_WINDOWS;THEORAVIDEO_EXPORTS;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
