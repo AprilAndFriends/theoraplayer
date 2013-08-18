@@ -7,6 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D139462D17C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139462E17C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139462F17C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139463017C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139463117C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139463217C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139463317C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139463417C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139463617C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D139463717C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D139463817C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D139463917C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D139463A17C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D139463B17C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D139463C17C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D139463D17C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D139463E17C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D13946C617C110670091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D13946CC17C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946CD17C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946CE17C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946CF17C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946D017C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946D117C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946D217C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946D317C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946D417C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946D517C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D13946D617C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D13946D717C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D13946D817C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D13946D917C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D13946DA17C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D13946DB17C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D13946DC17C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D13946DD17C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
 		D16775AB155C501D0050EC64 /* TheoraAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759E155C501D0050EC64 /* TheoraAsync.cpp */; };
 		D16775AC155C501D0050EC64 /* TheoraAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759E155C501D0050EC64 /* TheoraAsync.cpp */; };
 		D16775AD155C501D0050EC64 /* TheoraAudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */; };
@@ -67,7 +103,6 @@
 		D198F95B177A31FC002942E3 /* TheoraVideoManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A7155C501D0050EC64 /* TheoraVideoManager.cpp */; };
 		D198F95C177A31FC002942E3 /* TheoraWorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A8155C501D0050EC64 /* TheoraWorkerThread.cpp */; };
 		D198F95D177A31FC002942E3 /* TheoraVideoClip_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF941696D0F000609AB0 /* TheoraVideoClip_Theora.cpp */; };
-		D198F95E177A31FC002942E3 /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
 		D198F95F177A31FC002942E3 /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
 		D198F960177A31FC002942E3 /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
 		D198F961177A31FC002942E3 /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
@@ -86,7 +121,6 @@
 		D198F970177A31FC002942E3 /* TheoraVideoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CC155C50280050EC64 /* TheoraVideoManager.h */; };
 		D198F971177A31FC002942E3 /* TheoraWorkerThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CD155C50280050EC64 /* TheoraWorkerThread.h */; };
 		D198F972177A31FC002942E3 /* TheoraVideoClip_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1CDFF951696D0F000609AB0 /* TheoraVideoClip_Theora.h */; };
-		D198F973177A31FC002942E3 /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
 		D198F974177A31FC002942E3 /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
 		D198F97E177A31FE002942E3 /* TheoraAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759E155C501D0050EC64 /* TheoraAsync.cpp */; };
 		D198F97F177A31FE002942E3 /* TheoraAudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */; };
@@ -100,7 +134,6 @@
 		D198F987177A31FE002942E3 /* TheoraVideoManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A7155C501D0050EC64 /* TheoraVideoManager.cpp */; };
 		D198F988177A31FE002942E3 /* TheoraWorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A8155C501D0050EC64 /* TheoraWorkerThread.cpp */; };
 		D198F989177A31FE002942E3 /* TheoraVideoClip_AVFoundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF9C1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm */; };
-		D198F98A177A31FE002942E3 /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
 		D198F98B177A31FE002942E3 /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
 		D198F98C177A31FE002942E3 /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
 		D198F98D177A31FE002942E3 /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
@@ -119,7 +152,6 @@
 		D198F99C177A31FE002942E3 /* TheoraVideoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CC155C50280050EC64 /* TheoraVideoManager.h */; };
 		D198F99D177A31FE002942E3 /* TheoraWorkerThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CD155C50280050EC64 /* TheoraWorkerThread.h */; };
 		D198F99E177A31FE002942E3 /* TheoraVideoClip_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1CDFF951696D0F000609AB0 /* TheoraVideoClip_Theora.h */; };
-		D198F99F177A31FE002942E3 /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
 		D198F9A0177A31FE002942E3 /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
 		D198F9AA177A3200002942E3 /* TheoraAsync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759E155C501D0050EC64 /* TheoraAsync.cpp */; };
 		D198F9AB177A3200002942E3 /* TheoraAudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */; };
@@ -134,7 +166,6 @@
 		D198F9B4177A3200002942E3 /* TheoraWorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16775A8155C501D0050EC64 /* TheoraWorkerThread.cpp */; };
 		D198F9B5177A3200002942E3 /* TheoraVideoClip_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF941696D0F000609AB0 /* TheoraVideoClip_Theora.cpp */; };
 		D198F9B6177A3200002942E3 /* TheoraVideoClip_AVFoundation.mm in Sources */ = {isa = PBXBuildFile; fileRef = D1CDFF9C1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm */; };
-		D198F9B7177A3200002942E3 /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
 		D198F9B8177A3200002942E3 /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
 		D198F9B9177A3200002942E3 /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
 		D198F9BA177A3200002942E3 /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
@@ -153,7 +184,6 @@
 		D198F9C9177A3200002942E3 /* TheoraVideoManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CC155C50280050EC64 /* TheoraVideoManager.h */; };
 		D198F9CA177A3200002942E3 /* TheoraWorkerThread.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775CD155C50280050EC64 /* TheoraWorkerThread.h */; };
 		D198F9CB177A3200002942E3 /* TheoraVideoClip_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = D1CDFF951696D0F000609AB0 /* TheoraVideoClip_Theora.h */; };
-		D198F9CC177A3200002942E3 /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
 		D198F9CD177A3200002942E3 /* TheoraPixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E271B216B471E80046C00C /* TheoraPixelTransform.h */; };
 		D1CD00001696FC0B00609AB0 /* Theora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFFB1696FC0100609AB0 /* Theora.framework */; };
 		D1CD00011696FC0B00609AB0 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF91696FBF700609AB0 /* Vorbis.framework */; };
@@ -288,18 +318,6 @@
 		D1D465DD16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D465D916C2D070007A45AA /* TheoraAudioPacketQueue.cpp */; };
 		D1D465DE16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D465D916C2D070007A45AA /* TheoraAudioPacketQueue.cpp */; };
 		D1D465DF16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D465D916C2D070007A45AA /* TheoraAudioPacketQueue.cpp */; };
-		D1E2718D16B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
-		D1E2718E16B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
-		D1E2718F16B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
-		D1E2719016B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
-		D1E2719116B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
-		D1E2719216B46F640046C00C /* yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718816B46F640046C00C /* yuv_c.c */; };
-		D1E2719316B46F640046C00C /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
-		D1E2719416B46F640046C00C /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
-		D1E2719516B46F640046C00C /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
-		D1E2719616B46F640046C00C /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
-		D1E2719716B46F640046C00C /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
-		D1E2719816B46F640046C00C /* yuv_c.h in Headers */ = {isa = PBXBuildFile; fileRef = D1E2718916B46F640046C00C /* yuv_c.h */; };
 		D1E2719916B46F640046C00C /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
 		D1E2719A16B46F640046C00C /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
 		D1E2719B16B46F640046C00C /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
@@ -330,6 +348,10 @@
 /* Begin PBXFileReference section */
 		D12CA55517734B4200412E5B /* TheoraVideoClip_FFmpeg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraVideoClip_FFmpeg.cpp; path = src/FFmpeg/TheoraVideoClip_FFmpeg.cpp; sourceTree = "<group>"; };
 		D12CA55617734B4200412E5B /* TheoraVideoClip_FFmpeg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TheoraVideoClip_FFmpeg.h; path = src/FFmpeg/TheoraVideoClip_FFmpeg.h; sourceTree = "<group>"; };
+		D139462B17C0ED450091F4A4 /* yuv_libyuv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv_libyuv.c; path = src/YUV/libyuv/yuv_libyuv.c; sourceTree = "<group>"; };
+		D139462C17C0ED450091F4A4 /* yuv_libyuv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = yuv_libyuv.h; path = src/YUV/libyuv/yuv_libyuv.h; sourceTree = "<group>"; };
+		D13946CA17C119B30091F4A4 /* yuv_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv_util.c; path = src/YUV/yuv_util.c; sourceTree = "<group>"; };
+		D13946CB17C119B30091F4A4 /* yuv_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = yuv_util.h; path = src/YUV/yuv_util.h; sourceTree = "<group>"; };
 		D1473F2A150CA69B00B20490 /* theoraplayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = theoraplayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D167759E155C501D0050EC64 /* TheoraAsync.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraAsync.cpp; path = src/TheoraAsync.cpp; sourceTree = "<group>"; };
 		D167759F155C501D0050EC64 /* TheoraAudioInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraAudioInterface.cpp; path = src/TheoraAudioInterface.cpp; sourceTree = "<group>"; };
@@ -376,8 +398,6 @@
 		D1CDFFFB1696FC0100609AB0 /* Theora.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Theora.framework; path = ../__build__/products/Debug/Theora.framework; sourceTree = "<group>"; };
 		D1D465D516C2D063007A45AA /* TheoraAudioPacketQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheoraAudioPacketQueue.h; path = include/theoraplayer/TheoraAudioPacketQueue.h; sourceTree = "<group>"; };
 		D1D465D916C2D070007A45AA /* TheoraAudioPacketQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraAudioPacketQueue.cpp; path = src/TheoraAudioPacketQueue.cpp; sourceTree = "<group>"; };
-		D1E2718816B46F640046C00C /* yuv_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv_c.c; path = src/YUV/C/yuv_c.c; sourceTree = "<group>"; };
-		D1E2718916B46F640046C00C /* yuv_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = yuv_c.h; path = src/YUV/C/yuv_c.h; sourceTree = "<group>"; };
 		D1E2718A16B46F640046C00C /* yuv420_grey_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv420_grey_c.c; path = src/YUV/C/yuv420_grey_c.c; sourceTree = "<group>"; };
 		D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv420_yuv_c.c; path = src/YUV/C/yuv420_yuv_c.c; sourceTree = "<group>"; };
 		D1E271AB16B470210046C00C /* yuv420_rgb_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv420_rgb_c.c; path = src/YUV/C/yuv420_rgb_c.c; sourceTree = "<group>"; };
@@ -472,6 +492,15 @@
 				D12CA55617734B4200412E5B /* TheoraVideoClip_FFmpeg.h */,
 			);
 			name = FFmpeg;
+			sourceTree = "<group>";
+		};
+		D139462A17C0ED2F0091F4A4 /* libyuv */ = {
+			isa = PBXGroup;
+			children = (
+				D139462B17C0ED450091F4A4 /* yuv_libyuv.c */,
+				D139462C17C0ED450091F4A4 /* yuv_libyuv.h */,
+			);
+			name = libyuv;
 			sourceTree = "<group>";
 		};
 		D1473F1E150CA69B00B20490 = {
@@ -588,7 +617,10 @@
 		D1E2718516B46F370046C00C /* YUV */ = {
 			isa = PBXGroup;
 			children = (
+				D139462A17C0ED2F0091F4A4 /* libyuv */,
 				D1E2718716B46F4F0046C00C /* C */,
+				D13946CA17C119B30091F4A4 /* yuv_util.c */,
+				D13946CB17C119B30091F4A4 /* yuv_util.h */,
 			);
 			name = YUV;
 			sourceTree = "<group>";
@@ -596,8 +628,6 @@
 		D1E2718716B46F4F0046C00C /* C */ = {
 			isa = PBXGroup;
 			children = (
-				D1E2718916B46F640046C00C /* yuv_c.h */,
-				D1E2718816B46F640046C00C /* yuv_c.c */,
 				D1E271AB16B470210046C00C /* yuv420_rgb_c.c */,
 				D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */,
 				D1E2718A16B46F640046C00C /* yuv420_grey_c.c */,
@@ -628,7 +658,8 @@
 				D1D465D616C2D063007A45AA /* TheoraAudioPacketQueue.h in Headers */,
 				D1E271B316B471E80046C00C /* TheoraPixelTransform.h in Headers */,
 				D1CDFF991696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */,
-				D1E2719316B46F640046C00C /* yuv_c.h in Headers */,
+				D139463617C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946D517C119B40091F4A4 /* yuv_util.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,8 +681,9 @@
 				D198F970177A31FC002942E3 /* TheoraVideoManager.h in Headers */,
 				D198F971177A31FC002942E3 /* TheoraWorkerThread.h in Headers */,
 				D198F972177A31FC002942E3 /* TheoraVideoClip_Theora.h in Headers */,
-				D198F973177A31FC002942E3 /* yuv_c.h in Headers */,
 				D198F974177A31FC002942E3 /* TheoraPixelTransform.h in Headers */,
+				D139463917C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946D817C119B40091F4A4 /* yuv_util.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,8 +705,9 @@
 				D198F99C177A31FE002942E3 /* TheoraVideoManager.h in Headers */,
 				D198F99D177A31FE002942E3 /* TheoraWorkerThread.h in Headers */,
 				D198F99E177A31FE002942E3 /* TheoraVideoClip_Theora.h in Headers */,
-				D198F99F177A31FE002942E3 /* yuv_c.h in Headers */,
 				D198F9A0177A31FE002942E3 /* TheoraPixelTransform.h in Headers */,
+				D139463A17C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946D917C119B40091F4A4 /* yuv_util.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,8 +729,9 @@
 				D198F9C9177A3200002942E3 /* TheoraVideoManager.h in Headers */,
 				D198F9CA177A3200002942E3 /* TheoraWorkerThread.h in Headers */,
 				D198F9CB177A3200002942E3 /* TheoraVideoClip_Theora.h in Headers */,
-				D198F9CC177A3200002942E3 /* yuv_c.h in Headers */,
 				D198F9CD177A3200002942E3 /* TheoraPixelTransform.h in Headers */,
+				D139463B17C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946DA17C119B40091F4A4 /* yuv_util.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,8 +753,9 @@
 				D16775E5155C50280050EC64 /* TheoraVideoManager.h in Headers */,
 				D16775E7155C50280050EC64 /* TheoraWorkerThread.h in Headers */,
 				D1CDFF9B1696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */,
-				D1E2719616B46F640046C00C /* yuv_c.h in Headers */,
 				D1E271B616B471E80046C00C /* TheoraPixelTransform.h in Headers */,
+				D139463C17C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946DB17C119B40091F4A4 /* yuv_util.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -744,7 +779,8 @@
 				D1E271B416B471E80046C00C /* TheoraPixelTransform.h in Headers */,
 				D1D465D716C2D063007A45AA /* TheoraAudioPacketQueue.h in Headers */,
 				D1CDFF9F1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.h in Headers */,
-				D1E2719416B46F640046C00C /* yuv_c.h in Headers */,
+				D139463717C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946D617C119B40091F4A4 /* yuv_util.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,7 +805,8 @@
 				D1D465D816C2D063007A45AA /* TheoraAudioPacketQueue.h in Headers */,
 				D1CDFF9A1696D0F000609AB0 /* TheoraVideoClip_Theora.h in Headers */,
 				D1F09EB1169AFEFB00DEEC63 /* TheoraVideoClip_AVFoundation.h in Headers */,
-				D1E2719516B46F640046C00C /* yuv_c.h in Headers */,
+				D139463817C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946D717C119B40091F4A4 /* yuv_util.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,8 +828,9 @@
 				D1CDFFBB1696E1CA00609AB0 /* TheoraVideoManager.h in Headers */,
 				D1CDFFBC1696E1CA00609AB0 /* TheoraWorkerThread.h in Headers */,
 				D1CDFFBD1696E1CA00609AB0 /* TheoraVideoClip_Theora.h in Headers */,
-				D1E2719716B46F640046C00C /* yuv_c.h in Headers */,
 				D1E271B716B471E80046C00C /* TheoraPixelTransform.h in Headers */,
+				D139463D17C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946DC17C119B40091F4A4 /* yuv_util.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -814,8 +852,9 @@
 				D1CDFFE01696E1D700609AB0 /* TheoraVideoManager.h in Headers */,
 				D1CDFFE11696E1D700609AB0 /* TheoraWorkerThread.h in Headers */,
 				D1CDFFE21696E1D700609AB0 /* TheoraVideoClip_Theora.h in Headers */,
-				D1E2719816B46F640046C00C /* yuv_c.h in Headers */,
 				D1E271B816B471E80046C00C /* TheoraPixelTransform.h in Headers */,
+				D139463E17C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946DD17C119B40091F4A4 /* yuv_util.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1025,11 +1064,12 @@
 				D16775BD155C501D0050EC64 /* TheoraVideoManager.cpp in Sources */,
 				D16775BF155C501D0050EC64 /* TheoraWorkerThread.cpp in Sources */,
 				D1CDFF961696D0F000609AB0 /* TheoraVideoClip_Theora.cpp in Sources */,
-				D1E2718D16B46F640046C00C /* yuv_c.c in Sources */,
 				D1E2719916B46F640046C00C /* yuv420_grey_c.c in Sources */,
 				D1E271A516B46F640046C00C /* yuv420_yuv_c.c in Sources */,
 				D1E271AC16B470210046C00C /* yuv420_rgb_c.c in Sources */,
 				D1D465DA16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */,
+				D139462D17C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
+				D13946CC17C119B40091F4A4 /* yuv_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1049,11 +1089,12 @@
 				D198F95B177A31FC002942E3 /* TheoraVideoManager.cpp in Sources */,
 				D198F95C177A31FC002942E3 /* TheoraWorkerThread.cpp in Sources */,
 				D198F95D177A31FC002942E3 /* TheoraVideoClip_Theora.cpp in Sources */,
-				D198F95E177A31FC002942E3 /* yuv_c.c in Sources */,
 				D198F95F177A31FC002942E3 /* yuv420_grey_c.c in Sources */,
 				D198F960177A31FC002942E3 /* yuv420_yuv_c.c in Sources */,
 				D198F961177A31FC002942E3 /* yuv420_rgb_c.c in Sources */,
 				D198F962177A31FC002942E3 /* TheoraAudioPacketQueue.cpp in Sources */,
+				D139463017C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
+				D13946CF17C119B40091F4A4 /* yuv_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1073,11 +1114,12 @@
 				D198F987177A31FE002942E3 /* TheoraVideoManager.cpp in Sources */,
 				D198F988177A31FE002942E3 /* TheoraWorkerThread.cpp in Sources */,
 				D198F989177A31FE002942E3 /* TheoraVideoClip_AVFoundation.mm in Sources */,
-				D198F98A177A31FE002942E3 /* yuv_c.c in Sources */,
 				D198F98B177A31FE002942E3 /* yuv420_grey_c.c in Sources */,
 				D198F98C177A31FE002942E3 /* yuv420_yuv_c.c in Sources */,
 				D198F98D177A31FE002942E3 /* yuv420_rgb_c.c in Sources */,
 				D198F98E177A31FE002942E3 /* TheoraAudioPacketQueue.cpp in Sources */,
+				D139463117C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
+				D13946D017C119B40091F4A4 /* yuv_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1098,11 +1140,12 @@
 				D198F9B4177A3200002942E3 /* TheoraWorkerThread.cpp in Sources */,
 				D198F9B5177A3200002942E3 /* TheoraVideoClip_Theora.cpp in Sources */,
 				D198F9B6177A3200002942E3 /* TheoraVideoClip_AVFoundation.mm in Sources */,
-				D198F9B7177A3200002942E3 /* yuv_c.c in Sources */,
 				D198F9B8177A3200002942E3 /* yuv420_grey_c.c in Sources */,
 				D198F9B9177A3200002942E3 /* yuv420_yuv_c.c in Sources */,
 				D198F9BA177A3200002942E3 /* yuv420_rgb_c.c in Sources */,
 				D198F9BB177A3200002942E3 /* TheoraAudioPacketQueue.cpp in Sources */,
+				D139463217C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
+				D13946D117C119B40091F4A4 /* yuv_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1122,11 +1165,12 @@
 				D16775BE155C501D0050EC64 /* TheoraVideoManager.cpp in Sources */,
 				D16775C0155C501D0050EC64 /* TheoraWorkerThread.cpp in Sources */,
 				D1CDFF981696D0F000609AB0 /* TheoraVideoClip_Theora.cpp in Sources */,
-				D1E2719016B46F640046C00C /* yuv_c.c in Sources */,
 				D1E2719C16B46F640046C00C /* yuv420_grey_c.c in Sources */,
 				D1E271A816B46F640046C00C /* yuv420_yuv_c.c in Sources */,
 				D1E271AF16B470210046C00C /* yuv420_rgb_c.c in Sources */,
+				D139463317C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
 				D1D465DD16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */,
+				D13946D217C119B40091F4A4 /* yuv_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1146,11 +1190,12 @@
 				D1CDFF2D1696C77A00609AB0 /* TheoraVideoManager.cpp in Sources */,
 				D1CDFF2E1696C77A00609AB0 /* TheoraWorkerThread.cpp in Sources */,
 				D1CDFF9E1696D0FA00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */,
-				D1E2718E16B46F640046C00C /* yuv_c.c in Sources */,
 				D1E2719A16B46F640046C00C /* yuv420_grey_c.c in Sources */,
 				D1E271A616B46F640046C00C /* yuv420_yuv_c.c in Sources */,
 				D1E271AD16B470210046C00C /* yuv420_rgb_c.c in Sources */,
 				D1D465DB16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */,
+				D139462E17C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
+				D13946CD17C119B40091F4A4 /* yuv_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1171,11 +1216,12 @@
 				D1CDFF561696C79700609AB0 /* TheoraWorkerThread.cpp in Sources */,
 				D1CDFF971696D0F000609AB0 /* TheoraVideoClip_Theora.cpp in Sources */,
 				D1CDFFEC1696E24F00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */,
-				D1E2718F16B46F640046C00C /* yuv_c.c in Sources */,
 				D1E2719B16B46F640046C00C /* yuv420_grey_c.c in Sources */,
 				D1E271A716B46F640046C00C /* yuv420_yuv_c.c in Sources */,
 				D1E271AE16B470210046C00C /* yuv420_rgb_c.c in Sources */,
 				D1D465DC16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */,
+				D139462F17C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
+				D13946CE17C119B40091F4A4 /* yuv_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1195,11 +1241,12 @@
 				D1CDFFAB1696E1CA00609AB0 /* TheoraVideoManager.cpp in Sources */,
 				D1CDFFAC1696E1CA00609AB0 /* TheoraWorkerThread.cpp in Sources */,
 				D1CDFFEA1696E24B00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */,
-				D1E2719116B46F640046C00C /* yuv_c.c in Sources */,
 				D1E2719D16B46F640046C00C /* yuv420_grey_c.c in Sources */,
 				D1E271A916B46F640046C00C /* yuv420_yuv_c.c in Sources */,
 				D1E271B016B470210046C00C /* yuv420_rgb_c.c in Sources */,
+				D139463417C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
 				D1D465DE16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */,
+				D13946D317C119B40091F4A4 /* yuv_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1220,11 +1267,12 @@
 				D1CDFFD11696E1D700609AB0 /* TheoraWorkerThread.cpp in Sources */,
 				D1CDFFD21696E1D700609AB0 /* TheoraVideoClip_Theora.cpp in Sources */,
 				D1CDFFEB1696E24C00609AB0 /* TheoraVideoClip_AVFoundation.mm in Sources */,
-				D1E2719216B46F640046C00C /* yuv_c.c in Sources */,
 				D1E2719E16B46F640046C00C /* yuv420_grey_c.c in Sources */,
 				D1E271AA16B46F640046C00C /* yuv420_yuv_c.c in Sources */,
 				D1E271B116B470210046C00C /* yuv420_rgb_c.c in Sources */,
+				D13946C617C110670091F4A4 /* yuv_libyuv.c in Sources */,
 				D1D465DF16C2D070007A45AA /* TheoraAudioPacketQueue.cpp in Sources */,
+				D13946D417C119B40091F4A4 /* yuv_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1259,9 +1307,14 @@
 					"$(SRCROOT)/../ogg/include",
 					"$(SRCROOT)/../vorbis/include",
 					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/../libyuv/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lyuv",
+				);
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -1289,8 +1342,13 @@
 					"$(SRCROOT)/../ogg/include",
 					"$(SRCROOT)/../vorbis/include",
 					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/../libyuv/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lyuv",
+				);
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -1305,7 +1363,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1327,7 +1385,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1368,9 +1426,14 @@
 					"$(SRCROOT)/../ogg/include",
 					"$(SRCROOT)/../vorbis/include",
 					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/../libyuv/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lyuv",
+				);
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -1385,7 +1448,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1420,8 +1483,13 @@
 					"$(SRCROOT)/../ogg/include",
 					"$(SRCROOT)/../vorbis/include",
 					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/../libyuv/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lyuv",
+				);
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -1436,7 +1504,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1471,8 +1539,13 @@
 					"$(SRCROOT)/../ogg/include",
 					"$(SRCROOT)/../vorbis/include",
 					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/../libyuv/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lyuv",
+				);
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -1487,7 +1560,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1508,14 +1581,13 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1530,14 +1602,13 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1552,14 +1623,13 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1575,14 +1645,13 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1598,14 +1667,13 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1621,14 +1689,13 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer_avfoundation;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1643,14 +1710,13 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer_avfoundation;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1665,14 +1731,13 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer_avfoundation;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1688,14 +1753,13 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer_avfoundation;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1711,14 +1775,13 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer_avfoundation;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1735,14 +1798,13 @@
 					_MAC,
 					__THEORA,
 					__AVFOUNDATION,
-					YUV_C,
+					YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer_theora_avfoundation;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1758,14 +1820,13 @@
 					_MAC,
 					__THEORA,
 					__AVFOUNDATION,
-					YUV_C,
+					YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer_theora_avfoundation;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1781,14 +1842,13 @@
 					_MAC,
 					__THEORA,
 					__AVFOUNDATION,
-					YUV_C,
+					YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer_theora_avfoundation;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1805,14 +1865,13 @@
 					_MAC,
 					__THEORA,
 					__AVFOUNDATION,
-					YUV_C,
+					YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer_theora_avfoundation;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1829,14 +1888,13 @@
 					_MAC,
 					__THEORA,
 					__AVFOUNDATION,
-					YUV_C,
+					YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer_theora_avfoundation;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1852,7 +1910,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1861,7 +1919,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1876,7 +1933,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1885,7 +1942,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1900,7 +1956,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1909,7 +1965,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1925,7 +1980,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1934,7 +1989,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1950,7 +2004,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__THEORA,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -1959,7 +2013,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1976,7 +2029,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1998,7 +2051,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2020,7 +2073,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2042,7 +2095,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2064,7 +2117,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2087,7 +2140,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2110,7 +2163,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2133,7 +2186,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2156,7 +2209,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2179,7 +2232,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2200,7 +2253,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -2209,7 +2262,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2224,7 +2276,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -2233,7 +2285,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2248,7 +2299,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -2257,7 +2308,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2273,7 +2323,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -2282,7 +2332,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2298,7 +2347,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__AVFOUNDATION,
-					_YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -2307,7 +2356,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2324,7 +2372,7 @@
 					_IOS,
 					__THEORA,
 					__AVFOUNDATION,
-					YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -2333,7 +2381,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2349,7 +2396,7 @@
 					_IOS,
 					__THEORA,
 					__AVFOUNDATION,
-					YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -2358,7 +2405,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2374,7 +2420,7 @@
 					_IOS,
 					__THEORA,
 					__AVFOUNDATION,
-					YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -2383,7 +2429,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2400,7 +2445,7 @@
 					_IOS,
 					__THEORA,
 					__AVFOUNDATION,
-					YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -2409,7 +2454,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2426,7 +2470,7 @@
 					_IOS,
 					__THEORA,
 					__AVFOUNDATION,
-					YUV_C,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
@@ -2435,7 +2479,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;

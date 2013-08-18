@@ -6,7 +6,7 @@ Copyright (c) 2008-2013 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
-#include "yuv_c.h"
+#include "yuv_util.h"
 
 static void _decodeYUV(struct TheoraPixelTransform* t, int stride, int nBytes, int maxWidth)
 {
@@ -83,3 +83,4 @@ void decodeXYUV(struct TheoraPixelTransform* t)
 {
 	_decodeYUV(incOut(t, 1), t->w * 4, 4, 0);
 }
+

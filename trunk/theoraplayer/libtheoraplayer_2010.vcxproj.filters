@@ -13,6 +13,12 @@
     <Filter Include="src\Theora">
       <UniqueIdentifier>{e2cf3716-10e3-453d-bd3f-6e47e8023a09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\YUV\C">
+      <UniqueIdentifier>{8ba63999-20bc-4325-9765-3366e0bd8229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\YUV\libyuv">
+      <UniqueIdentifier>{5e2bfa35-74c0-40d1-bd4c-f66d27b33dad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\TheoraAsync.cpp">
@@ -54,25 +60,25 @@
     <ClCompile Include="src\Theora\TheoraVideoClip_Theora.cpp">
       <Filter>src\Theora</Filter>
     </ClCompile>
-    <ClCompile Include="src\YUV\C\yuv_c.c">
-      <Filter>src\YUV</Filter>
-    </ClCompile>
     <ClCompile Include="src\YUV\C\yuv420_grey_c.c">
-      <Filter>src\YUV</Filter>
-    </ClCompile>
-    <ClCompile Include="src\YUV\C\yuv420_rgb_c.c">
-      <Filter>src\YUV</Filter>
+      <Filter>src\YUV\C</Filter>
     </ClCompile>
     <ClCompile Include="src\YUV\C\yuv420_yuv_c.c">
+      <Filter>src\YUV\C</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\C\yuv420_rgb_c.c">
+      <Filter>src\YUV\C</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\yuv_util.c">
       <Filter>src\YUV</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\yuv_libyuv.c">
+      <Filter>src\YUV\libyuv</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Theora\TheoraVideoClip_Theora.h">
       <Filter>src\Theora</Filter>
-    </ClInclude>
-    <ClInclude Include="src\YUV\C\yuv_c.h">
-      <Filter>src\YUV</Filter>
     </ClInclude>
     <ClInclude Include="include\theoraplayer\TheoraAsync.h">
       <Filter>include</Filter>
@@ -118,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="include\theoraplayer\TheoraWorkerThread.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\yuv_util.h">
+      <Filter>src\YUV</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\yuv_libyuv.h">
+      <Filter>src\YUV\libyuv</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

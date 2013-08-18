@@ -30,7 +30,7 @@ static void bgrx2rgba(unsigned char* dest, int w, int h, struct TheoraPixelTrans
 	unsigned register int a;
 	unsigned int *dst = (unsigned int*) dest, *dstEnd;
 	unsigned char* src = t->raw;
-	int y, x, ax, bufferStride = w * 4;
+	int y, x, ax;
 	
 	for (y = 0; y < h; y++, src += t->rawStride)
 	{
@@ -178,12 +178,14 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 
 			TheoraPixelTransform t;
 			memset(&t, 0, sizeof(TheoraPixelTransform));
+#ifdef _AVFOUNDATION_BGRX
 			if (mOutputMode == TH_BGRX || mOutputMode == TH_RGBA)
 			{
 				t.raw = (unsigned char*) baseAddress;
 				t.rawStride = mStride;
 			}
 			else
+#endif
 			{
 				CVPlanarPixelBufferInfo_YCbCrPlanar yuv = getYUVStruct(baseAddress);
 				
@@ -191,12 +193,16 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 				t.u = (unsigned char*) baseAddress + yuv.componentInfoCb.offset; t.uStride = yuv.componentInfoCb.rowBytes;
 				t.v = (unsigned char*) baseAddress + yuv.componentInfoCr.offset; t.vStride = yuv.componentInfoCr.rowBytes;
 			}
+#ifdef _AVFOUNDATION_BGRX
 			if (mOutputMode == TH_RGBA)
 			{
-				bgrx2rgba(frame->getBuffer(), mWidth / 2, mHeight, &t);
+				for (int i = 0; i < 1000;i++)
+					bgrx2rgba(frame->getBuffer(), mWidth / 2, mHeight, &t);
 				frame->mReady = true;
 			}
-			else frame->decode(&t);
+			else
+#endif
+			frame->decode(&t);
 
 			CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
 			CMSampleBufferInvalidate(sampleBuffer);
@@ -265,7 +271,12 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	NSArray* audioTracks = [asset tracksWithMediaType:AVMediaTypeAudio];
 	AVAssetTrack *audioTrack = audioTracks.count > 0 ? [audioTracks objectAtIndex:0] : NULL;
 	
+#ifdef _AVFOUNDATION_BGRX
 	bool yuv_output = (mOutputMode != TH_BGRX && mOutputMode != TH_RGBA);
+#else
+	bool yuv_output = true;
+#endif
+	
 	NSDictionary *videoOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(yuv_output) ? kCVPixelFormatType_420YpCbCr8Planar : kCVPixelFormatType_32BGRA], kCVPixelBufferPixelFormatTypeKey, nil];
 
 	mOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:videoTrack outputSettings:videoOptions];
