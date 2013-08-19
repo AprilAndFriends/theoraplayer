@@ -13,6 +13,9 @@
 		/>
 	</Platforms>
 	<ToolFiles>
+		<DefaultToolFile
+			FileName="masm.rules"
+		/>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
@@ -33,6 +36,9 @@
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
+				Name="MASM"
+			/>
+			<Tool
 				Name="VCXMLDataGeneratorTool"
 			/>
 			<Tool
@@ -49,8 +55,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv"
-				PreprocessorDefinitions="__THEORA;_YUV_C;_WIN32;_DEBUG;THEORAVIDEO_EXPORTS"
+				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv;src\YUV\libyuv\include"
+				PreprocessorDefinitions="__THEORA;_YUV_LIBYUV;__SSSE3__;_WIN32;_DEBUG;THEORAVIDEO_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -132,6 +138,9 @@
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
+				Name="MASM"
+			/>
+			<Tool
 				Name="VCXMLDataGeneratorTool"
 			/>
 			<Tool
@@ -148,8 +157,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv"
-				PreprocessorDefinitions="__THEORA;_YUV_C;_WIN32;NDEBUG;THEORAVIDEO_EXPORTS"
+				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv;src\YUV\libyuv\include"
+				PreprocessorDefinitions="__THEORA;_YUV_LIBYUV;__SSSE3__;_WIN32;NDEBUG;THEORAVIDEO_EXPORTS"
 				StringPooling="true"
 				MinimalRebuild="true"
 				RuntimeLibrary="2"
@@ -230,6 +239,9 @@
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
+				Name="MASM"
+			/>
+			<Tool
 				Name="VCXMLDataGeneratorTool"
 			/>
 			<Tool
@@ -246,8 +258,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv"
-				PreprocessorDefinitions="__THEORA;_YUV_C;_WIN32;_DEBUG;THEORAVIDEO_STATIC"
+				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv;src\YUV\libyuv\include"
+				PreprocessorDefinitions="__THEORA;_YUV_LIBYUV;__SSSE3__;_WIN32;_DEBUG;THEORAVIDEO_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -311,6 +323,9 @@
 				Name="VCCustomBuildTool"
 			/>
 			<Tool
+				Name="MASM"
+			/>
+			<Tool
 				Name="VCXMLDataGeneratorTool"
 			/>
 			<Tool
@@ -327,8 +342,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv"
-				PreprocessorDefinitions="__THEORA;_YUV_C;WIN32;NDEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_STATIC"
+				AdditionalIncludeDirectories="include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv;src\YUV\libyuv\include"
+				PreprocessorDefinitions="__THEORA;_YUV_LIBYUV;__SSSE3__;WIN32;NDEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_STATIC"
 				StringPooling="true"
 				MinimalRebuild="true"
 				RuntimeLibrary="0"
@@ -542,6 +557,294 @@
 						RelativePath=".\src\YUV\libyuv\yuv_libyuv.h"
 						>
 					</File>
+					<Filter
+						Name="include"
+						>
+						<File
+							RelativePath=".\src\YUV\libyuv\include\libyuv.h"
+							>
+						</File>
+						<Filter
+							Name="libyuv"
+							>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\basic_types.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\compare.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\convert.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\convert_argb.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\convert_from.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\convert_from_argb.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\cpu_id.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\format_conversion.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\mjpeg_decoder.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\planar_functions.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\rotate.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\rotate_argb.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\row.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\scale.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\scale_argb.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\version.h"
+								>
+							</File>
+							<File
+								RelativePath=".\src\YUV\libyuv\include\libyuv\video_common.h"
+								>
+							</File>
+						</Filter>
+					</Filter>
+					<Filter
+						Name="src"
+						>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\compare.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\compare_common.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\compare_neon.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\compare_posix.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\compare_win.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\convert.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\convert_argb.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\convert_from.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\convert_from_argb.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\convert_jpeg.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\convert_to_argb.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\convert_to_i420.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\cpu_id.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\format_conversion.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\mjpeg_decoder.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\mjpeg_validate.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\planar_functions.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\rotate.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\rotate_argb.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\rotate_mips.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\rotate_neon.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\row_any.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\row_common.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\row_mips.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\row_neon.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\row_posix.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\row_win.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\row_x86.asm"
+							>
+							<FileConfiguration
+								Name="Debug|Win32"
+								ExcludedFromBuild="true"
+								>
+								<Tool
+									Name="MASM"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|Win32"
+								ExcludedFromBuild="true"
+								>
+								<Tool
+									Name="MASM"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Debug_Static|Win32"
+								ExcludedFromBuild="true"
+								>
+								<Tool
+									Name="MASM"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release_Static|Win32"
+								ExcludedFromBuild="true"
+								>
+								<Tool
+									Name="MASM"
+								/>
+							</FileConfiguration>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\scale.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\scale_argb.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\scale_argb_neon.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\scale_mips.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\scale_neon.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\video_common.cc"
+							>
+						</File>
+						<File
+							RelativePath=".\src\YUV\libyuv\src\x86inc.asm"
+							>
+							<FileConfiguration
+								Name="Debug|Win32"
+								ExcludedFromBuild="true"
+								>
+								<Tool
+									Name="MASM"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release|Win32"
+								ExcludedFromBuild="true"
+								>
+								<Tool
+									Name="MASM"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Debug_Static|Win32"
+								ExcludedFromBuild="true"
+								>
+								<Tool
+									Name="MASM"
+								/>
+							</FileConfiguration>
+							<FileConfiguration
+								Name="Release_Static|Win32"
+								ExcludedFromBuild="true"
+								>
+								<Tool
+									Name="MASM"
+								/>
+							</FileConfiguration>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 		</Filter>

@@ -104,20 +104,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\lib\arm\armbits.s">
-      <Filter>arm</Filter>
-    </None>
-    <None Include="..\..\..\lib\arm\armfrag.s">
-      <Filter>arm</Filter>
-    </None>
-    <None Include="..\..\..\lib\arm\armidct.s">
-      <Filter>arm</Filter>
-    </None>
-    <None Include="..\..\..\lib\arm\armloop.s">
-      <Filter>arm</Filter>
-    </None>
     <None Include="..\..\..\lib\arm\armopts-gnu.s">
       <Filter>arm</Filter>
     </None>
+    <None Include="..\..\..\lib\theora.def" />
   </ItemGroup>
 </Project>

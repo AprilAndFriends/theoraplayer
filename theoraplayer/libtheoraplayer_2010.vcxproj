@@ -43,6 +43,39 @@
     <ClCompile Include="src\YUV\C\yuv420_grey_c.c" />
     <ClCompile Include="src\YUV\C\yuv420_rgb_c.c" />
     <ClCompile Include="src\YUV\C\yuv420_yuv_c.c" />
+    <ClCompile Include="src\YUV\libyuv\src\compare.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\compare_common.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\compare_neon.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\compare_posix.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\compare_win.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert_argb.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert_from.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert_from_argb.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert_jpeg.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert_to_argb.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert_to_i420.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\cpu_id.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\format_conversion.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\mjpeg_decoder.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\mjpeg_validate.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\planar_functions.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\rotate.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\rotate_argb.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\rotate_mips.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\rotate_neon.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\row_any.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\row_common.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\row_mips.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\row_neon.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\row_posix.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\row_win.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\scale.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\scale_argb.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\scale_argb_neon.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\scale_mips.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\scale_neon.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\video_common.cc" />
     <ClCompile Include="src\YUV\libyuv\yuv_libyuv.c" />
     <ClCompile Include="src\YUV\yuv_util.c" />
   </ItemGroup>
@@ -63,8 +96,30 @@
     <ClInclude Include="include\theoraplayer\TheoraVideoManager.h" />
     <ClInclude Include="include\theoraplayer\TheoraWorkerThread.h" />
     <ClInclude Include="src\Theora\TheoraVideoClip_Theora.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\basic_types.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\compare.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\convert.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\convert_argb.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\convert_from.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\convert_from_argb.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\cpu_id.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\format_conversion.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\mjpeg_decoder.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\planar_functions.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\rotate.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\rotate_argb.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\row.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\scale.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\scale_argb.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\version.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\video_common.h" />
     <ClInclude Include="src\YUV\libyuv\yuv_libyuv.h" />
     <ClInclude Include="src\YUV\yuv_util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\YUV\libyuv\src\row_x86.asm" />
+    <None Include="src\YUV\libyuv\src\x86inc.asm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9C043B29-DB40-48D5-97D8-1BC44128E3BA}</ProjectGuid>
@@ -170,8 +225,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__THEORA;_YUV_C;_WIN32;_DEBUG;THEORAVIDEO_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv;src\YUV\libyuv\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__THEORA;_YUV_LIBYUV;__SSSE3__;_WIN32;_DEBUG;THEORAVIDEO_EXPORTS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -196,8 +251,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Static|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__THEORA;_YUV_C;_WIN32;_DEBUG;THEORAVIDEO_STATIC</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv;src\YUV\libyuv\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__THEORA;_YUV_LIBYUV;__SSSE3__;_WIN32;_DEBUG;THEORAVIDEO_STATIC;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -278,8 +333,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__THEORA;_YUV_C;_WIN32;NDEBUG;THEORAVIDEO_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv;src\YUV\libyuv\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__THEORA;_YUV_LIBYUV;__SSSE3__;_WIN32;NDEBUG;THEORAVIDEO_EXPORTS;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -308,8 +363,8 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__THEORA;_YUV_C;WIN32;NDEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_STATIC</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;include\theoraplayer;..\ogg\include;..\vorbis\include;..\theora\include;src;src\Theora;src\YUV;src\YUV\C;src\YUV\libyuv;src\YUV\libyuv\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__THEORA;_YUV_LIBYUV;__SSSE3__;WIN32;NDEBUG;_WINDOWS;_USRDLL;THEORAVIDEO_STATIC;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>

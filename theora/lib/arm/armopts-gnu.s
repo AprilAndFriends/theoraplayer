@@ -16,7 +16,7 @@
 
 @ Set the following to 1 if we have EDSP instructions
 @  (LDRD/STRD, etc., ARMv5E and later).
- .set OC_ARM_ASM_EDSP,	0
+ .set OC_ARM_ASM_EDSP,	1
 
 @ Set the following to 1 if we have ARMv6 media instructions.
  .set OC_ARM_ASM_MEDIA,	0
