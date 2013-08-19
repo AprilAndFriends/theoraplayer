@@ -18,17 +18,25 @@ extern "C" {
 
 #if !defined(LIBYUV_DISABLE_X86) && (defined(__x86_64__) || defined(__i386__))
 
+#if defined(__native_client__) && defined(__x86_64__)
+#define MEMACCESS(base) "%%nacl:(%%r15,%q" #base ")"
+#define MEMLEA(offset, base) #offset "(%q" #base ")"
+#else
+#define MEMACCESS(base) "(%" #base ")"
+#define MEMLEA(offset, base) #offset "(%" #base ")"
+#endif
+
 uint32 SumSquareError_SSE2(const uint8* src_a, const uint8* src_b, int count) {
   uint32 sse;
-  asm volatile (
+  asm volatile (  // NOLINT
     "pxor      %%xmm0,%%xmm0                   \n"
     "pxor      %%xmm5,%%xmm5                   \n"
-    "sub       %0,%1                           \n"
     ".p2align  4                               \n"
     "1:                                        \n"
-    "movdqa    (%0),%%xmm1                     \n"
-    "movdqa    (%0,%1,1),%%xmm2                \n"
-    "lea       0x10(%0),%0                     \n"
+    "movdqa    "MEMACCESS(0)",%%xmm1           \n"
+    "lea       "MEMLEA(0x10, 0)",%0            \n"
+    "movdqa    "MEMACCESS(1)",%%xmm2           \n"
+    "lea       "MEMLEA(0x10, 1)",%1            \n"
     "sub       $0x10,%2                        \n"
     "movdqa    %%xmm1,%%xmm3                   \n"
     "psubusb   %%xmm2,%%xmm1                   \n"
@@ -58,7 +66,7 @@ uint32 SumSquareError_SSE2(const uint8* src_a, const uint8* src_b, int count) {
 #if defined(__SSE2__)
     , "xmm0", "xmm1", "xmm2", "xmm3", "xmm5"
 #endif
-  );
+  );  // NOLINT
   return sse;
 }
 
@@ -66,34 +74,27 @@ uint32 SumSquareError_SSE2(const uint8* src_a, const uint8* src_b, int count) {
 
 #if !defined(LIBYUV_DISABLE_X86) && \
     (defined(__x86_64__) || (defined(__i386__) && !defined(__pic__)))
-// GCC 4.2 on OSX has link error when passing static or const to inline.
-// TODO(fbarchard): Use static const when gcc 4.2 support is dropped.
-#ifdef __APPLE__
-#define CONST
-#else
-#define CONST static const
-#endif
 #define HAS_HASHDJB2_SSE41
-CONST uvec32 kHash16x33 = { 0x92d9e201, 0, 0, 0 };  // 33 ^ 16
-CONST uvec32 kHashMul0 = {
+static uvec32 kHash16x33 = { 0x92d9e201, 0, 0, 0 };  // 33 ^ 16
+static uvec32 kHashMul0 = {
   0x0c3525e1,  // 33 ^ 15
   0xa3476dc1,  // 33 ^ 14
   0x3b4039a1,  // 33 ^ 13
   0x4f5f0981,  // 33 ^ 12
 };
-CONST uvec32 kHashMul1 = {
+static uvec32 kHashMul1 = {
   0x30f35d61,  // 33 ^ 11
   0x855cb541,  // 33 ^ 10
   0x040a9121,  // 33 ^ 9
   0x747c7101,  // 33 ^ 8
 };
-CONST uvec32 kHashMul2 = {
+static uvec32 kHashMul2 = {
   0xec41d4e1,  // 33 ^ 7
   0x4cfa3cc1,  // 33 ^ 6
   0x025528a1,  // 33 ^ 5
   0x00121881,  // 33 ^ 4
 };
-CONST uvec32 kHashMul3 = {
+static uvec32 kHashMul3 = {
   0x00008c61,  // 33 ^ 3
   0x00000441,  // 33 ^ 2
   0x00000021,  // 33 ^ 1
@@ -102,14 +103,14 @@ CONST uvec32 kHashMul3 = {
 
 uint32 HashDjb2_SSE41(const uint8* src, int count, uint32 seed) {
   uint32 hash;
-  asm volatile (
+  asm volatile (  // NOLINT
     "movd      %2,%%xmm0                       \n"
     "pxor      %%xmm7,%%xmm7                   \n"
     "movdqa    %4,%%xmm6                       \n"
     ".p2align  4                               \n"
   "1:                                          \n"
-    "movdqu    (%0),%%xmm1                     \n"
-    "lea       0x10(%0),%0                     \n"
+    "movdqu    "MEMACCESS(0)",%%xmm1           \n"
+    "lea       "MEMLEA(0x10, 0)",%0            \n"
     "pmulld    %%xmm6,%%xmm0                   \n"
     "movdqa    %5,%%xmm5                       \n"
     "movdqa    %%xmm1,%%xmm2                   \n"
@@ -153,7 +154,7 @@ uint32 HashDjb2_SSE41(const uint8* src, int count, uint32 seed) {
 #if defined(__SSE2__)
     , "xmm0", "xmm1", "xmm2", "xmm3", "xmm4", "xmm5", "xmm6", "xmm7"
 #endif
-  );
+  );  // NOLINT
   return hash;
 }
 #endif  // defined(__x86_64__) || (defined(__i386__) && !defined(__pic__)))
@@ -162,3 +163,4 @@ uint32 HashDjb2_SSE41(const uint8* src, int count, uint32 seed) {
 }  // extern "C"
 }  // namespace libyuv
 #endif
+

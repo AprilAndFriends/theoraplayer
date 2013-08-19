@@ -688,6 +688,19 @@ void ARGBColorTableRow_C(uint8* dst_argb, const uint8* table_argb, int width) {
   }
 }
 
+// Apply color table to a row of image.
+void RGBColorTableRow_C(uint8* dst_argb, const uint8* table_argb, int width) {
+  for (int x = 0; x < width; ++x) {
+    int b = dst_argb[0];
+    int g = dst_argb[1];
+    int r = dst_argb[2];
+    dst_argb[0] = table_argb[b * 4 + 0];
+    dst_argb[1] = table_argb[g * 4 + 1];
+    dst_argb[2] = table_argb[r * 4 + 2];
+    dst_argb += 4;
+  }
+}
+
 void ARGBQuantizeRow_C(uint8* dst_argb, int scale, int interval_size,
                        int interval_offset, int width) {
   for (int x = 0; x < width; ++x) {
@@ -1675,7 +1688,7 @@ void ARGBAttenuateRow_C(const uint8* src_argb, uint8* dst_argb, int width) {
 // Reciprocal method is off by 1 on some values. ie 125
 // 8.8 fixed point inverse table with 1.0 in upper short and 1 / a in lower.
 #define T(a) 0x01000000 + (0x10000 / a)
-uint32 fixed_invtbl8[256] = {
+const uint32 fixed_invtbl8[256] = {
   0x01000000, 0x0100ffff, T(0x02), T(0x03), T(0x04), T(0x05), T(0x06), T(0x07),
   T(0x08), T(0x09), T(0x0a), T(0x0b), T(0x0c), T(0x0d), T(0x0e), T(0x0f),
   T(0x10), T(0x11), T(0x12), T(0x13), T(0x14), T(0x15), T(0x16), T(0x17),
@@ -1891,7 +1904,7 @@ void I422ToUYVYRow_C(const uint8* src_y,
     }
 }
 
-#if !defined(LIBYUV_DISABLE_X86)
+#if !defined(LIBYUV_DISABLE_X86) && defined(HAS_I422TOARGBROW_SSSE3)
 // row_win.cc has asm version, but GCC uses 2 step wrapper.  5% slower.
 // TODO(fbarchard): Handle width > kMaxStride here instead of calling code.
 #if defined(__x86_64__) || defined(__i386__)
@@ -1988,7 +2001,6 @@ void UYVYToARGBRow_Unaligned_SSSE3(const uint8* src_uyvy,
   UYVYToYRow_Unaligned_SSE2(src_uyvy, row_y, width);
   I422ToARGBRow_Unaligned_SSSE3(row_y, row_u, row_v, dst_argb, width);
 }
-
 #endif  // defined(_M_IX86) || defined(__x86_64__) || defined(__i386__)
 #endif  // !defined(LIBYUV_DISABLE_X86)
 #undef clamp0
