@@ -35,18 +35,56 @@ extern "C" {
 #define LIBYUV_SSSE3_ONLY
 #endif
 
-// The following are available on all x86 platforms:
+// The following are available on all x86 platforms, including NaCL:
 #if !defined(LIBYUV_DISABLE_X86) && \
     (defined(_M_IX86) || defined(__x86_64__) || defined(__i386__))
-// Conversions.
+// Effects:
+#define HAS_ARGBADDROW_SSE2
+#define HAS_ARGBAFFINEROW_SSE2
+#define HAS_ARGBATTENUATEROW_SSSE3
+#define HAS_ARGBBLENDROW_SSSE3
+#define HAS_ARGBCOLORMATRIXROW_SSSE3
+#define HAS_ARGBGRAYROW_SSSE3
+#define HAS_ARGBMIRRORROW_SSSE3
+#define HAS_ARGBMULTIPLYROW_SSE2
+#define HAS_ARGBQUANTIZEROW_SSE2
+#define HAS_ARGBSEPIAROW_SSSE3
+#define HAS_ARGBSHADEROW_SSE2
+#define HAS_ARGBSUBTRACTROW_SSE2
+#define HAS_ARGBUNATTENUATEROW_SSE2
+#define HAS_COMPUTECUMULATIVESUMROW_SSE2
+#define HAS_CUMULATIVESUMTOAVERAGEROW_SSE2
+#define HAS_INTERPOLATEROW_SSE2
+#define HAS_INTERPOLATEROW_SSSE3
+#define HAS_SOBELROW_SSE2
+#define HAS_SOBELXROW_SSSE3
+#define HAS_SOBELXYROW_SSE2
+#define HAS_SOBELYROW_SSSE3
+
+// Conversions:
+#define HAS_ARGBSHUFFLEROW_SSSE3
+#define HAS_ARGBTOBAYERROW_SSSE3
+#define HAS_ARGBTOYJROW_SSSE3
+#define HAS_ARGBTOYROW_SSSE3
+#define HAS_COPYROW_ERMS
+#define HAS_COPYROW_X86
+#define HAS_FIXEDDIV_X86
+#define HAS_I400TOARGBROW_SSE2
+#define HAS_SETROW_X86
+#endif
+
+// The following are available on all x86 platforms except NaCL x64:
+#if !defined(LIBYUV_DISABLE_X86) && \
+    (defined(_M_IX86) || defined(__x86_64__) || defined(__i386__)) && \
+    !(defined(__native_client__) && defined(__x86_64__))
+
+// Conversions:
 #define HAS_ABGRTOUVROW_SSSE3
 #define HAS_ABGRTOYROW_SSSE3
 #define HAS_ARGB1555TOARGBROW_SSE2
 #define HAS_ARGB4444TOARGBROW_SSE2
-#define HAS_ARGBSHUFFLEROW_SSSE3
 #define HAS_ARGBTOARGB1555ROW_SSE2
 #define HAS_ARGBTOARGB4444ROW_SSE2
-#define HAS_ARGBTOBAYERROW_SSSE3
 #define HAS_ARGBTORAWROW_SSSE3
 #define HAS_ARGBTORGB24ROW_SSSE3
 #define HAS_ARGBTORGB565ROW_SSE2
@@ -54,15 +92,10 @@ extern "C" {
 #define HAS_ARGBTOUV444ROW_SSSE3
 #define HAS_ARGBTOUVROW_SSSE3
 #define HAS_ARGBTOUVJROW_SSSE3
-#define HAS_ARGBTOYROW_SSSE3
-#define HAS_ARGBTOYJROW_SSSE3
 #define HAS_BGRATOUVROW_SSSE3
 #define HAS_BGRATOYROW_SSSE3
 #define HAS_COPYROW_SSE2
-#define HAS_COPYROW_X86
-#define HAS_COPYROW_ERMS
 #define HAS_HALFROW_SSE2
-#define HAS_I400TOARGBROW_SSE2
 #define HAS_I411TOARGBROW_SSSE3
 #define HAS_I422TOABGRROW_SSSE3
 #define HAS_I422TOARGB1555ROW_SSSE3
@@ -90,7 +123,6 @@ extern "C" {
 #define HAS_RGB565TOARGBROW_SSE2
 #define HAS_RGBATOUVROW_SSSE3
 #define HAS_RGBATOYROW_SSSE3
-#define HAS_SETROW_X86
 #define HAS_SPLITUVROW_SSE2
 #define HAS_UYVYTOARGBROW_SSSE3
 #define HAS_UYVYTOUV422ROW_SSE2
@@ -101,37 +133,16 @@ extern "C" {
 #define HAS_YUY2TOUV422ROW_SSE2
 #define HAS_YUY2TOUVROW_SSE2
 #define HAS_YUY2TOYROW_SSE2
-#define HAS_FIXEDDIV
 
-// Effects
-#define HAS_ARGBADDROW_SSE2
-#define HAS_ARGBAFFINEROW_SSE2
-#define HAS_ARGBATTENUATEROW_SSSE3
-#define HAS_ARGBBLENDROW_SSSE3
-#define HAS_ARGBCOLORMATRIXROW_SSSE3
-#define HAS_ARGBGRAYROW_SSSE3
-#define HAS_ARGBMIRRORROW_SSSE3
-#define HAS_ARGBMULTIPLYROW_SSE2
-#define HAS_ARGBQUANTIZEROW_SSE2
-#define HAS_ARGBSEPIAROW_SSSE3
-#define HAS_ARGBSHADEROW_SSE2
-#define HAS_ARGBSUBTRACTROW_SSE2
-#define HAS_ARGBUNATTENUATEROW_SSE2
-#define HAS_COMPUTECUMULATIVESUMROW_SSE2
-#define HAS_CUMULATIVESUMTOAVERAGEROW_SSE2
-#define HAS_INTERPOLATEROW_SSE2
-#define HAS_INTERPOLATEROW_SSSE3
-#define HAS_SOBELROW_SSE2
-#define HAS_SOBELXROW_SSSE3
-#define HAS_SOBELXYROW_SSE2
-#define HAS_SOBELYROW_SSSE3
+// Effects:
 #endif
 
-// The following are Windows only.
+// The following are Windows only:
 // TODO(fbarchard): Port to gcc.
 #if !defined(LIBYUV_DISABLE_X86) && defined(_M_IX86) && defined(_MSC_VER)
 #define HAS_ARGBCOLORTABLEROW_X86
-// Visual C 2012 required for AVX2.
+#define HAS_RGBCOLORTABLEROW_X86
+// Caveat: Visual C 2012 required for AVX2.
 #if _MSC_VER >= 1700
 #define HAS_ARGBSHUFFLEROW_AVX2
 #define HAS_ARGBTOUVROW_AVX2
@@ -149,7 +160,7 @@ extern "C" {
 #define HAS_YUY2TOUVROW_AVX2
 #define HAS_YUY2TOYROW_AVX2
 
-// Effects
+// Effects:
 #define HAS_ARGBADDROW_AVX2
 #define HAS_ARGBATTENUATEROW_AVX2
 #define HAS_ARGBMIRRORROW_AVX2
@@ -159,7 +170,7 @@ extern "C" {
 #endif
 #endif
 
-// The following are Yasm x86 only.
+// The following are Yasm x86 only:
 // TODO(fbarchard): Port AVX2 to inline.
 #if !defined(LIBYUV_DISABLE_X86) && defined(HAVE_YASM)
     (defined(_M_IX86) || defined(_M_X64) || \
@@ -178,12 +189,15 @@ extern "C" {
 #if !defined(LIBYUV_DISABLE_X86) && \
     (defined(_M_IX86) || defined(__x86_64__) || defined(__i386__)) && \
     !defined(LIBYUV_SSSE3_ONLY)
-#define HAS_ARGBATTENUATEROW_SSE2
+// Available with NaCL:
 #define HAS_ARGBBLENDROW_SSE2
+#define HAS_ARGBATTENUATEROW_SSE2
+#if !(defined(__native_client__) && defined(__x86_64__))
 #define HAS_MIRRORROW_SSE2
 #endif
+#endif
 
-// The following are available on Neon platforms
+// The following are available on Neon platforms:
 #if !defined(LIBYUV_DISABLE_NEON) && \
     (defined(__ARM_NEON__) || defined(LIBYUV_NEON))
 #define HAS_ABGRTOUVROW_NEON
@@ -256,7 +270,7 @@ extern "C" {
 #define HAS_YUY2TOUVROW_NEON
 #define HAS_YUY2TOYROW_NEON
 
-// Effects
+// Effects:
 #define HAS_ARGBADDROW_NEON
 #define HAS_ARGBATTENUATEROW_NEON
 #define HAS_ARGBBLENDROW_NEON
@@ -275,7 +289,7 @@ extern "C" {
 #define HAS_INTERPOLATEROW_NEON
 #endif
 
-// The following are available on Mips platforms
+// The following are available on Mips platforms:
 #if !defined(LIBYUV_DISABLE_MIPS) && defined(__mips__)
 #define HAS_COPYROW_MIPS
 #if defined(__mips_dsp) && (__mips_dsp_rev >= 2)
@@ -1399,7 +1413,7 @@ void ARGBAttenuateRow_Any_NEON(const uint8* src_argb, uint8* dst_argb,
                                int width);
 
 // Inverse table for unattenuate, shared by C and SSE2.
-extern uint32 fixed_invtbl8[256];
+extern const uint32 fixed_invtbl8[256];
 void ARGBUnattenuateRow_C(const uint8* src_argb, uint8* dst_argb, int width);
 void ARGBUnattenuateRow_SSE2(const uint8* src_argb, uint8* dst_argb, int width);
 void ARGBUnattenuateRow_AVX2(const uint8* src_argb, uint8* dst_argb, int width);
@@ -1424,6 +1438,9 @@ void ARGBColorMatrixRow_NEON(uint8* dst_argb, const int8* matrix_argb,
 
 void ARGBColorTableRow_C(uint8* dst_argb, const uint8* table_argb, int width);
 void ARGBColorTableRow_X86(uint8* dst_argb, const uint8* table_argb, int width);
+
+void RGBColorTableRow_C(uint8* dst_argb, const uint8* table_argb, int width);
+void RGBColorTableRow_X86(uint8* dst_argb, const uint8* table_argb, int width);
 
 void ARGBQuantizeRow_C(uint8* dst_argb, int scale, int interval_size,
                        int interval_offset, int width);
@@ -1520,8 +1537,9 @@ void SobelXYRow_NEON(const uint8* src_sobelx, const uint8* src_sobely,
 
 // Divide num by div and return as 16.16 fixed point result.
 int FixedDiv_C(int num, int div);
-#ifdef HAS_FIXEDDIV
-int FixedDiv(int num, int div);
+int FixedDiv_X86(int num, int div);
+#ifdef HAS_FIXEDDIV_X86
+#define FixedDiv FixedDiv_X86
 #else
 #define FixedDiv FixedDiv_C
 #endif
