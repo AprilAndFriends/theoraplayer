@@ -16,7 +16,6 @@
 				D139465717C0EFCC0091F4A4 /* PBXTargetDependency */,
 				D139465517C0EFCC0091F4A4 /* PBXTargetDependency */,
 				D139465D17C0EFD30091F4A4 /* PBXTargetDependency */,
-				D139465917C0EFCC0091F4A4 /* PBXTargetDependency */,
 				D139468C17C0F0CB0091F4A4 /* PBXTargetDependency */,
 			);
 			name = "Mac Dependencies";
@@ -184,27 +183,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D11FEA521775E73C00D51E15 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D11FEA4D1775E73C00D51E15 /* libyuv.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 568E3016DD2F308A82671925;
-			remoteInfo = "libyuv (iOS)";
-		};
-		D11FEA541775E73C00D51E15 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D11FEA4D1775E73C00D51E15 /* libyuv.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D11FEA491775E72500D51E15;
-			remoteInfo = "libyuv (Mac)";
-		};
-		D11FEA7E1775E84E00D51E15 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D11FEA4D1775E73C00D51E15 /* libyuv.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BFCB3C407E427151B276345A;
-			remoteInfo = "libyuv (iOS)";
-		};
 		D127F90E169901DB007E6835 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
@@ -281,13 +259,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8D07F2BC0486CC7A007CD1D0;
 			remoteInfo = ogg;
-		};
-		D139465817C0EFCC0091F4A4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D11FEA4D1775E73C00D51E15 /* libyuv.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D11FEA561775E74500D51E15;
-			remoteInfo = "libyuv (Mac)";
 		};
 		D139465C17C0EFD30091F4A4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -497,7 +468,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D11FEA4D1775E73C00D51E15 /* libyuv.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libyuv.xcodeproj; path = libyuv/libyuv.xcodeproj; sourceTree = "<group>"; };
 		D127F7F71698C842007E6835 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cpp; path = demos/basecode/util/util.cpp; sourceTree = "<group>"; };
 		D127F8041698C84C007E6835 /* glutBasecode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glutBasecode.cpp; path = demos/basecode/glut/glutBasecode.cpp; sourceTree = "<group>"; };
 		D127F8101698C882007E6835 /* objcUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = objcUtil.mm; path = demos/basecode/util/objcUtil.mm; sourceTree = "<group>"; };
@@ -735,15 +705,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D11FEA4E1775E73C00D51E15 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D11FEA551775E73C00D51E15 /* libyuv.a */,
-				D11FEA531775E73C00D51E15 /* libyuv.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		D127F7F61698C81C007E6835 /* util */ = {
 			isa = PBXGroup;
 			children = (
@@ -791,7 +752,6 @@
 				D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */,
 				D127F91616990217007E6835 /* Tremor.xcodeproj */,
 				D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */,
-				D11FEA4D1775E73C00D51E15 /* libyuv.xcodeproj */,
 				D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */,
 				D1474109150CB6BD00B20490 /* glut_player */,
 				D1474107150CB6A700B20490 /* av_player */,
@@ -1212,7 +1172,6 @@
 				D127F913169901ED007E6835 /* PBXTargetDependency */,
 				D127F9231699021D007E6835 /* PBXTargetDependency */,
 				D127F911169901ED007E6835 /* PBXTargetDependency */,
-				D11FEA7F1775E84E00D51E15 /* PBXTargetDependency */,
 				D127F90F169901DB007E6835 /* PBXTargetDependency */,
 			);
 			name = "simple_player (iOS)";
@@ -1297,10 +1256,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = D11FEA4E1775E73C00D51E15 /* Products */;
-					ProjectRef = D11FEA4D1775E73C00D51E15 /* libyuv.xcodeproj */;
-				},
-				{
 					ProductGroup = D1D098CA155F05C5009F6AAA /* Products */;
 					ProjectRef = D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */;
 				},
@@ -1341,20 +1296,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		D11FEA531775E73C00D51E15 /* libyuv.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libyuv.a;
-			remoteRef = D11FEA521775E73C00D51E15 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D11FEA551775E73C00D51E15 /* libyuv.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libyuv.a;
-			remoteRef = D11FEA541775E73C00D51E15 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		D127F91F16990218007E6835 /* tremor.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1901,11 +1842,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D11FEA7F1775E84E00D51E15 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "libyuv (iOS)";
-			targetProxy = D11FEA7E1775E84E00D51E15 /* PBXContainerItemProxy */;
-		};
 		D127F90F169901DB007E6835 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "theoraplayer (iOS Theora AVFoundation)";
@@ -1935,11 +1871,6 @@
 			isa = PBXTargetDependency;
 			name = ogg;
 			targetProxy = D139465617C0EFCC0091F4A4 /* PBXContainerItemProxy */;
-		};
-		D139465917C0EFCC0091F4A4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "libyuv (Mac)";
-			targetProxy = D139465817C0EFCC0091F4A4 /* PBXContainerItemProxy */;
 		};
 		D139465D17C0EFD30091F4A4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

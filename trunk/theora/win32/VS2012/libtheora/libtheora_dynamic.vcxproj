@@ -240,21 +240,29 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_ANDROID;_DEBUG;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;..\..\..\lib\arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_ANDROID;_DEBUG;DEBUG;OC_ARM_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
       <Warnings>DisableAllWarnings</Warnings>
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>-logg;-ltremor</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib\android;$(SolutionDir)bin\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_ANDROID;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;..\..\..\lib\arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_ANDROID;NDEBUG;OC_ARM_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
       <Warnings>DisableAllWarnings</Warnings>
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>-logg;-ltremor</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib\android;$(SolutionDir)bin\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">
     <ClCompile>
@@ -366,8 +374,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugS|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_ANDROID;_DEBUG;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;..\..\..\lib\arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_ANDROID;_DEBUG;DEBUG;OC_ARM_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
       <Warnings>DisableAllWarnings</Warnings>
       <CompileAs>CompileAsC</CompileAs>
@@ -409,7 +417,16 @@
     <ClInclude Include="..\..\..\lib\x86_vc\x86cpu.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\lib\analyze.c" />
+    <ClCompile Include="..\..\..\lib\analyze.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\lib\arm\armcpu.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">true</ExcludedFromBuild>
@@ -423,17 +440,53 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\lib\collect.c" />
-    <ClCompile Include="..\..\..\lib\encapiwrapper.c" />
-    <ClCompile Include="..\..\..\lib\encfrag.c" />
-    <ClCompile Include="..\..\..\lib\encinfo.c" />
-    <ClCompile Include="..\..\..\lib\encode.c" />
-    <ClCompile Include="..\..\..\lib\encoder_disabled.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    <ClCompile Include="..\..\..\lib\encapiwrapper.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lib\encfrag.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lib\encinfo.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lib\encode.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lib\encoder_disabled.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -446,8 +499,22 @@
     <ClCompile Include="..\..\..\lib\tokenize.c" />
     <ClCompile Include="..\..\..\lib\x86_vc\mmxencfrag.c" />
     <ClCompile Include="..\..\..\lib\x86_vc\mmxfdct.c" />
-    <ClCompile Include="..\..\..\lib\x86_vc\x86cpu.c" />
-    <ClCompile Include="..\..\..\lib\x86_vc\x86enc.c" />
+    <ClCompile Include="..\..\..\lib\x86_vc\x86cpu.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lib\x86_vc\x86enc.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\lib\apiwrapper.c" />
     <ClCompile Include="..\..\..\lib\bitpack.c" />
     <ClCompile Include="..\..\..\lib\decapiwrapper.c" />
@@ -520,9 +587,6 @@
     <ClCompile Include="..\..\..\lib\x86_vc\x86state.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\lib\arm\armbits.s">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Android'">CompileAsAsm</CompileAs>
-    </None>
     <ClCompile Include="..\..\..\lib\arm\armbits.asm">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Android'">CompileAsAsm</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='DebugS|Android'">CompileAsAsm</CompileAs>
@@ -545,7 +609,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <None Include="..\..\..\lib\arm\armfrag.s" />
     <ClCompile Include="..\..\..\lib\arm\armidct.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Android'">CompileAsAsm</CompileAs>
@@ -557,7 +620,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <None Include="..\..\..\lib\arm\armidct.s" />
     <ClCompile Include="..\..\..\lib\arm\armloop.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Android'">CompileAsAsm</CompileAs>
@@ -569,8 +631,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <None Include="..\..\..\lib\arm\armloop.s" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="..\..\..\lib\arm\armopts-gnu.s" />
+    <None Include="..\..\..\lib\theora.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

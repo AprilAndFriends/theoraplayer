@@ -212,11 +212,26 @@
     <ClInclude Include="..\..\..\lib\x86_vc\x86cpu.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\lib\analyze.c" />
-    <ClCompile Include="..\..\..\lib\encapiwrapper.c" />
-    <ClCompile Include="..\..\..\lib\encfrag.c" />
-    <ClCompile Include="..\..\..\lib\encinfo.c" />
-    <ClCompile Include="..\..\..\lib\encode.c" />
+    <ClCompile Include="..\..\..\lib\analyze.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lib\encapiwrapper.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lib\encfrag.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lib\encinfo.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lib\encode.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\lib\encoder_disabled.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -225,15 +240,27 @@
     </ClCompile>
     <ClCompile Include="..\..\..\lib\enquant.c" />
     <ClCompile Include="..\..\..\lib\fdct.c" />
-    <ClCompile Include="..\..\..\lib\huffenc.c" />
+    <ClCompile Include="..\..\..\lib\huffenc.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\lib\mathops.c" />
     <ClCompile Include="..\..\..\lib\mcenc.c" />
-    <ClCompile Include="..\..\..\lib\rate.c" />
+    <ClCompile Include="..\..\..\lib\rate.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\lib\tokenize.c" />
-    <ClCompile Include="..\..\..\lib\x86_vc\mmxencfrag.c" />
+    <ClCompile Include="..\..\..\lib\x86_vc\mmxencfrag.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\lib\x86_vc\mmxfdct.c" />
     <ClCompile Include="..\..\..\lib\x86_vc\x86cpu.c" />
-    <ClCompile Include="..\..\..\lib\x86_vc\x86enc.c" />
+    <ClCompile Include="..\..\..\lib\x86_vc\x86enc.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\lib\apiwrapper.c" />
     <ClCompile Include="..\..\..\lib\bitpack.c" />
     <ClCompile Include="..\..\..\lib\decapiwrapper.c" />

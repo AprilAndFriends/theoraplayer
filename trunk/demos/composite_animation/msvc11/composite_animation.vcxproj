@@ -70,8 +70,6 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeaderOutputFile>
       </PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>
-      </AssemblerListingLocation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)vc90.pdb</ProgramDataBaseFileName>
       <BrowseInformation>true</BrowseInformation>
@@ -130,7 +128,6 @@
       </PrecompiledHeader>
       <PrecompiledHeaderOutputFile>
       </PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>$(SolutionDir)build\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)vc90.pdb</ProgramDataBaseFileName>
       <WarningLevel>Level1</WarningLevel>

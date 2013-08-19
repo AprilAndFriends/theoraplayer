@@ -22,6 +22,18 @@
     <Filter Include="src\YUV\C">
       <UniqueIdentifier>{4bd888e7-5736-4485-aa54-3574f5395d1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\YUV\libyuv">
+      <UniqueIdentifier>{eefc0868-f407-4451-893c-e0a7afa4f33c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\YUV\libyuv\include">
+      <UniqueIdentifier>{083ee782-e6c0-4fa7-80b7-50298423327b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\YUV\libyuv\src">
+      <UniqueIdentifier>{932b5ecd-fa3d-44de-9bb4-987161d901dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\YUV\libyuv\include\libyuv">
+      <UniqueIdentifier>{ae734130-dee5-4730-9b64-2ee17bfd9b4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\TheoraAsync.cpp">
@@ -74,6 +86,108 @@
     </ClCompile>
     <ClCompile Include="src\YUV\yuv_util.c">
       <Filter>src\YUV</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\yuv_libyuv.c">
+      <Filter>src\YUV\libyuv</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\compare.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\compare_common.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\compare_neon.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\compare_posix.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\compare_win.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\convert.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\convert_argb.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\convert_from.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\convert_from_argb.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\convert_jpeg.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\convert_to_argb.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\convert_to_i420.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\cpu_id.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\format_conversion.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\mjpeg_decoder.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\mjpeg_validate.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\planar_functions.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\rotate.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\rotate_argb.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\rotate_mips.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\rotate_neon.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\row_any.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\row_common.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\row_mips.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\row_neon.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\row_posix.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\row_win.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\scale.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\scale_argb.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\scale_argb_neon.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\scale_mips.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\scale_neon.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\video_common.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +242,63 @@
     <ClInclude Include="src\YUV\yuv_util.h">
       <Filter>src\YUV</Filter>
     </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\yuv_libyuv.h">
+      <Filter>src\YUV\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv.h">
+      <Filter>src\YUV\libyuv\include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\basic_types.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\compare.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\convert.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\convert_argb.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\convert_from.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\convert_from_argb.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\cpu_id.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\format_conversion.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\mjpeg_decoder.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\planar_functions.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\rotate.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\rotate_argb.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\row.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\scale.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\scale_argb.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\version.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\video_common.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\AVFoundation\TheoraVideoClip_AVFoundation.mm">
@@ -136,5 +307,11 @@
     <None Include="src\FFmpeg\TheoraVideoClip_FFmpeg.cpp" />
     <None Include="src\FFmpeg\TheoraVideoClip_FFmpeg.h" />
     <None Include="src\AVFoundation\TheoraVideoClip_AVFoundation.h" />
+    <None Include="src\YUV\libyuv\src\row_x86.asm">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </None>
+    <None Include="src\YUV\libyuv\src\x86inc.asm">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </None>
   </ItemGroup>
 </Project>

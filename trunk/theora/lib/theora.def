@@ -2,12 +2,6 @@ LIBRARY	libtheora
 EXPORTS
 	theora_version_string
 	theora_version_number
-	theora_encode_init
-	theora_encode_YUVin
-	theora_encode_packetout
-	theora_encode_header
-	theora_encode_comment
-	theora_encode_tables
 	theora_decode_header
 	theora_decode_init
 	theora_decode_packetin
@@ -48,9 +42,3 @@ EXPORTS
 	th_comment_query
 	th_comment_query_count
 	th_comment_clear
-	th_encode_alloc
-	th_encode_ctl
-	th_encode_flushheader
-	th_encode_packetout
-	th_encode_ycbcr_in
-	th_encode_free

@@ -6,7 +6,6 @@ Copyright (c) 2008-2013 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
-#define _CRT_SECURE_NO_WARNINGS // MSVC++
 #include <stdio.h>
 #include <memory.h>
 #include "TheoraDataSource.h"
