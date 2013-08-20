@@ -10,6 +10,10 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <theoraplayer/TheoraPlayer.h>
 #include <theoraplayer/TheoraDataSource.h>
 
+//#define BENCHMARK // uncomment this to benchmark decoding times
+#ifdef BENCHMARK
+    #include <time.h>
+#endif
 unsigned int tex_id;
 TheoraVideoManager* mgr;
 TheoraVideoClip* clip;
@@ -43,12 +47,13 @@ void draw()
 		clip->popFrame();
 	}
 
-	float w=clip->getWidth(),h=clip->getHeight();
-	float tw=nextPow2(w),th=nextPow2(h);
+	float w = clip->getSubFrameWidth(),h = clip->getSubFrameHeight();
+    float sx = clip->getSubFrameOffsetX(), sy = clip->getSubFrameOffsetY();
+	float tw = nextPow2(w),th = nextPow2(h);
 
 	glEnable(GL_TEXTURE_2D);
 	if (shader_on) enable_shader();
-	drawTexturedQuad(tex_id, 0,0,800,570,w/tw,h/th);
+	drawTexturedQuad(tex_id, 0, 0, 800, 570, w / tw,h / th, sx / tw, sy / th);
 	if (shader_on) disable_shader();
 
 	glDisable(GL_TEXTURE_2D);
@@ -127,9 +132,16 @@ void init()
 	}
 
 	//*/
-	
-	
-	clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 16);
+#ifdef BENCHMARK
+	clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 64);
+    int n = clip->getNumPrecachedFrames();
+    clock_t t = clock();
+    clip->waitForCache(1.0f, 1000000);
+    float diff = ((float) (clock() - t) * 1000.0f) / CLOCKS_PER_SEC;
+    printf("Decoding %d frames took %.1fms (%.2fms average per frame)\n", n, diff, diff / n);
+#else
+    clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 16);
+#endif
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);
 	clip->setAutoRestart(1);

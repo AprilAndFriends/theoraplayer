@@ -31,6 +31,10 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	mFrameDuration(0),
     mName(data_source->repr()),
     mStride(usePower2Stride),
+	mSubFrameWidth(0),
+	mSubFrameHeight(0),
+	mSubFrameOffsetX(0),
+	mSubFrameOffsetY(0),
     mAudioGain(1),
     mRequestedOutputMode(output_mode),
     mAutoRestart(0),
@@ -172,6 +176,26 @@ int TheoraVideoClip::getWidth()
 int TheoraVideoClip::getHeight()
 {
 	return mHeight;
+}
+
+int TheoraVideoClip::getSubFrameWidth()
+{
+    return mUseAlpha ? mWidth / 2 : mSubFrameWidth;
+}
+
+int TheoraVideoClip::getSubFrameHeight()
+{
+    return mUseAlpha ? mHeight : mSubFrameHeight;
+}
+
+int TheoraVideoClip::getSubFrameOffsetX()
+{
+    return mUseAlpha ? 0 : mSubFrameOffsetX;
+}
+
+int TheoraVideoClip::getSubFrameOffsetY()
+{
+    return mUseAlpha ? 0 : mSubFrameOffsetY;
 }
 
 TheoraVideoFrame* TheoraVideoClip::getNextFrame()

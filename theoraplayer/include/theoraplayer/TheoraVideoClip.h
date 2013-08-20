@@ -88,6 +88,7 @@ protected:
 	int mWidth, mHeight, mStride;
 	int mNumFrames;
 
+	int mSubFrameWidth, mSubFrameHeight, mSubFrameOffsetX, mSubFrameOffsetY;
 	float mAudioGain; //! multiplier for audio samples. between 0 and 1
 
 	TheoraOutputMode mOutputMode, mRequestedOutputMode;
@@ -143,7 +144,16 @@ public:
 	int getWidth();
 	//! return height in pixels of the video clip
 	int getHeight();
-	/**
+    
+    //! Width of the actual picture inside a video frame (depending on implementation, this may be equal to mWidth or differ within a codec block size (usually 16))
+    int getSubFrameWidth();
+    //! Height of the actual picture inside a video frame (depending on implementation, this may be equal to mHeight or differ within a codec block size (usually 16))
+	int getSubFrameHeight();
+    //! X Offset of the actual picture inside a video frame (depending on implementation, this may be 0 or within a codec block size (usually 16))
+	int getSubFrameOffsetX();
+    //! Y Offset of the actual picture inside a video frame (depending on implementation, this may be 0 or differ within a codec block size (usually 16))
+	int getSubFrameOffsetY();
+    /**
 	    \brief return stride in pixels
 
 		If you've specified usePower2Stride when creating the TheoraVideoClip object
