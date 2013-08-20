@@ -123,7 +123,9 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 		
 		if (ret > 0)
 		{
-			if (th_decode_packetin(mInfo.TheoraDecoder, &opTheora, &granulePos) != 0) continue; // 0 means success
+			int status = th_decode_packetin(mInfo.TheoraDecoder, &opTheora, &granulePos);
+            if (status != 0 && status != TH_DUPFRAME) continue; // 0 means success
+
 			float time = (float) th_granule_time(mInfo.TheoraDecoder, granulePos);
 			unsigned long frame_number = (unsigned long) th_granule_frame(mInfo.TheoraDecoder, granulePos);
 			
@@ -596,9 +598,10 @@ void TheoraVideoClip_Theora::doSeek()
 	// now that we've found the keyframe that preceeds our desired frame, lets keep on decoding frames until we
 	// reach our target frame.
 	
+    int status, ret;
 	for (;mSeekFrame != 0;)
 	{
-		int ret = ogg_stream_packetout(&mInfo.TheoraStreamState, &opTheora);
+		ret = ogg_stream_packetout(&mInfo.TheoraStreamState, &opTheora);
 		if (ret > 0)
 		{
 			if (!granule_set)
@@ -611,7 +614,8 @@ void TheoraVideoClip_Theora::doSeek()
 				}
 				else continue; // ignore prev delta frames until we hit a keyframe
 			}
-			if (th_decode_packetin(mInfo.TheoraDecoder, &opTheora, &granulePos) != 0) continue; // 0 means success
+			status = th_decode_packetin(mInfo.TheoraDecoder, &opTheora, &granulePos);
+            if (status != 0 && status != TH_DUPFRAME) continue;
 			frame = (int) th_granule_frame(mInfo.TheoraDecoder, granulePos);
 			if (frame >= mSeekFrame - 1) break;
 		}
