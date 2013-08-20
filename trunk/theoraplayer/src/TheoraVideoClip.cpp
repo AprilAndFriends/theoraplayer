@@ -343,7 +343,10 @@ void TheoraVideoClip::seek(float time)
 
 void TheoraVideoClip::seekToFrame(int frame)
 {
-	mSeekFrame = frame;
+    if      (frame < 0)          mSeekFrame = 0;
+    else if (frame > mNumFrames) mSeekFrame = mNumFrames;
+    else                         mSeekFrame = frame;
+
 	mEndOfFile = false;
 }
 
