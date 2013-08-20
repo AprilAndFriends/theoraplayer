@@ -280,7 +280,7 @@ namespace aprilvideo
 		float w = mClip->getWidth(), h = mClip->getHeight();
 		april::Texture* tex = april::rendersys->createTexture(_nextPow2(w), _nextPow2(h), textureFormat);
 		mTexture = new aprilui::Texture(tex->getFilename(), tex);
-		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(0, 0, w, h));
+		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
 #ifdef _ANDROID
 		hlog::write(logTag, "Waiting for cache: " + path);
 #endif

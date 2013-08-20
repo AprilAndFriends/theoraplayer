@@ -285,8 +285,8 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 		mOutput.alwaysCopiesSampleData = NO;
 
 	mFPS = videoTrack.nominalFrameRate;
-	mWidth = mStride = videoTrack.naturalSize.width;
-	mHeight = videoTrack.naturalSize.height;
+	mWidth = mSubFrameWidth = mStride = videoTrack.naturalSize.width;
+	mHeight = mSubFrameHeight = videoTrack.naturalSize.height;
 	mFrameDuration = 1.0f / mFPS;
 	mDuration = (float) CMTimeGetSeconds(asset.duration);
 	if (mFrameQueue == NULL)
