@@ -25,6 +25,10 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "aprilvideo.h"
 #include "AprilVideoDataSource.h"
 
+#ifdef _IOS
+#define __NPOT_TEXTURE // iOS armv7 and newer devices support non-power-of-two textures so let's use it.
+#endif
+
 namespace aprilvideo
 {
 	static TheoraVideoManager* gVideoManager = NULL;
@@ -74,7 +78,6 @@ namespace aprilvideo
 
 	VideoObject::VideoObject(chstr name, grect rect) : aprilui::ImageBox(name, rect)
 	{
-		mUsingAVFoundation = 0;
 		mUseAlpha = 0;
 		mPrevDoneFlag = 0;
 		mLoop = 1;
@@ -193,10 +196,8 @@ namespace aprilvideo
 		hstr path = mDataset->getFilePath() + "/video/" + mClipName;
 		if (!path.ends_with(".ogg") && !path.ends_with(".ogv") && !path.ends_with(".mp4")) path += defaultFileExtension;
 		
-		mUsingAVFoundation = path.ends_with(".mp4");
 		april::Texture::Format textureFormat;
 		
-//		mUsingAVFoundation ? april::Texture::FORMAT_BGRA :
 		try
 		{
 			TheoraOutputMode mode;
@@ -209,8 +210,8 @@ namespace aprilvideo
 				}
 				else
 				{
-					mode = mUsingAVFoundation ? TH_BGRX : TH_RGBX;
-					textureFormat = mUsingAVFoundation ? april::Texture::FORMAT_BGRA : april::Texture::FORMAT_ARGB;
+					mode = TH_RGBX;
+					textureFormat = april::Texture::FORMAT_ARGB;
 
 				}
 			}
@@ -278,7 +279,13 @@ namespace aprilvideo
 		mClip->setAutoRestart(mLoop);
 		
 		float w = mClip->getWidth(), h = mClip->getHeight();
-		april::Texture* tex = april::rendersys->createTexture(_nextPow2(w), _nextPow2(h), textureFormat);
+#ifdef __NPOT_TEXTURE
+        float tw = w, th = h;
+#else
+        float tw = _nextPow2(w), th = _nextPow2(h);
+#endif
+		april::Texture* tex = april::rendersys->createTexture(tw, th, textureFormat);
+        tex->setAddressMode(april::Texture::ADDRESS_CLAMP);
 		mTexture = new aprilui::Texture(tex->getFilename(), tex);
 		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
 #ifdef _ANDROID
