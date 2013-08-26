@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugP8|ARM">
+      <Configuration>DebugP8</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugP8|Win32">
+      <Configuration>DebugP8</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseP8|ARM">
+      <Configuration>ReleaseP8</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseP8|Win32">
+      <Configuration>ReleaseP8</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\YUV\libyuv\src\compare.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\compare_common.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\compare_neon.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\compare_posix.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\compare_win.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert_argb.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert_from.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert_from_argb.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert_jpeg.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert_to_argb.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\convert_to_i420.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\cpu_id.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\format_conversion.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\mjpeg_decoder.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\mjpeg_validate.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\planar_functions.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\rotate.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\rotate_argb.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\rotate_mips.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\rotate_neon.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\row_any.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\row_common.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\row_mips.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\row_neon.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\row_posix.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\row_win.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\scale.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\scale_argb.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\scale_argb_neon.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\scale_mips.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\scale_neon.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\video_common.cc" />
+    <ClCompile Include="src\YUV\libyuv\yuv_libyuv.c">
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="src\YUV\yuv_util.c">
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsWinRT>
+    </ClCompile>
+    <None Include="src\AVFoundation\TheoraVideoClip_AVFoundation.mm" />
+    <None Include="src\FFmpeg\TheoraVideoClip_FFmpeg.cpp" />
+    <ClCompile Include="src\TheoraAsync.cpp">
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='DebugP8|ARM'">true</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='ReleaseP8|ARM'">true</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='DebugP8|Win32'">true</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsWinRT>
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='ReleaseP8|Win32'">true</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="src\TheoraAudioInterface.cpp" />
+    <ClCompile Include="src\TheoraAudioPacketQueue.cpp" />
+    <ClCompile Include="src\TheoraDataSource.cpp" />
+    <ClCompile Include="src\TheoraException.cpp" />
+    <ClCompile Include="src\TheoraFrameQueue.cpp" />
+    <ClCompile Include="src\TheoraTimer.cpp" />
+    <ClCompile Include="src\TheoraUtil.cpp" />
+    <ClCompile Include="src\TheoraVideoClip.cpp" />
+    <ClCompile Include="src\TheoraVideoFrame.cpp" />
+    <ClCompile Include="src\TheoraVideoManager.cpp" />
+    <ClCompile Include="src\TheoraWorkerThread.cpp" />
+    <ClCompile Include="src\Theora\TheoraVideoClip_Theora.cpp" />
+    <ClCompile Include="src\YUV\C\yuv420_grey_c.c">
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="src\YUV\C\yuv420_rgb_c.c">
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="src\YUV\C\yuv420_yuv_c.c">
+      <CompileAsWinRT Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsWinRT>
+    </ClCompile>
+    <None Include="src\YUV\libyuv\src\row_x86.asm" />
+    <None Include="src\YUV\libyuv\src\x86inc.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\theoraplayer\TheoraAsync.h" />
+    <ClInclude Include="include\theoraplayer\TheoraAudioInterface.h" />
+    <ClInclude Include="include\theoraplayer\TheoraAudioPacketQueue.h" />
+    <ClInclude Include="include\theoraplayer\TheoraDataSource.h" />
+    <ClInclude Include="include\theoraplayer\TheoraException.h" />
+    <ClInclude Include="include\theoraplayer\TheoraExport.h" />
+    <ClInclude Include="include\theoraplayer\TheoraFrameQueue.h" />
+    <ClInclude Include="include\theoraplayer\TheoraPixelTransform.h" />
+    <ClInclude Include="include\theoraplayer\TheoraPlayer.h" />
+    <ClInclude Include="include\theoraplayer\TheoraTimer.h" />
+    <ClInclude Include="include\theoraplayer\TheoraUtil.h" />
+    <ClInclude Include="include\theoraplayer\TheoraVideoClip.h" />
+    <ClInclude Include="include\theoraplayer\TheoraVideoFrame.h" />
+    <ClInclude Include="include\theoraplayer\TheoraVideoManager.h" />
+    <ClInclude Include="include\theoraplayer\TheoraWorkerThread.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\basic_types.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\compare.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\convert.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\convert_argb.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\convert_from.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\convert_from_argb.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\cpu_id.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\format_conversion.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\mjpeg_decoder.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\planar_functions.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\rotate.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\rotate_argb.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\row.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\scale.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\scale_argb.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\version.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\video_common.h" />
+    <ClInclude Include="src\YUV\libyuv\yuv_libyuv.h" />
+    <ClInclude Include="src\YUV\yuv_util.h" />
+    <None Include="src\FFmpeg\TheoraVideoClip_FFmpeg.h" />
+    <None Include="src\AVFoundation\TheoraVideoClip_AVFoundation.h" />
+    <ClInclude Include="src\Theora\TheoraVideoClip_Theora.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{ABE6907D-00FF-4198-8D36-65115AF1D868}</ProjectGuid>
+    <RootNamespace>theoraplayer</RootNamespace>
+    <ProjectName>libtheoraplayer</ProjectName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <GenerateManifest>false</GenerateManifest>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseP8|Win32'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseP8|ARM'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugP8|Win32'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugP8|ARM'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110_wp80</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(Platform)\lib\$(ProjectName)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__native_client__;_WINRT;_WIN32;_DEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib;$(SolutionDir)bin\$(PlatformName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__native_client__;_WINRT;_WINARM;ARM;_DEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib;$(SolutionDir)bin\$(PlatformName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__native_client__;_WINRT;_WIN32;NDEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib;$(SolutionDir)bin\$(PlatformName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__native_client__;_WINRT;_WINARM;ARM;NDEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineARM</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib;$(SolutionDir)bin\$(PlatformName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugP8|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__native_client__;_WINRT;_WIN32;_DEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib;$(SolutionDir)bin\$(PlatformName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugP8|ARM'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__native_client__;_WINRT;_WINARM;ARM;_DEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib;$(SolutionDir)bin\$(PlatformName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseP8|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__native_client__;_WINRT;_WIN32;NDEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib;$(SolutionDir)bin\$(PlatformName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseP8|ARM'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__native_client__;_WINRT;_WINARM;ARM;NDEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineARM</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>lib;$(SolutionDir)bin\$(PlatformName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

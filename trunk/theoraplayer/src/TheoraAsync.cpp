@@ -8,6 +8,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
 #include <stdio.h>
 #include "TheoraAsync.h"
+#include "TheoraUtil.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -49,10 +50,17 @@ TheoraMutex::~TheoraMutex()
 void TheoraMutex::lock()
 {
 #ifdef _WIN32
-	if (!mHandle) mHandle=CreateMutex(0, 0, 0);
-	WaitForSingleObject(mHandle, INFINITE);
+	if (!mHandle)
+	{
+#ifndef _WINRT // WinXP does not have CreateMutexEx()
+		mHandle = CreateMutex(0, 0, 0);
 #else
-    pthread_mutex_lock(&mHandle);
+		mHandle = CreateMutexEx(NULL, NULL, 0, SYNCHRONIZE);
+#endif
+	}
+	WaitForSingleObjectEx(mHandle, INFINITE, FALSE);
+#else
+	pthread_mutex_lock(&mHandle);
 #endif
 }
 
@@ -65,6 +73,22 @@ void TheoraMutex::unlock()
 #endif
 }
 
+
+#ifdef _WINRT
+using namespace Windows::Foundation;
+using namespace Windows::System::Threading;
+
+struct TheoraAsyncActionWrapper
+{
+public:
+	IAsyncAction^ async_action;
+	TheoraAsyncActionWrapper(IAsyncAction^ async_action)
+	{
+		this->async_action = async_action;
+	}
+};
+
+#endif
 
 TheoraThread::TheoraThread()
 {
@@ -82,9 +106,17 @@ TheoraThread::~TheoraThread()
 void TheoraThread::startThread()
 {
 	mThreadRunning = true;
-
 #ifdef _WIN32
-	mHandle=CreateThread(0, 0, &theoraAsync_Call, this, 0, 0);
+#ifndef _WINRT
+	mHandle = CreateThread(0, 0, &theoraAsync_Call, this, 0, 0);
+#else
+	mHandle = new TheoraAsyncActionWrapper(ThreadPool::RunAsync(
+	ref new WorkItemHandler([&](IAsyncAction^ work_item)
+	{
+		this->executeThread();
+	}),
+	WorkItemPriority::Normal, WorkItemOptions::TimeSliced));
+#endif
 #else
     int ret=pthread_create(&mHandle, NULL, &theoraAsync_Call, this);
     if (ret) printf("ERROR: Unable to create thread!\n"); // <-- TODO: log this, rather then using printf, and remove stdio include.
@@ -95,8 +127,43 @@ void TheoraThread::waitforThread()
 {
 	mThreadRunning = false;
 #ifdef _WIN32
+#ifndef _WINRT
 	WaitForSingleObject(mHandle, INFINITE);
-	if (mHandle) { CloseHandle(mHandle); mHandle = 0; }
+	if (mHandle != 0)
+	{
+		CloseHandle(mHandle);
+		mHandle = 0;
+	}
+#else
+	IAsyncAction^ action = ((TheoraAsyncActionWrapper*)mHandle)->async_action;
+	int i = 0;
+	while (action->Status != AsyncStatus::Completed &&
+		action->Status != AsyncStatus::Canceled &&
+		action->Status != AsyncStatus::Error &&
+		i < 100)
+	{
+		_psleep(50);
+		i++;
+	}
+	if (i >= 100)
+	{
+		i = 0;
+		action->Cancel();
+		while (action->Status != AsyncStatus::Completed &&
+			action->Status != AsyncStatus::Canceled &&
+			action->Status != AsyncStatus::Error &&
+			i < 100)
+		{
+			_psleep(50);
+			i++;
+		}
+	}
+	if (mHandle != NULL)
+	{
+		delete mHandle;
+		mHandle = NULL;
+	}
+#endif
 #else
     pthread_join(mHandle, 0);
 #endif
