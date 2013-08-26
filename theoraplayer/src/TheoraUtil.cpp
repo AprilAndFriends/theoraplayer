@@ -32,12 +32,14 @@ std::string strf(float i)
     return std::string(s);
 }
 
-void _psleep(int milliseconds)
+void _psleep(int miliseconds)
 {
 #ifndef _WIN32
-    usleep(milliseconds * 1000);
+	usleep(miliseconds * 1000);
+#elif !defined(_WINRT)
+	Sleep((int)miliseconds);
 #else
-	Sleep(milliseconds);
+	WaitForSingleObjectEx(GetCurrentThread(), (int)miliseconds, 0);
 #endif
 }
 
