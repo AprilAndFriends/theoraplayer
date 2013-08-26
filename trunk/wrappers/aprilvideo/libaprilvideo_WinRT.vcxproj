@@ -90,6 +90,18 @@
   <PropertyGroup>
     <_ProjectFileVersion>11.0.51106.1</_ProjectFileVersion>
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugP8|Win32'">
+    <Link />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Link />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Link />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseP8|Win32'">
+    <Link />
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\aprilvideo\aprilvideo.h" />
     <ClInclude Include="include\aprilvideo\AprilVideoDataSource.h" />
@@ -147,6 +159,9 @@
       <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\theora\win32\VS2012-WinRT\libtheora\libtheora_dynamic.vcxproj">
+      <Project>{653f3841-3f26-49b9-afcf-091db4b67031}</Project>
     </ProjectReference>
     <ProjectReference Include="..\xal\libxal.vcxproj">
       <Project>{6b6c070b-7dd7-41b9-8dd7-12afbf0f6c08}</Project>
