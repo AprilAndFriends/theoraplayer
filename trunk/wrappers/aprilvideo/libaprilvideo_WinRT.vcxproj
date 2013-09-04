@@ -112,7 +112,7 @@
     <ClCompile Include="src\AprilVideoDataSource.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\aprilui\libaprilui.vcxproj">
+    <ProjectReference Include="..\aprilui\libaprilui_WinRT.vcxproj">
       <Project>{56ff74d1-34d0-4ddb-8b89-f6f9200842b8}</Project>
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -120,7 +120,7 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
-    <ProjectReference Include="..\april\libapril.vcxproj">
+    <ProjectReference Include="..\april\libapril_WinRT.vcxproj">
       <Project>{2d053cda-686b-4b36-80eb-1da5f0cef8f9}</Project>
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -128,7 +128,7 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
-    <ProjectReference Include="..\atres\libatres.vcxproj">
+    <ProjectReference Include="..\atres\libatres_WinRT.vcxproj">
       <Project>{a1e808a0-fe36-47fe-9e3b-cf195ea31f0a}</Project>
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -136,7 +136,7 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
-    <ProjectReference Include="..\gtypes\libgtypes.vcxproj">
+    <ProjectReference Include="..\gtypes\libgtypes_WinRT.vcxproj">
       <Project>{9c043b29-db40-48d5-97d8-1bc44128e3ba}</Project>
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -144,7 +144,7 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
-    <ProjectReference Include="..\hltypes\libhltypes.vcxproj">
+    <ProjectReference Include="..\hltypes\libhltypes_WinRT.vcxproj">
       <Project>{e4d373bf-e227-48b9-99e6-84987e8674ec}</Project>
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -152,7 +152,7 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
-    <ProjectReference Include="..\theoraplayer\libtheoraplayer_2012.vcxproj">
+    <ProjectReference Include="..\theoraplayer\libtheoraplayer_WinRT.vcxproj">
       <Project>{abe6907d-00ff-4198-8d36-65115af1d868}</Project>
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -160,10 +160,7 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
-    <ProjectReference Include="..\theora\win32\VS2012-WinRT\libtheora\libtheora_dynamic.vcxproj">
-      <Project>{653f3841-3f26-49b9-afcf-091db4b67031}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\xal\libxal.vcxproj">
+    <ProjectReference Include="..\xal\libxal_WinRT.vcxproj">
       <Project>{6b6c070b-7dd7-41b9-8dd7-12afbf0f6c08}</Project>
       <Private>false</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
