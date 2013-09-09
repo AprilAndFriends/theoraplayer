@@ -94,9 +94,18 @@ namespace aprilvideo
 		mPrevFrameNumber = 0;
 		mSeeked = 0;
         mPrevAlpha = 255;
+				
 		if (!gVideoManager)
 		{
-			gVideoManager = new TheoraVideoManager(gNumWorkerThreads);
+			try
+			{
+				gVideoManager = new TheoraVideoManager(gNumWorkerThreads);
+			}
+			catch (_TheoraGenericException& e)
+			{
+				// pass the exception further as a hltypes::exception so the general system can uderstand it
+				throw hl_exception(e.getErrorText());
+			}
 			std::vector<std::string> lst = gVideoManager->getSupportedDecoders();
 			foreach (std::string, it, lst)
 			{
@@ -190,13 +199,27 @@ namespace aprilvideo
 		}
 	}
 
+	hstr VideoObject::getFullPath()
+	{
+		hstr path = mDataset->getFilePath() + "/video/" + mClipName;
+		if (!path.ends_with(".ogg") && !path.ends_with(".ogv") && !path.ends_with(".mp4"))
+		{
+			if (hresource::exists(path + defaultFileExtension))
+			{
+				path += defaultFileExtension;
+			}
+			else
+				path += ".ogv";
+		}
+		
+		return path;
+	}
+	
 	void VideoObject::createClip()
 	{
-		destroyResources();
-		hstr path = mDataset->getFilePath() + "/video/" + mClipName;
-		if (!path.ends_with(".ogg") && !path.ends_with(".ogv") && !path.ends_with(".mp4")) path += defaultFileExtension;
-		
+		hstr path = getFullPath();
 		april::Texture::Format textureFormat;
+		destroyResources();
 		
 		try
 		{
@@ -237,11 +260,19 @@ namespace aprilvideo
 #endif
 			if (path.ends_with("mp4"))
 			{
-				
-				if (april::window->getName() == "OpenKODE")
-					mClip = gVideoManager->createVideoClip("res/" + path, mode, precached);
-				else
-					mClip = gVideoManager->createVideoClip(path, mode, precached);
+				try
+				{
+					if (april::window->getName() == "OpenKODE") // because mp4's are opened via apple's api, and that doesn't play nice with OpenKODE dir structure.
+						mClip = gVideoManager->createVideoClip("res/" + path, mode, precached);
+					else
+						mClip = gVideoManager->createVideoClip(path, mode, precached);
+				}
+				catch (_TheoraGenericException& e)
+				{
+					// pass the exception further as a hltypes::exception so the general system can uderstand it
+					throw hl_exception(e.getErrorText());
+				}
+
 			}
 			else
 			{
@@ -382,7 +413,12 @@ namespace aprilvideo
 	
 	bool VideoObject::setProperty(chstr name,chstr value)
 	{
-		if      (name == "video") mClipName = value;
+		if      (name == "video")
+		{
+			mClipName = value;
+			hstr path = getFullPath();
+			if (!hresource::exists(path)) throw hl_exception("Unable to find video file: " + path);
+		}
 		else if (name == "video_alpha") mUseAlpha = value;
 		else if (name == "alpha_pause_treshold") setAlphaTreshold(value);
 		else if (name == "loop")  mLoop = value;
