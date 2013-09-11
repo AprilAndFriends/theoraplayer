@@ -93,7 +93,8 @@ namespace aprilvideo
 		mAlphaPauseTreshold = 0;
 		mPrevFrameNumber = 0;
 		mSeeked = 0;
-        mPrevAlpha = 255;
+		mPrevAlpha = 255;
+		
 				
 		if (!gVideoManager)
 		{
@@ -226,27 +227,17 @@ namespace aprilvideo
 			TheoraOutputMode mode;
 			if (april::rendersys->getName().starts_with("OpenGL"))
 			{
-				if (mUseAlpha)
-				{
-					mode = TH_RGBA;
-					textureFormat = april::Texture::FORMAT_ARGB;
-				}
-				else
-				{
-					mode = TH_RGBX;
-					textureFormat = april::Texture::FORMAT_ARGB;
-
-				}
+				mode = mUseAlpha ? TH_RGBA : TH_RGBX;
 			}
 			else
 			{
 				mode = mUseAlpha ? TH_BGRA : TH_BGRX;
-				textureFormat = april::Texture::FORMAT_ARGB;
 			}
+			textureFormat = april::Texture::FORMAT_ARGB;
 			int ram = april::getSystemInfo().ram;
 			int precached = 16;
-#ifdef _ANDROID
-			// Android libtheoraplayer uses ARM optimized libtheora which is faster but stil slower then
+#if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
+			// Android/WinRT ARM libtheoraplayer uses ARM optimized libtheora which is faster but stil slower than
 			// a native hardware accelerated codec. so (for the moment) we use a larger precache to counter it.
 			if (ram > 512) precached = 32;
 #else
@@ -276,12 +267,12 @@ namespace aprilvideo
 			}
 			else
 			{
-#ifdef _ANDROID
+#if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
 				hresource r(path);
 				int size = r.size();
 				TheoraDataSource* source;
 				
-				// additional android optimization: preload file in RAM to speed up decoding, every bit counts on android ;)
+				// additional Android/WinRT ARM optimization: preload file in RAM to speed up decoding, every bit counts on Android/WinRT ARM
 				// but only for "reasonably" sized files
 				if (size < 64 * 1024 * 1024)
 				{
@@ -319,14 +310,14 @@ namespace aprilvideo
         tex->setAddressMode(april::Texture::ADDRESS_CLAMP);
 		mTexture = new aprilui::Texture(tex->getFilename(), tex);
 		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
-#ifdef _ANDROID
+#if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
 		hlog::write(logTag, "Waiting for cache: " + path);
 #endif
 		mClip->waitForCache(2 / mClip->getNumPrecachedFrames(), 5.0f); // better to wait a while then to display an empty image
 		mClip->waitForCache(0.25f, 0.5f);
 
-#ifdef _ANDROID
-		if (w * h >= 768 * 384) // best to fill the cache on large videos on android to counter a slower codec
+#if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
+		if (w * h >= 768 * 384) // best to fill the cache on large videos on Android/WinRT ARM to counter a slower codec
 			mClip->waitForCache(0.9f, 2.0f);
 		
 		hlog::write(logTag, "Initial precache cached " + hstr(mClip->getNumPrecachedFrames()) + " frames");
@@ -387,7 +378,7 @@ namespace aprilvideo
 				r.w = f->getWidth();
 				r.h = f->getHeight();
 				mImage->setSrcRect(r);
-#ifdef _ANDROID
+#if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
 				mTexture->load();
 #endif
 				mTexture->getRenderTexture()->write(0, 0, f->getBuffer(), r.w, r.h, 4);
