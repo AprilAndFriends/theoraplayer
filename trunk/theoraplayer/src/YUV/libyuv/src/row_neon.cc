@@ -113,6 +113,9 @@ void I444ToARGBRow_NEON(const uint8* src_y,
                         uint8* dst_argb,
                         int width) {
   asm volatile (
+#ifdef _ANDROID
+	".fpu neon\n"
+#endif
     "vld1.8     {d24}, [%5]                    \n"
     "vld1.8     {d25}, [%6]                    \n"
     "vmov.u8    d26, #128                      \n"

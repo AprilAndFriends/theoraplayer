@@ -25,6 +25,9 @@ extern "C" {
 void ScaleRowDown2_NEON(const uint8* src_ptr, ptrdiff_t /* src_stride */,
                         uint8* dst, int dst_width) {
   asm volatile (
+#ifdef _ANDROID
+	".fpu neon\n"
+#endif
   "1:                                          \n"
     // load even pixels into q0, odd into q1
     "vld2.8     {q0, q1}, [%0]!                \n"
@@ -42,6 +45,9 @@ void ScaleRowDown2_NEON(const uint8* src_ptr, ptrdiff_t /* src_stride */,
 void ScaleRowDown2Box_NEON(const uint8* src_ptr, ptrdiff_t src_stride,
                            uint8* dst, int dst_width) {
   asm volatile (
+#ifdef _ANDROID
+	".fpu neon\n"
+#endif
     // change the stride to row 2 pointer
     "add        %1, %0                         \n"
   "1:                                          \n"
@@ -68,6 +74,9 @@ void ScaleRowDown2Box_NEON(const uint8* src_ptr, ptrdiff_t src_stride,
 void ScaleRowDown4_NEON(const uint8* src_ptr, ptrdiff_t /* src_stride */,
                         uint8* dst_ptr, int dst_width) {
   asm volatile (
+#ifdef _ANDROID
+	".fpu neon\n"
+#endif
   "1:                                          \n"
     "vld4.8       {d0, d1, d2, d3}, [%0]!      \n" // src line 0
     "subs         %2, %2, #8                   \n" // 8 processed per loop
@@ -84,6 +93,9 @@ void ScaleRowDown4_NEON(const uint8* src_ptr, ptrdiff_t /* src_stride */,
 void ScaleRowDown4Box_NEON(const uint8* src_ptr, ptrdiff_t src_stride,
                            uint8* dst_ptr, int dst_width) {
   asm volatile (
+#ifdef _ANDROID
+	".fpu neon\n"
+#endif
     "add        r4, %0, %3                     \n"
     "add        r5, r4, %3                     \n"
     "add        %3, r5, %3                     \n"
@@ -117,6 +129,9 @@ void ScaleRowDown34_NEON(const uint8* src_ptr,
                          ptrdiff_t /* src_stride */,
                          uint8* dst_ptr, int dst_width) {
   asm volatile (
+#ifdef _ANDROID
+	".fpu neon\n"
+#endif
   "1:                                          \n"
     "vld4.8       {d0, d1, d2, d3}, [%0]!      \n" // src line 0
     "subs         %2, %2, #24                  \n"
