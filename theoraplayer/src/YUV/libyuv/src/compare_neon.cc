@@ -20,6 +20,9 @@ extern "C" {
 uint32 SumSquareError_NEON(const uint8* src_a, const uint8* src_b, int count) {
   volatile uint32 sse;
   asm volatile (
+#ifdef _ANDROID
+	".fpu neon\n"
+#endif
     "vmov.u8    q8, #0                         \n"
     "vmov.u8    q10, #0                        \n"
     "vmov.u8    q9, #0                         \n"

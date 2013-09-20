@@ -28,6 +28,9 @@ void TransposeWx8_NEON(const uint8* src, int src_stride,
     // loops are on blocks of 8. loop will stop when
     // counter gets to or below 0. starting the counter
     // at w-8 allow for this
+#ifdef _ANDROID
+	".fpu neon\n"
+#endif
     "sub         %4, #8                        \n"
 
     // handle 8x8 blocks. this should be the majority of the plane
