@@ -22,6 +22,9 @@ extern "C" {
 void ScaleARGBRowDown2_NEON(const uint8* src_ptr, ptrdiff_t /* src_stride */,
                             uint8* dst, int dst_width) {
   asm volatile (
+#ifdef _ANDROID
+	".fpu neon\n"
+#endif
   "1:                                          \n"
     // load even pixels into q0, odd into q1
     "vld2.32    {q0, q1}, [%0]!                \n"
