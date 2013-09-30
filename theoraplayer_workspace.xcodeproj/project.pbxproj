@@ -1011,7 +1011,7 @@
 			buildPhases = (
 				D12C207B1534D58B00B4904B /* Sources */,
 				D12C207E1534D58B00B4904B /* Frameworks */,
-				D16776C1155C56000050EC64 /* ShellScript */,
+				D16776C1155C56000050EC64 /* link media folder */,
 				D1E39AA7169A4440003A6CB5 /* Resources */,
 			);
 			buildRules = (
@@ -1030,7 +1030,7 @@
 			buildPhases = (
 				D1474020150CAF0D00B20490 /* Sources */,
 				D1474021150CAF0D00B20490 /* Frameworks */,
-				D16776B5155C53D90050EC64 /* ShellScript */,
+				D16776B5155C53D90050EC64 /* link media folder */,
 				D1E39A9F169A441F003A6CB5 /* Resources */,
 				D1D88EFF16B587A400CCE8CE /* CopyFiles */,
 			);
@@ -1050,7 +1050,7 @@
 			buildPhases = (
 				D14740E8150CB45E00B20490 /* Sources */,
 				D14740EB150CB45E00B20490 /* Frameworks */,
-				D16776BB155C55C20050EC64 /* ShellScript */,
+				D16776BB155C55C20050EC64 /* link media folder */,
 				D1E39AA1169A442F003A6CB5 /* Resources */,
 			);
 			buildRules = (
@@ -1069,7 +1069,7 @@
 			buildPhases = (
 				D147410B150CB6F300B20490 /* Sources */,
 				D147410F150CB6F300B20490 /* Frameworks */,
-				D16776BD155C55D70050EC64 /* ShellScript */,
+				D16776BD155C55D70050EC64 /* link media folder */,
 				D1E39AA3169A4435003A6CB5 /* Resources */,
 			);
 			buildRules = (
@@ -1088,7 +1088,7 @@
 			buildPhases = (
 				D1474124150CB6F600B20490 /* Sources */,
 				D1474128150CB6F600B20490 /* Frameworks */,
-				D16776BF155C55EC0050EC64 /* ShellScript */,
+				D16776BF155C55EC0050EC64 /* link media folder */,
 				D1E39AA5169A443B003A6CB5 /* Resources */,
 			);
 			buildRules = (
@@ -1107,7 +1107,7 @@
 			buildPhases = (
 				D147413D150CB6F900B20490 /* Sources */,
 				D1474141150CB6F900B20490 /* Frameworks */,
-				D16776C5155C56290050EC64 /* ShellScript */,
+				D16776C5155C56290050EC64 /* link media folder */,
 				D1E39AA9169A4449003A6CB5 /* Resources */,
 			);
 			buildRules = (
@@ -1126,7 +1126,7 @@
 			buildPhases = (
 				D1474156150CB70D00B20490 /* Sources */,
 				D147415A150CB70D00B20490 /* Frameworks */,
-				D16776C3155C56150050EC64 /* ShellScript */,
+				D16776C3155C56150050EC64 /* link media folder */,
 				D1E39AAD169A4454003A6CB5 /* Resources */,
 			);
 			buildRules = (
@@ -1145,7 +1145,7 @@
 			buildPhases = (
 				D166335B156ADAE8009E98F1 /* Sources */,
 				D1663360156ADAE8009E98F1 /* Frameworks */,
-				D1663365156ADAE8009E98F1 /* ShellScript */,
+				D1663365156ADAE8009E98F1 /* link media folder */,
 				D1E39AB1169A4461003A6CB5 /* Resources */,
 			);
 			buildRules = (
@@ -1185,7 +1185,7 @@
 			buildPhases = (
 				D17613821561B21500F645DE /* Sources */,
 				D17613871561B21500F645DE /* Frameworks */,
-				D176138C1561B21500F645DE /* ShellScript */,
+				D176138C1561B21500F645DE /* link media folder */,
 				D1E39AAB169A444F003A6CB5 /* Resources */,
 			);
 			buildRules = (
@@ -1204,7 +1204,7 @@
 			buildPhases = (
 				D1C014EF15619D4700FBEF81 /* Sources */,
 				D1C014F015619D4700FBEF81 /* Frameworks */,
-				D1C0151E15619E1F00FBEF81 /* ShellScript */,
+				D1C0151E15619E1F00FBEF81 /* link media folder */,
 				D1E39AAF169A445C003A6CB5 /* Resources */,
 			);
 			buildRules = (
@@ -1223,7 +1223,7 @@
 			buildPhases = (
 				D1C134B0157972CF005E8A5B /* Sources */,
 				D1C134B5157972CF005E8A5B /* Frameworks */,
-				D1C134BA157972CF005E8A5B /* ShellScript */,
+				D1C134BA157972CF005E8A5B /* link media folder */,
 				D1E39AB3169A4467003A6CB5 /* Resources */,
 			);
 			buildRules = (
@@ -1544,148 +1544,161 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D1663365156ADAE8009E98F1 /* ShellScript */ = {
+		D1663365156ADAE8009E98F1 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "link media folder";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\nmkdir \"${DATA_PATH}/Resources\"\nln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
 		};
-		D16776B5155C53D90050EC64 /* ShellScript */ = {
+		D16776B5155C53D90050EC64 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "link media folder";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
 		};
-		D16776BB155C55C20050EC64 /* ShellScript */ = {
+		D16776BB155C55C20050EC64 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "link media folder";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
 		};
-		D16776BD155C55D70050EC64 /* ShellScript */ = {
+		D16776BD155C55D70050EC64 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "link media folder";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
 		};
-		D16776BF155C55EC0050EC64 /* ShellScript */ = {
+		D16776BF155C55EC0050EC64 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "link media folder";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			showEnvVarsInLog = 0;
 		};
-		D16776C1155C56000050EC64 /* ShellScript */ = {
+		D16776C1155C56000050EC64 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "link media folder";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
 		};
-		D16776C3155C56150050EC64 /* ShellScript */ = {
+		D16776C3155C56150050EC64 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "link media folder";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
 		};
-		D16776C5155C56290050EC64 /* ShellScript */ = {
+		D16776C5155C56290050EC64 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "link media folder";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
 		};
-		D176138C1561B21500F645DE /* ShellScript */ = {
+		D176138C1561B21500F645DE /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "link media folder";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\nmkdir \"${DATA_PATH}/Resources\"\nln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
 		};
-		D1C0151E15619E1F00FBEF81 /* ShellScript */ = {
+		D1C0151E15619E1F00FBEF81 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "link media folder";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\nmkdir \"${DATA_PATH}/Resources\"\nln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
 		};
-		D1C134BA157972CF005E8A5B /* ShellScript */ = {
+		D1C134BA157972CF005E8A5B /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "link media folder";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\nmkdir \"${DATA_PATH}/Resources\"\nln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1940,7 +1953,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		D12C20891534D58B00B4904B /* Debug */ = {
+		D12C208A1534D58B00B4904B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1950,17 +1963,7 @@
 			};
 			name = Debug;
 		};
-		D12C208A1534D58B00B4904B /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				PRODUCT_NAME = composite_animation;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Debug-LLVM";
-		};
-		D12C208B1534D58B00B4904B /* Release */ = {
+		D12C208C1534D58B00B4904B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1969,16 +1972,6 @@
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
-		};
-		D12C208C1534D58B00B4904B /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				PRODUCT_NAME = composite_animation;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Release-LLVM";
 		};
 		D12C208D1534D58B00B4904B /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -1990,33 +1983,19 @@
 			};
 			name = "App Store";
 		};
-		D139464017C0EFAA0091F4A4 /* Debug */ = {
+		D139464117C0EFAA0091F4A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		D139464117C0EFAA0091F4A4 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = "Debug-LLVM";
-		};
-		D139464217C0EFAA0091F4A4 /* Release */ = {
+		D139464317C0EFAA0091F4A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
-		};
-		D139464317C0EFAA0091F4A4 /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = "Release-LLVM";
 		};
 		D139464417C0EFAA0091F4A4 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -2025,7 +2004,7 @@
 			};
 			name = "App Store";
 		};
-		D1473F3D150CA69B00B20490 /* Debug */ = {
+		D1473F43150CA6CE00B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2040,7 +2019,7 @@
 					_DEBUG,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -2057,66 +2036,6 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
-		};
-		D1473F3E150CA69B00B20490 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = MP4_VIDEO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../include",
-					"$(SRCROOT)/theoraplayer/include",
-					"$(SRCROOT)/demos",
-				);
-				INFOPLIST_FILE = theoraplayer_workspace.xcodeproj/workspace.plist;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		D1473F43150CA6CE00B20490 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					_DEBUG,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../include",
-					"$(SRCROOT)/theoraplayer/include",
-					"$(SRCROOT)/demos",
-				);
-				INFOPLIST_FILE = theoraplayer_workspace.xcodeproj/workspace.plist;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = "Debug-LLVM";
 		};
 		D1473F45150CA6D600B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -2128,7 +2047,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = MP4_VIDEO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -2145,7 +2064,7 @@
 			};
 			name = "App Store";
 		};
-		D1473F47150CA6E200B20490 /* Release-LLVM */ = {
+		D1473F47150CA6E200B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2155,7 +2074,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = MP4_VIDEO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -2170,9 +2089,9 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
-			name = "Release-LLVM";
+			name = Release;
 		};
-		D147403F150CAF0D00B20490 /* Debug */ = {
+		D1474040150CAF0D00B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2183,18 +2102,7 @@
 			};
 			name = Debug;
 		};
-		D1474040150CAF0D00B20490 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Debug-LLVM";
-		};
-		D1474041150CAF0D00B20490 /* Release */ = {
+		D1474042150CAF0D00B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2204,17 +2112,6 @@
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
-		};
-		D1474042150CAF0D00B20490 /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Release-LLVM";
 		};
 		D1474043150CAF0D00B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -2227,7 +2124,7 @@
 			};
 			name = "App Store";
 		};
-		D14740F6150CB45E00B20490 /* Debug */ = {
+		D14740F7150CB45E00B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2237,17 +2134,7 @@
 			};
 			name = Debug;
 		};
-		D14740F7150CB45E00B20490 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				PRODUCT_NAME = av_player;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Debug-LLVM";
-		};
-		D14740F8150CB45E00B20490 /* Release */ = {
+		D14740F9150CB45E00B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2256,16 +2143,6 @@
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
-		};
-		D14740F9150CB45E00B20490 /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				PRODUCT_NAME = av_player;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Release-LLVM";
 		};
 		D14740FA150CB45E00B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -2277,7 +2154,7 @@
 			};
 			name = "App Store";
 		};
-		D147411B150CB6F300B20490 /* Debug */ = {
+		D147411C150CB6F300B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2287,17 +2164,7 @@
 			};
 			name = Debug;
 		};
-		D147411C150CB6F300B20490 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				PRODUCT_NAME = multiple_videos;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Debug-LLVM";
-		};
-		D147411D150CB6F300B20490 /* Release */ = {
+		D147411E150CB6F300B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2306,16 +2173,6 @@
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
-		};
-		D147411E150CB6F300B20490 /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				PRODUCT_NAME = multiple_videos;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Release-LLVM";
 		};
 		D147411F150CB6F300B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -2327,7 +2184,7 @@
 			};
 			name = "App Store";
 		};
-		D1474134150CB6F600B20490 /* Debug */ = {
+		D1474135150CB6F600B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2337,17 +2194,7 @@
 			};
 			name = Debug;
 		};
-		D1474135150CB6F600B20490 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				PRODUCT_NAME = sprite_animation;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Debug-LLVM";
-		};
-		D1474136150CB6F600B20490 /* Release */ = {
+		D1474137150CB6F600B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2356,16 +2203,6 @@
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
-		};
-		D1474137150CB6F600B20490 /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				PRODUCT_NAME = sprite_animation;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Release-LLVM";
 		};
 		D1474138150CB6F600B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -2377,7 +2214,7 @@
 			};
 			name = "App Store";
 		};
-		D147414D150CB6F900B20490 /* Debug */ = {
+		D147414E150CB6F900B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2387,17 +2224,7 @@
 			};
 			name = Debug;
 		};
-		D147414E150CB6F900B20490 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				PRODUCT_NAME = seek_test;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Debug-LLVM";
-		};
-		D147414F150CB6F900B20490 /* Release */ = {
+		D1474150150CB6F900B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2406,16 +2233,6 @@
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
-		};
-		D1474150150CB6F900B20490 /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				PRODUCT_NAME = seek_test;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Release-LLVM";
 		};
 		D1474151150CB6F900B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -2427,7 +2244,7 @@
 			};
 			name = "App Store";
 		};
-		D1474166150CB70D00B20490 /* Debug */ = {
+		D1474167150CB70D00B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2443,23 +2260,7 @@
 			};
 			name = Debug;
 		};
-		D1474167150CB70D00B20490 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					__ZBUFFER,
-					__3D_PROJECTION,
-					"$(inherited)",
-				);
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				PRODUCT_NAME = tv_room;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Debug-LLVM";
-		};
-		D1474168150CB70D00B20490 /* Release */ = {
+		D1474169150CB70D00B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2474,22 +2275,6 @@
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
-		};
-		D1474169150CB70D00B20490 /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					__ZBUFFER,
-					__3D_PROJECTION,
-					"$(inherited)",
-				);
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				PRODUCT_NAME = tv_room;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Release-LLVM";
 		};
 		D147416A150CB70D00B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -2507,7 +2292,7 @@
 			};
 			name = "App Store";
 		};
-		D1663367156ADAE8009E98F1 /* Debug */ = {
+		D1663368156ADAE8009E98F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2522,22 +2307,7 @@
 			};
 			name = Debug;
 		};
-		D1663368156ADAE8009E98F1 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					__ZBUFFER,
-					__3D_PROJECTION,
-					"$(inherited)",
-				);
-				PRODUCT_NAME = video_lighting;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Debug-LLVM";
-		};
-		D1663369156ADAE8009E98F1 /* Release */ = {
+		D166336A156ADAE8009E98F1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2551,21 +2321,6 @@
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
-		};
-		D166336A156ADAE8009E98F1 /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					__ZBUFFER,
-					__3D_PROJECTION,
-					"$(inherited)",
-				);
-				PRODUCT_NAME = video_lighting;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Release-LLVM";
 		};
 		D166336B156ADAE8009E98F1 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -2582,7 +2337,7 @@
 			};
 			name = "App Store";
 		};
-		D16A0EA51698C4B80016DF67 /* Debug */ = {
+		D16A0EA61698C4B80016DF67 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -2604,29 +2359,7 @@
 			};
 			name = Debug;
 		};
-		D16A0EA61698C4B80016DF67 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					_IOS,
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = demos/basecode/ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				PRODUCT_NAME = simple_player;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = NO;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Debug-LLVM";
-		};
-		D16A0EA71698C4B80016DF67 /* Release */ = {
+		D16A0EA81698C4B80016DF67 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -2648,29 +2381,6 @@
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
-		};
-		D16A0EA81698C4B80016DF67 /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					_IOS,
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = demos/basecode/ios/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PRODUCT_NAME = simple_player;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = NO;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Release-LLVM";
 		};
 		D16A0EA91698C4B80016DF67 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -2695,7 +2405,7 @@
 			};
 			name = "App Store";
 		};
-		D176138E1561B21500F645DE /* Debug */ = {
+		D176138F1561B21500F645DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2710,22 +2420,7 @@
 			};
 			name = Debug;
 		};
-		D176138F1561B21500F645DE /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					__ZBUFFER,
-					__3D_PROJECTION,
-					"$(inherited)",
-				);
-				PRODUCT_NAME = environment_mapping;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Debug-LLVM";
-		};
-		D17613901561B21500F645DE /* Release */ = {
+		D17613911561B21500F645DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2739,21 +2434,6 @@
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
-		};
-		D17613911561B21500F645DE /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					__ZBUFFER,
-					__3D_PROJECTION,
-					"$(inherited)",
-				);
-				PRODUCT_NAME = environment_mapping;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Release-LLVM";
 		};
 		D17613921561B21500F645DE /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -2770,7 +2450,7 @@
 			};
 			name = "App Store";
 		};
-		D1C0150E15619D4700FBEF81 /* Debug */ = {
+		D1C0150F15619D4700FBEF81 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2785,22 +2465,7 @@
 			};
 			name = Debug;
 		};
-		D1C0150F15619D4700FBEF81 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					__ZBUFFER,
-					__3D_PROJECTION,
-					"$(inherited)",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Debug-LLVM";
-		};
-		D1C0151015619D4700FBEF81 /* Release */ = {
+		D1C0151115619D4700FBEF81 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2814,21 +2479,6 @@
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
-		};
-		D1C0151115619D4700FBEF81 /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					__ZBUFFER,
-					__3D_PROJECTION,
-					"$(inherited)",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Release-LLVM";
 		};
 		D1C0151215619D4700FBEF81 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -2845,7 +2495,7 @@
 			};
 			name = "App Store";
 		};
-		D1C134BC157972CF005E8A5B /* Debug */ = {
+		D1C134BD157972CF005E8A5B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2860,22 +2510,7 @@
 			};
 			name = Debug;
 		};
-		D1C134BD157972CF005E8A5B /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					__ZBUFFER,
-					__3D_PROJECTION,
-					"$(inherited)",
-				);
-				PRODUCT_NAME = parallax_mapping;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Debug-LLVM";
-		};
-		D1C134BE157972CF005E8A5B /* Release */ = {
+		D1C134BF157972CF005E8A5B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2889,21 +2524,6 @@
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
-		};
-		D1C134BF157972CF005E8A5B /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					__ZBUFFER,
-					__3D_PROJECTION,
-					"$(inherited)",
-				);
-				PRODUCT_NAME = parallax_mapping;
-				WRAPPER_EXTENSION = app;
-			};
-			name = "Release-LLVM";
 		};
 		D1C134C0157972CF005E8A5B /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -2926,170 +2546,142 @@
 		D12C20881534D58B00B4904B /* Build configuration list for PBXNativeTarget "composite_animation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D12C20891534D58B00B4904B /* Debug */,
-				D12C208A1534D58B00B4904B /* Debug-LLVM */,
-				D12C208B1534D58B00B4904B /* Release */,
-				D12C208C1534D58B00B4904B /* Release-LLVM */,
+				D12C208A1534D58B00B4904B /* Debug */,
+				D12C208C1534D58B00B4904B /* Release */,
 				D12C208D1534D58B00B4904B /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D139465317C0EFAA0091F4A4 /* Build configuration list for PBXAggregateTarget "Mac Dependencies" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D139464017C0EFAA0091F4A4 /* Debug */,
-				D139464117C0EFAA0091F4A4 /* Debug-LLVM */,
-				D139464217C0EFAA0091F4A4 /* Release */,
-				D139464317C0EFAA0091F4A4 /* Release-LLVM */,
+				D139464117C0EFAA0091F4A4 /* Debug */,
+				D139464317C0EFAA0091F4A4 /* Release */,
 				D139464417C0EFAA0091F4A4 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D1473F23150CA69B00B20490 /* Build configuration list for PBXProject "theoraplayer_workspace" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D1473F3D150CA69B00B20490 /* Debug */,
-				D1473F43150CA6CE00B20490 /* Debug-LLVM */,
-				D1473F3E150CA69B00B20490 /* Release */,
-				D1473F47150CA6E200B20490 /* Release-LLVM */,
+				D1473F43150CA6CE00B20490 /* Debug */,
+				D1473F47150CA6E200B20490 /* Release */,
 				D1473F45150CA6D600B20490 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D147403E150CAF0D00B20490 /* Build configuration list for PBXNativeTarget "glut_player" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D147403F150CAF0D00B20490 /* Debug */,
-				D1474040150CAF0D00B20490 /* Debug-LLVM */,
-				D1474041150CAF0D00B20490 /* Release */,
-				D1474042150CAF0D00B20490 /* Release-LLVM */,
+				D1474040150CAF0D00B20490 /* Debug */,
+				D1474042150CAF0D00B20490 /* Release */,
 				D1474043150CAF0D00B20490 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D14740F5150CB45E00B20490 /* Build configuration list for PBXNativeTarget "av_player" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D14740F6150CB45E00B20490 /* Debug */,
-				D14740F7150CB45E00B20490 /* Debug-LLVM */,
-				D14740F8150CB45E00B20490 /* Release */,
-				D14740F9150CB45E00B20490 /* Release-LLVM */,
+				D14740F7150CB45E00B20490 /* Debug */,
+				D14740F9150CB45E00B20490 /* Release */,
 				D14740FA150CB45E00B20490 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D147411A150CB6F300B20490 /* Build configuration list for PBXNativeTarget "multiple_videos" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D147411B150CB6F300B20490 /* Debug */,
-				D147411C150CB6F300B20490 /* Debug-LLVM */,
-				D147411D150CB6F300B20490 /* Release */,
-				D147411E150CB6F300B20490 /* Release-LLVM */,
+				D147411C150CB6F300B20490 /* Debug */,
+				D147411E150CB6F300B20490 /* Release */,
 				D147411F150CB6F300B20490 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D1474133150CB6F600B20490 /* Build configuration list for PBXNativeTarget "sprite_animation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D1474134150CB6F600B20490 /* Debug */,
-				D1474135150CB6F600B20490 /* Debug-LLVM */,
-				D1474136150CB6F600B20490 /* Release */,
-				D1474137150CB6F600B20490 /* Release-LLVM */,
+				D1474135150CB6F600B20490 /* Debug */,
+				D1474137150CB6F600B20490 /* Release */,
 				D1474138150CB6F600B20490 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D147414C150CB6F900B20490 /* Build configuration list for PBXNativeTarget "seek_test" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D147414D150CB6F900B20490 /* Debug */,
-				D147414E150CB6F900B20490 /* Debug-LLVM */,
-				D147414F150CB6F900B20490 /* Release */,
-				D1474150150CB6F900B20490 /* Release-LLVM */,
+				D147414E150CB6F900B20490 /* Debug */,
+				D1474150150CB6F900B20490 /* Release */,
 				D1474151150CB6F900B20490 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D1474165150CB70D00B20490 /* Build configuration list for PBXNativeTarget "tv_room" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D1474166150CB70D00B20490 /* Debug */,
-				D1474167150CB70D00B20490 /* Debug-LLVM */,
-				D1474168150CB70D00B20490 /* Release */,
-				D1474169150CB70D00B20490 /* Release-LLVM */,
+				D1474167150CB70D00B20490 /* Debug */,
+				D1474169150CB70D00B20490 /* Release */,
 				D147416A150CB70D00B20490 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D1663366156ADAE8009E98F1 /* Build configuration list for PBXNativeTarget "video_lighting" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D1663367156ADAE8009E98F1 /* Debug */,
-				D1663368156ADAE8009E98F1 /* Debug-LLVM */,
-				D1663369156ADAE8009E98F1 /* Release */,
-				D166336A156ADAE8009E98F1 /* Release-LLVM */,
+				D1663368156ADAE8009E98F1 /* Debug */,
+				D166336A156ADAE8009E98F1 /* Release */,
 				D166336B156ADAE8009E98F1 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D16A0EA41698C4B80016DF67 /* Build configuration list for PBXNativeTarget "simple_player (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D16A0EA51698C4B80016DF67 /* Debug */,
-				D16A0EA61698C4B80016DF67 /* Debug-LLVM */,
-				D16A0EA71698C4B80016DF67 /* Release */,
-				D16A0EA81698C4B80016DF67 /* Release-LLVM */,
+				D16A0EA61698C4B80016DF67 /* Debug */,
+				D16A0EA81698C4B80016DF67 /* Release */,
 				D16A0EA91698C4B80016DF67 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D176138D1561B21500F645DE /* Build configuration list for PBXNativeTarget "environment_mapping" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D176138E1561B21500F645DE /* Debug */,
-				D176138F1561B21500F645DE /* Debug-LLVM */,
-				D17613901561B21500F645DE /* Release */,
-				D17613911561B21500F645DE /* Release-LLVM */,
+				D176138F1561B21500F645DE /* Debug */,
+				D17613911561B21500F645DE /* Release */,
 				D17613921561B21500F645DE /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D1C0150D15619D4700FBEF81 /* Build configuration list for PBXNativeTarget "lightmap_demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D1C0150E15619D4700FBEF81 /* Debug */,
-				D1C0150F15619D4700FBEF81 /* Debug-LLVM */,
-				D1C0151015619D4700FBEF81 /* Release */,
-				D1C0151115619D4700FBEF81 /* Release-LLVM */,
+				D1C0150F15619D4700FBEF81 /* Debug */,
+				D1C0151115619D4700FBEF81 /* Release */,
 				D1C0151215619D4700FBEF81 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D1C134BB157972CF005E8A5B /* Build configuration list for PBXNativeTarget "parallax_mapping" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D1C134BC157972CF005E8A5B /* Debug */,
-				D1C134BD157972CF005E8A5B /* Debug-LLVM */,
-				D1C134BE157972CF005E8A5B /* Release */,
-				D1C134BF157972CF005E8A5B /* Release-LLVM */,
+				D1C134BD157972CF005E8A5B /* Debug */,
+				D1C134BF157972CF005E8A5B /* Release */,
 				D1C134C0157972CF005E8A5B /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
