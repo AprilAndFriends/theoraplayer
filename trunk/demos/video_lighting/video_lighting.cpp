@@ -132,6 +132,7 @@ void setDebugTitle(char* out)
 
 void init()
 {
+	resourceExtension = ".ogg"; // temp, mp4 files need to be reexported
 	FILE* f = fopen("media/lighting/camera.txt", "r");
 
 	xyz pos;

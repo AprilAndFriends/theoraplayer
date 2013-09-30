@@ -435,7 +435,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 4FADC24608B4156D00ABE55E /* Build configuration list for PBXProject "Theora" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -574,130 +574,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		4FADC24308B4156D00ABE55E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Library/Frameworks,
-				);
-				FRAMEWORK_VERSION = A;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					OC_X86_ASM,
-					__MACOSX__,
-				);
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = /Library/Frameworks;
-				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				LIBRARY_STYLE = DYNAMIC;
-				MACH_O_TYPE = mh_dylib;
-				OTHER_LDFLAGS_i386 = "-Wl,-read_only_relocs,suppress";
-				PRODUCT_NAME = Theora;
-				WRAPPER_EXTENSION = framework;
-				ZERO_LINK = YES;
-			};
-			name = Debug;
-		};
-		4FADC24408B4156D00ABE55E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Library/Frameworks,
-				);
-				FRAMEWORK_VERSION = A;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					OC_X86_ASM,
-					__MACOSX__,
-				);
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = /Library/Frameworks;
-				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				LIBRARY_STYLE = DYNAMIC;
-				MACH_O_TYPE = mh_dylib;
-				OTHER_LDFLAGS_i386 = "-Wl,-read_only_relocs,suppress";
-				PRODUCT_NAME = Theora;
-				WRAPPER_EXTENSION = framework;
-			};
-			name = Release;
-		};
-		4FADC24708B4156D00ABE55E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(GCC_PREPROCESSOR_DEFINITIONS)",
-					__MACOSX__,
-				);
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_MISSING_PARENTHESES = NO;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"${SRCROOT}/../../ogg/include",
-					"${SRCROOT}/../../vorbis/include",
-					../include,
-					"../lib/**",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				OTHER_CFLAGS = "";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = "-w";
-			};
-			name = Debug;
-		};
-		4FADC24808B4156D00ABE55E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(GCC_PREPROCESSOR_DEFINITIONS)",
-					__MACOSX__,
-				);
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_MISSING_PARENTHESES = NO;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"${SRCROOT}/../../ogg/include",
-					"${SRCROOT}/../../vorbis/include",
-					../include,
-					"../lib/**",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				OTHER_CFLAGS = (
-					"$(OTHER_CFLAGS)",
-					"-falign-loops=16",
-					"-fforce-addr",
-					"-fomit-frame-pointer",
-					"-finline-functions",
-					"-funroll-loops",
-				);
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = "-w";
-			};
-			name = Release;
-		};
-		D1473F11150CA45300B20490 /* Debug-LLVM */ = {
+		D1473F11150CA45300B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -725,9 +602,9 @@
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "-w";
 			};
-			name = "Debug-LLVM";
+			name = Debug;
 		};
-		D1473F12150CA45300B20490 /* Debug-LLVM */ = {
+		D1473F12150CA45300B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -753,7 +630,7 @@
 				WRAPPER_EXTENSION = framework;
 				ZERO_LINK = YES;
 			};
-			name = "Debug-LLVM";
+			name = Debug;
 		};
 		D1473F16150CA45B00B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -766,7 +643,6 @@
 					"$(GCC_PREPROCESSOR_DEFINITIONS)",
 					__MACOSX__,
 				);
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_MISSING_PARENTHESES = NO;
@@ -819,7 +695,7 @@
 			};
 			name = "App Store";
 		};
-		D1473F1A150CA46100B20490 /* Release-LLVM */ = {
+		D1473F1A150CA46100B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -854,9 +730,9 @@
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "-w";
 			};
-			name = "Release-LLVM";
+			name = Release;
 		};
-		D1473F1B150CA46100B20490 /* Release-LLVM */ = {
+		D1473F1B150CA46100B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -880,9 +756,9 @@
 				PRODUCT_NAME = Theora;
 				WRAPPER_EXTENSION = framework;
 			};
-			name = "Release-LLVM";
+			name = Release;
 		};
-		D1BB6F88150E9CFE00EF9400 /* Debug */ = {
+		D1BB6F89150E9CFE00EF9400 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -903,28 +779,7 @@
 			};
 			name = Debug;
 		};
-		D1BB6F89150E9CFE00EF9400 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = NO;
-				DSTROOT = /tmp/libtheora.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_THUMB_SUPPORT = NO;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = theora;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = "Debug-LLVM";
-		};
-		D1BB6F8A150E9CFE00EF9400 /* Release */ = {
+		D1BB6F8B150E9CFE00EF9400 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -943,26 +798,6 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
-		};
-		D1BB6F8B150E9CFE00EF9400 /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/libtheora.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				GCC_THUMB_SUPPORT = NO;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = theora;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Release-LLVM";
 		};
 		D1BB6F8C150E9CFE00EF9400 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -984,7 +819,7 @@
 			};
 			name = "App Store";
 		};
-		D1F279CF177A2B3400E5C131 /* Debug */ = {
+		D1F279D0177A2B3400E5C131 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1006,29 +841,7 @@
 			};
 			name = Debug;
 		};
-		D1F279D0177A2B3400E5C131 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = NO;
-				DSTROOT = /tmp/libtheora.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					OC_X86_ASM,
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = theora;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = "Debug-LLVM";
-		};
-		D1F279D1177A2B3400E5C131 /* Release */ = {
+		D1F279D2177A2B3400E5C131 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1048,27 +861,6 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
-		};
-		D1F279D2177A2B3400E5C131 /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/libtheora.dst;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					OC_X86_ASM,
-					"$(inherited)",
-				);
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = theora;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = "Release-LLVM";
 		};
 		D1F279D3177A2B3400E5C131 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -1097,50 +889,42 @@
 		4FADC24208B4156D00ABE55E /* Build configuration list for PBXNativeTarget "theora" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4FADC24308B4156D00ABE55E /* Debug */,
-				D1473F12150CA45300B20490 /* Debug-LLVM */,
-				4FADC24408B4156D00ABE55E /* Release */,
-				D1473F1B150CA46100B20490 /* Release-LLVM */,
+				D1473F12150CA45300B20490 /* Debug */,
+				D1473F1B150CA46100B20490 /* Release */,
 				D1473F17150CA45B00B20490 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		4FADC24608B4156D00ABE55E /* Build configuration list for PBXProject "Theora" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4FADC24708B4156D00ABE55E /* Debug */,
-				D1473F11150CA45300B20490 /* Debug-LLVM */,
-				4FADC24808B4156D00ABE55E /* Release */,
-				D1473F1A150CA46100B20490 /* Release-LLVM */,
+				D1473F11150CA45300B20490 /* Debug */,
+				D1473F1A150CA46100B20490 /* Release */,
 				D1473F16150CA45B00B20490 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D1BB6F8D150E9CFE00EF9400 /* Build configuration list for PBXNativeTarget "theora (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D1BB6F88150E9CFE00EF9400 /* Debug */,
-				D1BB6F89150E9CFE00EF9400 /* Debug-LLVM */,
-				D1BB6F8A150E9CFE00EF9400 /* Release */,
-				D1BB6F8B150E9CFE00EF9400 /* Release-LLVM */,
+				D1BB6F89150E9CFE00EF9400 /* Debug */,
+				D1BB6F8B150E9CFE00EF9400 /* Release */,
 				D1BB6F8C150E9CFE00EF9400 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D1F279CE177A2B3400E5C131 /* Build configuration list for PBXNativeTarget "theora (Mac)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D1F279CF177A2B3400E5C131 /* Debug */,
-				D1F279D0177A2B3400E5C131 /* Debug-LLVM */,
-				D1F279D1177A2B3400E5C131 /* Release */,
-				D1F279D2177A2B3400E5C131 /* Release-LLVM */,
+				D1F279D0177A2B3400E5C131 /* Debug */,
+				D1F279D2177A2B3400E5C131 /* Release */,
 				D1F279D3177A2B3400E5C131 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

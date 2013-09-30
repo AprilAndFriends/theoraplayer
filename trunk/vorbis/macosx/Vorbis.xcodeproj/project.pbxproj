@@ -436,7 +436,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = 730F23F3091827B200AB638C /* Build configuration list for PBXProject "Vorbis" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -516,100 +516,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		730F23ED091827B100AB638C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				FRAMEWORK_VERSION = A;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				HEADER_SEARCH_PATHS = ../lib;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = /Library/Frameworks;
-				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = Vorbis;
-				SDKROOT = macosx;
-				SECTORDER_FLAGS = "";
-				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = "";
-				WRAPPER_EXTENSION = framework;
-				ZERO_LINK = YES;
-			};
-			name = Debug;
-		};
-		730F23EE091827B100AB638C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				FRAMEWORK_VERSION = A;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				HEADER_SEARCH_PATHS = ../lib;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = /Library/Frameworks;
-				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = Vorbis;
-				SDKROOT = macosx;
-				SECTORDER_FLAGS = "";
-				SKIP_INSTALL = YES;
-				WARNING_CFLAGS = "";
-				WRAPPER_EXTENSION = framework;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
-		730F23F4091827B200AB638C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
-				HEADER_SEARCH_PATHS = (
-					"${SRCROOT}/../../ogg/include",
-					"$(SRCROOT)/../lib",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				WARNING_CFLAGS = "-w";
-			};
-			name = Debug;
-		};
-		730F23F5091827B200AB638C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
-				HEADER_SEARCH_PATHS = (
-					"${SRCROOT}/../../ogg/include",
-					"$(SRCROOT)/../lib",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				OTHER_CFLAGS = (
-					"$(OTHER_CFLAGS)",
-					"-ffast-math",
-					"-falign-loops=16",
-				);
-				WARNING_CFLAGS = "-w";
-			};
-			name = Release;
-		};
 		D186224D14F95B2E00639D7C /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -644,7 +550,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				FRAMEWORK_VERSION = A;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = ../lib;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/Frameworks;
@@ -661,7 +566,7 @@
 			};
 			name = "App Store";
 		};
-		D186224F14F95B3400639D7C /* Release-LLVM */ = {
+		D186224F14F95B3400639D7C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
@@ -684,9 +589,9 @@
 				);
 				WARNING_CFLAGS = "-w";
 			};
-			name = "Release-LLVM";
+			name = Release;
 		};
-		D186225014F95B3400639D7C /* Release-LLVM */ = {
+		D186225014F95B3400639D7C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -709,9 +614,9 @@
 				WRAPPER_EXTENSION = framework;
 				ZERO_LINK = NO;
 			};
-			name = "Release-LLVM";
+			name = Release;
 		};
-		D186225114F95B3B00639D7C /* Debug-LLVM */ = {
+		D186225114F95B3B00639D7C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -724,9 +629,9 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				WARNING_CFLAGS = "-w";
 			};
-			name = "Debug-LLVM";
+			name = Debug;
 		};
-		D186225214F95B3B00639D7C /* Debug-LLVM */ = {
+		D186225214F95B3B00639D7C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -751,9 +656,9 @@
 				WRAPPER_EXTENSION = framework;
 				ZERO_LINK = YES;
 			};
-			name = "Debug-LLVM";
+			name = Debug;
 		};
-		D1F2799A177A2A4200E5C131 /* Debug */ = {
+		D1F2799B177A2A4200E5C131 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -768,22 +673,7 @@
 			};
 			name = Debug;
 		};
-		D1F2799B177A2A4200E5C131 /* Debug-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = NO;
-				EXECUTABLE_PREFIX = lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = vorbis;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = "Debug-LLVM";
-		};
-		D1F2799C177A2A4200E5C131 /* Release */ = {
+		D1F2799D177A2A4200E5C131 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -796,20 +686,6 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
-		};
-		D1F2799D177A2A4200E5C131 /* Release-LLVM */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = YES;
-				EXECUTABLE_PREFIX = lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				PRODUCT_NAME = vorbis;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = "Release-LLVM";
 		};
 		D1F2799E177A2A4200E5C131 /* App Store */ = {
 			isa = XCBuildConfiguration;
@@ -831,38 +707,32 @@
 		730F23EC091827B100AB638C /* Build configuration list for PBXNativeTarget "vorbis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				730F23ED091827B100AB638C /* Debug */,
-				D186225214F95B3B00639D7C /* Debug-LLVM */,
-				730F23EE091827B100AB638C /* Release */,
-				D186225014F95B3400639D7C /* Release-LLVM */,
+				D186225214F95B3B00639D7C /* Debug */,
+				D186225014F95B3400639D7C /* Release */,
 				D186224E14F95B2E00639D7C /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		730F23F3091827B200AB638C /* Build configuration list for PBXProject "Vorbis" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				730F23F4091827B200AB638C /* Debug */,
-				D186225114F95B3B00639D7C /* Debug-LLVM */,
-				730F23F5091827B200AB638C /* Release */,
-				D186224F14F95B3400639D7C /* Release-LLVM */,
+				D186225114F95B3B00639D7C /* Debug */,
+				D186224F14F95B3400639D7C /* Release */,
 				D186224D14F95B2E00639D7C /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D1F2799F177A2A4200E5C131 /* Build configuration list for PBXNativeTarget "vorbis (Mac)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D1F2799A177A2A4200E5C131 /* Debug */,
-				D1F2799B177A2A4200E5C131 /* Debug-LLVM */,
-				D1F2799C177A2A4200E5C131 /* Release */,
-				D1F2799D177A2A4200E5C131 /* Release-LLVM */,
+				D1F2799B177A2A4200E5C131 /* Debug */,
+				D1F2799D177A2A4200E5C131 /* Release */,
 				D1F2799E177A2A4200E5C131 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
