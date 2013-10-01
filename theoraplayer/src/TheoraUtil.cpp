@@ -10,6 +10,11 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <algorithm>
 #include <math.h>
 #include <map>
+#ifndef _WIN32
+#include <unistd.h>
+#include <pthread.h>
+#endif
+
 #include "TheoraUtil.h"
 #include "TheoraException.h"
 
