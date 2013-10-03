@@ -5,7 +5,7 @@
       <AdditionalDependencies>libhltypes.lib;libgtypes.lib;libapril.lib;libaprilui.lib;libxal.lib;libtheoraplayer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Platform)'=='Android'">
+  <ItemDefinitionGroup Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">
     <Link>
       <AdditionalDependencies>-ltheoraplayer;-lxal;-laprilui.lib;-lapril;-lhltypes;-lgtypes;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
