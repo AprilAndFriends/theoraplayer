@@ -19,14 +19,6 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "TheoraVideoClip_Theora.h"
 #include "TheoraPixelTransform.h"
 
-//! clears a portion of memory with an unsign
-static void memset_uint(void* buffer, unsigned int color, unsigned int sizeInBytes)
-{
-	unsigned int* data = (unsigned int*) buffer;
-	for (unsigned int i = 0; i < sizeInBytes; i += 4, data++)
-		*data = color;
-}
-
 TheoraVideoClip_Theora::TheoraVideoClip_Theora(TheoraDataSource* data_source,
 										TheoraOutputMode output_mode,
 										int nPrecachedFrames,

@@ -20,6 +20,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "TheoraVideoClip_AVFoundation.h"
 #include "TheoraPixelTransform.h"
 
+#ifdef _AVFOUNDATION_BGRX
 // a fast function developed to use kernel byte swapping calls to optimize alpha decoding.
 // In AVFoundation, BGRX mode conversion is prefered to YUV conversion because apple's YUV
 // conversion on iOS seems to run faster than libtheoraplayer's implementation
@@ -46,6 +47,7 @@ static void bgrx2rgba(unsigned char* dest, int w, int h, struct TheoraPixelTrans
 		}
 	}
 }
+#endif
 
 static CVPlanarPixelBufferInfo_YCbCrPlanar getYUVStruct(void* src)
 {
