@@ -23,7 +23,7 @@ iOS_simulator = subprocess.check_output("xcodebuild -showsdks | grep simulator |
 # -------------------------
 def clean():
 	if os.path.exists(path): shutil.rmtree(path)
-#	if os.path.exists('build'): shutil.rmtree('build')
+	if os.path.exists('build'): shutil.rmtree('build')
 	os.system("svn export libtheoraplayer_sdk/ " + path)
 	
 def build(project, target, configuration, sdk = ""):
