@@ -219,6 +219,16 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ItemGroup Condition="'$(PlatformToolset)'=='v110_wp80'">
+    <Reference Include="platform.winmd">
+      <IsWinMDFile>true</IsWinMDFile>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Windows.winmd">
+      <IsWinMDFile>true</IsWinMDFile>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
@@ -320,7 +330,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__native_client__;_WINRT;_WIN32;_DEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__native_client__;_WINRT;_WINP8;_WIN32;_DEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -329,19 +339,21 @@
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>false</CompileAsWinRT>
+      <AdditionalUsingDirectories>$(VSInstallDir)vcpackages;$(WindowsSDK_MetadataPath);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>lib;$(SolutionDir)bin\$(PlatformName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugP8|ARM'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__native_client__;_WINRT;_WINARM;ARM;_DEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__native_client__;_WINRT;_WINP8;_WINARM;ARM;_DEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS;_CRT_SECURE_NO_WARNINGS;PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -350,12 +362,14 @@
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>false</CompileAsWinRT>
+      <AdditionalUsingDirectories>$(VSInstallDir)vcpackages;$(WindowsSDK_MetadataPath);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>lib;$(SolutionDir)bin\$(PlatformName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseP8|Win32'">
@@ -363,7 +377,7 @@
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__native_client__;_WINRT;_WIN32;NDEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__native_client__;_WINRT;_WINP8;_WIN32;NDEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level3</WarningLevel>
@@ -371,6 +385,7 @@
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>false</CompileAsWinRT>
+      <AdditionalUsingDirectories>$(VSInstallDir)vcpackages;$(WindowsSDK_MetadataPath);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -380,6 +395,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>lib;$(SolutionDir)bin\$(PlatformName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseP8|ARM'">
@@ -387,7 +403,7 @@
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__native_client__;_WINRT;_WINARM;ARM;NDEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__native_client__;_WINRT;_WINP8;_WINARM;ARM;NDEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level3</WarningLevel>
@@ -395,6 +411,7 @@
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>false</CompileAsWinRT>
+      <AdditionalUsingDirectories>$(VSInstallDir)vcpackages;$(WindowsSDK_MetadataPath);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -405,6 +422,7 @@
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>lib;$(SolutionDir)bin\$(PlatformName);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -27,6 +27,6 @@ public:
 	TheoraVideoClip* getAssignedClip() { return mClip; }
 
     //! Main Thread Body - do not call directly!
-	void executeThread();
+	void execute();
 };
 #endif
