@@ -357,7 +357,7 @@ void TheoraVideoManager::createWorkerThreads(int n)
 	for (int i=0;i<n;i++)
 	{
 		t=new TheoraWorkerThread();
-		t->startThread();
+		t->start();
 		mWorkerThreads.push_back(t);
 	}
 }
@@ -366,7 +366,7 @@ void TheoraVideoManager::destroyWorkerThreads()
 {
 	foreach(TheoraWorkerThread*,mWorkerThreads)
 	{
-		(*it)->waitforThread();
+		(*it)->join();
 		delete (*it);
 	}
 	mWorkerThreads.clear();

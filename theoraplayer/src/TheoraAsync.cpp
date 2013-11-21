@@ -6,61 +6,59 @@ Copyright (c) 2008-2013 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
+
 #include <stdio.h>
-#include "TheoraAsync.h"
-#include "TheoraUtil.h"
+#include <stdlib.h>
 
 #ifdef _WIN32
 #include <windows.h>
-
-unsigned long WINAPI theoraAsync_Call(void* param)
-{
 #else
-void *theoraAsync_Call(void* param)
-{
+#include <unistd.h>
+#include <pthread.h>
 #endif
 
-	TheoraThread* t = (TheoraThread*) param;
-	t->executeThread();
-#ifndef _WIN32
-    pthread_exit(NULL);
-#endif
-	return 0;
-}
+#include "TheoraAsync.h"
+#include "TheoraUtil.h"
 
+#ifdef _WINRT
+#include <wrl.h>
+#endif
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Mutex
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 TheoraMutex::TheoraMutex()
 {
 #ifdef _WIN32
-	mHandle = 0;
+#ifndef _WINRT // WinXP does not have CreateTheoraMutexEx()
+	mHandle = CreateMutex(0, 0, 0);
 #else
-    pthread_mutex_init(&mHandle, 0);
+	mHandle = CreateMutexEx(NULL, NULL, 0, SYNCHRONIZE);
+#endif
+#else
+	mHandle = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init((pthread_mutex_t*)mHandle, 0);
 #endif
 }
 
 TheoraMutex::~TheoraMutex()
 {
 #ifdef _WIN32
-	if (mHandle) CloseHandle(mHandle);
+	CloseHandle(mHandle);
 #else
-    pthread_mutex_destroy(&mHandle);
+	pthread_mutex_destroy((pthread_mutex_t*)mHandle);
+	free((pthread_mutex_t*)mHandle);
+	mHandle = NULL;
 #endif
 }
 
 void TheoraMutex::lock()
 {
 #ifdef _WIN32
-	if (!mHandle)
-	{
-#ifndef _WINRT // WinXP does not have CreateMutexEx()
-		mHandle = CreateMutex(0, 0, 0);
-#else
-		mHandle = CreateMutexEx(NULL, NULL, 0, SYNCHRONIZE);
-#endif
-	}
 	WaitForSingleObjectEx(mHandle, INFINITE, FALSE);
 #else
-	pthread_mutex_lock(&mHandle);
+	pthread_mutex_lock((pthread_mutex_t*)mHandle);
 #endif
 }
 
@@ -69,73 +67,107 @@ void TheoraMutex::unlock()
 #ifdef _WIN32
 	ReleaseMutex(mHandle);
 #else
-    pthread_mutex_unlock(&mHandle);
+	pthread_mutex_unlock((pthread_mutex_t*)mHandle);
 #endif
 }
-
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Thread
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 #ifdef _WINRT
 using namespace Windows::Foundation;
 using namespace Windows::System::Threading;
+#endif
 
+#ifdef _WIN32
+unsigned long WINAPI theoraAsyncCall(void* param)
+#else
+void* theoraAsyncCall(void* param)
+#endif
+{
+	TheoraThread* t = (TheoraThread*)param;
+	t->execute();
+#ifdef _WIN32
+	return 0;
+#else
+	pthread_exit(NULL);
+	return NULL;
+#endif
+}
+
+#ifdef _WINRT
 struct TheoraAsyncActionWrapper
 {
 public:
-	IAsyncAction^ async_action;
-	TheoraAsyncActionWrapper(IAsyncAction^ async_action)
+	IAsyncAction^ mAsyncAction;
+	TheoraAsyncActionWrapper(IAsyncAction^ asyncAction)
 	{
-		this->async_action = async_action;
+		mAsyncAction = asyncAction;
 	}
 };
-
 #endif
-
-TheoraThread::TheoraThread()
+	
+TheoraThread::TheoraThread() : mRunning(false), mId(0)
 {
-	mThreadRunning = false;
-	mHandle = 0;
+#ifndef _WIN32
+	mId = (pthread_t*)malloc(sizeof(pthread_t));
+#endif
 }
 
 TheoraThread::~TheoraThread()
 {
-#ifdef _WIN32
-	if (mHandle) CloseHandle(mHandle);
-#endif
-}
-
-void TheoraThread::startThread()
-{
-	mThreadRunning = true;
+	if (mRunning)
+	{
+		stop();
+	}
+	if (mId != NULL)
+	{
 #ifdef _WIN32
 #ifndef _WINRT
-	mHandle = CreateThread(0, 0, &theoraAsync_Call, this, 0, 0);
+		CloseHandle(mId);
 #else
-	mHandle = new TheoraAsyncActionWrapper(ThreadPool::RunAsync(
-	ref new WorkItemHandler([&](IAsyncAction^ work_item)
-	{
-		this->executeThread();
-	}),
-	WorkItemPriority::Normal, WorkItemOptions::TimeSliced));
+		delete mId;
 #endif
 #else
-    int ret=pthread_create(&mHandle, NULL, &theoraAsync_Call, this);
-    if (ret) printf("ERROR: Unable to create thread!\n"); // <-- TODO: log this, rather then using printf, and remove stdio include.
+		free((pthread_t*)mId);
 #endif
+		mId = NULL;
+	}
 }
 
-void TheoraThread::waitforThread()
+void TheoraThread::start()
 {
-	mThreadRunning = false;
+	mRunning = true;
 #ifdef _WIN32
 #ifndef _WINRT
-	WaitForSingleObject(mHandle, INFINITE);
-	if (mHandle != 0)
+	mId = CreateThread(0, 0, &theoraAsyncCall, this, 0, 0);
+#else
+	mId = new TheoraAsyncActionWrapper(ThreadPool::RunAsync(
+		ref new WorkItemHandler([&](IAsyncAction^ work_item)
+		{
+			execute();
+		}),
+		WorkItemPriority::Normal, WorkItemOptions::TimeSliced));
+#endif
+#else
+	pthread_create((pthread_t*)mId, NULL, &theoraAsyncCall, this);
+#endif
+}
+	
+void TheoraThread::join()
+{
+	mRunning = false;
+#ifdef _WIN32
+#ifndef _WINRT
+	WaitForSingleObject(mId, INFINITE);
+	if (mId != NULL)
 	{
-		CloseHandle(mHandle);
-		mHandle = 0;
+		CloseHandle(mId);
+		mId = NULL;
 	}
 #else
-	IAsyncAction^ action = ((TheoraAsyncActionWrapper*)mHandle)->async_action;
+	IAsyncAction^ action = ((TheoraAsyncActionWrapper*)mId)->mAsyncAction;
 	int i = 0;
 	while (action->Status != AsyncStatus::Completed &&
 		action->Status != AsyncStatus::Canceled &&
@@ -158,13 +190,50 @@ void TheoraThread::waitforThread()
 			i++;
 		}
 	}
-	if (mHandle != NULL)
-	{
-		delete mHandle;
-		mHandle = NULL;
-	}
 #endif
 #else
-    pthread_join(mHandle, 0);
+	pthread_join(*((pthread_t*)mId), 0);
 #endif
 }
+	
+void TheoraThread::resume()
+{
+#ifdef _WIN32
+#ifndef _WINRT
+	ResumeThread(mId);
+#else
+	// not available in WinRT
+#endif
+#endif
+}
+	
+void TheoraThread::pause()
+{
+#ifdef _WIN32
+#ifndef _WINRT
+	SuspendThread(mId);
+#else
+	// not available in WinRT
+#endif
+#endif
+}
+	
+void TheoraThread::stop()
+{
+	if (mRunning)
+	{
+		mRunning = false;
+#ifdef _WIN32
+#ifndef _WINRT
+		TerminateThread(mId, 0);
+#else
+		((TheoraAsyncActionWrapper*)mId)->mAsyncAction->Cancel();
+#endif
+#elif defined(_ANDROID)
+		pthread_kill(*((pthread_t*)mId), 0);
+#else
+		pthread_cancel(*((pthread_t*)mId));
+#endif
+	}
+}
+	

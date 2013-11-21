@@ -24,10 +24,10 @@ TheoraWorkerThread::~TheoraWorkerThread()
 
 }
 
-void TheoraWorkerThread::executeThread()
+void TheoraWorkerThread::execute()
 {
-	mThreadRunning = true;
-	while (mThreadRunning)
+	mRunning = true;
+	while (mRunning)
 	{
 		mClip = TheoraVideoManager::getSingleton().requestWork(this);
 		if (!mClip)
@@ -41,7 +41,7 @@ void TheoraWorkerThread::executeThread()
 		if (mClip->mSeekFrame >= 0) mClip->doSeek();
 
 		if (!mClip->decodeNextFrame())
-			_psleep(1); // this  happens when the video frame queue is full.
+			_psleep(1); // this happens when the video frame queue is full.
 
 		mClip->mAssignedWorkerThread = NULL;
 		mClip->mThreadAccessMutex->unlock();
