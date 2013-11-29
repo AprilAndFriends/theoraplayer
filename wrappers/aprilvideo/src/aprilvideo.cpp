@@ -22,6 +22,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <xal/AudioManager.h>
 #include <xal/Player.h>
 #include <xal/Sound.h>
+#include <xal/xal.h>
 #include "aprilvideo.h"
 #include "AprilVideoDataSource.h"
 
@@ -54,8 +55,8 @@ namespace aprilvideo
 			mSyncOffset = sync_offset;
 			mPlayer = player;
 			mT = 0;
-			static hstr audiosystem = xal::mgr->getName(); // Disabled" audio system doesn't sync audio & video
-			mDisabledAudio = (audiosystem == "Disabled");
+			static hstr audiosystem = xal::mgr->getName(); // XAL_AS_DISABLED audio system doesn't sync audio & video
+			mDisabledAudio = (audiosystem == XAL_AS_DISABLED);
 		}
 		
 		void update(float time_increase)

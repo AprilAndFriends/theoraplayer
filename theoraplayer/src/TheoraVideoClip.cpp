@@ -29,17 +29,17 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	mFPS(1),
 	mUseAlpha(0),
 	mFrameDuration(0),
-    mName(data_source->repr()),
-    mStride(usePower2Stride),
+	mName(data_source->repr()),
+	mStride(usePower2Stride),
 	mSubFrameWidth(0),
 	mSubFrameHeight(0),
 	mSubFrameOffsetX(0),
 	mSubFrameOffsetY(0),
-    mAudioGain(1),
-    mRequestedOutputMode(output_mode),
-    mAutoRestart(0),
-    mEndOfFile(0),
-    mRestarted(0),
+	mAudioGain(1),
+	mRequestedOutputMode(output_mode),
+	mAutoRestart(0),
+	mEndOfFile(0),
+	mRestarted(0),
 	mIteration(0),
 	mLastIteration(0),
 	mStream(0),
@@ -73,7 +73,7 @@ TheoraVideoClip::~TheoraVideoClip()
 	{
 		mAudioMutex->lock(); // ensure a thread isn't using this mutex
 		delete mAudioInterface; // notify audio interface it's time to call it a day
-        mAudioMutex ->unlock();
+		mAudioMutex ->unlock();
 		delete mAudioMutex;
 	}
 	
@@ -180,22 +180,22 @@ int TheoraVideoClip::getHeight()
 
 int TheoraVideoClip::getSubFrameWidth()
 {
-    return mUseAlpha ? mWidth / 2 : mSubFrameWidth;
+	return mUseAlpha ? mWidth / 2 : mSubFrameWidth;
 }
 
 int TheoraVideoClip::getSubFrameHeight()
 {
-    return mUseAlpha ? mHeight : mSubFrameHeight;
+	return mUseAlpha ? mHeight : mSubFrameHeight;
 }
 
 int TheoraVideoClip::getSubFrameOffsetX()
 {
-    return mUseAlpha ? 0 : mSubFrameOffsetX;
+	return mUseAlpha ? 0 : mSubFrameOffsetX;
 }
 
 int TheoraVideoClip::getSubFrameOffsetY()
 {
-    return mUseAlpha ? 0 : mSubFrameOffsetY;
+	return mUseAlpha ? 0 : mSubFrameOffsetY;
 }
 
 TheoraVideoFrame* TheoraVideoClip::getNextFrame()
@@ -316,7 +316,7 @@ bool TheoraVideoClip::isPaused()
 
 bool TheoraVideoClip::isDone()
 {
-    return mEndOfFile && !mFrameQueue->getFirstAvailableFrame();
+	return mEndOfFile && !mFrameQueue->getFirstAvailableFrame();
 }
 
 void TheoraVideoClip::stop()
@@ -328,12 +328,12 @@ void TheoraVideoClip::stop()
 
 void TheoraVideoClip::setPlaybackSpeed(float speed)
 {
-    mTimer->setSpeed(speed);
+	mTimer->setSpeed(speed);
 }
 
 float TheoraVideoClip::getPlaybackSpeed()
 {
-    return mTimer->getSpeed();
+	return mTimer->getSpeed();
 }
 
 void TheoraVideoClip::seek(float time)
@@ -343,9 +343,9 @@ void TheoraVideoClip::seek(float time)
 
 void TheoraVideoClip::seekToFrame(int frame)
 {
-    if      (frame < 0)          mSeekFrame = 0;
-    else if (frame > mNumFrames) mSeekFrame = mNumFrames;
-    else                         mSeekFrame = frame;
+	if      (frame < 0)          mSeekFrame = 0;
+	else if (frame > mNumFrames) mSeekFrame = mNumFrames;
+	else                         mSeekFrame = frame;
 
 	mEndOfFile = false;
 }
