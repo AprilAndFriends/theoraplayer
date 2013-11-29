@@ -149,7 +149,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 
 	TheoraVideoClip* clip = NULL;
 	int nPrecached = numPrecachedOverride ? numPrecachedOverride : mDefaultNumPrecachedFrames;
-	logMessage("Creating video from data source: "+data_source->repr());
+	logMessage("Creating video from data source: " + data_source->repr() + " [" + str(nPrecached) + " precached frames].");
 	
 #ifdef __AVFOUNDATION
 	TheoraFileDataSource* fileDataSource = dynamic_cast<TheoraFileDataSource*>(data_source);
