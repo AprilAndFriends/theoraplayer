@@ -18,11 +18,19 @@
 		D1307DA115FCA3920055BB26 /* hltypes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1307D9C15FCA3920055BB26 /* hltypes.framework */; };
 		D1307DA215FCA3920055BB26 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1307D9D15FCA3920055BB26 /* theoraplayer.framework */; };
 		D1307DA515FCB4630055BB26 /* aprilui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1307DA415FCB4630055BB26 /* aprilui.framework */; };
-		D135539B172962F000583915 /* AprilVideoDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D135539A172962F000583915 /* AprilVideoDataSource.cpp */; };
-		D135539C172962F000583915 /* AprilVideoDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D135539A172962F000583915 /* AprilVideoDataSource.cpp */; };
-		D135539E1729630400583915 /* AprilVideoDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D135539D1729630400583915 /* AprilVideoDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D135539B172962F000583915 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D135539A172962F000583915 /* DataSource.cpp */; };
+		D135539C172962F000583915 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D135539A172962F000583915 /* DataSource.cpp */; };
+		D135539E1729630400583915 /* DataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D135539D1729630400583915 /* DataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D198F9D7177A32C3002942E3 /* aprilvideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1307D7E15FC9DC00055BB26 /* aprilvideo.cpp */; };
-		D198F9D8177A32C3002942E3 /* AprilVideoDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D135539A172962F000583915 /* AprilVideoDataSource.cpp */; };
+		D198F9D8177A32C3002942E3 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D135539A172962F000583915 /* DataSource.cpp */; };
+		D1B822E6185860CE000BC51F /* AudioVideoTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = D1B822E4185860CE000BC51F /* AudioVideoTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1B822E7185860CE000BC51F /* VideoObject.h in Headers */ = {isa = PBXBuildFile; fileRef = D1B822E5185860CE000BC51F /* VideoObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1B822EA185860F0000BC51F /* AudioVideoTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B822E8185860F0000BC51F /* AudioVideoTimer.cpp */; };
+		D1B822EB185860F0000BC51F /* AudioVideoTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B822E8185860F0000BC51F /* AudioVideoTimer.cpp */; };
+		D1B822EC185860F0000BC51F /* AudioVideoTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B822E8185860F0000BC51F /* AudioVideoTimer.cpp */; };
+		D1B822ED185860F0000BC51F /* VideoObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B822E9185860F0000BC51F /* VideoObject.cpp */; };
+		D1B822EE185860F0000BC51F /* VideoObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B822E9185860F0000BC51F /* VideoObject.cpp */; };
+		D1B822EF185860F0000BC51F /* VideoObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B822E9185860F0000BC51F /* VideoObject.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,10 +44,14 @@
 		D1307D9C15FCA3920055BB26 /* hltypes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = hltypes.framework; path = "../../xcode/__build__/products/Debug-LLVM/hltypes.framework"; sourceTree = "<group>"; };
 		D1307D9D15FCA3920055BB26 /* theoraplayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = theoraplayer.framework; path = "../../xcode/__build__/products/Debug-LLVM/theoraplayer.framework"; sourceTree = "<group>"; };
 		D1307DA415FCB4630055BB26 /* aprilui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = aprilui.framework; path = "../../xcode/__build__/products/Debug-LLVM/aprilui.framework"; sourceTree = "<group>"; };
-		D135539A172962F000583915 /* AprilVideoDataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AprilVideoDataSource.cpp; path = src/AprilVideoDataSource.cpp; sourceTree = "<group>"; };
-		D135539D1729630400583915 /* AprilVideoDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AprilVideoDataSource.h; path = include/aprilvideo/AprilVideoDataSource.h; sourceTree = "<group>"; };
+		D135539A172962F000583915 /* DataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataSource.cpp; path = src/DataSource.cpp; sourceTree = "<group>"; };
+		D135539D1729630400583915 /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSource.h; path = include/aprilvideo/DataSource.h; sourceTree = "<group>"; };
 		D1473F2A150CA69B00B20490 /* aprilvideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = aprilvideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D198F9DF177A32C3002942E3 /* libaprilvideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libaprilvideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1B822E4185860CE000BC51F /* AudioVideoTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioVideoTimer.h; path = include/aprilvideo/AudioVideoTimer.h; sourceTree = "<group>"; };
+		D1B822E5185860CE000BC51F /* VideoObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoObject.h; path = include/aprilvideo/VideoObject.h; sourceTree = "<group>"; };
+		D1B822E8185860F0000BC51F /* AudioVideoTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioVideoTimer.cpp; path = src/AudioVideoTimer.cpp; sourceTree = "<group>"; };
+		D1B822E9185860F0000BC51F /* VideoObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VideoObject.cpp; path = src/VideoObject.cpp; sourceTree = "<group>"; };
 		D1BB6FAE150E9E7100EF9400 /* libaprilvideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libaprilvideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -92,8 +104,10 @@
 		D1473F42150CA6C000B20490 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				D135539A172962F000583915 /* AprilVideoDataSource.cpp */,
 				D1307D7E15FC9DC00055BB26 /* aprilvideo.cpp */,
+				D135539A172962F000583915 /* DataSource.cpp */,
+				D1B822E8185860F0000BC51F /* AudioVideoTimer.cpp */,
+				D1B822E9185860F0000BC51F /* VideoObject.cpp */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -115,9 +129,11 @@
 		D147401F150CAE9600B20490 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				D135539D1729630400583915 /* AprilVideoDataSource.h */,
-				D1307D8615FCA0560055BB26 /* aprilvideoExport.h */,
 				D1307D8015FC9DC90055BB26 /* aprilvideo.h */,
+				D1307D8615FCA0560055BB26 /* aprilvideoExport.h */,
+				D135539D1729630400583915 /* DataSource.h */,
+				D1B822E4185860CE000BC51F /* AudioVideoTimer.h */,
+				D1B822E5185860CE000BC51F /* VideoObject.h */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -130,7 +146,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1307D8115FC9DC90055BB26 /* aprilvideo.h in Headers */,
-				D135539E1729630400583915 /* AprilVideoDataSource.h in Headers */,
+				D1B822E7185860CE000BC51F /* VideoObject.h in Headers */,
+				D1B822E6185860CE000BC51F /* AudioVideoTimer.h in Headers */,
+				D135539E1729630400583915 /* DataSource.h in Headers */,
 				D1307D8715FCA0560055BB26 /* aprilvideoExport.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,8 +235,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B822EA185860F0000BC51F /* AudioVideoTimer.cpp in Sources */,
 				D1307D7F15FC9DC00055BB26 /* aprilvideo.cpp in Sources */,
-				D135539B172962F000583915 /* AprilVideoDataSource.cpp in Sources */,
+				D1B822ED185860F0000BC51F /* VideoObject.cpp in Sources */,
+				D135539B172962F000583915 /* DataSource.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,8 +246,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B822EC185860F0000BC51F /* AudioVideoTimer.cpp in Sources */,
 				D198F9D7177A32C3002942E3 /* aprilvideo.cpp in Sources */,
-				D198F9D8177A32C3002942E3 /* AprilVideoDataSource.cpp in Sources */,
+				D1B822EF185860F0000BC51F /* VideoObject.cpp in Sources */,
+				D198F9D8177A32C3002942E3 /* DataSource.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,8 +257,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B822EB185860F0000BC51F /* AudioVideoTimer.cpp in Sources */,
 				D1307D8215FC9ECF0055BB26 /* aprilvideo.cpp in Sources */,
-				D135539C172962F000583915 /* AprilVideoDataSource.cpp in Sources */,
+				D1B822EE185860F0000BC51F /* VideoObject.cpp in Sources */,
+				D135539C172962F000583915 /* DataSource.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
