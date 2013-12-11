@@ -17,7 +17,13 @@
     <ClInclude Include="include\aprilvideo\aprilvideoExport.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\aprilvideo\AprilVideoDataSource.h">
+    <ClInclude Include="include\aprilvideo\AudioVideoTimer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\aprilvideo\DataSource.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\aprilvideo\VideoObject.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -25,7 +31,13 @@
     <ClCompile Include="src\aprilvideo.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\AprilVideoDataSource.cpp">
+    <ClCompile Include="src\AudioVideoTimer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DataSource.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VideoObject.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
