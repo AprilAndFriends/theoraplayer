@@ -10,23 +10,8 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #define APRILVIDEO_H
 
 #include <hltypes/hstring.h>
-#include <aprilui/ObjectImageBox.h>
+
 #include "aprilvideoExport.h"
-
-class TheoraVideoManager;
-class TheoraVideoClip;
-class TheoraTimer;
-namespace aprilui
-{
-	class Texture;
-	class Image;
-}
-
-namespace xal
-{
-	class Sound;
-	class Player;
-}
 
 namespace aprilvideo
 {
@@ -34,5 +19,6 @@ namespace aprilvideo
 
 	void aprilVideoFnExport init(int num_worker_threads = 1);
 	void aprilVideoFnExport destroy();
+
 }
 #endif

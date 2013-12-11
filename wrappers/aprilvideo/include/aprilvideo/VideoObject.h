@@ -9,6 +9,27 @@
 #ifndef APRILVIDEO_OBJECT_H
 #define APRILVIDEO_OBJECT_H
 
+#include <aprilui/ObjectImageBox.h>
+#include <gtypes/Rectangle.h>
+#include <hltypes/hstring.h>
+
+#include "aprilVideoExport.h"
+
+class TheoraVideoClip;
+class TheoraTimer;
+
+namespace aprilui
+{
+	class Image;
+	class Texture;
+}
+
+namespace xal
+{
+	class Player;
+	class Sound;
+}
+
 namespace aprilvideo
 {
 	class aprilVideoExport VideoObject : public aprilui::ImageBox
