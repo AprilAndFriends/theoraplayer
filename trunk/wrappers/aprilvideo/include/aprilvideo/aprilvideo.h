@@ -32,52 +32,6 @@ namespace aprilvideo
 {
 	extern hstr logTag;
 
-	class aprilVideoExport VideoObject : public aprilui::ImageBox
-	{
-		bool mPrevDoneFlag;
-		bool mUseAlpha;
-		bool mLoop;
-		hstr mClipName;
-		TheoraVideoClip* mClip;
-		TheoraTimer* mTimer;
-		aprilui::Texture* mTexture;
-		aprilui::Image* mVideoImage;
-		float mSpeed;
-		int mPrevFrameNumber;
-		bool mSeeked;
-		int mAlphaPauseTreshold;
-		unsigned char mPrevAlpha;
-
-		float mAudioSyncOffset;
-		hstr mAudioName;
-		xal::Player* mAudioPlayer;
-		xal::Sound* mSound;
-		
-		void destroyResources();
-		void createClip();
-	public:
-		VideoObject(chstr name, grect rect);
-		static aprilui::Object* createInstance(chstr name, grect rect);
-		~VideoObject();
-		
-		hstr getFullPath();
-
-
-		bool isPlaying();
-		bool isPaused();
-		bool isStopped();
-		float getTimePosition();
-		
-		void update(float k);
-		void OnDraw();
-
-		void setAlphaTreshold(int treshold);
-		int getAlphaTreshold() { return mAlphaPauseTreshold; }
-		void notifyEvent(chstr name, void* params);
-		bool setProperty(chstr name, chstr value);
-		hstr getProperty(chstr name, bool* property_exists);
-	};
-	
 	void aprilVideoFnExport init(int num_worker_threads = 1);
 	void aprilVideoFnExport destroy();
 }
