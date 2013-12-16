@@ -203,10 +203,10 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 	if (mSeekFrame != -1) return 0; // if we are about to seek, then the current frame queue is invalidated
 	                                // (will be cleared when a worker thread does the actual seek)
 	TheoraVideoFrame* frame;
-	float time=mTimer->getTime();
+	float time = mTimer->getTime();
 	for (;;)
 	{
-		frame=mFrameQueue->getFirstAvailableFrame();
+		frame = mFrameQueue->getFirstAvailableFrame();
 		if (!frame) return 0;
 		if (frame->mTimeToDisplay > time) return 0;
 		// only drop frames if you have more frames to show. otherwise even the late frame will do..
@@ -214,7 +214,7 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 		{
 			if (mRestarted && frame->mTimeToDisplay < 2) return 0;
 #ifdef _DEBUG
-			th_writelog(mName+": dropped frame "+str(frame->getFrameNumber()));
+			th_writelog(mName + ": dropped frame " + str(frame->getFrameNumber()));
 #endif
 			mNumDroppedFrames++;
 			mNumDisplayedFrames++;
@@ -223,7 +223,7 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 		else break;
 	}
 
-	mLastIteration=frame->mIteration;
+	mLastIteration = frame->mIteration;
 	return frame;
 
 }
