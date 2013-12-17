@@ -212,6 +212,7 @@ namespace aprilvideo
 				else precached = 8;
 			}
 #endif
+			
 			if (path.ends_with("mp4"))
 			{
 				try
@@ -230,30 +231,34 @@ namespace aprilvideo
 			}
 			else
 			{
-#if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
-				hresource r(path);
-				int size = r.size();
-				TheoraDataSource* source;
-				
-				// additional Android/WinRT ARM optimization: preload file in RAM to speed up decoding, every bit counts on Android/WinRT ARM
-				// but only for "reasonably" sized files
-				if (size < 64 * 1024 * 1024)
+				if (!path.ends_with(".mp4") && ram > 256)
 				{
-					hlog::write(logTag, "Preloading video file to memory: " + path);
-					unsigned char* data = new unsigned char[size];
-					r.read_raw(data, size);
-					source = new TheoraMemoryFileDataSource(data, size);
+					hresource r(path);
+					int size = r.size();
+					TheoraDataSource* source;
+
+					// additional performance optimization: preload file in RAM to speed up decoding, every bit counts on Android/WinRT ARM
+					// but only for "reasonably" sized files
+					if (size < 64 * 1024 * 1024)
+					{
+						hlog::write(logTag, "Preloading video file to memory: " + path);
+						unsigned char* data = new unsigned char[size];
+						r.read_raw(data, size);
+						source = new TheoraMemoryFileDataSource(data, size);
+					}
+					else
+					{
+						source = new AprilVideoDataSource(path);
+					}
+					
+					mClip = gVideoManager->createVideoClip(source, mode, precached);
+					r.close();
+					hlog::write(logTag, "Created video clip.");
 				}
 				else
-					source = new AprilVideoDataSource(path);
-				
-				mClip = gVideoManager->createVideoClip(source, mode, precached);
-				r.close();
-				hlog::write(logTag, "Created video clip.");
-				
-#else
-				mClip = gVideoManager->createVideoClip(new AprilVideoDataSource(path), mode, precached);
-#endif
+				{
+					mClip = gVideoManager->createVideoClip(new AprilVideoDataSource(path), mode, precached);
+				}
 			}
 		}
 		catch (_TheoraGenericException& e)
