@@ -57,7 +57,7 @@ namespace aprilvideo
 		mPrevFrameNumber = 0;
 		mSeeked = 0;
 		mPrevAlpha = 255;
-		
+		mBlendMode = april::ALPHA_BLEND;
 		
 		if (!gVideoManager)
 		{
@@ -278,6 +278,7 @@ namespace aprilvideo
         tex->setAddressMode(april::Texture::ADDRESS_CLAMP);
 		mTexture = new aprilui::Texture(tex->getFilename(), tex);
 		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
+        mVideoImage->setBlendMode(mBlendMode);
 #if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
 		hlog::write(logTag, "Waiting for cache: " + path);
 #endif
@@ -406,6 +407,23 @@ namespace aprilvideo
 		{
 			mAudioSyncOffset = value;
 		}
+        else if (name == "blend_mode")
+        {
+            april::BlendMode mode;
+            if      (value == "add")         mode = april::ADD;
+            else if (value == "substract")   mode = april::SUBTRACT;
+            else if (value == "alpha_blend") mode = april::ALPHA_BLEND;
+            else
+            {
+                hlog::errorf(logTag, "Unknown VideoObject blend mode: %s", name.c_str());
+                return 1;
+            }
+            mBlendMode = mode;
+            if (mVideoImage)
+            {
+                mVideoImage->setBlendMode(mode);
+            }
+        }
         else if (name == "state")
         {
             if (value == "playing")
@@ -434,6 +452,21 @@ namespace aprilvideo
 		else if (name == "duration") return mClip ? hstr(mClip->getDuration()) : hstr(0);
 		else if (name == "audio")  return mAudioName;
 		else if (name == "sync_offset")  return mAudioSyncOffset;
+        else if (name == "blend_mode")
+        {
+            if (mVideoImage)
+            {
+                if      (mBlendMode == april::ADD)         return "add";
+                else if (mBlendMode == april::SUBTRACT)    return "substract";
+                else if (mBlendMode == april::ALPHA_BLEND) return "alpha_blend";
+                else return "unknown";
+            }
+            else
+            {
+                hlog::error(logTag, "Unable to get blend_mode to VideoObject, image is NULL");
+                return "";
+            }
+        }
         else if (name == "state")
         {
 			if (this->isPlaying()) return "playing";
