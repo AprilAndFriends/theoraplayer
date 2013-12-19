@@ -9,9 +9,10 @@
 #ifndef APRILVIDEO_OBJECT_H
 #define APRILVIDEO_OBJECT_H
 
-#include <aprilui/ObjectImageBox.h>
-#include <gtypes/Rectangle.h>
 #include <hltypes/hstring.h>
+#include <gtypes/Rectangle.h>
+#include <april/aprilUtil.h>
+#include <aprilui/ObjectImageBox.h>
 
 #include "aprilVideoExport.h"
 
@@ -40,6 +41,7 @@ namespace aprilvideo
 		hstr mClipName;
 		TheoraVideoClip* mClip;
 		TheoraTimer* mTimer;
+        april::BlendMode mBlendMode;
 		aprilui::Texture* mTexture;
 		aprilui::Image* mVideoImage;
 		float mSpeed;
