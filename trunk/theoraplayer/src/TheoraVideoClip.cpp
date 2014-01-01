@@ -134,7 +134,7 @@ void TheoraVideoClip::update(float time_increase)
         {
             if (time != mDuration)
             {
-                mTimer->update(mDuration - time);
+                mTimer->update((mDuration - time) / speed);
             }
         }
     }
