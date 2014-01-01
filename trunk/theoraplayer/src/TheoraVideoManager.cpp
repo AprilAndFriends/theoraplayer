@@ -402,7 +402,7 @@ std::string TheoraVideoManager::getVersionString()
 void TheoraVideoManager::getVersion(int* a, int* b, int* c) // TODO, return a struct instead of the current solution.
 {
 	*a = 1;
-	*b = 0;
+	*b = 1;
 	*c = 0;
 }
 
