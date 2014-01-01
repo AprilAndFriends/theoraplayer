@@ -29,7 +29,7 @@ public:
 	bool mReady;
 	//! indicates the frame is being used by TheoraWorkerThread instance
 	bool mInUse;
-	//! used to detect when the video restarted to ensure smooth playback
+	//! used to keep track of linear time in looping videos
 	int mIteration;
 	
 	int mBpp;

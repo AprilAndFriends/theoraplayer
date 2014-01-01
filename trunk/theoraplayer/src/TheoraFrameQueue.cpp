@@ -19,8 +19,10 @@ TheoraFrameQueue::TheoraFrameQueue(TheoraVideoClip* parent)
 
 TheoraFrameQueue::~TheoraFrameQueue()
 {
-	foreach_l(TheoraVideoFrame*,mQueue)
+	foreach_l(TheoraVideoFrame*, mQueue)
+    {
 		delete (*it);
+    }
 	mQueue.clear();
 }
 
@@ -40,8 +42,10 @@ void TheoraFrameQueue::setSize(int n)
 	mMutex.lock();
 	if (mQueue.size() > 0)
 	{
-		foreach_l (TheoraVideoFrame*,mQueue)
+		foreach_l (TheoraVideoFrame*, mQueue)
+        {
 			delete (*it);
+        }
 		mQueue.clear();
 	}
 	TheoraVideoFrame* frame;
@@ -63,11 +67,17 @@ int TheoraFrameQueue::getSize()
 	return mQueue.size();
 }
 
+TheoraVideoFrame* TheoraFrameQueue::_getFirstAvailableFrame()
+{
+	TheoraVideoFrame* frame = mQueue.front();
+	if (frame->mReady) return frame;
+	else               return NULL;
+}
+
 TheoraVideoFrame* TheoraFrameQueue::getFirstAvailableFrame()
 {
-	TheoraVideoFrame* frame = NULL;
 	mMutex.lock();
-	if (mQueue.front()->mReady) frame = mQueue.front();
+	TheoraVideoFrame* frame = _getFirstAvailableFrame();
 	mMutex.unlock();
 	return frame;
 }
@@ -75,18 +85,26 @@ TheoraVideoFrame* TheoraFrameQueue::getFirstAvailableFrame()
 void TheoraFrameQueue::clear()
 {
 	mMutex.lock();
-	foreach_l(TheoraVideoFrame*,mQueue)
+	foreach_l (TheoraVideoFrame*, mQueue)
 		(*it)->clear();
 	mMutex.unlock();
 }
 
-void TheoraFrameQueue::pop()
+void TheoraFrameQueue::_pop(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        TheoraVideoFrame* first = mQueue.front();
+        first->clear();
+        mQueue.pop_front();
+        mQueue.push_back(first);
+    }
+}
+
+void TheoraFrameQueue::pop(int n)
 {
 	mMutex.lock();
-	TheoraVideoFrame* first=mQueue.front();
-	first->clear();
-	mQueue.pop_front();
-	mQueue.push_back(first);
+    _pop(n);
 	mMutex.unlock();
 }
 
@@ -118,12 +136,19 @@ int TheoraFrameQueue::getUsedCount()
 	return n;
 }
 
+int TheoraFrameQueue::_getReadyCount()
+{
+	int n = 0;
+	foreach_l (TheoraVideoFrame*, mQueue)
+    if ((*it)->mReady) n++;
+	return n;
+}
+
+
 int TheoraFrameQueue::getReadyCount()
 {
 	mMutex.lock();
-	int n=0;
-	foreach_l(TheoraVideoFrame*,mQueue)
-		if ((*it)->mReady) n++;
+	int n = _getReadyCount();
 	mMutex.unlock();
 	return n;
 }
@@ -141,4 +166,9 @@ void TheoraFrameQueue::lock()
 void TheoraFrameQueue::unlock()
 {
 	mMutex.unlock();
+}
+
+std::list<TheoraVideoFrame*>& TheoraFrameQueue::_getFrameQueue()
+{
+    return mQueue;
 }

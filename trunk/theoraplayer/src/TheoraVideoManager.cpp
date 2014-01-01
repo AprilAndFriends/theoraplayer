@@ -52,11 +52,11 @@ void theora_writelog(std::string output)
 	printf("%s\n", output.c_str());
 }
 
-void (*g_LogFuction)(std::string)=theora_writelog;
+void (*g_LogFuction)(std::string) = theora_writelog;
 
 void TheoraVideoManager::setLogFunction(void (*fn)(std::string))
 {
-	g_LogFuction=fn;
+	g_LogFuction = fn;
 }
 
 TheoraVideoManager* TheoraVideoManager::getSingletonPtr()
@@ -195,12 +195,12 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 		{
 			if (!reported)
 			{
-				th_writelog("Waiting for WorkerThread to finish decoding in order to destroy");
+				th_writelog(" - Waiting for WorkerThread to finish decoding in order to destroy");
 				reported = 1;
 			}
 			_psleep(1);
 		}
-		if (reported) th_writelog("WorkerThread done, destroying..");
+		if (reported) th_writelog(" - WorkerThread done, destroying...");
 		
 		// erase the clip from the clip list
 		foreach (TheoraVideoClip*, mClips)
@@ -216,8 +216,9 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 
 		// delete the actual clip
 		delete clip;
-		
+#ifdef _DEBUG
 		th_writelog("Destroyed video.");
+#endif
 		mWorkMutex->unlock();
 	}
 }
@@ -235,8 +236,9 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 	TheoraWorkCandidate candidate;
 
 	// first pass is for playing videos, but if no such videos are available for decoding
-	// paused videos are selected in the second pass. Paused videos that are waiting for cache
-	// are considered as playing in the scheduling context
+	// paused videos are selected in the second pass.
+    // Note that paused videos that are waiting for cache are considered equal to playing
+    // videos in the scheduling context
 
 	for (int i = 0; i < 2 && candidates.size() == 0; i++)
 	{
@@ -329,7 +331,6 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 			}
 		}
 #endif
-
 	}
 
 	mWorkMutex->unlock();
