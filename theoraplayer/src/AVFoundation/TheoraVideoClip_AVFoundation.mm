@@ -223,7 +223,10 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 	if (sampleBuffer == NULL && mReader.status == AVAssetReaderStatusCompleted) // other cases could be app suspended
 	{
 		if (mAutoRestart)
+        {
+            mIteration++;
 			_restart();
+        }
 		else
 		{
 			unload();
@@ -437,7 +440,7 @@ void TheoraVideoClip_AVFoundation::doSeek()
 	mEndOfFile = 0;
 	mRestarted = 0;
 	
-	mFrameQueue->clear();
+    resetFrameQueue();
 	unload();
 	load(mStream);
 

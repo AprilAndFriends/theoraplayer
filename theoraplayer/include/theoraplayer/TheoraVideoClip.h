@@ -94,7 +94,7 @@ protected:
 	TheoraOutputMode mOutputMode, mRequestedOutputMode;
 	bool mAutoRestart;
 	bool mEndOfFile, mRestarted;
-	int mIteration, mLastIteration; //! used to detect when the video restarted
+	int mIteration, mPlaybackIteration; //! used to ensure smooth playback of looping videos
 
 	TheoraMutex* mAudioMutex; //! syncs audio decoding and extraction
 	TheoraMutex* mThreadAccessMutex;
@@ -120,7 +120,11 @@ protected:
 	 * @return last decoded timestamp (if found in decoded packet's granule position)
 	 */
 	virtual float decodeAudio() = 0;
-
+    
+    int _getNumReadyFrames();
+    void resetFrameQueue();
+    int discardOutdatedFrames(float absTime);
+    float getAbsPlaybackTime();
 	virtual void load(TheoraDataSource* source) = 0;
 
 	virtual void _restart() = 0; // resets the decoder and stream but leaves the frame queue intact

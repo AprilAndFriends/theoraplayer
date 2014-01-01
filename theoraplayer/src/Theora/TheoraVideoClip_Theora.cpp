@@ -127,7 +127,6 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 #ifdef _DEBUG
 				th_writelog(mName + ": pre-dropped frame " + str(frame_number));
 #endif
-				mNumDisplayedFrames++;
 				mNumDroppedFrames++;
 				continue; // drop frame
 			}
@@ -163,8 +162,10 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 		mAudioMutex->unlock();
 	}
 	if (should_restart)
+    {
+        mIteration++;
 		_restart();
-	
+	}
 	return 1;
 }
 
@@ -551,7 +552,7 @@ void TheoraVideoClip_Theora::doSeek()
 	mEndOfFile = 0;
 	mRestarted = 0;
 	
-	mFrameQueue->clear();
+	resetFrameQueue();
 	// reset the video decoder.
 	ogg_stream_reset(&mInfo.TheoraStreamState);
 	th_decode_free(mInfo.TheoraDecoder);

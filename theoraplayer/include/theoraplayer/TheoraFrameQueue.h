@@ -40,15 +40,19 @@ public:
 		when you want to mark the frame as used by calling the pop() function.
 	*/
 	TheoraVideoFrame* getFirstAvailableFrame();
+    //! non-mutex version
+	TheoraVideoFrame* _getFirstAvailableFrame();
 
 	//! return the number of used (not ready) frames
 	int getUsedCount();
 
 	//! return the number of ready frames
 	int getReadyCount();
+    //! non-mutex version
+	int _getReadyCount();
 
 	/**
-	    \brief remove the first available frame from the queue.
+	    \brief remove the first N available frame from the queue.
 
 	    Use this every time you display a frame	so you can get the next one when the time comes.
 		This function marks the frame on the front of the queue as unused and it's memory then
@@ -56,7 +60,11 @@ public:
 		If you don't call this, the frame queue will fill up with precached frames up to the
 		specified amount in the TheoraVideoManager class and you won't be able to advance the video.
 	*/
-	void pop();
+	void pop(int n = 1);
+    
+    //! This is an internal _pop function. use externally only in combination with lock() / unlock() calls
+	void _pop(int n);
+
 	//! frees all decoded frames for reuse (does not destroy memory, just marks them as free)
 	void clear();
 	//! Called by WorkerThreads when they need to unload frame data, do not call directly!
@@ -78,6 +86,9 @@ public:
 	void lock();
 	//! unlock the queue's mutex manually
 	void unlock();
+    
+    //! returns the internal frame queue. Warning: Always lock / unlock queue's mutex before accessing frames directly!
+    std::list<TheoraVideoFrame*>& _getFrameQueue();
 };
 
 #endif
