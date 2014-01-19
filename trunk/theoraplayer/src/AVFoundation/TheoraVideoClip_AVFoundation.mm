@@ -37,17 +37,10 @@ static void bgrx2rgba(unsigned char* dest, int w, int h, struct TheoraPixelTrans
 	{
 		for (x = 0, ax = w * 4, dstEnd = dst + w; dst != dstEnd; x += 4, ax += 4, dst++)
 		{
+            // use the full alpha range here because the Y channel has already been converted
+            // to RGB and that's in [0, 255] range.
 			a = src[ax];
-			if (a < 16) *dst = 0;
-			else
-			{
-				if (a > 235) *dst = (OSReadSwapInt32(src, x) >> 8) | 0xFF000000;
-                else
-                {
-                    a = (a - 16) * (255.0f / 219.0f);
-                    *dst = (OSReadSwapInt32(src, x) >> 8) | (a << 24);
-                }
-			}
+            *dst = (OSReadSwapInt32(src, x) >> 8) | (a << 24);
 		}
 	}
 }
