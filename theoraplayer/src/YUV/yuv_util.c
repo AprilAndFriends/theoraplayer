@@ -28,9 +28,11 @@ void _decodeAlpha(struct TheoraPixelTransform* t, int stride)
 		for (yLineEnd = ySrc + width; ySrc != yLineEnd; ySrc++, out += 4)
 		{
 			luma = *ySrc;
-			if (luma < 32) luma = 0;
-			if (luma > 224) luma = 255;
-			*out = luma;
+            // because in YCbCr specification, luma values are in the range of [16, 235]
+            // account for 'footroom' and 'headroom' ranges while using luma values as alpha channel
+            if (luma < 16)       *out = 0;
+            else if (luma > 235) *out = 255;
+            else                 *out = (luma - 16) * (255.0f / 219.0f);
 		}
 	}
 }

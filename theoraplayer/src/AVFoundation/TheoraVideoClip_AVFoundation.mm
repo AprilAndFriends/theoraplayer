@@ -38,11 +38,15 @@ static void bgrx2rgba(unsigned char* dest, int w, int h, struct TheoraPixelTrans
 		for (x = 0, ax = w * 4, dstEnd = dst + w; dst != dstEnd; x += 4, ax += 4, dst++)
 		{
 			a = src[ax];
-			if (a < 32) *dst = 0;
+			if (a < 16) *dst = 0;
 			else
 			{
-				if (a > 224) *dst = (OSReadSwapInt32(src, x) >> 8) | 0xFF000000;
-				else         *dst = (OSReadSwapInt32(src, x) >> 8) | (a << 24);
+				if (a > 235) *dst = (OSReadSwapInt32(src, x) >> 8) | 0xFF000000;
+                else
+                {
+                    a = (a - 16) * (255.0f / 219.0f);
+                    *dst = (OSReadSwapInt32(src, x) >> 8) | (a << 24);
+                }
 			}
 		}
 	}
