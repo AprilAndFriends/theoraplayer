@@ -99,39 +99,39 @@ int RVTable[256];
 			rgbY3 = YTable[*ySrcEven]; a3 = ySrcEven[alphaStride]; ySrcEven++;\
 			rgbY4 = YTable[*ySrcOdd];  a4 = ySrcOdd [alphaStride];  ySrcOdd++;\
 			\
-			if (a1 >= 32)\
+			if (a1 >= 16)\
 			{\
 				CLIP_RGB_COLOR(out1[i1], rgbY1 + rV );\
 				CLIP_RGB_COLOR(out1[i2], rgbY1 - gUV);\
 				CLIP_RGB_COLOR(out1[i3], rgbY1 + bU );\
-				out1[aindex1] = a1 > 224 ? 255 : a1;\
+				out1[aindex1] = a1 > 235 ? 255 : (a1 - 16) * (255.0f / 219.0f);\
 			}\
 			else *((unsigned int*) out1) = 0;\
 			\
-			if (a2 >= 32)\
+			if (a2 >= 16)\
 			{\
 				CLIP_RGB_COLOR(out2[i1], rgbY2 + rV );\
 				CLIP_RGB_COLOR(out2[i2], rgbY2 - gUV);\
 				CLIP_RGB_COLOR(out2[i3], rgbY2 + bU );\
-				out2[aindex1] = a2 > 224 ? 255 : a2;\
+				out2[aindex1] = a2 > 235 ? 255 : (a2 - 16) * (255.0f / 219.0f);\
 			}\
 			else *((unsigned int*) out2) = 0;\
 			\
-			if (a3 >= 32)\
+			if (a3 >= 16)\
 			{\
 				CLIP_RGB_COLOR(out1[j1], rgbY3 + rV );\
 				CLIP_RGB_COLOR(out1[j2], rgbY3 - gUV);\
 				CLIP_RGB_COLOR(out1[j3], rgbY3 + bU );\
-				out1[aindex2] = a3 > 224 ? 255 : a3;\
+				out1[aindex2] = a3 > 235 ? 255 : (a3 - 16) * (255.0f / 219.0f);\
 			}\
 			else *((unsigned int*) &out1[4]) = 0;\
 			\
-			if (a4 >= 32)\
+			if (a4 >= 16)\
 			{\
 				CLIP_RGB_COLOR(out2[j1], rgbY4 + rV );\
 				CLIP_RGB_COLOR(out2[j2], rgbY4 - gUV);\
 				CLIP_RGB_COLOR(out2[j3], rgbY4 + bU );\
-				out2[aindex2] = a4 > 224 ? 255 : a4;\
+				out2[aindex2] = a4 > 235 ? 255 : (a4 - 16) * (255.0f / 219.0f);\
 			}\
 			else *((unsigned int*) &out2[4]) = 0;\
 			\
