@@ -119,9 +119,9 @@ namespace aprilvideo
 	{
 		if (name == "AttachToObject")
 		{
-			if (mImage != mVideoImage)
+			if (this->image != mVideoImage)
 			{
-				mImage = mDataset->getImage(APRILUI_IMAGE_NAME_NULL);
+				this->image = this->dataset->getImage(APRILUI_IMAGE_NAME_NULL);
 			}
 		}
 		ImageBox::notifyEvent(name, params);
@@ -133,7 +133,7 @@ namespace aprilvideo
 		{
 			delete mVideoImage;
 			mVideoImage = NULL;
-			mImage = mDataset->getImage(APRILUI_IMAGE_NAME_NULL);
+			this->image = this->dataset->getImage(APRILUI_IMAGE_NAME_NULL);
 		}
 		if (mTexture)
 		{
@@ -165,7 +165,7 @@ namespace aprilvideo
 	
 	hstr VideoObject::getFullPath()
 	{
-		hstr path = mDataset->getFilePath() + "/video/" + mClipName;
+		hstr path = this->dataset->getFilePath() + "/video/" + mClipName;
 		if (!path.ends_with(".ogg") && !path.ends_with(".ogv") && !path.ends_with(".mp4"))
 		{
 			if (hresource::exists(path + defaultFileExtension))
@@ -304,7 +304,7 @@ namespace aprilvideo
 			{
 				xal::mgr->createCategory("video", xal::ON_DEMAND, xal::DISK);
 			}
-			mSound = xal::mgr->createSound(mDataset->getFilePath() + "/video/" + mAudioName, category);
+			mSound = xal::mgr->createSound(this->dataset->getFilePath() + "/video/" + mAudioName, category);
 
 			mAudioPlayer = xal::mgr->createPlayer(mSound->getName());
 			mTimer = new AudioVideoTimer(mAudioPlayer, mAudioSyncOffset);
@@ -347,11 +347,11 @@ namespace aprilvideo
 			TheoraVideoFrame* f = mClip->getNextFrame();
 			if (f)
 			{
-				mImage = mVideoImage;
-				grect r = mImage->getSrcRect();
+				this->image = mVideoImage;
+				grect r = this->image->getSrcRect();
 				r.w = f->getWidth();
 				r.h = f->getHeight();
-				mImage->setSrcRect(r);
+				this->image->setSrcRect(r);
 #if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
 				mTexture->load();
 #endif
