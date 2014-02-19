@@ -57,7 +57,7 @@ namespace aprilvideo
 		mPrevFrameNumber = 0;
 		mSeeked = 0;
 		mPrevAlpha = 255;
-		mBlendMode = april::ALPHA_BLEND;
+		mBlendMode = april::BM_DEFAULT;
 		
 		if (!gVideoManager)
 		{
@@ -182,21 +182,31 @@ namespace aprilvideo
 	void VideoObject::createClip()
 	{
 		hstr path = getFullPath();
-		april::Texture::Format textureFormat;
+		april::Image::Format textureFormat;
 		destroyResources();
 		
 		try
 		{
 			TheoraOutputMode mode;
-			if (april::rendersys->getName().starts_with("OpenGL"))
+			if (mUseAlpha)
 			{
-				mode = mUseAlpha ? TH_RGBA : TH_RGBX;
+				textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBA);
 			}
 			else
 			{
-				mode = mUseAlpha ? TH_BGRA : TH_BGRX;
+				textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBX);
 			}
-			textureFormat = april::Texture::FORMAT_ARGB;
+			if (textureFormat == april::Image::FORMAT_RGBA)				mode = TH_RGBA;
+			else if (textureFormat == april::Image::FORMAT_RGBX)		mode = TH_RGBX;
+			else if (textureFormat == april::Image::FORMAT_BGRA)		mode = TH_BGRA;
+			else if (textureFormat == april::Image::FORMAT_BGRX)		mode = TH_BGRX;
+			else if (textureFormat == april::Image::FORMAT_ARGB)		mode = TH_ARGB;
+			else if (textureFormat == april::Image::FORMAT_XRGB)		mode = TH_XRGB;
+			else if (textureFormat == april::Image::FORMAT_ABGR)		mode = TH_ABGR;
+			else if (textureFormat == april::Image::FORMAT_XBGR)		mode = TH_XBGR;
+			else if (textureFormat == april::Image::FORMAT_RGB)			mode = TH_RGB;
+			else if (textureFormat == april::Image::FORMAT_BGR)			mode = TH_BGR;
+			else if (textureFormat == april::Image::FORMAT_GRAYSCALE)	mode = TH_GREY;
 			int ram = april::getSystemInfo().ram;
 			int precached = 16;
 #if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
@@ -274,7 +284,7 @@ namespace aprilvideo
 #else
         float tw = _nextPow2(w), th = _nextPow2(h);
 #endif
-		april::Texture* tex = april::rendersys->createTexture(tw, th, textureFormat);
+		april::Texture* tex = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
         tex->setAddressMode(april::Texture::ADDRESS_CLAMP);
 		mTexture = new aprilui::Texture(tex->getFilename(), tex);
 		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
@@ -355,7 +365,17 @@ namespace aprilvideo
 #if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
 				mTexture->load();
 #endif
-				mTexture->getRenderTexture()->write(0, 0, f->getBuffer(), r.w, r.h, 4);
+				april::Image::Format textureFormat;
+				if (mUseAlpha)
+				{
+					textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBA);
+				}
+				else
+				{
+					textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBX);
+				}
+
+				mTexture->getRenderTexture()->write(0, 0, r.w, r.h, 0, 0, f->getBuffer(), r.w, r.h, textureFormat);
 				mClip->popFrame();
 				if (mLoop)
 				{
@@ -410,9 +430,11 @@ namespace aprilvideo
         else if (name == "blend_mode")
         {
             april::BlendMode mode;
-            if      (value == "add")         mode = april::ADD;
-            else if (value == "substract")   mode = april::SUBTRACT;
-            else if (value == "alpha_blend") mode = april::ALPHA_BLEND;
+			if		(value == "default")	mode = april::BM_DEFAULT;
+			else if (value == "alpha")		mode = april::BM_ALPHA;
+            else if (value == "add")		mode = april::BM_ADD;
+            else if (value == "substract")	mode = april::BM_SUBTRACT;
+            else if (value == "overwrite")	mode = april::BM_OVERWRITE;
             else
             {
                 hlog::errorf(logTag, "Unknown VideoObject blend mode: %s", name.c_str());
@@ -456,9 +478,11 @@ namespace aprilvideo
         {
             if (mVideoImage)
             {
-                if      (mBlendMode == april::ADD)         return "add";
-                else if (mBlendMode == april::SUBTRACT)    return "substract";
-                else if (mBlendMode == april::ALPHA_BLEND) return "alpha_blend";
+                if		(mBlendMode == april::BM_DEFAULT)	return "default";
+                else if (mBlendMode == april::BM_ALPHA)		return "alpha";
+                if      (mBlendMode == april::BM_ADD)		return "add";
+                else if (mBlendMode == april::BM_SUBTRACT)	return "substract";
+				else if (mBlendMode == april::BM_OVERWRITE)	return "overwrite";
                 else return "unknown";
             }
             else
