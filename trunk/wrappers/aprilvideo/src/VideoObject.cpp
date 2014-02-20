@@ -194,7 +194,7 @@ namespace aprilvideo
 			}
 			else
 			{
-				textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBX);
+				textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGB);
 			}
 			if (textureFormat == april::Image::FORMAT_RGBA)				mode = TH_RGBA;
 			else if (textureFormat == april::Image::FORMAT_RGBX)		mode = TH_RGBX;
@@ -372,7 +372,7 @@ namespace aprilvideo
 				}
 				else
 				{
-					textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBX);
+					textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGB);
 				}
 
 				mTexture->getRenderTexture()->write(0, 0, r.w, r.h, 0, 0, f->getBuffer(), r.w, r.h, textureFormat);
