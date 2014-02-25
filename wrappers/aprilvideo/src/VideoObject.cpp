@@ -8,6 +8,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
 #define THEORAUTIL_NOMACROS
 #include <theoraplayer/TheoraException.h>
+#include <theoraplayer/TheoraFrameQueue.h>
 #undef exception_cls
 #include <theoraplayer/TheoraPlayer.h>
 #include <april/april.h>
@@ -329,7 +330,57 @@ namespace aprilvideo
 	void VideoObject::OnDraw()
 	{
 		if (mClip == NULL && mClipName != "") createClip();
-		
+		if (mClip)
+		{
+			TheoraVideoFrame* f = mClip->getNextFrame();
+			bool pop = true;
+			if (!mTexture->isLoaded())
+			{
+				mTexture->load();
+				if (!f)
+				{
+					if (mClip->getNumReadyFrames() == 0)
+					{
+						mClip->waitForCache();
+					}
+					f = mClip->getFrameQueue()->getFirstAvailableFrame();
+					pop = false;
+				}
+			}
+			if (f)
+			{
+				this->image = mVideoImage;
+				grect r = this->image->getSrcRect();
+				r.w = f->getWidth();
+				r.h = f->getHeight();
+				this->image->setSrcRect(r);
+				april::Image::Format textureFormat;
+				if (mUseAlpha)
+				{
+					textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBA);
+				}
+				else
+				{
+					textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGB);
+				}
+
+				mTexture->getRenderTexture()->write(0, 0, r.w, r.h, 0, 0, f->getBuffer(), r.w, r.h, textureFormat);
+				if (pop)
+				{
+					mClip->popFrame();
+				}
+				if (mLoop)
+				{
+					int number = f->getFrameNumber();
+					if (mSeeked) mSeeked = 0;
+					else if (number < mPrevFrameNumber)
+					{
+						triggerEvent("PlaybackDone");
+					}
+					mPrevFrameNumber = number;
+				}
+			}
+		}		
 		ImageBox::OnDraw();
 	}
 	
@@ -353,40 +404,6 @@ namespace aprilvideo
                 bool should_pause = mAlphaPauseTreshold == 0 ? !isVisible() : getAlpha() <= mAlphaPauseTreshold;
                 if (should_pause && !mClip->isPaused()) mClip->pause();
                 else if (!should_pause && mClip->isPaused()) mClip->play();
-			}
-			TheoraVideoFrame* f = mClip->getNextFrame();
-			if (f)
-			{
-				this->image = mVideoImage;
-				grect r = this->image->getSrcRect();
-				r.w = f->getWidth();
-				r.h = f->getHeight();
-				this->image->setSrcRect(r);
-#if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
-				mTexture->load();
-#endif
-				april::Image::Format textureFormat;
-				if (mUseAlpha)
-				{
-					textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBA);
-				}
-				else
-				{
-					textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGB);
-				}
-
-				mTexture->getRenderTexture()->write(0, 0, r.w, r.h, 0, 0, f->getBuffer(), r.w, r.h, textureFormat);
-				mClip->popFrame();
-				if (mLoop)
-				{
-					int number = f->getFrameNumber();
-					if (mSeeked) mSeeked = 0;
-					else if (number < mPrevFrameNumber)
-					{
-						triggerEvent("PlaybackDone");
-					}
-					mPrevFrameNumber = number;
-				}
 			}
 		}
 	}
