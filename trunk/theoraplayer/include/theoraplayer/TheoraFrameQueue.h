@@ -12,6 +12,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 
 #include "TheoraAsync.h"
 #include <list>
+#include "TheoraExport.h"
 
 class TheoraVideoFrame;
 class TheoraVideoClip;
@@ -20,7 +21,7 @@ class TheoraVideoClip;
 	This class handles the frame queue. contains frames and handles their alloctation/deallocation
 	it is designed to be thread-safe
 */
-class TheoraFrameQueue
+class TheoraPlayerExport TheoraFrameQueue
 {
 protected:
 	std::list<TheoraVideoFrame*> mQueue;
