@@ -16,8 +16,10 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <aprilui/Dataset.h>
 #include <aprilui/NullImage.h>
 #include <aprilui/Texture.h>
+#include <hltypes/hrdir.h>
 #include <xal/Player.h>
 #include <xal/Sound.h>
+
 #include "aprilvideo.h"
 #include "DataSource.h"
 #include "VideoObject.h"
@@ -307,7 +309,7 @@ namespace aprilvideo
 			hstr category = "video";
 			if (mAudioName.contains("/"))
 			{
-				harray<hstr> folders = mAudioName.split("/");
+				harray<hstr> folders = hrdir::split_path(mAudioName);
 				hstr path_category = folders[folders.size() - 2];
 				if (xal::mgr->hasCategory(path_category)) category = path_category;
 			}
