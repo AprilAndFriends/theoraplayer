@@ -247,7 +247,7 @@ namespace aprilvideo
 				if (!path.ends_with(".mp4") && ram > 256)
 				{
 					hresource r(path);
-					int size = r.size();
+					unsigned long size = r.size();
 					TheoraDataSource* source;
 
 					// additional performance optimization: preload file in RAM to speed up decoding, every bit counts on Android/WinRT ARM
@@ -256,7 +256,7 @@ namespace aprilvideo
 					{
 						hlog::write(logTag, "Preloading video file to memory: " + path);
 						unsigned char* data = new unsigned char[size];
-						r.read_raw(data, size);
+						r.read_raw(data, (int) size);
 						source = new TheoraMemoryFileDataSource(data, size);
 					}
 					else
@@ -373,7 +373,7 @@ namespace aprilvideo
 				}
 				if (mLoop)
 				{
-					int number = f->getFrameNumber();
+					unsigned long number = f->getFrameNumber();
 					if (mSeeked) mSeeked = 0;
 					else if (number < mPrevFrameNumber)
 					{
