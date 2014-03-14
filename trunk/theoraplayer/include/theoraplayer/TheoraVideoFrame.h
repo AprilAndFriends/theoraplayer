@@ -38,9 +38,9 @@ public:
 	virtual ~TheoraVideoFrame();
 
 	//! internal function, do not use directly
-	void _setFrameNumber(int number) { mFrameNumber = number; }
+	void _setFrameNumber(unsigned long number) { mFrameNumber = number; }
 	//! returns the frame number of this frame in the theora stream
-	int getFrameNumber() { return mFrameNumber; }
+	unsigned long getFrameNumber() { return mFrameNumber; }
 
 	void clear();
 
