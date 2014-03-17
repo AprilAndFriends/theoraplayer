@@ -534,6 +534,9 @@
 /* Begin PBXFileReference section */
 		D12CA55517734B4200412E5B /* TheoraVideoClip_FFmpeg.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TheoraVideoClip_FFmpeg.cpp; path = src/FFmpeg/TheoraVideoClip_FFmpeg.cpp; sourceTree = "<group>"; };
 		D12CA55617734B4200412E5B /* TheoraVideoClip_FFmpeg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TheoraVideoClip_FFmpeg.h; path = src/FFmpeg/TheoraVideoClip_FFmpeg.h; sourceTree = "<group>"; };
+		D1358BC218D7777200A36FDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1358BC318D7777800A36FDC /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = iOS.xcconfig; path = xcconfig/iOS.xcconfig; sourceTree = "<group>"; };
+		D1358BC418D7777800A36FDC /* Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Mac.xcconfig; path = xcconfig/Mac.xcconfig; sourceTree = "<group>"; };
 		D139462B17C0ED450091F4A4 /* yuv_libyuv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv_libyuv.c; path = src/YUV/libyuv/yuv_libyuv.c; sourceTree = "<group>"; };
 		D139462C17C0ED450091F4A4 /* yuv_libyuv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = yuv_libyuv.h; path = src/YUV/libyuv/yuv_libyuv.h; sourceTree = "<group>"; };
 		D13946CA17C119B30091F4A4 /* yuv_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv_util.c; path = src/YUV/yuv_util.c; sourceTree = "<group>"; };
@@ -733,6 +736,16 @@
 			name = FFmpeg;
 			sourceTree = "<group>";
 		};
+		D1358BC118D7776700A36FDC /* config */ = {
+			isa = PBXGroup;
+			children = (
+				D1358BC318D7777800A36FDC /* iOS.xcconfig */,
+				D1358BC418D7777800A36FDC /* Mac.xcconfig */,
+				D1358BC218D7777200A36FDC /* Info.plist */,
+			);
+			name = config;
+			sourceTree = "<group>";
+		};
 		D139462A17C0ED2F0091F4A4 /* libyuv */ = {
 			isa = PBXGroup;
 			children = (
@@ -747,6 +760,7 @@
 		D1473F1E150CA69B00B20490 = {
 			isa = PBXGroup;
 			children = (
+				D1358BC118D7776700A36FDC /* config */,
 				D147401F150CAE9600B20490 /* include */,
 				D1473F42150CA6C000B20490 /* src */,
 				D1473F2C150CA69B00B20490 /* Frameworks */,
@@ -1840,6 +1854,7 @@
 		};
 		D1473F44150CA6CE00B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1912,6 +1927,7 @@
 		};
 		D1473F46150CA6D600B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1984,6 +2000,7 @@
 		};
 		D1473F48150CA6E200B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2006,6 +2023,7 @@
 		};
 		D198F977177A31FC002942E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2026,6 +2044,7 @@
 		};
 		D198F979177A31FC002942E3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2047,6 +2066,7 @@
 		};
 		D198F97A177A31FC002942E3 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2068,6 +2088,7 @@
 		};
 		D198F9A3177A31FE002942E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2089,6 +2110,7 @@
 		};
 		D198F9A5177A31FE002942E3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2111,6 +2133,7 @@
 		};
 		D198F9A6177A31FE002942E3 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2133,6 +2156,7 @@
 		};
 		D198F9D0177A3200002942E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2155,6 +2179,7 @@
 		};
 		D198F9D2177A3200002942E3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2178,6 +2203,7 @@
 		};
 		D198F9D3177A3200002942E3 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2201,6 +2227,7 @@
 		};
 		D1BB6FB8150E9E7100EF9400 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2214,7 +2241,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2223,6 +2249,7 @@
 		};
 		D1BB6FBA150E9E7100EF9400 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2236,7 +2263,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2246,6 +2272,7 @@
 		};
 		D1BB6FBB150E9E7100EF9400 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2259,7 +2286,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2269,6 +2295,7 @@
 		};
 		D1CDFF441696C77A00609AB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2292,6 +2319,7 @@
 		};
 		D1CDFF461696C77A00609AB0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2315,6 +2343,7 @@
 		};
 		D1CDFF471696C77A00609AB0 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2338,6 +2367,7 @@
 		};
 		D1CDFF6C1696C79700609AB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2362,6 +2392,7 @@
 		};
 		D1CDFF6E1696C79700609AB0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2386,6 +2417,7 @@
 		};
 		D1CDFF6F1696C79700609AB0 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2410,6 +2442,7 @@
 		};
 		D1CDFFC01696E1CA00609AB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2423,7 +2456,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
@@ -2433,6 +2465,7 @@
 		};
 		D1CDFFC21696E1CA00609AB0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2446,7 +2479,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
@@ -2457,6 +2489,7 @@
 		};
 		D1CDFFC31696E1CA00609AB0 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2470,7 +2503,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
@@ -2481,6 +2513,7 @@
 		};
 		D1CDFFE51696E1D700609AB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2495,7 +2528,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
@@ -2505,6 +2537,7 @@
 		};
 		D1CDFFE71696E1D700609AB0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2519,7 +2552,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
@@ -2530,6 +2562,7 @@
 		};
 		D1CDFFE81696E1D700609AB0 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libtheoraplayer.dst;
@@ -2544,7 +2577,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer;
 				SDKROOT = iphoneos;
