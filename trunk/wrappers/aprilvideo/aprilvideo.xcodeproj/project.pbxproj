@@ -46,6 +46,9 @@
 		D1307DA415FCB4630055BB26 /* aprilui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = aprilui.framework; path = "../../xcode/__build__/products/Debug-LLVM/aprilui.framework"; sourceTree = "<group>"; };
 		D135539A172962F000583915 /* DataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataSource.cpp; path = src/DataSource.cpp; sourceTree = "<group>"; };
 		D135539D1729630400583915 /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSource.h; path = include/aprilvideo/DataSource.h; sourceTree = "<group>"; };
+		D1358BC618D777E100A36FDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1358BC718D777E800A36FDC /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = iOS.xcconfig; path = xcconfig/iOS.xcconfig; sourceTree = "<group>"; };
+		D1358BC818D777E800A36FDC /* Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Mac.xcconfig; path = xcconfig/Mac.xcconfig; sourceTree = "<group>"; };
 		D1473F2A150CA69B00B20490 /* aprilvideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = aprilvideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D198F9DF177A32C3002942E3 /* libaprilvideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libaprilvideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1B822E4185860CE000BC51F /* AudioVideoTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioVideoTimer.h; path = include/aprilvideo/AudioVideoTimer.h; sourceTree = "<group>"; };
@@ -73,9 +76,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D1358BC518D777AB00A36FDC /* config */ = {
+			isa = PBXGroup;
+			children = (
+				D1358BC718D777E800A36FDC /* iOS.xcconfig */,
+				D1358BC818D777E800A36FDC /* Mac.xcconfig */,
+				D1358BC618D777E100A36FDC /* Info.plist */,
+			);
+			name = config;
+			sourceTree = "<group>";
+		};
 		D1473F1E150CA69B00B20490 = {
 			isa = PBXGroup;
 			children = (
+				D1358BC518D777AB00A36FDC /* config */,
 				D147401F150CAE9600B20490 /* include */,
 				D1473F42150CA6C000B20490 /* src */,
 				D1473F2C150CA69B00B20490 /* Frameworks */,
@@ -308,6 +322,7 @@
 		};
 		D1473F44150CA6CE00B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC818D777E800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -320,7 +335,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = ../../include/aprilvideo;
-				INFOPLIST_FILE = aprilvideo.xcodeproj/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -365,6 +380,7 @@
 		};
 		D1473F46150CA6D600B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC818D777E800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -377,7 +393,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = ../../include/aprilvideo;
-				INFOPLIST_FILE = aprilvideo.xcodeproj/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -422,6 +438,7 @@
 		};
 		D1473F48150CA6E200B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC818D777E800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -434,7 +451,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = ../../include/aprilvideo;
-				INFOPLIST_FILE = aprilvideo.xcodeproj/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -444,6 +461,7 @@
 		};
 		D198F9DB177A32C3002942E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC718D777E800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				DSTROOT = /tmp/libaprilvideo.dst;
@@ -455,7 +473,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = aprilvideo;
 				SDKROOT = iphoneos;
@@ -465,6 +482,7 @@
 		};
 		D198F9DD177A32C3002942E3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC718D777E800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				DSTROOT = /tmp/libaprilvideo.dst;
@@ -476,7 +494,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = aprilvideo;
 				SDKROOT = iphoneos;
@@ -487,6 +504,7 @@
 		};
 		D198F9DE177A32C3002942E3 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC718D777E800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				DSTROOT = /tmp/libaprilvideo.dst;
@@ -498,7 +516,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = aprilvideo;
 				SDKROOT = iphoneos;
@@ -509,6 +526,7 @@
 		};
 		D1BB6FB8150E9E7100EF9400 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC818D777E800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libaprilvideo.dst;
@@ -528,6 +546,7 @@
 		};
 		D1BB6FBA150E9E7100EF9400 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC818D777E800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libaprilvideo.dst;
@@ -548,6 +567,7 @@
 		};
 		D1BB6FBB150E9E7100EF9400 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC818D777E800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/libaprilvideo.dst;
