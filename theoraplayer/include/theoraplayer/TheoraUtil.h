@@ -14,10 +14,10 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 
 #ifndef THEORAUTIL_NOMACROS
 
-#define foreach(type,lst) for (std::vector<type>::iterator it=lst.begin();it != lst.end(); it++)
-#define foreach_l(type,lst) for (std::list<type>::iterator it=lst.begin();it != lst.end(); it++)
-#define foreach_r(type,lst) for (std::vector<type>::reverse_iterator it=lst.rbegin();it != lst.rend(); it++)
-#define foreach_in_map(type,list) for (std::map<std::string,type>::iterator it=list.begin();it != list.end(); it++)
+#define foreach(type,lst) for (std::vector<type>::iterator it=lst.begin();it != lst.end(); ++it)
+#define foreach_l(type,lst) for (std::list<type>::iterator it=lst.begin();it != lst.end(); ++it)
+#define foreach_r(type,lst) for (std::vector<type>::reverse_iterator it=lst.rbegin();it != lst.rend(); ++it)
+#define foreach_in_map(type,lst) for (std::map<std::string,type>::iterator it=lst.begin();it != lst.end(); ++it)
 
 #endif
 

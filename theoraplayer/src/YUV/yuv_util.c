@@ -26,7 +26,7 @@ void _decodeAlpha(struct TheoraPixelTransform* t, int stride)
 		ySrc = t->y + y * t->yStride + width;
 		out = t->out + y * stride;
 		
-		for (yLineEnd = ySrc + width; ySrc != yLineEnd; ySrc++, out += 4)
+		for (yLineEnd = ySrc + width; ySrc != yLineEnd; ++ySrc, out += 4)
 		{
 			luma = (*ySrc);
             // because in YCbCr specification, luma values are in the range of [16, 235]

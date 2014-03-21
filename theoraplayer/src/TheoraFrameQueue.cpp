@@ -49,7 +49,7 @@ void TheoraFrameQueue::setSize(int n)
 		mQueue.clear();
 	}
 	TheoraVideoFrame* frame;
-	for (int i = 0;i < n; i++)
+	for (int i = 0;i < n; ++i)
 	{
 		frame = createFrameInstance(mParent);
 		if (frame != NULL) mQueue.push_back(frame);
@@ -92,7 +92,7 @@ void TheoraFrameQueue::clear()
 
 void TheoraFrameQueue::_pop(int n)
 {
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; ++i)
     {
         TheoraVideoFrame* first = mQueue.front();
         first->clear();
@@ -131,7 +131,7 @@ int TheoraFrameQueue::getUsedCount()
 	mMutex.lock();
 	int n=0;
 	foreach_l(TheoraVideoFrame*,mQueue)
-		if ((*it)->mInUse) n++;
+		if ((*it)->mInUse) ++n;
 	mMutex.unlock();
 	return n;
 }
@@ -140,7 +140,7 @@ int TheoraFrameQueue::_getReadyCount()
 {
 	int n = 0;
 	foreach_l (TheoraVideoFrame*, mQueue)
-    if ((*it)->mReady) n++;
+    if ((*it)->mReady) ++n;
 	return n;
 }
 

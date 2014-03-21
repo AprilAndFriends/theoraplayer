@@ -125,7 +125,7 @@ void TheoraVideoClip::update(float time_increase)
             for (;seekTime >= mDuration;)
             {
                 seekTime -= mDuration;
-                mPlaybackIteration++;
+                ++mPlaybackIteration;
             }
 
             mTimer->seek(seekTime);
@@ -161,7 +161,7 @@ TheoraFrameQueue* TheoraVideoClip::getFrameQueue()
 
 void TheoraVideoClip::popFrame()
 {
-	mNumDisplayedFrames++;
+	++mNumDisplayedFrames;
 	mFrameQueue->pop(); // after transfering frame data to the texture, free the frame
 						// so it can be used again
 }
@@ -220,7 +220,7 @@ int TheoraVideoClip::discardOutdatedFrames(float absTime)
         timeToDisplay = frame->mTimeToDisplay + frame->mIteration * mDuration;
         if (time > timeToDisplay + mFrameDuration)
         {
-            nPop++;
+            ++nPop;
             if (nReady - nPop == 1) break; // always leave at least one in the queue
         }
         else break;

@@ -55,7 +55,7 @@ namespace aprilvideo
 		mSound = NULL;
 		mAudioPlayer = NULL;
 		mAudioSyncOffset = 0;
-		gRefCount++;
+		++gRefCount;
 		mAlphaPauseTreshold = 0;
 		mPrevFrameNumber = 0;
 		mSeeked = 0;
@@ -83,7 +83,7 @@ namespace aprilvideo
 	
 	VideoObject::~VideoObject()
 	{
-		gRefCount--;
+		--gRefCount;
 		destroyResources();
 		if (gRefCount <= 0 && gVideoManager)
 		{

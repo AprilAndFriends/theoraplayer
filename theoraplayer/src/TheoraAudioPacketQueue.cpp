@@ -57,15 +57,15 @@ void TheoraAudioPacketQueue::addAudioPacket(float** buffer, int numSamples, floa
 	if (gain < 1.0f)
 	{
 		// apply gain, let's attenuate the samples
-		for (i = 0; i < numSamples; i++)
-			for (j = 0; j < mNumAudioChannels; j++, dataptr++)
+		for (i = 0; i < numSamples; ++i)
+			for (j = 0; j < mNumAudioChannels; j++, ++dataptr)
 				*dataptr = buffer[i][j] * gain;
 	}
 	else
 	{
 		// do a simple copy, faster then the above method, when gain is 1.0f
-		for (i = 0; i < numSamples; i++)
-			for (j = 0; j < mNumAudioChannels; j++, dataptr++)
+		for (i = 0; i < numSamples; ++i)
+			for (j = 0; j < mNumAudioChannels; j++, ++dataptr)
 				*dataptr = buffer[j][i];
 	}
 		
@@ -81,13 +81,13 @@ void TheoraAudioPacketQueue::addAudioPacket(float* buffer, int numSamples, float
 	if (gain < 1.0f)
 	{
 		// apply gain, let's attenuate the samples
-		for (i = 0; i < numFloats; i++, dataptr++)
+		for (i = 0; i < numFloats; ++i, dataptr++)
 			*dataptr = buffer[i] * gain;
 	}
 	else
 	{
 		// do a simple copy, faster then the above method, when gain is 1.0f
-		for (i = 0; i < numFloats; i++, dataptr++)
+		for (i = 0; i < numFloats; ++i, dataptr++)
 			*dataptr = buffer[i];
 	}
 	

@@ -120,7 +120,7 @@ void TheoraVideoFrame::decode(struct TheoraPixelTransform* t)
 		{
 			unsigned char *buff = mBuffer, *src = t->raw;
 			int i, h = mParent->getHeight();
-			for (i = 0; i < h; i++, buff += bufferStride, src += t->rawStride)
+			for (i = 0; i < h; ++i, buff += bufferStride, src += t->rawStride)
 			{
 				memcpy(buff, src, bufferStride);
 			}
@@ -135,7 +135,7 @@ void TheoraVideoFrame::decode(struct TheoraPixelTransform* t)
 #ifdef YUV_TEST // when benchmarking yuv conversion functions during development, do a timed average
         #define N 1000
         clock_t time = clock();
-        for (int i = 0; i < N; i++)
+        for (int i = 0; i < N; ++i)
         {
             conversion_functions[mParent->getOutputMode()](t);
         }

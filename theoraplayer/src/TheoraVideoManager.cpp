@@ -102,7 +102,7 @@ TheoraVideoManager::~TheoraVideoManager()
 	destroyWorkerThreads();
 
 	ClipList::iterator ci;
-	for (ci = mClips.begin(); ci != mClips.end(); ci++)
+	for (ci = mClips.begin(); ci != mClips.end(); ++ci)
 		delete (*ci);
 	mClips.clear();
 	delete mWorkMutex;
@@ -240,7 +240,7 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
     // Note that paused videos that are waiting for cache are considered equal to playing
     // videos in the scheduling context
 
-	for (int i = 0; i < 2 && candidates.size() == 0; i++)
+	for (int i = 0; i < 2 && candidates.size() == 0; ++i)
 	{
 		foreach (TheoraVideoClip*, mClips)
 		{
@@ -302,7 +302,7 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 		if (nClips > 1)
 		{
 			mWorkLog.push_front(selectedClip);
-			selectedClip->mThreadAccessCount++;
+			++selectedClip->mThreadAccessCount;
 		}
 		
 		TheoraVideoClip* c;
@@ -357,7 +357,7 @@ int TheoraVideoManager::getNumWorkerThreads()
 void TheoraVideoManager::createWorkerThreads(int n)
 {
 	TheoraWorkerThread* t;
-	for (int i=0;i<n;i++)
+	for (int i=0;i<n;++i)
 	{
 		t=new TheoraWorkerThread();
 		t->start();

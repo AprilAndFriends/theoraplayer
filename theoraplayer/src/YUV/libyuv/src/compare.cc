@@ -286,7 +286,7 @@ double CalcFrameSsim(const uint8* src_a, int stride_a,
   for (int i = 0; i < height - 8; i += 4) {
     for (int j = 0; j < width - 8; j += 4) {
       ssim_total += Ssim8x8(src_a + j, stride_a, src_b + j, stride_b);
-      samples++;
+      ++samples;
     }
 
     src_a += stride_a * 4;

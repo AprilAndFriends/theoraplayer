@@ -175,7 +175,7 @@ void TheoraThread::join()
 		i < 100)
 	{
 		_psleep(50);
-		i++;
+		++i;
 	}
 	if (i >= 100)
 	{
@@ -187,7 +187,7 @@ void TheoraThread::join()
 			i < 100)
 		{
 			_psleep(50);
-			i++;
+			++i;
 		}
 	}
 #endif
