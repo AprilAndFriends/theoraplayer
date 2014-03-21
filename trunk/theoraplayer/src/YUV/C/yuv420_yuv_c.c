@@ -26,13 +26,13 @@ static void _decodeYUV(struct TheoraPixelTransform* t, int stride, int nBytes, i
 		for (yLineEnd = ySrcEven + width; ySrcEven != yLineEnd;)
 		{
 			// EVEN columns
-			cu = *uSrc; uSrc++;
-			cv = *vSrc; vSrc++;
+			cu = *uSrc; ++uSrc;
+			cv = *vSrc; ++vSrc;
 			
-			y1 = *ySrcEven; ySrcEven++;
-			y2 = *ySrcOdd;  ySrcOdd++;
-			y3 = *ySrcEven; ySrcEven++;
-			y4 = *ySrcOdd;  ySrcOdd++;
+			y1 = *ySrcEven; ++ySrcEven;
+			y2 = *ySrcOdd;  ++ySrcOdd;
+			y3 = *ySrcEven; ++ySrcEven;
+			y4 = *ySrcOdd;  ++ySrcOdd;
 			
 			// EVEN columns
 			out1[0] = y1;

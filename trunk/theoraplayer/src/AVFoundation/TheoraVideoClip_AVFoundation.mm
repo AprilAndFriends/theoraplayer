@@ -33,9 +33,9 @@ static void bgrx2rgba(unsigned char* dest, int w, int h, struct TheoraPixelTrans
 	unsigned char* src = t->raw;
 	int y, x, ax;
 	
-	for (y = 0; y < h; y++, src += t->rawStride)
+	for (y = 0; y < h; ++y, src += t->rawStride)
 	{
-		for (x = 0, ax = w * 4, dstEnd = dst + w; dst != dstEnd; x += 4, ax += 4, dst++)
+		for (x = 0, ax = w * 4, dstEnd = dst + w; dst != dstEnd; x += 4, ax += 4, ++dst)
 		{
             // use the full alpha range here because the Y channel has already been converted
             // to RGB and that's in [0, 255] range.
@@ -152,15 +152,15 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 			frame->mTimeToDisplay = (float) CMTimeGetSeconds(presentationTime);
 			frame->mIteration = mIteration;
 			frame->_setFrameNumber(mFrameNumber);
-			mFrameNumber++;
+			++mFrameNumber;
 			if (frame->mTimeToDisplay < mTimer->getTime() && !mRestarted && mFrameNumber % 16 != 0)
 			{
 				// %16 operation is here to prevent a playback halt during video playback if the decoder can't keep up with demand.
 #ifdef _DEBUG
 				th_writelog(mName + ": pre-dropped frame " + str(mFrameNumber - 1));
 #endif
-				mNumDisplayedFrames++;
-				mNumDroppedFrames++;
+				++mNumDisplayedFrames;
+				++mNumDroppedFrames;
 				CMSampleBufferInvalidate(sampleBuffer);
 				CFRelease(sampleBuffer);
 				sampleBuffer = NULL;
@@ -195,7 +195,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 #ifdef _AVFOUNDATION_BGRX
 			if (mOutputMode == TH_RGBA)
 			{
-				for (int i = 0; i < 1000;i++)
+				for (int i = 0; i < 1000; ++i)
 					bgrx2rgba(frame->getBuffer(), mWidth / 2, mHeight, &t);
 				frame->mReady = true;
 			}
@@ -221,7 +221,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 	{
 		if (mAutoRestart)
         {
-            mIteration++;
+            ++mIteration;
 			_restart();
         }
 		else
@@ -389,7 +389,7 @@ float TheoraVideoClip_AVFoundation::decodeAudio()
 					CMBlockBufferRef blockBuffer = NULL;
 					CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sampleBuffer, NULL, &audioBufferList, sizeof(audioBufferList), NULL, NULL, 0, &blockBuffer);
 					
-					for (int y = 0; y < audioBufferList.mNumberBuffers; y++)
+					for (int y = 0; y < audioBufferList.mNumberBuffers; ++y)
 					{
 						AudioBuffer audioBuffer = audioBufferList.mBuffers[y];
 						float *frame = (float*) audioBuffer.mData;

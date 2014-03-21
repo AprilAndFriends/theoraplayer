@@ -127,7 +127,7 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 #ifdef _DEBUG
 				th_writelog(mName + ": pre-dropped frame " + str(frame_number));
 #endif
-				mNumDroppedFrames++;
+				++mNumDroppedFrames;
 				continue; // drop frame
 			}
 			frame->mTimeToDisplay = time - mFrameDuration;
@@ -163,7 +163,7 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 	}
 	if (should_restart)
     {
-        mIteration++;
+        ++mIteration;
 		_restart();
 	}
 	return 1;
@@ -233,7 +233,7 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 	// find out the duration of the file by seeking to the end
 	// having ogg decode pages, extract the granule pos from
 	// the last theora page and seek back to beginning of the file
-	for (int i = 1; i <= 50; i++)
+	for (int i = 1; i <= 50; ++i)
 	{
 		ogg_sync_reset(&mInfo.OggSyncState);
 		mStream->seek(mStream->size() - 4096 * i);
@@ -256,7 +256,7 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 				mNumFrames = (unsigned long) th_granule_frame(mInfo.TheoraDecoder, granule) + 1;
 			}
 			else if (mNumFrames > 0)
-				mNumFrames++; // append delta frames at the end to get the exact numbe
+				++mNumFrames; // append delta frames at the end to get the exact numbe
 		}
 		if (mNumFrames > 0) break;
 		
@@ -385,7 +385,7 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 			if (!th_decode_headerin(&mInfo.TheoraInfo, &mInfo.TheoraComment, &mInfo.TheoraSetup, &tempOggPacket))
 				throw TheoraGenericException("invalid theora stream");
 			
-			mTheoraStreams++;
+			++mTheoraStreams;
 		} //end while looking for more theora headers
 		
 		//look 2nd vorbis header packets
@@ -397,7 +397,7 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 			if (vorbis_synthesis_headerin(&mInfo.VorbisInfo, &mInfo.VorbisComment,&tempOggPacket))
 				throw TheoraGenericException("invalid stream");
 			
-			mVorbisStreams++;
+			++mVorbisStreams;
 		} //end while looking for more vorbis headers
 		
 		//Not finished with Headers, get some more file data
@@ -487,7 +487,7 @@ long TheoraVideoClip_Theora::seekPage(long targetFrame, bool return_keyframe)
 	ogg_int64_t granule = 0;
 	
 	if (targetFrame == 0) mStream->seek(0);
-	for (i = (targetFrame == 0) ? 100 : 0; i < 100; i++)
+	for (i = (targetFrame == 0) ? 100 : 0; i < 100; ++i)
 	{
 		ogg_sync_reset(&mInfo.OggSyncState);
 		mStream->seek((seek_min + seek_max) / 2); // do a binary search
@@ -656,7 +656,7 @@ void TheoraVideoClip_Theora::doSeek()
 						destroyAudioPacket(popAudioPacket()); // if there's no data to be left, just destroy it
 					else
 					{
-						for (int i = n_trim, j = 0; i < mTheoraAudioPacketQueue->numSamples; i++, j++)
+						for (int i = n_trim, j = 0; i < mTheoraAudioPacketQueue->numSamples; ++i, ++j)
 							mTheoraAudioPacketQueue->pcm[j] = mTheoraAudioPacketQueue->pcm[i];
 						mTheoraAudioPacketQueue->numSamples -= n_trim;
 					}
@@ -673,8 +673,8 @@ void TheoraVideoClip_Theora::doSeek()
 				if (nmissing > 0)
 				{
 					float* samples = new float[nmissing + mTheoraAudioPacketQueue->numSamples];
-					for (i = 0; i < nmissing; i++) samples[i] = 0;
-					for (j = 0; i < nmissing + mTheoraAudioPacketQueue->numSamples; i++, j++)
+					for (i = 0; i < nmissing; ++i) samples[i] = 0;
+					for (j = 0; i < nmissing + mTheoraAudioPacketQueue->numSamples; ++i, ++j)
 						samples[i] = mTheoraAudioPacketQueue->pcm[j];
 					delete [] mTheoraAudioPacketQueue->pcm;
 					mTheoraAudioPacketQueue->pcm = samples;

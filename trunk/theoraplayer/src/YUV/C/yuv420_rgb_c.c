@@ -37,16 +37,16 @@ int RVTable[256];
 		\
 		for (yLineEnd = ySrcEven + width; ySrcEven != yLineEnd;)\
 		{\
-			cu = *uSrc; uSrc++;\
-			cv = *vSrc; vSrc++;\
+			cu = *uSrc; ++uSrc;\
+			cv = *vSrc; ++vSrc;\
 			rV   = RVTable[cv];\
 			gUV  = GUTable[cu] + GVTable[cv];\
 			bU   = BUTable[cu];\
 			\
-			rgbY1 = YTable[*ySrcEven]; ySrcEven++;\
-			rgbY2 = YTable[*ySrcOdd];  ySrcOdd++;\
-			rgbY3 = YTable[*ySrcEven]; ySrcEven++;\
-			rgbY4 = YTable[*ySrcOdd];  ySrcOdd++;\
+			rgbY1 = YTable[*ySrcEven]; ++ySrcEven;\
+			rgbY2 = YTable[*ySrcOdd];  ++ySrcOdd;\
+			rgbY3 = YTable[*ySrcEven]; ++ySrcEven;\
+			rgbY4 = YTable[*ySrcOdd];  ++ySrcOdd;\
 			\
 			CLIP_RGB_COLOR(out1[i1], rgbY1 + rV );\
 			CLIP_RGB_COLOR(out1[i2], rgbY1 - gUV);\
@@ -88,16 +88,16 @@ int RVTable[256];
 		\
 		for (yLineEnd = ySrcEven + width; ySrcEven != yLineEnd;)\
 		{\
-			cu = *uSrc; uSrc++;\
-			cv = *vSrc; vSrc++;\
+			cu = *uSrc; ++uSrc;\
+			cv = *vSrc; ++vSrc;\
 			rV   = RVTable[cv];\
 			gUV  = GUTable[cu] + GVTable[cv];\
 			bU   = BUTable[cu];\
 			\
-			rgbY1 = YTable[*ySrcEven]; a1 = ySrcEven[alphaStride]; ySrcEven++;\
-			rgbY2 = YTable[*ySrcOdd];  a2 = ySrcOdd [alphaStride];  ySrcOdd++;\
-			rgbY3 = YTable[*ySrcEven]; a3 = ySrcEven[alphaStride]; ySrcEven++;\
-			rgbY4 = YTable[*ySrcOdd];  a4 = ySrcOdd [alphaStride];  ySrcOdd++;\
+			rgbY1 = YTable[*ySrcEven]; a1 = ySrcEven[alphaStride]; ++ySrcEven;\
+			rgbY2 = YTable[*ySrcOdd];  a2 = ySrcOdd [alphaStride];  ++ySrcOdd;\
+			rgbY3 = YTable[*ySrcEven]; a3 = ySrcEven[alphaStride]; ++ySrcEven;\
+			rgbY4 = YTable[*ySrcOdd];  a4 = ySrcOdd [alphaStride];  ++ySrcOdd;\
 			\
 			if (a1 > 16)\
 			{\
@@ -214,7 +214,7 @@ void initYUVConversionModule()
     double scale = 1L << 13, temp;
 	
 	int i;
-	for (i = 0; i < 256; i++)
+	for (i = 0; i < 256; ++i)
 	{
 		temp = i - 128;
 		
@@ -251,16 +251,16 @@ void _decodeRGB(struct TheoraPixelTransform* t, int stride, int nBytes, int maxW
 		
 		for (yLineEnd = ySrcEven + width; ySrcEven != yLineEnd;)
 		{
-			cu = *uSrc; uSrc++;
-			cv = *vSrc; vSrc++;
+			cu = *uSrc; ++uSrc;
+			cv = *vSrc; ++vSrc;
 			rV   = RVTable[cv];
 			gUV  = GUTable[cu] + GVTable[cv];
 			bU   = BUTable[cu];
 			
-			rgbY1 = YTable[*ySrcEven]; ySrcEven++;
-			rgbY2 = YTable[*ySrcOdd];  ySrcOdd++;
-			rgbY3 = YTable[*ySrcEven]; ySrcEven++;
-			rgbY4 = YTable[*ySrcOdd];  ySrcOdd++;
+			rgbY1 = YTable[*ySrcEven]; ++ySrcEven;
+			rgbY2 = YTable[*ySrcOdd];  ++ySrcOdd;
+			rgbY3 = YTable[*ySrcEven]; ++ySrcEven;
+			rgbY4 = YTable[*ySrcOdd];  ++ySrcOdd;
 			
 			CLIP_RGB_COLOR(out1[i1], rgbY1 + rV );
 			CLIP_RGB_COLOR(out1[i2], rgbY1 - gUV);
@@ -302,16 +302,16 @@ void _decodeRGBA(struct TheoraPixelTransform* t, int stride, int nBytes, int max
 		
 		for (yLineEnd = ySrcEven + width; ySrcEven != yLineEnd;)
 		{
-			cu = *uSrc; uSrc++;
-			cv = *vSrc; vSrc++;
+			cu = *uSrc; ++uSrc;
+			cv = *vSrc; ++vSrc;
 			rV   = RVTable[cv];
 			gUV  = GUTable[cu] + GVTable[cv];
 			bU   = BUTable[cu];
 			
-			rgbY1 = YTable[*ySrcEven]; a1 = ySrcEven[alphaStride]; ySrcEven++;
-			rgbY2 = YTable[*ySrcOdd];  a2 = ySrcOdd [alphaStride];  ySrcOdd++;
-			rgbY3 = YTable[*ySrcEven]; a3 = ySrcEven[alphaStride]; ySrcEven++;
-			rgbY4 = YTable[*ySrcOdd];  a4 = ySrcOdd [alphaStride];  ySrcOdd++;
+			rgbY1 = YTable[*ySrcEven]; a1 = ySrcEven[alphaStride]; ++ySrcEven;
+			rgbY2 = YTable[*ySrcOdd];  a2 = ySrcOdd [alphaStride];  ++ySrcOdd;
+			rgbY3 = YTable[*ySrcEven]; a3 = ySrcEven[alphaStride]; ++ySrcEven;
+			rgbY4 = YTable[*ySrcOdd];  a4 = ySrcOdd [alphaStride];  ++ySrcOdd;
 			
 			if (a1 >= 32)
 			{

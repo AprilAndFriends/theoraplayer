@@ -116,7 +116,7 @@ static unsigned get_codecs_sorted(const AVCodecDescriptor ***rcodecs)
     unsigned nb_codecs = 0, i = 0;
 	
     while ((desc = avcodec_descriptor_next(desc)))
-        nb_codecs++;
+        ++nb_codecs;
     if (!(codecs = (const AVCodecDescriptor**) av_calloc(nb_codecs, sizeof(*codecs)))) {
         av_log(NULL, AV_LOG_ERROR, "Out of memory\n");
         exit(1);
@@ -170,7 +170,7 @@ int show_codecs(void *optctx, const char *opt, const char *arg)
            " ....L. = Lossy compression\n"
            " .....S = Lossless compression\n"
            " -------\n");
-    for (i = 0; i < nb_codecs; i++) {
+    for (i = 0; i < nb_codecs; ++i) {
         const AVCodecDescriptor *desc = codecs[i];
         const AVCodec *codec = NULL;
 		
@@ -285,7 +285,7 @@ void TheoraVideoClip_FFmpeg::load(TheoraDataSource* source)
 	//	av_dump_format(mFormatContext, 0, "", 0);
 	
 	// Find the first video stream
-	for (int i = 0; i < mFormatContext->nb_streams; i++)
+	for (int i = 0; i < mFormatContext->nb_streams; ++i)
 	{
 		if(mFormatContext->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO)
 		{

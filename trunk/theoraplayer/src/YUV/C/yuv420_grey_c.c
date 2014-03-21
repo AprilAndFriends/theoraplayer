@@ -12,8 +12,8 @@ static void _decodeGrey3(struct TheoraPixelTransform* t, int stride, int nBytes)
 {
 	unsigned char *ySrc = t->y, *yLineEnd, *out = t->out;
 	unsigned int y;
-	for (y = 0; y < t->h; y++, ySrc += t->yStride - t->w, out += stride-t->w * nBytes)
-		for (yLineEnd = ySrc + t->w; ySrc != yLineEnd; ySrc++, out += nBytes)
+	for (y = 0; y < t->h; ++y, ySrc += t->yStride - t->w, out += stride-t->w * nBytes)
+		for (yLineEnd = ySrc + t->w; ySrc != yLineEnd; ++ySrc, out += nBytes)
 			out[0] = out[1] = out[2] = *ySrc;
 }
 
@@ -21,8 +21,8 @@ void decodeGrey(struct TheoraPixelTransform* t)
 {
 	unsigned char *ySrc = t->y, *yLineEnd, *out = t->out;
 	unsigned int y;
-	for (y = 0; y < t->h; y++, ySrc += t->yStride - t->w)
-		for (yLineEnd = ySrc + t->w; ySrc != yLineEnd; ySrc++, out++)
+	for (y = 0; y < t->h; ++y, ySrc += t->yStride - t->w)
+		for (yLineEnd = ySrc + t->w; ySrc != yLineEnd; ++ySrc, ++out)
 			*out = *ySrc;
 
 }
