@@ -43,7 +43,8 @@ protected:
 	long seekPage(long targetFrame, bool return_keyframe);
 	void doSeek();
 	void readTheoraVorbisHeaders();
-	unsigned int mReadAudioSamples, mLastDecodedFrameNumber;
+	unsigned int mReadAudioSamples;
+	unsigned long mLastDecodedFrameNumber;
 public:
 	TheoraVideoClip_Theora(TheoraDataSource* data_source,
 						   TheoraOutputMode output_mode,

@@ -55,7 +55,7 @@ void TheoraFrameQueue::setSize(int n)
 		if (frame != NULL) mQueue.push_back(frame);
 		else
 		{
-			TheoraVideoManager::getSingleton().logMessage("TheoraFrameQueue: unable to create " + str(n) + " frames, out of memory. Created " + str(mQueue.size()) + " frames.");
+			TheoraVideoManager::getSingleton().logMessage("TheoraFrameQueue: unable to create " + str(n) + " frames, out of memory. Created " + str((int) mQueue.size()) + " frames.");
 			break;
 		}
 	}
@@ -64,7 +64,7 @@ void TheoraFrameQueue::setSize(int n)
 
 int TheoraFrameQueue::getSize()
 {
-	return mQueue.size();
+	return (int) mQueue.size();
 }
 
 TheoraVideoFrame* TheoraFrameQueue::_getFirstAvailableFrame()

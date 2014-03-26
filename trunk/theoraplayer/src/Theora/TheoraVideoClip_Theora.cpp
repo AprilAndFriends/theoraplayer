@@ -125,7 +125,7 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 			{
 				// %16 operation is here to prevent a playback halt during video playback if the decoder can't keep up with demand.
 #ifdef _DEBUG
-				th_writelog(mName + ": pre-dropped frame " + str(frame_number));
+				th_writelog(mName + ": pre-dropped frame " + str((int) frame_number));
 #endif
 				++mNumDroppedFrames;
 				continue; // drop frame
@@ -253,7 +253,7 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 			ogg_int64_t granule = ogg_page_granulepos(&mInfo.OggPage);
 			if (granule >= 0)
 			{
-				mNumFrames = (unsigned long) th_granule_frame(mInfo.TheoraDecoder, granule) + 1;
+				mNumFrames = (int) th_granule_frame(mInfo.TheoraDecoder, granule) + 1;
 			}
 			else if (mNumFrames > 0)
 				++mNumFrames; // append delta frames at the end to get the exact numbe
@@ -280,7 +280,7 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 		vorbis_synthesis_init(&mInfo.VorbisDSPState, &mInfo.VorbisInfo);
 		vorbis_block_init(&mInfo.VorbisDSPState, &mInfo.VorbisBlock);
 		mNumAudioChannels = mInfo.VorbisInfo.channels;
-		mAudioFrequency = mInfo.VorbisInfo.rate;
+		mAudioFrequency = (int) mInfo.VorbisInfo.rate;
 
 		// create an audio interface instance if available
 		TheoraAudioInterfaceFactory* audio_factory = TheoraVideoManager::getSingleton().getAudioInterfaceFactory();
@@ -482,7 +482,7 @@ float TheoraVideoClip_Theora::decodeAudio()
 
 long TheoraVideoClip_Theora::seekPage(long targetFrame, bool return_keyframe)
 {
-	int i,seek_min = 0, seek_max = mStream->size();
+	int i,seek_min = 0, seek_max = (int) mStream->size();
 	long frame;
 	ogg_int64_t granule = 0;
 	
@@ -569,7 +569,7 @@ void TheoraVideoClip_Theora::doSeek()
 	// previous keyframe and seek to it.
 	// then by setting the correct time, the decoder will skip N frames untill
 	// we get the frame we want.
-	frame = seekPage(mSeekFrame, 1); // find the keyframe nearest to the target frame
+	frame = (int) seekPage(mSeekFrame, 1); // find the keyframe nearest to the target frame
 #ifdef _DEBUG
 	//		th_writelog(mName + " [seek]: nearest keyframe for frame " + str(mSeekFrame) + " is frame: " + str(frame));
 #endif
