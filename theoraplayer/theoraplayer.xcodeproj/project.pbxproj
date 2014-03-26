@@ -1799,7 +1799,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1807,8 +1806,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -1829,7 +1826,6 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1844,10 +1840,8 @@
 				);
 				LIBYUV_PREPROCESSOR_IOS = "LIBYUV_NEON __ARM_NEON__";
 				LIBYUV_PREPROCESSOR_MAC = __SSSE3__;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1856,10 +1850,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					_YUV_LIBYUV,
@@ -1869,7 +1859,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -1879,7 +1868,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1887,8 +1875,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
@@ -1903,7 +1889,6 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1918,9 +1903,7 @@
 				);
 				LIBYUV_PREPROCESSOR_IOS = "LIBYUV_NEON __ARM_NEON__";
 				LIBYUV_PREPROCESSOR_MAC = __SSSE3__;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_LDFLAGS = "-ObjC";
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = "App Store";
@@ -1929,10 +1912,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					_YUV_LIBYUV,
@@ -1942,7 +1921,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -1952,7 +1930,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1960,8 +1937,6 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
@@ -1976,7 +1951,6 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1991,9 +1965,7 @@
 				);
 				LIBYUV_PREPROCESSOR_IOS = "LIBYUV_NEON __ARM_NEON__";
 				LIBYUV_PREPROCESSOR_MAC = __SSSE3__;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_LDFLAGS = "-ObjC";
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2002,10 +1974,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					_YUV_LIBYUV,
@@ -2015,7 +1983,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2025,8 +1992,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__THEORA,
@@ -2037,7 +2002,6 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				PRODUCT_NAME = theoraplayer;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2046,8 +2010,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__THEORA,
@@ -2058,9 +2020,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				PRODUCT_NAME = theoraplayer;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -2068,8 +2028,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__THEORA,
@@ -2080,9 +2038,7 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				PRODUCT_NAME = theoraplayer;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
 		};
@@ -2090,8 +2046,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__AVFOUNDATION,
@@ -2101,9 +2055,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer_avfoundation;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2112,8 +2064,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__AVFOUNDATION,
@@ -2123,11 +2073,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer_avfoundation;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -2135,8 +2082,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__AVFOUNDATION,
@@ -2146,11 +2091,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer_avfoundation;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
 		};
@@ -2158,8 +2100,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__THEORA,
@@ -2170,9 +2110,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer_theora_avfoundation;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2181,8 +2119,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__THEORA,
@@ -2193,11 +2129,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer_theora_avfoundation;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -2205,8 +2138,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_MAC,
 					__THEORA,
@@ -2217,11 +2148,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer_theora_avfoundation;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
 		};
@@ -2229,20 +2157,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__THEORA,
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				PRODUCT_NAME = theoraplayer;
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2251,22 +2175,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__THEORA,
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				PRODUCT_NAME = theoraplayer;
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -2274,22 +2193,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__THEORA,
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				PRODUCT_NAME = theoraplayer;
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
 		};
@@ -2297,10 +2211,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
 					_YUV_LIBYUV,
@@ -2310,8 +2220,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2321,10 +2229,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
 					_YUV_LIBYUV,
@@ -2334,8 +2238,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2345,10 +2247,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__AVFOUNDATION,
 					_YUV_LIBYUV,
@@ -2358,8 +2256,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2369,10 +2265,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
@@ -2383,8 +2275,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2394,10 +2284,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
@@ -2408,8 +2294,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2419,10 +2303,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					__THEORA,
 					__AVFOUNDATION,
@@ -2433,8 +2313,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2444,21 +2322,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__AVFOUNDATION,
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer;
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2467,23 +2340,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__AVFOUNDATION,
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer;
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -2491,23 +2358,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__AVFOUNDATION,
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer;
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
 		};
@@ -2515,8 +2376,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__THEORA,
@@ -2524,13 +2383,10 @@
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer;
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2539,8 +2395,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__THEORA,
@@ -2548,15 +2402,11 @@
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer;
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -2564,8 +2414,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/libtheoraplayer.dst;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					__THEORA,
@@ -2573,15 +2421,11 @@
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = theoraplayer;
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
 		};

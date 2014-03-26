@@ -234,7 +234,7 @@ int TheoraVideoClip::discardOutdatedFrames(float absTime)
         int i = nPop;
         foreach_l (TheoraVideoFrame*, queue)
         {
-            log += str((*it)->getFrameNumber());
+            log += str((int) (*it)->getFrameNumber());
             if (i-- > 1)
             {
                 log += ", ";

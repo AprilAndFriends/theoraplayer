@@ -43,11 +43,11 @@ void TheoraFileDataSource::openFile()
 	}
 }
 
-int TheoraFileDataSource::read(void* output,int nBytes)
+int TheoraFileDataSource::read(void* output, int nBytes)
 {
 	if (mFilePtr == NULL) openFile();
-	int n = fread(output, 1, nBytes, mFilePtr);
-	return n;
+	size_t n = fread(output, 1, nBytes, mFilePtr);
+	return (int) n;
 }
 
 void TheoraFileDataSource::seek(unsigned long byte_index)
@@ -96,12 +96,12 @@ TheoraMemoryFileDataSource::~TheoraMemoryFileDataSource()
 	if (mData) delete [] mData;
 }
 
-int TheoraMemoryFileDataSource::read(void* output,int nBytes)
+int TheoraMemoryFileDataSource::read(void* output, int nBytes)
 {
-	int n=(mReadPointer+nBytes <= mSize) ? nBytes : mSize-mReadPointer;
+	int n = (int) ((mReadPointer+nBytes <= mSize) ? nBytes : mSize - mReadPointer);
 	if (!n) return 0;
-	memcpy(output,mData+mReadPointer,n);
-	mReadPointer+=n;
+	memcpy(output, mData + mReadPointer, n);
+	mReadPointer += n;
 	return n;
 }
 

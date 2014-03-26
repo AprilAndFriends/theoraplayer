@@ -101,10 +101,12 @@ TheoraVideoManager::~TheoraVideoManager()
 {
 	destroyWorkerThreads();
 
+	mWorkMutex->lock();
 	ClipList::iterator ci;
 	for (ci = mClips.begin(); ci != mClips.end(); ++ci)
 		delete (*ci);
 	mClips.clear();
+	mWorkMutex->unlock();
 	delete mWorkMutex;
 }
 
@@ -115,10 +117,20 @@ void TheoraVideoManager::logMessage(std::string msg)
 
 TheoraVideoClip* TheoraVideoManager::getVideoClipByName(std::string name)
 {
-	foreach(TheoraVideoClip*,mClips)
-		if ((*it)->getName() == name) return *it;
+	TheoraVideoClip* clip = NULL;
+	mWorkMutex->lock();
 
-	return 0;
+	foreach(TheoraVideoClip*, mClips)
+	{
+		if ((*it)->getName() == name)
+		{
+			clip = *it;
+			break;
+		}
+	}
+	mWorkMutex->unlock();
+
+	return clip;
 }
 
 void TheoraVideoManager::setAudioInterfaceFactory(TheoraAudioInterfaceFactory* factory)
@@ -296,7 +308,7 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 	{
 		selectedClip->mAssignedWorkerThread = caller;
 		
-		int nClips = mClips.size();
+		int nClips = (int) mClips.size();
 		unsigned int maxWorkLogSize = (nClips - 1) * 50;
 
 		if (nClips > 1)
@@ -339,11 +351,13 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 
 void TheoraVideoManager::update(float time_increase)
 {
+	mWorkMutex->lock();
 	foreach (TheoraVideoClip*, mClips)
 	{
 		(*it)->update(time_increase);
 		(*it)->decodedAudioCheck();
 	}
+	mWorkMutex->unlock();
 #ifdef _SCHEDULING_DEBUG
 	gThreadDiagnosticTimer += time_increase;
 #endif
@@ -351,7 +365,7 @@ void TheoraVideoManager::update(float time_increase)
 
 int TheoraVideoManager::getNumWorkerThreads()
 {
-	return mWorkerThreads.size();
+	return (int) mWorkerThreads.size();
 }
 
 void TheoraVideoManager::createWorkerThreads(int n)
