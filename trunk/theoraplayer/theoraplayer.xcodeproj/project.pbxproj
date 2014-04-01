@@ -1841,7 +1841,6 @@
 				LIBYUV_PREPROCESSOR_IOS = "LIBYUV_NEON __ARM_NEON__";
 				LIBYUV_PREPROCESSOR_MAC = __SSSE3__;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-ObjC";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1903,7 +1902,6 @@
 				);
 				LIBYUV_PREPROCESSOR_IOS = "LIBYUV_NEON __ARM_NEON__";
 				LIBYUV_PREPROCESSOR_MAC = __SSSE3__;
-				OTHER_LDFLAGS = "-ObjC";
 				SKIP_INSTALL = YES;
 			};
 			name = "App Store";
@@ -1965,7 +1963,6 @@
 				);
 				LIBYUV_PREPROCESSOR_IOS = "LIBYUV_NEON __ARM_NEON__";
 				LIBYUV_PREPROCESSOR_MAC = __SSSE3__;
-				OTHER_LDFLAGS = "-ObjC";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
