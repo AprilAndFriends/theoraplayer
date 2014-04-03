@@ -1,6 +1,6 @@
 /************************************************************************************
 This source file is part of the Theora Video Playback Library
-For latest info, see http://libtheoraplayer.sourceforge.net/
+For latest info, see http://libtheoraplayer.googlecode.com
 *************************************************************************************
 Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
