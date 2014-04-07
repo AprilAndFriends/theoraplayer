@@ -19,14 +19,14 @@
  .set OC_ARM_ASM_EDSP,	1
 
 @ Set the following to 1 if we have ARMv6 media instructions.
- .set OC_ARM_ASM_MEDIA,	0
+ .set OC_ARM_ASM_MEDIA,	1
 
 @ Set the following to 1 if we have NEON (some ARMv7)
- .set OC_ARM_ASM_NEON,	0
+ .set OC_ARM_ASM_NEON,	1
 
 @ Set the following to 1 if LDR/STR can work on unaligned addresses
 @ This is assumed to be true for ARMv6 and later code
- .set OC_ARM_CAN_UNALIGN,	0
+ .set OC_ARM_CAN_UNALIGN,	1
 
 @ Large unaligned loads and stores are often configured to cause an exception.
 @ They cause an 8 cycle stall when they cross a 128-bit (load) or 64-bit (store)

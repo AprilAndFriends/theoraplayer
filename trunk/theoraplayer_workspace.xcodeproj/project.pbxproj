@@ -386,6 +386,13 @@
 			remoteGlobalIDString = D1BB6FAE150E9E7100EF9400;
 			remoteInfo = "theoraplayer (iOS)";
 		};
+		D1C34D6418F2C86400A072E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1DCB3B71829169B0089A79D;
+			remoteInfo = "vorbis (iOS)";
+		};
 		D1CDFF7A1696C88F00609AB0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
@@ -988,6 +995,7 @@
 			children = (
 				D1D098DE155F05CC009F6AAA /* Vorbis.framework */,
 				D13946BB17C10DE20091F4A4 /* libvorbis.a */,
+				D1C34D6518F2C86400A072E5 /* libvorbis.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1242,7 +1250,7 @@
 		D1473F20150CA69B00B20490 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = D1473F23150CA69B00B20490 /* Build configuration list for PBXProject "theoraplayer_workspace" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1364,6 +1372,13 @@
 			fileType = archive.ar;
 			path = libtheoraplayer.a;
 			remoteRef = D167758C155C4F8F0050EC64 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D1C34D6518F2C86400A072E5 /* libvorbis.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libvorbis.a;
+			remoteRef = D1C34D6418F2C86400A072E5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D1CDFF7B1696C88F00609AB0 /* theoraplayer.framework */ = {
