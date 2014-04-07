@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\lib\collect.c" />
+    <ClCompile Include="..\..\..\lib\encoder_disabled.c" />
+    <ClCompile Include="..\..\..\lib\enquant.c" />
+    <ClCompile Include="..\..\..\lib\fdct.c" />
+    <ClCompile Include="..\..\..\lib\huffenc.c" />
+    <ClCompile Include="..\..\..\lib\mathops.c" />
+    <ClCompile Include="..\..\..\lib\rate.c" />
+    <ClCompile Include="..\..\..\lib\tokenize.c" />
+    <ClCompile Include="..\..\..\lib\x86_vc\mmxfdct.c" />
+    <ClCompile Include="..\..\..\lib\apiwrapper.c" />
+    <ClCompile Include="..\..\..\lib\bitpack.c" />
+    <ClCompile Include="..\..\..\lib\decapiwrapper.c" />
+    <ClCompile Include="..\..\..\lib\decinfo.c" />
+    <ClCompile Include="..\..\..\lib\decode.c" />
+    <ClCompile Include="..\..\..\lib\dequant.c" />
+    <ClCompile Include="..\..\..\lib\fragment.c" />
+    <ClCompile Include="..\..\..\lib\huffdec.c" />
+    <ClCompile Include="..\..\..\lib\idct.c" />
+    <ClCompile Include="..\..\..\lib\info.c" />
+    <ClCompile Include="..\..\..\lib\internal.c" />
+    <ClCompile Include="..\..\..\lib\quant.c" />
+    <ClCompile Include="..\..\..\lib\state.c" />
+    <ClCompile Include="..\..\..\lib\x86_vc\mmxfrag.c" />
+    <ClCompile Include="..\..\..\lib\x86_vc\mmxidct.c" />
+    <ClCompile Include="..\..\..\lib\x86_vc\mmxstate.c" />
+    <ClCompile Include="..\..\..\lib\x86_vc\x86cpu.c">
+      <Filter>x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lib\x86_vc\x86state.c">
+      <Filter>x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lib\arm\armstate.c">
+      <Filter>arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\lib\arm\armcpu.c">
+      <Filter>arm</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\theora\codec.h" />
+    <ClInclude Include="..\..\..\include\theora\theora.h" />
+    <ClInclude Include="..\..\..\include\theora\theoradec.h" />
+    <ClInclude Include="..\..\..\include\theora\theoraenc.h" />
+    <ClInclude Include="..\..\..\lib\collect.h" />
+    <ClInclude Include="..\..\..\lib\internal.h" />
+    <ClInclude Include="..\..\..\lib\enquant.h" />
+    <ClInclude Include="..\..\..\lib\huffenc.h" />
+    <ClInclude Include="..\..\..\lib\mathops.h" />
+    <ClInclude Include="..\..\..\lib\modedec.h" />
+    <ClInclude Include="..\..\..\lib\apiwrapper.h" />
+    <ClInclude Include="..\..\..\lib\bitpack.h" />
+    <ClInclude Include="..\..\..\lib\dct.h" />
+    <ClInclude Include="..\..\..\lib\decint.h" />
+    <ClInclude Include="..\..\..\lib\dequant.h" />
+    <ClInclude Include="..\..\..\lib\huffdec.h" />
+    <ClInclude Include="..\..\..\lib\huffman.h" />
+    <ClInclude Include="..\..\..\lib\ocintrin.h" />
+    <ClInclude Include="..\..\..\lib\quant.h" />
+    <ClInclude Include="..\..\..\lib\x86_vc\x86cpu.h">
+      <Filter>x86</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lib\arm\armbits.h">
+      <Filter>arm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lib\arm\armcpu.h">
+      <Filter>arm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\lib\arm\armint.h">
+      <Filter>arm</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="x86">
+      <UniqueIdentifier>{124d3858-946c-4735-8905-7756e827818c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="arm">
+      <UniqueIdentifier>{a14f21c8-94ff-46d1-9149-1eb871248d3a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\lib\theora.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="..\..\..\lib\arm\armbits.s">
+      <Filter>arm</Filter>
+    </MASM>
+    <MASM Include="..\..\..\lib\arm\armfrag.s">
+      <Filter>arm</Filter>
+    </MASM>
+    <MASM Include="..\..\..\lib\arm\armidct.s">
+      <Filter>arm</Filter>
+    </MASM>
+    <MASM Include="..\..\..\lib\arm\armloop.s">
+      <Filter>arm</Filter>
+    </MASM>
+    <MASM Include="..\..\..\lib\arm\armopts.s">
+      <Filter>arm</Filter>
+    </MASM>
+  </ItemGroup>
+</Project>

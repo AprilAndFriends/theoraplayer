@@ -70,28 +70,7 @@
 		730F23E5091827B100AB638C /* synthesis.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F65C03389C830112CE8F /* synthesis.c */; };
 		730F23E7091827B100AB638C /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F65F03389C830112CE8F /* vorbisfile.c */; };
 		730F23E8091827B100AB638C /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F66003389C830112CE8F /* window.c */; };
-		730F23FB0918281100AB638C /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730F23FA0918281100AB638C /* Ogg.framework */; };
-		D1DCB39E1829169B0089A79D /* analysis.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F60A03389C830112CE8F /* analysis.c */; };
-		D1DCB39F1829169B0089A79D /* bitrate.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F60D03389C830112CE8F /* bitrate.c */; };
-		D1DCB3A01829169B0089A79D /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F60F03389C830112CE8F /* block.c */; };
-		D1DCB3A11829169B0089A79D /* codebook.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F62303389C830112CE8F /* codebook.c */; };
-		D1DCB3A21829169B0089A79D /* envelope.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F62603389C830112CE8F /* envelope.c */; };
-		D1DCB3A31829169B0089A79D /* floor0.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F62803389C830112CE8F /* floor0.c */; };
-		D1DCB3A41829169B0089A79D /* floor1.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F62903389C830112CE8F /* floor1.c */; };
-		D1DCB3A51829169B0089A79D /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F62B03389C830112CE8F /* info.c */; };
-		D1DCB3A61829169B0089A79D /* lookup.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F62C03389C830112CE8F /* lookup.c */; };
-		D1DCB3A71829169B0089A79D /* lpc.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F63003389C830112CE8F /* lpc.c */; };
-		D1DCB3A81829169B0089A79D /* lsp.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F63203389C830112CE8F /* lsp.c */; };
-		D1DCB3A91829169B0089A79D /* mapping0.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F63603389C830112CE8F /* mapping0.c */; };
-		D1DCB3AA1829169B0089A79D /* mdct.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F63803389C830112CE8F /* mdct.c */; };
-		D1DCB3AB1829169B0089A79D /* psy.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F65203389C830112CE8F /* psy.c */; };
-		D1DCB3AC1829169B0089A79D /* registry.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F65503389C830112CE8F /* registry.c */; };
-		D1DCB3AD1829169B0089A79D /* res0.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F65703389C830112CE8F /* res0.c */; };
-		D1DCB3AE1829169B0089A79D /* sharedbook.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F65903389C830112CE8F /* sharedbook.c */; };
-		D1DCB3AF1829169B0089A79D /* smallft.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F65A03389C830112CE8F /* smallft.c */; };
-		D1DCB3B01829169B0089A79D /* synthesis.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F65C03389C830112CE8F /* synthesis.c */; };
-		D1DCB3B11829169B0089A79D /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F65F03389C830112CE8F /* vorbisfile.c */; };
-		D1DCB3B21829169B0089A79D /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F66003389C830112CE8F /* window.c */; };
+		D1C34D7618F2CB8E00A072E5 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C34D7518F2CB8E00A072E5 /* Ogg.framework */; };
 		D1F279A0177A2ABE00E5C131 /* analysis.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F60A03389C830112CE8F /* analysis.c */; };
 		D1F279A2177A2ABE00E5C131 /* bitrate.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F60D03389C830112CE8F /* bitrate.c */; };
 		D1F279A3177A2ABE00E5C131 /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = F5D8F60F03389C830112CE8F /* block.c */; };
@@ -119,8 +98,10 @@
 		730F23F0091827B100AB638C /* Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist; fileEncoding = 4; path = Info.plist; sourceTree = "<group>"; };
 		730F23F1091827B100AB638C /* Vorbis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Vorbis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		730F23FA0918281100AB638C /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = /Library/Frameworks/Ogg.framework; sourceTree = "<absolute>"; };
+		D1681B9118D764B20088FC68 /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = iOS.xcconfig; path = ../xcconfig/iOS.xcconfig; sourceTree = "<group>"; };
+		D1681B9218D764B20088FC68 /* Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Mac.xcconfig; path = ../xcconfig/Mac.xcconfig; sourceTree = "<group>"; };
 		D1BB6F4B150E9B0E00EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D1DCB3B71829169B0089A79D /* libvorbis.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libvorbis.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1C34D7518F2CB8E00A072E5 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = ../../__build__/products/Debug/Ogg.framework; sourceTree = "<group>"; };
 		D1F27999177A2A4200E5C131 /* libvorbis.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libvorbis.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F58520B90191D12B01A802FE /* codec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = codec.h; sourceTree = "<group>"; };
 		F58520BA0191D12B01A802FE /* vorbisenc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vorbisenc.h; sourceTree = "<group>"; };
@@ -196,7 +177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				730F23FB0918281100AB638C /* Ogg.framework in Frameworks */,
+				D1C34D7618F2CB8E00A072E5 /* Ogg.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,7 +189,6 @@
 			children = (
 				730F23F1091827B100AB638C /* Vorbis.framework */,
 				D1F27999177A2A4200E5C131 /* libvorbis.a */,
-				D1DCB3B71829169B0089A79D /* libvorbis.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,6 +196,7 @@
 		0867D691FE84028FC02AAC07 /* vorbis */ = {
 			isa = PBXGroup;
 			children = (
+				D1681B8918D7643B0088FC68 /* config */,
 				F58520B70191D12B01A802FE /* Headers */,
 				F5D8F60803389C830112CE8F /* lib */,
 				089C1665FE841158C02AAC07 /* Resources */,
@@ -228,14 +209,24 @@
 		089C1665FE841158C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				730F23F0091827B100AB638C /* Info.plist */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		D1681B8918D7643B0088FC68 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				D1681B9118D764B20088FC68 /* iOS.xcconfig */,
+				D1681B9218D764B20088FC68 /* Mac.xcconfig */,
+				730F23F0091827B100AB638C /* Info.plist */,
+			);
+			name = config;
 			sourceTree = "<group>";
 		};
 		D1BB6F4A150E9B0E00EF9400 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D1C34D7518F2CB8E00A072E5 /* Ogg.framework */,
 				730F23FA0918281100AB638C /* Ogg.framework */,
 				D1BB6F4B150E9B0E00EF9400 /* Foundation.framework */,
 			);
@@ -438,21 +429,6 @@
 			productReference = 730F23F1091827B100AB638C /* Vorbis.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D1DCB39C1829169B0089A79D /* vorbis (iOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D1DCB3B31829169B0089A79D /* Build configuration list for PBXNativeTarget "vorbis (iOS)" */;
-			buildPhases = (
-				D1DCB39D1829169B0089A79D /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "vorbis (iOS)";
-			productName = "vorbis (Mac)";
-			productReference = D1DCB3B71829169B0089A79D /* libvorbis.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		D1F27998177A2A4200E5C131 /* vorbis (Mac) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D1F2799F177A2A4200E5C131 /* Build configuration list for PBXNativeTarget "vorbis (Mac)" */;
@@ -474,7 +450,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 730F23F3091827B200AB638C /* Build configuration list for PBXProject "Vorbis" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -490,7 +466,6 @@
 			targets = (
 				730F23A1091827B100AB638C /* vorbis */,
 				D1F27998177A2A4200E5C131 /* vorbis (Mac) */,
-				D1DCB39C1829169B0089A79D /* vorbis (iOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -521,34 +496,6 @@
 				730F23E5091827B100AB638C /* synthesis.c in Sources */,
 				730F23E7091827B100AB638C /* vorbisfile.c in Sources */,
 				730F23E8091827B100AB638C /* window.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D1DCB39D1829169B0089A79D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D1DCB39E1829169B0089A79D /* analysis.c in Sources */,
-				D1DCB39F1829169B0089A79D /* bitrate.c in Sources */,
-				D1DCB3A01829169B0089A79D /* block.c in Sources */,
-				D1DCB3A11829169B0089A79D /* codebook.c in Sources */,
-				D1DCB3A21829169B0089A79D /* envelope.c in Sources */,
-				D1DCB3A31829169B0089A79D /* floor0.c in Sources */,
-				D1DCB3A41829169B0089A79D /* floor1.c in Sources */,
-				D1DCB3A51829169B0089A79D /* info.c in Sources */,
-				D1DCB3A61829169B0089A79D /* lookup.c in Sources */,
-				D1DCB3A71829169B0089A79D /* lpc.c in Sources */,
-				D1DCB3A81829169B0089A79D /* lsp.c in Sources */,
-				D1DCB3A91829169B0089A79D /* mapping0.c in Sources */,
-				D1DCB3AA1829169B0089A79D /* mdct.c in Sources */,
-				D1DCB3AB1829169B0089A79D /* psy.c in Sources */,
-				D1DCB3AC1829169B0089A79D /* registry.c in Sources */,
-				D1DCB3AD1829169B0089A79D /* res0.c in Sources */,
-				D1DCB3AE1829169B0089A79D /* sharedbook.c in Sources */,
-				D1DCB3AF1829169B0089A79D /* smallft.c in Sources */,
-				D1DCB3B01829169B0089A79D /* synthesis.c in Sources */,
-				D1DCB3B11829169B0089A79D /* vorbisfile.c in Sources */,
-				D1DCB3B21829169B0089A79D /* window.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,11 +533,6 @@
 		D186224D14F95B2E00639D7C /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
@@ -598,11 +540,9 @@
 					"${SRCROOT}/../../ogg/include",
 					"$(SRCROOT)/../lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_CFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-ffast-math",
-					"-falign-loops=16",
 				);
 				WARNING_CFLAGS = "-w";
 			};
@@ -610,37 +550,27 @@
 		};
 		D186224E14F95B2E00639D7C /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1681B9218D764B20088FC68 /* Mac.xcconfig */;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				FRAMEWORK_VERSION = A;
-				HEADER_SEARCH_PATHS = ../lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/kreso/projects/libtheoraplayer/__build__/products/Debug,
+				);
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = /Library/Frameworks;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Vorbis;
-				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = framework;
-				ZERO_LINK = NO;
 			};
 			name = "App Store";
 		};
 		D186224F14F95B3400639D7C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
@@ -648,11 +578,9 @@
 					"${SRCROOT}/../../ogg/include",
 					"$(SRCROOT)/../lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_CFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-ffast-math",
-					"-falign-loops=16",
 				);
 				WARNING_CFLAGS = "-w";
 			};
@@ -660,156 +588,92 @@
 		};
 		D186225014F95B3400639D7C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1681B9218D764B20088FC68 /* Mac.xcconfig */;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				FRAMEWORK_VERSION = A;
-				HEADER_SEARCH_PATHS = ../lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/kreso/projects/libtheoraplayer/__build__/products/Debug,
+				);
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = /Library/Frameworks;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Vorbis;
-				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = framework;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
 		D186225114F95B3B00639D7C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX__;
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/../../ogg/include",
 					"$(SRCROOT)/../lib",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				ONLY_ACTIVE_ARCH = YES;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Debug;
 		};
 		D186225214F95B3B00639D7C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1681B9218D764B20088FC68 /* Mac.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				FRAMEWORK_VERSION = A;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/kreso/projects/libtheoraplayer/__build__/products/Debug,
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
-				HEADER_SEARCH_PATHS = ../lib;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = /Library/Frameworks;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Vorbis;
-				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = framework;
-				ZERO_LINK = YES;
 			};
 			name = Debug;
-		};
-		D1DCB3B41829169B0089A79D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = NO;
-				EXECUTABLE_PREFIX = lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = vorbis;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-			};
-			name = Debug;
-		};
-		D1DCB3B51829169B0089A79D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = YES;
-				EXECUTABLE_PREFIX = lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				PRODUCT_NAME = vorbis;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-			};
-			name = Release;
-		};
-		D1DCB3B61829169B0089A79D /* App Store */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = YES;
-				EXECUTABLE_PREFIX = lib;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				PRODUCT_NAME = vorbis;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-			};
-			name = "App Store";
 		};
 		D1F2799B177A2A4200E5C131 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1681B9218D764B20088FC68 /* Mac.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				EXECUTABLE_PREFIX = lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = vorbis;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
 		D1F2799D177A2A4200E5C131 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1681B9218D764B20088FC68 /* Mac.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				EXECUTABLE_PREFIX = lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				PRODUCT_NAME = vorbis;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
 		D1F2799E177A2A4200E5C131 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1681B9218D764B20088FC68 /* Mac.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				EXECUTABLE_PREFIX = lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				PRODUCT_NAME = vorbis;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = "App Store";
@@ -833,16 +697,6 @@
 				D186225114F95B3B00639D7C /* Debug */,
 				D186224F14F95B3400639D7C /* Release */,
 				D186224D14F95B2E00639D7C /* App Store */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		D1DCB3B31829169B0089A79D /* Build configuration list for PBXNativeTarget "vorbis (iOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D1DCB3B41829169B0089A79D /* Debug */,
-				D1DCB3B51829169B0089A79D /* Release */,
-				D1DCB3B61829169B0089A79D /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

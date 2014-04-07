@@ -70,6 +70,8 @@
 /* Begin PBXFileReference section */
 		8DC2EF5B0486A6940098B216 /* tremor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tremor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1522F1C140F79500012F290 /* libtremor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtremor.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1681B9318D764C00088FC68 /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = iOS.xcconfig; path = xcconfig/iOS.xcconfig; sourceTree = "<group>"; };
+		D1681B9418D764C00088FC68 /* Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Mac.xcconfig; path = xcconfig/Mac.xcconfig; sourceTree = "<group>"; };
 		D176B25F1562F1AF00E26F82 /* asm_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asm_arm.h; sourceTree = "<group>"; };
 		D176B2611562F1AF00E26F82 /* backends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = backends.h; sourceTree = "<group>"; };
 		D176B2621562F1AF00E26F82 /* block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = block.c; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		0867D691FE84028FC02AAC07 /* libtremor */ = {
 			isa = PBXGroup;
 			children = (
+				D1681B8A18D7643F0088FC68 /* config */,
 				7F42F6E811EB0E0600B1C1DF /* include */,
 				7F42F6E711EB0E0200B1C1DF /* src */,
 				034768DFFF38A50411DB9C8B /* Products */,
@@ -179,6 +182,15 @@
 				D176B2851562F1AF00E26F82 /* window.h */,
 			);
 			name = include;
+			sourceTree = "<group>";
+		};
+		D1681B8A18D7643F0088FC68 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				D1681B9318D764C00088FC68 /* iOS.xcconfig */,
+				D1681B9418D764C00088FC68 /* Mac.xcconfig */,
+			);
+			name = config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,7 +287,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "Tremor" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -355,41 +367,27 @@
 		7F7A5614129D436D00E0ED12 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = i386;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/../ogg/include",
 					.,
 				);
 				PRODUCT_NAME = tremor;
-				SDKROOT = macosx;
 				WARNING_CFLAGS = "-W";
 			};
 			name = "App Store";
 		};
 		7F7A5615129D436D00E0ED12 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1681B9318D764C00088FC68 /* iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COMBINE_HIDPI_IMAGES = YES;
 				DSTROOT = /;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_MODEL_TUNING = G5;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				PRODUCT_NAME = tremor;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "i386 x86_64 ppc";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = "App Store";
@@ -397,12 +395,8 @@
 		C9160585132AE60400914FFC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/../ogg/include",
@@ -410,33 +404,23 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = tremor;
-				SDKROOT = macosx;
 				WARNING_CFLAGS = "-W";
 			};
 			name = Debug;
 		};
 		C9160586132AE60400914FFC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1681B9318D764C00088FC68 /* iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				PRODUCT_NAME = tremor;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "i386 x86_64 ppc";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -444,60 +428,42 @@
 		C9160587132AE61000914FFC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				HEADER_SEARCH_PATHS = (
 					"${SRCROOT}/../ogg/include",
 					.,
 				);
 				PRODUCT_NAME = tremor;
-				SDKROOT = macosx;
 				WARNING_CFLAGS = "-W";
 			};
 			name = Release;
 		};
 		C9160588132AE61000914FFC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1681B9318D764C00088FC68 /* iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COMBINE_HIDPI_IMAGES = YES;
 				DSTROOT = /;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_MODEL_TUNING = G5;
-				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				PRODUCT_NAME = tremor;
-				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "i386 x86_64 ppc";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
 		};
 		D1522F27140F79500012F290 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1681B9318D764C00088FC68 /* iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/libtremor_ios.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = tremor;
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "-w";
 			};
@@ -505,38 +471,28 @@
 		};
 		D1522F29140F79500012F290 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1681B9318D764C00088FC68 /* iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/libtremor_ios.dst;
-				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = tremor;
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = "-w";
 			};
 			name = Release;
 		};
 		D1522F2A140F79500012F290 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1681B9318D764C00088FC68 /* iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/libtremor_ios.dst;
-				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = tremor;
-				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALIDATE_PRODUCT = YES;
 				WARNING_CFLAGS = "-w";
 			};
 			name = "App Store";
