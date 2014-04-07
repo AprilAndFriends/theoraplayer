@@ -30,6 +30,7 @@ protected:
 /// @note Based on hltypes::Thread
 class TheoraThread
 {
+	TheoraMutex mRunningMutex;
 public:
 	TheoraThread();
 	virtual ~TheoraThread();
@@ -37,6 +38,7 @@ public:
 	void stop();
 	void resume();
 	void pause();
+	bool isRunning();
 	virtual void execute() = 0;
 	void join();
 		

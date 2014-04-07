@@ -26,8 +26,7 @@ TheoraWorkerThread::~TheoraWorkerThread()
 
 void TheoraWorkerThread::execute()
 {
-	mRunning = true;
-	while (mRunning)
+	while (isRunning())
 	{
 		mClip = TheoraVideoManager::getSingleton().requestWork(this);
 		if (!mClip)

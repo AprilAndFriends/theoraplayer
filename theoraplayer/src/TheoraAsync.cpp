@@ -154,10 +154,22 @@ void TheoraThread::start()
 	pthread_create((pthread_t*)mId, NULL, &theoraAsyncCall, this);
 #endif
 }
+
+bool TheoraThread::isRunning()
+{
+	bool ret;
+	mRunningMutex.lock();
+	ret = mRunning;
+	mRunningMutex.unlock();
 	
+	return ret;
+}
+
 void TheoraThread::join()
 {
+	mRunningMutex.lock();
 	mRunning = false;
+	mRunningMutex.unlock();
 #ifdef _WIN32
 #ifndef _WINRT
 	WaitForSingleObject(mId, INFINITE);
@@ -222,7 +234,9 @@ void TheoraThread::stop()
 {
 	if (mRunning)
 	{
+		mRunningMutex.lock();
 		mRunning = false;
+		mRunningMutex.unlock();
 #ifdef _WIN32
 #ifndef _WINRT
 		TerminateThread(mId, 0);
