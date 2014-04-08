@@ -75,9 +75,14 @@ typedef signed char int8;
 #endif
 
 #ifndef ALIGNP
+#ifdef __cplusplus
 #define ALIGNP(p, t) \
     (reinterpret_cast<uint8*>(((reinterpret_cast<uintptr_t>(p) + \
     ((t) - 1)) & ~((t) - 1))))
+#else
+#define ALIGNP(p, t) \
+    ((uint8*)((((uintptr_t)(p) + ((t) - 1)) & ~((t) - 1))))  /* NOLINT */
+#endif
 #endif
 
 #if !defined(LIBYUV_API)
@@ -97,6 +102,10 @@ typedef signed char int8;
 #define LIBYUV_API
 #endif  // __GNUC__
 #endif  // LIBYUV_API
+
+#define LIBYUV_BOOL int
+#define LIBYUV_FALSE 0
+#define LIBYUV_TRUE 1
 
 // Visual C x86 or GCC little endian.
 #if defined(__x86_64__) || defined(_M_X64) || \

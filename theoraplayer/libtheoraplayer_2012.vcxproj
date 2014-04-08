@@ -351,6 +351,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Android'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Android-x86'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\scale_common.cc" />
     <ClCompile Include="src\YUV\libyuv\src\scale_mips.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android-x86'">false</ExcludedFromBuild>
@@ -371,6 +372,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Android'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_Static|Android-x86'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\scale_posix.cc" />
+    <ClCompile Include="src\YUV\libyuv\src\scale_win.cc" />
     <ClCompile Include="src\YUV\libyuv\src\video_common.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android-x86'">false</ExcludedFromBuild>
@@ -448,6 +451,7 @@
     <ClInclude Include="src\YUV\libyuv\include\libyuv\row.h" />
     <ClInclude Include="src\YUV\libyuv\include\libyuv\scale.h" />
     <ClInclude Include="src\YUV\libyuv\include\libyuv\scale_argb.h" />
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\scale_row.h" />
     <ClInclude Include="src\YUV\libyuv\include\libyuv\version.h" />
     <ClInclude Include="src\YUV\libyuv\include\libyuv\video_common.h" />
     <ClInclude Include="src\YUV\libyuv\yuv_libyuv.h" />

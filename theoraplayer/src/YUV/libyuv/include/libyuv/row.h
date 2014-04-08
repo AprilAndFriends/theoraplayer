@@ -11,6 +11,8 @@
 #ifndef INCLUDE_LIBYUV_ROW_H_  // NOLINT
 #define INCLUDE_LIBYUV_ROW_H_
 
+#include <stdlib.h>  // For malloc.
+
 #include "libyuv/basic_types.h"
 
 #ifdef __cplusplus
@@ -18,15 +20,24 @@ namespace libyuv {
 extern "C" {
 #endif
 
-// TODO(fbarchard): Remove kMaxStride.
-#ifdef __arm__
-#define kMaxStride (1920 * 4)
-#else
-#define kMaxStride (4096 * 4)
-#endif
 #define IS_ALIGNED(p, a) (!((uintptr_t)(p) & ((a) - 1)))
 
-#if defined(__CLR_VER) || defined(COVERAGE_ENABLED) || \
+#ifdef __cplusplus
+#define align_buffer_64(var, size)                                             \
+  uint8* var##_mem = reinterpret_cast<uint8*>(malloc((size) + 63));            \
+  uint8* var = reinterpret_cast<uint8*>                                        \
+      ((reinterpret_cast<intptr_t>(var##_mem) + 63) & ~63)
+#else
+#define align_buffer_64(var, size)                                             \
+  uint8* var##_mem = (uint8*)(malloc((size) + 63));               /* NOLINT */ \
+  uint8* var = (uint8*)(((intptr_t)(var##_mem) + 63) & ~63)       /* NOLINT */
+#endif
+
+#define free_aligned_buffer_64(var) \
+  free(var##_mem);  \
+  var = 0
+
+#if defined(__pnacl__) || defined(__CLR_VER) || defined(COVERAGE_ENABLED) || \
     defined(TARGET_IPHONE_SIMULATOR)
 #define LIBYUV_DISABLE_X86
 #endif
@@ -35,7 +46,10 @@ extern "C" {
 #define LIBYUV_SSSE3_ONLY
 #endif
 
-// The following are available on all x86 platforms, including NaCL:
+// Enable for NaCL pepper 33 for bundle and AVX2 support.
+//  #define NEW_BINUTILS
+
+// The following are available on all x86 platforms:
 #if !defined(LIBYUV_DISABLE_X86) && \
     (defined(_M_IX86) || defined(__x86_64__) || defined(__i386__))
 // Effects:
@@ -44,59 +58,59 @@ extern "C" {
 #define HAS_ARGBATTENUATEROW_SSSE3
 #define HAS_ARGBBLENDROW_SSSE3
 #define HAS_ARGBCOLORMATRIXROW_SSSE3
+#define HAS_ARGBCOLORTABLEROW_X86
+#define HAS_ARGBCOPYALPHAROW_SSE2
+#define HAS_ARGBCOPYYTOALPHAROW_SSE2
 #define HAS_ARGBGRAYROW_SSSE3
+#define HAS_ARGBLUMACOLORTABLEROW_SSSE3
 #define HAS_ARGBMIRRORROW_SSSE3
 #define HAS_ARGBMULTIPLYROW_SSE2
+#define HAS_ARGBPOLYNOMIALROW_SSE2
 #define HAS_ARGBQUANTIZEROW_SSE2
 #define HAS_ARGBSEPIAROW_SSSE3
 #define HAS_ARGBSHADEROW_SSE2
 #define HAS_ARGBSUBTRACTROW_SSE2
+#define HAS_ARGBTOUVROW_SSSE3
 #define HAS_ARGBUNATTENUATEROW_SSE2
 #define HAS_COMPUTECUMULATIVESUMROW_SSE2
 #define HAS_CUMULATIVESUMTOAVERAGEROW_SSE2
 #define HAS_INTERPOLATEROW_SSE2
 #define HAS_INTERPOLATEROW_SSSE3
+#define HAS_RGBCOLORTABLEROW_X86
 #define HAS_SOBELROW_SSE2
-#define HAS_SOBELXROW_SSSE3
+#define HAS_SOBELTOPLANEROW_SSE2
+#define HAS_SOBELXROW_SSE2
 #define HAS_SOBELXYROW_SSE2
-#define HAS_SOBELYROW_SSSE3
-
-// Conversions:
-#define HAS_ARGBSHUFFLEROW_SSSE3
-#define HAS_ARGBTOBAYERROW_SSSE3
-#define HAS_ARGBTOYJROW_SSSE3
-#define HAS_ARGBTOYROW_SSSE3
-#define HAS_COPYROW_ERMS
-#define HAS_COPYROW_X86
-#define HAS_FIXEDDIV_X86
-#define HAS_I400TOARGBROW_SSE2
-#define HAS_SETROW_X86
-#endif
-
-// The following are available on all x86 platforms except NaCL x64:
-#if !defined(LIBYUV_DISABLE_X86) && \
-    (defined(_M_IX86) || defined(__x86_64__) || defined(__i386__)) && \
-    !(defined(__native_client__) && defined(__x86_64__))
+#define HAS_SOBELYROW_SSE2
 
 // Conversions:
 #define HAS_ABGRTOUVROW_SSSE3
 #define HAS_ABGRTOYROW_SSSE3
 #define HAS_ARGB1555TOARGBROW_SSE2
 #define HAS_ARGB4444TOARGBROW_SSE2
+#define HAS_ARGBSHUFFLEROW_SSE2
+#define HAS_ARGBSHUFFLEROW_SSSE3
 #define HAS_ARGBTOARGB1555ROW_SSE2
 #define HAS_ARGBTOARGB4444ROW_SSE2
+#define HAS_ARGBTOBAYERGGROW_SSE2
+#define HAS_ARGBTOBAYERROW_SSSE3
 #define HAS_ARGBTORAWROW_SSSE3
 #define HAS_ARGBTORGB24ROW_SSSE3
 #define HAS_ARGBTORGB565ROW_SSE2
 #define HAS_ARGBTOUV422ROW_SSSE3
 #define HAS_ARGBTOUV444ROW_SSSE3
-#define HAS_ARGBTOUVROW_SSSE3
 #define HAS_ARGBTOUVJROW_SSSE3
+#define HAS_ARGBTOYJROW_SSSE3
+#define HAS_ARGBTOYROW_SSSE3
 #define HAS_BGRATOUVROW_SSSE3
 #define HAS_BGRATOYROW_SSSE3
+#define HAS_COPYROW_ERMS
 #define HAS_COPYROW_SSE2
+#define HAS_COPYROW_X86
 #define HAS_HALFROW_SSE2
+#define HAS_I400TOARGBROW_SSE2
 #define HAS_I411TOARGBROW_SSSE3
+#define HAS_I422TOARGB1555ROW_SSSE3
 #define HAS_I422TOABGRROW_SSSE3
 #define HAS_I422TOARGB1555ROW_SSSE3
 #define HAS_I422TOARGB4444ROW_SSSE3
@@ -110,7 +124,9 @@ extern "C" {
 #define HAS_I422TOYUY2ROW_SSE2
 #define HAS_I444TOARGBROW_SSSE3
 #define HAS_MERGEUVROW_SSE2
+#define HAS_MIRRORROW_SSE2
 #define HAS_MIRRORROW_SSSE3
+#define HAS_MIRRORROW_UV_SSSE3
 #define HAS_MIRRORUVROW_SSSE3
 #define HAS_NV12TOARGBROW_SSSE3
 #define HAS_NV12TORGB565ROW_SSSE3
@@ -123,6 +139,7 @@ extern "C" {
 #define HAS_RGB565TOARGBROW_SSE2
 #define HAS_RGBATOUVROW_SSSE3
 #define HAS_RGBATOYROW_SSSE3
+#define HAS_SETROW_X86
 #define HAS_SPLITUVROW_SSE2
 #define HAS_UYVYTOARGBROW_SSSE3
 #define HAS_UYVYTOUV422ROW_SSE2
@@ -133,23 +150,48 @@ extern "C" {
 #define HAS_YUY2TOUV422ROW_SSE2
 #define HAS_YUY2TOUVROW_SSE2
 #define HAS_YUY2TOYROW_SSE2
-
-// Effects:
 #endif
 
-// The following are Windows only:
-// TODO(fbarchard): Port to gcc.
-#if !defined(LIBYUV_DISABLE_X86) && defined(_M_IX86) && defined(_MSC_VER)
-#define HAS_ARGBCOLORTABLEROW_X86
-#define HAS_RGBCOLORTABLEROW_X86
-// Caveat: Visual C 2012 required for AVX2.
-#if _MSC_VER >= 1700
+// GCC >= 4.7.0 required for AVX2.
+#if defined(__GNUC__) && (defined(__x86_64__) || defined(__i386__))
+#if (__GNUC__ > 4) || (__GNUC__ == 4 && (__GNUC_MINOR__ >= 7))
+#define GCC_HAS_AVX2 1
+#endif  // GNUC >= 4.7
+#endif  // __GNUC__
+
+// clang >= 3.4.0 required for AVX2.
+#if defined(__clang__) && (defined(__x86_64__) || defined(__i386__))
+#if (__clang_major__ > 3) || (__clang_major__ == 3 && (__clang_minor__ >= 4))
+#define CLANG_HAS_AVX2 1
+#endif  // clang >= 3.4
+#endif  // __clang__
+
+// Visual C 2012 required for AVX2.
+#if defined(_M_IX86) && defined(_MSC_VER) && _MSC_VER >= 1700
+#define VISUALC_HAS_AVX2 1
+#endif  // VisualStudio >= 2012
+
+// The following are available on all x86 platforms, but
+// require VS2012, clang 3.4 or gcc 4.7.
+// The code supports NaCL but requires a new compiler and validator.
+#if !defined(LIBYUV_DISABLE_X86) && (defined(VISUALC_HAS_AVX2) || \
+    defined(CLANG_HAS_AVX2) || defined(GCC_HAS_AVX2))
+// Effects:
+#define HAS_ARGBPOLYNOMIALROW_AVX2
 #define HAS_ARGBSHUFFLEROW_AVX2
+#define HAS_ARGBCOPYALPHAROW_AVX2
+#define HAS_ARGBCOPYYTOALPHAROW_AVX2
+#endif
+
+// The following are require VS2012.
+// TODO(fbarchard): Port to gcc.
+#if !defined(LIBYUV_DISABLE_X86) && defined(VISUALC_HAS_AVX2)
 #define HAS_ARGBTOUVROW_AVX2
 #define HAS_ARGBTOYJROW_AVX2
 #define HAS_ARGBTOYROW_AVX2
 #define HAS_HALFROW_AVX2
 #define HAS_I422TOARGBROW_AVX2
+#define HAS_INTERPOLATEROW_AVX2
 #define HAS_MERGEUVROW_AVX2
 #define HAS_MIRRORROW_AVX2
 #define HAS_SPLITUVROW_AVX2
@@ -167,8 +209,7 @@ extern "C" {
 #define HAS_ARGBMULTIPLYROW_AVX2
 #define HAS_ARGBSUBTRACTROW_AVX2
 #define HAS_ARGBUNATTENUATEROW_AVX2
-#endif
-#endif
+#endif  // defined(VISUALC_HAS_AVX2)
 
 // The following are Yasm x86 only:
 // TODO(fbarchard): Port AVX2 to inline.
@@ -189,12 +230,9 @@ extern "C" {
 #if !defined(LIBYUV_DISABLE_X86) && \
     (defined(_M_IX86) || defined(__x86_64__) || defined(__i386__)) && \
     !defined(LIBYUV_SSSE3_ONLY)
-// Available with NaCL:
 #define HAS_ARGBBLENDROW_SSE2
 #define HAS_ARGBATTENUATEROW_SSE2
-#if !(defined(__native_client__) && defined(__x86_64__))
 #define HAS_MIRRORROW_SSE2
-#endif
 #endif
 
 // The following are available on Neon platforms:
@@ -283,6 +321,7 @@ extern "C" {
 #define HAS_ARGBSHADEROW_NEON
 #define HAS_ARGBSUBTRACTROW_NEON
 #define HAS_SOBELROW_NEON
+#define HAS_SOBELTOPLANEROW_NEON
 #define HAS_SOBELXYROW_NEON
 #define HAS_SOBELXROW_NEON
 #define HAS_SOBELYROW_NEON
@@ -319,6 +358,7 @@ typedef __declspec(align(32)) uint32 ulvec32[8];
 typedef __declspec(align(32)) uint8 ulvec8[32];
 
 #elif defined(__GNUC__)
+// Caveat GCC 4.2 to 4.7 have a known issue using vectors with const.
 #define SIMD_ALIGNED(var) var __attribute__((aligned(16)))
 typedef int16 __attribute__((vector_size(16))) vec16;
 typedef int32 __attribute__((vector_size(16))) vec32;
@@ -340,6 +380,68 @@ typedef uint8 uvec8[16];
 #define OMITFP
 #else
 #define OMITFP __attribute__((optimize("omit-frame-pointer")))
+#endif
+
+// NaCL macros for GCC x86 and x64.
+
+// TODO(nfullagar): When pepper_33 toolchain is distributed, default to
+// NEW_BINUTILS and remove all BUNDLEALIGN occurances.
+#if defined(__native_client__)
+#define LABELALIGN ".p2align 5\n"
+#else
+#define LABELALIGN ".p2align 2\n"
+#endif
+#if defined(__native_client__) && defined(__x86_64__)
+#if defined(NEW_BINUTILS)
+#define BUNDLELOCK ".bundle_lock\n"
+#define BUNDLEUNLOCK ".bundle_unlock\n"
+#define BUNDLEALIGN "\n"
+#else
+#define BUNDLELOCK "\n"
+#define BUNDLEUNLOCK "\n"
+#define BUNDLEALIGN ".p2align 5\n"
+#endif
+#define MEMACCESS(base) "%%nacl:(%%r15,%q" #base ")"
+#define MEMACCESS2(offset, base) "%%nacl:" #offset "(%%r15,%q" #base ")"
+#define MEMLEA(offset, base) #offset "(%q" #base ")"
+#define MEMLEA3(offset, index, scale) \
+    #offset "(,%q" #index "," #scale ")"
+#define MEMLEA4(offset, base, index, scale) \
+    #offset "(%q" #base ",%q" #index "," #scale ")"
+#define MEMMOVESTRING(s, d) "%%nacl:(%q" #s "),%%nacl:(%q" #d "), %%r15"
+#define MEMSTORESTRING(reg, d) "%%" #reg ",%%nacl:(%q" #d "), %%r15"
+#define MEMOPREG(opcode, offset, base, index, scale, reg) \
+    BUNDLELOCK \
+    "lea " #offset "(%q" #base ",%q" #index "," #scale "),%%r14d\n" \
+    #opcode " (%%r15,%%r14),%%" #reg "\n" \
+    BUNDLEUNLOCK
+#define MEMOPMEM(opcode, reg, offset, base, index, scale) \
+    BUNDLELOCK \
+    "lea " #offset "(%q" #base ",%q" #index "," #scale "),%%r14d\n" \
+    #opcode " %%" #reg ",(%%r15,%%r14)\n" \
+    BUNDLEUNLOCK
+#define MEMOPARG(opcode, offset, base, index, scale, arg) \
+    BUNDLELOCK \
+    "lea " #offset "(%q" #base ",%q" #index "," #scale "),%%r14d\n" \
+    #opcode " (%%r15,%%r14),%" #arg "\n" \
+    BUNDLEUNLOCK
+#else
+#define BUNDLEALIGN "\n"
+#define MEMACCESS(base) "(%" #base ")"
+#define MEMACCESS2(offset, base) #offset "(%" #base ")"
+#define MEMLEA(offset, base) #offset "(%" #base ")"
+#define MEMLEA3(offset, index, scale) \
+    #offset "(,%" #index "," #scale ")"
+#define MEMLEA4(offset, base, index, scale) \
+    #offset "(%" #base ",%" #index "," #scale ")"
+#define MEMMOVESTRING(s, d)
+#define MEMSTORESTRING(reg, d)
+#define MEMOPREG(opcode, offset, base, index, scale, reg) \
+    #opcode " " #offset "(%" #base ",%" #index "," #scale "),%%" #reg "\n"
+#define MEMOPMEM(opcode, reg, offset, base, index, scale) \
+    #opcode " %%" #reg ","#offset "(%" #base ",%" #index "," #scale ")\n"
+#define MEMOPARG(opcode, offset, base, index, scale, arg) \
+    #opcode " " #offset "(%" #base ",%" #index "," #scale "),%" #arg "\n"
 #endif
 
 void I444ToARGBRow_NEON(const uint8* src_y,
@@ -670,6 +772,14 @@ void CopyRow_NEON(const uint8* src, uint8* dst, int count);
 void CopyRow_MIPS(const uint8* src, uint8* dst, int count);
 void CopyRow_C(const uint8* src, uint8* dst, int count);
 
+void ARGBCopyAlphaRow_C(const uint8* src_argb, uint8* dst_argb, int width);
+void ARGBCopyAlphaRow_SSE2(const uint8* src_argb, uint8* dst_argb, int width);
+void ARGBCopyAlphaRow_AVX2(const uint8* src_argb, uint8* dst_argb, int width);
+
+void ARGBCopyYToAlphaRow_C(const uint8* src_y, uint8* dst_argb, int width);
+void ARGBCopyYToAlphaRow_SSE2(const uint8* src_y, uint8* dst_argb, int width);
+void ARGBCopyYToAlphaRow_AVX2(const uint8* src_y, uint8* dst_argb, int width);
+
 void SetRow_X86(uint8* dst, uint32 v32, int count);
 void ARGBSetRows_X86(uint8* dst, uint32 v32, int width,
                      int dst_stride, int height);
@@ -683,6 +793,8 @@ void ARGBSetRows_C(uint8* dst, uint32 v32, int width, int dst_stride,
 // ARGBShufflers for BGRAToARGB etc.
 void ARGBShuffleRow_C(const uint8* src_argb, uint8* dst_argb,
                       const uint8* shuffler, int pix);
+void ARGBShuffleRow_SSE2(const uint8* src_argb, uint8* dst_argb,
+                         const uint8* shuffler, int pix);
 void ARGBShuffleRow_SSSE3(const uint8* src_argb, uint8* dst_argb,
                           const uint8* shuffler, int pix);
 void ARGBShuffleRow_AVX2(const uint8* src_argb, uint8* dst_argb,
@@ -691,6 +803,8 @@ void ARGBShuffleRow_NEON(const uint8* src_argb, uint8* dst_argb,
                          const uint8* shuffler, int pix);
 void ARGBShuffleRow_Unaligned_SSSE3(const uint8* src_argb, uint8* dst_argb,
                                     const uint8* shuffler, int pix);
+void ARGBShuffleRow_Any_SSE2(const uint8* src_argb, uint8* dst_argb,
+                             const uint8* shuffler, int pix);
 void ARGBShuffleRow_Any_SSSE3(const uint8* src_argb, uint8* dst_argb,
                               const uint8* shuffler, int pix);
 void ARGBShuffleRow_Any_AVX2(const uint8* src_argb, uint8* dst_argb,
@@ -1353,8 +1467,16 @@ void ARGBToBayerRow_Any_SSSE3(const uint8* src_argb, uint8* dst_bayer,
                               uint32 selector, int pix);
 void ARGBToBayerRow_Any_NEON(const uint8* src_argb, uint8* dst_bayer,
                              uint32 selector, int pix);
+void ARGBToBayerGGRow_C(const uint8* src_argb, uint8* dst_bayer,
+                        uint32 /* selector */, int pix);
+void ARGBToBayerGGRow_SSE2(const uint8* src_argb, uint8* dst_bayer,
+                           uint32 /* selector */, int pix);
 void ARGBToBayerGGRow_NEON(const uint8* src_argb, uint8* dst_bayer,
                            uint32 /* selector */, int pix);
+void ARGBToBayerGGRow_Any_SSE2(const uint8* src_argb, uint8* dst_bayer,
+                               uint32 /* selector */, int pix);
+void ARGBToBayerGGRow_Any_NEON(const uint8* src_argb, uint8* dst_bayer,
+                               uint32 /* selector */, int pix);
 
 void I422ToYUY2Row_C(const uint8* src_y,
                      const uint8* src_u,
@@ -1430,11 +1552,12 @@ void ARGBSepiaRow_C(uint8* dst_argb, int width);
 void ARGBSepiaRow_SSSE3(uint8* dst_argb, int width);
 void ARGBSepiaRow_NEON(uint8* dst_argb, int width);
 
-void ARGBColorMatrixRow_C(uint8* dst_argb, const int8* matrix_argb, int width);
-void ARGBColorMatrixRow_SSSE3(uint8* dst_argb, const int8* matrix_argb,
-                              int width);
-void ARGBColorMatrixRow_NEON(uint8* dst_argb, const int8* matrix_argb,
-                             int width);
+void ARGBColorMatrixRow_C(const uint8* src_argb, uint8* dst_argb,
+                          const int8* matrix_argb, int width);
+void ARGBColorMatrixRow_SSSE3(const uint8* src_argb, uint8* dst_argb,
+                              const int8* matrix_argb, int width);
+void ARGBColorMatrixRow_NEON(const uint8* src_argb, uint8* dst_argb,
+                             const int8* matrix_argb, int width);
 
 void ARGBColorTableRow_C(uint8* dst_argb, const uint8* table_argb, int width);
 void ARGBColorTableRow_X86(uint8* dst_argb, const uint8* table_argb, int width);
@@ -1484,6 +1607,9 @@ void InterpolateRow_SSE2(uint8* dst_ptr, const uint8* src_ptr,
 void InterpolateRow_SSSE3(uint8* dst_ptr, const uint8* src_ptr,
                           ptrdiff_t src_stride_ptr, int width,
                           int source_y_fraction);
+void InterpolateRow_AVX2(uint8* dst_ptr, const uint8* src_ptr,
+                         ptrdiff_t src_stride_ptr, int width,
+                         int source_y_fraction);
 void InterpolateRow_NEON(uint8* dst_ptr, const uint8* src_ptr,
                          ptrdiff_t src_stride_ptr, int width,
                          int source_y_fraction);
@@ -1505,6 +1631,9 @@ void InterpolateRow_Any_SSE2(uint8* dst_ptr, const uint8* src_ptr,
 void InterpolateRow_Any_SSSE3(uint8* dst_ptr, const uint8* src_ptr,
                               ptrdiff_t src_stride_ptr, int width,
                               int source_y_fraction);
+void InterpolateRow_Any_AVX2(uint8* dst_ptr, const uint8* src_ptr,
+                             ptrdiff_t src_stride_ptr, int width,
+                             int source_y_fraction);
 void InterpolateRows_Any_MIPS_DSPR2(uint8* dst_ptr, const uint8* src_ptr,
                                     ptrdiff_t src_stride_ptr, int width,
                                     int source_y_fraction);
@@ -1512,14 +1641,14 @@ void InterpolateRows_Any_MIPS_DSPR2(uint8* dst_ptr, const uint8* src_ptr,
 // Sobel images.
 void SobelXRow_C(const uint8* src_y0, const uint8* src_y1, const uint8* src_y2,
                  uint8* dst_sobelx, int width);
-void SobelXRow_SSSE3(const uint8* src_y0, const uint8* src_y1,
-                     const uint8* src_y2, uint8* dst_sobelx, int width);
+void SobelXRow_SSE2(const uint8* src_y0, const uint8* src_y1,
+                    const uint8* src_y2, uint8* dst_sobelx, int width);
 void SobelXRow_NEON(const uint8* src_y0, const uint8* src_y1,
                     const uint8* src_y2, uint8* dst_sobelx, int width);
 void SobelYRow_C(const uint8* src_y0, const uint8* src_y1,
                  uint8* dst_sobely, int width);
-void SobelYRow_SSSE3(const uint8* src_y0, const uint8* src_y1,
-                     uint8* dst_sobely, int width);
+void SobelYRow_SSE2(const uint8* src_y0, const uint8* src_y1,
+                    uint8* dst_sobely, int width);
 void SobelYRow_NEON(const uint8* src_y0, const uint8* src_y1,
                     uint8* dst_sobely, int width);
 void SobelRow_C(const uint8* src_sobelx, const uint8* src_sobely,
@@ -1528,6 +1657,12 @@ void SobelRow_SSE2(const uint8* src_sobelx, const uint8* src_sobely,
                    uint8* dst_argb, int width);
 void SobelRow_NEON(const uint8* src_sobelx, const uint8* src_sobely,
                    uint8* dst_argb, int width);
+void SobelToPlaneRow_C(const uint8* src_sobelx, const uint8* src_sobely,
+                       uint8* dst_y, int width);
+void SobelToPlaneRow_SSE2(const uint8* src_sobelx, const uint8* src_sobely,
+                          uint8* dst_y, int width);
+void SobelToPlaneRow_NEON(const uint8* src_sobelx, const uint8* src_sobely,
+                          uint8* dst_y, int width);
 void SobelXYRow_C(const uint8* src_sobelx, const uint8* src_sobely,
                   uint8* dst_argb, int width);
 void SobelXYRow_SSE2(const uint8* src_sobelx, const uint8* src_sobely,
@@ -1535,14 +1670,21 @@ void SobelXYRow_SSE2(const uint8* src_sobelx, const uint8* src_sobely,
 void SobelXYRow_NEON(const uint8* src_sobelx, const uint8* src_sobely,
                      uint8* dst_argb, int width);
 
-// Divide num by div and return as 16.16 fixed point result.
-int FixedDiv_C(int num, int div);
-int FixedDiv_X86(int num, int div);
-#ifdef HAS_FIXEDDIV_X86
-#define FixedDiv FixedDiv_X86
-#else
-#define FixedDiv FixedDiv_C
-#endif
+void ARGBPolynomialRow_C(const uint8* src_argb,
+                         uint8* dst_argb, const float* poly,
+                         int width);
+void ARGBPolynomialRow_SSE2(const uint8* src_argb,
+                            uint8* dst_argb, const float* poly,
+                            int width);
+void ARGBPolynomialRow_AVX2(const uint8* src_argb,
+                            uint8* dst_argb, const float* poly,
+                            int width);
+
+void ARGBLumaColorTableRow_C(const uint8* src_argb, uint8* dst_argb, int width,
+                             const uint8* luma, uint32 lumacoeff);
+void ARGBLumaColorTableRow_SSSE3(const uint8* src_argb, uint8* dst_argb,
+                                 int width,
+                                 const uint8* luma, uint32 lumacoeff);
 
 #ifdef __cplusplus
 }  // extern "C"
