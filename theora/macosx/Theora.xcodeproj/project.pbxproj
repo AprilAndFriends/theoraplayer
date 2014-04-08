@@ -84,6 +84,13 @@
 		D1BB6FA6150E9D8C00EF9400 /* internal.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EA0FE4E5BD00117FC9 /* internal.c */; };
 		D1BB6FA7150E9D8C00EF9400 /* quant.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EC0FE4E5BD00117FC9 /* quant.c */; };
 		D1BB6FA8150E9D8C00EF9400 /* state.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EE0FE4E5BD00117FC9 /* state.c */; };
+		D1BCE04418F3EF2D00C83470 /* armbits.asm in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE03918F3EF2D00C83470 /* armbits.asm */; };
+		D1BCE04518F3EF2D00C83470 /* armcpu.c in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE03B18F3EF2D00C83470 /* armcpu.c */; };
+		D1BCE04618F3EF2D00C83470 /* armenc.c in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE03D18F3EF2D00C83470 /* armenc.c */; };
+		D1BCE04718F3EF2D00C83470 /* armfrag.asm in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE03F18F3EF2D00C83470 /* armfrag.asm */; };
+		D1BCE04818F3EF2D00C83470 /* armidct.asm in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE04018F3EF2D00C83470 /* armidct.asm */; };
+		D1BCE04918F3EF2D00C83470 /* armloop.asm in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE04218F3EF2D00C83470 /* armloop.asm */; };
+		D1BCE04A18F3EF2D00C83470 /* armstate.c in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE04318F3EF2D00C83470 /* armstate.c */; };
 		D1F279BB177A2B3400E5C131 /* encoder_disabled.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C324B0FE4E5D500117FC9 /* encoder_disabled.c */; };
 		D1F279BC177A2B3400E5C131 /* fdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C324E0FE4E5D500117FC9 /* fdct.c */; };
 		D1F279BD177A2B3400E5C131 /* mathops.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32510FE4E5D500117FC9 /* mathops.c */; };
@@ -159,26 +166,21 @@
 		D109504D1620571200C5B181 /* sse2trans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sse2trans.h; sourceTree = "<group>"; };
 		D109504E1620571200C5B181 /* x86cpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = x86cpu.c; sourceTree = "<group>"; };
 		D109504F1620571200C5B181 /* x86cpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x86cpu.h; sourceTree = "<group>"; };
-		D12CA53C17732E7600412E5B /* armbits.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = armbits.h; path = arm/armbits.h; sourceTree = "<group>"; };
-		D12CA53D17732E7600412E5B /* armbits.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = armbits.s; path = arm/armbits.s; sourceTree = "<group>"; };
-		D12CA53E17732E7600412E5B /* armcpu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = armcpu.c; path = arm/armcpu.c; sourceTree = "<group>"; };
-		D12CA53F17732E7600412E5B /* armcpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = armcpu.h; path = arm/armcpu.h; sourceTree = "<group>"; };
-		D12CA54217732E7600412E5B /* armencfrag.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = armencfrag.s; path = arm/armencfrag.s; sourceTree = "<group>"; };
-		D12CA54317732E7600412E5B /* armenquant.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = armenquant.s; path = arm/armenquant.s; sourceTree = "<group>"; };
-		D12CA54417732E7600412E5B /* armfrag.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = armfrag.s; path = arm/armfrag.s; sourceTree = "<group>"; };
-		D12CA54517732E7600412E5B /* armidct.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = armidct.s; path = arm/armidct.s; sourceTree = "<group>"; };
-		D12CA54617732E7600412E5B /* armint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = armint.h; path = arm/armint.h; sourceTree = "<group>"; };
-		D12CA54717732E7600412E5B /* armloop.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; name = armloop.s; path = arm/armloop.s; sourceTree = "<group>"; };
-		D12CA54917732E7600412E5B /* armstate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = armstate.c; path = arm/armstate.c; sourceTree = "<group>"; };
-		D12CA54A177345FC00412E5B /* armbits.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armbits.asm; path = arm/armbits.asm; sourceTree = "<group>"; };
-		D12CA54B177345FC00412E5B /* armfrag.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armfrag.asm; path = arm/armfrag.asm; sourceTree = "<group>"; };
-		D12CA54C177345FC00412E5B /* armidct.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armidct.asm; path = arm/armidct.asm; sourceTree = "<group>"; };
-		D12CA54D177345FD00412E5B /* armloop.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armloop.asm; path = arm/armloop.asm; sourceTree = "<group>"; };
-		D12CA54E177345FE00412E5B /* armopts-gnu.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; name = "armopts-gnu.s"; path = "arm/armopts-gnu.s"; sourceTree = "<group>"; };
 		D1358BB318D7760B00A36FDC /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = iOS.xcconfig; path = ../xcconfig/iOS.xcconfig; sourceTree = "<group>"; };
 		D1358BB418D7760B00A36FDC /* Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Mac.xcconfig; path = ../xcconfig/Mac.xcconfig; sourceTree = "<group>"; };
 		D1BB6F7E150E9CFD00EF9400 /* libtheora.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheora.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1BB6F80150E9CFD00EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D1BCE03918F3EF2D00C83470 /* armbits.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armbits.asm; path = arm_llvm/armbits.asm; sourceTree = "<group>"; };
+		D1BCE03A18F3EF2D00C83470 /* armbits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = armbits.h; path = arm_llvm/armbits.h; sourceTree = "<group>"; };
+		D1BCE03B18F3EF2D00C83470 /* armcpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = armcpu.c; path = arm_llvm/armcpu.c; sourceTree = "<group>"; };
+		D1BCE03C18F3EF2D00C83470 /* armcpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = armcpu.h; path = arm_llvm/armcpu.h; sourceTree = "<group>"; };
+		D1BCE03D18F3EF2D00C83470 /* armenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = armenc.c; path = arm_llvm/armenc.c; sourceTree = "<group>"; };
+		D1BCE03E18F3EF2D00C83470 /* armenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = armenc.h; path = arm_llvm/armenc.h; sourceTree = "<group>"; };
+		D1BCE03F18F3EF2D00C83470 /* armfrag.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armfrag.asm; path = arm_llvm/armfrag.asm; sourceTree = "<group>"; };
+		D1BCE04018F3EF2D00C83470 /* armidct.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armidct.asm; path = arm_llvm/armidct.asm; sourceTree = "<group>"; };
+		D1BCE04118F3EF2D00C83470 /* armint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = armint.h; path = arm_llvm/armint.h; sourceTree = "<group>"; };
+		D1BCE04218F3EF2D00C83470 /* armloop.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armloop.asm; path = arm_llvm/armloop.asm; sourceTree = "<group>"; };
+		D1BCE04318F3EF2D00C83470 /* armstate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = armstate.c; path = arm_llvm/armstate.c; sourceTree = "<group>"; };
 		D1F279D4177A2B3400E5C131 /* libtheora.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheora.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -318,22 +320,17 @@
 		D12CA53A17732E6D00412E5B /* arm */ = {
 			isa = PBXGroup;
 			children = (
-				D12CA54A177345FC00412E5B /* armbits.asm */,
-				D12CA54B177345FC00412E5B /* armfrag.asm */,
-				D12CA54C177345FC00412E5B /* armidct.asm */,
-				D12CA54D177345FD00412E5B /* armloop.asm */,
-				D12CA54E177345FE00412E5B /* armopts-gnu.s */,
-				D12CA53C17732E7600412E5B /* armbits.h */,
-				D12CA53D17732E7600412E5B /* armbits.s */,
-				D12CA53E17732E7600412E5B /* armcpu.c */,
-				D12CA53F17732E7600412E5B /* armcpu.h */,
-				D12CA54217732E7600412E5B /* armencfrag.s */,
-				D12CA54317732E7600412E5B /* armenquant.s */,
-				D12CA54417732E7600412E5B /* armfrag.s */,
-				D12CA54517732E7600412E5B /* armidct.s */,
-				D12CA54617732E7600412E5B /* armint.h */,
-				D12CA54717732E7600412E5B /* armloop.s */,
-				D12CA54917732E7600412E5B /* armstate.c */,
+				D1BCE03918F3EF2D00C83470 /* armbits.asm */,
+				D1BCE03A18F3EF2D00C83470 /* armbits.h */,
+				D1BCE03B18F3EF2D00C83470 /* armcpu.c */,
+				D1BCE03C18F3EF2D00C83470 /* armcpu.h */,
+				D1BCE03D18F3EF2D00C83470 /* armenc.c */,
+				D1BCE03E18F3EF2D00C83470 /* armenc.h */,
+				D1BCE03F18F3EF2D00C83470 /* armfrag.asm */,
+				D1BCE04018F3EF2D00C83470 /* armidct.asm */,
+				D1BCE04118F3EF2D00C83470 /* armint.h */,
+				D1BCE04218F3EF2D00C83470 /* armloop.asm */,
+				D1BCE04318F3EF2D00C83470 /* armstate.c */,
 			);
 			name = arm;
 			sourceTree = "<group>";
@@ -539,13 +536,20 @@
 				D1BB6FA0150E9D8C00EF9400 /* decode.c in Sources */,
 				D1BB6FA1150E9D8C00EF9400 /* dequant.c in Sources */,
 				D1BB6FA2150E9D8C00EF9400 /* fragment.c in Sources */,
+				D1BCE04A18F3EF2D00C83470 /* armstate.c in Sources */,
+				D1BCE04518F3EF2D00C83470 /* armcpu.c in Sources */,
+				D1BCE04918F3EF2D00C83470 /* armloop.asm in Sources */,
 				D1BB6FA3150E9D8C00EF9400 /* huffdec.c in Sources */,
+				D1BCE04818F3EF2D00C83470 /* armidct.asm in Sources */,
 				D1BB6FA4150E9D8C00EF9400 /* idct.c in Sources */,
+				D1BCE04718F3EF2D00C83470 /* armfrag.asm in Sources */,
 				D1BB6FA5150E9D8C00EF9400 /* info.c in Sources */,
 				D1BB6FA6150E9D8C00EF9400 /* internal.c in Sources */,
+				D1BCE04418F3EF2D00C83470 /* armbits.asm in Sources */,
 				D1BB6FA7150E9D8C00EF9400 /* quant.c in Sources */,
 				D1BB6FA8150E9D8C00EF9400 /* state.c in Sources */,
 				D1095044162056DB00C5B181 /* collect.c in Sources */,
+				D1BCE04618F3EF2D00C83470 /* armenc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,10 +595,7 @@
 			buildSettings = {
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(GCC_PREPROCESSOR_DEFINITIONS)",
-					__MACOSX__,
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_MISSING_PARENTHESES = NO;
@@ -641,10 +642,7 @@
 			buildSettings = {
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(GCC_PREPROCESSOR_DEFINITIONS)",
-					__MACOSX__,
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_MISSING_PARENTHESES = NO;
@@ -694,10 +692,7 @@
 			buildSettings = {
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(GCC_PREPROCESSOR_DEFINITIONS)",
-					__MACOSX__,
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_MISSING_PARENTHESES = NO;
@@ -747,9 +742,14 @@
 			baseConfigurationReference = D1358BB318D7760B00A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARM_PREPR = "_IOS OC_ARM_ASM OC_ARM_ASM_EDSP=1 OC_ARM_ASM_MEDIA=1 OC_ARM_ASM_NEON=1 OC_ARM_CAN_UNALIGN=1 OC_ARM_CAN_UNALIGN_LDRD=0 $(inherited)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = "$(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=armv7]" = "$(ARM_PREPR)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*][arch=armv7s]" = "$(ARM_PREPR)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = "$(inherited)";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				PRODUCT_NAME = theora;
@@ -762,8 +762,14 @@
 			baseConfigurationReference = D1358BB318D7760B00A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARM_PREPR = "_IOS OC_ARM_ASM OC_ARM_ASM_EDSP=1 OC_ARM_ASM_MEDIA=1 OC_ARM_ASM_NEON=1 OC_ARM_CAN_UNALIGN=1 OC_ARM_CAN_UNALIGN_LDRD=0 $(inherited)";
 				COPY_PHASE_STRIP = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = " ";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = "$(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=armv7]" = "$(ARM_PREPR)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*][arch=armv7s]" = "$(ARM_PREPR)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = "$(inherited)";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				PRODUCT_NAME = theora;
 				SKIP_INSTALL = YES;
@@ -775,8 +781,14 @@
 			baseConfigurationReference = D1358BB318D7760B00A36FDC /* iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARM_PREPR = "_IOS OC_ARM_ASM OC_ARM_ASM_EDSP=1 OC_ARM_ASM_MEDIA=1 OC_ARM_ASM_NEON=1 OC_ARM_CAN_UNALIGN=1 OC_ARM_CAN_UNALIGN_LDRD=0 $(inherited)";
 				COPY_PHASE_STRIP = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = " ";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = "$(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=armv7]" = "$(ARM_PREPR)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*][arch=armv7s]" = "$(ARM_PREPR)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = "$(inherited)";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				PRODUCT_NAME = theora;
 				SKIP_INSTALL = YES;
@@ -792,6 +804,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					OC_X86_ASM,
+					__MACOSX__,
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -809,6 +822,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					OC_X86_ASM,
+					__MACOSX__,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -825,6 +839,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					OC_X86_ASM,
+					__MACOSX__,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;

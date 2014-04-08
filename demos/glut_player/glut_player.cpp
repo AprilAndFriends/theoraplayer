@@ -13,6 +13,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 //#define BENCHMARK // uncomment this to benchmark decoding times
 #ifdef BENCHMARK
     #include <time.h>
+#include <theoraplayer/TheoraFrameQueue.h>
 #endif
 unsigned int tex_id;
 TheoraVideoManager* mgr;
@@ -112,36 +113,39 @@ void setDebugTitle(char* out)
 			                                                                percent);
 }
 
+#ifdef BENCHMARK
+void benchmark(const char* filename)
+{
+	int nPrecached = 256;
+	int n = nPrecached;
+	TheoraVideoClip* clip = mgr->createVideoClip(filename, outputMode, 32);
+    clock_t t = clock();
+	while (n > 0)
+	{
+		clip->waitForCache(1.0f, 1000000);
+		n -= 32;
+		clip->getFrameQueue()->clear();
+	}
+    float diff = ((float) (clock() - t) * 1000.0f) / CLOCKS_PER_SEC;
+    printf("%s: Decoding %d frames took %.1fms (%.2fms average per frame)\n",filename, nPrecached, diff, diff / nPrecached);
+	mgr->destroyVideoClip(clip);
+}
+#endif
+
 void init()
 {
-	mgr=new TheoraVideoManager();
-	
-	/*/ Benchmark
-	clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 100);
-	unsigned int time = GetTickCount();
-	clip->waitForCache(1.0f, 10000000);
-	printf("Average time per frame: %.2f\n", (GetTickCount() - time) / 100.0f);
-	
-	//*/
-	/*/ Test Memory Leaks
-	
-	for (;;)
-	{
-		clip = mgr->createVideoClip("media/bunny.ogg", outputMode, 16);
-		mgr->destroyVideoClip(clip);
-	}
+	mgr = new TheoraVideoManager();
 
-	//*/
 #ifdef BENCHMARK
-	clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 64);
-    int n = clip->getNumPrecachedFrames();
-    clock_t t = clock();
-    clip->waitForCache(1.0f, 1000000);
-    float diff = ((float) (clock() - t) * 1000.0f) / CLOCKS_PER_SEC;
-    printf("Decoding %d frames took %.1fms (%.2fms average per frame)\n", n, diff, diff / n);
-#else
-    clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 16);
+	benchmark("media/witch_intro.ogv");
+	benchmark("media/hotel_intro.ogv");
+	benchmark("media/angels_intro.ogv");
+	benchmark("media/witch_intro.mp4");
+	benchmark("media/hotel_intro.mp4");
+	benchmark("media/angels_intro.mp4");
 #endif
+    clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 16);
+
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);
 	clip->setAutoRestart(1);
