@@ -11,7 +11,7 @@
  ********************************************************************
 
  function: maintain the info structure, info <-> header packets
- last mod: $Id: info.c 17584 2010-11-01 19:26:16Z xiphmont $
+ last mod: $Id: info.c 19058 2014-01-22 18:03:15Z xiphmont $
 
  ********************************************************************/
 
@@ -31,8 +31,8 @@
 #include "misc.h"
 #include "os.h"
 
-#define GENERAL_VENDOR_STRING "Xiph.Org libVorbis 1.3.2"
-#define ENCODE_VENDOR_STRING "Xiph.Org libVorbis I 20101101 (Schaufenugget)"
+#define GENERAL_VENDOR_STRING "Xiph.Org libVorbis 1.3.4"
+#define ENCODE_VENDOR_STRING "Xiph.Org libVorbis I 20140122 (Turpakäräjiin)"
 
 /* helpers */
 static int ilog2(unsigned int v){
@@ -550,7 +550,10 @@ int vorbis_commentheader_out(vorbis_comment *vc,
   oggpack_buffer opb;
 
   oggpack_writeinit(&opb);
-  if(_vorbis_pack_comment(&opb,vc)) return OV_EIMPL;
+  if(_vorbis_pack_comment(&opb,vc)){
+    oggpack_writeclear(&opb);
+    return OV_EIMPL;
+  }
 
   op->packet = _ogg_malloc(oggpack_bytes(&opb));
   memcpy(op->packet, opb.buffer, oggpack_bytes(&opb));
@@ -561,6 +564,7 @@ int vorbis_commentheader_out(vorbis_comment *vc,
   op->granulepos=0;
   op->packetno=1;
 
+  oggpack_writeclear(&opb);
   return 0;
 }
 
@@ -654,11 +658,7 @@ double vorbis_granule_time(vorbis_dsp_state *v,ogg_int64_t granulepos){
   }else{
     ogg_int64_t granuleoff=0xffffffff;
     granuleoff<<=31;
-#ifdef __APPLE__ // cateia games note: added this to silence xcode warning on gcc compiler
-    granuleoff|=0x7ffffffffLL;	  
-#else
     granuleoff|=0x7ffffffff;
-#endif
     return(((double)granulepos+2+granuleoff+granuleoff)/v->vi->rate);
   }
 }
