@@ -11,7 +11,7 @@
  ********************************************************************
 
  function: stdio-based convenience library for opening/seeking/decoding
- last mod: $Id: vorbisfile.c 17573 2010-10-27 14:53:59Z xiphmont $
+ last mod: $Id: vorbisfile.c 19031 2013-12-03 19:20:50Z tterribe $
 
  ********************************************************************/
 
@@ -1055,7 +1055,11 @@ int ov_halfrate_p(OggVorbis_File *vf){
 /* Only partially open the vorbis file; test for Vorbisness, and load
    the headers for the first chain.  Do not seek (although test for
    seekability).  Use ov_test_open to finish opening the file, else
-   ov_clear to close/free it. Same return codes as open. */
+   ov_clear to close/free it. Same return codes as open.
+
+   Note that vorbisfile does _not_ take ownership of the file if the
+   call fails; the calling applicaiton is responsible for closing the file
+   if this call returns an error. */
 
 int ov_test_callbacks(void *f,OggVorbis_File *vf,
     const char *initial,long ibytes,ov_callbacks callbacks)
@@ -2054,14 +2058,14 @@ long ov_read_float(OggVorbis_File *vf,float ***pcm_channels,int length,
   }
 }
 
-extern float *vorbis_window(vorbis_dsp_state *v,int W);
+extern const float *vorbis_window(vorbis_dsp_state *v,int W);
 
 static void _ov_splice(float **pcm,float **lappcm,
                        int n1, int n2,
                        int ch1, int ch2,
-                       float *w1, float *w2){
+                       const float *w1, const float *w2){
   int i,j;
-  float *w=w1;
+  const float *w=w1;
   int n=n1;
 
   if(n1>n2){
@@ -2169,7 +2173,7 @@ int ov_crosslap(OggVorbis_File *vf1, OggVorbis_File *vf2){
   vorbis_info *vi1,*vi2;
   float **lappcm;
   float **pcm;
-  float *w1,*w2;
+  const float *w1,*w2;
   int n1,n2,i,ret,hs1,hs2;
 
   if(vf1==vf2)return(0); /* degenerate case */
@@ -2223,7 +2227,7 @@ static int _ov_64_seek_lap(OggVorbis_File *vf,ogg_int64_t pos,
   vorbis_info *vi;
   float **lappcm;
   float **pcm;
-  float *w1,*w2;
+  const float *w1,*w2;
   int n1,n2,ch1,ch2,hs;
   int i,ret;
 
@@ -2284,7 +2288,7 @@ static int _ov_d_seek_lap(OggVorbis_File *vf,double pos,
   vorbis_info *vi;
   float **lappcm;
   float **pcm;
-  float *w1,*w2;
+  const float *w1,*w2;
   int n1,n2,ch1,ch2,hs;
   int i,ret;
 

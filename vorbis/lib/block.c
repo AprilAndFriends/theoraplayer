@@ -11,7 +11,7 @@
  ********************************************************************
 
  function: PCM data vector blocking, windowing and dis/reassembly
- last mod: $Id: block.c 17561 2010-10-23 10:34:24Z xiphmont $
+ last mod: $Id: block.c 19031 2013-12-03 19:20:50Z tterribe $
 
  Handle windowing, overlap-add, etc of the PCM vectors.  This is made
  more amusing by Vorbis' current two allowed block sizes.
@@ -771,14 +771,14 @@ int vorbis_synthesis_blockin(vorbis_dsp_state *v,vorbis_block *vb){
       if(v->lW){
         if(v->W){
           /* large/large */
-          float *w=_vorbis_window_get(b->window[1]-hs);
+          const float *w=_vorbis_window_get(b->window[1]-hs);
           float *pcm=v->pcm[j]+prevCenter;
           float *p=vb->pcm[j];
           for(i=0;i<n1;i++)
             pcm[i]=pcm[i]*w[n1-i-1] + p[i]*w[i];
         }else{
           /* large/small */
-          float *w=_vorbis_window_get(b->window[0]-hs);
+          const float *w=_vorbis_window_get(b->window[0]-hs);
           float *pcm=v->pcm[j]+prevCenter+n1/2-n0/2;
           float *p=vb->pcm[j];
           for(i=0;i<n0;i++)
@@ -787,7 +787,7 @@ int vorbis_synthesis_blockin(vorbis_dsp_state *v,vorbis_block *vb){
       }else{
         if(v->W){
           /* small/large */
-          float *w=_vorbis_window_get(b->window[0]-hs);
+          const float *w=_vorbis_window_get(b->window[0]-hs);
           float *pcm=v->pcm[j]+prevCenter;
           float *p=vb->pcm[j]+n1/2-n0/2;
           for(i=0;i<n0;i++)
@@ -796,7 +796,7 @@ int vorbis_synthesis_blockin(vorbis_dsp_state *v,vorbis_block *vb){
             pcm[i]=p[i];
         }else{
           /* small/small */
-          float *w=_vorbis_window_get(b->window[0]-hs);
+          const float *w=_vorbis_window_get(b->window[0]-hs);
           float *pcm=v->pcm[j]+prevCenter;
           float *p=vb->pcm[j];
           for(i=0;i<n0;i++)
@@ -1035,7 +1035,7 @@ int vorbis_synthesis_lapout(vorbis_dsp_state *v,float ***pcm){
 
 }
 
-float *vorbis_window(vorbis_dsp_state *v,int W){
+const float *vorbis_window(vorbis_dsp_state *v,int W){
   vorbis_info *vi=v->vi;
   codec_setup_info *ci=vi->codec_setup;
   int hs=ci->halfrate_flag;

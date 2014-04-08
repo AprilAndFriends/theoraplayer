@@ -11,7 +11,7 @@
  ********************************************************************
 
  function: basic codebook pack/unpack/code/decode operations
- last mod: $Id: codebook.c 17553 2010-10-21 17:54:26Z tterribe $
+ last mod: $Id: codebook.c 19057 2014-01-22 12:32:31Z xiphmont $
 
  ********************************************************************/
 
@@ -53,8 +53,8 @@ int vorbis_staticbook_pack(const static_codebook *c,oggpack_buffer *opb){
     oggpack_write(opb,c->lengthlist[0]-1,5); /* 1 to 32 */
 
     for(i=1;i<c->entries;i++){
-      long this=c->lengthlist[i];
-      long last=c->lengthlist[i-1];
+      char this=c->lengthlist[i];
+      char last=c->lengthlist[i-1];
       if(this>last){
         for(j=last;j<this;j++){
           oggpack_write(opb,i-count,_ilog(c->entries-count));
@@ -367,6 +367,7 @@ long vorbis_book_decode(codebook *book, oggpack_buffer *b){
 }
 
 /* returns 0 on OK or -1 on eof *************************************/
+/* decode vector / dim granularity gaurding is done in the upper layer */
 long vorbis_book_decodevs_add(codebook *book,float *a,oggpack_buffer *b,int n){
   if(book->used_entries>0){
     int step=n/book->dim;
@@ -386,6 +387,7 @@ long vorbis_book_decodevs_add(codebook *book,float *a,oggpack_buffer *b,int n){
   return(0);
 }
 
+/* decode vector / dim granularity gaurding is done in the upper layer */
 long vorbis_book_decodev_add(codebook *book,float *a,oggpack_buffer *b,int n){
   if(book->used_entries>0){
     int i,j,entry;
@@ -431,6 +433,9 @@ long vorbis_book_decodev_add(codebook *book,float *a,oggpack_buffer *b,int n){
   return(0);
 }
 
+/* unlike the others, we guard against n not being an integer number
+   of <dim> internally rather than in the upper layer (called only by
+   floor0) */
 long vorbis_book_decodev_set(codebook *book,float *a,oggpack_buffer *b,int n){
   if(book->used_entries>0){
     int i,j,entry;
@@ -440,15 +445,15 @@ long vorbis_book_decodev_set(codebook *book,float *a,oggpack_buffer *b,int n){
       entry = decode_packed_entry_number(book,b);
       if(entry==-1)return(-1);
       t     = book->valuelist+entry*book->dim;
-      for (j=0;j<book->dim;)
+      for (j=0;i<n && j<book->dim;){
         a[i++]=t[j++];
+      }
     }
   }else{
-    int i,j;
+    int i;
 
     for(i=0;i<n;){
-      for (j=0;j<book->dim;)
-        a[i++]=0.f;
+      a[i++]=0.f;
     }
   }
   return(0);
