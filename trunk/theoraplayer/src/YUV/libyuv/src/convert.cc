@@ -22,7 +22,43 @@ namespace libyuv {
 extern "C" {
 #endif
 
+#define SUBSAMPLE(v, a, s) (v < 0) ? (-((-v + a) >> s)) : ((v + a) >> s)
+static __inline int Abs(int v) {
+  return v >= 0 ? v : -v;
+}
+
+// Any I4xx To I420 format with mirroring.
+static int I4xxToI420(const uint8* src_y, int src_stride_y,
+                      const uint8* src_u, int src_stride_u,
+                      const uint8* src_v, int src_stride_v,
+                      uint8* dst_y, int dst_stride_y,
+                      uint8* dst_u, int dst_stride_u,
+                      uint8* dst_v, int dst_stride_v,
+                      int src_y_width, int src_y_height,
+                      int src_uv_width, int src_uv_height) {
+  if (src_y_width == 0 || src_y_height == 0 ||
+      src_uv_width == 0 || src_uv_height == 0) {
+    return -1;
+  }
+  const int dst_y_width = Abs(src_y_width);
+  const int dst_y_height = Abs(src_y_height);
+  const int dst_uv_width = SUBSAMPLE(dst_y_width, 1, 1);
+  const int dst_uv_height = SUBSAMPLE(dst_y_height, 1, 1);
+  ScalePlane(src_y, src_stride_y, src_y_width, src_y_height,
+             dst_y, dst_stride_y, dst_y_width, dst_y_height,
+             kFilterBilinear);
+  ScalePlane(src_u, src_stride_u, src_uv_width, src_uv_height,
+             dst_u, dst_stride_u, dst_uv_width, dst_uv_height,
+             kFilterBilinear);
+  ScalePlane(src_v, src_stride_v, src_uv_width, src_uv_height,
+             dst_v, dst_stride_v, dst_uv_width, dst_uv_height,
+             kFilterBilinear);
+  return 0;
+}
+
 // Copy I420 with optional flipping
+// TODO(fbarchard): Use Scale plane which supports mirroring, but ensure
+// is does row coalescing.
 LIBYUV_API
 int I420Copy(const uint8* src_y, int src_stride_y,
              const uint8* src_u, int src_stride_u,
@@ -39,7 +75,7 @@ int I420Copy(const uint8* src_y, int src_stride_y,
   // Negative height means invert the image.
   if (height < 0) {
     height = -height;
-    int halfheight = (height + 1) >> 1;
+    const int halfheight = (height + 1) >> 1;
     src_y = src_y + (height - 1) * src_stride_y;
     src_u = src_u + (halfheight - 1) * src_stride_u;
     src_v = src_v + (halfheight - 1) * src_stride_v;
@@ -48,16 +84,19 @@ int I420Copy(const uint8* src_y, int src_stride_y,
     src_stride_v = -src_stride_v;
   }
 
-  int halfwidth = (width + 1) >> 1;
-  int halfheight = (height + 1) >> 1;
   if (dst_y) {
     CopyPlane(src_y, src_stride_y, dst_y, dst_stride_y, width, height);
   }
+  // Copy UV planes.
+  const int halfwidth = (width + 1) >> 1;
+  const int halfheight = (height + 1) >> 1;
   CopyPlane(src_u, src_stride_u, dst_u, dst_stride_u, halfwidth, halfheight);
   CopyPlane(src_v, src_stride_v, dst_v, dst_stride_v, halfwidth, halfheight);
   return 0;
 }
 
+// 422 chroma is 1/2 width, 1x height
+// 420 chroma is 1/2 width, 1/2 height
 LIBYUV_API
 int I422ToI420(const uint8* src_y, int src_stride_y,
                const uint8* src_u, int src_stride_u,
@@ -66,88 +105,19 @@ int I422ToI420(const uint8* src_y, int src_stride_y,
                uint8* dst_u, int dst_stride_u,
                uint8* dst_v, int dst_stride_v,
                int width, int height) {
-  if (!src_y || !src_u || !src_v ||
-      !dst_y || !dst_u || !dst_v ||
-      width <= 0 || height == 0) {
-    return -1;
-  }
-  // Negative height means invert the image.
-  if (height < 0) {
-    height = -height;
-    src_y = src_y + (height - 1) * src_stride_y;
-    src_u = src_u + (height - 1) * src_stride_u;
-    src_v = src_v + (height - 1) * src_stride_v;
-    src_stride_y = -src_stride_y;
-    src_stride_u = -src_stride_u;
-    src_stride_v = -src_stride_v;
-  }
-  int halfwidth = (width + 1) >> 1;
-  void (*HalfRow)(const uint8* src_uv, int src_uv_stride,
-                  uint8* dst_uv, int pix) = HalfRow_C;
-#if defined(HAS_HALFROW_SSE2)
-  if (TestCpuFlag(kCpuHasSSE2) && IS_ALIGNED(halfwidth, 16) &&
-      IS_ALIGNED(src_u, 16) && IS_ALIGNED(src_stride_u, 16) &&
-      IS_ALIGNED(src_v, 16) && IS_ALIGNED(src_stride_v, 16) &&
-      IS_ALIGNED(dst_u, 16) && IS_ALIGNED(dst_stride_u, 16) &&
-      IS_ALIGNED(dst_v, 16) && IS_ALIGNED(dst_stride_v, 16)) {
-    HalfRow = HalfRow_SSE2;
-  }
-#endif
-#if defined(HAS_HALFROW_AVX2)
-  if (TestCpuFlag(kCpuHasAVX2) && IS_ALIGNED(halfwidth, 32)) {
-    HalfRow = HalfRow_AVX2;
-  }
-#endif
-#if defined(HAS_HALFROW_NEON)
-  if (TestCpuFlag(kCpuHasNEON) && IS_ALIGNED(halfwidth, 16)) {
-    HalfRow = HalfRow_NEON;
-  }
-#endif
-
-  // Copy Y plane
-  if (dst_y) {
-    CopyPlane(src_y, src_stride_y, dst_y, dst_stride_y, width, height);
-  }
-
-  // SubSample U plane.
-  int y;
-  for (y = 0; y < height - 1; y += 2) {
-    HalfRow(src_u, src_stride_u, dst_u, halfwidth);
-    src_u += src_stride_u * 2;
-    dst_u += dst_stride_u;
-  }
-  if (height & 1) {
-    HalfRow(src_u, 0, dst_u, halfwidth);
-  }
-
-  // SubSample V plane.
-  for (y = 0; y < height - 1; y += 2) {
-    HalfRow(src_v, src_stride_v, dst_v, halfwidth);
-    src_v += src_stride_v * 2;
-    dst_v += dst_stride_v;
-  }
-  if (height & 1) {
-    HalfRow(src_v, 0, dst_v, halfwidth);
-  }
-  return 0;
+  const int src_uv_width = SUBSAMPLE(width, 1, 1);
+  return I4xxToI420(src_y, src_stride_y,
+                    src_u, src_stride_u,
+                    src_v, src_stride_v,
+                    dst_y, dst_stride_y,
+                    dst_u, dst_stride_u,
+                    dst_v, dst_stride_v,
+                    width, height,
+                    src_uv_width, height);
 }
 
-// Blends 32x2 pixels to 16x1
-// source in scale.cc
-#if !defined(LIBYUV_DISABLE_NEON) && \
-    (defined(__ARM_NEON__) || defined(LIBYUV_NEON))
-#define HAS_SCALEROWDOWN2_NEON
-void ScaleRowDown2Box_NEON(const uint8* src_ptr, ptrdiff_t src_stride,
-                           uint8* dst, int dst_width);
-#elif !defined(LIBYUV_DISABLE_X86) && \
-    (defined(_M_IX86) || defined(__x86_64__) || defined(__i386__))
-
-void ScaleRowDown2Box_SSE2(const uint8* src_ptr, ptrdiff_t src_stride,
-                           uint8* dst_ptr, int dst_width);
-#endif
-void ScaleRowDown2Box_C(const uint8* src_ptr, ptrdiff_t src_stride,
-                        uint8* dst_ptr, int dst_width);
-
+// 444 chroma is 1x width, 1x height
+// 420 chroma is 1/2 width, 1/2 height
 LIBYUV_API
 int I444ToI420(const uint8* src_y, int src_stride_y,
                const uint8* src_u, int src_stride_u,
@@ -156,69 +126,16 @@ int I444ToI420(const uint8* src_y, int src_stride_y,
                uint8* dst_u, int dst_stride_u,
                uint8* dst_v, int dst_stride_v,
                int width, int height) {
-  if (!src_y || !src_u || !src_v ||
-      !dst_y || !dst_u || !dst_v ||
-      width <= 0 || height == 0) {
-    return -1;
-  }
-  // Negative height means invert the image.
-  if (height < 0) {
-    height = -height;
-    src_y = src_y + (height - 1) * src_stride_y;
-    src_u = src_u + (height - 1) * src_stride_u;
-    src_v = src_v + (height - 1) * src_stride_v;
-    src_stride_y = -src_stride_y;
-    src_stride_u = -src_stride_u;
-    src_stride_v = -src_stride_v;
-  }
-  int halfwidth = (width + 1) >> 1;
-  void (*ScaleRowDown2)(const uint8* src_ptr, ptrdiff_t src_stride,
-                        uint8* dst_ptr, int dst_width) = ScaleRowDown2Box_C;
-#if defined(HAS_SCALEROWDOWN2_NEON)
-  if (TestCpuFlag(kCpuHasNEON) &&
-      IS_ALIGNED(halfwidth, 16)) {
-    ScaleRowDown2 = ScaleRowDown2Box_NEON;
-  }
-#elif defined(HAS_SCALEROWDOWN2_SSE2)
-  if (TestCpuFlag(kCpuHasSSE2) &&
-      IS_ALIGNED(halfwidth, 16) &&
-      IS_ALIGNED(src_u, 16) && IS_ALIGNED(src_stride_u, 16) &&
-      IS_ALIGNED(src_v, 16) && IS_ALIGNED(src_stride_v, 16) &&
-      IS_ALIGNED(dst_u, 16) && IS_ALIGNED(dst_stride_u, 16) &&
-      IS_ALIGNED(dst_v, 16) && IS_ALIGNED(dst_stride_v, 16)) {
-    ScaleRowDown2 = ScaleRowDown2Box_SSE2;
-  }
-#endif
-
-  // Copy Y plane
-  if (dst_y) {
-    CopyPlane(src_y, src_stride_y, dst_y, dst_stride_y, width, height);
-  }
-
-  // SubSample U plane.
-  int y;
-  for (y = 0; y < height - 1; y += 2) {
-    ScaleRowDown2(src_u, src_stride_u, dst_u, halfwidth);
-    src_u += src_stride_u * 2;
-    dst_u += dst_stride_u;
-  }
-  if (height & 1) {
-    ScaleRowDown2(src_u, 0, dst_u, halfwidth);
-  }
-
-  // SubSample V plane.
-  for (y = 0; y < height - 1; y += 2) {
-    ScaleRowDown2(src_v, src_stride_v, dst_v, halfwidth);
-    src_v += src_stride_v * 2;
-    dst_v += dst_stride_v;
-  }
-  if (height & 1) {
-    ScaleRowDown2(src_v, 0, dst_v, halfwidth);
-  }
-  return 0;
+  return I4xxToI420(src_y, src_stride_y,
+                    src_u, src_stride_u,
+                    src_v, src_stride_v,
+                    dst_y, dst_stride_y,
+                    dst_u, dst_stride_u,
+                    dst_v, dst_stride_v,
+                    width, height,
+                    width, height);
 }
 
-// TODO(fbarchard): Enable bilinear when fast enough or specialized upsampler.
 // 411 chroma is 1/4 width, 1x height
 // 420 chroma is 1/2 width, 1/2 height
 LIBYUV_API
@@ -229,41 +146,15 @@ int I411ToI420(const uint8* src_y, int src_stride_y,
                uint8* dst_u, int dst_stride_u,
                uint8* dst_v, int dst_stride_v,
                int width, int height) {
-  if (!src_y || !src_u || !src_v ||
-      !dst_y || !dst_u || !dst_v ||
-      width <= 0 || height == 0) {
-    return -1;
-  }
-  // Negative height means invert the image.
-  if (height < 0) {
-    height = -height;
-    src_y = src_y + (height - 1) * src_stride_y;
-    src_u = src_u + (height - 1) * src_stride_u;
-    src_v = src_v + (height - 1) * src_stride_v;
-    src_stride_y = -src_stride_y;
-    src_stride_u = -src_stride_u;
-    src_stride_v = -src_stride_v;
-  }
-
-  // Copy Y plane
-  if (dst_y) {
-    CopyPlane(src_y, src_stride_y, dst_y, dst_stride_y, width, height);
-  }
-
-  int halfwidth = (width + 1) >> 1;
-  int halfheight = (height + 1) >> 1;
-  int quarterwidth = (width + 3) >> 2;
-
-  // Resample U plane from 1/4 width, 1x height to 1/2 width, 1/2 height.
-  ScalePlane(src_u, src_stride_u, quarterwidth, height,
-             dst_u, dst_stride_u, halfwidth, halfheight,
-             kFilterNone);
-
-  // Resample V plane.
-  ScalePlane(src_v, src_stride_v, quarterwidth, height,
-             dst_v, dst_stride_v, halfwidth, halfheight,
-             kFilterNone);
-  return 0;
+  const int src_uv_width = SUBSAMPLE(width, 3, 2);
+  return I4xxToI420(src_y, src_stride_y,
+                    src_u, src_stride_u,
+                    src_v, src_stride_v,
+                    dst_y, dst_stride_y,
+                    dst_u, dst_stride_u,
+                    dst_v, dst_stride_v,
+                    width, height,
+                    src_uv_width, height);
 }
 
 // I400 is greyscale typically used in MJPG
@@ -309,7 +200,6 @@ static void CopyPlane2(const uint8* src, int src_stride_0, int src_stride_1,
   }
 #endif
 #if defined(HAS_COPYROW_ERMS)
-  // TODO(fbarchard): Detect Fast String support.
   if (TestCpuFlag(kCpuHasERMS)) {
     CopyRow = CopyRow_ERMS;
   }
@@ -369,20 +259,23 @@ static int X420ToI420(const uint8* src_y,
     dst_stride_u = -dst_stride_u;
     dst_stride_v = -dst_stride_v;
   }
-  // Coalesce contiguous rows.
+  // Coalesce rows.
   int halfwidth = (width + 1) >> 1;
   int halfheight = (height + 1) >> 1;
   if (src_stride_y0 == width &&
       src_stride_y1 == width &&
       dst_stride_y == width) {
-    width = width * height;
+    width *= height;
     height = 1;
+    src_stride_y0 = src_stride_y1 = dst_stride_y = 0;
   }
-  if (src_stride_uv == width &&
-      dst_stride_u * 2 == width &&
-      dst_stride_v * 2 == width) {
-    halfwidth = halfwidth * halfheight;
+  // Coalesce rows.
+  if (src_stride_uv == halfwidth * 2 &&
+      dst_stride_u == halfwidth &&
+      dst_stride_v == halfwidth) {
+    halfwidth *= halfheight;
     halfheight = 1;
+    src_stride_uv = dst_stride_u = dst_stride_v = 0;
   }
   void (*SplitUVRow)(const uint8* src_uv, uint8* dst_u, uint8* dst_v, int pix) =
       SplitUVRow_C;
@@ -1051,8 +944,7 @@ int RGB24ToI420(const uint8* src_rgb24, int src_stride_rgb24,
                 uint8* dst_v, int dst_stride_v,
                 int width, int height) {
   if (!src_rgb24 || !dst_y || !dst_u || !dst_v ||
-      width <= 0 || height == 0 ||
-      width * 4 > kMaxStride) {
+      width <= 0 || height == 0) {
     return -1;
   }
   // Negative height means invert the image.
@@ -1080,7 +972,11 @@ int RGB24ToI420(const uint8* src_rgb24, int src_stride_rgb24,
     }
   }
 #else  // HAS_RGB24TOYROW_NEON
-  SIMD_ALIGNED(uint8 row[kMaxStride * 2]);
+
+  // Allocate 2 rows of ARGB.
+  const int kRowSize = (width * 4 + 15) & ~15;
+  align_buffer_64(row, kRowSize * 2);
+
   void (*RGB24ToARGBRow)(const uint8* src_rgb, uint8* dst_argb, int pix) =
       RGB24ToARGBRow_C;
 #if defined(HAS_RGB24TOARGBROW_SSSE3)
@@ -1123,10 +1019,10 @@ int RGB24ToI420(const uint8* src_rgb24, int src_stride_rgb24,
     RGB24ToYRow(src_rgb24 + src_stride_rgb24, dst_y + dst_stride_y, width);
 #else
     RGB24ToARGBRow(src_rgb24, row, width);
-    RGB24ToARGBRow(src_rgb24 + src_stride_rgb24, row + kMaxStride, width);
-    ARGBToUVRow(row, kMaxStride, dst_u, dst_v, width);
+    RGB24ToARGBRow(src_rgb24 + src_stride_rgb24, row + kRowSize, width);
+    ARGBToUVRow(row, kRowSize, dst_u, dst_v, width);
     ARGBToYRow(row, dst_y, width);
-    ARGBToYRow(row + kMaxStride, dst_y + dst_stride_y, width);
+    ARGBToYRow(row + kRowSize, dst_y + dst_stride_y, width);
 #endif
     src_rgb24 += src_stride_rgb24 * 2;
     dst_y += dst_stride_y * 2;
@@ -1143,6 +1039,9 @@ int RGB24ToI420(const uint8* src_rgb24, int src_stride_rgb24,
     ARGBToYRow(row, dst_y, width);
 #endif
   }
+#if !defined(HAS_RGB24TOYROW_NEON)
+  free_aligned_buffer_64(row);
+#endif
   return 0;
 }
 
@@ -1154,8 +1053,7 @@ int RAWToI420(const uint8* src_raw, int src_stride_raw,
               uint8* dst_v, int dst_stride_v,
               int width, int height) {
   if (!src_raw || !dst_y || !dst_u || !dst_v ||
-      width <= 0 || height == 0 ||
-      width * 4 > kMaxStride) {
+      width <= 0 || height == 0) {
     return -1;
   }
   // Negative height means invert the image.
@@ -1183,7 +1081,11 @@ int RAWToI420(const uint8* src_raw, int src_stride_raw,
     }
   }
 #else  // HAS_RAWTOYROW_NEON
-  SIMD_ALIGNED(uint8 row[kMaxStride * 2]);
+
+  // Allocate 2 rows of ARGB.
+  const int kRowSize = (width * 4 + 15) & ~15;
+  align_buffer_64(row, kRowSize * 2);
+
   void (*RAWToARGBRow)(const uint8* src_rgb, uint8* dst_argb, int pix) =
       RAWToARGBRow_C;
 #if defined(HAS_RAWTOARGBROW_SSSE3)
@@ -1226,10 +1128,10 @@ int RAWToI420(const uint8* src_raw, int src_stride_raw,
     RAWToYRow(src_raw + src_stride_raw, dst_y + dst_stride_y, width);
 #else
     RAWToARGBRow(src_raw, row, width);
-    RAWToARGBRow(src_raw + src_stride_raw, row + kMaxStride, width);
-    ARGBToUVRow(row, kMaxStride, dst_u, dst_v, width);
+    RAWToARGBRow(src_raw + src_stride_raw, row + kRowSize, width);
+    ARGBToUVRow(row, kRowSize, dst_u, dst_v, width);
     ARGBToYRow(row, dst_y, width);
-    ARGBToYRow(row + kMaxStride, dst_y + dst_stride_y, width);
+    ARGBToYRow(row + kRowSize, dst_y + dst_stride_y, width);
 #endif
     src_raw += src_stride_raw * 2;
     dst_y += dst_stride_y * 2;
@@ -1246,6 +1148,9 @@ int RAWToI420(const uint8* src_raw, int src_stride_raw,
     ARGBToYRow(row, dst_y, width);
 #endif
   }
+#if !defined(HAS_RAWTOYROW_NEON)
+  free_aligned_buffer_64(row);
+#endif
   return 0;
 }
 
@@ -1257,8 +1162,7 @@ int RGB565ToI420(const uint8* src_rgb565, int src_stride_rgb565,
                 uint8* dst_v, int dst_stride_v,
                 int width, int height) {
   if (!src_rgb565 || !dst_y || !dst_u || !dst_v ||
-      width <= 0 || height == 0 ||
-      width * 4 > kMaxStride) {
+      width <= 0 || height == 0) {
     return -1;
   }
   // Negative height means invert the image.
@@ -1286,7 +1190,11 @@ int RGB565ToI420(const uint8* src_rgb565, int src_stride_rgb565,
     }
   }
 #else  // HAS_RGB565TOYROW_NEON
-  SIMD_ALIGNED(uint8 row[kMaxStride * 2]);
+
+  // Allocate 2 rows of ARGB.
+  const int kRowSize = (width * 4 + 15) & ~15;
+  align_buffer_64(row, kRowSize * 2);
+
   void (*RGB565ToARGBRow)(const uint8* src_rgb, uint8* dst_argb, int pix) =
       RGB565ToARGBRow_C;
 #if defined(HAS_RGB565TOARGBROW_SSE2)
@@ -1329,10 +1237,10 @@ int RGB565ToI420(const uint8* src_rgb565, int src_stride_rgb565,
     RGB565ToYRow(src_rgb565 + src_stride_rgb565, dst_y + dst_stride_y, width);
 #else
     RGB565ToARGBRow(src_rgb565, row, width);
-    RGB565ToARGBRow(src_rgb565 + src_stride_rgb565, row + kMaxStride, width);
-    ARGBToUVRow(row, kMaxStride, dst_u, dst_v, width);
+    RGB565ToARGBRow(src_rgb565 + src_stride_rgb565, row + kRowSize, width);
+    ARGBToUVRow(row, kRowSize, dst_u, dst_v, width);
     ARGBToYRow(row, dst_y, width);
-    ARGBToYRow(row + kMaxStride, dst_y + dst_stride_y, width);
+    ARGBToYRow(row + kRowSize, dst_y + dst_stride_y, width);
 #endif
     src_rgb565 += src_stride_rgb565 * 2;
     dst_y += dst_stride_y * 2;
@@ -1349,6 +1257,9 @@ int RGB565ToI420(const uint8* src_rgb565, int src_stride_rgb565,
     ARGBToYRow(row, dst_y, width);
 #endif
   }
+#if !defined(HAS_RGB565TOYROW_NEON)
+  free_aligned_buffer_64(row);
+#endif
   return 0;
 }
 
@@ -1360,8 +1271,7 @@ int ARGB1555ToI420(const uint8* src_argb1555, int src_stride_argb1555,
                    uint8* dst_v, int dst_stride_v,
                    int width, int height) {
   if (!src_argb1555 || !dst_y || !dst_u || !dst_v ||
-      width <= 0 || height == 0 ||
-      width * 4 > kMaxStride) {
+      width <= 0 || height == 0) {
     return -1;
   }
   // Negative height means invert the image.
@@ -1389,7 +1299,11 @@ int ARGB1555ToI420(const uint8* src_argb1555, int src_stride_argb1555,
     }
   }
 #else  // HAS_ARGB1555TOYROW_NEON
-  SIMD_ALIGNED(uint8 row[kMaxStride * 2]);
+
+  // Allocate 2 rows of ARGB.
+  const int kRowSize = (width * 4 + 15) & ~15;
+  align_buffer_64(row, kRowSize * 2);
+
   void (*ARGB1555ToARGBRow)(const uint8* src_rgb, uint8* dst_argb, int pix) =
       ARGB1555ToARGBRow_C;
 #if defined(HAS_ARGB1555TOARGBROW_SSE2)
@@ -1433,11 +1347,11 @@ int ARGB1555ToI420(const uint8* src_argb1555, int src_stride_argb1555,
                    width);
 #else
     ARGB1555ToARGBRow(src_argb1555, row, width);
-    ARGB1555ToARGBRow(src_argb1555 + src_stride_argb1555, row + kMaxStride,
+    ARGB1555ToARGBRow(src_argb1555 + src_stride_argb1555, row + kRowSize,
                       width);
-    ARGBToUVRow(row, kMaxStride, dst_u, dst_v, width);
+    ARGBToUVRow(row, kRowSize, dst_u, dst_v, width);
     ARGBToYRow(row, dst_y, width);
-    ARGBToYRow(row + kMaxStride, dst_y + dst_stride_y, width);
+    ARGBToYRow(row + kRowSize, dst_y + dst_stride_y, width);
 #endif
     src_argb1555 += src_stride_argb1555 * 2;
     dst_y += dst_stride_y * 2;
@@ -1454,6 +1368,9 @@ int ARGB1555ToI420(const uint8* src_argb1555, int src_stride_argb1555,
     ARGBToYRow(row, dst_y, width);
 #endif
   }
+#if !defined(HAS_ARGB1555TOYROW_NEON)
+  free_aligned_buffer_64(row);
+#endif
   return 0;
 }
 
@@ -1465,8 +1382,7 @@ int ARGB4444ToI420(const uint8* src_argb4444, int src_stride_argb4444,
                    uint8* dst_v, int dst_stride_v,
                    int width, int height) {
   if (!src_argb4444 || !dst_y || !dst_u || !dst_v ||
-      width <= 0 || height == 0 ||
-      width * 4 > kMaxStride) {
+      width <= 0 || height == 0) {
     return -1;
   }
   // Negative height means invert the image.
@@ -1494,7 +1410,11 @@ int ARGB4444ToI420(const uint8* src_argb4444, int src_stride_argb4444,
     }
   }
 #else  // HAS_ARGB4444TOYROW_NEON
-  SIMD_ALIGNED(uint8 row[kMaxStride * 2]);
+
+  // Allocate 2 rows of ARGB.
+  const int kRowSize = (width * 4 + 15) & ~15;
+  align_buffer_64(row, kRowSize * 2);
+
   void (*ARGB4444ToARGBRow)(const uint8* src_rgb, uint8* dst_argb, int pix) =
       ARGB4444ToARGBRow_C;
 #if defined(HAS_ARGB4444TOARGBROW_SSE2)
@@ -1538,11 +1458,11 @@ int ARGB4444ToI420(const uint8* src_argb4444, int src_stride_argb4444,
                    width);
 #else
     ARGB4444ToARGBRow(src_argb4444, row, width);
-    ARGB4444ToARGBRow(src_argb4444 + src_stride_argb4444, row + kMaxStride,
+    ARGB4444ToARGBRow(src_argb4444 + src_stride_argb4444, row + kRowSize,
                       width);
-    ARGBToUVRow(row, kMaxStride, dst_u, dst_v, width);
+    ARGBToUVRow(row, kRowSize, dst_u, dst_v, width);
     ARGBToYRow(row, dst_y, width);
-    ARGBToYRow(row + kMaxStride, dst_y + dst_stride_y, width);
+    ARGBToYRow(row + kRowSize, dst_y + dst_stride_y, width);
 #endif
     src_argb4444 += src_stride_argb4444 * 2;
     dst_y += dst_stride_y * 2;
@@ -1559,6 +1479,9 @@ int ARGB4444ToI420(const uint8* src_argb4444, int src_stride_argb4444,
     ARGBToYRow(row, dst_y, width);
 #endif
   }
+#if !defined(HAS_ARGB4444TOYROW_NEON)
+  free_aligned_buffer_64(row);
+#endif
   return 0;
 }
 

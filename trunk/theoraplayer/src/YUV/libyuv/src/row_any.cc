@@ -199,6 +199,15 @@ BAYERANY(ARGBToBayerRow_Any_SSSE3, ARGBToBayerRow_SSSE3, ARGBToBayerRow_C,
 BAYERANY(ARGBToBayerRow_Any_NEON, ARGBToBayerRow_NEON, ARGBToBayerRow_C,
          7, 4, 1)
 #endif
+#if defined(HAS_ARGBTOBAYERGGROW_SSE2)
+BAYERANY(ARGBToBayerGGRow_Any_SSE2, ARGBToBayerGGRow_SSE2, ARGBToBayerGGRow_C,
+         7, 4, 1)
+#endif
+#if defined(HAS_ARGBTOBAYERGGROW_NEON)
+BAYERANY(ARGBToBayerGGRow_Any_NEON, ARGBToBayerGGRow_NEON, ARGBToBayerGGRow_C,
+         7, 4, 1)
+#endif
+
 #undef BAYERANY
 
 // RGB/YUV to Y does multiple of 16 with SIMD and last 16 with SIMD.
@@ -474,6 +483,10 @@ MATHROW_ANY(ARGBSubtractRow_Any_NEON, ARGBSubtractRow_NEON, ARGBSubtractRow_C,
                 dst_argb  + n * BPP, shuffler, width & MASK);                  \
     }
 
+#ifdef HAS_ARGBSHUFFLEROW_SSE2
+YANY(ARGBShuffleRow_Any_SSE2, ARGBShuffleRow_SSE2,
+     ARGBShuffleRow_C, 4, 4, 3)
+#endif
 #ifdef HAS_ARGBSHUFFLEROW_SSSE3
 YANY(ARGBShuffleRow_Any_SSSE3, ARGBShuffleRow_Unaligned_SSSE3,
      ARGBShuffleRow_C, 4, 4, 7)
@@ -501,6 +514,10 @@ YANY(ARGBShuffleRow_Any_NEON, ARGBShuffleRow_NEON,
              width & MASK, source_y_fraction);                                 \
     }
 
+#ifdef HAS_INTERPOLATEROW_AVX2
+NANY(InterpolateRow_Any_AVX2, InterpolateRow_AVX2,
+     InterpolateRow_C, 1, 1, 32)
+#endif
 #ifdef HAS_INTERPOLATEROW_SSSE3
 NANY(InterpolateRow_Any_SSSE3, InterpolateRow_Unaligned_SSSE3,
      InterpolateRow_C, 1, 1, 15)

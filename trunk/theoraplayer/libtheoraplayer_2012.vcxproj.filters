@@ -189,6 +189,15 @@
     <ClCompile Include="src\YUV\libyuv\src\video_common.cc">
       <Filter>src\YUV\libyuv\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\scale_posix.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\scale_win.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\YUV\libyuv\src\scale_common.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Theora\TheoraVideoClip_Theora.h">
@@ -297,6 +306,9 @@
       <Filter>src\YUV\libyuv\include\libyuv</Filter>
     </ClInclude>
     <ClInclude Include="src\YUV\libyuv\include\libyuv\video_common.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\libyuv\include\libyuv\scale_row.h">
       <Filter>src\YUV\libyuv\include\libyuv</Filter>
     </ClInclude>
   </ItemGroup>
