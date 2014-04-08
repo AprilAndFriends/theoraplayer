@@ -658,7 +658,11 @@ double vorbis_granule_time(vorbis_dsp_state *v,ogg_int64_t granulepos){
   }else{
     ogg_int64_t granuleoff=0xffffffff;
     granuleoff<<=31;
+#ifdef __APPLE__ // cateia games note: added this to silence xcode warning on gcc compiler
+    granuleoff|=0x7ffffffffLL;	  
+#else
     granuleoff|=0x7ffffffff;
+#endif
     return(((double)granulepos+2+granuleoff+granuleoff)/v->vi->rate);
   }
 }
