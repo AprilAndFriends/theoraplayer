@@ -24,7 +24,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		D117630D177649C500269515 /* composite_animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776C6155C56A70050EC64 /* composite_animation.cpp */; };
 		D117630E177649D000269515 /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
 		D127F7F81698C842007E6835 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F7F71698C842007E6835 /* util.cpp */; };
 		D127F7F91698C842007E6835 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F7F71698C842007E6835 /* util.cpp */; };
@@ -135,6 +134,7 @@
 		D17613981561B2EE00F645DE /* environment_mapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D17613971561B2EE00F645DE /* environment_mapping.cpp */; };
 		D1A48A5116C2F64100318F58 /* OpenAL_AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */; };
 		D1A48A5416C2F64A00318F58 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A48A5316C2F64A00318F58 /* OpenAL.framework */; };
+		D1BCE05618F3F5CD00C83470 /* composite_animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776C6155C56A70050EC64 /* composite_animation.cpp */; };
 		D1C0151315619DA700FBEF81 /* theoraplayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
 		D1C0151415619DD400FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
 		D1C0151515619DDB00FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
@@ -385,13 +385,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = D1BB6FAE150E9E7100EF9400;
 			remoteInfo = "theoraplayer (iOS)";
-		};
-		D1C34D6418F2C86400A072E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D1DCB3B71829169B0089A79D;
-			remoteInfo = "vorbis (iOS)";
 		};
 		D1CDFF7A1696C88F00609AB0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -995,7 +988,6 @@
 			children = (
 				D1D098DE155F05CC009F6AAA /* Vorbis.framework */,
 				D13946BB17C10DE20091F4A4 /* libvorbis.a */,
-				D1C34D6518F2C86400A072E5 /* libvorbis.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1372,13 +1364,6 @@
 			fileType = archive.ar;
 			path = libtheoraplayer.a;
 			remoteRef = D167758C155C4F8F0050EC64 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D1C34D6518F2C86400A072E5 /* libvorbis.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libvorbis.a;
-			remoteRef = D1C34D6418F2C86400A072E5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D1CDFF7B1696C88F00609AB0 /* theoraplayer.framework */ = {
@@ -1816,8 +1801,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1BCE05618F3F5CD00C83470 /* composite_animation.cpp in Sources */,
 				D117630E177649D000269515 /* tga.cpp in Sources */,
-				D117630D177649C500269515 /* composite_animation.cpp in Sources */,
 				D1A48A5116C2F64100318F58 /* OpenAL_AudioInterface.cpp in Sources */,
 				D16A0EB91698C5640016DF67 /* AppDelegate.mm in Sources */,
 				D16A0EBE1698C5640016DF67 /* main.mm in Sources */,
