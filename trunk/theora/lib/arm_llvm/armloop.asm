@@ -1,3 +1,4 @@
+#ifdef OC_ARM_ASM
 @********************************************************************
 @*                                                                  *
 @* THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
@@ -16,16 +17,15 @@
 
     .text;   .p2align 2
 
-	.include "armopts-gnu.S"
-
-	.global	oc_loop_filter_frag_rows_arm
+	.global	_oc_loop_filter_frag_rows_arm
 
 @ Which bit this is depends on the order of packing within a bitfield.
 @ Hopefully that doesn't change among any of the relevant compilers.
  .set OC_FRAG_CODED_FLAG,	1
 
 	@ Vanilla ARM v4 version
-	.type	loop_filter_h_arm, %function; loop_filter_h_arm: @ PROC
+	@ .type loop_filter_h_arm, %function; loop_filter_h_arm: @ PROC
+loop_filter_h_arm:
 	@ r0 = unsigned char *_pix
 	@ r1 = int            _ystride
 	@ r2 = int           *_bv
@@ -58,9 +58,10 @@ lfh_arm_lp:
 	BGT	lfh_arm_lp
 	SUB	r0, r0, r1, LSL #3
 	LDMFD	r13!,{r3-r6,PC}
-	.size loop_filter_h_arm, .-loop_filter_h_arm	@ ENDP
+	@ @ .size loop_filter_h_arm, .-loop_filter_h_arm	@ ENDP
 
-	.type	loop_filter_v_arm, %function; loop_filter_v_arm: @ PROC
+	@ .type loop_filter_v_arm, %function; loop_filter_v_arm: @ PROC
+loop_filter_v_arm:
 	@ r0 = unsigned char *_pix
 	@ r1 = int            _ystride
 	@ r2 = int           *_bv
@@ -93,9 +94,10 @@ lfv_arm_lp:
 	BGT	lfv_arm_lp
 	SUB	r0, r0, #8
 	LDMFD	r13!,{r3-r6,PC}
-	.size loop_filter_v_arm, .-loop_filter_v_arm	@ ENDP
+	@ @ .size loop_filter_v_arm, .-loop_filter_v_arm	@ ENDP
 
-	.type	oc_loop_filter_frag_rows_arm, %function; oc_loop_filter_frag_rows_arm: @ PROC
+	@ .type oc_loop_filter_frag_rows_arm, %function; oc_loop_filter_frag_rows_arm: @ PROC
+_oc_loop_filter_frag_rows_arm:
 	@ r0 = _ref_frame_data
 	@ r1 = _ystride
 	@ r2 = _bv
@@ -160,13 +162,14 @@ oslffri_arm_uncoded:
 	CMP	r4, r5
 	BLT	oslffri_arm_lp1
 	LDMFD	r13!,{r0,r4-r11,PC}
-	.size oc_loop_filter_frag_rows_arm, .-oc_loop_filter_frag_rows_arm	@ ENDP
+	@ @ .size oc_loop_filter_frag_rows_arm, .-oc_loop_filter_frag_rows_arm	@ ENDP
 
   .if OC_ARM_ASM_MEDIA
-	.global	oc_loop_filter_init_v6
-	.global	oc_loop_filter_frag_rows_v6
+	.global	_oc_loop_filter_init_v6
+	.global	_oc_loop_filter_frag_rows_v6
 
-	.type	oc_loop_filter_init_v6, %function; oc_loop_filter_init_v6: @ PROC
+	@ .type oc_loop_filter_init_v6, %function; oc_loop_filter_init_v6: @ PROC
+_oc_loop_filter_init_v6:
 	@ r0 = _bv
 	@ r1 = _flimit (=L from the spec)
 	MVN	r1, r1, LSL #1		@ r1 = <0xFFFFFF|255-2*L>
@@ -175,7 +178,7 @@ oslffri_arm_uncoded:
 	PKHBT	r1, r1, r1, LSL #16	@ r1 = <ll|ll|ll|ll>
 	STR	r1, [r0]
 	MOV	PC,r14
-	.size oc_loop_filter_init_v6, .-oc_loop_filter_init_v6	@ ENDP
+	@ @ .size oc_loop_filter_init_v6, .-oc_loop_filter_init_v6	@ ENDP
 
 @ We could use the same strategy as the v filter below, but that would require
 @  40 instructions to load the data and transpose it into columns and another
@@ -188,21 +191,24 @@ oslffri_arm_uncoded:
 @  http://lists.mplayerhq.hu/pipermail/ffmpeg-devel/2010-February/083141.html
 @ His is a lot less code, though, because it only does two rows at once instead
 @  of four.
-	.type	loop_filter_h_v6, %function; loop_filter_h_v6: @ PROC
+	@ .type loop_filter_h_v6, %function; loop_filter_h_v6: @ PROC
+loop_filter_h_v6:
 	@ r0 = unsigned char *_pix
 	@ r1 = int            _ystride
 	@ r2 = int            _ll
 	@ preserves r0-r3
 	STMFD	r13!,{r4-r11,r14}
-	LDR	r12,=0x10003
+	MOV	r12, 0x0003
+	MOVT	r12, 0x1
 	BL loop_filter_h_core_v6
 	ADD	r0, r0, r1, LSL #2
 	BL loop_filter_h_core_v6
 	SUB	r0, r0, r1, LSL #2
 	LDMFD	r13!,{r4-r11,PC}
-	.size loop_filter_h_v6, .-loop_filter_h_v6	@ ENDP
+	@ @ .size loop_filter_h_v6, .-loop_filter_h_v6	@ ENDP
 
-	.type	loop_filter_h_core_v6, %function; loop_filter_h_core_v6: @ PROC
+	@ .type loop_filter_h_core_v6, %function; loop_filter_h_core_v6: @ PROC
+loop_filter_h_core_v6:
 	@ r0 = unsigned char *_pix
 	@ r1 = int            _ystride
 	@ r2 = int            _ll
@@ -283,7 +289,7 @@ oslffri_arm_uncoded:
 	@ Single issue
 	STRB	r8, [r0,#-1]
 	MOV	PC,r14
-	.size loop_filter_h_core_v6, .-loop_filter_h_core_v6	@ ENDP
+	@ @ .size loop_filter_h_core_v6, .-loop_filter_h_core_v6	@ ENDP
 
 @ This uses the same strategy as the MMXEXT version for x86, except that UHADD8
 @  computes (a+b>>1) instead of (a+b+1>>1) like PAVGB.
@@ -300,17 +306,18 @@ oslffri_arm_uncoded:
 @ It executes about 2/3 the number of instructions of David Conrad's approach,
 @  but requires more code, because it does all eight columns at once, instead
 @  of four at a time.
-	.type	loop_filter_v_v6, %function; loop_filter_v_v6: @ PROC
+	@ .type loop_filter_v_v6, %function; loop_filter_v_v6: @ PROC
+loop_filter_v_v6:
 	@ r0 = unsigned char *_pix
 	@ r1 = int            _ystride
 	@ r2 = int            _ll
 	@ preserves r0-r11
 	STMFD	r13!,{r4-r11,r14}
-	LDRD	r6, [r0, -r1]!		@ r7, r6 = <p5|p1>
-	LDRD	r4, [r0, -r1]		@ r5, r4 = <p4|p0>
-	LDRD	r8, [r0, r1]!		@ r9, r8 = <p6|p2>
+	LDRD	r6, r7, [r0, -r1]!		@ r7, r6 = <p5|p1>
+	LDRD	r4, r5, [r0, -r1]		@ r5, r4 = <p4|p0>
+	LDRD	r8, r9, [r0, r1]!		@ r9, r8 = <p6|p2>
 	MVN	r14,r6			@ r14= ~p1
-	LDRD	r10,[r0, r1]		@ r11,r10= <p7|p3>
+	LDRD	r10,r11,[r0, r1]		@ r11,r10= <p7|p3>
 	@ Filter the first four columns.
 	MVN	r12,r8			@ r12= ~p2
 	UHADD8	r14,r14,r8		@ r14= v1=~p1+p2>>1
@@ -343,7 +350,8 @@ oslffri_arm_uncoded:
 	EOR	r5, r5, r10		@ r5 = a2=m2^((m2^p4)+(m2^~p7)>>1)
 	@ Single issue
 	UHADD8	r5, r5, r12		@ r5 = a2+u2>>1
-	LDR	r12,=0x7F7F7F7F		@ r12 = {127}x4
+	MOV	r12, #0x7F7F		@ r12 = {127}x4
+	MOVT	r12, #0x7F7F		@ r12 = {127}x4
 	UHADD8	r5, r5, r14		@ r5 = f2=(a2+u2>>1)+v2>>1
 	@ Now split f[i] by sign.
 	@ There's no min or max instruction.
@@ -372,13 +380,14 @@ oslffri_arm_uncoded:
 	UQADD8	r7, r7, r11
 	UQSUB8	r9, r9, r11
 	UQSUB8	r7, r7, r5		@ r7 = p5+lflim(R_i,L)
-	STRD	r6, [r0, -r1]		@ [p5:p1] = [r7: r6]
+	STRD	r6, r7, [r0, -r1]		@ [p5:p1] = [r7: r6]
 	UQADD8	r9, r9, r5		@ r9 = p6-lflim(R_i,L)
-	STRD	r8, [r0]		@ [p6:p2] = [r9: r8]
+	STRD	r8, r9, [r0]		@ [p6:p2] = [r9: r8]
 	LDMFD	r13!,{r4-r11,PC}
-	.size loop_filter_v_v6, .-loop_filter_v_v6	@ ENDP
+	@ @ .size loop_filter_v_v6, .-loop_filter_v_v6	@ ENDP
 
-	.type	oc_loop_filter_frag_rows_v6, %function; oc_loop_filter_frag_rows_v6: @ PROC
+	@ .type oc_loop_filter_frag_rows_v6, %function; oc_loop_filter_frag_rows_v6: @ PROC
+_oc_loop_filter_frag_rows_v6:
 	@ r0 = _ref_frame_data
 	@ r1 = _ystride
 	@ r2 = _bv
@@ -443,23 +452,25 @@ oslffri_v6_uncoded:
 	CMP	r4, r5
 	BLT	oslffri_v6_lp1
 	LDMFD	r13!,{r0,r4-r11,PC}
-	.size oc_loop_filter_frag_rows_v6, .-oc_loop_filter_frag_rows_v6	@ ENDP
+	@ @ .size oc_loop_filter_frag_rows_v6, .-oc_loop_filter_frag_rows_v6	@ ENDP
   .endif
 
   .if OC_ARM_ASM_NEON
-	.global	oc_loop_filter_init_neon
-	.global	oc_loop_filter_frag_rows_neon
+	.global	_oc_loop_filter_init_neon
+	.global	_oc_loop_filter_frag_rows_neon
 
-	.type	oc_loop_filter_init_neon, %function; oc_loop_filter_init_neon: @ PROC
+	@ .type oc_loop_filter_init_neon, %function; oc_loop_filter_init_neon: @ PROC
+_oc_loop_filter_init_neon:
 	@ r0 = _bv
 	@ r1 = _flimit (=L from the spec)
 	MOV		r1, r1, LSL #1  @ r1 = 2*L
 	VDUP.S16	Q15, r1		@ Q15= 2L in U16s
 	VST1.64		{D30,D31}, [r0,:128]
 	MOV	PC,r14
-	.size oc_loop_filter_init_neon, .-oc_loop_filter_init_neon	@ ENDP
+	@ @ .size oc_loop_filter_init_neon, .-oc_loop_filter_init_neon	@ ENDP
 
-	.type	loop_filter_h_neon, %function; loop_filter_h_neon: @ PROC
+	@ .type loop_filter_h_neon, %function; loop_filter_h_neon: @ PROC
+loop_filter_h_neon:
 	@ r0 = unsigned char *_pix
 	@ r1 = int            _ystride
 	@ r2 = int           *_bv
@@ -545,9 +556,10 @@ oslffri_v6_uncoded:
 	VST1.16	{D4[3]}, [r12], r1
 	VST1.16	{D2[3]}, [r12], r1
 	MOV	PC,r14
-	.size loop_filter_h_neon, .-loop_filter_h_neon	@ ENDP
+	@ @ .size loop_filter_h_neon, .-loop_filter_h_neon	@ ENDP
 
-	.type	loop_filter_v_neon, %function; loop_filter_v_neon: @ PROC
+	@ .type loop_filter_v_neon, %function; loop_filter_v_neon: @ PROC
+loop_filter_v_neon:
 	@ r0 = unsigned char *_pix
 	@ r1 = int            _ystride
 	@ r2 = int           *_bv
@@ -603,9 +615,10 @@ oslffri_v6_uncoded:
 	VST1.64	{D2}, [r12,:64], r1
 	VST1.64	{D4}, [r12,:64], r1
 	MOV	PC,r14
-	.size loop_filter_v_neon, .-loop_filter_v_neon	@ ENDP
+	@ @ .size loop_filter_v_neon, .-loop_filter_v_neon	@ ENDP
 
-	.type	oc_loop_filter_frag_rows_neon, %function; oc_loop_filter_frag_rows_neon: @ PROC
+	@ .type oc_loop_filter_frag_rows_neon, %function; oc_loop_filter_frag_rows_neon: @ PROC
+_oc_loop_filter_frag_rows_neon:
 	@ r0 = _ref_frame_data
 	@ r1 = _ystride
 	@ r2 = _bv
@@ -620,7 +633,7 @@ oslffri_v6_uncoded:
 	STMFD	r13!,{r0,r4-r11,r14}
 	LDMFD	r12,{r4-r9}
 	CMP	r4, r5		@ if(_fragi0>=_fragi0_end)
-	BGE	oslffri_neon_end@   bail
+	BGE	oslffri_neon_end	@   bail
 	SUBS	r9, r9, #1	@ r9 = _nhfrags-1	if (r9<=0)
 	BLE	oslffri_neon_end	@		  bail
 	VLD1.64	{D30,D31}, [r2,:128]	@ Q15= 2L in U16s
@@ -670,8 +683,9 @@ oslffri_neon_uncoded:
 	CMP	r4, r5
 	BLT	oslffri_neon_lp1
 	LDMFD	r13!,{r0,r4-r11,PC}
-	.size oc_loop_filter_frag_rows_neon, .-oc_loop_filter_frag_rows_neon	@ ENDP
+	@ @ .size oc_loop_filter_frag_rows_neon, .-oc_loop_filter_frag_rows_neon	@ ENDP
   .endif
 
 	@ END
-    .section	.note.GNU-stack,"",%progbits
+    @ .section	.note.GNU-stack,"",%progbits
+#endif

@@ -107,6 +107,17 @@ ogg_uint32_t oc_cpu_flags_get(void){
   return flags;
 }
 
+#elif defined(_IOS)
+
+ogg_uint32_t oc_cpu_flags_get(void){
+	ogg_uint32_t flags;
+	flags=0;
+	flags|=OC_CPU_ARM_EDSP;
+	flags|=OC_CPU_ARM_MEDIA;
+	flags|=OC_CPU_ARM_NEON;
+	return flags;
+}
+
 #else
 /*The feature registers which can tell us what the processor supports are
    accessible in priveleged modes only, so we can't have a general user-space

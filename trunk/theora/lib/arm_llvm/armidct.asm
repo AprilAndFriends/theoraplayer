@@ -1,3 +1,4 @@
+#ifdef OC_ARM_ASM
 @********************************************************************
 @*                                                                  *
 @* THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
@@ -16,12 +17,11 @@
 
     .text;   .p2align 2
 
-	.include "armopts-gnu.S"
+	.global	_oc_idct8x8_1_arm
+	.global	_oc_idct8x8_arm
 
-	.global	oc_idct8x8_1_arm
-	.global	oc_idct8x8_arm
-
-	.type	oc_idct8x8_1_arm, %function; oc_idct8x8_1_arm: @ PROC
+	@ .type oc_idct8x8_1_arm, %function; oc_idct8x8_1_arm: @ PROC
+_oc_idct8x8_1_arm:
 	@ r0 = ogg_int16_t  *_y
 	@ r1 = ogg_uint16_t  _dc
 	ORR	r1, r1, r1, LSL #16
@@ -37,9 +37,10 @@
 	STMIA	r0!,{r1,r2,r3,r12}
 	STMIA	r0!,{r1,r2,r3,r12}
 	MOV	PC, r14
-	.size oc_idct8x8_1_arm, .-oc_idct8x8_1_arm	@ ENDP
+	@ .size oc_idct8x8_1_arm, .-oc_idct8x8_1_arm	@ ENDP
 
-	.type	oc_idct8x8_arm, %function; oc_idct8x8_arm: @ PROC
+	@ .type oc_idct8x8_arm, %function; oc_idct8x8_arm: @ PROC
+_oc_idct8x8_arm:
 	@ r0 = ogg_int16_t *_y
 	@ r1 = ogg_int16_t *_x
 	@ r2 = int          _last_zzi
@@ -90,9 +91,10 @@ oc_idct8x8_slow_arm:
 	BL	idct8core_down_arm
 	ADD	r13,r13,#64*2
 	LDMFD	r13!,{r4-r11,PC}
-	.size oc_idct8x8_arm, .-oc_idct8x8_arm	@ ENDP
+	@ .size oc_idct8x8_arm, .-oc_idct8x8_arm	@ ENDP
 
-	.type	oc_idct8x8_10_arm, %function; oc_idct8x8_10_arm: @ PROC
+	@ .type oc_idct8x8_10_arm, %function; oc_idct8x8_10_arm: @ PROC
+oc_idct8x8_10_arm:
 	STMFD	r13!,{r4-r11,r14}
 	SUB	r13,r13,#64*2
 @ Row transforms
@@ -124,9 +126,10 @@ oc_idct8x8_10_arm_cols:
 	BL	idct4core_down_arm
 	ADD	r13,r13,#64*2
 	LDMFD	r13!,{r4-r11,PC}
-	.size oc_idct8x8_10_arm, .-oc_idct8x8_10_arm	@ ENDP
+	@ .size oc_idct8x8_10_arm, .-oc_idct8x8_10_arm	@ ENDP
 
-	.type	oc_idct8x8_6_arm, %function; oc_idct8x8_6_arm: @ PROC
+	@ .type oc_idct8x8_6_arm, %function; oc_idct8x8_6_arm: @ PROC
+oc_idct8x8_6_arm:
 	STMFD	r13!,{r4-r7,r9-r11,r14}
 	SUB	r13,r13,#64*2
 @ Row transforms
@@ -154,9 +157,10 @@ oc_idct8x8_10_arm_cols:
 	BL	idct3core_down_arm
 	ADD	r13,r13,#64*2
 	LDMFD	r13!,{r4-r7,r9-r11,PC}
-	.size oc_idct8x8_6_arm, .-oc_idct8x8_6_arm	@ ENDP
+	@ .size oc_idct8x8_6_arm, .-oc_idct8x8_6_arm	@ ENDP
 
-	.type	oc_idct8x8_3_arm, %function; oc_idct8x8_3_arm: @ PROC
+	@ .type oc_idct8x8_3_arm, %function; oc_idct8x8_3_arm: @ PROC
+oc_idct8x8_3_arm:
 	STMFD	r13!,{r4-r7,r9-r11,r14}
 	SUB	r13,r13,#64*2
 @ Row transforms
@@ -181,9 +185,10 @@ oc_idct8x8_10_arm_cols:
 	BL	idct2core_down_arm
 	ADD	r13,r13,#64*2
 	LDMFD	r13!,{r4-r7,r9-r11,PC}
-	.size oc_idct8x8_3_arm, .-oc_idct8x8_3_arm	@ ENDP
+	@ .size oc_idct8x8_3_arm, .-oc_idct8x8_3_arm	@ ENDP
 
-	.type	idct1core_arm, %function; idct1core_arm: @ PROC
+	@ .type idct1core_arm, %function; idct1core_arm: @ PROC
+idct1core_arm:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 	LDRSH	r3, [r1], #16
@@ -201,9 +206,10 @@ oc_idct8x8_10_arm_cols:
 	STRH	r3, [r0, #94]
 	STRH	r3, [r0, #110]
 	MOV	PC,R14
-	.size idct1core_arm, .-idct1core_arm	@ ENDP
+	@ .size idct1core_arm, .-idct1core_arm	@ ENDP
 
-	.type	idct2core_arm, %function; idct2core_arm: @ PROC
+	@ .type idct2core_arm, %function; idct2core_arm: @ PROC
+idct2core_arm:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 	LDRSH	r9, [r1], #16		@ r9 = x[0]
@@ -238,9 +244,10 @@ oc_idct8x8_10_arm_cols:
 	STRH	r12,[r0, #94]		@ y[6] = t[0]-t[6]
 	STRH	r11,[r0, #110]		@ y[7] = t[0]-t[7]
 	MOV	PC,r14
-	.size idct2core_arm, .-idct2core_arm	@ ENDP
+	@ .size idct2core_arm, .-idct2core_arm	@ ENDP
 
-	.type	idct2core_down_arm, %function; idct2core_down_arm: @ PROC
+	@ .type idct2core_down_arm, %function; idct2core_down_arm: @ PROC
+idct2core_down_arm:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 	LDRSH	r9, [r1], #16		@ r9 = x[0]
@@ -287,9 +294,10 @@ oc_idct8x8_10_arm_cols:
 	STRH	r12,[r0, #94]		@ y[6] = t[0]-t[6]
 	STRH	r11,[r0, #110]		@ y[7] = t[0]-t[7]
 	MOV	PC,r14
-	.size idct2core_down_arm, .-idct2core_down_arm	@ ENDP
+	@ .size idct2core_down_arm, .-idct2core_down_arm	@ ENDP
 
-	.type	idct3core_arm, %function; idct3core_arm: @ PROC
+	@ .type idct3core_arm, %function; idct3core_arm: @ PROC
+idct3core_arm:
 	LDRSH	r9, [r1], #16		@ r9 = x[0]
 	LDR	r12,OC_C4S4		@ r12= OC_C4S4
 	LDRSH	r3, [r1, #-12]		@ r3 = x[2]
@@ -333,9 +341,10 @@ oc_idct8x8_10_arm_cols:
 	STRH	r5, [r0, #94]		@ y[6] = t[1]-t2[6]
 	STRH	r11,[r0, #110]		@ y[7] = t2[0]-t[7]
 	MOV	PC,R14
-	.size idct3core_arm, .-idct3core_arm	@ ENDP
+	@ .size idct3core_arm, .-idct3core_arm	@ ENDP
 
-	.type	idct3core_down_arm, %function; idct3core_down_arm: @ PROC
+	@ .type idct3core_down_arm, %function; idct3core_down_arm: @ PROC
+idct3core_down_arm:
 	LDRSH	r9, [r1], #16		@ r9 = x[0]
 	LDR	r12,OC_C4S4		@ r12= OC_C4S4
 	LDRSH	r3, [r1, #-12]		@ r3 = x[2]
@@ -391,9 +400,10 @@ oc_idct8x8_10_arm_cols:
 	STRH	r10,[r0, #94]		@ y[6] = t[1]-t2[6]
 	STRH	r3, [r0, #110]		@ y[7] = t2[0]-t[7]
 	MOV	PC,R14
-	.size idct3core_down_arm, .-idct3core_down_arm	@ ENDP
+	@ .size idct3core_down_arm, .-idct3core_down_arm	@ ENDP
 
-	.type	idct4core_arm, %function; idct4core_arm: @ PROC
+	@ .type idct4core_arm, %function; idct4core_arm: @ PROC
+idct4core_arm:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 	LDRSH	r9, [r1], #16		@ r9 = x[0]
@@ -449,9 +459,10 @@ oc_idct8x8_10_arm_cols:
 	STRH	r6, [r0, #94]		@ y[6] = t[1]-t2[6]
 	STRH	r11, [r0, #110]		@ y[7] = t2[0]-t[7]
 	MOV	PC,r14
-	.size idct4core_arm, .-idct4core_arm	@ ENDP
+	@ .size idct4core_arm, .-idct4core_arm	@ ENDP
 
-	.type	idct4core_down_arm, %function; idct4core_down_arm: @ PROC
+	@ .type idct4core_down_arm, %function; idct4core_down_arm: @ PROC
+idct4core_down_arm:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 	LDRSH	r9, [r1], #16		@ r9 = x[0]
@@ -519,9 +530,10 @@ oc_idct8x8_10_arm_cols:
 	STRH	r6, [r0, #94]		@ y[6] = t[1]-t2[6]
 	STRH	r11,[r0, #110]		@ y[7] = t2[0]-t[7]
 	MOV	PC,r14
-	.size idct4core_down_arm, .-idct4core_down_arm	@ ENDP
+	@ .size idct4core_down_arm, .-idct4core_down_arm	@ ENDP
 
-	.type	idct8core_arm, %function; idct8core_arm: @ PROC
+	@ .type idct8core_arm, %function; idct8core_arm: @ PROC
+idct8core_arm:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 	LDRSH	r2, [r1],#16		@ r2 = x[0]
@@ -621,9 +633,10 @@ oc_idct8x8_10_arm_cols:
 	STRH	r10,[r0, #94]		@ y[6] = t[1]-t[6]
 	STRH	r8, [r0, #110]		@ y[7] = t[0]-t[7]
 	LDMFD	r13!,{r1,PC}
-	.size idct8core_arm, .-idct8core_arm	@ ENDP
+	@ .size idct8core_arm, .-idct8core_arm	@ ENDP
 
-	.type	idct8core_down_arm, %function; idct8core_down_arm: @ PROC
+	@ .type idct8core_down_arm, %function; idct8core_down_arm: @ PROC
+idct8core_down_arm:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 	LDRSH	r2, [r1],#16		@ r2 = x[0]
@@ -736,37 +749,39 @@ oc_idct8x8_10_arm_cols:
 	STRH	r10,[r0, #94]		@ y[6] = t[1]-t[6]
 	STRH	r8, [r0, #110]		@ y[7] = t[0]-t[7]
 	LDMFD	r13!,{r1,PC}
-	.size idct8core_down_arm, .-idct8core_down_arm	@ ENDP
+	@ .size idct8core_down_arm, .-idct8core_down_arm	@ ENDP
 
   .if OC_ARM_ASM_MEDIA
-	.global	oc_idct8x8_1_v6
-	.global	oc_idct8x8_v6
+	.global	_oc_idct8x8_1_v6
+	.global	_oc_idct8x8_v6
 
-	.type	oc_idct8x8_1_v6, %function; oc_idct8x8_1_v6: @ PROC
+	@ .type oc_idct8x8_1_v6, %function; oc_idct8x8_1_v6: @ PROC
+_oc_idct8x8_1_v6:
 	@ r0 = ogg_int16_t  *_y
 	@ r1 = ogg_uint16_t  _dc
 	ORR	r2, r1, r1, LSL #16
 	ORR	r3, r1, r1, LSL #16
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
-	STRD	r2, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
+	STRD	r2, r3, [r0], #8
 	MOV	PC, r14
-	.size oc_idct8x8_1_v6, .-oc_idct8x8_1_v6	@ ENDP
+	@ .size oc_idct8x8_1_v6, .-oc_idct8x8_1_v6	@ ENDP
 
-	.type	oc_idct8x8_v6, %function; oc_idct8x8_v6: @ PROC
+	@ .type oc_idct8x8_v6, %function; oc_idct8x8_v6: @ PROC
+_oc_idct8x8_v6:
 	@ r0 = ogg_int16_t *_y
 	@ r1 = ogg_int16_t *_x
 	@ r2 = int          _last_zzi
@@ -790,22 +805,22 @@ oc_idct8x8_slow_v6:
 	@ Clear input data for next block.
 	MOV	r4, #0
 	MOV	r5, #0
-	STRD	r4, [r1,#-8*16]!
-	STRD	r4, [r1,#8]
-	STRD	r4, [r1,#16]
-	STRD	r4, [r1,#24]
-	STRD	r4, [r1,#32]
-	STRD	r4, [r1,#40]
-	STRD	r4, [r1,#48]
-	STRD	r4, [r1,#56]
-	STRD	r4, [r1,#64]
-	STRD	r4, [r1,#72]
-	STRD	r4, [r1,#80]
-	STRD	r4, [r1,#88]
-	STRD	r4, [r1,#96]
-	STRD	r4, [r1,#104]
-	STRD	r4, [r1,#112]
-	STRD	r4, [r1,#120]
+	STRD	r4, r5, [r1,#-8*16]!
+	STRD	r4, r5, [r1,#8]
+	STRD	r4, r5, [r1,#16]
+	STRD	r4, r5, [r1,#24]
+	STRD	r4, r5, [r1,#32]
+	STRD	r4, r5, [r1,#40]
+	STRD	r4, r5, [r1,#48]
+	STRD	r4, r5, [r1,#56]
+	STRD	r4, r5, [r1,#64]
+	STRD	r4, r5, [r1,#72]
+	STRD	r4, r5, [r1,#80]
+	STRD	r4, r5, [r1,#88]
+	STRD	r4, r5, [r1,#96]
+	STRD	r4, r5, [r1,#104]
+	STRD	r4, r5, [r1,#112]
+	STRD	r4, r5, [r1,#120]
 	MOV	r1, r13		@ And read from temp storage.
 @ Column transforms
 	BL	idct8_8core_down_v6
@@ -814,9 +829,10 @@ oc_idct8x8_slow_v6:
 	BL	idct8_8core_down_v6
 	ADD	r13,r13,#64*2
 	LDMFD	r13!,{r4-r11,PC}
-	.size oc_idct8x8_v6, .-oc_idct8x8_v6	@ ENDP
+	@ .size oc_idct8x8_v6, .-oc_idct8x8_v6	@ ENDP
 
-	.type	oc_idct8x8_10_v6, %function; oc_idct8x8_10_v6: @ PROC
+	@ .type oc_idct8x8_10_v6, %function; oc_idct8x8_10_v6: @ PROC
+oc_idct8x8_10_v6:
 	STMFD	r13!,{r4-r11,r14}
 	SUB	r13,r13,#64*2+4
 @ Row transforms
@@ -830,8 +846,8 @@ oc_idct8x8_slow_v6:
 	@ Clear input data for next block.
 	MOV	r4, #0
 	MOV	r5, #0
-	STRD	r4, [r1,#-4*16]!
-	STRD	r4, [r1,#16]
+	STRD	r4, r5, [r1,#-4*16]!
+	STRD	r4, r5, [r1,#16]
 	STR	r4, [r1,#32]
 	STR	r4, [r1,#48]
 	AND	r1, r13,#4	@ Align the stack.
@@ -843,9 +859,10 @@ oc_idct8x8_slow_v6:
 	BL	idct4_4core_down_v6
 	ADD	r13,r13,#64*2+4
 	LDMFD	r13!,{r4-r11,PC}
-	.size oc_idct8x8_10_v6, .-oc_idct8x8_10_v6	@ ENDP
+	@ .size oc_idct8x8_10_v6, .-oc_idct8x8_10_v6	@ ENDP
 
-	.type	oc_idct8x8_3_v6, %function; oc_idct8x8_3_v6: @ PROC
+	@ .type oc_idct8x8_3_v6, %function; oc_idct8x8_3_v6: @ PROC
+oc_idct8x8_3_v6:
 	STMFD	r13!,{r4-r8,r14}
 	SUB	r13,r13,#64*2
 @ Row transforms
@@ -865,9 +882,10 @@ oc_idct8x8_slow_v6:
 	BL	idct2_2core_down_v6
 	ADD	r13,r13,#64*2
 	LDMFD	r13!,{r4-r8,PC}
-	.size oc_idct8x8_3_v6, .-oc_idct8x8_3_v6	@ ENDP
+	@ .size oc_idct8x8_3_v6, .-oc_idct8x8_3_v6	@ ENDP
 
-	.type	idct2_1core_v6, %function; idct2_1core_v6: @ PROC
+	@ .type idct2_1core_v6, %function; idct2_1core_v6: @ PROC
+idct2_1core_v6:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 @ Stage 1:
@@ -875,7 +893,7 @@ oc_idct8x8_slow_v6:
 	LDR	r3, OC_C4S4
 	LDRSH	r6, [r1], #16		@ r6 = x[1,0]
 	SMULWB	r12,r3, r2		@ r12= t[0,0]=OC_C4S4*x[0,0]>>16
-	LDRD	r4, OC_C7S1		@ r4 = OC_C7S1; r5 = OC_C1S7
+	LDRD	r4, r5, OC_C7S1		@ r4 = OC_C7S1; r5 = OC_C1S7
 	SMULWB	r6, r3, r6		@ r6 = t[1,0]=OC_C4S4*x[1,0]>>16
 	SMULWT	r4, r4, r2		@ r4 = t[0,4]=OC_C7S1*x[0,1]>>16
 	SMULWT	r7, r5, r2		@ r7 = t[0,7]=OC_C1S7*x[0,1]>>16
@@ -908,7 +926,7 @@ oc_idct8x8_slow_v6:
 	SSUB16	r7, r12,r7		@ r7 = t[0]-t[7]
 	STR	r7, [r0, #108]		@ y[7<<3] = t[0]-t[7]
 	MOV	PC,r14
-	.size idct2_1core_v6, .-idct2_1core_v6	@ ENDP
+	@ .size idct2_1core_v6, .-idct2_1core_v6	@ ENDP
   .endif
 
 	.balign 8
@@ -928,7 +946,8 @@ OC_C4S4:
 	.word	46341 @ B505
 
   .if OC_ARM_ASM_MEDIA
-	.type	idct2_2core_down_v6, %function; idct2_2core_down_v6: @ PROC
+	@ .type idct2_2core_down_v6, %function; idct2_2core_down_v6: @ PROC
+idct2_2core_down_v6:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 @ Stage 1:
@@ -937,7 +956,7 @@ OC_C4S4:
 	MOV	r7 ,#8			@ r7  = 8
 	LDR	r6, [r1], #16		@ r6 = <x[1,1]|x[1,0]>
 	SMLAWB	r12,r3, r2, r7		@ r12= (t[0,0]=OC_C4S4*x[0,0]>>16)+8
-	LDRD	r4, OC_C7S1		@ r4 = OC_C7S1; r5 = OC_C1S7
+	LDRD	r4, r5, OC_C7S1		@ r4 = OC_C7S1; r5 = OC_C1S7
 	SMLAWB	r7, r3, r6, r7		@ r7 = (t[1,0]=OC_C4S4*x[1,0]>>16)+8
 	SMULWT  r5, r5, r2		@ r2 = t[0,7]=OC_C1S7*x[0,1]>>16
 	PKHBT	r12,r12,r7, LSL #16	@ r12= <t[1,0]+8|t[0,0]+8>
@@ -997,14 +1016,15 @@ OC_C4S4:
 	PKHTB	r3, r3, r7, ASR #20	@ r3 = t[0]-t[7]+8>>4
 	STR	r3, [r0, #108]		@ y[7<<3] = t[0]-t[7]+8>>4
 	MOV	PC,r14
-	.size idct2_2core_down_v6, .-idct2_2core_down_v6	@ ENDP
+	@ .size idct2_2core_down_v6, .-idct2_2core_down_v6	@ ENDP
 
 @ In theory this should save ~75 cycles over oc_idct8x8_10, more than enough to
 @  pay for increased branch mis-prediction to get here, but in practice it
 @  doesn't seem to slow anything down to take it out, and it's less code this
 @  way.
   .if 0
-	.type	oc_idct8x8_6_v6, %function; oc_idct8x8_6_v6: @ PROC
+	@ .type oc_idct8x8_6_v6, %function; oc_idct8x8_6_v6: @ PROC
+_oc_idct8x8_6_v6:
 	STMFD	r13!,{r4-r8,r10,r11,r14}
 	SUB	r13,r13,#64*2+4
 @ Row transforms
@@ -1016,7 +1036,7 @@ OC_C4S4:
 	@ Clear input data for next block.
 	MOV	r4, #0
 	MOV	r5, #0
-	STRD	r4, [r1,#-3*16]!
+	STRD	r4, r5, [r1,#-3*16]!
 	STR	r4, [r1,#16]
 	STR	r4, [r1,#32]
 	AND	r1, r13,#4	@ Align the stack.
@@ -1029,9 +1049,10 @@ OC_C4S4:
 	BL	idct3_3core_down_v6
 	ADD	r13,r13,#64*2+4
 	LDMFD	r13!,{r4-r8,r10,r11,PC}
-	.size oc_idct8x8_6_v6, .-oc_idct8x8_6_v6	@ ENDP
+	@ .size oc_idct8x8_6_v6, .-oc_idct8x8_6_v6	@ ENDP
 
-	.type	idct1core_v6, %function; idct1core_v6: @ PROC
+	@ .type idct1core_v6, %function; idct1core_v6: @ PROC
+_idct1core_v6:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 	LDRSH	r3, [r1], #16
@@ -1046,21 +1067,22 @@ OC_C4S4:
 	STRH	r3, [r0, #62]
 	STRH	r3, [r0, #94]
 	MOV	PC,R14
-	.size idct1core_v6, .-idct1core_v6	@ ENDP
+	@ .size idct1core_v6, .-idct1core_v6	@ ENDP
 
-	.type	idct3_2core_v6, %function; idct3_2core_v6: @ PROC
+	@ .type idct3_2core_v6, %function; idct3_2core_v6: @ PROC
+_idct3_2core_v6:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 @ Stage 1:
-	LDRD	r4, [r1], #16		@ r4 = <x[0,1]|x[0,0]>; r5 = <*|x[0,2]>
-	LDRD	r10,OC_C6S2_3_v6	@ r10= OC_C6S2; r11= OC_C2S6
+	LDRD	r4, r5, [r1], #16		@ r4 = <x[0,1]|x[0,0]>; r5 = <*|x[0,2]>
+	LDRD	r10,r11,OC_C6S2_3_v6	@ r10= OC_C6S2; r11= OC_C2S6
 	@ Stall
 	SMULWB	r3, r11,r5		@ r3 = t[0,3]=OC_C2S6*x[0,2]>>16
 	LDR	r11,OC_C4S4
 	SMULWB	r2, r10,r5		@ r2 = t[0,2]=OC_C6S2*x[0,2]>>16
 	LDR	r5, [r1], #16		@ r5 = <x[1,1]|x[1,0]>
 	SMULWB	r12,r11,r4		@ r12= (t[0,0]=OC_C4S4*x[0,0]>>16)
-	LDRD	r6, OC_C7S1_3_v6	@ r6 = OC_C7S1; r7 = OC_C1S7
+	LDRD	r6, r7, OC_C7S1_3_v6	@ r6 = OC_C7S1; r7 = OC_C1S7
 	SMULWB	r10,r11,r5		@ r10= (t[1,0]=OC_C4S4*x[1,0]>>16)
 	PKHBT	r12,r12,r10,LSL #16	@ r12= <t[1,0]|t[0,0]>
 	SMULWT  r10,r7, r5		@ r10= t[1,7]=OC_C1S7*x[1,1]>>16
@@ -1079,7 +1101,7 @@ OC_C4S4:
 	SMULWT	r10,r11,r4		@ r10= t[1,5]=OC_C4S4*t[1,4]>>16
 @ Stage 3:
 	B	idct4_3core_stage3_v6
-	.size idct3_2core_v6, .-idct3_2core_v6	@ ENDP
+	@ .size idct3_2core_v6, .-idct3_2core_v6	@ ENDP
 
 @ Another copy so the LDRD offsets are less than +/- 255.
 	.balign 8
@@ -1092,12 +1114,13 @@ OC_C6S2_3_v6:
 OC_C2S6_3_v6:
 	.word	60547 @ EC83
 
-	.type	idct3_3core_down_v6, %function; idct3_3core_down_v6: @ PROC
+	@ .type idct3_3core_down_v6, %function; idct3_3core_down_v6: @ PROC
+_idct3_3core_down_v6:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 @ Stage 1:
-	LDRD	r10,[r1], #16		@ r10= <x[0,1]|x[0,0]>; r11= <??|x[0,2]>
-	LDRD	r6, OC_C6S2_3_v6	@ r6 = OC_C6S2; r7 = OC_C2S6
+	LDRD	r10,r11,[r1], #16		@ r10= <x[0,1]|x[0,0]>; r11= <??|x[0,2]>
+	LDRD	r6, r7, OC_C6S2_3_v6	@ r6 = OC_C6S2; r7 = OC_C2S6
 	LDR	r4, [r1], #16		@ r4 = <x[1,1]|x[1,0]>
 	SMULWB	r3, r7, r11		@ r3 = t[0,3]=OC_C2S6*x[0,2]>>16
 	MOV	r7,#8
@@ -1108,7 +1131,7 @@ OC_C2S6_3_v6:
 	PKHBT	r3, r3, r3, LSL #16	@ r3 = <t[0,3]|t[0,3]>
 	SMLAWB	r5, r11,r4, r7		@ r5 = t[1,0]+8=(OC_C4S4*x[1,0]>>16)+8
 	PKHBT	r2, r2, r2, LSL #16	@ r2 = <t[0,2]|t[0,2]>
-	LDRD	r6, OC_C7S1_3_v6	@ r6 = OC_C7S1; r7 = OC_C1S7
+	LDRD	r6, r7, OC_C7S1_3_v6	@ r6 = OC_C7S1; r7 = OC_C1S7
 	PKHBT	r12,r12,r5, LSL #16	@ r12= <t[1,0]+8|t[0,0]+8>
 	SMULWT  r5, r7, r4		@ r5 = t[1,7]=OC_C1S7*x[1,1]>>16
 	SMULWT  r7, r7, r10		@ r7 = t[0,7]=OC_C1S7*x[0,1]>>16
@@ -1124,20 +1147,21 @@ OC_C2S6_3_v6:
 	SMULWT	r10,r11,r4		@ r10= t[1,5]=OC_C4S4*t[1,4]>>16
 @ Stage 3:
 	B	idct4_4core_down_stage3_v6
-	.size idct3_3core_down_v6, .-idct3_3core_down_v6	@ ENDP
+	@ .size idct3_3core_down_v6, .-idct3_3core_down_v6	@ ENDP
   .endif
 
-	.type	idct4_3core_v6, %function; idct4_3core_v6: @ PROC
+	@ .type idct4_3core_v6, %function; idct4_3core_v6: @ PROC
+idct4_3core_v6:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 @ Stage 1:
-	LDRD	r10,[r1], #16	@ r10= <x[0,1]|x[0,0]>; r11= <x[0,3]|x[0,2]>
-	LDRD	r2, OC_C5S3_4_v6	@ r2 = OC_C5S3; r3 = OC_C3S5
-	LDRD	r4, [r1], #16		@ r4 = <x[1,1]|x[1,0]>; r5 = <??|x[1,2]>
+	LDRD	r10,r11,[r1], #16	@ r10= <x[0,1]|x[0,0]>; r11= <x[0,3]|x[0,2]>
+	LDRD	r2, r3, OC_C5S3_4_v6	@ r2 = OC_C5S3; r3 = OC_C3S5
+	LDRD	r4, r5, [r1], #16		@ r4 = <x[1,1]|x[1,0]>; r5 = <??|x[1,2]>
 	SMULWT	r9, r3, r11		@ r9 = t[0,6]=OC_C3S5*x[0,3]>>16
 	SMULWT	r8, r2, r11		@ r8 = -t[0,5]=OC_C5S3*x[0,3]>>16
 	PKHBT	r9, r9, r2		@ r9 = <0|t[0,6]>
-	LDRD	r6, OC_C6S2_4_v6	@ r6 = OC_C6S2; r7 = OC_C2S6
+	LDRD	r6, r7, OC_C6S2_4_v6	@ r6 = OC_C6S2; r7 = OC_C2S6
 	PKHBT	r8, r8, r2		@ r9 = <0|-t[0,5]>
 	SMULWB	r3, r7, r11		@ r3 = t[0,3]=OC_C2S6*x[0,2]>>16
 	SMULWB	r2, r6, r11		@ r2 = t[0,2]=OC_C6S2*x[0,2]>>16
@@ -1148,7 +1172,7 @@ OC_C2S6_3_v6:
 	SMULWB	r12,r11,r10		@ r12= t[0,0]=OC_C4S4*x[0,0]>>16
 	PKHBT	r2, r2, r5, LSL #16	@ r2 = <t[1,2]|t[0,2]>
 	SMULWB	r5, r11,r4		@ r5 = t[1,0]=OC_C4S4*x[1,0]>>16
-	LDRD	r6, OC_C7S1_4_v6	@ r6 = OC_C7S1; r7 = OC_C1S7
+	LDRD	r6, r7, OC_C7S1_4_v6	@ r6 = OC_C7S1; r7 = OC_C1S7
 	PKHBT	r12,r12,r5, LSL #16	@ r12= <t[1,0]|t[0,0]>
 	SMULWT  r5, r7, r4		@ r5 = t[1,7]=OC_C1S7*x[1,1]>>16
 	SMULWT  r7, r7, r10		@ r7 = t[0,7]=OC_C1S7*x[0,1]>>16
@@ -1194,7 +1218,7 @@ idct4_3core_stage3_5_v6:
 	SSUB16	r7, r10,r7		@ r7 = t[0]-t[7]
 	STR	r7, [r0, #108]		@ y[7<<3] = t[0]-t[7]
 	MOV	PC,r14
-	.size idct4_3core_v6, .-idct4_3core_v6	@ ENDP
+	@ .size idct4_3core_v6, .-idct4_3core_v6	@ ENDP
 
 @ Another copy so the LDRD offsets are less than +/- 255.
 	.balign 8
@@ -1211,15 +1235,16 @@ OC_C5S3_4_v6:
 OC_C3S5_4_v6:
 	.word	54491 @ D4DB
 
-	.type	idct4_4core_down_v6, %function; idct4_4core_down_v6: @ PROC
+	@ .type idct4_4core_down_v6, %function; idct4_4core_down_v6: @ PROC
+idct4_4core_down_v6:
 	@ r0 =       ogg_int16_t *_y (destination)
 	@ r1 = const ogg_int16_t *_x (source)
 @ Stage 1:
-	LDRD	r10,[r1], #16	@ r10= <x[0,1]|x[0,0]>; r11= <x[0,3]|x[0,2]>
-	LDRD	r2, OC_C5S3_4_v6	@ r2 = OC_C5S3; r3 = OC_C3S5
-	LDRD	r4, [r1], #16	@ r4 = <x[1,1]|x[1,0]>; r5 = <x[1,3]|x[1,2]>
+	LDRD	r10,r11,[r1], #16	@ r10= <x[0,1]|x[0,0]>; r11= <x[0,3]|x[0,2]>
+	LDRD	r2, r3, OC_C5S3_4_v6	@ r2 = OC_C5S3; r3 = OC_C3S5
+	LDRD	r4, r5, [r1], #16	@ r4 = <x[1,1]|x[1,0]>; r5 = <x[1,3]|x[1,2]>
 	SMULWT	r9, r3, r11		@ r9 = t[0,6]=OC_C3S5*x[0,3]>>16
-	LDRD	r6, OC_C6S2_4_v6	@ r6 = OC_C6S2; r7 = OC_C2S6
+	LDRD	r6, r7, OC_C6S2_4_v6	@ r6 = OC_C6S2; r7 = OC_C2S6
 	SMULWT	r8, r2, r11		@ r8 = -t[0,5]=OC_C5S3*x[0,3]>>16
 @ Here we cheat: row 3 had just a DC, so x[0,3]==x[1,3] by definition.
 	PKHBT	r9, r9, r9, LSL #16	@ r9 = <t[0,6]|t[0,6]>
@@ -1234,7 +1259,7 @@ OC_C3S5_4_v6:
 	SMLAWB	r12,r11,r10,r7		@ r12= t[0,0]+8=(OC_C4S4*x[0,0]>>16)+8
 	PKHBT	r2, r2, r5, LSL #16	@ r2 = <t[1,2]|t[0,2]>
 	SMLAWB	r5, r11,r4 ,r7		@ r5 = t[1,0]+8=(OC_C4S4*x[1,0]>>16)+8
-	LDRD	r6, OC_C7S1_4_v6	@ r6 = OC_C7S1; r7 = OC_C1S7
+	LDRD	r6, r7, OC_C7S1_4_v6	@ r6 = OC_C7S1; r7 = OC_C1S7
 	PKHBT	r12,r12,r5, LSL #16	@ r12= <t[1,0]+8|t[0,0]+8>
 	SMULWT  r5, r7, r4		@ r5 = t[1,7]=OC_C1S7*x[1,1]>>16
 	SMULWT  r7, r7, r10		@ r7 = t[0,7]=OC_C1S7*x[0,1]>>16
@@ -1258,13 +1283,14 @@ idct4_4core_down_stage3_v6:
 	PKHBT	r10,r5, r10,LSL #16	@ r10= <t[1,5]|t[0,5]>
 	SSUB16	r2, r12,r2		@ r2 = t[2]+8=t[0]-t[2]+8
 	B	idct8_8core_down_stage3_5_v6
-	.size idct4_4core_down_v6, .-idct4_4core_down_v6	@ ENDP
+	@ .size idct4_4core_down_v6, .-idct4_4core_down_v6	@ ENDP
 
-	.type	idct8_8core_v6, %function; idct8_8core_v6: @ PROC
+	@ .type idct8_8core_v6, %function; idct8_8core_v6: @ PROC
+idct8_8core_v6:
 	STMFD	r13!,{r0,r14}
 @ Stage 1:
 	@5-6 rotation by 3pi/16
-	LDRD	r10,OC_C5S3_4_v6	@ r10= OC_C5S3, r11= OC_C3S5
+	LDRD	r10,r11,OC_C5S3_4_v6	@ r10= OC_C5S3, r11= OC_C3S5
 	LDR	r4, [r1,#8]		@ r4 = <x[0,5]|x[0,4]>
 	LDR	r7, [r1,#24]		@ r7 = <x[1,5]|x[1,4]>
 	SMULWT	r5, r11,r4		@ r5 = OC_C3S5*x[0,5]>>16
@@ -1281,7 +1307,7 @@ idct4_4core_down_stage3_v6:
 	PKHBT	r6, r6, r11,LSL #16	@ r6 = <t[1,6]|t[0,6]>
 	SMULWT	r8, r10,r12		@ r8 = OC_C5S3*x[1,3]>>16
 	@2-3 rotation by 6pi/16
-	LDRD	r10,OC_C6S2_4_v6	@ r10= OC_C6S2, r11= OC_C2S6
+	LDRD	r10,r11,OC_C6S2_4_v6	@ r10= OC_C6S2, r11= OC_C2S6
 	PKHBT	r3, r3, r8, LSL #16	@ r3 = <r8|r3>
 	LDR	r8, [r1,#12]		@ r8 = <x[0,7]|x[0,6]>
 	SMULWB	r2, r10,r0		@ r2 = OC_C6S2*x[0,2]>>16
@@ -1297,7 +1323,7 @@ idct4_4core_down_stage3_v6:
 	PKHBT	r3, r3, r10,LSL #16	@ r3 = <t[1,6]|t[0,6]>
 	SMULWB	r12,r11,r7		@ r12= OC_C2S6*x[1,6]>>16
 	@4-7 rotation by 7pi/16
-	LDRD	r10,OC_C7S1_8_v6	@ r10= OC_C7S1, r11= OC_C1S7
+	LDRD	r10,r11,OC_C7S1_8_v6	@ r10= OC_C7S1, r11= OC_C1S7
 	PKHBT	r9, r9, r12,LSL #16	@ r9 = <r9|r12>
 	LDR	r0, [r1],#16		@ r0 = <x[0,1]|x[0,0]>
 	PKHTB	r7, r7, r8, ASR #16	@ r7 = <x[1,7]|x[0,7]>
@@ -1342,7 +1368,7 @@ idct4_4core_down_stage3_v6:
 	SSUB16	r2, r8, r2		@ r2 = t[2]=t[1]-t[2]
 	LDMFD	r13!,{r0,r14}
 	B	idct4_3core_stage3_5_v6
-	.size idct8_8core_v6, .-idct8_8core_v6	@ ENDP
+	@ .size idct8_8core_v6, .-idct8_8core_v6	@ ENDP
 
 @ Another copy so the LDRD offsets are less than +/- 255.
 	.balign 8
@@ -1359,11 +1385,12 @@ OC_C5S3_8_v6:
 OC_C3S5_8_v6:
 	.word	54491 @ D4DB
 
-	.type	idct8_8core_down_v6, %function; idct8_8core_down_v6: @ PROC
+	@ .type idct8_8core_down_v6, %function; idct8_8core_down_v6: @ PROC
+idct8_8core_down_v6:
 	STMFD	r13!,{r0,r14}
 @ Stage 1:
 	@5-6 rotation by 3pi/16
-	LDRD	r10,OC_C5S3_8_v6	@ r10= OC_C5S3, r11= OC_C3S5
+	LDRD	r10,r11,OC_C5S3_8_v6	@ r10= OC_C5S3, r11= OC_C3S5
 	LDR	r4, [r1,#8]		@ r4 = <x[0,5]|x[0,4]>
 	LDR	r7, [r1,#24]		@ r7 = <x[1,5]|x[1,4]>
 	SMULWT	r5, r11,r4		@ r5 = OC_C3S5*x[0,5]>>16
@@ -1380,7 +1407,7 @@ OC_C3S5_8_v6:
 	PKHBT	r6, r6, r11,LSL #16	@ r6 = <t[1,6]|t[0,6]>
 	SMULWT	r8, r10,r12		@ r8 = OC_C5S3*x[1,3]>>16
 	@2-3 rotation by 6pi/16
-	LDRD	r10,OC_C6S2_8_v6	@ r10= OC_C6S2, r11= OC_C2S6
+	LDRD	r10,r11,OC_C6S2_8_v6	@ r10= OC_C6S2, r11= OC_C2S6
 	PKHBT	r3, r3, r8, LSL #16	@ r3 = <r8|r3>
 	LDR	r8, [r1,#12]		@ r8 = <x[0,7]|x[0,6]>
 	SMULWB	r2, r10,r0		@ r2 = OC_C6S2*x[0,2]>>16
@@ -1396,7 +1423,7 @@ OC_C3S5_8_v6:
 	PKHBT	r3, r3, r10,LSL #16	@ r3 = <t[1,6]|t[0,6]>
 	SMULWB	r12,r11,r7		@ r12= OC_C2S6*x[1,6]>>16
 	@4-7 rotation by 7pi/16
-	LDRD	r10,OC_C7S1_8_v6	@ r10= OC_C7S1, r11= OC_C1S7
+	LDRD	r10,r11,OC_C7S1_8_v6	@ r10= OC_C7S1, r11= OC_C1S7
 	PKHBT	r9, r9, r12,LSL #16	@ r9 = <r9|r12>
 	LDR	r0, [r1],#16		@ r0 = <x[0,1]|x[0,0]>
 	PKHTB	r7, r7, r8, ASR #16	@ r7 = <x[1,7]|x[0,7]>
@@ -1488,12 +1515,12 @@ idct8_8core_down_stage3_5_v6:
 	PKHTB	r10,r10,r7, ASR #20	@ r10= t[0]-t[7]+8>>4
 	STR	r10,[r0, #108]		@ y[7<<3] = t[0]-t[7]+8>>4
 	MOV	PC,r14
-	.size idct8_8core_down_v6, .-idct8_8core_down_v6	@ ENDP
+	@ .size idct8_8core_down_v6, .-idct8_8core_down_v6	@ ENDP
   .endif
 
   .if OC_ARM_ASM_NEON
-	.global	oc_idct8x8_1_neon
-	.global	oc_idct8x8_neon
+	.global	_oc_idct8x8_1_neon
+	.global	_oc_idct8x8_neon
 
 	.balign 16
 OC_IDCT_CONSTS_NEON:
@@ -1506,7 +1533,8 @@ OC_IDCT_CONSTS_NEON:
 	.short	25080 @ 30FC (C6S2)
 	.short	12785 @ 31F1 (C7S1)
 
-	.type	oc_idct8x8_1_neon, %function; oc_idct8x8_1_neon: @ PROC
+	@ .type oc_idct8x8_1_neon, %function; oc_idct8x8_1_neon: @ PROC
+_oc_idct8x8_1_neon:
 	@ r0 = ogg_int16_t  *_y
 	@ r1 = ogg_uint16_t  _dc
 	VDUP.S16	Q0, r1
@@ -1516,9 +1544,10 @@ OC_IDCT_CONSTS_NEON:
 	VST1.64		{D0, D1, D2, D3}, [r0,:128]!
 	VST1.64		{D0, D1, D2, D3}, [r0,:128]
 	MOV	PC, r14
-	.size oc_idct8x8_1_neon, .-oc_idct8x8_1_neon	@ ENDP
+	@ .size oc_idct8x8_1_neon, .-oc_idct8x8_1_neon	@ ENDP
 
-	.type	oc_idct8x8_neon, %function; oc_idct8x8_neon: @ PROC
+	@ .type oc_idct8x8_neon, %function; oc_idct8x8_neon: @ PROC
+_oc_idct8x8_neon:
 	@ r0 = ogg_int16_t *_y
 	@ r1 = ogg_int16_t *_x
 	@ r2 = int          _last_zzi
@@ -1594,9 +1623,10 @@ oc_idct8x8_slow_neon:
 	VRSHR.S16	Q15,Q15,#4	@ Q15 = y[7]+8>>4
 	VSTMIA		r0, {D16-D31}
 	MOV	PC, r14
-	.size oc_idct8x8_neon, .-oc_idct8x8_neon	@ ENDP
+	@ .size oc_idct8x8_neon, .-oc_idct8x8_neon	@ ENDP
 
-	.type	oc_idct8x8_stage123_neon, %function; oc_idct8x8_stage123_neon: @ PROC
+	@ .type oc_idct8x8_stage123_neon, %function; oc_idct8x8_stage123_neon: @ PROC
+oc_idct8x8_stage123_neon:
 @ Stages 1 & 2
 	VMULL.S16	Q4, D18,D1[3]
 	VMULL.S16	Q5, D19,D1[3]
@@ -1692,9 +1722,10 @@ oc_idct8x8_slow_neon:
 	VSUB.S16	Q10,Q1, Q2	@ Q10 = t[2]=t[1]-t[2]
 	VSUB.S16	Q5, Q6, Q5	@ Q5  = t[5]=t[6]-t[5]
 	MOV	PC, r14
-	.size oc_idct8x8_stage123_neon, .-oc_idct8x8_stage123_neon	@ ENDP
+	@ .size oc_idct8x8_stage123_neon, .-oc_idct8x8_stage123_neon	@ ENDP
 
-	.type	oc_idct8x8_10_neon, %function; oc_idct8x8_10_neon: @ PROC
+	@ .type oc_idct8x8_10_neon, %function; oc_idct8x8_10_neon: @ PROC
+oc_idct8x8_10_neon:
 	ADR	r3, OC_IDCT_CONSTS_NEON
 	VLD1.64		{D0,D1},          [r3,:128]
 	MOV	r2, r1
@@ -1847,8 +1878,9 @@ oc_idct8x8_slow_neon:
 	VRSHR.S16	Q15,Q15,#4	@ Q15 = y[7]+8>>4
 	VSTMIA		r0, {D16-D31}
 	MOV	PC, r14
-	.size oc_idct8x8_10_neon, .-oc_idct8x8_10_neon	@ ENDP
+	@ .size oc_idct8x8_10_neon, .-oc_idct8x8_10_neon	@ ENDP
   .endif
 
 	@ END
-    .section	.note.GNU-stack,"",%progbits
+    @ .section	.note.GNU-stack,"",%progbits
+#endif
