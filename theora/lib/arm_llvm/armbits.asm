@@ -1,3 +1,4 @@
+#ifdef OC_ARM_ASM
 @********************************************************************
 @*                                                                  *
 @* THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
@@ -17,11 +18,12 @@
 
     .text;   .p2align 2
 
-	.global oc_pack_read_arm
-	.global oc_pack_read1_arm
-	.global oc_huff_token_decode_arm
+	.global _oc_pack_read_arm
+	.global _oc_pack_read1_arm
+	.global _oc_huff_token_decode_arm
 
-	.type	oc_pack_read1_arm, %function; oc_pack_read1_arm: @ PROC
+	@ .type oc_pack_read1_arm, %function; oc_pack_read1_arm: @ PROC
+_oc_pack_read1_arm:
 	@ r0 = oc_pack_buf *_b
 	ADD r12,r0,#8
 	LDMIA r12,{r2,r3}      @ r2 = window
@@ -34,9 +36,10 @@
 	STMIA r12,{r2,r3}      @ window = r2
 	                       @ available = r3
 	MOV PC,r14
-	.size oc_pack_read1_arm, .-oc_pack_read1_arm	@ ENDP
+	@ .size oc_pack_read1_arm, .-oc_pack_read1_arm	@ ENDP
 
-	.type	oc_pack_read_arm, %function; oc_pack_read_arm: @ PROC
+	@ .type oc_pack_read_arm, %function; oc_pack_read_arm: @ PROC
+_oc_pack_read_arm:
 	@ r0 = oc_pack_buf *_b
 	@ r1 = int          _bits
 	ADD r12,r0,#8
@@ -67,25 +70,25 @@ oc_pack_read_refill:
 @  negative.
 	CMP r10,r11            @ ptr<stop => HI
 	CMPHI r3,#7            @   available<=24 => HI
-	LDRHIB r14,[r11],#1    @     r14 = *ptr++
+	LDRBHI r14,[r11],#1    @     r14 = *ptr++
 	SUBHI r3,#8            @     available += 8
 	@ (HI) Stall...
 	ORRHI r2,r14,LSL r3    @     r2 = window|=r14<<32-available
 	CMPHI r10,r11          @     ptr<stop => HI
 	CMPHI r3,#7            @       available<=24 => HI
-	LDRHIB r14,[r11],#1    @         r14 = *ptr++
+	LDRBHI r14,[r11],#1    @         r14 = *ptr++
 	SUBHI r3,#8            @         available += 8
 	@ (HI) Stall...
 	ORRHI r2,r14,LSL r3    @         r2 = window|=r14<<32-available
 	CMPHI r10,r11          @         ptr<stop => HI
 	CMPHI r3,#7            @           available<=24 => HI
-	LDRHIB r14,[r11],#1    @             r14 = *ptr++
+	LDRBHI r14,[r11],#1    @             r14 = *ptr++
 	SUBHI r3,#8            @             available += 8
 	@ (HI) Stall...
 	ORRHI r2,r14,LSL r3    @             r2 = window|=r14<<32-available
 	CMPHI r10,r11          @             ptr<stop => HI
 	CMPHI r3,#7            @               available<=24 => HI
-	LDRHIB r14,[r11],#1    @                 r14 = *ptr++
+	LDRBHI r14,[r11],#1    @                 r14 = *ptr++
 	SUBHI r3,#8            @                 available += 8
 	@ (HI) Stall...
 	ORRHI r2,r14,LSL r3    @                 r2 = window|=r14<<32-available
@@ -104,7 +107,7 @@ oc_pack_read_refill_last:
 	CMP r11,r10            @ ptr<stop => LO
 @ If we didn't hit the end of the packet, then pull enough of the next byte to
 @  to fill up the window.
-	LDRLOB r14,[r11]       @ (LO) r14 = *ptr
+	LDRBLO r14,[r11]       @ (LO) r14 = *ptr
 @ Otherwise, set the EOF flag and pretend we have lots of available bits.
 	MOVHS r14,#1           @ (HS) r14 = 1
 	ADDLO r10,r3,r1        @ (LO) r10 = available
@@ -118,11 +121,12 @@ oc_pack_read_refill_last:
 	STMIA r12,{r2,r3}      @ window = r2
 	                       @ available = r3
 	LDMFD r13!,{r10,r11,PC}
-	.size oc_pack_read_arm, .-oc_pack_read_arm	@ ENDP
+	@ .size oc_pack_read_arm, .-oc_pack_read_arm	@ ENDP
 
 
 
-	.type	oc_huff_token_decode_arm, %function; oc_huff_token_decode_arm: @ PROC
+	@ .type oc_huff_token_decode_arm, %function; oc_huff_token_decode_arm: @ PROC
+_oc_huff_token_decode_arm:
 	@ r0 = oc_pack_buf       *_b
 	@ r1 = const ogg_int16_t *_tree
 	STMFD r13!,{r4,r5,r10,r14}
@@ -183,12 +187,12 @@ oc_huff_token_decode_refill:
 @ We can't possibly need more than 15 bits, so available must be <= 15.
 @ Therefore we can load at least two bytes without checking it.
 	CMP r2,r3              @ ptr<stop => HI
-	LDRHIB r14,[r3],#1     @   r14 = *ptr++
+	LDRBHI r14,[r3],#1     @   r14 = *ptr++
 	RSBHI r5,r5,#24        @ (HI) available = 32-(available+=8)
 	RSBLS r5,r5,#32        @ (LS) r5 = 32-available
 	ORRHI r4,r14,LSL r5    @   r4 = window|=r14<<32-available
 	CMPHI r2,r3            @   ptr<stop => HI
-	LDRHIB r14,[r3],#1     @     r14 = *ptr++
+	LDRBHI r14,[r3],#1     @     r14 = *ptr++
 	SUBHI r5,#8            @     available += 8
 	@ (HI) Stall...
 	ORRHI r4,r14,LSL r5    @     r4 = window|=r14<<32-available
@@ -198,14 +202,14 @@ oc_huff_token_decode_refill:
 @  negative.
 	CMPHI r2,r3            @     ptr<stop => HI
 	CMPHI r5,#7            @       available<=24 => HI
-	LDRHIB r14,[r3],#1     @         r14 = *ptr++
+	LDRBHI r14,[r3],#1     @         r14 = *ptr++
 	SUBHI r5,#8            @         available += 8
 	@ (HI) Stall...
 	ORRHI r4,r14,LSL r5    @         r4 = window|=r14<<32-available
 	CMP r2,r3              @ ptr<stop => HI
 	MOVLS r5,#-1<<30       @ (LS) available = OC_LOTS_OF_BITS+32
 	CMPHI r5,#7            @ (HI) available<=24 => HI
-	LDRHIB r14,[r3],#1     @ (HI)   r14 = *ptr++
+	LDRBHI r14,[r3],#1     @ (HI)   r14 = *ptr++
 	SUBHI r5,#8            @ (HI)   available += 8
 	@ (HI) Stall...
 	ORRHI r4,r14,LSL r5    @ (HI)   r4 = window|=r14<<32-available
@@ -225,7 +229,8 @@ oc_huff_token_decode_refill:
 	                       @ available = r5
 	AND r0,r14,#255        @ r0 = node0x255
 	LDMFD r13!,{r4,r5,r10,pc}
-	.size oc_huff_token_decode_arm, .-oc_huff_token_decode_arm	@ ENDP
+	@ .size oc_huff_token_decode_arm, .-oc_huff_token_decode_arm	@ ENDP
 
 	@ END
-    .section	.note.GNU-stack,"",%progbits
+    @ .section	.note.GNU-stack,"",%progbits
+#endif
