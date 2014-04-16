@@ -25,6 +25,9 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #ifdef __FFMPEG
 	#include "TheoraVideoClip_FFmpeg.h"
 #endif
+#ifdef _ANDROID //libtheoraplayer addition for cpu feature detection
+	#include "cpu-features.h"
+#endif
 // declaring function prototype here so I don't have to put it in a header file
 // it only needs to be used by this plugin and called once
 extern "C"
@@ -76,18 +79,26 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 
 	g_ManagerSingleton = this;
 
-	logMessage("Initializing Theora Playback Library (" + getVersionString() + ")\n" +
+	std::string msg = "Initializing Theora Playback Library (" + getVersionString() + ")\n";
 #ifdef __THEORA
-	           "  - libtheora version: " + th_version_string() + "\n" + 
-	           "  - libvorbis version: " + vorbis_version_string() + "\n" +
+	msg += "  - libtheora version: " + std::string(th_version_string()) + "\n" +
+	       "  - libvorbis version: " +  std::string(vorbis_version_string()) + "\n";
 #endif
+#ifdef _ANDROID
+	if (android_getCpuFeatures() & ANDROID_CPU_ARM_FEATURE_NEON == 0)
+		msg += "  - Android: NEON features NOT SUPPORTED by CPU\n";
+	else
+		msg += "  - Android: Detected NEON CPU features\n";
+#endif
+
 #ifdef __AVFOUNDATION
-			   "  - using Apple AVFoundation classes.\n"
+	msg += "  - using Apple AVFoundation classes.\n";
 #endif
 #ifdef __FFMPEG
-			   "  - using FFmpeg library.\n"
+	msg += "  - using FFmpeg library.\n";
 #endif
-			   "------------------------------------");
+	
+	logMessage(msg + "------------------------------------");
 	mAudioFactory = NULL;
 	mWorkMutex = new TheoraMutex();
 

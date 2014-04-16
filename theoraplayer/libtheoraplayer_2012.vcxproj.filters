@@ -34,6 +34,9 @@
     <Filter Include="src\YUV\libyuv\include\libyuv">
       <UniqueIdentifier>{ae734130-dee5-4730-9b64-2ee17bfd9b4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\YUV\libyuv\android">
+      <UniqueIdentifier>{27f59d1b-29ec-41dd-962e-abc4e1177511}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\TheoraAsync.cpp">
@@ -198,6 +201,9 @@
     <ClCompile Include="src\YUV\libyuv\src\scale_common.cc">
       <Filter>src\YUV\libyuv\src</Filter>
     </ClCompile>
+    <ClCompile Include="src\YUV\android\cpu-features.c">
+      <Filter>src\YUV\libyuv\android</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Theora\TheoraVideoClip_Theora.h">
@@ -310,6 +316,9 @@
     </ClInclude>
     <ClInclude Include="src\YUV\libyuv\include\libyuv\scale_row.h">
       <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YUV\android\cpu-features.h">
+      <Filter>src\YUV\libyuv\android</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
