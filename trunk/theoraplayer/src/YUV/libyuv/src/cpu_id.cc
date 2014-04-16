@@ -10,6 +10,10 @@
 
 #include "libyuv/cpu_id.h"
 
+#ifdef _ANDROID //libtheoraplayer addition for cpu feature detection
+#include "cpu-features.h"
+#endif
+
 #ifdef _MSC_VER
 #include <intrin.h>  // For __cpuidex()
 #endif
@@ -265,6 +269,13 @@ int InitCpuFlags(void) {
   if (TestEnv("LIBYUV_DISABLE_NEON")) {
     cpu_info_ &= ~kCpuHasNEON;
   }
+#ifdef _ANDROID
+  // libtheoraplayer addition to disable NEON support on android devices that don't support it
+  if (android_getCpuFeatures() & ANDROID_CPU_ARM_FEATURE_NEON == 0)
+  {
+ 	cpu_info_ &= ~kCpuHasNEON;
+  }
+#endif
 #endif  // __arm__
   if (TestEnv("LIBYUV_DISABLE_ASM")) {
     cpu_info_ = 0;
