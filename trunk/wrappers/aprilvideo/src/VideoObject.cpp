@@ -29,6 +29,8 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #define __NPOT_TEXTURE // iOS armv7 and newer devices support non-power-of-two textures so let's use it.
 #endif
 
+//#define _TEXWRITE_BENCHMARK // uncomment this to benchmark texture upload speed
+
 namespace aprilvideo
 {
 	extern int gRefCount, gNumWorkerThreads;
@@ -197,7 +199,12 @@ namespace aprilvideo
 			}
 			else
 			{
+#ifdef _ANDROID
+				// android has better performance if using rgbx
+				textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBX);
+#else
 				textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGB);
+#endif
 			}
 			if (textureFormat == april::Image::FORMAT_RGBA)				mode = TH_RGBA;
 			else if (textureFormat == april::Image::FORMAT_RGBX)		mode = TH_RGBX;
@@ -363,10 +370,27 @@ namespace aprilvideo
 				}
 				else
 				{
+#ifdef _ANDROID
+					// android has better performance if using rgbx
+					textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBX);
+#else
 					textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGB);
+#endif
 				}
-
+#ifdef _TEXWRITE_BENCHMARK
+				long t = clock();
+				int n = 256;
+				char msg[1024];
+				for (int i = 0; i < n; i++)
+				{
+					mTexture->getRenderTexture()->write(0, 0, r.w, r.h, 0, 0, f->getBuffer(), r.w, r.h, textureFormat);
+				}
+				float diff = ((float) (clock() - t) * 1000.0f) / CLOCKS_PER_SEC;
+				sprintf(msg, "BENCHMARK: uploading n %dx%d video frames to texture took %.1fms (%.2fms average per frame)\n", (int) r.w, (int )r.h, diff, diff / n);
+				hlog::write(logTag, msg);
+#else
 				mTexture->getRenderTexture()->write(0, 0, r.w, r.h, 0, 0, f->getBuffer(), r.w, r.h, textureFormat);
+#endif
 				if (pop)
 				{
 					mClip->popFrame();
