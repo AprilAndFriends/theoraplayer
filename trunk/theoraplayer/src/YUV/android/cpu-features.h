@@ -172,7 +172,8 @@ enum {
     ANDROID_CPU_X86_FEATURE_MOVBE  = (1 << 2),
 };
 
-extern uint64_t    android_getCpuFeatures(void);
+// libtheoraplayer addition, renamed this to "Ext" as not to conflict with your own project if you've included cpu-features.c in it
+extern uint64_t    android_getCpuFeaturesExt(void);
 
 /* Return the number of CPU cores detected on this device. */
 extern int         android_getCpuCount(void);

@@ -9,6 +9,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include "TheoraPixelTransform.h"
 #include "TheoraVideoClip.h"
 #include "TheoraVideoFrame.h"
+#include "TheoraVideoManager.h"
 
 //#define YUV_TEST // uncomment this if you want to benchmark YUV decoding functions
 
@@ -141,7 +142,9 @@ void TheoraVideoFrame::decode(struct TheoraPixelTransform* t)
         }
         float diff = (clock() - time) * 1000.0f / CLOCKS_PER_SEC;
         
-        printf("YUV Decoding time: %.2f ms\n", diff / N);
+		char s[128];
+		sprintf(s, "%.2f", diff / N);
+        TheoraVideoManager::getSingleton().logMessage("YUV Decoding time: " + std::string(s) + " ms\n");
 #else
 		conversion_functions[mParent->getOutputMode()](t);
 #endif

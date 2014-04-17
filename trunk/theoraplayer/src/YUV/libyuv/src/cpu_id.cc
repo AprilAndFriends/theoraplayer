@@ -271,7 +271,7 @@ int InitCpuFlags(void) {
   }
 #ifdef _ANDROID
   // libtheoraplayer addition to disable NEON support on android devices that don't support it
-  if (android_getCpuFeatures() & ANDROID_CPU_ARM_FEATURE_NEON == 0)
+  if (android_getCpuFeaturesExt() & ANDROID_CPU_ARM_FEATURE_NEON == 0)
   {
  	cpu_info_ &= ~kCpuHasNEON;
   }
