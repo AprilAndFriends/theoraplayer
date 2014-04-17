@@ -20,7 +20,6 @@ namespace aprilvideo
 		mPrevTimePosition = -1;
 		mAudioPosition = 0;
 		mPlayer = player;
-		mSyncApproximated = false;
 		mSyncDiff = mSyncDiffFactor = 0;
 		mT = 0;
 		static hstr audiosystem = xal::mgr->getName(); // XAL_AS_DISABLED audio system doesn't sync audio & video
@@ -35,16 +34,15 @@ namespace aprilvideo
 			{
 				// on some platforms, getTimePosition() isn't accurate enough, so we need to manually update our timer and
 				// use the audio position for syncing
-				float timePosition = mPlayer->getTimePosition();
+				float timePosition = (int) mPlayer->getTimePosition();
 				if (timePosition != mPrevTimePosition)
 				{
-					if (mSyncApproximated)
+					if (timePosition - mPrevTimePosition > 0.1f)
 					{
-						mSyncApproximated = false;
 						mSyncDiff = timePosition - mAudioPosition;
 						mSyncDiffFactor = (float) fabs(mSyncDiff);
 						mPrevTimePosition = timePosition;
-						hlog::writef("aprilvideo_DEBUG", "sync diff: %.3f", mSyncDiff);
+						//hlog::writef("aprilvideo_DEBUG", "sync diff: %.3f", mSyncDiff);
 					}
 					else
 					{
@@ -53,7 +51,6 @@ namespace aprilvideo
 				}
 				else
 				{
-					mSyncApproximated = true;
 					mAudioPosition += time_increase;
 				}
 				if (mSyncDiff != 0)
