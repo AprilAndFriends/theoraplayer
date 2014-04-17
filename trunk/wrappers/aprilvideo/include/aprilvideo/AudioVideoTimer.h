@@ -21,7 +21,6 @@ namespace aprilvideo
 	class AudioVideoTimer : public TheoraTimer
 	{
 		float mSyncOffset, mPrevTimePosition, mAudioPosition;
-		bool mSyncApproximated;
 		float mSyncDiff, mSyncDiffFactor;
 		xal::Player* mPlayer;
 		float mT;
