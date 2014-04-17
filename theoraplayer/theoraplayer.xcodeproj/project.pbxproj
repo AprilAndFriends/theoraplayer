@@ -666,6 +666,8 @@
 		D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv420_yuv_c.c; path = src/YUV/C/yuv420_yuv_c.c; sourceTree = "<group>"; };
 		D1E271AB16B470210046C00C /* yuv420_rgb_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv420_rgb_c.c; path = src/YUV/C/yuv420_rgb_c.c; sourceTree = "<group>"; };
 		D1E271B216B471E80046C00C /* TheoraPixelTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheoraPixelTransform.h; path = include/theoraplayer/TheoraPixelTransform.h; sourceTree = "<group>"; };
+		D1F4DA1D18FECACE007C1968 /* cpu-features.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "cpu-features.c"; path = "src/YUV/android/cpu-features.c"; sourceTree = "<group>"; };
+		D1F4DA1E18FECACE007C1968 /* cpu-features.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "cpu-features.h"; path = "src/YUV/android/cpu-features.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -973,6 +975,7 @@
 		D1E2718516B46F370046C00C /* YUV */ = {
 			isa = PBXGroup;
 			children = (
+				D1F4DA1C18FECABC007C1968 /* android */,
 				D139462A17C0ED2F0091F4A4 /* libyuv */,
 				D1E2718716B46F4F0046C00C /* C */,
 				D13946CA17C119B30091F4A4 /* yuv_util.c */,
@@ -989,6 +992,15 @@
 				D1E2718A16B46F640046C00C /* yuv420_grey_c.c */,
 			);
 			name = C;
+			sourceTree = "<group>";
+		};
+		D1F4DA1C18FECABC007C1968 /* android */ = {
+			isa = PBXGroup;
+			children = (
+				D1F4DA1D18FECACE007C1968 /* cpu-features.c */,
+				D1F4DA1E18FECACE007C1968 /* cpu-features.h */,
+			);
+			name = android;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

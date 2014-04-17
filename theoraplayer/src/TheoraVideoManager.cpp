@@ -35,12 +35,35 @@ extern "C"
 	void initYUVConversionModule();
 }
 
+//#define _DECODING_BENCHMARK //uncomment to test average decoding time on a given device
+
+
 // --------------------------
 //#define _SCHEDULING_DEBUG
 #ifdef _SCHEDULING_DEBUG
 float gThreadDiagnosticTimer = 0;
 #endif
 // --------------------------
+
+#ifdef _DECODING_BENCHMARK
+void benchmark(TheoraVideoClip* clip)
+{
+	int nPrecached = 256;
+	int n = nPrecached;
+	char msg[1024];
+	clock_t t = clock();
+	while (n > 0)
+	{
+		clip->waitForCache(1.0f, 1000000);
+		n -= 32;
+		clip->getFrameQueue()->clear();
+	}
+	float diff = ((float) (clock() - t) * 1000.0f) / CLOCKS_PER_SEC;
+	sprintf(msg, "BENCHMARK: %s: Decoding %d frames took %.1fms (%.2fms average per frame)\n",clip->getName().c_str(), nPrecached, diff, diff / nPrecached);
+	TheoraVideoManager::getSingleton().logMessage(msg);
+	clip->seek(0);
+}
+#endif
 
 struct TheoraWorkCandidate
 {
@@ -85,7 +108,11 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 	       "  - libvorbis version: " +  std::string(vorbis_version_string()) + "\n";
 #endif
 #ifdef _ANDROID
-	if (android_getCpuFeatures() & ANDROID_CPU_ARM_FEATURE_NEON == 0)
+	uint64_t features = android_getCpuFeaturesExt();
+	char s[128];
+	sprintf(s, "  - Android: CPU Features: %u\n", (unsigned int) features);
+	msg += s;
+	if ((features & ANDROID_CPU_ARM_FEATURE_NEON) == 0)
 		msg += "  - Android: NEON features NOT SUPPORTED by CPU\n";
 	else
 		msg += "  - Android: Detected NEON CPU features\n";
@@ -204,6 +231,10 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 
 	mClips.push_back(clip);
 	mWorkMutex->unlock();
+	
+#ifdef _DECODING_BENCHMARK
+	benchmark(clip);
+#endif
 	return clip;
 }
 
