@@ -10,13 +10,18 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include <xal/Player.h>
 #include <xal/xal.h>
 #include "AudioVideoTimer.h"
+#include <hltypes/hlog.h>
 
 namespace aprilvideo
 {
 	AudioVideoTimer::AudioVideoTimer(xal::Player* player, float sync_offset) : TheoraTimer()
 	{
 		mSyncOffset = sync_offset;
+		mPrevTimePosition = -1;
+		mAudioPosition = 0;
 		mPlayer = player;
+		mSyncApproximated = false;
+		mSyncDiff = mSyncDiffFactor = 0;
 		mT = 0;
 		static hstr audiosystem = xal::mgr->getName(); // XAL_AS_DISABLED audio system doesn't sync audio & video
 		mDisabledAudio = (audiosystem == XAL_AS_DISABLED);
@@ -27,9 +32,67 @@ namespace aprilvideo
 		if (!mDisabledAudio)
 		{
 			if (mPlayer->isPlaying())
-				mTime = mPlayer->getTimePosition() - mSyncOffset;
+			{
+				// on some platforms, getTimePosition() isn't accurate enough, so we need to manually update our timer and
+				// use the audio position for syncing
+				float timePosition = mPlayer->getTimePosition();
+				if (timePosition != mPrevTimePosition)
+				{
+					if (mSyncApproximated)
+					{
+						mSyncApproximated = false;
+						mSyncDiff = timePosition - mAudioPosition;
+						mSyncDiffFactor = (float) fabs(mSyncDiff);
+						mPrevTimePosition = timePosition;
+						hlog::writef("aprilvideo_DEBUG", "sync diff: %.3f", mSyncDiff);
+					}
+					else
+					{
+						mAudioPosition = mPrevTimePosition = timePosition;
+					}
+				}
+				else
+				{
+					mSyncApproximated = true;
+					mAudioPosition += time_increase;
+				}
+				if (mSyncDiff != 0)
+				{
+					float chunk = time_increase * mSyncDiffFactor;
+					
+					if (mSyncDiff > 0)
+					{
+						if (mSyncDiff - chunk < 0)
+						{
+							chunk = mSyncDiff;
+							mSyncDiff = 0;
+						}
+						else
+						{
+							mSyncDiff -= chunk;
+						}
+						mAudioPosition += chunk;
+					}
+					else
+					{
+						if (mSyncDiff + chunk > 0)
+						{
+							chunk = -mSyncDiff;
+							mSyncDiff = 0;
+						}
+						else
+						{
+							mSyncDiff += chunk;
+						}
+						mAudioPosition -= chunk;
+					}
+				}
+				mTime = mAudioPosition - mSyncOffset;
+			}
 			else
+			{
 				mTime += time_increase;
+			}
 		}
 		else
 		{
