@@ -260,7 +260,11 @@ int InitCpuFlags(void) {
 // __ARM_NEON__ generates code that requires Neon.  NaCL also requires Neon.
 // For Linux, /proc/cpuinfo can be tested but without that assume Neon.
 #if defined(__ARM_NEON__) || defined(__native_client__) || !defined(__linux__)
+#ifdef _ANDROID
+  cpu_info_ = ArmCpuCaps("/proc/cpuinfo"); // libtheoraplayer #ifdef addition, just in case, android gave us troubles
+#else
   cpu_info_ = kCpuHasNEON;
+#endif
 #else
   // Linux arm parse text file for neon detect.
   cpu_info_ = ArmCpuCaps("/proc/cpuinfo");
@@ -270,10 +274,10 @@ int InitCpuFlags(void) {
     cpu_info_ &= ~kCpuHasNEON;
   }
 #ifdef _ANDROID
-  // libtheoraplayer addition to disable NEON support on android devices that don't support it
-  if (android_getCpuFeaturesExt() & ANDROID_CPU_ARM_FEATURE_NEON == 0)
+  // libtheoraplayer addition to disable NEON support on android devices that don't support it, once again, just in case	
+  if ((android_getCpuFeaturesExt() & ANDROID_CPU_ARM_FEATURE_NEON) == 0)
   {
- 	cpu_info_ &= ~kCpuHasNEON;
+ 	cpu_info_ = kCpuHasARM;
   }
 #endif
 #endif  // __arm__
