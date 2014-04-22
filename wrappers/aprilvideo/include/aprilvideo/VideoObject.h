@@ -12,6 +12,7 @@
 #include <hltypes/hstring.h>
 #include <gtypes/Rectangle.h>
 #include <april/aprilUtil.h>
+#include <april/Image.h>
 #include <aprilui/ObjectImageBox.h>
 
 #include "aprilVideoExport.h"
@@ -55,6 +56,7 @@ namespace aprilvideo
 		xal::Player* mAudioPlayer;
 		xal::Sound* mSound;
 		
+		april::Image::Format _getTextureFormat();
 		void destroyResources();
 		void createClip();
 	public:

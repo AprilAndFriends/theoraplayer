@@ -184,28 +184,33 @@ namespace aprilvideo
 		return path;
 	}
 	
+	april::Image::Format VideoObject::_getTextureFormat()
+	{
+		if (mUseAlpha)
+		{
+			return april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBA);
+		}
+		else
+		{
+#ifdef _ANDROID
+			// android has better performance if using rgbx
+			return  april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBX);
+#else
+			return  april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGB);
+#endif
+		}
+	}
+	
 	void VideoObject::createClip()
 	{
 		hstr path = getFullPath();
-		april::Image::Format textureFormat;
+		april::Image::Format textureFormat = _getTextureFormat();
 		destroyResources();
 		
 		try
 		{
 			TheoraOutputMode mode;
-			if (mUseAlpha)
-			{
-				textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBA);
-			}
-			else
-			{
-#ifdef _ANDROID
-				// android has better performance if using rgbx
-				textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBX);
-#else
-				textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGB);
-#endif
-			}
+
 			if (textureFormat == april::Image::FORMAT_RGBA)				mode = TH_RGBA;
 			else if (textureFormat == april::Image::FORMAT_RGBX)		mode = TH_RGBX;
 			else if (textureFormat == april::Image::FORMAT_BGRA)		mode = TH_BGRA;
@@ -354,6 +359,18 @@ namespace aprilvideo
 					}
 					f = mClip->getFrameQueue()->getFirstAvailableFrame();
 					pop = false;
+					if (!f) // didn't decode anything in time, so just upload empty data to avoid having undefined texture data
+					{
+						int w = mTexture->getWidth();
+						int h = mTexture->getHeight();
+						int size = w * h * 4;
+						unsigned char* nulldata = new unsigned char[size];
+						memset(nulldata, 0, size);
+						
+						mTexture->getRenderTexture()->write(0, 0, w, h, 0, 0, nulldata, w, h, _getTextureFormat());
+						
+						delete [] nulldata;
+					}
 				}
 			}
 			if (f)
@@ -363,20 +380,7 @@ namespace aprilvideo
 				r.w = f->getWidth();
 				r.h = f->getHeight();
 				this->image->setSrcRect(r);
-				april::Image::Format textureFormat;
-				if (mUseAlpha)
-				{
-					textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBA);
-				}
-				else
-				{
-#ifdef _ANDROID
-					// android has better performance if using rgbx
-					textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBX);
-#else
-					textureFormat = april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGB);
-#endif
-				}
+				april::Image::Format textureFormat = _getTextureFormat();
 #ifdef _TEXWRITE_BENCHMARK
 				long t = clock();
 				int n = 256;
