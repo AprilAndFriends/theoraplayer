@@ -428,10 +428,11 @@ namespace aprilvideo
 			}
 			mClip->update(k);
 			//mClip->decodedAudioCheck();
-            if (mPrevAlpha != getAlpha())
+			float a = getDerivedAlpha() * getVisibilityFlag();
+            if (mPrevAlpha != a)
             {
-                mPrevAlpha = getAlpha();
-                bool should_pause = mAlphaPauseTreshold == 0 ? !isVisible() : getAlpha() <= mAlphaPauseTreshold;
+                mPrevAlpha = a;
+                bool should_pause = a <= mAlphaPauseTreshold;
                 if (should_pause && !mClip->isPaused()) mClip->pause();
                 else if (!should_pause && mClip->isPaused()) mClip->play();
 			}
