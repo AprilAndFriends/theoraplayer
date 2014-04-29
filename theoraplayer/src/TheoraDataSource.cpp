@@ -83,9 +83,9 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
 	fclose(f);
 }
 
-TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(unsigned char* data, long size)
+TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(unsigned char* data, long size, const std::string& filename)
 {
-	mFilename="memory";
+	mFilename = filename;
 	mData = data;
 	mSize = size;
 	mReadPointer = 0;
