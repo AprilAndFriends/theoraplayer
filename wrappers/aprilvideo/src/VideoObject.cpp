@@ -414,9 +414,9 @@ namespace aprilvideo
 		ImageBox::OnDraw();
 	}
 	
-	void VideoObject::update(float k)
+	void VideoObject::update(float timeDelta)
 	{
-		ImageBox::update(k);
+		ImageBox::update(timeDelta);
 		
 		if (mClip)
 		{
@@ -426,7 +426,7 @@ namespace aprilvideo
 				if (mPrevDoneFlag == 0 && done == 1) triggerEvent("PlaybackDone");
 				mPrevDoneFlag = done;
 			}
-			mClip->update(k);
+			mClip->update(timeDelta);
 			//mClip->decodedAudioCheck();
 			float a = getDerivedAlpha() * getVisibilityFlag();
             if (mPrevAlpha != a)
