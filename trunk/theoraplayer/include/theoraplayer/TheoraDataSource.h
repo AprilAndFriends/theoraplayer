@@ -74,7 +74,7 @@ class TheoraPlayerExport TheoraMemoryFileDataSource : public TheoraDataSource
 	unsigned long mSize, mReadPointer;
 	unsigned char* mData;
 public:
-	TheoraMemoryFileDataSource(unsigned char* data, long size);
+	TheoraMemoryFileDataSource(unsigned char* data, long size, const std::string& filename = "memory");
 	TheoraMemoryFileDataSource(std::string filename);
 	~TheoraMemoryFileDataSource();
 
