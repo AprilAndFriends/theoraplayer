@@ -16,6 +16,7 @@ namespace aprilvideo
 {
 	AudioVideoTimer::AudioVideoTimer(xal::Player* player, float sync_offset) : TheoraTimer()
 	{
+		mPrevTickCount = 0;
 		mSyncOffset = sync_offset;
 		mPrevTimePosition = -1;
 		mAudioPosition = 0;
@@ -30,6 +31,11 @@ namespace aprilvideo
 	{
 		if (!mDisabledAudio)
 		{
+			// use our own time calculation because april's could be tampered with (speedup/slowdown)
+			unsigned int tickCount = get_system_tick_count();
+			if (mPrevTickCount == 0) mPrevTickCount = tickCount;
+			time_increase = (tickCount - mPrevTickCount) / 1000.0f;
+			mPrevTickCount = tickCount;
 			if (mPlayer->isPlaying())
 			{
 				// on some platforms, getTimePosition() isn't accurate enough, so we need to manually update our timer and
