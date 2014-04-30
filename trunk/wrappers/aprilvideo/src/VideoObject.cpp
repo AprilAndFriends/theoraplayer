@@ -138,7 +138,7 @@ namespace aprilvideo
 		{
 			delete mVideoImage;
 			mVideoImage = NULL;
-			this->image = this->dataset->getImage(APRILUI_IMAGE_NAME_NULL);
+			this->image = this->dataset != NULL ? this->dataset->getImage(APRILUI_IMAGE_NAME_NULL) : NULL;
 		}
 		if (mTexture)
 		{
