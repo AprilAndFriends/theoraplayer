@@ -233,10 +233,13 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 	// find out the duration of the file by seeking to the end
 	// having ogg decode pages, extract the granule pos from
 	// the last theora page and seek back to beginning of the file
+	long streamSize = mStream->size(), seekPos;
 	for (int i = 1; i <= 50; ++i)
 	{
 		ogg_sync_reset(&mInfo.OggSyncState);
-		mStream->seek(mStream->size() - 4096 * i);
+		seekPos = streamSize - 4096 * i;
+		if (seekPos < 0) seekPos = 0;
+		mStream->seek(seekPos);
 		
 		char *buffer = ogg_sync_buffer(&mInfo.OggSyncState, 4096 * i);
 		int bytes_read = mStream->read(buffer, 4096 * i);
@@ -258,7 +261,7 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 			else if (mNumFrames > 0)
 				++mNumFrames; // append delta frames at the end to get the exact numbe
 		}
-		if (mNumFrames > 0) break;
+		if (mNumFrames > 0 || streamSize - 4096 * i < 0) break;
 		
 	}
 	if (mNumFrames < 0)
