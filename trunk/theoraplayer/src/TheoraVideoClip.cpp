@@ -45,6 +45,7 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	mStream(0),
 	mThreadAccessCount(0),
 	mPriority(1),
+	mFirstFrameDisplayed(0),
 	mWaitingForCache(false),
 	mOutputMode(TH_UNDEFINED)
 {
@@ -105,12 +106,12 @@ void TheoraVideoClip::restart()
 	mThreadAccessMutex->lock();
 	_restart();
 	mTimer->seek(0);
+	mFirstFrameDisplayed = false;
     resetFrameQueue();
 	mEndOfFile = 0;
 	mRestarted = 0;
 	mSeekFrame = -1;
 	mThreadAccessMutex->unlock();
-
 }
 
 void TheoraVideoClip::update(float time_increase)
@@ -162,8 +163,20 @@ TheoraFrameQueue* TheoraVideoClip::getFrameQueue()
 void TheoraVideoClip::popFrame()
 {
 	++mNumDisplayedFrames;
-	mFrameQueue->pop(); // after transfering frame data to the texture, free the frame
-						// so it can be used again
+	
+    // after transfering frame data to the texture, free the frame
+	// so it can be used again
+	if (!mFirstFrameDisplayed)
+	{
+		mFrameQueue->lock();
+		mFrameQueue->_pop(1);
+		mFirstFrameDisplayed = true;
+		mFrameQueue->unlock();
+	}
+	else
+	{
+		mFrameQueue->pop();
+	}
 }
 
 int TheoraVideoClip::getWidth()
@@ -264,9 +277,9 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
     frame = mFrameQueue->_getFirstAvailableFrame();
     if (frame != NULL)
     {
-        if (frame->mTimeToDisplay + frame->mIteration * mDuration > time)
+        if (frame->mTimeToDisplay + frame->mIteration * mDuration > time && mFirstFrameDisplayed)
         {
-            frame = NULL; // frame is ready but it's not yet time to display it
+            frame = NULL; // frame is ready but it's not yet time to display it, except when we haven't displayed any frames yet
         }
     }
 
@@ -375,6 +388,7 @@ void TheoraVideoClip::stop()
 {
 	pause();
     resetFrameQueue();
+	mFirstFrameDisplayed = false;
 	seek(0);
 }
 
@@ -399,6 +413,7 @@ void TheoraVideoClip::seekToFrame(int frame)
 	else if (frame > mNumFrames) mSeekFrame = mNumFrames;
 	else                         mSeekFrame = frame;
 
+	mFirstFrameDisplayed = false;
 	mEndOfFile = false;
 }
 
