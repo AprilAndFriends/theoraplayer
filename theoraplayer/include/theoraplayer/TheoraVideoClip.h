@@ -92,6 +92,7 @@ protected:
 	float mAudioGain; //! multiplier for audio samples. between 0 and 1
 
 	TheoraOutputMode mOutputMode, mRequestedOutputMode;
+	bool mFirstFrameDisplayed;
 	bool mAutoRestart;
 	bool mEndOfFile, mRestarted;
 	int mIteration, mPlaybackIteration; //! used to ensure smooth playback of looping videos
