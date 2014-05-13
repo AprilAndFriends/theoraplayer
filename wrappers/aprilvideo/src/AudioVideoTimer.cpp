@@ -35,12 +35,18 @@ namespace aprilvideo
 			unsigned int tickCount = get_system_tick_count();
 			if (mPrevTickCount == 0) mPrevTickCount = tickCount;
 			time_increase = (tickCount - mPrevTickCount) / 1000.0f;
+			if (time_increase > 0.1f) time_increase = 0.1f; // prevent long hiccups when defoucsing window
+
 			mPrevTickCount = tickCount;
 			if (mPlayer->isPlaying())
 			{
 				// on some platforms, getTimePosition() isn't accurate enough, so we need to manually update our timer and
 				// use the audio position for syncing
+#if defined(_DEBUG) && 0 // debug testing
 				float timePosition = (int) mPlayer->getTimePosition();
+#else
+				float timePosition = mPlayer->getTimePosition();
+#endif
 				if (timePosition != mPrevTimePosition)
 				{
 					if (timePosition - mPrevTimePosition > 0.1f)
@@ -48,7 +54,9 @@ namespace aprilvideo
 						mSyncDiff = timePosition - mAudioPosition;
 						mSyncDiffFactor = (float) fabs(mSyncDiff);
 						mPrevTimePosition = timePosition;
-						//hlog::writef("aprilvideo_DEBUG", "sync diff: %.3f", mSyncDiff);
+#if defined(_DEBUG) && 0 // debug testing
+						hlog::writef("aprilvideo_DEBUG", "sync diff: %.3f", mSyncDiff);
+#endif
 					}
 					else
 					{
