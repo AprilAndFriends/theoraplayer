@@ -437,6 +437,7 @@ namespace aprilvideo
 			if (!mLoop)
 			{
 				bool done = mClip->isDone();
+				if (done && mAudioPlayer != NULL && mAudioPlayer->isPlaying()) done = false;
 				if (mPrevDoneFlag == 0 && done == 1) triggerEvent("PlaybackDone");
 				mPrevDoneFlag = done;
 			}
