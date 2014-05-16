@@ -184,6 +184,21 @@ namespace aprilvideo
 		return path;
 	}
 	
+	void VideoObject::play()
+	{
+		mClip->play();
+	}
+	
+	void VideoObject::pause()
+	{
+		mClip->pause();
+	}
+	
+	void VideoObject::stop()
+	{
+		mClip->stop();
+	}
+	
 	april::Image::Format VideoObject::_getTextureFormat()
 	{
 		if (mUseAlpha)
@@ -379,7 +394,6 @@ namespace aprilvideo
 				grect r = this->image->getSrcRect();
 				r.w = f->getWidth();
 				r.h = f->getHeight();
-				this->image->setSrcRect(r);
 				april::Image::Format textureFormat = _getTextureFormat();
 #ifdef _TEXWRITE_BENCHMARK
 				long t = clock();

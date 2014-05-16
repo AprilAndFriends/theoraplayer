@@ -36,6 +36,7 @@ namespace aprilvideo
 {
 	class aprilVideoExport VideoObject : public aprilui::ImageBox
 	{
+	protected:
 		bool mPrevDoneFlag;
 		bool mUseAlpha;
 		bool mLoop;
@@ -66,7 +67,9 @@ namespace aprilvideo
 		
 		hstr getFullPath();
 		
-		
+		void play();
+		void pause();
+		void stop();
 		bool isPlaying();
 		bool isPaused();
 		bool isStopped();
