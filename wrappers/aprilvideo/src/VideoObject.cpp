@@ -186,17 +186,26 @@ namespace aprilvideo
 	
 	void VideoObject::play()
 	{
-		mClip->play();
+		if (mClip)
+		{
+			mClip->play();
+		}
 	}
 	
 	void VideoObject::pause()
 	{
-		mClip->pause();
+		if (mClip)
+		{
+			mClip->pause();
+		}
 	}
 	
 	void VideoObject::stop()
 	{
-		mClip->stop();
+		if (mClip)
+		{
+			mClip->stop();
+		}
 	}
 	
 	april::Image::Format VideoObject::_getTextureFormat()
