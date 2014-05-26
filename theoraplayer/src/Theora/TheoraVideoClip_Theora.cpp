@@ -109,9 +109,15 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 	ogg_packet opTheora;
 	ogg_int64_t granulePos;
 	th_ycbcr_buffer buff;
+    int ret, nAttempts;
 	for (;;)
 	{
-		int ret = ogg_stream_packetout(&mInfo.TheoraStreamState, &opTheora);
+        // ogg_stream_packetout can return -1 and the official docs suggest to do subsequent calls until it succeeds
+        // because the data is out of sync. still will limit the number of attempts just in case
+        for (ret = -1, nAttempts = 0; ret < 0 && nAttempts < 100; nAttempts++)
+        {
+            ret = ogg_stream_packetout(&mInfo.TheoraStreamState, &opTheora);
+        }
 		
 		if (ret > 0)
 		{
@@ -552,8 +558,8 @@ void TheoraVideoClip_Theora::doSeek()
 	bool paused = mTimer->isPaused();
 	if (!paused) mTimer->pause(); // pause until seeking is done
 	
-	mEndOfFile = 0;
-	mRestarted = 0;
+	mEndOfFile = false;
+	mRestarted = false;
 	
 	resetFrameQueue();
 	// reset the video decoder.

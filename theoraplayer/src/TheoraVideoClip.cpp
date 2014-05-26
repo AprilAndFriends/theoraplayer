@@ -102,14 +102,14 @@ void TheoraVideoClip::resetFrameQueue()
 
 void TheoraVideoClip::restart()
 {
-	mEndOfFile = 1; //temp, to prevent threads to decode while restarting
+	mEndOfFile = true; //temp, to prevent threads to decode while restarting
 	mThreadAccessMutex->lock();
 	_restart();
 	mTimer->seek(0);
 	mFirstFrameDisplayed = false;
     resetFrameQueue();
-	mEndOfFile = 0;
-	mRestarted = 0;
+	mEndOfFile = false;
+	mRestarted = false;
 	mSeekFrame = -1;
 	mThreadAccessMutex->unlock();
 }

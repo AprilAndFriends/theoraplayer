@@ -227,7 +227,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 		else
 		{
 			unload();
-			mEndOfFile = 1;
+			mEndOfFile = true;
 		}
 		return 0;
 	}
@@ -238,17 +238,17 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 
 void TheoraVideoClip_AVFoundation::_restart()
 {
-	mEndOfFile = 0;
+	mEndOfFile = false;
 	unload();
 	load(mStream);
-	mRestarted = 1;
+	mRestarted = true;
 }
 
 void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 {
 	mStream = source;
 	mFrameNumber = 0;
-	mEndOfFile = 0;
+	mEndOfFile = false;
 	TheoraFileDataSource* fileDataSource = dynamic_cast<TheoraFileDataSource*>(source);
 	std::string filename;
 	if (fileDataSource != NULL) filename = fileDataSource->getFilename();
@@ -434,8 +434,8 @@ void TheoraVideoClip_AVFoundation::doSeek()
 	bool paused = mTimer->isPaused();
 	if (!paused) mTimer->pause(); // pause until seeking is done
 	
-	mEndOfFile = 0;
-	mRestarted = 0;
+	mEndOfFile = false;
+	mRestarted = false;
 	
     resetFrameQueue();
 	unload();
