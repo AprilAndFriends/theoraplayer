@@ -21,6 +21,7 @@ namespace aprilvideo
 		mPrevTimePosition = -1;
 		mAudioPosition = 0;
 		mPlayer = player;
+        mCachedPlayingFlag = mPlayer->isPlaying();
 		mSyncDiff = mSyncDiffFactor = 0;
 		mT = 0;
 		static hstr audiosystem = xal::mgr->getName(); // XAL_AS_DISABLED audio system doesn't sync audio & video
@@ -31,6 +32,7 @@ namespace aprilvideo
 	{
 		if (!mDisabledAudio)
 		{
+            mCachedPlayingFlag = mPlayer->isPlaying();
 			// use our own time calculation because april's could be tampered with (speedup/slowdown)
 			unsigned int tickCount = get_system_tick_count();
 			if (mPrevTickCount == 0) mPrevTickCount = tickCount;
@@ -115,24 +117,36 @@ namespace aprilvideo
 	void AudioVideoTimer::pause()
 	{
 		if (mDisabledAudio) TheoraTimer::pause();
-		else                mPlayer->pause();
+		else if (mPlayer->isPlaying() && !mPlayer->isFadingOut())
+        {
+            mPlayer->pause();
+            mCachedPlayingFlag = false;
+        }
 	}
 	
 	void AudioVideoTimer::play()
 	{
 		if (mDisabledAudio) TheoraTimer::play();
-		else                mPlayer->play();
+        else if (!mPlayer->isPlaying())
+        {
+            mPlayer->play();
+            mCachedPlayingFlag = true;
+        }
 	}
 	
 	bool AudioVideoTimer::isPaused()
 	{
 		if (mDisabledAudio) return TheoraTimer::isPaused();
-		return mPlayer->isPaused();
+		return !mCachedPlayingFlag;
 	}
 	
 	void AudioVideoTimer::stop()
 	{
 		if (mDisabledAudio) TheoraTimer::stop();
-		else                mPlayer->stop();
+		else if (mPlayer->isPlaying() && !mPlayer->isFadingOut())
+        {
+            mPlayer->stop();
+            mCachedPlayingFlag = false;
+        }
 	}
 };
