@@ -276,7 +276,6 @@ namespace aprilvideo
 					// pass the exception further as a hltypes::exception so the general system can uderstand it
 					throw hl_exception(e.getErrorText());
 				}
-				
 			}
 			else
 			{
@@ -358,8 +357,13 @@ namespace aprilvideo
 			mAudioPlayer = xal::mgr->createPlayer(mSound->getName());
 			mTimer = new AudioVideoTimer(mAudioPlayer, mAudioSyncOffset);
 			mClip->setTimer(mTimer);
-
-			mAudioPlayer->play();
+            
+            float alpha = getDerivedAlpha() * getVisibilityFlag();
+            if (alpha > mAlphaPauseTreshold)
+            {
+                mAudioPlayer->play();
+            }
+            mTimer->update(0); // sync playing state
 		}
 		else if (mSpeed != 1.0f) mClip->setPlaybackSpeed(mSpeed);
 		update(0); // to grab the first frame.
@@ -456,9 +460,21 @@ namespace aprilvideo
             if (mPrevAlpha != a)
             {
                 mPrevAlpha = a;
-                bool should_pause = a <= mAlphaPauseTreshold;
-                if (should_pause && !mClip->isPaused()) mClip->pause();
-                else if (!should_pause && mClip->isPaused()) mClip->play();
+                bool should_pause = a <= mAlphaPauseTreshold, paused = mClip->isPaused();
+                if (should_pause && !paused)
+                {
+#ifdef _DEBUG
+                    hlog::debug(logTag, mClip->getName() + ": pause");
+#endif
+                    mClip->pause();
+                }
+                else if (!should_pause && paused)
+                {
+#ifdef _DEBUG
+                    hlog::debug(logTag, mClip->getName() + "play");
+#endif
+                    mClip->play();
+                }
 			}
 		}
 	}
@@ -522,7 +538,14 @@ namespace aprilvideo
         {
             if (value == "playing")
             {
-                if (mClip && mClip->isPaused()) mClip->play();
+                if (mClip && mClip->isPaused())
+                {
+                    float alpha = getDerivedAlpha() * getVisibilityFlag();
+                    if (alpha > mAlphaPauseTreshold) // only allow playback if the alpha conditions are met
+                    {
+                        mClip->play();
+                    }
+                }
             }
             else if (value == "paused")
             {

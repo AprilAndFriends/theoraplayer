@@ -26,6 +26,7 @@ namespace aprilvideo
 		xal::Player* mPlayer;
 		float mT;
 		bool mDisabledAudio;
+        bool mCachedPlayingFlag;
 	public:
 		AudioVideoTimer(xal::Player* player, float sync_offset);
 		void update(float time_increase);
