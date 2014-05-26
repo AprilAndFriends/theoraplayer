@@ -10,6 +10,8 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include <memory.h>
 #include "TheoraDataSource.h"
 #include "TheoraException.h"
+#include "TheoraVideoManager.h"
+#include "TheoraUtil.h"
 
 TheoraDataSource::~TheoraDataSource()
 {
@@ -36,7 +38,12 @@ void TheoraFileDataSource::openFile()
 	if (mFilePtr == NULL)
 	{
 		mFilePtr=fopen(mFilename.c_str(), "rb");
-		if (!mFilePtr) throw TheoraGenericException("Can't open video file: " + mFilename);
+		if (!mFilePtr)
+        {
+            std::string msg = "Can't open video file: " + mFilename;
+            th_writelog(msg);
+            throw TheoraGenericException(msg);
+        }
 		fseek(mFilePtr, 0, SEEK_END);
 		mSize = ftell(mFilePtr);
 		fseek(mFilePtr, 0, SEEK_SET);
