@@ -116,7 +116,11 @@ void TheoraVideoClip::restart()
 
 void TheoraVideoClip::update(float time_increase)
 {
-	if (mTimer->isPaused()) return;
+	if (mTimer->isPaused())
+	{
+		mTimer->update(0); // update timer in case there is some code that needs to execute each frame
+		return;
+	}
 	float time = mTimer->getTime(), speed = mTimer->getSpeed();
     if (time + time_increase * speed >= mDuration)
     {
