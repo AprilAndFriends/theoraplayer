@@ -117,12 +117,14 @@
     <ClInclude Include="include\aprilvideo\AudioVideoTimer.h" />
     <ClInclude Include="include\aprilvideo\DataSource.h" />
     <ClInclude Include="include\aprilvideo\VideoObject.h" />
+    <ClInclude Include="include\aprilvideo\VideoTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\aprilvideo.cpp" />
     <ClCompile Include="src\AudioVideoTimer.cpp" />
     <ClCompile Include="src\DataSource.cpp" />
     <ClCompile Include="src\VideoObject.cpp" />
+    <ClCompile Include="src\VideoTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aprilui\libaprilui.vcxproj">

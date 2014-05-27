@@ -23,6 +23,10 @@
 		D135539E1729630400583915 /* DataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = D135539D1729630400583915 /* DataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D198F9D7177A32C3002942E3 /* aprilvideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1307D7E15FC9DC00055BB26 /* aprilvideo.cpp */; };
 		D198F9D8177A32C3002942E3 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D135539A172962F000583915 /* DataSource.cpp */; };
+		D1B4EF9C1934AC430095048A /* VideoTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = D1B4EF9B1934AC430095048A /* VideoTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1B4EF9E1934AC4A0095048A /* VideoTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B4EF9D1934AC4A0095048A /* VideoTimer.cpp */; };
+		D1B4EF9F1934AC4A0095048A /* VideoTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B4EF9D1934AC4A0095048A /* VideoTimer.cpp */; };
+		D1B4EFA01934AC4A0095048A /* VideoTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B4EF9D1934AC4A0095048A /* VideoTimer.cpp */; };
 		D1B822E6185860CE000BC51F /* AudioVideoTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = D1B822E4185860CE000BC51F /* AudioVideoTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D1B822E7185860CE000BC51F /* VideoObject.h in Headers */ = {isa = PBXBuildFile; fileRef = D1B822E5185860CE000BC51F /* VideoObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D1B822EA185860F0000BC51F /* AudioVideoTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B822E8185860F0000BC51F /* AudioVideoTimer.cpp */; };
@@ -51,6 +55,8 @@
 		D1358BC818D777E800A36FDC /* Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Mac.xcconfig; path = xcconfig/Mac.xcconfig; sourceTree = "<group>"; };
 		D1473F2A150CA69B00B20490 /* aprilvideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = aprilvideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D198F9DF177A32C3002942E3 /* libaprilvideo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libaprilvideo.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1B4EF9B1934AC430095048A /* VideoTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoTimer.h; path = include/aprilvideo/VideoTimer.h; sourceTree = "<group>"; };
+		D1B4EF9D1934AC4A0095048A /* VideoTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VideoTimer.cpp; path = src/VideoTimer.cpp; sourceTree = "<group>"; };
 		D1B822E4185860CE000BC51F /* AudioVideoTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioVideoTimer.h; path = include/aprilvideo/AudioVideoTimer.h; sourceTree = "<group>"; };
 		D1B822E5185860CE000BC51F /* VideoObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoObject.h; path = include/aprilvideo/VideoObject.h; sourceTree = "<group>"; };
 		D1B822E8185860F0000BC51F /* AudioVideoTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioVideoTimer.cpp; path = src/AudioVideoTimer.cpp; sourceTree = "<group>"; };
@@ -121,6 +127,7 @@
 				D1307D7E15FC9DC00055BB26 /* aprilvideo.cpp */,
 				D135539A172962F000583915 /* DataSource.cpp */,
 				D1B822E8185860F0000BC51F /* AudioVideoTimer.cpp */,
+				D1B4EF9D1934AC4A0095048A /* VideoTimer.cpp */,
 				D1B822E9185860F0000BC51F /* VideoObject.cpp */,
 			);
 			name = src;
@@ -146,6 +153,7 @@
 				D1307D8015FC9DC90055BB26 /* aprilvideo.h */,
 				D1307D8615FCA0560055BB26 /* aprilvideoExport.h */,
 				D135539D1729630400583915 /* DataSource.h */,
+				D1B4EF9B1934AC430095048A /* VideoTimer.h */,
 				D1B822E4185860CE000BC51F /* AudioVideoTimer.h */,
 				D1B822E5185860CE000BC51F /* VideoObject.h */,
 			);
@@ -161,6 +169,7 @@
 			files = (
 				D1307D8115FC9DC90055BB26 /* aprilvideo.h in Headers */,
 				D1B822E7185860CE000BC51F /* VideoObject.h in Headers */,
+				D1B4EF9C1934AC430095048A /* VideoTimer.h in Headers */,
 				D1B822E6185860CE000BC51F /* AudioVideoTimer.h in Headers */,
 				D135539E1729630400583915 /* DataSource.h in Headers */,
 				D1307D8715FCA0560055BB26 /* aprilvideoExport.h in Headers */,
@@ -249,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B4EF9E1934AC4A0095048A /* VideoTimer.cpp in Sources */,
 				D1B822EA185860F0000BC51F /* AudioVideoTimer.cpp in Sources */,
 				D1307D7F15FC9DC00055BB26 /* aprilvideo.cpp in Sources */,
 				D1B822ED185860F0000BC51F /* VideoObject.cpp in Sources */,
@@ -260,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B4EFA01934AC4A0095048A /* VideoTimer.cpp in Sources */,
 				D1B822EC185860F0000BC51F /* AudioVideoTimer.cpp in Sources */,
 				D198F9D7177A32C3002942E3 /* aprilvideo.cpp in Sources */,
 				D1B822EF185860F0000BC51F /* VideoObject.cpp in Sources */,
@@ -271,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B4EF9F1934AC4A0095048A /* VideoTimer.cpp in Sources */,
 				D1B822EB185860F0000BC51F /* AudioVideoTimer.cpp in Sources */,
 				D1307D8215FC9ECF0055BB26 /* aprilvideo.cpp in Sources */,
 				D1B822EE185860F0000BC51F /* VideoObject.cpp in Sources */,
