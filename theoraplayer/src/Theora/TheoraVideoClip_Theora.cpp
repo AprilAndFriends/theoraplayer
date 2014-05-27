@@ -8,6 +8,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
 #ifdef __THEORA
 #include <memory.h>
+#include <algorithm>
 #include "TheoraVideoManager.h"
 #include "TheoraFrameQueue.h"
 #include "TheoraVideoFrame.h"
