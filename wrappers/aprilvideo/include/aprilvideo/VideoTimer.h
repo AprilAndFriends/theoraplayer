@@ -6,10 +6,10 @@
  This program is free software; you can redistribute it and/or modify it under
  the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
  *************************************************************************************/
-#ifndef APRILVIDEO_AVTIMER_H
-#define APRILVIDEO_AVTIMER_H
+#ifndef APRILVIDEO_TIMER_H
+#define APRILVIDEO_TIMER_H
 
-#include "VideoTimer.h"
+#include <theoraplayer/TheoraTimer.h>
 
 namespace xal
 {
@@ -20,17 +20,12 @@ namespace aprilvideo
 {
 	class VideoObject;
 	
-	class AudioVideoTimer : public VideoTimer
+	class VideoTimer : public TheoraTimer
 	{
-		unsigned int mPrevTickCount;
-		float mSyncOffset, mPrevTimePosition, mAudioPosition;
-		float mSyncDiff, mSyncDiffFactor;
-		xal::Player* mPlayer;
-		float mT;
-		bool mDisabledAudio;
+		VideoObject* mObject;
 	public:
-		AudioVideoTimer(VideoObject* object, xal::Player* player, float sync_offset);
-		void update(float time_increase);
+		VideoTimer(VideoObject* object);
+		bool isPaused();
 	};
 }
 #endif

@@ -11,33 +11,45 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include <xal/xal.h>
 #include "AudioVideoTimer.h"
 #include <hltypes/hlog.h>
+#include "VideoObject.h"
 
 namespace aprilvideo
 {
-	AudioVideoTimer::AudioVideoTimer(xal::Player* player, float sync_offset) : TheoraTimer()
+	AudioVideoTimer::AudioVideoTimer(VideoObject* object, xal::Player* player, float sync_offset) : VideoTimer(object)
 	{
 		mPrevTickCount = 0;
 		mSyncOffset = sync_offset;
 		mPrevTimePosition = -1;
 		mAudioPosition = 0;
 		mPlayer = player;
-        mCachedPlayingFlag = mPlayer->isPlaying();
 		mSyncDiff = mSyncDiffFactor = 0;
 		mT = 0;
 		static hstr audiosystem = xal::mgr->getName(); // XAL_AS_DISABLED audio system doesn't sync audio & video
 		mDisabledAudio = (audiosystem == XAL_AS_DISABLED);
 	}
-
+	
 	void AudioVideoTimer::update(float time_increase)
 	{
+		VideoTimer::update(time_increase);
 		if (!mDisabledAudio)
 		{
-            mCachedPlayingFlag = mPlayer->isPlaying();
+			bool paused = isPaused(), playerPaused = mPlayer->isPaused();
 			// use our own time calculation because april's could be tampered with (speedup/slowdown)
 			unsigned int tickCount = get_system_tick_count();
 			if (mPrevTickCount == 0) mPrevTickCount = tickCount;
 			time_increase = (tickCount - mPrevTickCount) / 1000.0f;
-			if (time_increase > 0.1f) time_increase = 0.1f; // prevent long hiccups when defoucsing window
+			if (paused) time_increase = 0;
+			
+			if (paused && !playerPaused && !mPlayer->isFadingOut())
+			{
+				mPlayer->pause();
+			}
+			else if (!paused && playerPaused)
+			{
+				mPlayer->play();
+			}
+			
+			else if (time_increase > 0.1f) time_increase = 0.1f; // prevent long hiccups when defoucsing window
 
 			mPrevTickCount = tickCount;
 			if (mPlayer->isPlaying())
@@ -112,41 +124,5 @@ namespace aprilvideo
 			mT += time_increase;
 			mTime = mT - mSyncOffset;
 		}
-	}
-	
-	void AudioVideoTimer::pause()
-	{
-		if (mDisabledAudio) TheoraTimer::pause();
-		else if (mPlayer->isPlaying() && !mPlayer->isFadingOut())
-        {
-            mPlayer->pause();
-            mCachedPlayingFlag = false;
-        }
-	}
-	
-	void AudioVideoTimer::play()
-	{
-		if (mDisabledAudio) TheoraTimer::play();
-        else if (!mPlayer->isPlaying())
-        {
-            mPlayer->play();
-            mCachedPlayingFlag = true;
-        }
-	}
-	
-	bool AudioVideoTimer::isPaused()
-	{
-		if (mDisabledAudio) return TheoraTimer::isPaused();
-		return !mCachedPlayingFlag;
-	}
-	
-	void AudioVideoTimer::stop()
-	{
-		if (mDisabledAudio) TheoraTimer::stop();
-		else if (mPlayer->isPlaying() && !mPlayer->isFadingOut())
-        {
-            mPlayer->stop();
-            mCachedPlayingFlag = false;
-        }
 	}
 };

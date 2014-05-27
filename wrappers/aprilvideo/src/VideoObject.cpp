@@ -97,12 +97,14 @@ namespace aprilvideo
 	
 	bool VideoObject::isPlaying()
 	{
-		return (mClip != NULL && !mClip->isPaused() && !mClip->isDone());
+		return (mClip != NULL && !isPaused() && !mClip->isDone());
 	}
 	
 	bool VideoObject::isPaused()
 	{
-		return (mClip != NULL && mClip->isPaused());
+		if  (mClip == NULL) return true;
+		int alpha = getDerivedAlpha() * getVisibilityFlag();
+		return alpha < mAlphaPauseTreshold;
 	}
 	
 	bool VideoObject::isStopped()
@@ -355,17 +357,12 @@ namespace aprilvideo
 			mSound = xal::mgr->createSound(this->dataset->getFilePath() + "/video/" + mAudioName, category);
 
 			mAudioPlayer = xal::mgr->createPlayer(mSound->getName());
-			mTimer = new AudioVideoTimer(mAudioPlayer, mAudioSyncOffset);
-			mClip->setTimer(mTimer);
-            
-            float alpha = getDerivedAlpha() * getVisibilityFlag();
-            if (alpha > mAlphaPauseTreshold)
-            {
-                mAudioPlayer->play();
-            }
-            mTimer->update(0); // sync playing state
+			mAudioPlayer->pause();
+			mTimer = new AudioVideoTimer(this, mAudioPlayer, mAudioSyncOffset);
 		}
 		else if (mSpeed != 1.0f) mClip->setPlaybackSpeed(mSpeed);
+		if (mTimer == NULL) mTimer = new VideoTimer(this);
+		mClip->setTimer(mTimer);
 		update(0); // to grab the first frame.
 	}
 	
@@ -444,7 +441,6 @@ namespace aprilvideo
 	void VideoObject::update(float timeDelta)
 	{
 		ImageBox::update(timeDelta);
-		
 		if (mClip)
 		{
 			if (!mLoop)
@@ -455,27 +451,6 @@ namespace aprilvideo
 				mPrevDoneFlag = done;
 			}
 			mClip->update(timeDelta);
-			//mClip->decodedAudioCheck();
-			float a = getDerivedAlpha() * getVisibilityFlag();
-            if (mPrevAlpha != a)
-            {
-                mPrevAlpha = a;
-                bool should_pause = a <= mAlphaPauseTreshold, paused = mClip->isPaused();
-                if (should_pause && !paused)
-                {
-#ifdef _DEBUG
-                    hlog::debug(logTag, mClip->getName() + ": pause");
-#endif
-                    mClip->pause();
-                }
-                else if (!should_pause && paused)
-                {
-#ifdef _DEBUG
-                    hlog::debug(logTag, mClip->getName() + "play");
-#endif
-                    mClip->play();
-                }
-			}
 		}
 	}
 	
@@ -540,11 +515,7 @@ namespace aprilvideo
             {
                 if (mClip && mClip->isPaused())
                 {
-                    float alpha = getDerivedAlpha() * getVisibilityFlag();
-                    if (alpha > mAlphaPauseTreshold) // only allow playback if the alpha conditions are met
-                    {
-                        mClip->play();
-                    }
+					mClip->play();
                 }
             }
             else if (value == "paused")
