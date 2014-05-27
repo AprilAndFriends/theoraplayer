@@ -22,8 +22,10 @@ TheoraTimer::~TheoraTimer()
 
 void TheoraTimer::update(float time_increase)
 {
-	if (!mPaused)
+	if (!isPaused())
+	{
 		mTime += time_increase * mSpeed;
+	}
 }
 
 float TheoraTimer::getTime()
