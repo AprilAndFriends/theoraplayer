@@ -114,7 +114,7 @@ namespace aprilvideo
 				}
 				mTime = mAudioPosition - mSyncOffset;
 			}
-			else
+			else if (!xal::mgr->isSuspended())
 			{
 				mTime += time_increase;
 			}
