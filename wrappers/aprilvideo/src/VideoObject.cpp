@@ -360,7 +360,7 @@ namespace aprilvideo
 			mAudioPlayer->pause();
 			mTimer = new AudioVideoTimer(this, mAudioPlayer, mAudioSyncOffset);
 		}
-		else if (mSpeed != 1.0f) mClip->setPlaybackSpeed(mSpeed);
+		mClip->setPlaybackSpeed(mSpeed);
 		if (mTimer == NULL) mTimer = new VideoTimer(this);
 		mClip->setTimer(mTimer);
 		update(0); // to grab the first frame.
@@ -443,6 +443,16 @@ namespace aprilvideo
 		ImageBox::update(timeDelta);
 		if (mClip)
 		{
+            if (mAudioPlayer)
+            {
+                float pitch = mAudioPlayer->getPitch();
+                float desiredPitch = mSpeed;
+                if (pitch != desiredPitch)
+                {
+                    mAudioPlayer->setPitch(desiredPitch);
+                }
+            }
+
 			if (!mLoop)
 			{
 				bool done = mClip->isDone();
@@ -459,7 +469,7 @@ namespace aprilvideo
 		mAlphaPauseTreshold = hclamp(treshold, 0, 255);
 	}
 	
-	bool VideoObject::setProperty(chstr name,chstr value)
+	bool VideoObject::setProperty(chstr name, chstr value)
 	{
 		if      (name == "video")
 		{
@@ -470,7 +480,11 @@ namespace aprilvideo
 		else if (name == "video_alpha") mUseAlpha = value;
 		else if (name == "alpha_pause_treshold") setAlphaTreshold(value);
 		else if (name == "loop")  mLoop = value;
-		else if (name == "speed") mSpeed = value;
+		else if (name == "speed")
+        {
+            mSpeed = value;
+            if (mClip) mClip->setPlaybackSpeed(mSpeed);
+        }
 		else if (name == "time")
 		{
 			if (!mClip && mClipName != "") update(0); // try to create the clip if it hasn't been created already
