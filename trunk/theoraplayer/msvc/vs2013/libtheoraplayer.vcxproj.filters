@@ -335,4 +335,7 @@
       <Filter>src\YUV\libyuv\src</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\fileproperties.rc" />
+  </ItemGroup>
 </Project>
