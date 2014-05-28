@@ -239,5 +239,10 @@
     <None Include="..\..\src\AVFoundation\TheoraVideoClip_AVFoundation.h" />
     <ClInclude Include="..\..\src\Theora\TheoraVideoClip_Theora.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\fileproperties.rc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86' or '$(ConfigurationType)'=='StaticLibrary'">true</ExcludedFromBuild>
+    </ResourceCompile>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>
