@@ -103,10 +103,17 @@ namespace aprilvideo
 	bool VideoObject::isPaused()
 	{
 		if  (mClip == NULL) return true;
-		int alpha = getDerivedAlpha() * getVisibilityFlag();
-		return alpha < mAlphaPauseTreshold;
+		if (mAlphaPauseTreshold == 0)
+		{
+			return !isVisible();
+		}
+		else
+		{
+			int alpha = getDerivedAlpha() * getVisibilityFlag();
+			return alpha < mAlphaPauseTreshold;
+		}
 	}
-	
+
 	bool VideoObject::isStopped()
 	{
 		return (mClip == NULL || mClip->isDone());
@@ -360,9 +367,9 @@ namespace aprilvideo
 			mAudioPlayer->pause();
 			mTimer = new AudioVideoTimer(this, mAudioPlayer, mAudioSyncOffset);
 		}
-		mClip->setPlaybackSpeed(mSpeed);
 		if (mTimer == NULL) mTimer = new VideoTimer(this);
 		mClip->setTimer(mTimer);
+		mClip->setPlaybackSpeed(mSpeed);
 		update(0); // to grab the first frame.
 	}
 	
@@ -499,6 +506,10 @@ namespace aprilvideo
 		else if (name == "audio")
 		{
 			mAudioName = value;
+		}
+		else if (name == "alpha")
+		{
+			aprilui::ImageBox::setProperty(name, value);
 		}
 		else if (name == "sync_offset")
 		{
