@@ -270,7 +270,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;..\..\..\lib\arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_ANDROID;_DEBUG;DEBUG;OC_ARM_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
       <Warnings>DisableAllWarnings</Warnings>
@@ -283,7 +283,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android-x86'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;..\..\..\lib\arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_ANDROID;_DEBUG;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
       <Warnings>DisableAllWarnings</Warnings>
@@ -296,7 +296,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;..\..\..\lib\arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_ANDROID;NDEBUG;OC_ARM_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
       <Warnings>DisableAllWarnings</Warnings>
@@ -309,7 +309,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android-x86'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;..\..\..\lib\arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_ANDROID;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
       <Warnings>DisableAllWarnings</Warnings>
@@ -430,7 +430,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugS|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;..\..\..\lib\arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_ANDROID;_DEBUG;DEBUG;OC_ARM_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
       <Warnings>DisableAllWarnings</Warnings>
@@ -439,7 +439,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugS|Android-x86'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;..\..\..\lib\arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_ANDROID;_DEBUG;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
       <Warnings>DisableAllWarnings</Warnings>
@@ -448,7 +448,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;..\..\..\lib\arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_ANDROID;NDEBUG;OC_ARM_ASM;OC_ARM_ASM_EDSP;OC_ARM_ASM_MEDIA;OC_ARM_ASM_NEON;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
       <Warnings>DisableAllWarnings</Warnings>
@@ -457,7 +457,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Android-x86'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;..\..\..\lib\arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_ANDROID;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
       <Warnings>DisableAllWarnings</Warnings>
