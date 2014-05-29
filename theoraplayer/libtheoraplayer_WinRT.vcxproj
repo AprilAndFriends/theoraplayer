@@ -242,7 +242,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../xal/lib/ogg/include;../vorbis/include;../xal/lib/vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>__native_client__;_WINRT;_WIN32;_DEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -263,7 +263,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../xal/lib/ogg/include;../vorbis/include;../xal/lib/vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>__native_client__;_WINRT;_WINARM;ARM;_DEBUG;__THEORA;_YUV_LIBYUV;THEORAVIDEO_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -285,7 +285,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../xal/lib/ogg/include;../vorbis/include;../xal/lib/vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>__native_client__;_WINRT;_WIN32;NDEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -309,7 +309,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../xal/lib/ogg/include;../vorbis/include;../xal/lib/vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>__native_client__;_WINRT;_WINARM;ARM;NDEBUG;__THEORA;_YUV_LIBYUV;THEORAVIDEO_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -333,7 +333,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugP8|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../xal/lib/ogg/include;../vorbis/include;../xal/lib/vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>__native_client__;_WINRT;_WINP8;_WIN32;_DEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -356,7 +356,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugP8|ARM'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../xal/lib/ogg/include;../vorbis/include;../xal/lib/vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>__native_client__;_WINRT;_WINP8;_WINARM;ARM;_DEBUG;__THEORA;_YUV_LIBYUV;THEORAVIDEO_EXPORTS;_CRT_SECURE_NO_WARNINGS;PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -380,7 +380,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../xal/lib/ogg/include;../vorbis/include;../xal/lib/vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>__native_client__;_WINRT;_WINP8;_WIN32;NDEBUG;__THEORA;_YUV_LIBYUV;__SSSE3__;THEORAVIDEO_EXPORTS; _CRT_SECURE_NO_WARNINGS;PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -406,7 +406,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;include/theoraplayer;../ogg/include;../xal/lib/ogg/include;../vorbis/include;../xal/lib/vorbis/include;../theora/include;src;src/Theora;src/YUV;src/YUV/C;src/YUV/libyuv;src/YUV/libyuv/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>__native_client__;_WINRT;_WINP8;_WINARM;ARM;NDEBUG;__THEORA;_YUV_LIBYUV;THEORAVIDEO_EXPORTS;_CRT_SECURE_NO_WARNINGS;PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

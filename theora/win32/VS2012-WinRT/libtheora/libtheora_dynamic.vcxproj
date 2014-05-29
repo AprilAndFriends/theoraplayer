@@ -112,7 +112,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_BIND_TO_CURRENT_CRT_VERSION;_WINRT;WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBTHEORA_EXPORTS;DEBUG;OC_X86_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>StackFrameRuntimeCheck</BasicRuntimeChecks>
@@ -139,7 +139,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_BIND_TO_CURRENT_CRT_VERSION;_WINRT;WINARM;ARM;_DEBUG;_WINDOWS;_USRDLL;LIBTHEORA_EXPORTS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>StackFrameRuntimeCheck</BasicRuntimeChecks>
@@ -169,7 +169,7 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_BIND_TO_CURRENT_CRT_VERSION;_WINRT;WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBTHEORA_EXPORTS;OC_X86_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
@@ -199,7 +199,7 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_BIND_TO_CURRENT_CRT_VERSION;_WINRT;WINARM;ARM;NDEBUG;_WINDOWS;_USRDLL;LIBTHEORA_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
@@ -227,7 +227,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugP8|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_BIND_TO_CURRENT_CRT_VERSION;_WINRT;WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBTHEORA_EXPORTS;DEBUG;OC_X86_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>StackFrameRuntimeCheck</BasicRuntimeChecks>
@@ -254,7 +254,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugP8|ARM'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_BIND_TO_CURRENT_CRT_VERSION;_WINRT;_WINP8;WINARM;ARM;_DEBUG;_WINDOWS;_USRDLL;LIBTHEORA_EXPORTS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>StackFrameRuntimeCheck</BasicRuntimeChecks>
@@ -284,7 +284,7 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_BIND_TO_CURRENT_CRT_VERSION;_WINRT;WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBTHEORA_EXPORTS;OC_X86_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
@@ -314,7 +314,7 @@
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\lib;..\..\..\..\ogg\include;..\..\..\..\xal\lib\ogg\include;..\..\..\..\..\..\..\core\ogg\libogg\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>PSAPI_VERSION=2;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_BIND_TO_CURRENT_CRT_VERSION;_WINRT;_WINP8;WINARM;ARM;NDEBUG;_WINDOWS;_USRDLL;LIBTHEORA_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
