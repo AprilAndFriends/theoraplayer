@@ -1891,6 +1891,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../ogg/include",
 					"$(SRCROOT)/../vorbis/include",
+					"$(SRCROOT)/../xal/lib/ogg/include",
+					"$(SRCROOT)/../xal/lib/vorbis/include",
 					"$(SRCROOT)/../theora/include",
 					"$(SRCROOT)/src/YUV/libyuv/include",
 				);
@@ -1953,6 +1955,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../ogg/include",
 					"$(SRCROOT)/../vorbis/include",
+					"$(SRCROOT)/../xal/lib/ogg/include",
+					"$(SRCROOT)/../xal/lib/vorbis/include",
 					"$(SRCROOT)/../theora/include",
 					"$(SRCROOT)/src/YUV/libyuv/include",
 				);
@@ -2014,6 +2018,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../ogg/include",
 					"$(SRCROOT)/../vorbis/include",
+					"$(SRCROOT)/../xal/lib/ogg/include",
+					"$(SRCROOT)/../xal/lib/vorbis/include",
 					"$(SRCROOT)/../theora/include",
 					"$(SRCROOT)/src/YUV/libyuv/include",
 				);
