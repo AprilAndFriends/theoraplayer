@@ -26,6 +26,9 @@
     <ClInclude Include="include\aprilvideo\VideoObject.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\aprilvideo\VideoTimer.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\aprilvideo.cpp">
@@ -38,6 +41,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\VideoObject.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VideoTimer.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
