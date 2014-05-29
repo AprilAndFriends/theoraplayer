@@ -555,14 +555,21 @@ namespace aprilvideo
 	
 	hstr VideoObject::getProperty(chstr name, bool* property_exists)
 	{
-		*property_exists = true;
+		if (property_exists) *property_exists = true;
 		if      (name == "video") return mClipName;
 		else if (name == "video_alpha") return mUseAlpha ? "1" : "0";
 		else if (name == "alpha_pause_treshold") return mAlphaPauseTreshold;
 		else if (name == "loop")  return mLoop ? "1" : "0";
 		else if (name == "speed") return mSpeed;
 		else if (name == "time") return this->getTimePosition();
-		else if (name == "duration") return mClip ? hstr(mClip->getDuration()) : hstr(0);
+		else if (name == "duration")
+		{
+			if (mClip == NULL && mClipName != "")
+			{
+				createClip();
+			}
+			return mClip ? hstr(mClip->getDuration()) : hstr(0);
+		}
 		else if (name == "audio")  return mAudioName;
 		else if (name == "sync_offset")  return mAudioSyncOffset;
         else if (name == "blend_mode")
@@ -589,7 +596,7 @@ namespace aprilvideo
 			if (this->isStopped()) return "stopped";
 			return "unknown";
         }
-		*property_exists = false;
+		if (property_exists) *property_exists = false;
 		return ImageBox::getProperty(name, property_exists);
 	}
 }
