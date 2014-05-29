@@ -15,9 +15,9 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <StringPooling>true</StringPooling>
-      <CompileAs>CompileAsC</CompileAs>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>../../lib/theora.def</ModuleDefinitionFile>
