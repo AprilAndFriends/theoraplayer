@@ -40,9 +40,6 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">
-    <ClCompile>
-      <AdditionalOptions>-fpermissive %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
     <Link>
       <AdditionalDependencies>-logg;-ltremor;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>

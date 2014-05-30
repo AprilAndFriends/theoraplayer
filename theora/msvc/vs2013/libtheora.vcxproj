@@ -158,7 +158,9 @@
     <ClCompile Include="..\..\lib\x86_vc\mmxfrag.c" />
     <ClCompile Include="..\..\lib\x86_vc\mmxidct.c" />
     <ClCompile Include="..\..\lib\x86_vc\mmxstate.c" />
-    <ClCompile Include="..\..\lib\x86_vc\x86state.c" />
+    <ClCompile Include="..\..\lib\x86_vc\x86state.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\lib\arm\armbits.asm">
