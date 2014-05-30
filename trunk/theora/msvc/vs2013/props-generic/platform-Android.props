@@ -14,6 +14,7 @@
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories>..\..\lib\lib\android;..\..\lib\android;..\..\..\lib\android;..\..\..\..\lib\android;..\..\lib\lib\android\armeabi;..\..\lib\android\armeabi;..\..\..\lib\android\armeabi;..\..\..\..\lib\android\armeabi;..\..\lib\lib\android\armeabi-v7a;..\..\lib\android\armeabi-v7a;..\..\..\lib\android\armeabi-v7a;..\..\..\..\lib\android\armeabi-v7a;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AndroidSystemLibs>c;m;log;gcc;dl;z;GLESv1_CM;%(AndroidSystemLibs)</AndroidSystemLibs>
     </Link>
     <Lib>
