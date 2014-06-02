@@ -3,19 +3,20 @@
   <PropertyGroup Label="Configuration">
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v120</PlatformToolset>
+    <WindowsAppContainer>true</WindowsAppContainer>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <PreprocessorDefinitions Condition="'$(PlatformToolset)'=='v120_wp80'">_WINP8;WINP8;PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions>_WINRT;WINRT;_WIN32;WIN32;_X64;X64;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(PlatformToolset)'=='v120_wp81'">_WINP8;WINP8;PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINRT;WINRT;_WIN32;WIN32;_X86;X86;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../..;../../src;../../../include;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalUsingDirectories Condition="'$(PlatformToolset)'=='v120_wp80'">$(VSInstallDir)vcpackages;$(WindowsSDK_MetadataPath);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories Condition="'$(PlatformToolset)'=='v120_wp81'">$(VSInstallDir)vcpackages;$(WindowsSDK_MetadataPath);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories>..\..\lib\lib\msvc120-winrt\$(Platform);..\..\lib\msvc120-winrt\$(Platform);..\..\..\lib\msvc120-winrt\$(Platform);..\..\..\..\lib\msvc120-winrt\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <TargetMachine>MachineX64</TargetMachine>
+      <TargetMachine>MachineX86</TargetMachine>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>true</CompileAsWinRT>
     </Link>
@@ -23,12 +24,12 @@
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories>..\..\lib\lib\msvc120-winrt\$(Platform);..\..\lib\msvc120-winrt\$(Platform);..\..\..\lib\msvc120-winrt\$(Platform);..\..\..\..\lib\msvc120-winrt\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <TargetMachine>MachineX64</TargetMachine>
+      <TargetMachine>MachineX86</TargetMachine>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <CompileAsWinRT>true</CompileAsWinRT>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemGroup Condition="'$(PlatformToolset)'=='v120_wp80'">
+  <ItemGroup Condition="'$(PlatformToolset)'=='v120_wp81'">
     <Reference Include="platform.winmd">
       <IsWinMDFile>true</IsWinMDFile>
       <Private>false</Private>
