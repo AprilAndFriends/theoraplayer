@@ -70,7 +70,7 @@ public:
 	TheoraVideoClip* createVideoClip(std::string filename,TheoraOutputMode output_mode=TH_RGB,int numPrecachedOverride=0,bool usePower2Stride=0);
 	TheoraVideoClip* createVideoClip(TheoraDataSource* data_source,TheoraOutputMode output_mode=TH_RGB,int numPrecachedOverride=0,bool usePower2Stride=0);
 
-	void update(float time_increase);
+	void update(float timeDelta);
 
 	void destroyVideoClip(TheoraVideoClip* clip);
 
