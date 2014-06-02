@@ -114,7 +114,7 @@ void TheoraVideoClip::restart()
 	mThreadAccessMutex->unlock();
 }
 
-void TheoraVideoClip::update(float time_increase)
+void TheoraVideoClip::update(float timeDelta)
 {
 	if (mTimer->isPaused())
 	{
@@ -122,11 +122,11 @@ void TheoraVideoClip::update(float time_increase)
 		return;
 	}
 	float time = mTimer->getTime(), speed = mTimer->getSpeed();
-    if (time + time_increase * speed >= mDuration)
+    if (time + timeDelta * speed >= mDuration)
     {
         if (mAutoRestart && mRestarted)
         {
-            float seekTime = time + time_increase * speed;
+            float seekTime = time + timeDelta * speed;
             for (;seekTime >= mDuration;)
             {
                 seekTime -= mDuration;
@@ -145,7 +145,7 @@ void TheoraVideoClip::update(float time_increase)
     }
     else
     {
-        mTimer->update(time_increase);
+        mTimer->update(timeDelta);
     }
 }
 

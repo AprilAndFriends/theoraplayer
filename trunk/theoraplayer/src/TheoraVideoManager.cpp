@@ -391,17 +391,17 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 	return selectedClip;
 }
 
-void TheoraVideoManager::update(float time_increase)
+void TheoraVideoManager::update(float timeDelta)
 {
 	mWorkMutex->lock();
 	foreach (TheoraVideoClip*, mClips)
 	{
-		(*it)->update(time_increase);
+		(*it)->update(timeDelta);
 		(*it)->decodedAudioCheck();
 	}
 	mWorkMutex->unlock();
 #ifdef _SCHEDULING_DEBUG
-	gThreadDiagnosticTimer += time_increase;
+	gThreadDiagnosticTimer += timeDelta;
 #endif
 }
 

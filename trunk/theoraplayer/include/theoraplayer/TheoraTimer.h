@@ -38,7 +38,7 @@ public:
 
 		NOTE: this is called by TheoraVideoManager from the main thread
 	 */
-	virtual void update(float time_increase);
+	virtual void update(float timeDelta);
 
 	virtual void pause();
 	virtual void play();

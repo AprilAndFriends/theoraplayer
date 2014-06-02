@@ -20,11 +20,11 @@ TheoraTimer::~TheoraTimer()
 
 }
 
-void TheoraTimer::update(float time_increase)
+void TheoraTimer::update(float timeDelta)
 {
 	if (!isPaused())
 	{
-		mTime += time_increase * mSpeed;
+		mTime += timeDelta * mSpeed;
 	}
 }
 

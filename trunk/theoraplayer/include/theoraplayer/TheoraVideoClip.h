@@ -178,7 +178,7 @@ public:
 	virtual bool decodeNextFrame() = 0;
 
 	//! advance time. TheoraVideoManager calls this
-	void update(float time_increase);
+	void update(float timeDelta);
 	/**
 	    \brief update timer to the display time of the next frame
 
