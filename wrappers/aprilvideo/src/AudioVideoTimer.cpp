@@ -28,17 +28,17 @@ namespace aprilvideo
 		mDisabledAudio = (audiosystem == XAL_AS_DISABLED);
 	}
 	
-	void AudioVideoTimer::update(float time_increase)
+	void AudioVideoTimer::update(float timeDelta)
 	{
-		VideoTimer::update(time_increase);
+		VideoTimer::update(timeDelta);
 		if (!mDisabledAudio)
 		{
 			bool paused = isPaused(), playerPaused = mPlayer->isPaused();
 			// use our own time calculation because april's could be tampered with (speedup/slowdown)
 			unsigned int tickCount = get_system_tick_count();
 			if (mPrevTickCount == 0) mPrevTickCount = tickCount;
-			time_increase = (tickCount - mPrevTickCount) / 1000.0f;
-			if (paused) time_increase = 0;
+			timeDelta = (tickCount - mPrevTickCount) / 1000.0f;
+			if (paused) timeDelta = 0;
 			
 			if (paused && !playerPaused && !mPlayer->isFadingOut())
 			{
@@ -49,7 +49,7 @@ namespace aprilvideo
 				mPlayer->play();
 			}
 			
-			else if (time_increase > 0.1f) time_increase = 0.1f; // prevent long hiccups when defoucsing window
+			else if (timeDelta > 0.1f) timeDelta = 0.1f; // prevent long hiccups when defoucsing window
 
 			mPrevTickCount = tickCount;
 			if (mPlayer->isPlaying())
@@ -79,11 +79,11 @@ namespace aprilvideo
 				}
 				else
 				{
-					mAudioPosition += time_increase;
+					mAudioPosition += timeDelta;
 				}
 				if (mSyncDiff != 0)
 				{
-					float chunk = time_increase * mSyncDiffFactor;
+					float chunk = timeDelta * mSyncDiffFactor;
 					
 					if (mSyncDiff > 0)
 					{
@@ -116,12 +116,12 @@ namespace aprilvideo
 			}
 			else if (!xal::mgr->isSuspended())
 			{
-				mTime += time_increase;
+				mTime += timeDelta;
 			}
 		}
 		else
 		{
-			mT += time_increase;
+			mT += timeDelta;
 			mTime = mT - mSyncOffset;
 		}
 	}
