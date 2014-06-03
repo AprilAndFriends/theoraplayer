@@ -174,12 +174,14 @@ int cpu_info_ = kCpuInit;  // cpu_info is not initialized yet.
 #if !defined(__native_client__) && !defined(_M_ARM)
 
 static LIBYUV_BOOL TestEnv(const char* name) {
+#ifndef _WINRT
   const char* var = getenv(name);
   if (var) {
     if (var[0] != '0') {
       return LIBYUV_TRUE;
     }
   }
+#endif
   return LIBYUV_FALSE;
 }
 #else  // nacl does not support getenv().
