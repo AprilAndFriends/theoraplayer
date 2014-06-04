@@ -57,6 +57,7 @@
  * NDK r4: Initial release
  */
 
+#ifdef _ANDROID
 #if defined(__le32__)
 
 // When users enter this, we should only provide interface and
@@ -1087,3 +1088,4 @@ android_setCpuArm(int cpu_count, uint64_t cpu_features, uint32_t cpu_id)
  */
 
 #endif // defined(__le32__)
+#endif
