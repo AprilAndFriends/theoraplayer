@@ -154,25 +154,25 @@
     <ClCompile Include="..\..\lib\arm\armbits.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='ARM'">CompileAsAsm</CompileAs>
-      <ExcludedFromBuild Condition="'$(Platform)'!='ARM'">true</ExcludedFromBuild>
+      <ExcludedFromBuild>true</ExcludedFromBuild>
       <AdditionalOptions Condition="'$(Platform)'=='ARM'">-mfpu=neon %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="..\..\lib\arm\armfrag.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='ARM'">CompileAsAsm</CompileAs>
-      <ExcludedFromBuild Condition="'$(Platform)'!='ARM'">true</ExcludedFromBuild>
+      <ExcludedFromBuild>true</ExcludedFromBuild>
       <AdditionalOptions Condition="'$(Platform)'=='ARM'">-mfpu=neon %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="..\..\lib\arm\armidct.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='ARM'">CompileAsAsm</CompileAs>
-      <ExcludedFromBuild Condition="'$(Platform)'!='ARM'">true</ExcludedFromBuild>
+      <ExcludedFromBuild>true</ExcludedFromBuild>
       <AdditionalOptions Condition="'$(Platform)'=='ARM'">-mfpu=neon %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="..\..\lib\arm\armloop.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='ARM'">CompileAsAsm</CompileAs>
-      <ExcludedFromBuild Condition="'$(Platform)'!='ARM'">true</ExcludedFromBuild>
+      <ExcludedFromBuild>true</ExcludedFromBuild>
       <AdditionalOptions Condition="'$(Platform)'=='ARM'">-mfpu=neon %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemGroup>

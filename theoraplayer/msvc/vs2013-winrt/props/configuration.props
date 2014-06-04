@@ -3,7 +3,6 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions Condition="'$(Platform)'=='Win32'">__SSSE3__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Platform)'=='ARM'">LIBYUV_NEON;__ARM_NEON__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>

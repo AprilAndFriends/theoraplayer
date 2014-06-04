@@ -34,7 +34,6 @@
   <ItemDefinitionGroup Condition="'$(Platform)'=='ARM'">
     <ClCompile>
       <AdditionalIncludeDirectories>../../lib/arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>OC_ARM_ASM;OC_ARM_ASM_EDSP;OC_ARM_ASM_MEDIA;OC_ARM_ASM_NEON;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
 </Project>
