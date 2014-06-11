@@ -612,17 +612,17 @@ namespace aprilvideo
 	{
 		if (VideoObject::_propertyDescriptions.size() == 0)
 		{
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video", aprilui::PropertyDescription::TYPE_STRING);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_alpha", aprilui::PropertyDescription::TYPE_BOOL);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("alpha_pause_treshold", aprilui::PropertyDescription::TYPE_INT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("loop", aprilui::PropertyDescription::TYPE_BOOL);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("speed", aprilui::PropertyDescription::TYPE_FLOAT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("time", aprilui::PropertyDescription::TYPE_FLOAT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("duration", aprilui::PropertyDescription::TYPE_FLOAT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("audio", aprilui::PropertyDescription::TYPE_STRING);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("syc_offset", aprilui::PropertyDescription::TYPE_FLOAT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("blend_mode", aprilui::PropertyDescription::TYPE_STRING);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("state", aprilui::PropertyDescription::TYPE_STRING);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video", aprilui::PropertyDescription::STRING);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_alpha", aprilui::PropertyDescription::BOOL);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("alpha_pause_treshold", aprilui::PropertyDescription::INT);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("loop", aprilui::PropertyDescription::BOOL);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("speed", aprilui::PropertyDescription::FLOAT);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("time", aprilui::PropertyDescription::FLOAT);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("duration", aprilui::PropertyDescription::FLOAT);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("audio", aprilui::PropertyDescription::STRING);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("syc_offset", aprilui::PropertyDescription::FLOAT);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("blend_mode", aprilui::PropertyDescription::STRING);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("state", aprilui::PropertyDescription::STRING);
 		}
 		return (aprilui::ImageBox::getPropertyDescriptions() + VideoObject::_propertyDescriptions);
 	}
