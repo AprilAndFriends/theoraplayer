@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS|Win32">
+      <Configuration>DebugS</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS|Win32">
+      <Configuration>ReleaseS</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Android">
+      <Configuration>Debug</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS|Android">
+      <Configuration>DebugS</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Android">
+      <Configuration>Release</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS|Android">
+      <Configuration>ReleaseS</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Android-x86">
+      <Configuration>Debug</Configuration>
+      <Platform>Android-x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS|Android-x86">
+      <Configuration>DebugS</Configuration>
+      <Platform>Android-x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Android-x86">
+      <Configuration>Release</Configuration>
+      <Platform>Android-x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS|Android-x86">
+      <Configuration>ReleaseS</Configuration>
+      <Platform>Android-x86</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{ABE6907D-00FF-4198-8D36-65115AF1D868}</ProjectGuid>
+    <RootNamespace>theoraplayer</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="props\default.props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2012\props-generic\platform-$(Platform).prop')" Project="..\..\..\hltypes\msvc\vs2012\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2012\props-generic\platform-$(Platform).prop')" Project="..\..\..\theora\msvc\vs2012\props-generic\platform-$(Platform).props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2012\props-generic\configurations.props')" Project="..\..\..\hltypes\msvc\vs2012\props-generic\configurations.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2012\props-generic\configurations.props')" Project="..\..\..\theora\msvc\vs2012\props-generic\configurations.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2012\props-generic\build-defaults.props')" Project="..\..\..\hltypes\msvc\vs2012\props-generic\build-defaults.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2012\props-generic\build-defaults.props')" Project="..\..\..\theora\msvc\vs2012\props-generic\build-defaults.props" />
+  <Import Project="props\configuration.props" />
+  <ItemGroup>
+    <ClCompile Include="..\..\src\YUV\android\cpu-features.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_common.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_neon.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_posix.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_win.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_argb.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_from.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_from_argb.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_jpeg.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_to_argb.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_to_i420.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\cpu_id.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\format_conversion.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\mjpeg_decoder.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\mjpeg_validate.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\planar_functions.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_argb.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_mips.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_neon.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_any.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_common.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_mips.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_neon.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_posix.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_win.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb_neon.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_common.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_mips.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_neon.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_posix.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_win.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\video_common.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\yuv_libyuv.c" />
+    <ClCompile Include="..\..\src\YUV\yuv_util.c" />
+    <None Include="..\..\src\AVFoundation\TheoraVideoClip_AVFoundation.mm" />
+    <None Include="..\..\src\FFmpeg\TheoraVideoClip_FFmpeg.cpp" />
+    <ClCompile Include="..\..\src\TheoraAsync.cpp" />
+    <ClCompile Include="..\..\src\TheoraAudioInterface.cpp" />
+    <ClCompile Include="..\..\src\TheoraAudioPacketQueue.cpp" />
+    <ClCompile Include="..\..\src\TheoraDataSource.cpp" />
+    <ClCompile Include="..\..\src\TheoraException.cpp" />
+    <ClCompile Include="..\..\src\TheoraFrameQueue.cpp" />
+    <ClCompile Include="..\..\src\TheoraTimer.cpp" />
+    <ClCompile Include="..\..\src\TheoraUtil.cpp" />
+    <ClCompile Include="..\..\src\TheoraVideoClip.cpp" />
+    <ClCompile Include="..\..\src\TheoraVideoFrame.cpp" />
+    <ClCompile Include="..\..\src\TheoraVideoManager.cpp" />
+    <ClCompile Include="..\..\src\TheoraWorkerThread.cpp" />
+    <ClCompile Include="..\..\src\Theora\TheoraVideoClip_Theora.cpp" />
+    <ClCompile Include="..\..\src\YUV\C\yuv420_grey_c.c" />
+    <ClCompile Include="..\..\src\YUV\C\yuv420_rgb_c.c" />
+    <ClCompile Include="..\..\src\YUV\C\yuv420_yuv_c.c" />
+    <None Include="..\..\src\YUV\libyuv\src\row_x86.asm">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\src\YUV\libyuv\src\x86inc.asm">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraAsync.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraAudioInterface.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraAudioPacketQueue.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraDataSource.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraException.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraExport.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraFrameQueue.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraPixelTransform.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraPlayer.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraTimer.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraUtil.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraVideoClip.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraVideoFrame.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraVideoManager.h" />
+    <ClInclude Include="..\..\include\theoraplayer\TheoraWorkerThread.h" />
+    <ClInclude Include="..\..\src\YUV\android\cpu-features.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\basic_types.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\compare.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert_argb.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert_from.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert_from_argb.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\cpu_id.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\format_conversion.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\mjpeg_decoder.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\planar_functions.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\rotate.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\rotate_argb.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\row.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\scale.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\scale_argb.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\scale_row.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\version.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\video_common.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\yuv_libyuv.h" />
+    <ClInclude Include="..\..\src\YUV\yuv_util.h" />
+    <None Include="..\..\src\FFmpeg\TheoraVideoClip_FFmpeg.h" />
+    <None Include="..\..\src\AVFoundation\TheoraVideoClip_AVFoundation.h" />
+    <ClInclude Include="..\..\src\Theora\TheoraVideoClip_Theora.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\fileproperties.rc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86' or '$(ConfigurationType)'=='StaticLibrary'">true</ExcludedFromBuild>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>
