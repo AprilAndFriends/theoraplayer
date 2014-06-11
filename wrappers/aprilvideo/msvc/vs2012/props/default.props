@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>APRILVIDEO_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+	  <AdditionalIncludeDirectories>../../include/aprilvideo;../../../hltypes/include;../../../gtypes/include;../../../april/include;../../../aprilui/include;../../../xal/include;../../../theoraplayer/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level3</WarningLevel>
+      <DisableSpecificWarnings>4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+</Project>

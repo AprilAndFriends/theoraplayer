@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{241047a3-99d2-4d39-b00a-7f7eee613e62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{a680c661-9d96-4ef9-a249-79595ae5db15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\YUV">
+      <UniqueIdentifier>{019bf286-2095-466f-939d-385b0a6685df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Theora">
+      <UniqueIdentifier>{e2cf3716-10e3-453d-bd3f-6e47e8023a09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\FFmpeg">
+      <UniqueIdentifier>{49309935-ea86-4916-90d8-146993c9419d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\AVFoundation">
+      <UniqueIdentifier>{408f1a6a-f1f7-4ebd-be69-35b8b36dcf96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\YUV\C">
+      <UniqueIdentifier>{4bd888e7-5736-4485-aa54-3574f5395d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\YUV\libyuv">
+      <UniqueIdentifier>{eefc0868-f407-4451-893c-e0a7afa4f33c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\YUV\libyuv\include">
+      <UniqueIdentifier>{083ee782-e6c0-4fa7-80b7-50298423327b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\YUV\libyuv\src">
+      <UniqueIdentifier>{932b5ecd-fa3d-44de-9bb4-987161d901dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\YUV\libyuv\include\libyuv">
+      <UniqueIdentifier>{ae734130-dee5-4730-9b64-2ee17bfd9b4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\YUV\libyuv\android">
+      <UniqueIdentifier>{27f59d1b-29ec-41dd-962e-abc4e1177511}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\TheoraAsync.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TheoraWorkerThread.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TheoraAudioInterface.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TheoraAudioPacketQueue.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TheoraDataSource.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TheoraException.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TheoraFrameQueue.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TheoraTimer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TheoraUtil.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TheoraVideoClip.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TheoraVideoFrame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TheoraVideoManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Theora\TheoraVideoClip_Theora.cpp">
+      <Filter>src\Theora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\C\yuv420_grey_c.c">
+      <Filter>src\YUV\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\C\yuv420_rgb_c.c">
+      <Filter>src\YUV\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\C\yuv420_yuv_c.c">
+      <Filter>src\YUV\C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\yuv_util.c">
+      <Filter>src\YUV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\yuv_libyuv.c">
+      <Filter>src\YUV\libyuv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_common.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_neon.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_posix.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_win.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_argb.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_from.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_from_argb.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_jpeg.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_to_argb.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_to_i420.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\cpu_id.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\format_conversion.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\mjpeg_decoder.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\mjpeg_validate.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\planar_functions.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_argb.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_mips.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_neon.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_any.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_common.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_mips.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_neon.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_posix.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_win.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb_neon.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_mips.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_neon.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\video_common.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_posix.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_win.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_common.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\android\cpu-features.c">
+      <Filter>src\YUV\libyuv\android</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\Theora\TheoraVideoClip_Theora.h">
+      <Filter>src\Theora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraAsync.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraAudioInterface.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraAudioPacketQueue.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraDataSource.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraException.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraExport.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraFrameQueue.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraPixelTransform.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraPlayer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraTimer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraUtil.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraVideoClip.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraVideoFrame.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraVideoManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\TheoraWorkerThread.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\yuv_util.h">
+      <Filter>src\YUV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\yuv_libyuv.h">
+      <Filter>src\YUV\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv.h">
+      <Filter>src\YUV\libyuv\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\basic_types.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\compare.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert_argb.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert_from.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert_from_argb.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\cpu_id.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\format_conversion.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\mjpeg_decoder.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\planar_functions.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\rotate.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\rotate_argb.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\row.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\scale.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\scale_argb.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\version.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\video_common.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\scale_row.h">
+      <Filter>src\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\android\cpu-features.h">
+      <Filter>src\YUV\libyuv\android</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\AVFoundation\TheoraVideoClip_AVFoundation.mm">
+      <Filter>src\AVFoundation</Filter>
+    </None>
+    <None Include="..\..\src\FFmpeg\TheoraVideoClip_FFmpeg.cpp" />
+    <None Include="..\..\src\FFmpeg\TheoraVideoClip_FFmpeg.h" />
+    <None Include="..\..\src\AVFoundation\TheoraVideoClip_AVFoundation.h" />
+    <None Include="..\..\src\YUV\libyuv\src\row_x86.asm">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </None>
+    <None Include="..\..\src\YUV\libyuv\src\x86inc.asm">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\fileproperties.rc" />
+  </ItemGroup>
+</Project>
