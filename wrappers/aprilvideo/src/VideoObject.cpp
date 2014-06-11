@@ -33,6 +33,8 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 namespace aprilvideo
 {
+    harray<aprilui::PropertyDescription> VideoObject::_propertyDescriptions;
+
 	extern int gRefCount, gNumWorkerThreads;
 	extern TheoraVideoManager* gVideoManager;
 	extern hstr defaultFileExtension;
@@ -486,7 +488,15 @@ namespace aprilvideo
 		}
 		else if (name == "video_alpha") mUseAlpha = value;
 		else if (name == "alpha_pause_treshold") setAlphaTreshold(value);
-		else if (name == "loop")  mLoop = value;
+		else if (name == "loop")
+        {
+            mLoop = value;
+            if (mClip)
+            {
+                mClip->setAutoRestart(mLoop);
+//                if (mLoop && !mClip->g)
+            }
+        }
 		else if (name == "speed")
         {
             mSpeed = value;
@@ -598,5 +608,24 @@ namespace aprilvideo
         }
 		if (property_exists) *property_exists = false;
 		return ImageBox::getProperty(name, property_exists);
+	}
+    
+	harray<aprilui::PropertyDescription> VideoObject::getPropertyDescriptions()
+	{
+		if (VideoObject::_propertyDescriptions.size() == 0)
+		{
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video", aprilui::PropertyDescription::TYPE_STRING);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_alpha", aprilui::PropertyDescription::TYPE_BOOLEAN);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("alpha_pause_treshold", aprilui::PropertyDescription::TYPE_INT);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("loop", aprilui::PropertyDescription::TYPE_BOOLEAN);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("speed", aprilui::PropertyDescription::TYPE_FLOAT);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("time", aprilui::PropertyDescription::TYPE_FLOAT);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("duration", aprilui::PropertyDescription::TYPE_FLOAT);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("audio", aprilui::PropertyDescription::TYPE_STRING);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("syc_offset", aprilui::PropertyDescription::TYPE_FLOAT);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("blend_mode", aprilui::PropertyDescription::TYPE_STRING);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("state", aprilui::PropertyDescription::TYPE_STRING);
+		}
+		return (aprilui::ImageBox::getPropertyDescriptions() + VideoObject::_propertyDescriptions);
 	}
 }

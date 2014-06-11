@@ -37,6 +37,8 @@ namespace aprilvideo
 	class aprilVideoExport VideoObject : public aprilui::ImageBox
 	{
 	protected:
+        static harray<aprilui::PropertyDescription> _propertyDescriptions;
+        
 		bool mPrevDoneFlag;
 		bool mUseAlpha;
 		bool mLoop;
@@ -83,6 +85,7 @@ namespace aprilvideo
 		void notifyEvent(chstr name, void* params);
 		bool setProperty(chstr name, chstr value);
 		hstr getProperty(chstr name, bool* property_exists);
+        harray<aprilui::PropertyDescription> getPropertyDescriptions();
 	};
 }
 #endif
