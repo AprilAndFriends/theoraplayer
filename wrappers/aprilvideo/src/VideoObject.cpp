@@ -563,9 +563,8 @@ namespace aprilvideo
 		return 1;
 	}
 	
-	hstr VideoObject::getProperty(chstr name, bool* property_exists)
+	hstr VideoObject::getProperty(chstr name)
 	{
-		if (property_exists) *property_exists = true;
 		if      (name == "video") return mClipName;
 		else if (name == "video_alpha") return mUseAlpha ? "1" : "0";
 		else if (name == "alpha_pause_treshold") return mAlphaPauseTreshold;
@@ -606,8 +605,7 @@ namespace aprilvideo
 			if (this->isStopped()) return "stopped";
 			return "unknown";
         }
-		if (property_exists) *property_exists = false;
-		return ImageBox::getProperty(name, property_exists);
+		return ImageBox::getProperty(name);
 	}
     
 	harray<aprilui::PropertyDescription> VideoObject::getPropertyDescriptions()
@@ -615,9 +613,9 @@ namespace aprilvideo
 		if (VideoObject::_propertyDescriptions.size() == 0)
 		{
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video", aprilui::PropertyDescription::TYPE_STRING);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_alpha", aprilui::PropertyDescription::TYPE_BOOLEAN);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_alpha", aprilui::PropertyDescription::TYPE_BOOL);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("alpha_pause_treshold", aprilui::PropertyDescription::TYPE_INT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("loop", aprilui::PropertyDescription::TYPE_BOOLEAN);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("loop", aprilui::PropertyDescription::TYPE_BOOL);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("speed", aprilui::PropertyDescription::TYPE_FLOAT);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("time", aprilui::PropertyDescription::TYPE_FLOAT);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("duration", aprilui::PropertyDescription::TYPE_FLOAT);
