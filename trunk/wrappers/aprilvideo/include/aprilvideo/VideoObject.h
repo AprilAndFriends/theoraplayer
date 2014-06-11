@@ -36,8 +36,10 @@ namespace aprilvideo
 {
 	class aprilVideoExport VideoObject : public aprilui::ImageBox
 	{
-	protected:
+	private:
         static harray<aprilui::PropertyDescription> _propertyDescriptions;
+
+	protected:
         
 		bool mPrevDoneFlag;
 		bool mUseAlpha;
@@ -62,6 +64,7 @@ namespace aprilvideo
 		april::Image::Format _getTextureFormat();
 		void destroyResources();
 		void createClip();
+
 	public:
 		VideoObject(chstr name, grect rect);
 		static aprilui::Object* createInstance(chstr name, grect rect);
@@ -81,11 +84,13 @@ namespace aprilvideo
 		void OnDraw();
 		
 		void setAlphaTreshold(int treshold);
-		int getAlphaTreshold() { return mAlphaPauseTreshold; }
+		inline int getAlphaTreshold() { return mAlphaPauseTreshold; }
 		void notifyEvent(chstr name, void* params);
+
+		hstr getProperty(chstr name);
 		bool setProperty(chstr name, chstr value);
-		hstr getProperty(chstr name, bool* property_exists);
         harray<aprilui::PropertyDescription> getPropertyDescriptions();
+
 	};
 }
 #endif
