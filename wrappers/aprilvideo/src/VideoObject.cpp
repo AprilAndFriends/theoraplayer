@@ -241,6 +241,15 @@ namespace aprilvideo
 		hstr path = getFullPath();
 		april::Image::Format textureFormat = _getTextureFormat();
 		destroyResources();
+        
+        if (path.ends_with(".mp4"))
+        {
+            hstr archive = hresource::getArchive();
+            if (archive != "")
+            {
+                path = hrdir::join_path(archive, path);
+            }
+        }
 		
 		try
 		{
