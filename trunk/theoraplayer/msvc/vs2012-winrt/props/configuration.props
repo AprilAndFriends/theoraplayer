@@ -7,8 +7,5 @@
     <Link>
       <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib Condition="'$(ConfigurationType)'=='StaticLibrary'">
-      <OutputFile>$(OutDir)$(TargetName)_static$(TargetExt)</OutputFile>
-    </Lib>
   </ItemDefinitionGroup>
 </Project>
