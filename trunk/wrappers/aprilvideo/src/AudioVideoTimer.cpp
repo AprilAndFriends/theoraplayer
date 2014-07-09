@@ -26,6 +26,7 @@ namespace aprilvideo
 		mT = 0;
 		static hstr audiosystem = xal::mgr->getName(); // XAL_AS_DISABLED audio system doesn't sync audio & video
 		mDisabledAudio = (audiosystem == XAL_AS_DISABLED);
+		mStartedPlaying = 0;
 	}
 	
 	void AudioVideoTimer::update(float timeDelta)
@@ -39,8 +40,12 @@ namespace aprilvideo
 			if (mPrevTickCount == 0) mPrevTickCount = tickCount;
 			timeDelta = (tickCount - mPrevTickCount) / 1000.0f;
 			if (paused) timeDelta = 0;
-			
-			if (paused && !playerPaused && !mPlayer->isFadingOut())
+			if (!paused && !mStartedPlaying)
+			{
+				mStartedPlaying = 1;
+				mPlayer->play();
+			}
+			else if (paused && !playerPaused && !mPlayer->isFadingOut())
 			{
 				mPlayer->pause();
 			}
