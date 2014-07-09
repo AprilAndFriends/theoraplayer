@@ -375,7 +375,6 @@ namespace aprilvideo
 			mSound = xal::mgr->createSound(this->dataset->getFilePath() + "/video/" + mAudioName, category);
 
 			mAudioPlayer = xal::mgr->createPlayer(mSound->getName());
-			mAudioPlayer->pause();
 			mTimer = new AudioVideoTimer(this, mAudioPlayer, mAudioSyncOffset);
 		}
 		if (mTimer == NULL) mTimer = new VideoTimer(this);
