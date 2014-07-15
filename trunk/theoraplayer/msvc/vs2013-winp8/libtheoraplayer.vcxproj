@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -38,19 +38,19 @@
     <ProjectGuid>{ABE6907D-00FF-4198-8D36-65115AF1D868}</ProjectGuid>
     <RootNamespace>theoraplayer</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
-    <ApplicationType>Windows Store</ApplicationType>
-    <ApplicationTypeRevision>8.0</ApplicationTypeRevision>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <ApplicationType>Windows Phone</ApplicationType>
+    <ApplicationTypeRevision>8.1</ApplicationTypeRevision>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props\default.props" />
-  <Import Condition="exists('..\..\..\hltypes\msvc\vs2012-winrt\props-generic\platform-$(Platform).prop')" Project="..\..\..\hltypes\msvc\vs2012-winrt\props-generic\platform-$(Platform).props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2012-winrt\props-generic\platform-$(Platform).prop')" Project="..\..\..\theora\msvc\vs2012-winrt\props-generic\platform-$(Platform).props" />
-  <Import Condition="exists('..\..\..\hltypes\msvc\vs2012-winrt\props-generic\configurations.props')" Project="..\..\..\hltypes\msvc\vs2012-winrt\props-generic\configurations.props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2012-winrt\props-generic\configurations.props')" Project="..\..\..\theora\msvc\vs2012-winrt\props-generic\configurations.props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winp8\props-generic\platform-$(Platform).prop')" Project="..\..\..\hltypes\msvc\vs2013-winp8\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winp8\props-generic\platform-$(Platform).prop')" Project="..\..\..\theora\msvc\vs2013-winp8\props-generic\platform-$(Platform).props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winp8\props-generic\configurations.props')" Project="..\..\..\hltypes\msvc\vs2013-winp8\props-generic\configurations.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winp8\props-generic\configurations.props')" Project="..\..\..\theora\msvc\vs2013-winp8\props-generic\configurations.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <Import Condition="exists('..\..\..\hltypes\msvc\vs2012-winrt\props-generic\build-defaults.props')" Project="..\..\..\hltypes\msvc\vs2012-winrt\props-generic\build-defaults.props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2012-winrt\props-generic\build-defaults.props')" Project="..\..\..\theora\msvc\vs2012-winrt\props-generic\build-defaults.props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winp8\props-generic\build-defaults.props')" Project="..\..\..\hltypes\msvc\vs2013-winp8\props-generic\build-defaults.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winp8\props-generic\build-defaults.props')" Project="..\..\..\theora\msvc\vs2013-winp8\props-generic\build-defaults.props" />
   <Import Project="props\configuration.props" />
   <ItemGroup>
     <ClCompile Include="..\..\src\YUV\android\cpu-features.c">
