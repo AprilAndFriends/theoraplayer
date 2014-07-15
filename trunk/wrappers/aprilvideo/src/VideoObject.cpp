@@ -579,13 +579,24 @@ namespace aprilvideo
 		else if (name == "loop")  return mLoop ? "1" : "0";
 		else if (name == "speed") return mSpeed;
 		else if (name == "time") return this->getTimePosition();
-		else if (name == "duration")
+		else if (name == "videoWidth" || name == "videoHeight" || name == "duration")
 		{
 			if (mClip == NULL && mClipName != "")
 			{
 				createClip();
 			}
-			return mClip ? hstr(mClip->getDuration()) : hstr(0);
+			if		(name == "duration")
+			{
+				return mClip ? hstr(mClip->getDuration()) : "0";
+			}
+			else if (name == "videoWidth")
+			{
+				return mClip ? hstr(mClip->getWidth()) : "0";
+			}
+			else if (name == "videoHeight")
+			{
+				return mClip ? hstr(mClip->getHeight()) : "0";
+			}
 		}
 		else if (name == "audio")  return mAudioName;
 		else if (name == "sync_offset")  return mAudioSyncOffset;
@@ -627,6 +638,8 @@ namespace aprilvideo
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("speed", aprilui::PropertyDescription::FLOAT);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("time", aprilui::PropertyDescription::FLOAT);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("duration", aprilui::PropertyDescription::FLOAT);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("videoWidth", aprilui::PropertyDescription::INT);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("videoHeight", aprilui::PropertyDescription::INT);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("audio", aprilui::PropertyDescription::STRING);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("syc_offset", aprilui::PropertyDescription::FLOAT);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("blend_mode", aprilui::PropertyDescription::STRING);
