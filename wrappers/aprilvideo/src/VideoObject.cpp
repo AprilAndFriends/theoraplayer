@@ -539,7 +539,7 @@ namespace aprilvideo
 			if		(value == "default")	mode = april::BM_DEFAULT;
 			else if (value == "alpha")		mode = april::BM_ALPHA;
             else if (value == "add")		mode = april::BM_ADD;
-            else if (value == "substract")	mode = april::BM_SUBTRACT;
+            else if (value == "subtract")	mode = april::BM_SUBTRACT;
             else if (value == "overwrite")	mode = april::BM_OVERWRITE;
             else
             {
@@ -607,7 +607,7 @@ namespace aprilvideo
                 if		(mBlendMode == april::BM_DEFAULT)	return "default";
                 else if (mBlendMode == april::BM_ALPHA)		return "alpha";
                 if      (mBlendMode == april::BM_ADD)		return "add";
-                else if (mBlendMode == april::BM_SUBTRACT)	return "substract";
+                else if (mBlendMode == april::BM_SUBTRACT)	return "subtract";
 				else if (mBlendMode == april::BM_OVERWRITE)	return "overwrite";
                 else return "unknown";
             }
