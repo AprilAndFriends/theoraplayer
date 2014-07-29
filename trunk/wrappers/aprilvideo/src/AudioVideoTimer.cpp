@@ -25,7 +25,7 @@ namespace aprilvideo
 		mSyncDiff = mSyncDiffFactor = 0;
 		mT = 0;
 		static hstr audiosystem = xal::mgr->getName(); // XAL_AS_DISABLED audio system doesn't sync audio & video
-		mDisabledAudio = (audiosystem == XAL_AS_DISABLED);
+		mDisabledAudio = (audiosystem == XAL_AS_DISABLED || !xal::mgr->isEnabled());
 		mStartedPlaying = 0;
 	}
 	
