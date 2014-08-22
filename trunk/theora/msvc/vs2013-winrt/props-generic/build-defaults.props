@@ -21,9 +21,6 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
 	  <PreprocessorDefinitions Condition="'$(ConfigurationType)'=='StaticLibrary'">_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <Link>
-      <IgnoreSpecificDefaultLibraries Condition="'$(PlatformToolset)'=='v120_wp81'">ole32.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(WholeProgramOptimization)'!='true'">
     <ClCompile>
