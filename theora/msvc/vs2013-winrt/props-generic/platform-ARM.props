@@ -7,10 +7,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <PreprocessorDefinitions Condition="'$(PlatformToolset)'=='v120_wp81'">_WINP8;WINP8;PSAPI_VERSION=2;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions>_WINRT;WINRT;_WINARM;WINARM;_ARM;ARM;__ARM__;__arm__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../..;../../src;../../../include;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalUsingDirectories Condition="'$(PlatformToolset)'=='v120_wp81'">$(VSInstallDir)vcpackages;$(WindowsSDK_MetadataPath);%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
       <CompileAsWinRT>true</CompileAsWinRT>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -29,14 +27,4 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemGroup Condition="'$(PlatformToolset)'=='v120_wp81'">
-    <Reference Include="platform.winmd">
-      <IsWinMDFile>true</IsWinMDFile>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Windows.winmd">
-      <IsWinMDFile>true</IsWinMDFile>
-      <Private>false</Private>
-    </Reference>
-  </ItemGroup>
 </Project>
