@@ -86,7 +86,7 @@ namespace aprilvideo
 		
 		void setAlphaTreshold(int treshold);
 		inline int getAlphaTreshold() { return mAlphaPauseTreshold; }
-		void notifyEvent(chstr name, void* params);
+		void notifyEvent(aprilui::Event::Type type, aprilui::EventArgs* args);
 
 		hstr getProperty(chstr name);
 		bool setProperty(chstr name, chstr value);
