@@ -131,16 +131,16 @@ namespace aprilvideo
 		return new VideoObject(name, rect);
 	}
 	
-	void VideoObject::notifyEvent(chstr name, void* params)
+	void VideoObject::notifyEvent(aprilui::Event::Type type, aprilui::EventArgs* args)
 	{
-		if (name == "AttachToObject")
+		if (type == aprilui::Event::ATTACHED_TO_OBJECT)
 		{
 			if (this->image != mVideoImage)
 			{
 				this->image = this->dataset->getImage(APRILUI_IMAGE_NAME_NULL);
 			}
 		}
-		ImageBox::notifyEvent(name, params);
+		ImageBox::notifyEvent(type, args);
 	}
 	
 	void VideoObject::destroyResources()
