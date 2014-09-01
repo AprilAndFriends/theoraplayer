@@ -131,9 +131,9 @@ namespace aprilvideo
 		return new VideoObject(name, rect);
 	}
 	
-	void VideoObject::notifyEvent(aprilui::Event::Type type, aprilui::EventArgs* args)
+	void VideoObject::notifyEvent(chstr type, aprilui::EventArgs* args)
 	{
-		if (type == aprilui::Event::ATTACHED_TO_OBJECT)
+		if (type == aprilui::Event::AttachedToObject)
 		{
 			if (this->image != mVideoImage)
 			{
