@@ -37,17 +37,17 @@ namespace aprilvideo
 	class aprilVideoExport VideoObject : public aprilui::ImageBox
 	{
 	private:
-        static harray<aprilui::PropertyDescription> _propertyDescriptions;
+		static harray<aprilui::PropertyDescription> _propertyDescriptions;
 
 	protected:
-        
+
 		bool mPrevDoneFlag;
 		bool mUseAlpha;
 		bool mLoop;
 		hstr mClipName;
 		TheoraVideoClip* mClip;
 		TheoraTimer* mTimer;
-        april::BlendMode mBlendMode;
+		april::BlendMode mBlendMode;
 		aprilui::Texture* mTexture;
 		aprilui::Image* mVideoImage;
 		float mSpeed;
@@ -86,11 +86,11 @@ namespace aprilvideo
 		
 		void setAlphaTreshold(int treshold);
 		inline int getAlphaTreshold() { return mAlphaPauseTreshold; }
-		void notifyEvent(aprilui::Event::Type type, aprilui::EventArgs* args);
+		void notifyEvent(chstr type, aprilui::EventArgs* args);
 
 		hstr getProperty(chstr name);
 		bool setProperty(chstr name, chstr value);
-        harray<aprilui::PropertyDescription> getPropertyDescriptions();
+		harray<aprilui::PropertyDescription> getPropertyDescriptions();
 
 	};
 }
