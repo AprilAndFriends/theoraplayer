@@ -344,7 +344,7 @@ namespace aprilvideo
 #endif
 		april::Texture* tex = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
         tex->setAddressMode(april::Texture::ADDRESS_CLAMP);
-		mTexture = new aprilui::Texture(tex->getFilename(), tex);
+		mTexture = new aprilui::Texture(tex->getFilename(), tex, april::Texture::LoadMode::LOAD_IMMEDIATE, false);
 		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
         mVideoImage->setBlendMode(mBlendMode);
 #if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
