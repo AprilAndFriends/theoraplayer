@@ -107,7 +107,8 @@ namespace aprilvideo
 		if  (mClip == NULL) return true;
 		if (mAlphaPauseTreshold == 0)
 		{
-			return !isVisible();
+			bool visible = isDerivedVisible();
+			return !visible;
 		}
 		else
 		{
@@ -474,7 +475,10 @@ namespace aprilvideo
 			{
 				bool done = mClip->isDone();
 				if (done && mAudioPlayer != NULL && mAudioPlayer->isPlaying()) done = false;
-				if (mPrevDoneFlag == 0 && done == 1) triggerEvent("PlaybackDone");
+				if (mPrevDoneFlag == 0 && done == 1)
+				{
+					triggerEvent("PlaybackDone");
+				}
 				mPrevDoneFlag = done;
 			}
 			mClip->update(timeDelta);
