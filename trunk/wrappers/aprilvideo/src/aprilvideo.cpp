@@ -21,7 +21,18 @@ namespace aprilvideo
 	TheoraVideoManager* gVideoManager = NULL;
 	int gRefCount = 0, gNumWorkerThreads = 1;
 	hstr logTag = "aprilvideo", defaultFileExtension = ".ogv";
+	bool debugMode = 0;
 
+	bool isDebugModeEnabled()
+	{
+		return debugMode;
+	}
+	
+	void setDebugModeEnabled(bool enabled)
+	{
+		debugMode = enabled;
+	}
+	
 	static void theoraLogMessage(std::string log)
 	{
 #ifdef _DEBUG

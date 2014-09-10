@@ -19,6 +19,7 @@ namespace aprilvideo
 
 	void aprilVideoFnExport init(int num_worker_threads = 1);
 	void aprilVideoFnExport destroy();
-
+	bool aprilVideoFnExport isDebugModeEnabled();
+	void aprilVideoFnExport setDebugModeEnabled(bool enabled);
 }
 #endif

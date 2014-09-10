@@ -82,6 +82,7 @@ namespace aprilvideo
 		virtual bool isPaused();
 		
 		void update(float timeDelta);
+		void updateFrame();
 		void OnDraw();
 		
 		void setAlphaTreshold(int treshold);
