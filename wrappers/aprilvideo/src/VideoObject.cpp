@@ -110,6 +110,10 @@ namespace aprilvideo
 			bool visible = isDerivedVisible();
 			return !visible;
 		}
+		else if (mAlphaPauseTreshold < 0)
+		{
+			return false;
+		}
 		else
 		{
 			int alpha = getDerivedAlpha() * getVisibilityFlag();
@@ -384,7 +388,7 @@ namespace aprilvideo
 		update(0); // to grab the first frame.
 	}
 	
-	void VideoObject::OnDraw()
+	void VideoObject::updateFrame()
 	{
 		if (mClip == NULL && mClipName != "") createClip();
 		if (mClip)
@@ -452,7 +456,13 @@ namespace aprilvideo
 					mPrevFrameNumber = number;
 				}
 			}
-		}		
+		}
+
+	}
+	
+	void VideoObject::OnDraw()
+	{
+		updateFrame();
 		ImageBox::OnDraw();
 	}
 	
@@ -482,12 +492,21 @@ namespace aprilvideo
 				mPrevDoneFlag = done;
 			}
 			mClip->update(timeDelta);
+
+			if (mAlphaPauseTreshold < 0 && !isDerivedVisible() && !isPaused())
+			{
+				updateFrame();
+				if (isDebugModeEnabled())
+				{
+					hlog::write(logTag, mClipName + ": Video object is not visible, but alpha_treshold is set to -1, updating frame");
+				}
+			}
 		}
 	}
 	
 	void VideoObject::setAlphaTreshold(int treshold)
 	{
-		mAlphaPauseTreshold = hclamp(treshold, 0, 255);
+		mAlphaPauseTreshold = hclamp(treshold, -1, 255); // -1 indicates a situation where the user wants the video playing all the time
 	}
 	
 	bool VideoObject::setProperty(chstr name, chstr value)
