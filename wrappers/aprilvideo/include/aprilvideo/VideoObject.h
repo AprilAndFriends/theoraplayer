@@ -63,7 +63,6 @@ namespace aprilvideo
 		
 		april::Image::Format _getTextureFormat();
 		void destroyResources();
-		void createClip();
 
 	public:
 		VideoObject(chstr name, grect rect);
@@ -80,6 +79,11 @@ namespace aprilvideo
 		bool isStopped();
 		float getTimePosition();
 		virtual bool isPaused();
+		
+		void _createClip(bool waitForCache = true);
+		bool _isClipCreated();
+		float getPrecacheFactor();
+		hstr getClipName() { return mClipName; }
 		
 		void update(float timeDelta);
 		void updateFrame();
