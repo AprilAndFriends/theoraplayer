@@ -241,7 +241,21 @@ namespace aprilvideo
 		}
 	}
 	
-	void VideoObject::createClip()
+	bool VideoObject::_isClipCreated()
+	{
+		return mClip != NULL;
+	}
+	
+	float VideoObject::getPrecacheFactor()
+	{
+		if (mClip == NULL)
+		{
+			return 0;
+		}
+		return ((float) mClip->getNumReadyFrames()) / mClip->getNumPrecachedFrames();
+	}
+	
+	void VideoObject::_createClip(bool waitForCache)
 	{
 		hstr path = getFullPath();
 		april::Image::Format textureFormat = _getTextureFormat();
@@ -352,18 +366,24 @@ namespace aprilvideo
 		mTexture = new aprilui::Texture(tex->getFilename(), tex);
 		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
         mVideoImage->setBlendMode(mBlendMode);
+		if (waitForCache)
+		{
 #if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
-		hlog::write(logTag, "Waiting for cache: " + path);
+			hlog::write(logTag, "Waiting for cache: " + path);
 #endif
-		mClip->waitForCache(2 / mClip->getNumPrecachedFrames(), 5.0f); // better to wait a while then to display an empty image
-		mClip->waitForCache(0.25f, 0.5f);
+			mClip->waitForCache(2 / mClip->getNumPrecachedFrames(), 5.0f); // better to wait a while then to display an empty image
+			mClip->waitForCache(0.25f, 0.5f);
 		
 #if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
-		if (w * h >= 768 * 384) // best to fill the cache on large videos on Android/WinRT ARM to counter a slower codec
-			mClip->waitForCache(0.9f, 2.0f);
+			if (w * h >= 768 * 384) // best to fill the cache on large videos on Android/WinRT ARM to counter a slower codec
+			{
+				mClip->waitForCache(0.9f, 2.0f);
+			}
 		
 		hlog::write(logTag, "Initial precache cached " + hstr(mClip->getNumPrecachedFrames()) + " frames");
 #endif
+		}
+
 		if (mAudioName != "")
 		{
 			hstr category = "video";
@@ -390,7 +410,7 @@ namespace aprilvideo
 	
 	void VideoObject::updateFrame()
 	{
-		if (mClip == NULL && mClipName != "") createClip();
+		if (mClip == NULL && mClipName != "") _createClip();
 		if (mClip)
 		{
 			TheoraVideoFrame* f = mClip->getNextFrame();
@@ -606,7 +626,7 @@ namespace aprilvideo
 		{
 			if (mClip == NULL && mClipName != "")
 			{
-				createClip();
+				_createClip();
 			}
 			if		(name == "duration")
 			{
