@@ -56,7 +56,7 @@ protected:
 	 */
 	TheoraVideoClip* requestWork(TheoraWorkerThread* caller);
 public:
-	TheoraVideoManager(int num_worker_threads=1);
+	TheoraVideoManager(int num_worker_threads = 1);
 	virtual ~TheoraVideoManager();
 
 	//! get the global reference to the manager instance

@@ -8,11 +8,45 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
 #ifdef _WIN32
 #pragma warning( disable: 4251 ) // MSVC++
+#include "windows.h"
+const DWORD MS_VC_EXCEPTION=0x406D1388;
+
+#pragma pack(push,8)
+typedef struct tagTHREADNAME_INFO
+{
+	DWORD dwType; // Must be 0x1000.
+	LPCSTR szName; // Pointer to name (in user addr space).
+	DWORD dwThreadID; // Thread ID (-1=caller thread).
+	DWORD dwFlags; // Reserved for future use, must be zero.
+} THREADNAME_INFO;
+#pragma pack(pop)
+
+void SetThreadName( DWORD dwThreadID, char* threadName)
+{
+	THREADNAME_INFO info;
+	info.dwType = 0x1000;
+	info.szName = threadName;
+	info.dwThreadID = dwThreadID;
+	info.dwFlags = 0;
+
+	__try
+	{
+		RaiseException( MS_VC_EXCEPTION, 0, sizeof(info)/sizeof(ULONG_PTR),       (ULONG_PTR*)&info );
+	}
+	__except(EXCEPTION_EXECUTE_HANDLER)
+	{
+		
+	}
+}
 #endif
 #include "TheoraWorkerThread.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip.h"
+#include "TheoraAsync.h"
 #include "TheoraUtil.h"
+
+static int threadCounter = 1;
+static TheoraMutex counterMutex;
 
 TheoraWorkerThread::TheoraWorkerThread() : TheoraThread()
 {
@@ -26,6 +60,16 @@ TheoraWorkerThread::~TheoraWorkerThread()
 
 void TheoraWorkerThread::execute()
 {
+	char name[64];
+	counterMutex.lock();
+#if !defined(_WIN32) && !defined(_WINRT)
+	sprintf(name, "TheoraWorkerThread %d", threadCounter++);
+	pthread_setname_np(name);
+#elif defined(_WIN32)
+	SetThreadName((DWORD) mId, name);
+#endif
+	counterMutex.unlock();
+			
 	while (isRunning())
 	{
 		mClip = TheoraVideoManager::getSingleton().requestWork(this);
