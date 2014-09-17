@@ -518,7 +518,7 @@ namespace aprilvideo
 				updateFrame();
 				if (isDebugModeEnabled())
 				{
-					hlog::write(logTag, mClipName + ": Video object is not visible, but alpha_treshold is set to -1, updating frame");
+					hlog::write(logTag, mClipName + ": Video object is not visible, but alpha_pause_treshold is set to -1, updating frame");
 				}
 			}
 		}
