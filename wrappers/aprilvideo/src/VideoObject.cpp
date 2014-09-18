@@ -35,7 +35,9 @@ namespace aprilvideo
 {
     harray<aprilui::PropertyDescription> VideoObject::_propertyDescriptions;
 
-	extern int gRefCount, gNumWorkerThreads;
+	extern int gNumWorkerThreads;
+	extern harray<VideoObject*> gReferences;
+	extern hmutex gReferenceMutex;
 	extern TheoraVideoManager* gVideoManager;
 	extern hstr defaultFileExtension;
 	
@@ -59,7 +61,9 @@ namespace aprilvideo
 		mSound = NULL;
 		mAudioPlayer = NULL;
 		mAudioSyncOffset = 0;
-		++gRefCount;
+		gReferenceMutex.lock();
+		gReferences += this;
+		gReferenceMutex.unlock();
 		mAlphaPauseTreshold = 0;
 		mPrevFrameNumber = 0;
 		mSeeked = 0;
@@ -87,9 +91,12 @@ namespace aprilvideo
 	
 	VideoObject::~VideoObject()
 	{
-		--gRefCount;
+		gReferenceMutex.lock();
+		gReferences.remove(this);
+		bool managerDone = gReferences.size() == 0;
+		gReferenceMutex.unlock();
 		destroyResources();
-		if (gRefCount <= 0 && gVideoManager)
+		if (managerDone && gVideoManager)
 		{
 			hlog::write(logTag, "Destroying Video manager, no more active clips found.");
 			delete gVideoManager;
@@ -434,7 +441,7 @@ namespace aprilvideo
 						unsigned char* nulldata = new unsigned char[size];
 						memset(nulldata, 0, size);
 						
-						mTexture->getRenderTexture()->write(0, 0, w, h, 0, 0, nulldata, w, h, _getTextureFormat());
+						mTexture->getTexture()->write(0, 0, w, h, 0, 0, nulldata, w, h, _getTextureFormat());
 						
 						delete [] nulldata;
 					}
@@ -453,13 +460,13 @@ namespace aprilvideo
 				char msg[1024];
 				for (int i = 0; i < n; i++)
 				{
-					mTexture->getRenderTexture()->write(0, 0, r.w, r.h, 0, 0, f->getBuffer(), r.w, r.h, textureFormat);
+					mTexture->getTexture()->write(0, 0, r.w, r.h, 0, 0, f->getBuffer(), r.w, r.h, textureFormat);
 				}
 				float diff = ((float) (clock() - t) * 1000.0f) / CLOCKS_PER_SEC;
 				sprintf(msg, "BENCHMARK: uploading n %dx%d video frames to texture took %.1fms (%.2fms average per frame)\n", (int) r.w, (int )r.h, diff, diff / n);
 				hlog::write(logTag, msg);
 #else
-				mTexture->getRenderTexture()->write(0, 0, r.w, r.h, 0, 0, f->getBuffer(), r.w, r.h, textureFormat);
+				mTexture->getTexture()->write(0, 0, r.w, r.h, 0, 0, f->getBuffer(), r.w, r.h, textureFormat);
 #endif
 				if (pop)
 				{
