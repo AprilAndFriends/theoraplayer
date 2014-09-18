@@ -45,7 +45,7 @@ namespace aprilvideo
 				mStartedPlaying = 1;
 				mPlayer->play();
 			}
-			else if (paused && !playerPaused && !mPlayer->isFadingOut())
+			else if (paused && !playerPaused && mStartedPlaying && !mPlayer->isFadingOut())
 			{
 				mPlayer->pause();
 			}
