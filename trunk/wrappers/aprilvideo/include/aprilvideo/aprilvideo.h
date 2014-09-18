@@ -15,10 +15,12 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 namespace aprilvideo
 {
+	class VideoObject;
 	extern hstr logTag;
 
 	void aprilVideoFnExport init(int num_worker_threads = 1);
 	void aprilVideoFnExport destroy();
+	harray<VideoObject*> aprilVideoFnExport getActiveVideoObjects();
 	bool aprilVideoFnExport isDebugModeEnabled();
 	void aprilVideoFnExport setDebugModeEnabled(bool enabled);
 }

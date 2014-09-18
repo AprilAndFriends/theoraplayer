@@ -72,6 +72,8 @@ namespace aprilvideo
 		
 		hstr getFullPath();
 		
+		aprilui::Texture* getTexture() { return mTexture; }
+		
 		void play();
 		void pause();
 		void stop();

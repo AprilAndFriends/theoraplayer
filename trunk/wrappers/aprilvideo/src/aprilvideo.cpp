@@ -19,7 +19,9 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 namespace aprilvideo
 {
 	TheoraVideoManager* gVideoManager = NULL;
-	int gRefCount = 0, gNumWorkerThreads = 1;
+	int gNumWorkerThreads = 1;
+	harray<VideoObject*> gReferences;
+	hmutex gReferenceMutex;
 	hstr logTag = "aprilvideo", defaultFileExtension = ".ogv";
 	bool debugMode = 0;
 
@@ -55,5 +57,15 @@ namespace aprilvideo
 	void destroy()
 	{
 	
+	}
+	
+	harray<VideoObject*> getActiveVideoObjects()
+	{
+		harray<VideoObject*> videos;
+		gReferenceMutex.lock();
+		videos = gReferences;
+		gReferenceMutex.unlock();
+		
+		return videos;
 	}
 }
