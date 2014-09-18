@@ -8,6 +8,8 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
 #ifdef _WIN32
 #pragma warning( disable: 4251 ) // MSVC++
+
+#ifdef _DEBUG
 #include "windows.h"
 const DWORD MS_VC_EXCEPTION=0x406D1388;
 
@@ -38,6 +40,8 @@ void SetThreadName( DWORD dwThreadID, char* threadName)
 		
 	}
 }
+
+#endif
 #endif
 #include "TheoraWorkerThread.h"
 #include "TheoraVideoManager.h"
@@ -45,8 +49,10 @@ void SetThreadName( DWORD dwThreadID, char* threadName)
 #include "TheoraAsync.h"
 #include "TheoraUtil.h"
 
+#ifdef _DEBUG
 static int threadCounter = 1;
 static TheoraMutex counterMutex;
+#endif
 
 TheoraWorkerThread::TheoraWorkerThread() : TheoraThread()
 {
@@ -60,6 +66,7 @@ TheoraWorkerThread::~TheoraWorkerThread()
 
 void TheoraWorkerThread::execute()
 {
+#ifdef _DEBUG
 	char name[64];
 	counterMutex.lock();
 #if !defined(_WIN32) && !defined(_WINRT)
@@ -69,7 +76,7 @@ void TheoraWorkerThread::execute()
 	SetThreadName((DWORD) mId, name);
 #endif
 	counterMutex.unlock();
-			
+#endif
 	while (isRunning())
 	{
 		mClip = TheoraVideoManager::getSingleton().requestWork(this);
