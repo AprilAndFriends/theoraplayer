@@ -402,7 +402,18 @@ namespace aprilvideo
 			}
 			if (category == "video" && !xal::mgr->hasCategory("video"))
 			{
+#if defined(_WINRT) || defined(_ANDROID)
 				xal::mgr->createCategory("video", xal::ON_DEMAND, xal::DISK);
+#else
+				if (april::getSystemInfo().ram >= 512)
+				{
+					xal::mgr->createCategory("video", xal::STREAMED, xal::RAM);
+				}
+				else
+				{
+					xal::mgr->createCategory("video", xal::STREAMED, xal::DISK);
+				}
+#endif
 			}
 			mSound = xal::mgr->createSound(this->dataset->getFilePath() + "/video/" + mAudioName, category);
 
