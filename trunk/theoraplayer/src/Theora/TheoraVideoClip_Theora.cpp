@@ -131,7 +131,7 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 			if (time < mTimer->getTime() && !mRestarted && frame_number % 16 != 0)
 			{
 				// %16 operation is here to prevent a playback halt during video playback if the decoder can't keep up with demand.
-#ifdef _DEBUG
+#ifdef _DEBUG_FRAMEDROP
 				th_writelog(mName + ": pre-dropped frame " + str((int) frame_number));
 #endif
 				++mNumDroppedFrames;
