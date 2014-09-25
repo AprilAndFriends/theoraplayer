@@ -245,7 +245,7 @@ int TheoraVideoClip::discardOutdatedFrames(float absTime)
     
 	if (nPop > 0)
     {
-#ifdef _DEBUG
+#ifdef _DEBUG_FRAMEDROP
         std::string log = getName() + ": dropped frame ";
     
         int i = nPop;
