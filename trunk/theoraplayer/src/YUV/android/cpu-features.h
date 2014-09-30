@@ -173,10 +173,10 @@ enum {
 };
 
 // libtheoraplayer addition, renamed this to "Ext" as not to conflict with your own project if you've included cpu-features.c in it
-extern uint64_t    android_getCpuFeaturesExt(void);
+extern uint64_t    libtheoraplayer_android_getCpuFeaturesExt(void);
 
 /* Return the number of CPU cores detected on this device. */
-extern int         android_getCpuCount(void);
+extern int         libtheoraplayer_android_getCpuCount(void);
 
 /* The following is used to force the CPU count and features
  * mask in sandboxed processes. Under 4.1 and higher, these processes
@@ -188,7 +188,7 @@ extern int         android_getCpuCount(void);
  *
  * This function return 1 on success, and 0 on failure.
  */
-extern int android_setCpu(int      cpu_count,
+extern int libtheoraplayer_android_setCpu(int      cpu_count,
                           uint64_t cpu_features);
 
 #ifdef __arm__
@@ -196,12 +196,12 @@ extern int android_setCpu(int      cpu_count,
  * Note that this cannot work on sandboxed processes under 4.1 and
  * higher, unless you called android_setCpuArm() before.
  */
-extern uint32_t android_getCpuIdArm(void);
+extern uint32_t libtheoraplayer_android_getCpuIdArm(void);
 
 /* An ARM-specific variant of android_setCpu() that also allows you
  * to set the ARM CPUID field.
  */
-extern int android_setCpuArm(int      cpu_count,
+extern int libtheoraplayer_android_setCpuArm(int      cpu_count,
                              uint64_t cpu_features,
                              uint32_t cpu_id);
 #endif

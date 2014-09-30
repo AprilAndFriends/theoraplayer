@@ -108,7 +108,7 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 	       "  - libvorbis version: " +  std::string(vorbis_version_string()) + "\n";
 #endif
 #ifdef _ANDROID
-	uint64_t features = android_getCpuFeaturesExt();
+	uint64_t features = libtheoraplayer_android_getCpuFeaturesExt();
 	char s[128];
 	sprintf(s, "  - Android: CPU Features: %u\n", (unsigned int) features);
 	msg += s;
