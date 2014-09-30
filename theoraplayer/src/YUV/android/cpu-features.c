@@ -840,7 +840,7 @@ android_cpuInit(void)
 
 
 AndroidCpuFamily
-android_getCpuFamily(void)
+libtheoraplayer_android_getCpuFamily(void)
 {
     pthread_once(&g_once, android_cpuInit);
     return g_cpuFamily;
@@ -848,7 +848,7 @@ android_getCpuFamily(void)
 
 
 uint64_t
-android_getCpuFeaturesExt(void)
+libtheoraplayer_android_getCpuFeaturesExt(void)
 {
     pthread_once(&g_once, android_cpuInit);
     return g_cpuFeatures;
@@ -856,20 +856,20 @@ android_getCpuFeaturesExt(void)
 
 
 int
-android_getCpuCount(void)
+libtheoraplayer_android_getCpuCount(void)
 {
     pthread_once(&g_once, android_cpuInit);
     return g_cpuCount;
 }
 
 static void
-android_cpuInitDummy(void)
+libtheoraplayer_android_cpuInitDummy(void)
 {
     g_inited = 1;
 }
 
 int
-android_setCpu(int cpu_count, uint64_t cpu_features)
+libtheoraplayer_android_setCpu(int cpu_count, uint64_t cpu_features)
 {
     /* Fail if the library was already initialized. */
     if (g_inited)
@@ -878,21 +878,21 @@ android_setCpu(int cpu_count, uint64_t cpu_features)
     android_cpuInitFamily();
     g_cpuCount = (cpu_count <= 0 ? 1 : cpu_count);
     g_cpuFeatures = cpu_features;
-    pthread_once(&g_once, android_cpuInitDummy);
+    pthread_once(&g_once, libtheoraplayer_android_cpuInitDummy);
 
     return 1;
 }
 
 #ifdef __arm__
 uint32_t
-android_getCpuIdArm(void)
+libtheoraplayer_android_getCpuIdArm(void)
 {
     pthread_once(&g_once, android_cpuInit);
     return g_cpuIdArm;
 }
 
 int
-android_setCpuArm(int cpu_count, uint64_t cpu_features, uint32_t cpu_id)
+libtheoraplayer_android_setCpuArm(int cpu_count, uint64_t cpu_features, uint32_t cpu_id)
 {
     if (!android_setCpu(cpu_count, cpu_features))
         return 0;
