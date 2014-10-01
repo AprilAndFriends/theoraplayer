@@ -446,15 +446,7 @@ namespace aprilvideo
 					pop = false;
 					if (!f) // didn't decode anything in time, so just upload empty data to avoid having undefined texture data
 					{
-						int w = mTexture->getWidth();
-						int h = mTexture->getHeight();
-						int size = w * h * 4;
-						unsigned char* nulldata = new unsigned char[size];
-						memset(nulldata, 0, size);
-						
-						mTexture->getTexture()->write(0, 0, w, h, 0, 0, nulldata, w, h, _getTextureFormat());
-						
-						delete [] nulldata;
+						mTexture->getTexture()->clear();
 					}
 				}
 			}
