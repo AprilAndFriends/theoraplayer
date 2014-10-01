@@ -894,7 +894,7 @@ libtheoraplayer_android_getCpuIdArm(void)
 int
 libtheoraplayer_android_setCpuArm(int cpu_count, uint64_t cpu_features, uint32_t cpu_id)
 {
-    if (!android_setCpu(cpu_count, cpu_features))
+	if (!libtheoraplayer_android_setCpu(cpu_count, cpu_features))
         return 0;
 
     g_cpuIdArm = cpu_id;
