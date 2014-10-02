@@ -56,7 +56,11 @@ namespace aprilvideo
 
 	void destroy()
 	{
-	
+		if (gVideoManager)
+		{
+			delete gVideoManager;
+			gVideoManager = NULL;
+		}
 	}
 	
 	harray<VideoObject*> getActiveVideoObjects()
