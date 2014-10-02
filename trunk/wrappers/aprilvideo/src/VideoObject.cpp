@@ -93,15 +93,8 @@ namespace aprilvideo
 	{
 		gReferenceMutex.lock();
 		gReferences.remove(this);
-		bool managerDone = gReferences.size() == 0;
 		gReferenceMutex.unlock();
 		destroyResources();
-		if (managerDone && gVideoManager)
-		{
-			hlog::write(logTag, "Destroying Video manager, no more active clips found.");
-			delete gVideoManager;
-			gVideoManager = NULL;
-		}
 	}
 	
 	bool VideoObject::isPlaying()
