@@ -12,10 +12,6 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include "aprilvideo.h"
 #include "VideoObject.h"
 
-#ifdef _IOS
-#define __NPOT_TEXTURE // iOS armv7 and newer devices support non-power-of-two textures so let's use it.
-#endif
-
 namespace aprilvideo
 {
 	TheoraVideoManager* gVideoManager = NULL;

@@ -225,11 +225,11 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 	
 	mWidth = mInfo.TheoraInfo.frame_width;
 	mHeight = mInfo.TheoraInfo.frame_height;
-    mSubFrameWidth	 = mInfo.TheoraInfo.pic_width;
-    mSubFrameHeight	 = mInfo.TheoraInfo.pic_height;
-    mSubFrameOffsetX = mInfo.TheoraInfo.pic_x;
-    mSubFrameOffsetY = mInfo.TheoraInfo.pic_y;
-    mStride = (mStride == 1) ? mStride = _nextPow2(getWidth()) : getWidth();
+	mSubFrameWidth	 = mInfo.TheoraInfo.pic_width;
+	mSubFrameHeight	 = mInfo.TheoraInfo.pic_height;
+	mSubFrameOffsetX = mInfo.TheoraInfo.pic_x;
+	mSubFrameOffsetY = mInfo.TheoraInfo.pic_y;
+	mStride = (mStride == 1) ? mStride = _nextPow2(getWidth()) : getWidth();
 	mFPS = mInfo.TheoraInfo.fps_numerator / (float) mInfo.TheoraInfo.fps_denominator;
 	
 #ifdef _DEBUG
