@@ -25,10 +25,6 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include "VideoObject.h"
 #include "AudioVideoTimer.h"
 
-#ifdef _IOS
-#define __NPOT_TEXTURE // iOS armv7 and newer devices support non-power-of-two textures so let's use it.
-#endif
-
 //#define _TEXWRITE_BENCHMARK // uncomment this to benchmark texture upload speed
 
 namespace aprilvideo
@@ -40,13 +36,6 @@ namespace aprilvideo
 	extern hmutex gReferenceMutex;
 	extern TheoraVideoManager* gVideoManager;
 	extern hstr defaultFileExtension;
-	
-	static int _nextPow2(int x)
-	{
-		int y;
-		for (y = 1; y < x; y *= 2);
-		return y;
-	}
 	
 	VideoObject::VideoObject(chstr name, grect rect) : aprilui::ImageBox(name, rect)
 	{
@@ -287,8 +276,8 @@ namespace aprilvideo
 			else if (textureFormat == april::Image::FORMAT_GRAYSCALE)	mode = TH_GREY;
 			int ram = april::getSystemInfo().ram;
 			int precached = 16;
-#if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM) && !defined(_WINP8)
-			// Android and WinRT ARM libtheoraplayer uses ARM optimized libtheora which is faster, but still slower than
+#if defined(_ANDROID) || defined(_WINRT) && !defined(_WINP8)
+			// Android and WinRT libtheoraplayer uses an optimized libtheora which is faster, but still slower than
 			// a native hardware accelerated codec. So (for now) we use a larger precache to counter it. Though, WinP8 can't handle this memory-wise.
 			if (ram > 512) precached = 32;
 #else
@@ -356,11 +345,13 @@ namespace aprilvideo
 		mClip->setAutoRestart(mLoop);
 		
 		float w = mClip->getWidth(), h = mClip->getHeight();
-#ifdef __NPOT_TEXTURE
-        float tw = w, th = h;
-#else
-        float tw = _nextPow2(w), th = _nextPow2(h);
-#endif
+		float tw = w, th = h;
+		april::RenderSystem::Caps caps = april::rendersys->getCaps();
+		if (!caps.npotTexturesLimited && !caps.npotTextures)
+		{
+			tw = hpotceil(tw);
+			th = hpotceil(th);
+		}
 		april::Texture* tex = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
         tex->setAddressMode(april::Texture::ADDRESS_CLAMP);
 		mTexture = new aprilui::Texture(tex->getFilename(), tex);
@@ -368,13 +359,13 @@ namespace aprilvideo
         mVideoImage->setBlendMode(mBlendMode);
 		if (waitForCache)
 		{
-#if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
+#if defined(_ANDROID) || defined(_WINRT)
 			hlog::write(logTag, "Waiting for cache: " + path);
 #endif
 			mClip->waitForCache(2 / mClip->getNumPrecachedFrames(), 5.0f); // better to wait a while then to display an empty image
 			mClip->waitForCache(0.25f, 0.5f);
 		
-#if defined(_ANDROID) || defined(_WINRT) && defined(_WINARM)
+#if defined(_ANDROID) || defined(_WINRT)
 			if (w * h >= 768 * 384) // best to fill the cache on large videos on Android/WinRT ARM to counter a slower codec
 			{
 				mClip->waitForCache(0.9f, 2.0f);
@@ -437,10 +428,6 @@ namespace aprilvideo
 					}
 					f = mClip->getFrameQueue()->getFirstAvailableFrame();
 					pop = false;
-					if (!f) // didn't decode anything in time, so just upload empty data to avoid having undefined texture data
-					{
-						mTexture->getTexture()->clear();
-					}
 				}
 			}
 			if (f)

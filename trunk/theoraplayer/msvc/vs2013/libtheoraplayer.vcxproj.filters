@@ -325,14 +325,20 @@
     <None Include="..\..\src\AVFoundation\TheoraVideoClip_AVFoundation.mm">
       <Filter>src\AVFoundation</Filter>
     </None>
-    <None Include="..\..\src\FFmpeg\TheoraVideoClip_FFmpeg.cpp" />
-    <None Include="..\..\src\FFmpeg\TheoraVideoClip_FFmpeg.h" />
-    <None Include="..\..\src\AVFoundation\TheoraVideoClip_AVFoundation.h" />
     <None Include="..\..\src\YUV\libyuv\src\row_x86.asm">
       <Filter>src\YUV\libyuv\src</Filter>
     </None>
     <None Include="..\..\src\YUV\libyuv\src\x86inc.asm">
       <Filter>src\YUV\libyuv\src</Filter>
+    </None>
+    <None Include="..\..\src\FFmpeg\TheoraVideoClip_FFmpeg.cpp">
+      <Filter>src\FFmpeg</Filter>
+    </None>
+    <None Include="..\..\src\FFmpeg\TheoraVideoClip_FFmpeg.h">
+      <Filter>src\FFmpeg</Filter>
+    </None>
+    <None Include="..\..\src\AVFoundation\TheoraVideoClip_AVFoundation.h">
+      <Filter>src\AVFoundation</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
