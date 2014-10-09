@@ -68,7 +68,7 @@ namespace aprilvideo
 		VideoObject(chstr name, grect rect);
 		static aprilui::Object* createInstance(chstr name, grect rect);
 		~VideoObject();
-		hstr getClassName() const { return "VideoObject"; }
+		inline hstr getClassName() const { return "VideoObject"; }
 		
 		hstr getFullPath();
 		
