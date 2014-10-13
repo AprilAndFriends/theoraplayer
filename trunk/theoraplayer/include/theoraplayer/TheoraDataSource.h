@@ -11,6 +11,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 #include <stdint.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <string>
 #include "TheoraExport.h"
 
@@ -30,7 +31,7 @@ public:
 		if function returns less bytes then nBytes, the system assumes EOF is reached.
 	*/
 	virtual int read(void* output,int nBytes)=0;
-    //! returns a string representation of the DataSource, eg 'File: source.ogg'
+	//! returns a string representation of the DataSource, eg 'File: source.ogg'
 	virtual std::string repr()=0;
 	//! position the source pointer to byte_index from the start of the source
 	virtual void seek(uint64_t byte_index)=0;
