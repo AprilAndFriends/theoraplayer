@@ -470,10 +470,10 @@ namespace aprilvideo
 
 	}
 	
-	void VideoObject::OnDraw()
+	void VideoObject::_draw()
 	{
 		updateFrame();
-		ImageBox::OnDraw();
+		ImageBox::_draw();
 	}
 	
 	void VideoObject::update(float timeDelta)
