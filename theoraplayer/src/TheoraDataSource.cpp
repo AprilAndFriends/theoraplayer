@@ -46,7 +46,7 @@ void TheoraFileDataSource::openFile()
             throw TheoraGenericException(msg);
         }
 		struct stat s;
-		fstat(fileno(mFilePtr), &s);
+		fstat(_fileno(mFilePtr), &s);
 		mSize = (uint64_t) s.st_size;
 	}
 }
@@ -87,7 +87,7 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
 	FILE* f = fopen(filename.c_str(),"rb");
 	if (!f) throw TheoraGenericException("Can't open video file: "+filename);
 	struct stat s;
-	fstat(fileno(f), &s);
+	fstat(_fileno(f), &s);
 	mSize = (uint64_t) s.st_size;
 	mData = new unsigned char[mSize];
 	if (mSize < UINT_MAX)

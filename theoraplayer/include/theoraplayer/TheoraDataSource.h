@@ -9,6 +9,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #ifndef _TheoraDataSource_h
 #define _TheoraDataSource_h
 
+#include <stdint.h>
 #include <stdio.h>
 #include <string>
 #include "TheoraExport.h"
