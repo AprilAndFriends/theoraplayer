@@ -28,7 +28,7 @@ int AprilVideoDataSource::read(void* output, int nBytes)
 
 void AprilVideoDataSource::seek(uint64_t byte_index)
 {
-	mResource.seek((uint64_t) byte_index, hresource::START);
+	mResource.seek((long) byte_index, hresource::START);
 }
 
 uint64_t AprilVideoDataSource::size()
