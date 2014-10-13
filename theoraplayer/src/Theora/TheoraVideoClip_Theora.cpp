@@ -454,7 +454,7 @@ float TheoraVideoClip_Theora::decodeAudio()
 	float timestamp = -1;
 	bool read_past_timestamp = 0;
 	
-	float factor = 1.0f / mAudioFrequency;
+	float factor = 1.0f / (mAudioFrequency);
 	float videoTime = (float) mLastDecodedFrameNumber / mFPS;
 	float min = mFrameQueue->getSize() / mFPS + 1.0f;
 
@@ -488,10 +488,13 @@ float TheoraVideoClip_Theora::decodeAudio()
 					break;
 			}
 		}
-		addAudioPacket(pcm, len, mAudioGain);
-		mReadAudioSamples += len;
-		if (read_past_timestamp) timestamp += (float) len / mInfo.VorbisInfo.rate;
-		vorbis_synthesis_read(&mInfo.VorbisDSPState, len); // tell vorbis we read a number of samples
+		if (len > 0)
+		{
+			addAudioPacket(pcm, len, mAudioGain);
+			mReadAudioSamples += len;
+			if (read_past_timestamp) timestamp += (float) len / mInfo.VorbisInfo.rate;
+			vorbis_synthesis_read(&mInfo.VorbisDSPState, len); // tell vorbis we read a number of samples
+		}
 	}
 	return timestamp;
 }

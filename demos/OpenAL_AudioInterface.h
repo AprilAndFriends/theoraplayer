@@ -24,6 +24,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 	
 class OpenAL_AudioInterface : public TheoraAudioInterface, TheoraTimer
 {
+	int mSourceNumChannels;
 	int mMaxBuffSize;
 	int mBuffSize;
 	short *mTempBuffer;
