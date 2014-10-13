@@ -180,8 +180,8 @@ void TheoraVideoClip_Theora::_restart()
 {
 	bool paused = mTimer->isPaused();
 	if (!paused) mTimer->pause();
-	long granule=0;
-	th_decode_ctl(mInfo.TheoraDecoder,TH_DECCTL_SET_GRANPOS,&granule,sizeof(granule));
+	long initialGranule = 0;
+	th_decode_ctl(mInfo.TheoraDecoder,TH_DECCTL_SET_GRANPOS, &initialGranule, sizeof(initialGranule));
 	th_decode_free(mInfo.TheoraDecoder);
 	mInfo.TheoraDecoder=th_decode_alloc(&mInfo.TheoraInfo,mInfo.TheoraSetup);
 	ogg_stream_reset(&mInfo.TheoraStreamState);
@@ -204,7 +204,7 @@ void TheoraVideoClip_Theora::_restart()
 	ogg_sync_reset(&mInfo.OggSyncState);
 	mStream->seek(0);
 	ogg_int64_t granulePos = 0;
-	th_decode_ctl(mInfo.TheoraDecoder, TH_DECCTL_SET_GRANPOS, &granulePos, sizeof(granule));
+	th_decode_ctl(mInfo.TheoraDecoder, TH_DECCTL_SET_GRANPOS, &granulePos, sizeof(granulePos));
 	
 	mEndOfFile = false;
 	
@@ -240,12 +240,18 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 	// find out the duration of the file by seeking to the end
 	// having ogg decode pages, extract the granule pos from
 	// the last theora page and seek back to beginning of the file
-	long streamSize = mStream->size(), seekPos;
+	uint64_t streamSize = mStream->size(), seekPos;
 	for (int i = 1; i <= 50; ++i)
 	{
 		ogg_sync_reset(&mInfo.OggSyncState);
-		seekPos = streamSize - 4096 * i;
-		if (seekPos < 0) seekPos = 0;
+		if (4096 * i > streamSize)
+		{
+			seekPos = 0;
+		}
+		else
+		{
+			seekPos = streamSize - 4096 * i;
+		}
 		mStream->seek(seekPos);
 		
 		char *buffer = ogg_sync_buffer(&mInfo.OggSyncState, 4096 * i);
@@ -266,9 +272,9 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 				mNumFrames = (int) th_granule_frame(mInfo.TheoraDecoder, granule) + 1;
 			}
 			else if (mNumFrames > 0)
-				++mNumFrames; // append delta frames at the end to get the exact numbe
+				++mNumFrames; // append delta frames at the end to get the exact number
 		}
-		if (mNumFrames > 0 || streamSize - 4096 * i < 0) break;
+		if (mNumFrames > 0 || streamSize < 4096 * i) break;
 		
 	}
 	if (mNumFrames < 0)
@@ -492,7 +498,8 @@ float TheoraVideoClip_Theora::decodeAudio()
 
 long TheoraVideoClip_Theora::seekPage(long targetFrame, bool return_keyframe)
 {
-	int i,seek_min = 0, seek_max = (int) mStream->size();
+	int i;
+	uint64_t seek_min = 0, seek_max = mStream->size();
 	long frame;
 	ogg_int64_t granule = 0;
 	
@@ -500,7 +507,7 @@ long TheoraVideoClip_Theora::seekPage(long targetFrame, bool return_keyframe)
 	for (i = (targetFrame == 0) ? 100 : 0; i < 100; ++i)
 	{
 		ogg_sync_reset(&mInfo.OggSyncState);
-		mStream->seek((seek_min + seek_max) / 2); // do a binary search
+		mStream->seek(seek_min / 2 + seek_max / 2); // do a binary search
 		memset(&mInfo.OggPage, 0, sizeof(ogg_page));
 		ogg_sync_pageseek(&mInfo.OggSyncState, &mInfo.OggPage);
 		
@@ -523,8 +530,8 @@ long TheoraVideoClip_Theora::seekPage(long targetFrame, bool return_keyframe)
 							break;
 						}
 						// we're not close enough, let's shorten the borders of the binary search
-						if (targetFrame - 1 > frame) seek_min = (seek_min + seek_max) / 2;
-						else				         seek_max = (seek_min + seek_max) / 2;
+						if (targetFrame - 1 > frame) seek_min = seek_min / 2 + seek_max / 2;
+						else				         seek_max = seek_min / 2 + seek_max / 2;
 						break;
 					}
 				}

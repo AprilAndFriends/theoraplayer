@@ -32,11 +32,11 @@ public:
     //! returns a string representation of the DataSource, eg 'File: source.ogg'
 	virtual std::string repr()=0;
 	//! position the source pointer to byte_index from the start of the source
-	virtual void seek(unsigned long byte_index)=0;
+	virtual void seek(uint64_t byte_index)=0;
 	//! return the size of the stream in bytes
-	virtual unsigned long size()=0;
+	virtual uint64_t size()=0;
 	//! return the current position of the source pointer
-	virtual unsigned long tell()=0;
+	virtual uint64_t tell()=0;
 };
 
 
@@ -47,7 +47,7 @@ class TheoraPlayerExport TheoraFileDataSource : public TheoraDataSource
 {
 	FILE* mFilePtr;
 	std::string mFilename;
-	unsigned long mSize;
+	uint64_t mSize;
 	
 	void openFile();
 public:
@@ -55,10 +55,10 @@ public:
 	~TheoraFileDataSource();
 
 	int read(void* output,int nBytes);
-	void seek(unsigned long byte_index);
+	void seek(uint64_t byte_index);
 	std::string repr() { return mFilename; }
-	unsigned long size();
-	unsigned long tell();
+	uint64_t size();
+	uint64_t tell();
 	
 	std::string getFilename() { return mFilename; }
 };
@@ -71,7 +71,7 @@ public:
 class TheoraPlayerExport TheoraMemoryFileDataSource : public TheoraDataSource
 {
 	std::string mFilename;
-	unsigned long mSize, mReadPointer;
+	uint64_t mSize, mReadPointer;
 	unsigned char* mData;
 public:
 	TheoraMemoryFileDataSource(unsigned char* data, long size, const std::string& filename = "memory");
@@ -79,10 +79,10 @@ public:
 	~TheoraMemoryFileDataSource();
 
 	int read(void* output,int nBytes);
-	void seek(unsigned long byte_index);
+	void seek(uint64_t byte_index);
 	std::string repr() { return "MEM:"+mFilename; }
-	unsigned long size();
-	unsigned long tell();
+	uint64_t size();
+	uint64_t tell();
 	std::string getFilename() { return mFilename; }
 };
 

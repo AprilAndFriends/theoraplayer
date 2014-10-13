@@ -7,6 +7,7 @@ This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
 #include <stdio.h>
+#include <sys/stat.h>
 #include <memory.h>
 #include "TheoraDataSource.h"
 #include "TheoraException.h"
@@ -37,42 +38,45 @@ void TheoraFileDataSource::openFile()
 {
 	if (mFilePtr == NULL)
 	{
-		mFilePtr=fopen(mFilename.c_str(), "rb");
+		mFilePtr = fopen(mFilename.c_str(), "rb");
 		if (!mFilePtr)
         {
             std::string msg = "Can't open video file: " + mFilename;
             th_writelog(msg);
             throw TheoraGenericException(msg);
         }
-		fseek(mFilePtr, 0, SEEK_END);
-		mSize = ftell(mFilePtr);
-		fseek(mFilePtr, 0, SEEK_SET);
+		struct stat s;
+		fstat(fileno(mFilePtr), &s);
+		mSize = (uint64_t) s.st_size;
 	}
 }
 
 int TheoraFileDataSource::read(void* output, int nBytes)
 {
 	if (mFilePtr == NULL) openFile();
-	size_t n = fread(output, 1, nBytes, mFilePtr);
+	uint64_t n = fread(output, 1, nBytes, mFilePtr);
 	return (int) n;
 }
 
-void TheoraFileDataSource::seek(unsigned long byte_index)
+void TheoraFileDataSource::seek(uint64_t byte_index)
 {
 	if (mFilePtr == NULL) openFile();
-	fseek(mFilePtr, byte_index, SEEK_SET);
+	fpos_t fpos = byte_index;
+	fsetpos(mFilePtr, &fpos);
 }
 
-unsigned long TheoraFileDataSource::size()
+uint64_t TheoraFileDataSource::size()
 {
 	if (mFilePtr == NULL) openFile();
 	return mSize;
 }
 
-unsigned long TheoraFileDataSource::tell()
+uint64_t TheoraFileDataSource::tell()
 {
 	if (mFilePtr == NULL) return 0;
-	return ftell(mFilePtr);
+	fpos_t pos;
+	fgetpos(mFilePtr, &pos);
+	return (uint64_t) pos;
 }
 
 TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
@@ -80,13 +84,30 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
 	mData(0)
 {
 	mFilename=filename;
-	FILE* f=fopen(filename.c_str(),"rb");
+	FILE* f = fopen(filename.c_str(),"rb");
 	if (!f) throw TheoraGenericException("Can't open video file: "+filename);
-	fseek(f,0,SEEK_END);
-	mSize=ftell(f);
-	fseek(f,0,SEEK_SET);
-	mData=new unsigned char[mSize];
-	fread(mData,1,mSize,f);
+	struct stat s;
+	fstat(fileno(f), &s);
+	mSize = (uint64_t) s.st_size;
+	mData = new unsigned char[mSize];
+	if (mSize < UINT_MAX)
+	{
+		fread(mData, 1, (size_t) mSize, f);
+	}
+	else
+	{
+		for (uint64_t offset = 0; offset < mSize; offset += UINT_MAX)
+		{
+			if (mSize - offset >= UINT_MAX)
+			{
+				fread(mData + offset, 1, UINT_MAX, f);
+			}
+			else
+			{
+				fread(mData + offset, 1, (size_t) (mSize - offset), f);
+			}
+		}
+	}
 	fclose(f);
 }
 
@@ -112,17 +133,17 @@ int TheoraMemoryFileDataSource::read(void* output, int nBytes)
 	return n;
 }
 
-void TheoraMemoryFileDataSource::seek(unsigned long byte_index)
+void TheoraMemoryFileDataSource::seek(uint64_t byte_index)
 {
-	mReadPointer=byte_index;
+	mReadPointer = byte_index;
 }
 
-unsigned long TheoraMemoryFileDataSource::size()
+uint64_t TheoraMemoryFileDataSource::size()
 {
 	return mSize;
 }
 
-unsigned long TheoraMemoryFileDataSource::tell()
+uint64_t TheoraMemoryFileDataSource::tell()
 {
 	return mReadPointer;
 }

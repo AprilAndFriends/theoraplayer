@@ -113,7 +113,7 @@ void mouse(int button,int state, int x, int y)
 	{
 		mx=((float) x/glutGet(GLUT_WINDOW_WIDTH))*window_w;
 		my=((float) y/glutGet(GLUT_WINDOW_HEIGHT))*window_h;
-		OnClick(mx,my*window_h);
+		OnClick(mx, my);
 	}
 }
 

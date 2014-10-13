@@ -1242,7 +1242,7 @@
 		D1473F20150CA69B00B20490 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 			};
 			buildConfigurationList = D1473F23150CA69B00B20490 /* Build configuration list for PBXProject "theoraplayer_workspace" */;
 			compatibilityVersion = "Xcode 3.2";
