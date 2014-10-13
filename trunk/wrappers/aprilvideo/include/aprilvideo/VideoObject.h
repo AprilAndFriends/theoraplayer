@@ -61,6 +61,8 @@ namespace aprilvideo
 		xal::Player* mAudioPlayer;
 		xal::Sound* mSound;
 		
+		void _draw();
+
 		april::Image::Format _getTextureFormat();
 		void destroyResources();
 
@@ -72,7 +74,7 @@ namespace aprilvideo
 		
 		hstr getFullPath();
 		
-		aprilui::Texture* getTexture() { return mTexture; }
+		inline aprilui::Texture* getTexture() { return mTexture; }
 		
 		void play();
 		void pause();
@@ -89,7 +91,6 @@ namespace aprilvideo
 		
 		void update(float timeDelta);
 		void updateFrame();
-		void OnDraw();
 		
 		void setAlphaTreshold(int treshold);
 		inline int getAlphaTreshold() { return mAlphaPauseTreshold; }
