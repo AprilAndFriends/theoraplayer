@@ -291,6 +291,7 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	mHeight = mSubFrameHeight = videoTrack.naturalSize.height;
 	mFrameDuration = 1.0f / mFPS;
 	mDuration = (float) CMTimeGetSeconds(asset.duration);
+	mNumFrames = mDuration * mFPS;
 	if (mFrameQueue == NULL)
 	{
 		mFrameQueue = new TheoraFrameQueue(this);
