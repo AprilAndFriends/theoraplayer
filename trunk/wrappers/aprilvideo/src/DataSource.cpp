@@ -26,17 +26,17 @@ int AprilVideoDataSource::read(void* output, int nBytes)
 	return mResource.read_raw(output, nBytes);
 }
 
-void AprilVideoDataSource::seek(unsigned long byte_index)
+void AprilVideoDataSource::seek(uint64_t byte_index)
 {
-	mResource.seek(byte_index, hresource::START);
+	mResource.seek((uint64_t) byte_index, hresource::START);
 }
 
-unsigned long AprilVideoDataSource::size()
+uint64_t AprilVideoDataSource::size()
 {
 	return mSize;
 }
 
-unsigned long AprilVideoDataSource::tell()
+uint64_t AprilVideoDataSource::tell()
 {
 	return mResource.position();
 }

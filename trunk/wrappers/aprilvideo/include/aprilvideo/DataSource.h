@@ -9,6 +9,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #ifndef APRILVIDEO_DATA_SOURCE_H
 #define APRILVIDEO_DATA_SOURCE_H
 
+#include <stdint.h>
 #include <hltypes/hstring.h>
 #include <hltypes/hresource.h>
 #include <theoraplayer/TheoraDataSource.h>
@@ -23,10 +24,10 @@ public:
 	~AprilVideoDataSource();
 	
 	int read(void* output, int nBytes);
-	void seek(unsigned long byte_index);
+	void seek(uint64_t byte_index);
 	std::string repr() { return "HRESOURCE:" + mFilename; }
-	unsigned long size();
-	unsigned long tell();
+	uint64_t size();
+	uint64_t tell();
 	hstr getFilename() { return mFilename; }
 };
 
