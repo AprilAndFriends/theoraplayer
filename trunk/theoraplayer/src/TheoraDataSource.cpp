@@ -46,7 +46,12 @@ void TheoraFileDataSource::openFile()
             throw TheoraGenericException(msg);
         }
 		struct stat s;
+		
+#ifdef _WIN32
 		fstat(_fileno(mFilePtr), &s);
+#else
+		fstat(fileno(mFilePtr), &s);
+#endif
 		mSize = (uint64_t) s.st_size;
 	}
 }
@@ -85,9 +90,13 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
 {
 	mFilename=filename;
 	FILE* f = fopen(filename.c_str(),"rb");
-	if (!f) throw TheoraGenericException("Can't open video file: "+filename);
+	if (!f) throw TheoraGenericException("Can't open video file: " + filename);
 	struct stat s;
+#ifdef _WIN32
 	fstat(_fileno(f), &s);
+#else
+	fstat(fileno(f), &s);
+#endif
 	mSize = (uint64_t) s.st_size;
 	mData = new unsigned char[mSize];
 	if (mSize < UINT_MAX)
@@ -96,18 +105,9 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
 	}
 	else
 	{
-		for (uint64_t offset = 0; offset < mSize; offset += UINT_MAX)
-		{
-			if (mSize - offset >= UINT_MAX)
-			{
-				fread(mData + offset, 1, UINT_MAX, f);
-			}
-			else
-			{
-				fread(mData + offset, 1, (size_t) (mSize - offset), f);
-			}
-		}
+		throw TheoraGenericException("Unable to preload file to memory, file is too large.");
 	}
+
 	fclose(f);
 }
 

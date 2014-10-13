@@ -23,6 +23,12 @@ short float2short(float f)
 OpenAL_AudioInterface::OpenAL_AudioInterface(TheoraVideoClip* owner,int nChannels,int freq) :
 	TheoraAudioInterface(owner,nChannels,freq), TheoraTimer()
 {
+	mSourceNumChannels = mNumChannels;
+	if (mNumChannels > 2)
+	{
+		// ignore audio with more than 2 channels, use only the stereo channels
+		mNumChannels = 2;
+	}
 	mMaxBuffSize = freq * mNumChannels * 2;
 	mBuffSize = 0;
 	mNumProcessedSamples = 0;
@@ -57,6 +63,19 @@ float OpenAL_AudioInterface::getQueuedAudioSize()
 
 void OpenAL_AudioInterface::insertData(float* data, int nSamples)
 {
+	float* tempData = NULL;
+	if (mSourceNumChannels > 2)
+	{
+		tempData = new float[nSamples * 2 / mSourceNumChannels + 16]; // 16 padding just in case
+		int i, n;
+		for (n = 0, i = 0; i < nSamples; i += mSourceNumChannels, n += 2)
+		{
+			tempData[n] = data[i];
+			tempData[n + 1] = data[i + 1];
+		}
+		data = tempData;
+		nSamples = n;
+	}
 	//printf("got %d bytes, %d buffers queued\n",nSamples,(int)mBufferQueue.size());
 	for (int i = 0; i < nSamples; i++)
 	{
@@ -88,6 +107,10 @@ void OpenAL_AudioInterface::insertData(float* data, int nSamples)
 			}
 
 		}
+	}
+	if (tempData)
+	{
+		delete [] tempData;
 	}
 }
 
