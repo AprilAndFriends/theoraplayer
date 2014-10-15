@@ -226,10 +226,17 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 #ifdef __FFMPEG
 		clip = new TheoraVideoClip_FFmpeg(data_source, output_mode, nPrecached, usePower2Stride);
 #endif
-	clip->load(data_source);
-	clip->decodeNextFrame(); // ensure the first frame is always preloaded and have the main thread do it to prevent potential thread starvatio
+	if (clip != NULL)
+	{
+		clip->load(data_source);
+		clip->decodeNextFrame(); // ensure the first frame is always preloaded and have the main thread do it to prevent potential thread starvatio
 
-	mClips.push_back(clip);
+		mClips.push_back(clip);
+	}
+	else
+	{
+		th_writelog("Failed creating video clip: " + data_source->repr());
+	}
 	mWorkMutex->unlock();
 	
 #ifdef _DECODING_BENCHMARK
