@@ -90,7 +90,7 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
 	mReadPointer(0),
 	mData(0)
 {
-	mFilename=filename;
+	mFilename = filename;
 	FILE* f = fopen(filename.c_str(),"rb");
 	if (!f) throw TheoraGenericException("Can't open video file: " + filename);
 
@@ -102,6 +102,10 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
 	fstat(fileno(f), &s);
 #endif
 	mSize = (uint64_t) s.st_size;
+	if (mSize > 0xFFFFFFFF)
+	{
+		throw TheoraGenericException("TheoraMemoryFileDataSource doesn't support files larger than 4GB!");
+	}
 	mData = new unsigned char[(unsigned int) mSize];
 	if (mSize < UINT_MAX)
 	{
