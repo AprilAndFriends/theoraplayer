@@ -18,7 +18,8 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 	#include <windows.h>
 	#include <GL/gl.h>
 	#include <GL/glut.h>
-#else
+#endif
+#ifdef __APPLE__
 	#include "objcUtil.h"
 	#ifdef _IOS
 		#import <OpenGLES/ES1/gl.h>
@@ -29,8 +30,12 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 		#include <GLUT/glut.h>
 	#endif
 #endif
+#ifdef _LINUX
+	#include <GL/gl.h>
+	#include <GL/glut.h>
+#endif
 
-#ifndef __APPLE__
+#ifdef _WIN32
 #include <GL/glext.h>
 extern PFNGLCREATEPROGRAMPROC glCreateProgram;
 extern PFNGLCREATESHADERPROC glCreateShader;
@@ -41,6 +46,10 @@ extern PFNGLCOMPILESHADERPROC glCompileShader;
 extern PFNGLATTACHSHADERPROC glAttachShader;
 extern PFNGLMULTITEXCOORD2FARBPROC glMultiTexCoord2fARB;
 extern PFNGLACTIVETEXTUREARBPROC glActiveTextureARB;
+#endif
+
+#ifdef _LINUX
+#include <GL/glext.h>
 #endif
 
 #include "util.h"

@@ -9,4 +9,8 @@
 #ifndef _UTIL_H
 #define _UTIL_H
 
+#ifndef WIN32
+unsigned long GetTickCount();
+#endif
+
 #endif

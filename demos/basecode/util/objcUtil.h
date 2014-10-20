@@ -9,7 +9,6 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #ifndef _OBJC_UTIL_H
 #define _OBJC_UTIL_H
 
-unsigned long GetTickCount();
 void ObjCUtil_setCWD();
 
 #endif

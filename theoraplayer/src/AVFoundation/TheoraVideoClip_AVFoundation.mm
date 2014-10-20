@@ -171,7 +171,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 			CVPixelBufferLockBaseAddress(imageBuffer, 0);
 			void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
 			
-			mStride = CVPixelBufferGetBytesPerRow(imageBuffer);
+			mStride = (int) CVPixelBufferGetBytesPerRow(imageBuffer);
 			size_t width = CVPixelBufferGetWidth(imageBuffer);
 			size_t height = CVPixelBufferGetHeight(imageBuffer);
 
