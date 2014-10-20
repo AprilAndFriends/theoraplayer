@@ -27,6 +27,19 @@ protected:
 		
 };
 
+class TheoraScopedLock
+{
+public:
+	TheoraScopedLock();
+	TheoraScopedLock(TheoraMutex* mutex);
+	~TheoraScopedLock();
+	void acquire(TheoraMutex* mutex);
+	void unlock();
+private:
+	TheoraMutex* mMutex;
+};
+
+
 /// @note Based on hltypes::Thread
 class TheoraThread
 {
