@@ -7,9 +7,6 @@ This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
 #include <stdio.h>
-#include <algorithm>
-#include <math.h>
-#include <map>
 #ifndef _WIN32
 #include <unistd.h>
 #include <pthread.h>

@@ -1,5 +1,10 @@
 #include "demo_basecode.h"
 
+#ifndef WIN32
+#include <sys/time.h>
+#include <unistd.h>
+#endif
+
 bool shader_on = 0;
 float FOVY = 45;
 std::string resourceExtension =
@@ -9,13 +14,21 @@ std::string resourceExtension =
 ".ogg";
 #endif
 
+#ifndef WIN32
+unsigned long GetTickCount()
+{
+	struct timeval tv;
+	if (gettimeofday(&tv, NULL) != 0) return 0;
+	return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+}
+#endif
 
 void psleep(int milliseconds)
 {
 #ifdef _WIN32
 	Sleep(milliseconds);
 #else
-    usleep(milliseconds*1000);
+    usleep(milliseconds * 1000);
 #endif
 }
 

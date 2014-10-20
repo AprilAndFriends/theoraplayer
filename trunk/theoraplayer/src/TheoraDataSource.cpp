@@ -68,7 +68,12 @@ int TheoraFileDataSource::read(void* output, int nBytes)
 void TheoraFileDataSource::seek(uint64_t byte_index)
 {
 	if (mFilePtr == NULL) openFile();
+#ifdef _LINUX //fpos_t is not a scalar in Linux, for more info refer here: https://code.google.com/p/libtheoraplayer/issues/detail?id=6
+	fpos_t fpos = { 0 };
+	fpos.__pos = byte_index;
+#else
 	fpos_t fpos = byte_index;
+#endif
 	fsetpos(mFilePtr, &fpos);
 }
 
@@ -81,9 +86,15 @@ uint64_t TheoraFileDataSource::size()
 uint64_t TheoraFileDataSource::tell()
 {
 	if (mFilePtr == NULL) return 0;
+#ifdef _LINUX
+	fpos_t pos;
+	fgetpos(mFilePtr, &pos);
+	return (uint64_t) pos.__pos;
+#else
 	fpos_t pos;
 	fgetpos(mFilePtr, &pos);
 	return (uint64_t) pos;
+#endif
 }
 
 TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :

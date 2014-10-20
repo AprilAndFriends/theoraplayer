@@ -534,6 +534,8 @@
 		D1C0152015619EDC00FBEF81 /* lightmap_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lightmap_demo.cpp; path = demos/lightmap_demo/lightmap_demo.cpp; sourceTree = "<group>"; };
 		D1C134C1157972CF005E8A5B /* parallax_mapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = parallax_mapping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C134C515797387005E8A5B /* parallax_mapping.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parallax_mapping.cpp; path = demos/parallax_mapping/parallax_mapping.cpp; sourceTree = "<group>"; };
+		D1C2F5CD19F502B100A21F0D /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = iOS.xcconfig; path = xcconfig/iOS.xcconfig; sourceTree = "<group>"; };
+		D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Mac.xcconfig; path = xcconfig/Mac.xcconfig; sourceTree = "<group>"; };
 		D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Ogg.xcodeproj; path = ogg/macosx/Ogg.xcodeproj; sourceTree = "<group>"; };
 		D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vorbis.xcodeproj; path = vorbis/macosx/Vorbis.xcodeproj; sourceTree = "<group>"; };
 		D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Theora.xcodeproj; path = theora/macosx/Theora.xcodeproj; sourceTree = "<group>"; };
@@ -753,6 +755,7 @@
 				D127F91616990217007E6835 /* Tremor.xcodeproj */,
 				D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */,
 				D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */,
+				D1C2F5C119F502A500A21F0D /* config */,
 				D1474109150CB6BD00B20490 /* glut_player */,
 				D1474107150CB6A700B20490 /* av_player */,
 				D147416E150CB74200B20490 /* multiple_videos */,
@@ -929,10 +932,10 @@
 		D16D9DDF150CBC5D001BD35C /* common */ = {
 			isa = PBXGroup;
 			children = (
-				D167761B155C52B40050EC64 /* demo_basecode.h */,
 				D127F7F61698C81C007E6835 /* util */,
 				D16A0EAB1698C5300016DF67 /* ios */,
 				D16A0EAA1698C5290016DF67 /* glut */,
+				D167761B155C52B40050EC64 /* demo_basecode.h */,
 				D1D098F0155F077C009F6AAA /* tga.cpp */,
 				D1D098F1155F077C009F6AAA /* tga.h */,
 				D167761D155C52B40050EC64 /* ObjModel.cpp */,
@@ -971,6 +974,15 @@
 				D1FB87A1157D4DFD0060641F /* parallax_mapping.frag */,
 			);
 			name = parallax_mapping;
+			sourceTree = "<group>";
+		};
+		D1C2F5C119F502A500A21F0D /* config */ = {
+			isa = PBXGroup;
+			children = (
+				D1C2F5CD19F502B100A21F0D /* iOS.xcconfig */,
+				D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */,
+			);
+			name = config;
 			sourceTree = "<group>";
 		};
 		D1D098CA155F05C5009F6AAA /* Products */ = {
@@ -1955,6 +1967,7 @@
 /* Begin XCBuildConfiguration section */
 		D12C208A1534D58B00B4904B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1965,6 +1978,7 @@
 		};
 		D12C208C1534D58B00B4904B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1975,6 +1989,7 @@
 		};
 		D12C208D1534D58B00B4904B /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1985,6 +2000,7 @@
 		};
 		D139464117C0EFAA0091F4A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -2039,6 +2055,7 @@
 		};
 		D1473F45150CA6D600B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -2066,6 +2083,7 @@
 		};
 		D1473F47150CA6E200B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CD19F502B100A21F0D /* iOS.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -2093,6 +2111,7 @@
 		};
 		D1474040150CAF0D00B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2104,6 +2123,7 @@
 		};
 		D1474042150CAF0D00B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2115,6 +2135,7 @@
 		};
 		D1474043150CAF0D00B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2126,6 +2147,7 @@
 		};
 		D14740F7150CB45E00B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2136,6 +2158,7 @@
 		};
 		D14740F9150CB45E00B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2146,6 +2169,7 @@
 		};
 		D14740FA150CB45E00B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2156,6 +2180,7 @@
 		};
 		D147411C150CB6F300B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2166,6 +2191,7 @@
 		};
 		D147411E150CB6F300B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2176,6 +2202,7 @@
 		};
 		D147411F150CB6F300B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2186,6 +2213,7 @@
 		};
 		D1474135150CB6F600B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2196,6 +2224,7 @@
 		};
 		D1474137150CB6F600B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2206,6 +2235,7 @@
 		};
 		D1474138150CB6F600B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2216,6 +2246,7 @@
 		};
 		D147414E150CB6F900B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2226,6 +2257,7 @@
 		};
 		D1474150150CB6F900B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2236,6 +2268,7 @@
 		};
 		D1474151150CB6F900B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2246,6 +2279,7 @@
 		};
 		D1474167150CB70D00B20490 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2262,6 +2296,7 @@
 		};
 		D1474169150CB70D00B20490 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2278,6 +2313,7 @@
 		};
 		D147416A150CB70D00B20490 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2294,6 +2330,7 @@
 		};
 		D1663368156ADAE8009E98F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2309,6 +2346,7 @@
 		};
 		D166336A156ADAE8009E98F1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2324,6 +2362,7 @@
 		};
 		D166336B156ADAE8009E98F1 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2339,6 +2378,7 @@
 		};
 		D16A0EA61698C4B80016DF67 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CD19F502B100A21F0D /* iOS.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2361,6 +2401,7 @@
 		};
 		D16A0EA81698C4B80016DF67 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CD19F502B100A21F0D /* iOS.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2384,6 +2425,7 @@
 		};
 		D16A0EA91698C4B80016DF67 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CD19F502B100A21F0D /* iOS.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2407,6 +2449,7 @@
 		};
 		D176138F1561B21500F645DE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2422,6 +2465,7 @@
 		};
 		D17613911561B21500F645DE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2437,6 +2481,7 @@
 		};
 		D17613921561B21500F645DE /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2452,6 +2497,7 @@
 		};
 		D1C0150F15619D4700FBEF81 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2467,6 +2513,7 @@
 		};
 		D1C0151115619D4700FBEF81 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2482,6 +2529,7 @@
 		};
 		D1C0151215619D4700FBEF81 /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2497,6 +2545,7 @@
 		};
 		D1C134BD157972CF005E8A5B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2512,6 +2561,7 @@
 		};
 		D1C134BF157972CF005E8A5B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2527,6 +2577,7 @@
 		};
 		D1C134C0157972CF005E8A5B /* App Store */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (

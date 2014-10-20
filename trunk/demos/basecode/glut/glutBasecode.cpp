@@ -2,12 +2,15 @@
 
 float mx = 0, my = 0;
 
+#ifndef _LINUX // temp, compilation issues
 #define USE_SHADERS
+#endif
+
 #ifdef USE_SHADERS
 
 #if defined(WIN32)
 #define pglGetProcAddress(func) wglGetProcAddress(func)
-#elif defined(__APPLE__)
+#elif defined(__APPLE__) || defined(_LINUX)
 #define pglGetProcAddress(func) glXGetProcAddress((GLubyte*) func)
 #endif
 
@@ -49,24 +52,24 @@ void display()
 	
 	glutSwapBuffers();
 	
-	static unsigned long time=GetTickCount();
-	unsigned long t=GetTickCount();
+	static unsigned long time = GetTickCount();
+	unsigned long t = GetTickCount();
 	
-	float diff=(t-time)/1000.0f;
+	float diff = (t-time)/1000.0f;
 	if (diff > 0.25f)
-		diff=0.05f; // prevent spikes (usually happen on app load)
+		diff = 0.05f; // prevent spikes (usually happen on app load)
 	update(diff);
 	
-	static unsigned int fps_timer=time,fps_counter=0;
+	static unsigned long fps_timer = time, fps_counter = 0;
 	if (t-fps_timer >= 250)
 	{
-		char title[512],debug[256]="";
+		char title[512],debug[256] = "";
 		
 		setDebugTitle(debug);
-		sprintf(title,"%s: %d FPS; %s",window_name.c_str(),fps_counter*4,debug);
+		sprintf(title,"%s: %ld FPS; %s", window_name.c_str(), fps_counter * 4, debug);
 		glutSetWindowTitle(title);
-		fps_counter=0;
-		fps_timer=t;
+		fps_counter = 0;
+		fps_timer = t;
 	}
 	else fps_counter++;
 	
@@ -174,7 +177,7 @@ void toggle_YUV2RGB_shader()
 void getMultiTextureExtensionFuncPointers()
 {
 #if defined(USE_SHADERS) && defined(WIN32)
-	glAttachShader=(PFNGLATTACHSHADERPROC) pglGetProcAddress("glAttachShader");
+	glAttachShader = (PFNGLATTACHSHADERPROC) pglGetProcAddress("glAttachShader");
 	glMultiTexCoord2fARB = (PFNGLMULTITEXCOORD2FARBPROC) pglGetProcAddress("glMultiTexCoord2fARB");
 	glActiveTextureARB = (PFNGLACTIVETEXTUREARBPROC) pglGetProcAddress("glActiveTextureARB");
 #endif
