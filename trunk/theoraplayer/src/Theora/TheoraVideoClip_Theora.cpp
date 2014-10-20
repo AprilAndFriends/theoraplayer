@@ -164,9 +164,9 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 	
 	if (mAudioInterface != NULL)
 	{
-		mAudioMutex->lock();
+		TheoraScopedLock mutex(mAudioMutex);
 		decodeAudio();
-		mAudioMutex->unlock();
+		mutex.unlock();
 	}
 	if (should_restart)
     {
@@ -439,9 +439,9 @@ void TheoraVideoClip_Theora::decodedAudioCheck()
 {
 	if (!mAudioInterface || mTimer->isPaused()) return;
 
-	mAudioMutex->lock();
+	TheoraScopedLock mutex(mAudioMutex);
 	flushAudioPackets(mAudioInterface);
-	mAudioMutex->unlock();
+	mutex.unlock();
 }
 
 float TheoraVideoClip_Theora::decodeAudio()
@@ -577,10 +577,11 @@ void TheoraVideoClip_Theora::doSeek()
 	ogg_stream_reset(&mInfo.TheoraStreamState);
 	th_decode_free(mInfo.TheoraDecoder);
 	mInfo.TheoraDecoder = th_decode_alloc(&mInfo.TheoraInfo, mInfo.TheoraSetup);
-	
+
+	TheoraScopedLock audioMutex;
 	if (mAudioInterface)
 	{
-		mAudioMutex->lock();
+		audioMutex.acquire(mAudioMutex);
 		ogg_stream_reset(&mInfo.VorbisStreamState);
 		vorbis_synthesis_restart(&mInfo.VorbisDSPState);
 		destroyAllAudioPackets();
@@ -637,7 +638,7 @@ void TheoraVideoClip_Theora::doSeek()
 			if (!_readData())
 			{
 				th_writelog(mName + " [seek]: fineseeking failed, _readData failed!");
-				if (mAudioInterface) mAudioMutex->unlock();
+				audioMutex.unlock();
 				return;
 			}
 		}
@@ -704,7 +705,7 @@ void TheoraVideoClip_Theora::doSeek()
 		mLastDecodedFrameNumber = mSeekFrame;
 		mReadAudioSamples = (unsigned int) (timestamp * mAudioFrequency);
 		
-		mAudioMutex->unlock();
+		audioMutex.unlock();
 	}
 	if (!paused) mTimer->play();
 	mSeekFrame = -1;

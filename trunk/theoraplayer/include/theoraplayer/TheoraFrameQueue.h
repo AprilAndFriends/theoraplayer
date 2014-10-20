@@ -82,12 +82,9 @@ public:
 	
 	//! return whether all frames in the queue are ready for display
 	bool isFull();
-	
-	//! lock the queue's mutex manually
-	void lock();
-	//! unlock the queue's mutex manually
-	void unlock();
-    
+
+	TheoraMutex* getMutex() { return &mMutex; }
+
     //! returns the internal frame queue. Warning: Always lock / unlock queue's mutex before accessing frames directly!
     std::list<TheoraVideoFrame*>& _getFrameQueue();
 };
