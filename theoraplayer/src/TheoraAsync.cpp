@@ -89,7 +89,8 @@ TheoraScopedLock::~TheoraScopedLock()
 {
 	if (mMutex != NULL)
 	{
-		unlock();
+		mMutex->unlock();
+		mMutex = NULL;
 		if (mLogUnhandledUnlocks)
 		{
 			th_writelog("Unhandled mutex unlock detected!");
@@ -204,6 +205,7 @@ bool TheoraThread::isRunning()
 	bool ret;
 	TheoraScopedLock mutex(&mRunningMutex);
 	ret = mRunning;
+	mutex.unlock();
 	return ret;
 }
 
