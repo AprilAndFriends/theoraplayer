@@ -35,7 +35,10 @@ public:
 	~TheoraScopedLock();
 	void acquire(TheoraMutex* mutex);
 	void unlock();
+	void setLogUnhandledUnlocks(bool value) { mLogUnhandledUnlocks = value; }
+	bool getLogUnhandledUnlocks() { return mLogUnhandledUnlocks; }
 private:
+	bool mLogUnhandledUnlocks;
 	TheoraMutex* mMutex;
 };
 

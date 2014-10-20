@@ -19,7 +19,7 @@ TheoraFrameQueue::TheoraFrameQueue(TheoraVideoClip* parent)
 
 TheoraFrameQueue::~TheoraFrameQueue()
 {
-	foreach_l(TheoraVideoFrame*, mQueue)
+	foreach_l (TheoraVideoFrame*, mQueue)
     {
 		delete (*it);
     }

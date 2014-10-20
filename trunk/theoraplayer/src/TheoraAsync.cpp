@@ -17,6 +17,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 #include "TheoraAsync.h"
 #include "TheoraUtil.h"
+#include "TheoraVideoManager.h"
 
 #ifdef _WINRT
 #include <wrl.h>
@@ -75,12 +76,13 @@ void TheoraMutex::unlock()
 
 TheoraScopedLock::TheoraScopedLock() : mMutex(NULL)
 {
-
+	mLogUnhandledUnlocks = true;
 }
 
 TheoraScopedLock::TheoraScopedLock(TheoraMutex* mutex) : mMutex(mutex)
 {
 	mMutex->lock();
+	mLogUnhandledUnlocks = true;
 }
 
 TheoraScopedLock::~TheoraScopedLock()
@@ -88,6 +90,10 @@ TheoraScopedLock::~TheoraScopedLock()
 	if (mMutex != NULL)
 	{
 		unlock();
+		if (mLogUnhandledUnlocks)
+		{
+			th_writelog("Unhandled mutex unlock detected!");
+		}
 	}
 }
 
