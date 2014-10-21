@@ -50,9 +50,9 @@ namespace aprilvideo
 		mSound = NULL;
 		mAudioPlayer = NULL;
 		mAudioSyncOffset = 0;
-		gReferenceMutex.lock();
+		hmutex::ScopeLock lock(&gReferenceMutex);
 		gReferences += this;
-		gReferenceMutex.unlock();
+		lock.release();
 		mAlphaPauseTreshold = 0;
 		mPrevFrameNumber = 0;
 		mSeeked = 0;
@@ -80,9 +80,9 @@ namespace aprilvideo
 	
 	VideoObject::~VideoObject()
 	{
-		gReferenceMutex.lock();
+		hmutex::ScopeLock lock(&gReferenceMutex);
 		gReferences.remove(this);
-		gReferenceMutex.unlock();
+		lock.release();
 		destroyResources();
 	}
 	

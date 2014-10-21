@@ -66,16 +66,17 @@ TheoraWorkerThread::~TheoraWorkerThread()
 
 void TheoraWorkerThread::execute()
 {
+	TheoraMutex::ScopeLock lock;
 #ifdef _DEBUG
 	char name[64];
-	counterMutex.lock();
+	lock.acquire(&counterMutex);
 #if !defined(_WIN32) && !defined(_WINRT)
 	sprintf(name, "TheoraWorkerThread %d", threadCounter++);
 	pthread_setname_np(name);
 #elif defined(_WIN32)
 	SetThreadName((DWORD) mId, name);
 #endif
-	counterMutex.unlock();
+	lock.release();
 #endif
 	while (isRunning())
 	{
@@ -86,7 +87,7 @@ void TheoraWorkerThread::execute()
 			continue;
 		}
 
-		TheoraScopedLock mutex(mClip->mThreadAccessMutex);
+		lock.acquire(mClip->mThreadAccessMutex);
 		// if user requested seeking, do that then.
 		if (mClip->mSeekFrame >= 0) mClip->doSeek();
 
@@ -94,7 +95,7 @@ void TheoraWorkerThread::execute()
 			_psleep(1); // this happens when the video frame queue is full.
 
 		mClip->mAssignedWorkerThread = NULL;
-		mutex.unlock();
+		lock.release();
 		mClip = NULL;
 	}
 }

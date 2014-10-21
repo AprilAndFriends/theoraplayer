@@ -9,6 +9,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #ifndef _TheoraAsync_h
 #define _TheoraAsync_h
 
+#include <stdlib.h>
 #ifndef _WIN32
 #include <pthread.h>
 #endif
@@ -17,6 +18,20 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 class TheoraMutex
 {
 public:
+	class ScopeLock
+	{
+	public:
+		ScopeLock(TheoraMutex* mutex = NULL, bool logUnhandledUnlocks = true);
+		~ScopeLock();
+		bool acquire(TheoraMutex* mutex);
+		bool release();
+
+	protected:
+		TheoraMutex* mMutex;
+		bool mLogUnhandledUnlocks;
+
+	};
+
 	TheoraMutex();
 	~TheoraMutex();
 	void lock();
@@ -26,22 +41,6 @@ protected:
 	void* mHandle;
 		
 };
-
-class TheoraScopedLock
-{
-public:
-	TheoraScopedLock();
-	TheoraScopedLock(TheoraMutex* mutex);
-	~TheoraScopedLock();
-	void acquire(TheoraMutex* mutex);
-	void unlock();
-	void setLogUnhandledUnlocks(bool value) { mLogUnhandledUnlocks = value; }
-	bool getLogUnhandledUnlocks() { return mLogUnhandledUnlocks; }
-private:
-	bool mLogUnhandledUnlocks;
-	TheoraMutex* mMutex;
-};
-
 
 /// @note Based on hltypes::Thread
 class TheoraThread

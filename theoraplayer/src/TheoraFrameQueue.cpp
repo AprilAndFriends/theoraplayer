@@ -20,9 +20,9 @@ TheoraFrameQueue::TheoraFrameQueue(TheoraVideoClip* parent)
 TheoraFrameQueue::~TheoraFrameQueue()
 {
 	foreach_l (TheoraVideoFrame*, mQueue)
-    {
+	{
 		delete (*it);
-    }
+	}
 	mQueue.clear();
 }
 
@@ -39,13 +39,13 @@ TheoraVideoFrame* TheoraFrameQueue::createFrameInstance(TheoraVideoClip* clip)
 
 void TheoraFrameQueue::setSize(int n)
 {
-	TheoraScopedLock mutex(&mMutex);
+	TheoraMutex::ScopeLock mutex(&mMutex);
 	if (mQueue.size() > 0)
 	{
 		foreach_l (TheoraVideoFrame*, mQueue)
-        {
+		{
 			delete (*it);
-        }
+		}
 		mQueue.clear();
 	}
 	TheoraVideoFrame* frame;
@@ -59,7 +59,7 @@ void TheoraFrameQueue::setSize(int n)
 			break;
 		}
 	}
-	mutex.unlock();
+	mutex.release();
 }
 
 int TheoraFrameQueue::getSize()
@@ -76,44 +76,44 @@ TheoraVideoFrame* TheoraFrameQueue::_getFirstAvailableFrame()
 
 TheoraVideoFrame* TheoraFrameQueue::getFirstAvailableFrame()
 {
-	TheoraScopedLock mutex(&mMutex);
+	TheoraMutex::ScopeLock mutex(&mMutex);
 	TheoraVideoFrame* frame = _getFirstAvailableFrame();
-	mutex.unlock();
+	mutex.release();
 	return frame;
 }
 
 void TheoraFrameQueue::clear()
 {
-	TheoraScopedLock mutex(&mMutex);
+	TheoraMutex::ScopeLock mutex(&mMutex);
 	foreach_l (TheoraVideoFrame*, mQueue)
 	{
 		(*it)->clear();
 	}
-	mutex.unlock();
+	mutex.release();
 }
 
 void TheoraFrameQueue::_pop(int n)
 {
-    for (int i = 0; i < n; ++i)
-    {
-        TheoraVideoFrame* first = mQueue.front();
-        first->clear();
-        mQueue.pop_front();
-        mQueue.push_back(first);
-    }
+	for (int i = 0; i < n; ++i)
+	{
+		TheoraVideoFrame* first = mQueue.front();
+		first->clear();
+		mQueue.pop_front();
+		mQueue.push_back(first);
+	}
 }
 
 void TheoraFrameQueue::pop(int n)
 {
-	TheoraScopedLock mutex(&mMutex);
-    _pop(n);
-	mutex.unlock();
+	TheoraMutex::ScopeLock mutex(&mMutex);
+	_pop(n);
+	mutex.release();
 }
 
 TheoraVideoFrame* TheoraFrameQueue::requestEmptyFrame()
 {
 	TheoraVideoFrame* frame = NULL;
-	TheoraScopedLock mutex(&mMutex);
+	TheoraMutex::ScopeLock mutex(&mMutex);
 	foreach_l (TheoraVideoFrame*, mQueue)
 	{
 		if (!(*it)->mInUse)
@@ -124,22 +124,22 @@ TheoraVideoFrame* TheoraFrameQueue::requestEmptyFrame()
 			break;
 		}
 	}
-	mutex.unlock();
+	mutex.release();
 	return frame;
 }
 
 int TheoraFrameQueue::getUsedCount()
 {
-	TheoraScopedLock mutex(&mMutex);
+	TheoraMutex::ScopeLock mutex(&mMutex);
 	int n = 0;
-	foreach_l(TheoraVideoFrame*, mQueue)
+	foreach_l (TheoraVideoFrame*, mQueue)
 	{
 		if ((*it)->mInUse)
 		{
-			n++;
+			++n;
 		}
 	}
-	mutex.unlock();
+	mutex.release();
 	return n;
 }
 
@@ -150,7 +150,7 @@ int TheoraFrameQueue::_getReadyCount()
 	{
 		if ((*it)->mReady)
 		{
-			n++;
+			++n;
 		}
 	}
 	return n;
@@ -159,9 +159,9 @@ int TheoraFrameQueue::_getReadyCount()
 
 int TheoraFrameQueue::getReadyCount()
 {
-	TheoraScopedLock mutex(&mMutex);
+	TheoraMutex::ScopeLock mutex(&mMutex);
 	int n = _getReadyCount();
-	mutex.unlock();
+	mutex.release();
 	return n;
 }
 
