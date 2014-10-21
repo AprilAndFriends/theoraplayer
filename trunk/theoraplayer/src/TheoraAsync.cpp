@@ -71,49 +71,43 @@ void TheoraMutex::unlock()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-// ScopedLock
+// ScopeLock
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-TheoraScopedLock::TheoraScopedLock() : mMutex(NULL)
+TheoraMutex::ScopeLock::ScopeLock(TheoraMutex* mutex, bool logUnhandledUnlocks) : mMutex(NULL)
 {
-	mLogUnhandledUnlocks = true;
+	mLogUnhandledUnlocks = logUnhandledUnlocks;
+	acquire(mutex);
 }
 
-TheoraScopedLock::TheoraScopedLock(TheoraMutex* mutex) : mMutex(mutex)
+TheoraMutex::ScopeLock::~ScopeLock()
 {
-	mMutex->lock();
-	mLogUnhandledUnlocks = true;
-}
-
-TheoraScopedLock::~TheoraScopedLock()
-{
-	if (mMutex != NULL)
+	if (release() && mLogUnhandledUnlocks)
 	{
-		mMutex->unlock();
-		mMutex = NULL;
-		if (mLogUnhandledUnlocks)
-		{
-			th_writelog("Unhandled mutex unlock detected!");
-		}
+		th_writelog("A mutex has been scope-unlocked automatically!");
 	}
 }
 
-void TheoraScopedLock::acquire(TheoraMutex* mutex)
+bool TheoraMutex::ScopeLock::acquire(TheoraMutex* mutex)
 {
-	if (!mMutex)
+	if (mMutex == NULL && mutex != NULL)
 	{
 		mMutex = mutex;
 		mMutex->lock();
+		return true;
 	}
+	return false;
 }
 
-void TheoraScopedLock::unlock()
+bool TheoraMutex::ScopeLock::release()
 {
 	if (mMutex != NULL)
 	{
 		mMutex->unlock();
 		mMutex = NULL;
+		return true;
 	}
+	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -162,7 +156,10 @@ TheoraThread::TheoraThread() : mRunning(false), mId(0)
 
 TheoraThread::~TheoraThread()
 {
-	if (mRunning)
+	TheoraMutex::ScopeLock mutex(&mRunningMutex);
+	bool running = mRunning;
+	mutex.release();
+	if (running)
 	{
 		stop();
 	}
@@ -183,7 +180,9 @@ TheoraThread::~TheoraThread()
 
 void TheoraThread::start()
 {
+	TheoraMutex::ScopeLock mutex(&mRunningMutex);
 	mRunning = true;
+	mutex.release();
 #ifdef _WIN32
 #ifndef _WINRT
 	mId = CreateThread(0, 0, &theoraAsyncCall, this, 0, 0);
@@ -202,18 +201,17 @@ void TheoraThread::start()
 
 bool TheoraThread::isRunning()
 {
-	bool ret;
-	TheoraScopedLock mutex(&mRunningMutex);
-	ret = mRunning;
-	mutex.unlock();
-	return ret;
+	TheoraMutex::ScopeLock mutex(&mRunningMutex);
+	bool result = mRunning;
+	mutex.release();
+	return result;
 }
 
 void TheoraThread::join()
 {
-	TheoraScopedLock mutex(&mRunningMutex);
+	TheoraMutex::ScopeLock mutex(&mRunningMutex);
 	mRunning = false;
-	mutex.unlock();
+	mutex.release();
 #ifdef _WIN32
 #ifndef _WINRT
 	WaitForSingleObject(mId, INFINITE);
@@ -276,11 +274,16 @@ void TheoraThread::pause()
 	
 void TheoraThread::stop()
 {
+	bool stop = false;
+	TheoraMutex::ScopeLock mutex(&mRunningMutex);
 	if (mRunning)
 	{
-		TheoraScopedLock mutex(&mRunningMutex);
 		mRunning = false;
-		mutex.unlock();
+		stop = true;
+	}
+	mutex.release();
+	if (stop)
+	{
 #ifdef _WIN32
 #ifndef _WINRT
 		TerminateThread(mId, 0);

@@ -61,11 +61,7 @@ namespace aprilvideo
 	
 	harray<VideoObject*> getActiveVideoObjects()
 	{
-		harray<VideoObject*> videos;
-		gReferenceMutex.lock();
-		videos = gReferences;
-		gReferenceMutex.unlock();
-		
-		return videos;
+		hmutex::ScopeLock lock(&gReferenceMutex);
+		return gReferences;
 	}
 }

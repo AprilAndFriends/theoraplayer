@@ -110,20 +110,20 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 	ogg_packet opTheora;
 	ogg_int64_t granulePos;
 	th_ycbcr_buffer buff;
-    int ret, nAttempts;
+	int ret, nAttempts;
 	for (;;)
 	{
-        // ogg_stream_packetout can return -1 and the official docs suggest to do subsequent calls until it succeeds
-        // because the data is out of sync. still will limit the number of attempts just in case
-        for (ret = -1, nAttempts = 0; ret < 0 && nAttempts < 100; nAttempts++)
-        {
-            ret = ogg_stream_packetout(&mInfo.TheoraStreamState, &opTheora);
-        }
+		// ogg_stream_packetout can return -1 and the official docs suggest to do subsequent calls until it succeeds
+		// because the data is out of sync. still will limit the number of attempts just in case
+		for (ret = -1, nAttempts = 0; ret < 0 && nAttempts < 100; nAttempts++)
+		{
+			ret = ogg_stream_packetout(&mInfo.TheoraStreamState, &opTheora);
+		}
 		
 		if (ret > 0)
 		{
 			int status = th_decode_packetin(mInfo.TheoraDecoder, &opTheora, &granulePos);
-            if (status != 0 && status != TH_DUPFRAME) continue; // 0 means success
+			if (status != 0 && status != TH_DUPFRAME) continue; // 0 means success
 
 			float time = (float) th_granule_time(mInfo.TheoraDecoder, granulePos);
 			unsigned long frame_number = (unsigned long) th_granule_frame(mInfo.TheoraDecoder, granulePos);
@@ -164,13 +164,13 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 	
 	if (mAudioInterface != NULL)
 	{
-		TheoraScopedLock mutex(mAudioMutex);
+		TheoraMutex::ScopeLock mutex(mAudioMutex);
 		decodeAudio();
-		mutex.unlock();
+		mutex.release();
 	}
 	if (should_restart)
-    {
-        ++mIteration;
+	{
+		++mIteration;
 		_restart();
 	}
 	return 1;
@@ -439,9 +439,9 @@ void TheoraVideoClip_Theora::decodedAudioCheck()
 {
 	if (!mAudioInterface || mTimer->isPaused()) return;
 
-	TheoraScopedLock mutex(mAudioMutex);
+	TheoraMutex::ScopeLock mutex(mAudioMutex);
 	flushAudioPackets(mAudioInterface);
-	mutex.unlock();
+	mutex.release();
 }
 
 float TheoraVideoClip_Theora::decodeAudio()
@@ -578,7 +578,7 @@ void TheoraVideoClip_Theora::doSeek()
 	th_decode_free(mInfo.TheoraDecoder);
 	mInfo.TheoraDecoder = th_decode_alloc(&mInfo.TheoraInfo, mInfo.TheoraSetup);
 
-	TheoraScopedLock audioMutex;
+	TheoraMutex::ScopeLock audioMutex;
 	if (mAudioInterface)
 	{
 		audioMutex.acquire(mAudioMutex);
@@ -612,7 +612,7 @@ void TheoraVideoClip_Theora::doSeek()
 	// now that we've found the keyframe that preceeds our desired frame, lets keep on decoding frames until we
 	// reach our target frame.
 	
-    int status, ret;
+	int status, ret;
 	for (;mSeekFrame != 0;)
 	{
 		ret = ogg_stream_packetout(&mInfo.TheoraStreamState, &opTheora);
@@ -629,7 +629,7 @@ void TheoraVideoClip_Theora::doSeek()
 				else continue; // ignore prev delta frames until we hit a keyframe
 			}
 			status = th_decode_packetin(mInfo.TheoraDecoder, &opTheora, &granulePos);
-            if (status != 0 && status != TH_DUPFRAME) continue;
+			if (status != 0 && status != TH_DUPFRAME) continue;
 			frame = (int) th_granule_frame(mInfo.TheoraDecoder, granulePos);
 			if (frame >= mSeekFrame - 1) break;
 		}
@@ -638,7 +638,7 @@ void TheoraVideoClip_Theora::doSeek()
 			if (!_readData())
 			{
 				th_writelog(mName + " [seek]: fineseeking failed, _readData failed!");
-				audioMutex.unlock();
+				audioMutex.release();
 				return;
 			}
 		}
@@ -705,7 +705,7 @@ void TheoraVideoClip_Theora::doSeek()
 		mLastDecodedFrameNumber = mSeekFrame;
 		mReadAudioSamples = (unsigned int) (timestamp * mAudioFrequency);
 		
-		audioMutex.unlock();
+		audioMutex.release();
 	}
 	if (!paused) mTimer->play();
 	mSeekFrame = -1;
