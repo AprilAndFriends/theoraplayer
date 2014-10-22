@@ -2222,7 +2222,10 @@
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = LIBYUV_DISABLE_NEON;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = (
+					LIBYUV_DISABLE_NEON,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -2241,7 +2244,10 @@
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = LIBYUV_DISABLE_NEON;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = (
+					LIBYUV_DISABLE_NEON,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -2260,7 +2266,10 @@
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = LIBYUV_DISABLE_NEON;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = (
+					LIBYUV_DISABLE_NEON,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -2390,7 +2399,10 @@
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = LIBYUV_DISABLE_NEON;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = (
+					LIBYUV_DISABLE_NEON,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -2409,7 +2421,10 @@
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = LIBYUV_DISABLE_NEON;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = (
+					LIBYUV_DISABLE_NEON,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -2428,7 +2443,10 @@
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = LIBYUV_DISABLE_NEON;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = (
+					LIBYUV_DISABLE_NEON,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -2448,7 +2466,10 @@
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = LIBYUV_DISABLE_NEON;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = (
+					LIBYUV_DISABLE_NEON,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -2468,7 +2489,10 @@
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = LIBYUV_DISABLE_NEON;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = (
+					LIBYUV_DISABLE_NEON,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -2488,7 +2512,10 @@
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = LIBYUV_DISABLE_NEON;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = (
+					LIBYUV_DISABLE_NEON,
+					"$(inherited)",
+				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
