@@ -415,9 +415,9 @@ void TheoraVideoClip_FFmpeg::decodedAudioCheck()
 {
 	if (!mAudioInterface || mTimer->isPaused()) return;
 	
-	TheoraMutex::ScopeLock mutex(mAudioMutex);
+	TheoraMutex::ScopeLock lock(mAudioMutex);
 	flushAudioPackets(mAudioInterface);
-	mutex.release();
+	lock.release();
 }
 
 float TheoraVideoClip_FFmpeg::decodeAudio()

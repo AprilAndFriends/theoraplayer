@@ -138,14 +138,14 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 TheoraVideoManager::~TheoraVideoManager()
 {
 	destroyWorkerThreads();
-	TheoraMutex::ScopeLock mutex(mWorkMutex);
+	TheoraMutex::ScopeLock lock(mWorkMutex);
 	ClipList::iterator ci;
 	for (ci = mClips.begin(); ci != mClips.end(); ++ci)
 	{
 		delete (*ci);
 	}
 	mClips.clear();
-	mutex.release();
+	lock.release();
 	delete mWorkMutex;
 }
 
@@ -157,7 +157,7 @@ void TheoraVideoManager::logMessage(std::string msg)
 TheoraVideoClip* TheoraVideoManager::getVideoClipByName(std::string name)
 {
 	TheoraVideoClip* clip = NULL;
-	TheoraMutex::ScopeLock mutex(mWorkMutex);
+	TheoraMutex::ScopeLock lock(mWorkMutex);
 	foreach (TheoraVideoClip*, mClips)
 	{
 		if ((*it)->getName() == name)
@@ -166,7 +166,7 @@ TheoraVideoClip* TheoraVideoManager::getVideoClipByName(std::string name)
 			break;
 		}
 	}
-	mutex.release();
+	lock.release();
 	return clip;
 }
 
@@ -194,7 +194,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 													 int numPrecachedOverride,
 													 bool usePower2Stride)
 {
-	TheoraMutex::ScopeLock mutex(mWorkMutex);
+	TheoraMutex::ScopeLock lock(mWorkMutex);
 
 	TheoraVideoClip* clip = NULL;
 	int nPrecached = numPrecachedOverride ? numPrecachedOverride : mDefaultNumPrecachedFrames;
@@ -236,7 +236,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 	{
 		th_writelog("Failed creating video clip: " + data_source->repr());
 	}
-	mutex.release();
+	lock.release();
 	
 #ifdef _DECODING_BENCHMARK
 	benchmark(clip);
@@ -249,7 +249,7 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 	if (clip)
 	{
 		th_writelog("Destroying video clip: " + clip->getName());
-		TheoraMutex::ScopeLock mutex(mWorkMutex);
+		TheoraMutex::ScopeLock lock(mWorkMutex);
 		bool reported = 0;
 		while (clip->mAssignedWorkerThread)
 		{
@@ -279,14 +279,14 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 #ifdef _DEBUG
 		th_writelog("Destroyed video.");
 #endif
-		mutex.release();
+		lock.release();
 	}
 }
 
 TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 {
 	if (!mWorkMutex) return NULL;
-	TheoraMutex::ScopeLock mutex(mWorkMutex);
+	TheoraMutex::ScopeLock lock(mWorkMutex);
 
 	TheoraVideoClip* selectedClip = NULL;
 	float maxQueuedTime = 0, totalAccessCount = 0, prioritySum = 0, diff, maxDiff = -1;
@@ -393,19 +393,19 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 #endif
 	}
 
-	mutex.release();
+	lock.release();
 	return selectedClip;
 }
 
 void TheoraVideoManager::update(float timeDelta)
 {
-	TheoraMutex::ScopeLock mutex(mWorkMutex);
+	TheoraMutex::ScopeLock lock(mWorkMutex);
 	foreach (TheoraVideoClip*, mClips)
 	{
 		(*it)->update(timeDelta);
 		(*it)->decodedAudioCheck();
 	}
-	mutex.release();
+	lock.release();
 #ifdef _SCHEDULING_DEBUG
 	gThreadDiagnosticTimer += timeDelta;
 #endif

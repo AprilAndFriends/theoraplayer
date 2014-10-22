@@ -62,7 +62,7 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 TheoraVideoClip::~TheoraVideoClip()
 {
 	// wait untill a worker thread is done decoding the frame
-	TheoraMutex::ScopeLock mutex(mThreadAccessMutex);
+	TheoraMutex::ScopeLock lock(mThreadAccessMutex);
 
 	delete mDefaultTimer;
 
@@ -72,14 +72,13 @@ TheoraVideoClip::~TheoraVideoClip()
 
 	if (mAudioInterface)
 	{
-		TheoraMutex::ScopeLock audioMutex(mAudioMutex); // ensure a thread isn't using this mutex
+		TheoraMutex::ScopeLock audioMutexLock(mAudioMutex); // ensure a thread isn't using this mutex
 		delete mAudioInterface; // notify audio interface it's time to call it a day
-		audioMutex.release();
+		audioMutexLock.release();
 		delete mAudioMutex;
 	}
 	
-	mutex.release();
-
+	lock.release();
 	delete mThreadAccessMutex;
 }
 
@@ -103,7 +102,7 @@ void TheoraVideoClip::resetFrameQueue()
 void TheoraVideoClip::restart()
 {
 	mEndOfFile = true; //temp, to prevent threads to decode while restarting
-	TheoraMutex::ScopeLock mutex(mThreadAccessMutex);
+	TheoraMutex::ScopeLock lock(mThreadAccessMutex);
 	_restart();
 	mTimer->seek(0);
 	mFirstFrameDisplayed = false;
@@ -111,7 +110,7 @@ void TheoraVideoClip::restart()
 	mEndOfFile = false;
 	mRestarted = false;
 	mSeekFrame = -1;
-	mutex.release();
+	lock.release();
 }
 
 void TheoraVideoClip::update(float timeDelta)
@@ -172,10 +171,10 @@ void TheoraVideoClip::popFrame()
 	// so it can be used again
 	if (!mFirstFrameDisplayed)
 	{
-		TheoraMutex::ScopeLock mutex(mFrameQueue->getMutex());
+		TheoraMutex::ScopeLock lock(mFrameQueue->getMutex());
 		mFrameQueue->_pop(1);
 		mFirstFrameDisplayed = true;
-		mutex.release();
+		lock.release();
 	}
 	else
 	{
@@ -274,7 +273,7 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 	// (will be cleared when a worker thread does the actual seek)
 	if (mSeekFrame != -1) return NULL;
 	
-	TheoraMutex::ScopeLock mutex(mFrameQueue->getMutex());
+	TheoraMutex::ScopeLock lock(mFrameQueue->getMutex());
 	float time = getAbsPlaybackTime();
 	discardOutdatedFrames(time);
 	
@@ -287,7 +286,7 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 		}
 	}
 	
-	mutex.release();
+	lock.release();
 	return frame;
 }
 
@@ -321,10 +320,10 @@ void TheoraVideoClip::setOutputMode(TheoraOutputMode mode)
 				 mode == TH_AYUV);
 	if (mAssignedWorkerThread)
 	{
-		TheoraMutex::ScopeLock mutex(mThreadAccessMutex);
+		TheoraMutex::ScopeLock lock(mThreadAccessMutex);
 		// discard current frames and recreate them
 		mFrameQueue->setSize(mFrameQueue->getSize());
-		mutex.release();
+		lock.release();
 
 	}
 	mOutputMode = mRequestedOutputMode;

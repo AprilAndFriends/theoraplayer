@@ -39,7 +39,7 @@ TheoraVideoFrame* TheoraFrameQueue::createFrameInstance(TheoraVideoClip* clip)
 
 void TheoraFrameQueue::setSize(int n)
 {
-	TheoraMutex::ScopeLock mutex(&mMutex);
+	TheoraMutex::ScopeLock lock(&mMutex);
 	if (mQueue.size() > 0)
 	{
 		foreach_l (TheoraVideoFrame*, mQueue)
@@ -59,7 +59,7 @@ void TheoraFrameQueue::setSize(int n)
 			break;
 		}
 	}
-	mutex.release();
+	lock.release();
 }
 
 int TheoraFrameQueue::getSize()
@@ -76,20 +76,20 @@ TheoraVideoFrame* TheoraFrameQueue::_getFirstAvailableFrame()
 
 TheoraVideoFrame* TheoraFrameQueue::getFirstAvailableFrame()
 {
-	TheoraMutex::ScopeLock mutex(&mMutex);
+	TheoraMutex::ScopeLock lock(&mMutex);
 	TheoraVideoFrame* frame = _getFirstAvailableFrame();
-	mutex.release();
+	lock.release();
 	return frame;
 }
 
 void TheoraFrameQueue::clear()
 {
-	TheoraMutex::ScopeLock mutex(&mMutex);
+	TheoraMutex::ScopeLock lock(&mMutex);
 	foreach_l (TheoraVideoFrame*, mQueue)
 	{
 		(*it)->clear();
 	}
-	mutex.release();
+	lock.release();
 }
 
 void TheoraFrameQueue::_pop(int n)
@@ -105,15 +105,15 @@ void TheoraFrameQueue::_pop(int n)
 
 void TheoraFrameQueue::pop(int n)
 {
-	TheoraMutex::ScopeLock mutex(&mMutex);
+	TheoraMutex::ScopeLock lock(&mMutex);
 	_pop(n);
-	mutex.release();
+	lock.release();
 }
 
 TheoraVideoFrame* TheoraFrameQueue::requestEmptyFrame()
 {
 	TheoraVideoFrame* frame = NULL;
-	TheoraMutex::ScopeLock mutex(&mMutex);
+	TheoraMutex::ScopeLock lock(&mMutex);
 	foreach_l (TheoraVideoFrame*, mQueue)
 	{
 		if (!(*it)->mInUse)
@@ -124,13 +124,13 @@ TheoraVideoFrame* TheoraFrameQueue::requestEmptyFrame()
 			break;
 		}
 	}
-	mutex.release();
+	lock.release();
 	return frame;
 }
 
 int TheoraFrameQueue::getUsedCount()
 {
-	TheoraMutex::ScopeLock mutex(&mMutex);
+	TheoraMutex::ScopeLock lock(&mMutex);
 	int n = 0;
 	foreach_l (TheoraVideoFrame*, mQueue)
 	{
@@ -139,7 +139,7 @@ int TheoraFrameQueue::getUsedCount()
 			++n;
 		}
 	}
-	mutex.release();
+	lock.release();
 	return n;
 }
 
@@ -159,9 +159,9 @@ int TheoraFrameQueue::_getReadyCount()
 
 int TheoraFrameQueue::getReadyCount()
 {
-	TheoraMutex::ScopeLock mutex(&mMutex);
+	TheoraMutex::ScopeLock lock(&mMutex);
 	int n = _getReadyCount();
-	mutex.release();
+	lock.release();
 	return n;
 }
 
