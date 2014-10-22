@@ -354,9 +354,9 @@ void TheoraVideoClip_AVFoundation::decodedAudioCheck()
 {
 	if (!mAudioInterface || mTimer->isPaused()) return;
 	
-	TheoraMutex::ScopeLock mutex(mAudioMutex);
+	TheoraMutex::ScopeLock lock(mAudioMutex);
 	flushAudioPackets(mAudioInterface);
-	mutex.release();
+	lock.release();
 }
 
 float TheoraVideoClip_AVFoundation::decodeAudio()
@@ -371,7 +371,7 @@ float TheoraVideoClip_AVFoundation::decodeAudio()
 		CMSampleBufferRef sampleBuffer = NULL;
 		NSAutoreleasePool* pool = NULL;
 		bool mutexLocked = 0;
-		TheoraMutex::ScopeLock audioMutex;
+		TheoraMutex::ScopeLock audioMutexLock;
 
 		float factor = 1.0f / (mAudioFrequency * mNumAudioChannels);
 		float videoTime = (float) mFrameNumber / mFPS;
@@ -398,7 +398,7 @@ float TheoraVideoClip_AVFoundation::decodeAudio()
 
 						if (!mutexLocked)
 						{
-							audioMutex.acquire(mAudioMutex);
+							audioMutexLock.acquire(mAudioMutex);
 							mutexLocked = 1;
 						}
 						addAudioPacket(frame, audioBuffer.mDataByteSize / (mNumAudioChannels * sizeof(float)), mAudioGain);
@@ -419,7 +419,7 @@ float TheoraVideoClip_AVFoundation::decodeAudio()
 			}
 			[pool release];
 		}
-		audioMutex.release();
+		audioMutexLock.release();
 	}
 	
 	return -1;
@@ -445,9 +445,9 @@ void TheoraVideoClip_AVFoundation::doSeek()
 
 	if (mAudioInterface)
 	{
-		TheoraMutex::ScopeLock mutex(mAudioMutex);
+		TheoraMutex::ScopeLock lock(mAudioMutex);
 		destroyAllAudioPackets();
-		mutex.release();
+		lock.release();
 	}
 
 	if (!paused) mTimer->play();
