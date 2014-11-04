@@ -58,6 +58,11 @@ namespace aprilvideo
 		mSeeked = 0;
 		mPrevAlpha = 255;
 		mBlendMode = april::BM_DEFAULT;
+#if defined(_ANDROID) || defined(_WINRT)
+		mInitialPrecacheFactor = 0.9f; // slower devices, better to precache more
+#else
+		mInitialPrecacheFactor = 0.5f;
+#endif
 		
 		if (!gVideoManager)
 		{
@@ -119,7 +124,12 @@ namespace aprilvideo
 	{
 		return (mClip != NULL ? mClip->getTimePosition() : 0.0f);
 	}
-	
+
+	void VideoObject::setInitialPrecacheFactor(float value)
+	{
+		value = hclamp(value, 0.0f, 1.0f);
+	}
+
 	aprilui::Object* VideoObject::createInstance(chstr name, grect rect)
 	{
 		return new VideoObject(name, rect);
@@ -357,22 +367,26 @@ namespace aprilvideo
 		mTexture = new aprilui::Texture(tex->getFilename(), tex);
 		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
         mVideoImage->setBlendMode(mBlendMode);
-		if (waitForCache)
+		if (waitForCache && mInitialPrecacheFactor > 0.0f)
 		{
-#if defined(_ANDROID) || defined(_WINRT)
-			hlog::write(logTag, "Waiting for cache: " + path);
-#endif
-			mClip->waitForCache(2 / mClip->getNumPrecachedFrames(), 5.0f); // better to wait a while then to display an empty image
-			mClip->waitForCache(0.25f, 0.5f);
-		
-#if defined(_ANDROID) || defined(_WINRT)
-			if (w * h >= 768 * 384) // best to fill the cache on large videos on Android/WinRT ARM to counter a slower codec
+			float factor = hmax(2.0f / mClip->getNumPrecachedFrames(), mInitialPrecacheFactor);
+			float precached = (float) mClip->getNumReadyFrames() / mClip->getNumPrecachedFrames();
+			if (precached < factor)
 			{
-				mClip->waitForCache(0.9f, 2.0f);
+				hlog::writef(logTag, "Waiting for cache (%.1f%% / %.1f%%): %s", precached * 100.0f, factor * 100.0f, path.c_str());
+				if (factor > 0)
+				{
+					precached = mClip->waitForCache(factor, 5.0f); // better to wait a while then to display an empty image
+					if (precached < 0.25f && factor >= 0.25f)
+					{
+						precached = mClip->waitForCache(0.25f, 0.5f);
+					}
+				}
+				if (precached < factor)
+				{
+					hlog::writef(logTag, "Initial precache cached %.1f%% frames, target precache factor was %.1f%%", precached * 100.0f, factor * 100.0f);
+				}
 			}
-		
-		hlog::write(logTag, "Initial precache cached " + hstr(mClip->getNumPrecachedFrames()) + " frames");
-#endif
 		}
 
 		if (mAudioName != "")
@@ -538,6 +552,10 @@ namespace aprilvideo
 //                if (mLoop && !mClip->g)
             }
         }
+		else if (name == "initial_precache_factor")
+		{
+			setInitialPrecacheFactor(value);
+		}
 		else if (name == "speed")
         {
             mSpeed = value;
@@ -611,6 +629,7 @@ namespace aprilvideo
 		else if (name == "alpha_pause_treshold") return mAlphaPauseTreshold;
 		else if (name == "loop")  return mLoop ? "1" : "0";
 		else if (name == "speed") return mSpeed;
+		else if (name == "initial_precache_factor") return mInitialPrecacheFactor;
 		else if (name == "time") return this->getTimePosition();
 		else if (name == "videoWidth" || name == "videoHeight" || name == "duration")
 		{
@@ -668,6 +687,7 @@ namespace aprilvideo
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_alpha", aprilui::PropertyDescription::BOOL);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("alpha_pause_treshold", aprilui::PropertyDescription::INT);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("loop", aprilui::PropertyDescription::BOOL);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("initial_precache_factor", aprilui::PropertyDescription::FLOAT);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("speed", aprilui::PropertyDescription::FLOAT);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("time", aprilui::PropertyDescription::FLOAT);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("duration", aprilui::PropertyDescription::FLOAT);
