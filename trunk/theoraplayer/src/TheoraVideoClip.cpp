@@ -6,6 +6,7 @@ Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
+#include <math.h>
 #include "TheoraVideoClip.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoFrame.h"
@@ -420,21 +421,25 @@ void TheoraVideoClip::seekToFrame(int frame)
 	mEndOfFile = false;
 }
 
-void TheoraVideoClip::waitForCache(float desired_cache_factor, float max_wait_time)
+float TheoraVideoClip::waitForCache(float desired_cache_factor, float max_wait_time)
 {
 	mWaitingForCache = true;
 	bool paused = mTimer->isPaused();
 	if (!paused) mTimer->pause();
-	int elapsed = 0;
-	int desired_num_precached_frames = (int) (desired_cache_factor * getNumPrecachedFrames());
-	while (getNumReadyFrames() < desired_num_precached_frames)
+	int elapsed = 0, nReady = 0, frameQueueSize = getNumPrecachedFrames();
+	int desired_num_precached_frames = (int) ceil(desired_cache_factor * frameQueueSize);
+	for (;;)
 	{
+		nReady = getNumReadyFrames();
+		if (nReady >= desired_num_precached_frames) break;
 		_psleep(10);
 		elapsed += 10;
 		if (elapsed >= max_wait_time * 1000) break;
 	}
 	if (!paused) mTimer->play();
 	mWaitingForCache = false;
+
+	return (float) nReady / (float) frameQueueSize;
 }
 
 float TheoraVideoClip::getPriority()
