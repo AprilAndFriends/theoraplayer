@@ -273,8 +273,8 @@ public:
 	void seek(float time);
 	//! seek to a given frame number
 	void seekToFrame(int frame);
-	//! wait max_time for the clip to cache a given percentage of frames, factor in range [0,1]
-	void waitForCache(float desired_cache_factor = 0.5f, float max_wait_time = 1.0f);
+	//! wait max_time for the clip to cache a given percentage of frames, factor in range [0,1]. Returns actual precache factor
+	float waitForCache(float desired_cache_factor = 0.5f, float max_wait_time = 1.0f);
 };
 
 #endif
