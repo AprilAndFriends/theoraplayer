@@ -29,7 +29,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 namespace aprilvideo
 {
-    harray<aprilui::PropertyDescription> VideoObject::_propertyDescriptions;
+	harray<aprilui::PropertyDescription> VideoObject::_propertyDescriptions;
 
 	extern int gNumWorkerThreads;
 	extern harray<VideoObject*> gReferences;
@@ -259,15 +259,15 @@ namespace aprilvideo
 		hstr path = getFullPath();
 		april::Image::Format textureFormat = _getTextureFormat();
 		destroyResources();
-        
-        if (path.ends_with(".mp4"))
-        {
-            hstr archive = hresource::getArchive();
-            if (archive != "")
-            {
-                path = hrdir::join_path(archive, path);
-            }
-        }
+		
+		if (path.ends_with(".mp4"))
+		{
+			hstr archive = hresource::getArchive();
+			if (archive != "")
+			{
+				path = hrdir::join_path(archive, path);
+			}
+		}
 		
 		try
 		{
@@ -363,10 +363,10 @@ namespace aprilvideo
 			th = hpotceil(th);
 		}
 		april::Texture* tex = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
-        tex->setAddressMode(april::Texture::ADDRESS_CLAMP);
+		tex->setAddressMode(april::Texture::ADDRESS_CLAMP);
 		mTexture = new aprilui::Texture(tex->getFilename(), tex);
 		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
-        mVideoImage->setBlendMode(mBlendMode);
+		mVideoImage->setBlendMode(mBlendMode);
 		if (waitForCache && mInitialPrecacheFactor > 0.0f)
 		{
 			float factor = hmax(2.0f / mClip->getNumPrecachedFrames(), mInitialPrecacheFactor);
@@ -495,15 +495,15 @@ namespace aprilvideo
 		ImageBox::update(timeDelta);
 		if (mClip)
 		{
-            if (mAudioPlayer)
-            {
-                float pitch = mAudioPlayer->getPitch();
-                float desiredPitch = mSpeed;
-                if (pitch != desiredPitch)
-                {
-                    mAudioPlayer->setPitch(desiredPitch);
-                }
-            }
+			if (mAudioPlayer)
+			{
+				float pitch = mAudioPlayer->getPitch();
+				float desiredPitch = mSpeed;
+				if (pitch != desiredPitch)
+				{
+					mAudioPlayer->setPitch(desiredPitch);
+				}
+			}
 
 			if (!mLoop)
 			{
@@ -544,23 +544,23 @@ namespace aprilvideo
 		else if (name == "video_alpha") mUseAlpha = value;
 		else if (name == "alpha_pause_treshold") setAlphaTreshold(value);
 		else if (name == "loop")
-        {
-            mLoop = value;
-            if (mClip)
-            {
-                mClip->setAutoRestart(mLoop);
-//                if (mLoop && !mClip->g)
-            }
-        }
+		{
+			mLoop = value;
+			if (mClip)
+			{
+				mClip->setAutoRestart(mLoop);
+//				if (mLoop && !mClip->g)
+			}
+		}
 		else if (name == "initial_precache_factor")
 		{
 			setInitialPrecacheFactor(value);
 		}
 		else if (name == "speed")
-        {
-            mSpeed = value;
-            if (mClip) mClip->setPlaybackSpeed(mSpeed);
-        }
+		{
+			mSpeed = value;
+			if (mClip) mClip->setPlaybackSpeed(mSpeed);
+		}
 		else if (name == "time")
 		{
 			if (!mClip && mClipName != "") update(0); // try to create the clip if it hasn't been created already
@@ -584,40 +584,40 @@ namespace aprilvideo
 		{
 			mAudioSyncOffset = value;
 		}
-        else if (name == "blend_mode")
-        {
-            april::BlendMode mode;
+		else if (name == "blend_mode")
+		{
+			april::BlendMode mode;
 			if		(value == "default")	mode = april::BM_DEFAULT;
 			else if (value == "alpha")		mode = april::BM_ALPHA;
-            else if (value == "add")		mode = april::BM_ADD;
-            else if (value == "subtract")	mode = april::BM_SUBTRACT;
-            else if (value == "overwrite")	mode = april::BM_OVERWRITE;
-            else
-            {
-                hlog::errorf(logTag, "Unknown VideoObject blend mode: %s", name.c_str());
-                return 1;
-            }
-            mBlendMode = mode;
-            if (mVideoImage)
-            {
-                mVideoImage->setBlendMode(mode);
-            }
-        }
-        else if (name == "state")
-        {
-            if (value == "playing")
-            {
-                if (mClip && mClip->isPaused())
-                {
+			else if (value == "add")		mode = april::BM_ADD;
+			else if (value == "subtract")	mode = april::BM_SUBTRACT;
+			else if (value == "overwrite")	mode = april::BM_OVERWRITE;
+			else
+			{
+				hlog::errorf(logTag, "Unknown VideoObject blend mode: %s", name.c_str());
+				return 1;
+			}
+			mBlendMode = mode;
+			if (mVideoImage)
+			{
+				mVideoImage->setBlendMode(mode);
+			}
+		}
+		else if (name == "state")
+		{
+			if (value == "playing")
+			{
+				if (mClip && mClip->isPaused())
+				{
 					mClip->play();
-                }
-            }
-            else if (value == "paused")
-            {
-                if (mClip && !mClip->isPaused()) mClip->pause();
-            }
-            else throw hl_exception("VideoObject: unable to set state property to '" + value + "'.");
-        }
+				}
+			}
+			else if (value == "paused")
+			{
+				if (mClip && !mClip->isPaused()) mClip->pause();
+			}
+			else throw hl_exception("VideoObject: unable to set state property to '" + value + "'.");
+		}
 		else return aprilui::ImageBox::setProperty(name, value);
 		return 1;
 	}
@@ -652,33 +652,33 @@ namespace aprilvideo
 		}
 		else if (name == "audio")  return mAudioName;
 		else if (name == "sync_offset")  return mAudioSyncOffset;
-        else if (name == "blend_mode")
-        {
-            if (mVideoImage)
-            {
-                if		(mBlendMode == april::BM_DEFAULT)	return "default";
-                else if (mBlendMode == april::BM_ALPHA)		return "alpha";
-                if      (mBlendMode == april::BM_ADD)		return "add";
-                else if (mBlendMode == april::BM_SUBTRACT)	return "subtract";
+		else if (name == "blend_mode")
+		{
+			if (mVideoImage)
+			{
+				if		(mBlendMode == april::BM_DEFAULT)	return "default";
+				else if (mBlendMode == april::BM_ALPHA)		return "alpha";
+				if      (mBlendMode == april::BM_ADD)		return "add";
+				else if (mBlendMode == april::BM_SUBTRACT)	return "subtract";
 				else if (mBlendMode == april::BM_OVERWRITE)	return "overwrite";
-                else return "unknown";
-            }
-            else
-            {
-                hlog::error(logTag, "Unable to get blend_mode to VideoObject, image is NULL");
-                return "";
-            }
-        }
-        else if (name == "state")
-        {
+				else return "unknown";
+			}
+			else
+			{
+				hlog::error(logTag, "Unable to get blend_mode to VideoObject, image is NULL");
+				return "";
+			}
+		}
+		else if (name == "state")
+		{
 			if (this->isPlaying()) return "playing";
 			if (this->isPaused()) return "paused";
 			if (this->isStopped()) return "stopped";
 			return "unknown";
-        }
+		}
 		return ImageBox::getProperty(name);
 	}
-    
+	
 	harray<aprilui::PropertyDescription> VideoObject::getPropertyDescriptions()
 	{
 		if (VideoObject::_propertyDescriptions.size() == 0)
