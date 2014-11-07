@@ -15,18 +15,18 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 class TheoraPlayerExport _TheoraGenericException
 {
 public:
-    std::string mErrText,mFile,mType;
+	std::string mErrText,mFile,mType;
 	int mLineNumber;
 
 	_TheoraGenericException(const std::string& errorText, std::string type = "",std::string file = "", int line = 0);
-    virtual ~_TheoraGenericException() {}
-    
+	virtual ~_TheoraGenericException() {}
+	
 	virtual std::string repr();
-    
+	
 	void writeOutput();
 	
 	virtual const std::string& getErrorText() { return mErrText; }
-    
+	
 	const std::string getType(){ return mType; }
 };
 
@@ -37,7 +37,7 @@ public:
 { \
 public: \
 	name(const std::string& errorText,std::string type = "",std::string file = "",int line = 0) : \
-	  _TheoraGenericException(errorText, type, file, line){} \
+		_TheoraGenericException(errorText, type, file, line){} \
 }
 
 exception_cls(_KeyException);

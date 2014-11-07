@@ -13,7 +13,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 _TheoraGenericException::_TheoraGenericException(const std::string& errorText, std::string type, std::string file, int line)
 {
-    mErrText = errorText;
+	mErrText = errorText;
 	int src = (int) file.find("src");
 	if (src >= 0) file = file.substr(src + 4, 1000);
 	mLineNumber = line;

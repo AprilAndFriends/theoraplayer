@@ -23,7 +23,7 @@ struct TheoraAudioPacket
 };
 
 /**
-    This is a Mutex object, used in thread syncronization.
+	This is a Mutex object, used in thread syncronization.
  */
 class TheoraPlayerExport TheoraAudioPacketQueue
 {

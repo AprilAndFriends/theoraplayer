@@ -23,7 +23,7 @@ class TheoraDataSource;
 class TheoraVideoFrame;
 
 /**
-    format of the TheoraVideoFrame pixels. Affects decoding time
+	format of the TheoraVideoFrame pixels. Affects decoding time
  */
 enum TheoraOutputMode
 {
@@ -84,7 +84,7 @@ protected:
 	int mSeekFrame; //! stores desired seek position as a frame number. next worker thread will do the seeking and reset this var to -1
 	float mDuration, mFrameDuration, mFPS;
 	float mPriority; //! User assigned priority. Default value is 1
-    std::string mName;
+	std::string mName;
 	int mWidth, mHeight, mStride;
 	int mNumFrames;
 
@@ -121,19 +121,16 @@ protected:
 	 * @return last decoded timestamp (if found in decoded packet's granule position)
 	 */
 	virtual float decodeAudio() = 0;
-    
-    int _getNumReadyFrames();
-    void resetFrameQueue();
-    int discardOutdatedFrames(float absTime);
-    float getAbsPlaybackTime();
+	
+	int _getNumReadyFrames();
+	void resetFrameQueue();
+	int discardOutdatedFrames(float absTime);
+	float getAbsPlaybackTime();
 	virtual void load(TheoraDataSource* source) = 0;
 
 	virtual void _restart() = 0; // resets the decoder and stream but leaves the frame queue intact
 public:
-	TheoraVideoClip(TheoraDataSource* data_source,
-		            TheoraOutputMode output_mode,
-					int nPrecachedFrames,
-					bool usePower2Stride);
+	TheoraVideoClip(TheoraDataSource* data_source, TheoraOutputMode output_mode, int nPrecachedFrames, bool usePower2Stride);
 	virtual ~TheoraVideoClip();
 
 	std::string getName();
@@ -149,17 +146,17 @@ public:
 	int getWidth();
 	//! return height in pixels of the video clip
 	int getHeight();
-    
-    //! Width of the actual picture inside a video frame (depending on implementation, this may be equal to mWidth or differ within a codec block size (usually 16))
-    int getSubFrameWidth();
-    //! Height of the actual picture inside a video frame (depending on implementation, this may be equal to mHeight or differ within a codec block size (usually 16))
+	
+	//! Width of the actual picture inside a video frame (depending on implementation, this may be equal to mWidth or differ within a codec block size (usually 16))
+	int getSubFrameWidth();
+	//! Height of the actual picture inside a video frame (depending on implementation, this may be equal to mHeight or differ within a codec block size (usually 16))
 	int getSubFrameHeight();
-    //! X Offset of the actual picture inside a video frame (depending on implementation, this may be 0 or within a codec block size (usually 16))
+	//! X Offset of the actual picture inside a video frame (depending on implementation, this may be 0 or within a codec block size (usually 16))
 	int getSubFrameOffsetX();
-    //! Y Offset of the actual picture inside a video frame (depending on implementation, this may be 0 or differ within a codec block size (usually 16))
+	//! Y Offset of the actual picture inside a video frame (depending on implementation, this may be 0 or differ within a codec block size (usually 16))
 	int getSubFrameOffsetY();
-    /**
-	    \brief return stride in pixels
+	/**
+		\brief return stride in pixels
 
 		If you've specified usePower2Stride when creating the TheoraVideoClip object
 		then this value will be the next power of two size compared to width,
@@ -180,7 +177,7 @@ public:
 	//! advance time. TheoraVideoManager calls this
 	void update(float timeDelta);
 	/**
-	    \brief update timer to the display time of the next frame
+		\brief update timer to the display time of the next frame
 
 		useful if you want to grab frames instead of regular display
 		\return time advanced. 0 if no frames are ready
@@ -191,20 +188,20 @@ public:
 	TheoraFrameQueue* getFrameQueue();
 	
 	/**
-	    \brief pop the frame from the front of the FrameQueue
+		\brief pop the frame from the front of the FrameQueue
 
 		see TheoraFrameQueue::pop() for more details
 	 */
 	void popFrame();
 
 	/**
-	    \brief Returns the first available frame in the queue or NULL if no frames are available.
+		\brief Returns the first available frame in the queue or NULL if no frames are available.
 
 		see TheoraFrameQueue::getFirstAvailableFrame() for more details
 	*/
 	TheoraVideoFrame* getNextFrame();
 	/**
-	    check if there is enough audio data decoded to submit to the audio interface
+		check if there is enough audio data decoded to submit to the audio interface
 
 		TheoraWorkerThread calls this
 	 */
@@ -214,7 +211,7 @@ public:
 	TheoraAudioInterface* getAudioInterface();
 
 	/**
-	    \brief resize the frame queues
+		\brief resize the frame queues
 
 		Warning: this call discards ready frames in the frame queue
 	 */
@@ -235,7 +232,7 @@ public:
 
 
 	/**
-	    TODO: user priority. Useful only when more than one video is being decoded
+		TODO: user priority. Useful only when more than one video is being decoded
 	 */
 	void setPriority(float priority);
 	float getPriority();
@@ -255,20 +252,20 @@ public:
 	//! return the current output mode for this video object
 	TheoraOutputMode getOutputMode();
 	/**
-	    set a new output mode
+		set a new output mode
 
 		Warning: this discards the frame queue. ready frames will be lost.
 	 */
 	void setOutputMode(TheoraOutputMode mode);
 
-    bool isDone();
+	bool isDone();
 	void play();
 	void pause();
 	void restart();
 	bool isPaused();
 	void stop();
-    void setPlaybackSpeed(float speed);
-    float getPlaybackSpeed();
+	void setPlaybackSpeed(float speed);
+	float getPlaybackSpeed();
 	//! seek to a given time position
 	void seek(float time);
 	//! seek to a given frame number

@@ -31,8 +31,8 @@ public:
 	
 	TheoraAudioInterface(TheoraVideoClip* owner, int nChannels, int freq);
 	virtual ~TheoraAudioInterface();
-    //! A function that the TheoraVideoClip object calls once more audio packets are decoded
-    /*!
+	//! A function that the TheoraVideoClip object calls once more audio packets are decoded
+	/*!
 	 \param data contains one or two channels of float PCM data in the range [-1,1]
 	 \param nSamples contains the number of samples that the data parameter contains in each channel
 	 */

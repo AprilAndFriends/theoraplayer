@@ -13,7 +13,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include "TheoraExport.h"
 
 /**
-    This is a Timer object, it is used to control the playback of a TheoraVideoClip.
+	This is a Timer object, it is used to control the playback of a TheoraVideoClip.
 
 	You can inherit this class and make a timer that eg. plays twice as fast,
 	or playbacks an audio track and uses it's time offset for syncronizing Video etc.
@@ -31,7 +31,7 @@ public:
 
 	virtual float getTime();
 	/**
-	    \brief advance the time.
+		\brief advance the time.
 
 		If you're using another synronization system, eg. an audio track,
 		then you can ignore this call or use it to perform other updates.
@@ -45,20 +45,20 @@ public:
 	virtual bool isPaused();
 	virtual void stop();
 	/**
-	    \brief set's playback speed
+		\brief set's playback speed
 
-        1.0 is the default. The speed factor multiplies time advance, thus
-        setting the value higher will increase playback speed etc.
-    
-        NOTE: depending on Timer implementation, it may not support setting the speed
-         
+		1.0 is the default. The speed factor multiplies time advance, thus
+		setting the value higher will increase playback speed etc.
+
+		NOTE: depending on Timer implementation, it may not support setting the speed
+		 
 	 */
-    virtual void setSpeed(float speed);
-    //! return the update speed 1.0 is the default
-    virtual float getSpeed();
+	virtual void setSpeed(float speed);
+	//! return the update speed 1.0 is the default
+	virtual float getSpeed();
 
 	/**
-	    \brief change the current time.
+		\brief change the current time.
 
 		if you're using another syncronization mechanism, make sure to adjust
 		the time offset there

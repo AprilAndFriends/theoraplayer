@@ -172,5 +172,5 @@ bool TheoraFrameQueue::isFull()
 
 std::list<TheoraVideoFrame*>& TheoraFrameQueue::_getFrameQueue()
 {
-    return mQueue;
+	return mQueue;
 }

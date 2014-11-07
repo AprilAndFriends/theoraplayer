@@ -40,11 +40,11 @@ void TheoraFileDataSource::openFile()
 	{
 		mFilePtr = fopen(mFilename.c_str(), "rb");
 		if (!mFilePtr)
-        {
-            std::string msg = "Can't open video file: " + mFilename;
-            th_writelog(msg);
-            throw TheoraGenericException(msg);
-        }
+		{
+			std::string msg = "Can't open video file: " + mFilename;
+			th_writelog(msg);
+			throw TheoraGenericException(msg);
+		}
 
 		
 #ifdef _WIN32

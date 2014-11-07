@@ -12,7 +12,7 @@ TheoraTimer::TheoraTimer()
 {
 	mTime = 0;
 	mPaused = 0;
-    mSpeed = 1.0f;
+	mSpeed = 1.0f;
 }
 
 TheoraTimer::~TheoraTimer()
@@ -61,10 +61,10 @@ void TheoraTimer::seek(float time)
 
 void TheoraTimer::setSpeed(float speed)
 {
-    mSpeed = speed;
+	mSpeed = speed;
 }
 
 float TheoraTimer::getSpeed()
 {
-    return mSpeed;
+	return mSpeed;
 }

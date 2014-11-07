@@ -24,7 +24,7 @@ class TheoraPlayerExport TheoraDataSource
 {
 public:
 
-    virtual ~TheoraDataSource();
+	virtual ~TheoraDataSource();
 	/**
 		Reads nBytes bytes from data source and returns number of read bytes.
 		if function returns less bytes then nBytes, the system assumes EOF is reached.

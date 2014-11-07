@@ -97,7 +97,7 @@ public:
 	//! get nicely formated version string
 	std::string getVersionString();
 	/**
-	    \brief get version numbers
+		\brief get version numbers
 
 		if c is negative, it means it's a release candidate -c
 	 */

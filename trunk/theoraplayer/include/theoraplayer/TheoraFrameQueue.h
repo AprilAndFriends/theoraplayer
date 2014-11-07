@@ -35,13 +35,13 @@ public:
 	~TheoraFrameQueue();
 
 	/**
-	    \brief Returns the first available frame in the queue or NULL if no frames are available.
+		\brief Returns the first available frame in the queue or NULL if no frames are available.
 
 		This function DOES NOT remove the frame from the queue, you have to do it manually
 		when you want to mark the frame as used by calling the pop() function.
 	*/
 	TheoraVideoFrame* getFirstAvailableFrame();
-    //! non-mutex version
+	//! non-mutex version
 	TheoraVideoFrame* _getFirstAvailableFrame();
 
 	//! return the number of used (not ready) frames
@@ -49,21 +49,21 @@ public:
 
 	//! return the number of ready frames
 	int getReadyCount();
-    //! non-mutex version
+	//! non-mutex version
 	int _getReadyCount();
 
 	/**
-	    \brief remove the first N available frame from the queue.
+		\brief remove the first N available frame from the queue.
 
-	    Use this every time you display a frame	so you can get the next one when the time comes.
+		Use this every time you display a frame	so you can get the next one when the time comes.
 		This function marks the frame on the front of the queue as unused and it's memory then
 		get's used again in the decoding process.
 		If you don't call this, the frame queue will fill up with precached frames up to the
 		specified amount in the TheoraVideoManager class and you won't be able to advance the video.
 	*/
 	void pop(int n = 1);
-    
-    //! This is an internal _pop function. use externally only in combination with lock() / unlock() calls
+	
+	//! This is an internal _pop function. use externally only in combination with lock() / unlock() calls
 	void _pop(int n);
 
 	//! frees all decoded frames for reuse (does not destroy memory, just marks them as free)
@@ -72,8 +72,8 @@ public:
 	TheoraVideoFrame* requestEmptyFrame();
 
 	/** 
-	    \brief set's the size of the frame queue.
-		
+		\brief set's the size of the frame queue.
+
 		Beware, currently stored ready frames will be lost upon this call
 	*/
 	void setSize(int n);
@@ -85,8 +85,8 @@ public:
 
 	TheoraMutex* getMutex() { return &mMutex; }
 
-    //! returns the internal frame queue. Warning: Always lock / unlock queue's mutex before accessing frames directly!
-    std::list<TheoraVideoFrame*>& _getFrameQueue();
+	//! returns the internal frame queue. Warning: Always lock / unlock queue's mutex before accessing frames directly!
+	std::list<TheoraVideoFrame*>& _getFrameQueue();
 };
 
 #endif
