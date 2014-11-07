@@ -22,16 +22,16 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 std::string str(int i)
 {
-    char s[32];
-    sprintf(s, "%d", i);
-    return std::string(s);
+	char s[32];
+	sprintf(s, "%d", i);
+	return std::string(s);
 }
 
 std::string strf(float i)
 {
-    char s[32];
-    sprintf(s, "%.3f", i);
-    return std::string(s);
+	char s[32];
+	sprintf(s, "%.3f", i);
+	return std::string(s);
 }
 
 void _psleep(int miliseconds)

@@ -87,12 +87,12 @@ void TheoraVideoManager::setLogFunction(void (*fn)(std::string))
 
 TheoraVideoManager* TheoraVideoManager::getSingletonPtr()
 {
-    return g_ManagerSingleton;
+	return g_ManagerSingleton;
 }
 
 TheoraVideoManager& TheoraVideoManager::getSingleton()
-{  
-    return *g_ManagerSingleton;  
+{
+	return *g_ManagerSingleton;  
 }
 
 TheoraVideoManager::TheoraVideoManager(int num_worker_threads) : 
@@ -105,7 +105,7 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 	std::string msg = "Initializing Theora Playback Library (" + getVersionString() + ")\n";
 #ifdef __THEORA
 	msg += "  - libtheora version: " + std::string(th_version_string()) + "\n" +
-	       "  - libvorbis version: " +  std::string(vorbis_version_string()) + "\n";
+		"  - libvorbis version: " +  std::string(vorbis_version_string()) + "\n";
 #endif
 #ifdef _ANDROID
 	uint64_t features = libtheoraplayer_android_getCpuFeaturesExt();

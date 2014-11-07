@@ -37,10 +37,10 @@ static void bgrx2rgba(unsigned char* dest, int w, int h, struct TheoraPixelTrans
 	{
 		for (x = 0, ax = w * 4, dstEnd = dst + w; dst != dstEnd; x += 4, ax += 4, ++dst)
 		{
-            // use the full alpha range here because the Y channel has already been converted
-            // to RGB and that's in [0, 255] range.
+			// use the full alpha range here because the Y channel has already been converted
+			// to RGB and that's in [0, 255] range.
 			a = src[ax];
-            *dst = (OSReadSwapInt32(src, x) >> 8) | (a << 24);
+			*dst = (OSReadSwapInt32(src, x) >> 8) | (a << 24);
 		}
 	}
 }
@@ -220,10 +220,10 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 	if (sampleBuffer == NULL && mReader.status == AVAssetReaderStatusCompleted) // other cases could be app suspended
 	{
 		if (mAutoRestart)
-        {
-            ++mIteration;
+		{
+			++mIteration;
 			_restart();
-        }
+		}
 		else
 		{
 			unload();
@@ -439,7 +439,7 @@ void TheoraVideoClip_AVFoundation::doSeek()
 	mEndOfFile = false;
 	mRestarted = false;
 	
-    resetFrameQueue();
+	resetFrameQueue();
 	unload();
 	load(mStream);
 

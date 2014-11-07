@@ -138,7 +138,7 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 				continue; // drop frame
 			}
 			frame->mTimeToDisplay = time - mFrameDuration;
-			frame->mIteration     = mIteration;
+			frame->mIteration = mIteration;
 			frame->_setFrameNumber(frame_number);
 			mLastDecodedFrameNumber = frame_number;
 			th_decode_ycbcr_out(mInfo.TheoraDecoder, buff);
