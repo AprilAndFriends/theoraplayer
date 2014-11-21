@@ -146,6 +146,8 @@ public:
 	int getWidth();
 	//! return height in pixels of the video clip
 	int getHeight();
+	//! returns whether the clip has an alpha channel
+	bool hasAlphaChannel() { return mUseAlpha; }
 	
 	//! Width of the actual picture inside a video frame (depending on implementation, this may be equal to mWidth or differ within a codec block size (usually 16))
 	int getSubFrameWidth();
