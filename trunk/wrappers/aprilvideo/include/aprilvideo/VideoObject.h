@@ -90,7 +90,12 @@ namespace aprilvideo
 		void _createClip(bool waitForCache = true);
 		bool _isClipCreated();
 		float getPrecacheFactor();
+		int getNumReadyFrames();
+		int getNumPrecachedFrames();
 		hstr getClipName() { return mClipName; }
+		int getClipWidth();
+		int getClipHeight();
+		bool hasAlphaChannel();
 		
 		void update(float timeDelta);
 		void updateFrame();
