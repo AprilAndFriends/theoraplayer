@@ -247,13 +247,34 @@ namespace aprilvideo
 	
 	float VideoObject::getPrecacheFactor()
 	{
-		if (mClip == NULL)
-		{
-			return 0;
-		}
-		return ((float) mClip->getNumReadyFrames()) / mClip->getNumPrecachedFrames();
+		return mClip == NULL ? 0 : ((float) mClip->getNumReadyFrames()) / mClip->getNumPrecachedFrames();
 	}
-	
+
+	int VideoObject::getNumReadyFrames()
+	{
+		return mClip == NULL ? 0 : mClip->getNumReadyFrames();
+	}
+
+	int VideoObject::getNumPrecachedFrames()
+	{
+		return mClip == NULL ? 0 : mClip->getNumPrecachedFrames();
+	}
+
+	bool VideoObject::hasAlphaChannel()
+	{
+		return mClip == NULL ? false : mClip->hasAlphaChannel();
+	}
+
+	int VideoObject::getClipWidth()
+	{
+		return mClip == NULL ? 0 : mClip->getWidth();
+	}
+
+	int VideoObject::getClipHeight()
+	{
+		return mClip == NULL ? false : mClip->getHeight();
+	}
+
 	void VideoObject::_createClip(bool waitForCache)
 	{
 		hstr path = getFullPath();
