@@ -37,7 +37,7 @@ namespace aprilvideo
 	extern TheoraVideoManager* gVideoManager;
 	extern hstr defaultFileExtension;
 	
-	VideoObject::VideoObject(chstr name, grect rect) : aprilui::ImageBox(name, rect)
+	VideoObject::VideoObject(chstr name) : aprilui::ImageBox(name)
 	{
 		mUseAlpha = 0;
 		mPrevDoneFlag = 0;
@@ -130,9 +130,9 @@ namespace aprilvideo
 		value = hclamp(value, 0.0f, 1.0f);
 	}
 
-	aprilui::Object* VideoObject::createInstance(chstr name, grect rect)
+	aprilui::Object* VideoObject::createInstance(chstr name)
 	{
-		return new VideoObject(name, rect);
+		return new VideoObject(name);
 	}
 	
 	void VideoObject::notifyEvent(chstr type, aprilui::EventArgs* args)
