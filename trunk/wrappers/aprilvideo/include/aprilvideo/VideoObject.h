@@ -68,10 +68,10 @@ namespace aprilvideo
 		void destroyResources();
 
 	public:
-		VideoObject(chstr name, grect rect);
-		static aprilui::Object* createInstance(chstr name, grect rect);
+		VideoObject(chstr name);
+		static aprilui::Object* createInstance(chstr name);
 		~VideoObject();
-		inline hstr getClassName() const { return "VideoObject"; }
+		inline hstr getClassName() const { return "aprilvideo.VideoObject"; }
 		
 		hstr getFullPath();
 		
