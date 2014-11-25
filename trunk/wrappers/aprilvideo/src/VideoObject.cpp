@@ -46,8 +46,6 @@ namespace aprilvideo
 		mClip = NULL;
 		mVideoImage = NULL;
 		mTexture = NULL;
-		mTexture1 = NULL;
-		mTexture2 = NULL;
 		mTimer = NULL;
 		mSound = NULL;
 		mAudioPlayer = NULL;
@@ -151,17 +149,21 @@ namespace aprilvideo
 	
 	void VideoObject::destroyResources()
 	{
-		if (mVideoImage)
+		foreach (aprilui::Image*, it, mVideoImages)
 		{
-			delete mVideoImage;
-			mVideoImage = NULL;
-			this->image = this->dataset != NULL ? this->dataset->getImage(APRILUI_IMAGE_NAME_NULL) : NULL;
+			delete *it;
 		}
-		if (mTexture)
+		mVideoImage = NULL;
+		this->image = this->dataset != NULL ? this->dataset->getImage(APRILUI_IMAGE_NAME_NULL) : NULL;
+		mVideoImages.clear();
+
+		foreach (aprilui::Texture*, it, mTextures)
 		{
-			delete mTexture;
-			mTexture = NULL;
+			delete *it;
 		}
+		mTextures.clear();
+		mTexture = NULL;
+
 		if (mClip)
 		{
 			gVideoManager->destroyVideoClip(mClip);
@@ -381,15 +383,22 @@ namespace aprilvideo
 			tw = hpotceil(tw);
 			th = hpotceil(th);
 		}
-		april::Texture* tex1 = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
-		april::Texture* tex2 = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
-		tex1->setAddressMode(april::Texture::ADDRESS_CLAMP);
-		tex2->setAddressMode(april::Texture::ADDRESS_CLAMP);
-		mTexture1 = new aprilui::Texture(tex1->getFilename() + "_1", tex1);
-		mTexture2 = new aprilui::Texture(tex2->getFilename() + "_2", tex2);
-		mTexture = mTexture1;
-		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
-		mVideoImage->setBlendMode(mBlendMode);
+
+		hlog::write(logTag, "Creating video textures for " + mClipName);
+		april::Texture* tex;
+		for (int i = 0; i < 2; i++)
+		{
+			tex = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
+			tex->setAddressMode(april::Texture::ADDRESS_CLAMP);
+			mTexture = new aprilui::Texture(tex->getFilename() + "_" + hstr(i + 1), tex);
+
+			mVideoImage = new aprilui::Image(mTexture, "video_img_" + hstr(i + 1), grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
+			mVideoImage->setBlendMode(mBlendMode);
+
+			mTextures += mTexture;
+			mVideoImages += mVideoImage;
+		}
+
 		if (waitForCache && mInitialPrecacheFactor > 0.0f)
 		{
 			float factor = hmax(2.0f / mClip->getNumPrecachedFrames(), mInitialPrecacheFactor);
@@ -456,8 +465,10 @@ namespace aprilvideo
 			bool pop = true;
 			if (!mTexture->isLoaded())
 			{
-				mTexture1->load();
-				mTexture2->load();
+				foreach (aprilui::Texture*, it, mTextures)
+				{
+					(*it)->load();
+				}
 				if (!f)
 				{
 					if (mClip->getNumReadyFrames() == 0)
@@ -476,8 +487,10 @@ namespace aprilvideo
 				r.h = f->getHeight();
 				april::Image::Format textureFormat = _getTextureFormat();
 				// switch textures each frame to optimize GPU pipeline
-				mTexture = mTexture == mTexture1 ? mTexture2 : mTexture1;
-				mVideoImage->setTexture(mTexture);
+				int index = mVideoImage == mVideoImages[0] ? 1 : 0;
+				mTexture = mTextures[index];
+				mVideoImage = mVideoImages[index];
+				this->image = mVideoImage;
 #ifdef _TEXWRITE_BENCHMARK
 				long t = clock();
 				int n = 256;
@@ -515,13 +528,9 @@ namespace aprilvideo
 		return mTexture;
 	}
 
-	harray<aprilui::Texture*> VideoObject::getTextures()
+	const harray<aprilui::Texture*>& VideoObject::getTextures()
 	{
-		harray<aprilui::Texture*> textures;
-		textures += mTexture1;
-		textures += mTexture2;
-
-		return textures;
+		return mTextures;
 	}
 
 	void VideoObject::_draw()
