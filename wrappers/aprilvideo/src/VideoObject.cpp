@@ -46,6 +46,8 @@ namespace aprilvideo
 		mClip = NULL;
 		mVideoImage = NULL;
 		mTexture = NULL;
+		mTexture1 = NULL;
+		mTexture2 = NULL;
 		mTimer = NULL;
 		mSound = NULL;
 		mAudioPlayer = NULL;
@@ -231,12 +233,8 @@ namespace aprilvideo
 		}
 		else
 		{
-#ifdef _ANDROID
-			// android has better performance if using rgbx
+			// android and iOS has better performance if using rgbx
 			return  april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBX);
-#else
-			return  april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGB);
-#endif
 		}
 	}
 	
@@ -302,8 +300,8 @@ namespace aprilvideo
 			else if (textureFormat == april::Image::FORMAT_XRGB)		mode = TH_XRGB;
 			else if (textureFormat == april::Image::FORMAT_ABGR)		mode = TH_ABGR;
 			else if (textureFormat == april::Image::FORMAT_XBGR)		mode = TH_XBGR;
-			else if (textureFormat == april::Image::FORMAT_RGB)			mode = TH_RGB;
-			else if (textureFormat == april::Image::FORMAT_BGR)			mode = TH_BGR;
+			else if (textureFormat == april::Image::FORMAT_RGB)			mode = TH_RGBX;
+			else if (textureFormat == april::Image::FORMAT_BGR)			mode = TH_BGRX;
 			else if (textureFormat == april::Image::FORMAT_GRAYSCALE)	mode = TH_GREY;
 			int ram = april::getSystemInfo().ram;
 			int precached = 16;
@@ -312,8 +310,8 @@ namespace aprilvideo
 			// a native hardware accelerated codec. So (for now) we use a larger precache to counter it. Though, WinP8 can't handle this memory-wise.
 			if (ram > 512) precached = 32;
 #else
-			if      (ram < 384) precached = 4;
-			else if (ram < 512) precached = 6;
+			if      (ram < 384) precached = 6;
+			else if (ram < 512) precached = 8;
 			else if (ram < 1024)
 			{
 				if (path.contains("lowres")) precached = 16;
@@ -383,9 +381,13 @@ namespace aprilvideo
 			tw = hpotceil(tw);
 			th = hpotceil(th);
 		}
-		april::Texture* tex = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
-		tex->setAddressMode(april::Texture::ADDRESS_CLAMP);
-		mTexture = new aprilui::Texture(tex->getFilename(), tex);
+		april::Texture* tex1 = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
+		april::Texture* tex2 = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
+		tex1->setAddressMode(april::Texture::ADDRESS_CLAMP);
+		tex2->setAddressMode(april::Texture::ADDRESS_CLAMP);
+		mTexture1 = new aprilui::Texture(tex1->getFilename() + "_1", tex1);
+		mTexture2 = new aprilui::Texture(tex2->getFilename() + "_2", tex2);
+		mTexture = mTexture1;
 		mVideoImage = new aprilui::Image(mTexture, "video_img", grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
 		mVideoImage->setBlendMode(mBlendMode);
 		if (waitForCache && mInitialPrecacheFactor > 0.0f)
@@ -454,7 +456,8 @@ namespace aprilvideo
 			bool pop = true;
 			if (!mTexture->isLoaded())
 			{
-				mTexture->load();
+				mTexture1->load();
+				mTexture2->load();
 				if (!f)
 				{
 					if (mClip->getNumReadyFrames() == 0)
@@ -472,6 +475,9 @@ namespace aprilvideo
 				r.w = f->getWidth();
 				r.h = f->getHeight();
 				april::Image::Format textureFormat = _getTextureFormat();
+				// switch textures each frame to optimize GPU pipeline
+				mTexture = mTexture == mTexture1 ? mTexture2 : mTexture1;
+				mVideoImage->setTexture(mTexture);
 #ifdef _TEXWRITE_BENCHMARK
 				long t = clock();
 				int n = 256;
@@ -502,9 +508,22 @@ namespace aprilvideo
 				}
 			}
 		}
-
 	}
-	
+
+	aprilui::Texture* VideoObject::getTexture()
+	{
+		return mTexture;
+	}
+
+	harray<aprilui::Texture*> VideoObject::getTextures()
+	{
+		harray<aprilui::Texture*> textures;
+		textures += mTexture1;
+		textures += mTexture2;
+
+		return textures;
+	}
+
 	void VideoObject::_draw()
 	{
 		updateFrame();
