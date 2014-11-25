@@ -48,8 +48,8 @@ namespace aprilvideo
 		TheoraVideoClip* mClip;
 		TheoraTimer* mTimer;
 		april::BlendMode mBlendMode;
-		aprilui::Texture* mTexture1;
-		aprilui::Texture* mTexture2;
+		harray<aprilui::Texture*> mTextures;
+		harray<aprilui::Image*> mVideoImages;
 		aprilui::Texture* mTexture;
 		aprilui::Image* mVideoImage;
 		float mSpeed;
@@ -78,7 +78,7 @@ namespace aprilvideo
 		hstr getFullPath();
 		
 		aprilui::Texture* getTexture();
-		harray<aprilui::Texture*> getTextures();
+		const harray<aprilui::Texture*>& getTextures();
 
 		void play();
 		void pause();
