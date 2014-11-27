@@ -76,7 +76,11 @@ bool TheoraVideoClip_Theora::_readData()
 		{
 			if (bytes_read == 0)
 			{
-				if (!mAutoRestart) mEndOfFile = true;
+				if (!mAutoRestart)
+				{
+					mEndOfFile = true;
+					th_writelog(mName + " finished playing");
+				}
 				return 0;
 			}
 		}
@@ -300,7 +304,10 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 
 		// create an audio interface instance if available
 		TheoraAudioInterfaceFactory* audio_factory = TheoraVideoManager::getSingleton().getAudioInterfaceFactory();
-		if (audio_factory) setAudioInterface(audio_factory->createInstance(this, mNumAudioChannels, mAudioFrequency));
+		if (audio_factory)
+		{
+			setAudioInterface(audio_factory->createInstance(this, mNumAudioChannels, mAudioFrequency));
+		}
 	}
 	
 	mFrameDuration = 1.0f / getFPS();
@@ -313,7 +320,7 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 {
 	ogg_packet tempOggPacket;
 	bool done = false;
-	bool decode_audio=TheoraVideoManager::getSingleton().getAudioInterfaceFactory() != NULL;
+	bool decode_audio = TheoraVideoManager::getSingleton().getAudioInterfaceFactory() != NULL;
 	//init Vorbis/Theora Layer
 	//Ensure all structures get cleared out.
 	memset(&mInfo.OggSyncState, 0, sizeof(ogg_sync_state));
