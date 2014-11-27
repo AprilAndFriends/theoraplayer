@@ -195,8 +195,11 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 #ifdef _AVFOUNDATION_BGRX
 			if (mOutputMode == TH_RGBA)
 			{
+				unsigned char* buffer = frame->getBuffer();
 				for (int i = 0; i < 1000; ++i)
-					bgrx2rgba(frame->getBuffer(), mWidth / 2, mHeight, &t);
+				{
+					bgrx2rgba(buffer, mWidth / 2, mHeight, &t);
+				}
 				frame->mReady = true;
 			}
 			else
@@ -228,6 +231,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 		{
 			unload();
 			mEndOfFile = true;
+			th_writelog(mName + " finished playing");
 		}
 		return 0;
 	}

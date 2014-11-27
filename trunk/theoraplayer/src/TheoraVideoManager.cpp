@@ -228,7 +228,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 	if (clip != NULL)
 	{
 		clip->load(data_source);
-		clip->decodeNextFrame(); // ensure the first frame is always preloaded and have the main thread do it to prevent potential thread starvatio
+		clip->decodeNextFrame(); // ensure the first frame is always preloaded and have the main thread do it to prevent potential thread starvation
 
 		mClips.push_back(clip);
 	}

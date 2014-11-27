@@ -1908,6 +1908,7 @@
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
 					__THEORA,
 					_YUV_LIBYUV,
 					"$(inherited)",
@@ -1971,6 +1972,7 @@
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
 					__THEORA,
 					_YUV_LIBYUV,
 					"$(inherited)",
@@ -2034,6 +2036,7 @@
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
 					__THEORA,
 					_YUV_LIBYUV,
 					"$(inherited)",
@@ -2163,7 +2166,7 @@
 					_MAC,
 					__THEORA,
 					__AVFOUNDATION,
-					YUV_LIBYUV,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2182,7 +2185,7 @@
 					_MAC,
 					__THEORA,
 					__AVFOUNDATION,
-					YUV_LIBYUV,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2201,7 +2204,7 @@
 					_MAC,
 					__THEORA,
 					__AVFOUNDATION,
-					YUV_LIBYUV,
+					_YUV_LIBYUV,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2283,6 +2286,7 @@
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
 					__AVFOUNDATION,
 					_YUV_LIBYUV,
 					"$(inherited)",
@@ -2301,6 +2305,7 @@
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
 					__AVFOUNDATION,
 					_YUV_LIBYUV,
 					"$(inherited)",
@@ -2319,6 +2324,7 @@
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
 					__AVFOUNDATION,
 					_YUV_LIBYUV,
 					"$(inherited)",
@@ -2337,6 +2343,7 @@
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
 					__THEORA,
 					__AVFOUNDATION,
 					_YUV_LIBYUV,
@@ -2356,6 +2363,7 @@
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
 					__THEORA,
 					__AVFOUNDATION,
 					_YUV_LIBYUV,
@@ -2375,6 +2383,7 @@
 			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
 					__THEORA,
 					__AVFOUNDATION,
 					_YUV_LIBYUV,

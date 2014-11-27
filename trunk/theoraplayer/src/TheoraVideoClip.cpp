@@ -385,7 +385,16 @@ bool TheoraVideoClip::isPaused()
 
 bool TheoraVideoClip::isDone()
 {
-	return mEndOfFile && !mFrameQueue->getFirstAvailableFrame();
+	if (mEndOfFile)
+	{
+		TheoraVideoFrame* frame = mFrameQueue->getFirstAvailableFrame();
+		if (frame == NULL || frame->mTimeToDisplay >= mDuration) // in some cases, there could be a diference between the reported video duration and timestamp on the last frame(s)
+		{
+			return true;
+		}
+
+	}
+	return false;
 }
 
 void TheoraVideoClip::stop()
