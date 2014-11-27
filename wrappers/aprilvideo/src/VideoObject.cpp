@@ -458,7 +458,10 @@ namespace aprilvideo
 	
 	void VideoObject::updateFrame()
 	{
-		if (mClip == NULL && mClipName != "") _createClip();
+		if (mClip == NULL && mClipName != "")
+		{
+			_createClip();
+		}
 		if (mClip)
 		{
 			TheoraVideoFrame* f = mClip->getNextFrame();
@@ -481,7 +484,6 @@ namespace aprilvideo
 			}
 			if (f)
 			{
-				this->image = mVideoImage;
 				grect r = this->image->getSrcRect();
 				r.w = f->getWidth();
 				r.h = f->getHeight();
