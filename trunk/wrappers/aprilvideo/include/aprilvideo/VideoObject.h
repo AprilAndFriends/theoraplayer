@@ -36,6 +36,7 @@ namespace aprilvideo
 {
 	class aprilVideoExport VideoObject : public aprilui::ImageBox
 	{
+		APRILUI_CLONEABLE(VideoObject);
 	private:
 		static harray<aprilui::PropertyDescription> _propertyDescriptions;
 
