@@ -82,7 +82,32 @@ namespace aprilvideo
 			}
 		}
 	}
-	
+
+	VideoObject::VideoObject(const VideoObject& other) : aprilui::ImageBox(other)
+	{
+		mUseAlpha = other.mUseAlpha;
+		mPrevDoneFlag = other.mPrevDoneFlag;
+		mLoop = other.mLoop;
+		mSpeed = other.mSpeed;
+		mClipName = other.mClipName;
+		mClip = NULL;
+		mBlendMode = other.mBlendMode;
+		mVideoImage = NULL;
+		mTexture = NULL;
+		mTimer = NULL;
+		mSound = NULL;
+		mAudioPlayer = NULL;
+		mAudioSyncOffset = 0;
+		hmutex::ScopeLock lock(&gReferenceMutex);
+		gReferences += this;
+		lock.release();
+		mAlphaPauseTreshold = other.mAlphaPauseTreshold;
+		mPrevFrameNumber = 0;
+		mSeeked = 0;
+		mPrevAlpha = 255;
+		mInitialPrecacheFactor = other.mInitialPrecacheFactor;
+	}
+
 	VideoObject::~VideoObject()
 	{
 		hmutex::ScopeLock lock(&gReferenceMutex);
