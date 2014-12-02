@@ -49,7 +49,7 @@ void SetThreadName( DWORD dwThreadID, char* threadName)
 #include "TheoraAsync.h"
 #include "TheoraUtil.h"
 
-#if !defined(_WIN32) && !defined(_WINRT)
+#if defined(_DEBUG) || (!defined(_WIN32) && !defined(_WINRT))
 static int threadCounter = 1;
 static TheoraMutex counterMutex;
 #endif
