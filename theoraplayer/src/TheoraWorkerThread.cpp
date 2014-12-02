@@ -49,7 +49,7 @@ void SetThreadName( DWORD dwThreadID, char* threadName)
 #include "TheoraAsync.h"
 #include "TheoraUtil.h"
 
-#ifdef _DEBUG
+#if !defined(_WIN32) && !defined(_WINRT)
 static int threadCounter = 1;
 static TheoraMutex counterMutex;
 #endif
@@ -67,16 +67,22 @@ TheoraWorkerThread::~TheoraWorkerThread()
 void TheoraWorkerThread::execute()
 {
 	TheoraMutex::ScopeLock lock;
+    {
 #ifdef _DEBUG
-	char name[64];
-	lock.acquire(&counterMutex);
-#if !defined(_WIN32) && !defined(_WINRT)
-	sprintf(name, "TheoraWorkerThread %d", threadCounter++);
-	pthread_setname_np(name);
-#elif defined(_WIN32)
-	SetThreadName((DWORD) mId, name);
+        char name[64];
+        lock.acquire(&counterMutex);
+#if defined(_WIN32)
+        SetThreadName((DWORD) mId, name);
 #endif
-	lock.release();
+        lock.release();
+#endif
+    }
+#if !defined(_WIN32) && !defined(_WINRT)
+    {
+        char name[64];
+        sprintf(name, "TheoraWorkerThread %d", threadCounter++);
+        pthread_setname_np(name);
+    }
 #endif
 	while (isRunning())
 	{
