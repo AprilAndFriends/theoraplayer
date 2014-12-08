@@ -77,7 +77,7 @@ void TheoraWorkerThread::execute()
         lock.release();
 #endif
     }
-#if !defined(_WIN32) && !defined(_WINRT)
+#if !defined(_WIN32) && !defined(_WINRT) && !defined(_ANDROID)
     {
         char name[64];
         sprintf(name, "TheoraWorkerThread %d", threadCounter++);
