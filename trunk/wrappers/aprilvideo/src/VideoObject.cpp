@@ -365,7 +365,8 @@ namespace aprilvideo
 			{
 				if (!path.ends_with(".mp4") && ram > 256)
 				{
-					hresource r(path);
+					hresource r;
+					r.open(path);
 					unsigned long size = r.size();
 					TheoraDataSource* source;
 
