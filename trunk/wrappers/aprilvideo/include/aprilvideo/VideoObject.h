@@ -58,7 +58,7 @@ namespace aprilvideo
 		bool mSeeked;
 		int mAlphaPauseTreshold;
 		unsigned char mPrevAlpha;
-		float mInitialPrecacheFactor;
+		float mInitialPrecacheFactor, mInitialPrecacheTimeout;
 		
 		float mAudioSyncOffset;
 		hstr mAudioName;
@@ -90,7 +90,8 @@ namespace aprilvideo
 		virtual bool isPaused();
 		float getInitialPrecacheFactor() { return mInitialPrecacheFactor; }
 		void setInitialPrecacheFactor(float value);
-		
+		void setInitialPrecacheTimeout(float value);
+
 		void _createClip(bool waitForCache = true);
 		bool _isClipCreated();
 		float getPrecacheFactor();
