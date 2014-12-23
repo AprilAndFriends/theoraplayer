@@ -67,22 +67,14 @@ TheoraWorkerThread::~TheoraWorkerThread()
 void TheoraWorkerThread::execute()
 {
 	TheoraMutex::ScopeLock lock;
-    {
-#ifdef _DEBUG
-        char name[64];
-        lock.acquire(&counterMutex);
-#if defined(_WIN32)
-        SetThreadName((DWORD) mId, name);
-#endif
-        lock.release();
-#endif
-    }
 #ifdef _THREAD_NAMING
     {
+        lock.acquire(&counterMutex);
         char name[64];
         sprintf(name, "TheoraWorkerThread %d", threadCounter++);
         pthread_setname_np(name);
-    }
+		lock.release();
+	}
 #endif
 	while (isRunning())
 	{
