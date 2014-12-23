@@ -49,7 +49,7 @@ void SetThreadName( DWORD dwThreadID, char* threadName)
 #include "TheoraAsync.h"
 #include "TheoraUtil.h"
 
-#if defined(_DEBUG) || (!defined(_WIN32) && !defined(_WINRT))
+#ifdef _THREAD_NAMING
 static int threadCounter = 1;
 static TheoraMutex counterMutex;
 #endif
@@ -77,7 +77,7 @@ void TheoraWorkerThread::execute()
         lock.release();
 #endif
     }
-#if !defined(_WIN32) && !defined(_WINRT) && !defined(_ANDROID)
+#ifdef _THREAD_NAMING
     {
         char name[64];
         sprintf(name, "TheoraWorkerThread %d", threadCounter++);
