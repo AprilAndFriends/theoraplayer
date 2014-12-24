@@ -704,7 +704,7 @@ void TheoraVideoClip_Theora::doSeek()
 					for (i = 0; i < nmissing; ++i) samples[i] = 0;
 					for (j = 0; i < nmissing + mTheoraAudioPacketQueue->numSamples; ++i, ++j)
 						samples[i] = mTheoraAudioPacketQueue->pcm[j];
-					delete [] mTheoraAudioPacketQueue->pcm;
+					delete[] mTheoraAudioPacketQueue->pcm;
 					mTheoraAudioPacketQueue->pcm = samples;
 				}
 			}

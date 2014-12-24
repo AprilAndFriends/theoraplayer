@@ -407,8 +407,8 @@ namespace aprilvideo
 		if (mClip->getWidth() == 0) throw hl_exception("Failed to load video file: " + path);
 		mClip->setAutoRestart(mLoop);
 		
-		float w = mClip->getWidth(), h = mClip->getHeight();
-		float tw = w, th = h;
+		int tw = mClip->getWidth();
+		int th = mClip->getHeight();
 		april::RenderSystem::Caps caps = april::rendersys->getCaps();
 		if (!caps.npotTexturesLimited && !caps.npotTextures)
 		{

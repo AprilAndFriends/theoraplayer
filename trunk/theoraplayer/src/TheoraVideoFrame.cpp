@@ -86,7 +86,7 @@ TheoraVideoFrame::TheoraVideoFrame(TheoraVideoClip* parent)
 
 TheoraVideoFrame::~TheoraVideoFrame()
 {
-	if (mBuffer) delete [] mBuffer;
+	if (mBuffer) delete[] mBuffer;
 }
 
 int TheoraVideoFrame::getWidth()

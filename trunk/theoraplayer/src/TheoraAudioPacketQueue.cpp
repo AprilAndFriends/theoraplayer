@@ -104,9 +104,11 @@ TheoraAudioPacket* TheoraAudioPacketQueue::popAudioPacket()
 
 void TheoraAudioPacketQueue::destroyAudioPacket(TheoraAudioPacket* p)
 {
-	if (p == NULL) return;
-	delete [] p->pcm;
-	delete p;
+	if (p != NULL)
+	{
+		delete[] p->pcm;
+		delete p;
+	}
 }
 
 void TheoraAudioPacketQueue::destroyAllAudioPackets()
