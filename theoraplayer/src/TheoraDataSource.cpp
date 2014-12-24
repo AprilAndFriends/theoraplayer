@@ -140,7 +140,7 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(unsigned char* data, long
 
 TheoraMemoryFileDataSource::~TheoraMemoryFileDataSource()
 {
-	if (mData) delete [] mData;
+	if (mData) delete[] mData;
 }
 
 int TheoraMemoryFileDataSource::read(void* output, int nBytes)
