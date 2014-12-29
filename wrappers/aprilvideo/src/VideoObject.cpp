@@ -373,7 +373,7 @@ namespace aprilvideo
 				{
 					hresource r;
 					r.open(path);
-					unsigned long size = r.size();
+					unsigned long size = (unsigned long) r.size();
 					TheoraDataSource* source;
 
 					// additional performance optimization: preload file in RAM to speed up decoding, every bit counts on Android/WinRT ARM
