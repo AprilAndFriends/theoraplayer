@@ -402,9 +402,9 @@ namespace aprilvideo
 		}
 		catch (_TheoraGenericException& e)
 		{
-			throw hl_exception(e.getErrorText());
+			throw Exception(e.getErrorText());
 		}
-		if (mClip->getWidth() == 0) throw hl_exception("Failed to load video file: " + path);
+		if (mClip->getWidth() == 0) throw Exception("Failed to load video file: " + path);
 		mClip->setAutoRestart(mLoop);
 		
 		int tw = mClip->getWidth();
@@ -618,7 +618,7 @@ namespace aprilvideo
 		{
 			mClipName = value;
 			hstr path = getFullPath();
-			if (!hresource::exists(path)) throw hl_exception("Unable to find video file: " + path);
+			if (!hresource::exists(path)) throw Exception("Unable to find video file: " + path);
 		}
 		else if (name == "video_alpha") mUseAlpha = value;
 		else if (name == "alpha_pause_treshold") setAlphaTreshold(value);
@@ -698,7 +698,7 @@ namespace aprilvideo
 			{
 				if (mClip && !mClip->isPaused()) mClip->pause();
 			}
-			else throw hl_exception("VideoObject: unable to set state property to '" + value + "'.");
+			else throw Exception("VideoObject: unable to set state property to '" + value + "'.");
 		}
 		else return aprilui::ImageBox::setProperty(name, value);
 		return 1;
