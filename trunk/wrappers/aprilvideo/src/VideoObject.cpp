@@ -512,9 +512,9 @@ namespace aprilvideo
 			}
 			if (f)
 			{
-				grect r = this->image->getSrcRect();
-				r.w = f->getWidth();
-				r.h = f->getHeight();
+				gvec2 size = this->image->getSrcSize();
+				size.x = f->getWidth();
+				size.y = f->getHeight();
 				april::Image::Format textureFormat = _getTextureFormat();
 				// switch textures each frame to optimize GPU pipeline
 				int index = mVideoImage == mVideoImages[0] ? 1 : 0;
@@ -527,13 +527,13 @@ namespace aprilvideo
 				char msg[1024];
 				for (int i = 0; i < n; i++)
 				{
-					mTexture->getTexture()->write(0, 0, r.w, r.h, 0, 0, f->getBuffer(), r.w, r.h, textureFormat);
+					mTexture->getTexture()->write(0, 0, (int)size.x, (int)size.y, 0, 0, f->getBuffer(), (int)size.x, (int)size.y, textureFormat);
 				}
 				float diff = ((float) (clock() - t) * 1000.0f) / CLOCKS_PER_SEC;
-				sprintf(msg, "BENCHMARK: uploading n %dx%d video frames to texture took %.1fms (%.2fms average per frame)\n", (int) r.w, (int )r.h, diff, diff / n);
+				sprintf(msg, "BENCHMARK: uploading n %dx%d video frames to texture took %.1fms (%.2fms average per frame)\n", (int)size.x, (int)size.y, diff, diff / n);
 				hlog::write(logTag, msg);
 #else
-				mTexture->getTexture()->write(0, 0, r.w, r.h, 0, 0, f->getBuffer(), r.w, r.h, textureFormat);
+				mTexture->getTexture()->write(0, 0, (int)size.x, (int)size.y, 0, 0, f->getBuffer(), (int)size.x, (int)size.y, textureFormat);
 #endif
 				if (pop)
 				{
