@@ -13,7 +13,7 @@ AprilVideoDataSource::AprilVideoDataSource(hstr filename)
 	mFilename = filename;
 	mResource.open(filename);
 	
-	mSize = mResource.size();
+	mSize = (unsigned long) mResource.size();
 }
 
 AprilVideoDataSource::~AprilVideoDataSource()
