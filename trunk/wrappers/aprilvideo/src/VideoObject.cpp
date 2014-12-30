@@ -73,7 +73,7 @@ namespace aprilvideo
 			}
 			catch (_TheoraGenericException& e)
 			{
-				// pass the exception further as a hltypes::_Exception so the general system can understand it
+				// pass the exception further as a hexception so the general system can understand it
 				throw Exception(e.getErrorText());
 			}
 			std::vector<std::string> lst = gVideoManager->getSupportedDecoders();
@@ -363,7 +363,7 @@ namespace aprilvideo
 				}
 				catch (_TheoraGenericException& e)
 				{
-					// pass the exception further as a hltypes::_Exception so the general system can understand it
+					// pass the exception further as a hexception so the general system can understand it
 					throw Exception(e.getErrorText());
 				}
 			}
