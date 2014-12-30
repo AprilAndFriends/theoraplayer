@@ -317,7 +317,7 @@ namespace aprilvideo
 			hstr archive = hresource::getArchive();
 			if (archive != "")
 			{
-				path = hrdir::join_path(archive, path);
+				path = hrdir::joinPath(archive, path);
 			}
 		}
 		
@@ -454,7 +454,7 @@ namespace aprilvideo
 			hstr category = "video";
 			if (mAudioName.contains("/"))
 			{
-				harray<hstr> folders = hrdir::split_path(mAudioName);
+				harray<hstr> folders = hrdir::splitPath(mAudioName);
 				hstr path_category = folders[folders.size() - 2];
 				if (xal::mgr->hasCategory(path_category)) category = path_category;
 			}
