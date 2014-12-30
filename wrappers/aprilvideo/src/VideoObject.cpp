@@ -382,7 +382,7 @@ namespace aprilvideo
 					{
 						hlog::write(logTag, "Preloading video file to memory: " + path);
 						unsigned char* data = new unsigned char[size];
-						r.read_raw(data, (int) size);
+						r.readRaw(data, (int) size);
 						source = new TheoraMemoryFileDataSource(data, size, path);
 					}
 					else

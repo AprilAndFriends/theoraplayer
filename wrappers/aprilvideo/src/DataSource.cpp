@@ -23,7 +23,7 @@ AprilVideoDataSource::~AprilVideoDataSource()
 
 int AprilVideoDataSource::read(void* output, int nBytes)
 {
-	return mResource.read_raw(output, nBytes);
+	return mResource.readRaw(output, nBytes);
 }
 
 void AprilVideoDataSource::seek(uint64_t byte_index)
