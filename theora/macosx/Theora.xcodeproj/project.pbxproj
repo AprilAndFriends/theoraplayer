@@ -756,7 +756,6 @@
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=armv7]" = "$(ARM_PREPR)";
 				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*][arch=armv7s]" = "$(ARM_PREPR)";
 				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = "$(inherited)";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				PRODUCT_NAME = theora;
 				SKIP_INSTALL = YES;
@@ -813,7 +812,6 @@
 					__MACOSX__,
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				PRODUCT_NAME = theora;
 				SKIP_INSTALL = YES;
