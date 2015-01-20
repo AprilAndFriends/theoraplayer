@@ -98,7 +98,10 @@ TheoraVideoManager& TheoraVideoManager::getSingleton()
 TheoraVideoManager::TheoraVideoManager(int num_worker_threads) : 
 	mDefaultNumPrecachedFrames(8)
 {
-	if (num_worker_threads < 1) throw TheoraGenericException("Unable to create TheoraVideoManager, at least one worker thread is reqired");
+	if (num_worker_threads < 1)
+	{
+		throw TheoraGenericException("Unable to create TheoraVideoManager, at least one worker thread is reqired");
+	}
 
 	g_ManagerSingleton = this;
 
@@ -185,8 +188,8 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(std::string filename,
 													 int numPrecachedOverride,
 													 bool usePower2Stride)
 {
-	TheoraDataSource* src=new TheoraFileDataSource(filename);
-	return createVideoClip(src,output_mode,numPrecachedOverride,usePower2Stride);
+	TheoraDataSource* src = new TheoraFileDataSource(filename);
+	return createVideoClip(src, output_mode, numPrecachedOverride, usePower2Stride);
 }
 
 TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_source,
@@ -227,7 +230,15 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 #endif
 	if (clip != NULL)
 	{
-		clip->load(data_source);
+		try
+		{
+			clip->load(data_source);
+		}
+		catch (_TheoraGenericException& e)
+		{
+			delete clip;
+			throw e;
+		}
 		clip->decodeNextFrame(); // ensure the first frame is always preloaded and have the main thread do it to prevent potential thread starvation
 
 		mClips.push_back(clip);
@@ -439,8 +450,14 @@ void TheoraVideoManager::destroyWorkerThreads()
 
 void TheoraVideoManager::setNumWorkerThreads(int n)
 {
-	if (n == getNumWorkerThreads()) return;
-	if (n < 1) throw TheoraGenericException("Unable to change the number of worker threads in TheoraVideoManager, at least one worker thread is reqired");
+	if (n == getNumWorkerThreads())
+	{
+		return;
+	}
+	if (n < 1)
+	{
+		throw TheoraGenericException("Unable to change the number of worker threads in TheoraVideoManager, at least one worker thread is reqired");
+	}
 
 	th_writelog("changing number of worker threats to: "+str(n));
 

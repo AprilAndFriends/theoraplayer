@@ -308,7 +308,10 @@ TheoraOutputMode TheoraVideoClip::getOutputMode()
 
 void TheoraVideoClip::setOutputMode(TheoraOutputMode mode)
 {
-	if (mode == TH_UNDEFINED) throw TheoraGenericException("Invalid output mode: TH_UNDEFINED for video: " + mName);
+	if (mode == TH_UNDEFINED)
+	{
+		throw TheoraGenericException("Invalid output mode: TH_UNDEFINED for video: " + mName);
+	}
 	if (mOutputMode == mode) return;
 	mRequestedOutputMode = mode;
 	mUseAlpha = (mode == TH_RGBA   ||

@@ -404,9 +404,13 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 			  (iSuccess = ogg_stream_packetout(&mInfo.TheoraStreamState, &tempOggPacket)))
 		{
 			if (iSuccess < 0)
+			{
 				throw TheoraGenericException("Error parsing Theora stream headers.");
+			}
 			if (!th_decode_headerin(&mInfo.TheoraInfo, &mInfo.TheoraComment, &mInfo.TheoraSetup, &tempOggPacket))
+			{
 				throw TheoraGenericException("invalid theora stream");
+			}
 			
 			++mTheoraStreams;
 		} //end while looking for more theora headers
@@ -415,10 +419,14 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 		while (mVorbisStreams < 3 && (iSuccess = ogg_stream_packetout(&mInfo.VorbisStreamState, &tempOggPacket)))
 		{
 			if (iSuccess < 0)
+			{
 				throw TheoraGenericException("Error parsing vorbis stream headers");
+			}
 			
 			if (vorbis_synthesis_headerin(&mInfo.VorbisInfo, &mInfo.VorbisComment,&tempOggPacket))
+			{
 				throw TheoraGenericException("invalid stream");
+			}
 			
 			++mVorbisStreams;
 		} //end while looking for more vorbis headers
