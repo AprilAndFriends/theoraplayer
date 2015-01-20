@@ -260,7 +260,10 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	{
 		TheoraMemoryFileDataSource* memoryDataSource = dynamic_cast<TheoraMemoryFileDataSource*>(source);
 		if (memoryDataSource != NULL) filename = memoryDataSource->getFilename();
-		else throw TheoraGenericException("Unable to load MP4 file");
+		else
+		{
+			throw TheoraGenericException("Unable to load MP4 file");
+		}
 	}
 	
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
@@ -271,7 +274,9 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	mReader = [[AVAssetReader alloc] initWithAsset:asset error:&err];
 	NSArray* tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
 	if ([tracks count] == 0)
+	{
 		throw TheoraGenericException("Unable to open video file: " + filename);
+	}
 	AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
 
 	NSArray* audioTracks = [asset tracksWithMediaType:AVMediaTypeAudio];
