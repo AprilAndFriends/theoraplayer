@@ -212,7 +212,10 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 		if (memoryDataSource != NULL) filename = memoryDataSource->getFilename();
 		// if the user has his own data source, it's going to be a problem for AVAssetReader since it only supports reading from files...
 	}
-	else filename = fileDataSource->getFilename();
+	else
+	{
+		filename = fileDataSource->getFilename();
+	}
 
 	if (filename.size() > 4 && filename.substr(filename.size() - 4, filename.size()) == ".mp4")
 	{
