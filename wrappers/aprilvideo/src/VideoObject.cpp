@@ -478,7 +478,10 @@ namespace aprilvideo
 			mAudioPlayer = xal::mgr->createPlayer(mSound->getName());
 			mTimer = new AudioVideoTimer(this, mAudioPlayer, mAudioSyncOffset);
 		}
-		if (mTimer == NULL) mTimer = new VideoTimer(this);
+		if (mTimer == NULL)
+		{
+			mTimer = new VideoTimer(this);
+		}
 		mClip->setTimer(mTimer);
 		mClip->setPlaybackSpeed(mSpeed);
 		update(0); // to grab the first frame.
