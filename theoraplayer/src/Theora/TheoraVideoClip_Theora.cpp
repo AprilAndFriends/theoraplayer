@@ -214,7 +214,10 @@ void TheoraVideoClip_Theora::_restart()
 	
 	mRestarted = 1;
 	
-	if (!paused) mTimer->play();
+	if (!paused)
+	{
+		mTimer->play();
+	}
 }
 
 void TheoraVideoClip_Theora::load(TheoraDataSource* source)
@@ -266,9 +269,15 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 		for (;;)
 		{
 			int ret = ogg_sync_pageout(&mInfo.OggSyncState, &mInfo.OggPage);
-			if (ret == 0) break;
+			if (ret == 0)
+			{
+				break;
+			}
 			// if page is not a theora page, skip it
-			if (ogg_page_serialno(&mInfo.OggPage) != mInfo.TheoraStreamState.serialno) continue;
+			if (ogg_page_serialno(&mInfo.OggPage) != mInfo.TheoraStreamState.serialno)
+			{
+				continue;
+			}
 			
 			ogg_int64_t granule = ogg_page_granulepos(&mInfo.OggPage);
 			if (granule >= 0)
@@ -276,13 +285,17 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 				mNumFrames = (int) th_granule_frame(mInfo.TheoraDecoder, granule) + 1;
 			}
 			else if (mNumFrames > 0)
+			{
 				++mNumFrames; // append delta frames at the end to get the exact number
+			}
 		}
 		if (mNumFrames > 0 || streamSize < 4096 * i) break;
 		
 	}
 	if (mNumFrames < 0)
+	{
 		th_writelog("unable to determine file duration!");
+	}
 	else
 	{
 		mDuration = mNumFrames / mFPS;
