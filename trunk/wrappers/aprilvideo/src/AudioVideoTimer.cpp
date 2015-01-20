@@ -36,8 +36,11 @@ namespace aprilvideo
 		{
 			bool paused = isPaused(), playerPaused = mPlayer->isPaused();
 			// use our own time calculation because april's could be tampered with (speedup/slowdown)
-			unsigned long tickCount = (unsigned long) htickCount();
-			if (mPrevTickCount == 0) mPrevTickCount = tickCount;
+			uint64_t tickCount = htickCount();
+			if (mPrevTickCount == 0)
+			{
+				mPrevTickCount = tickCount;
+			}
 			timeDelta = (tickCount - mPrevTickCount) / 1000.0f;
 			if (paused) timeDelta = 0;
 			if (!paused && !mStartedPlaying)

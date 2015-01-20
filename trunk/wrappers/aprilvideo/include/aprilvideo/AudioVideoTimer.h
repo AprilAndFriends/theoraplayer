@@ -22,7 +22,7 @@ namespace aprilvideo
 	
 	class AudioVideoTimer : public VideoTimer
 	{
-		unsigned int mPrevTickCount;
+		uint64_t mPrevTickCount;
 		float mSyncOffset, mPrevTimePosition, mAudioPosition;
 		float mSyncDiff, mSyncDiffFactor;
 		xal::Player* mPlayer;
