@@ -474,9 +474,11 @@ namespace aprilvideo
 #endif
 			}
 			mSound = xal::mgr->createSound(this->dataset->getFilePath() + "/video/" + mAudioName, category);
-
-			mAudioPlayer = xal::mgr->createPlayer(mSound->getName());
-			mTimer = new AudioVideoTimer(this, mAudioPlayer, mAudioSyncOffset);
+			if (mSound != NULL)
+			{
+				mAudioPlayer = xal::mgr->createPlayer(mSound->getName());
+				mTimer = new AudioVideoTimer(this, mAudioPlayer, mAudioSyncOffset);
+			}
 		}
 		if (mTimer == NULL)
 		{
@@ -590,7 +592,10 @@ namespace aprilvideo
 			if (!mLoop)
 			{
 				bool done = mClip->isDone();
-				if (done && mAudioPlayer != NULL && mAudioPlayer->isPlaying()) done = false;
+				if (done && mAudioPlayer != NULL && mAudioPlayer->isPlaying())
+				{
+					done = false;
+				}
 				if (mPrevDoneFlag == 0 && done == 1)
 				{
 					triggerEvent("PlaybackDone");
