@@ -550,6 +550,7 @@ namespace aprilvideo
 					if (mSeeked) mSeeked = 0;
 					else if (number < mPrevFrameNumber)
 					{
+						hlog::writef(logTag, "PlaybackDone(looping): %s", mClipName.c_str());
 						triggerEvent("PlaybackDone");
 					}
 					mPrevFrameNumber = number;
@@ -598,6 +599,7 @@ namespace aprilvideo
 				}
 				if (mPrevDoneFlag == 0 && done == 1)
 				{
+					hlog::writef(logTag, "PlaybackDone: %s", mClipName.c_str());
 					triggerEvent("PlaybackDone");
 				}
 				mPrevDoneFlag = done;
