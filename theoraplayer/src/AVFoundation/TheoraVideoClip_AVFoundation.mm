@@ -267,7 +267,7 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	}
 	
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-	NSString* path = [NSString stringWithUTF8String:filename.c_str()];
+	NSString* path = [NSString stringWithUTF8String:filename.cStr()];
 	NSError* err;
 	NSURL *url = [NSURL fileURLWithPath:path];
 	AVAsset* asset = [[AVURLAsset alloc] initWithURL:url options:nil];

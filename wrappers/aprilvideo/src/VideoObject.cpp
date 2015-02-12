@@ -221,7 +221,7 @@ namespace aprilvideo
 	hstr VideoObject::getFullPath()
 	{
 		hstr path = this->dataset->getFilePath() + "/video/" + mClipName;
-		if (!path.ends_with(".ogg") && !path.ends_with(".ogv") && !path.ends_with(".mp4"))
+		if (!path.endsWith(".ogg") && !path.endsWith(".ogv") && !path.endsWith(".mp4"))
 		{
 			if (hresource::exists(path + defaultFileExtension))
 			{
@@ -312,7 +312,7 @@ namespace aprilvideo
 		april::Image::Format textureFormat = _getTextureFormat();
 		destroyResources();
 		
-		if (path.ends_with(".mp4"))
+		if (path.endsWith(".mp4"))
 		{
 			hstr archive = hresource::getArchive();
 			if (archive != "")
@@ -352,7 +352,7 @@ namespace aprilvideo
 			}
 #endif
 			
-			if (path.ends_with("mp4"))
+			if (path.endsWith("mp4"))
 			{
 				try
 				{
@@ -369,7 +369,7 @@ namespace aprilvideo
 			}
 			else
 			{
-				if (!path.ends_with(".mp4") && ram > 256)
+				if (!path.endsWith(".mp4") && ram > 256)
 				{
 					hresource r;
 					r.open(path);
@@ -437,7 +437,7 @@ namespace aprilvideo
 			float precached = (float) mClip->getNumReadyFrames() / mClip->getNumPrecachedFrames();
 			if (precached < factor)
 			{
-				hlog::writef(logTag, "Waiting for cache (%.1f%% / %.1f%%): %s", precached * 100.0f, factor * 100.0f, path.c_str());
+				hlog::writef(logTag, "Waiting for cache (%.1f%% / %.1f%%): %s", precached * 100.0f, factor * 100.0f, path.cStr());
 				if (factor > 0)
 				{
 					precached = mClip->waitForCache(factor, mInitialPrecacheTimeout); // better to wait a while then to display an empty image
@@ -551,7 +551,7 @@ namespace aprilvideo
 					else if (number < mPrevFrameNumber)
 					{
 #ifdef _PLAYBACK_DONE_DEBUG
-						hlog::writef(logTag, "PlaybackDone(looping): %s", mClipName.c_str());
+						hlog::writef(logTag, "PlaybackDone(looping): %s", mClipName.cStr());
 #endif
 						triggerEvent("PlaybackDone");
 					}
@@ -602,7 +602,7 @@ namespace aprilvideo
 				if (mPrevDoneFlag == 0 && done == 1)
 				{
 //#ifdef _PLAYBACK_DONE_DEBUG
-					hlog::writef(logTag, "PlaybackDone: %s", mClipName.c_str());
+					hlog::writef(logTag, "PlaybackDone: %s", mClipName.cStr());
 //#endif
 					triggerEvent("PlaybackDone");
 				}
@@ -690,7 +690,7 @@ namespace aprilvideo
 			else if (value == "overwrite")	mode = april::BM_OVERWRITE;
 			else
 			{
-				hlog::errorf(logTag, "Unknown VideoObject blend mode: %s", name.c_str());
+				hlog::errorf(logTag, "Unknown VideoObject blend mode: %s", name.cStr());
 				return 1;
 			}
 			mBlendMode = mode;

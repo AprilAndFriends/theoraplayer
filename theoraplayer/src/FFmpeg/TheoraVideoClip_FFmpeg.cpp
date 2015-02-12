@@ -205,7 +205,7 @@ int show_codecs(void *optctx, const char *opt, const char *arg)
 	}
 	av_free(codecs);
 	
-	av_log(0, 0, "%s", text.c_str());
+	av_log(0, 0, "%s", text.cStr());
 	return 0;
 }
 
