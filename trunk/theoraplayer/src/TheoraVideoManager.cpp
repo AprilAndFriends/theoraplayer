@@ -59,7 +59,7 @@ void benchmark(TheoraVideoClip* clip)
 		clip->getFrameQueue()->clear();
 	}
 	float diff = ((float) (clock() - t) * 1000.0f) / CLOCKS_PER_SEC;
-	sprintf(msg, "BENCHMARK: %s: Decoding %d frames took %.1fms (%.2fms average per frame)\n",clip->getName().c_str(), nPrecached, diff, diff / nPrecached);
+	sprintf(msg, "BENCHMARK: %s: Decoding %d frames took %.1fms (%.2fms average per frame)\n",clip->getName().cStr(), nPrecached, diff, diff / nPrecached);
 	TheoraVideoManager::getSingleton().logMessage(msg);
 	clip->seek(0);
 }
