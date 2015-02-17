@@ -74,7 +74,7 @@ namespace aprilvideo
 			catch (_TheoraGenericException& e)
 			{
 				// pass the exception further as a hexception so the general system can understand it
-				throw Exception(e.getErrorText());
+				throw Exception(e.getErrorText().c_str());
 			}
 			std::vector<std::string> lst = gVideoManager->getSupportedDecoders();
 			foreach (std::string, it, lst)
@@ -357,14 +357,14 @@ namespace aprilvideo
 				try
 				{
 					if (april::window->getName() == "OpenKODE") // because mp4's are opened via apple's api, and that doesn't play nice with OpenKODE dir structure.
-						mClip = gVideoManager->createVideoClip("res/" + path, mode, precached);
+						mClip = gVideoManager->createVideoClip(("res/" + path).cStr(), mode, precached);
 					else
-						mClip = gVideoManager->createVideoClip(path, mode, precached);
+						mClip = gVideoManager->createVideoClip(path.cStr(), mode, precached);
 				}
 				catch (_TheoraGenericException& e)
 				{
 					// pass the exception further as a hexception so the general system can understand it
-					throw Exception(e.getErrorText());
+					throw Exception(e.getErrorText().c_str());
 				}
 			}
 			else
@@ -383,7 +383,7 @@ namespace aprilvideo
 						hlog::write(logTag, "Preloading video file to memory: " + path);
 						unsigned char* data = new unsigned char[size];
 						r.readRaw(data, (int) size);
-						source = new TheoraMemoryFileDataSource(data, size, path);
+						source = new TheoraMemoryFileDataSource(data, size, path.cStr());
 					}
 					else
 					{
@@ -402,7 +402,7 @@ namespace aprilvideo
 		}
 		catch (_TheoraGenericException& e)
 		{
-			throw Exception(e.getErrorText());
+			throw Exception(e.getErrorText().c_str());
 		}
 		if (mClip->getWidth() == 0) throw Exception("Failed to load video file: " + path);
 		mClip->setAutoRestart(mLoop);

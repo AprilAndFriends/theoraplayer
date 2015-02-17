@@ -34,12 +34,12 @@ namespace aprilvideo
 	static void theoraLogMessage(std::string log)
 	{
 #ifdef _DEBUG
-		if (hstr(log).contains("dropped"))
-			hlog::debug("aprilvideo", log);
+		if (hstr(log.c_str()).contains("dropped"))
+			hlog::debug("aprilvideo", log.c_str());
 		else
-			hlog::write("aprilvideo", log);
+			hlog::write("aprilvideo", log.c_str());
 #else
-		hlog::write("aprilvideo", log);
+		hlog::write("aprilvideo", log.c_str());
 #endif
 	}
 
