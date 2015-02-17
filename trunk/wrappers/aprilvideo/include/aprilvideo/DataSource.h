@@ -25,7 +25,7 @@ public:
 	
 	int read(void* output, int nBytes);
 	void seek(uint64_t byte_index);
-	std::string repr() { return "HRESOURCE:" + mFilename; }
+	std::string repr() { return ("HRESOURCE:" + mFilename).cStr(); }
 	uint64_t size();
 	uint64_t tell();
 	hstr getFilename() { return mFilename; }
