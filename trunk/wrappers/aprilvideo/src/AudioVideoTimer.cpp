@@ -24,8 +24,8 @@ namespace aprilvideo
 		mPlayer = player;
 		mSyncDiff = mSyncDiffFactor = 0;
 		mT = 0;
-		static hstr audiosystem = xal::mgr->getName(); // XAL_AS_DISABLED audio system doesn't sync audio & video
-		mDisabledAudio = (audiosystem == XAL_AS_DISABLED || !xal::mgr->isEnabled());
+		static hstr audiosystem = xal::manager->getName(); // XAL_AS_DISABLED audio system doesn't sync audio & video
+		mDisabledAudio = (audiosystem == XAL_AS_DISABLED || !xal::manager->isEnabled());
 		mStartedPlaying = 0;
 	}
 	
@@ -122,7 +122,7 @@ namespace aprilvideo
 				}
 				mTime = mAudioPosition - mSyncOffset;
 			}
-			else if (!xal::mgr->isSuspended())
+			else if (!xal::manager->isSuspended())
 			{
 				mTime += timeDelta;
 			}

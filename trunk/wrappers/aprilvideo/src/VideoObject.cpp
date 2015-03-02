@@ -202,12 +202,12 @@ namespace aprilvideo
 		}
 		if (mAudioPlayer)
 		{
-			xal::mgr->destroyPlayer(mAudioPlayer);
+			xal::manager->destroyPlayer(mAudioPlayer);
 			mAudioPlayer = NULL;
 		}
 		if (mSound)
 		{
-			xal::mgr->destroySound(mSound);
+			xal::manager->destroySound(mSound);
 			mSound = NULL;
 		}
 		
@@ -456,27 +456,27 @@ namespace aprilvideo
 			{
 				harray<hstr> folders = hrdir::splitPath(mAudioName);
 				hstr path_category = folders[folders.size() - 2];
-				if (xal::mgr->hasCategory(path_category)) category = path_category;
+				if (xal::manager->hasCategory(path_category)) category = path_category;
 			}
-			if (category == "video" && !xal::mgr->hasCategory("video"))
+			if (category == "video" && !xal::manager->hasCategory("video"))
 			{
 #if defined(_WINRT) || defined(_ANDROID)
-				xal::mgr->createCategory("video", xal::ON_DEMAND, xal::DISK);
+				xal::manager->createCategory("video", xal::ON_DEMAND, xal::DISK);
 #else
 				if (april::getSystemInfo().ram >= 512)
 				{
-					xal::mgr->createCategory("video", xal::STREAMED, xal::RAM);
+					xal::manager->createCategory("video", xal::STREAMED, xal::RAM);
 				}
 				else
 				{
-					xal::mgr->createCategory("video", xal::STREAMED, xal::DISK);
+					xal::manager->createCategory("video", xal::STREAMED, xal::DISK);
 				}
 #endif
 			}
-			mSound = xal::mgr->createSound(this->dataset->getFilePath() + "/video/" + mAudioName, category);
+			mSound = xal::manager->createSound(this->dataset->getFilePath() + "/video/" + mAudioName, category);
 			if (mSound != NULL)
 			{
-				mAudioPlayer = xal::mgr->createPlayer(mSound->getName());
+				mAudioPlayer = xal::manager->createPlayer(mSound->getName());
 				mTimer = new AudioVideoTimer(this, mAudioPlayer, mAudioSyncOffset);
 			}
 		}
