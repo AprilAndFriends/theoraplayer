@@ -56,7 +56,7 @@ namespace aprilvideo
 		float mSpeed;
 		unsigned long mPrevFrameNumber;
 		bool mSeeked;
-		int mAlphaPauseTreshold;
+		int mAlphaPauseThreshold;
 		unsigned char mPrevAlpha;
 		float mInitialPrecacheFactor, mInitialPrecacheTimeout;
 		
@@ -105,13 +105,16 @@ namespace aprilvideo
 		void update(float timeDelta);
 		void updateFrame();
 		
-		void setAlphaTreshold(int treshold);
-		inline int getAlphaTreshold() { return mAlphaPauseTreshold; }
+		void setAlphaThreshold(int threshold);
+		inline int getAlphaThreshold() { return mAlphaPauseThreshold; }
 		void notifyEvent(chstr type, aprilui::EventArgs* args);
 
 		hstr getProperty(chstr name);
 		bool setProperty(chstr name, chstr value);
 		harray<aprilui::PropertyDescription> getPropertyDescriptions();
+
+		DEPRECATED_ATTRIBUTE void setAlphaTreshold(int threshold) { setAlphaThreshold(threshold); }
+		DEPRECATED_ATTRIBUTE inline int getAlphaTreshold() { return mAlphaPauseThreshold; }
 
 	};
 }

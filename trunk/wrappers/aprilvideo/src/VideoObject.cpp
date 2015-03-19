@@ -53,7 +53,7 @@ namespace aprilvideo
 		hmutex::ScopeLock lock(&gReferenceMutex);
 		gReferences += this;
 		lock.release();
-		mAlphaPauseTreshold = 0;
+		mAlphaPauseThreshold = 0;
 		mPrevFrameNumber = 0;
 		mSeeked = 0;
 		mPrevAlpha = 255;
@@ -102,7 +102,7 @@ namespace aprilvideo
 		hmutex::ScopeLock lock(&gReferenceMutex);
 		gReferences += this;
 		lock.release();
-		mAlphaPauseTreshold = other.mAlphaPauseTreshold;
+		mAlphaPauseThreshold = other.mAlphaPauseThreshold;
 		mPrevFrameNumber = 0;
 		mSeeked = 0;
 		mPrevAlpha = 255;
@@ -126,19 +126,19 @@ namespace aprilvideo
 	bool VideoObject::isPaused()
 	{
 		if  (mClip == NULL) return true;
-		if (mAlphaPauseTreshold == 0)
+		if (mAlphaPauseThreshold == 0)
 		{
 			bool visible = isDerivedVisible();
 			return !visible;
 		}
-		else if (mAlphaPauseTreshold < 0)
+		else if (mAlphaPauseThreshold < 0)
 		{
 			return false;
 		}
 		else
 		{
 			int alpha = getDerivedAlpha() * getVisibilityFlag();
-			return alpha < mAlphaPauseTreshold;
+			return alpha < mAlphaPauseThreshold;
 		}
 	}
 
@@ -610,20 +610,20 @@ namespace aprilvideo
 			}
 			mClip->update(timeDelta);
 
-			if (mAlphaPauseTreshold < 0 && !isDerivedVisible() && !isPaused())
+			if (mAlphaPauseThreshold < 0 && !isDerivedVisible() && !isPaused())
 			{
 				updateFrame();
 				if (isDebugModeEnabled())
 				{
-					hlog::write(logTag, mClipName + ": Video object is not visible, but alpha_pause_treshold is set to -1, updating frame");
+					hlog::write(logTag, mClipName + ": Video object is not visible, but alpha_pause_threshold is set to -1, updating frame");
 				}
 			}
 		}
 	}
 	
-	void VideoObject::setAlphaTreshold(int treshold)
+	void VideoObject::setAlphaThreshold(int threshold)
 	{
-		mAlphaPauseTreshold = hclamp(treshold, -1, 255); // -1 indicates a situation where the user wants the video playing all the time
+		mAlphaPauseThreshold = hclamp(threshold, -1, 255); // -1 indicates a situation where the user wants the video playing all the time
 	}
 	
 	bool VideoObject::setProperty(chstr name, chstr value)
@@ -635,7 +635,12 @@ namespace aprilvideo
 			if (!hresource::exists(path)) throw Exception("Unable to find video file: " + path);
 		}
 		else if (name == "video_alpha") mUseAlpha = value;
-		else if (name == "alpha_pause_treshold") setAlphaTreshold(value);
+		else if (name == "alpha_pause_threshold") setAlphaThreshold(value);
+		else if (name == "alpha_pause_treshold")
+		{
+			hlog::warn(logTag, "'alpha_pause_treshold=' is deprecated. Use 'alpha_pause_threshold=' instead."); // DEPRECATED
+			this->setAlphaThreshold(value);
+		}
 		else if (name == "loop")
 		{
 			mLoop = value;
@@ -720,57 +725,52 @@ namespace aprilvideo
 	
 	hstr VideoObject::getProperty(chstr name)
 	{
-		if      (name == "video") return mClipName;
-		else if (name == "video_alpha") return mUseAlpha ? "1" : "0";
-		else if (name == "alpha_pause_treshold") return mAlphaPauseTreshold;
-		else if (name == "loop")  return mLoop ? "1" : "0";
-		else if (name == "speed") return mSpeed;
-		else if (name == "initial_precache_factor") return mInitialPrecacheFactor;
-		else if (name == "initial_precache_timeout") return mInitialPrecacheTimeout;
-		else if (name == "time") return this->getTimePosition();
-		else if (name == "videoWidth" || name == "videoHeight" || name == "duration")
+		if (name == "video")						return mClipName;
+		if (name == "video_alpha")					return mUseAlpha ? "1" : "0";
+		if (name == "alpha_pause_threshold")		return mAlphaPauseThreshold;
+		if (name == "alpha_pause_treshold")
+		{
+			hlog::warn(logTag, "'alpha_pause_treshold' is deprecated. Use 'alpha_pause_threshold' instead."); // DEPRECATED
+			return mAlphaPauseThreshold;
+		}
+		if (name == "loop")							return mLoop ? "1" : "0";
+		if (name == "speed")						return mSpeed;
+		if (name == "initial_precache_factor")		return mInitialPrecacheFactor;
+		if (name == "initial_precache_timeout")		return mInitialPrecacheTimeout;
+		if (name == "time")							return this->getTimePosition();
+		if (name == "videoWidth" || name == "videoHeight" || name == "duration")
 		{
 			if (mClip == NULL && mClipName != "")
 			{
 				_createClip();
 			}
-			if		(name == "duration")
-			{
-				return mClip ? hstr(mClip->getDuration()) : "0";
-			}
-			else if (name == "videoWidth")
-			{
-				return mClip ? hstr(mClip->getWidth()) : "0";
-			}
-			else if (name == "videoHeight")
-			{
-				return mClip ? hstr(mClip->getHeight()) : "0";
-			}
+			if (name == "duration")		return mClip ? hstr(mClip->getDuration()) : "0";
+			if (name == "videoWidth")	return mClip ? hstr(mClip->getWidth()) : "0";
+			if (name == "videoHeight")	return mClip ? hstr(mClip->getHeight()) : "0";
+			// should never happen
+			return "0";
 		}
-		else if (name == "audio")  return mAudioName;
-		else if (name == "sync_offset")  return mAudioSyncOffset;
-		else if (name == "blend_mode")
+		if (name == "audio")						return mAudioName;
+		if (name == "sync_offset")					return mAudioSyncOffset;
+		if (name == "blend_mode")
 		{
 			if (mVideoImage)
 			{
-				if		(mBlendMode == april::BM_DEFAULT)	return "default";
-				else if (mBlendMode == april::BM_ALPHA)		return "alpha";
-				if      (mBlendMode == april::BM_ADD)		return "add";
-				else if (mBlendMode == april::BM_SUBTRACT)	return "subtract";
-				else if (mBlendMode == april::BM_OVERWRITE)	return "overwrite";
-				else return "unknown";
+				if (mBlendMode == april::BM_DEFAULT)	return "default";
+				if (mBlendMode == april::BM_ALPHA)		return "alpha";
+				if (mBlendMode == april::BM_ADD)		return "add";
+				if (mBlendMode == april::BM_SUBTRACT)	return "subtract";
+				if (mBlendMode == april::BM_OVERWRITE)	return "overwrite";
+				return "unknown";
 			}
-			else
-			{
-				hlog::error(logTag, "Unable to get blend_mode to VideoObject, image is NULL");
-				return "";
-			}
+			hlog::error(logTag, "Unable to get blend_mode to VideoObject, image is NULL");
+			return "";
 		}
-		else if (name == "state")
+		if (name == "state")
 		{
-			if (this->isPlaying()) return "playing";
-			if (this->isPaused()) return "paused";
-			if (this->isStopped()) return "stopped";
+			if (this->isPlaying())	return "playing";
+			if (this->isPaused())	return "paused";
+			if (this->isStopped())	return "stopped";
 			return "unknown";
 		}
 		return ImageBox::getProperty(name);
@@ -782,7 +782,7 @@ namespace aprilvideo
 		{
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video", aprilui::PropertyDescription::STRING);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_alpha", aprilui::PropertyDescription::BOOL);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("alpha_pause_treshold", aprilui::PropertyDescription::INT);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("alpha_pause_threshold", aprilui::PropertyDescription::INT);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("loop", aprilui::PropertyDescription::BOOL);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("initial_precache_factor", aprilui::PropertyDescription::FLOAT);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("initial_precache_timeout", aprilui::PropertyDescription::FLOAT);
