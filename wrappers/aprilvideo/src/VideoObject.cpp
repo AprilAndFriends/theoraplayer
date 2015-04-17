@@ -498,21 +498,32 @@ namespace aprilvideo
 		if (mClip)
 		{
 			TheoraVideoFrame* f = mClip->getNextFrame();
-			bool pop = true;
+			bool pop = true, restoringTexture = false;
 			if (!mTexture->isLoaded())
 			{
+				restoringTexture = true;
+				hlog::write(logTag, this->mClipName + ": Textures unloaded, reloading");
+				int i = 1;
 				foreach (aprilui::Texture*, it, mTextures)
 				{
+					hlog::write(logTag, this->mClipName + "Reloading texture " + hstr(i));
 					(*it)->load();
+					i++;
 				}
 				if (!f)
 				{
-					if (mClip->getNumReadyFrames() == 0)
+					hlog::write(logTag, this->mClipName + ": Texture restored, waiting for video frame to decode to fill texture.");
+					int nReady = mClip->getNumReadyFrames();
+					if (nReady == 0)
 					{
 						mClip->waitForCache();
 					}
 					f = mClip->getFrameQueue()->getFirstAvailableFrame();
 					pop = false;
+				}
+				else
+				{
+					hlog::write(logTag, this->mClipName + ": Texture restored, using current frame to fill restored texture content.");
 				}
 			}
 			if (f)
@@ -524,6 +535,19 @@ namespace aprilvideo
 				// switch textures each frame to optimize GPU pipeline
 				int index = mVideoImage == mVideoImages[0] ? 1 : 0;
 				mTexture = mTextures[index];
+
+				if (restoringTexture)
+				{
+					if (mTextures[index]->isLoaded())
+					{
+						hlog::write(logTag, this->mClipName + ": Verified that new texture is loaded.");
+					}
+					else
+					{
+						hlog::error(logTag, this->mClipName + ": New texture is not loaded!");
+					}
+				}
+
 				mVideoImage = mVideoImages[index];
 				this->image = mVideoImage;
 #ifdef _TEXWRITE_BENCHMARK
@@ -556,6 +580,10 @@ namespace aprilvideo
 						triggerEvent("PlaybackDone");
 					}
 					mPrevFrameNumber = number;
+				}
+				if (restoringTexture)
+				{
+					hlog::write(logTag, this->mClipName + ": Successfully uploaded video frame to restored texture.");
 				}
 			}
 		}
