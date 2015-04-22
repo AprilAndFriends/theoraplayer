@@ -220,7 +220,7 @@ namespace aprilvideo
 	
 	hstr VideoObject::getFullPath()
 	{
-		hstr path = this->dataset->getFilePath() + "/video/" + mClipName;
+		hstr path = hrdir::joinPath(hrdir::joinPath(this->dataset->getFilePath(), "video"), mClipName);
 		if (!path.endsWith(".ogg") && !path.endsWith(".ogv") && !path.endsWith(".mp4"))
 		{
 			if (hresource::exists(path + defaultFileExtension))
@@ -357,7 +357,7 @@ namespace aprilvideo
 				try
 				{
 					if (april::window->getName() == "OpenKODE") // because mp4's are opened via apple's api, and that doesn't play nice with OpenKODE dir structure.
-						mClip = gVideoManager->createVideoClip(("res/" + path).cStr(), mode, precached);
+						mClip = gVideoManager->createVideoClip(hrdir::joinPath("res", path).cStr(), mode, precached);
 					else
 						mClip = gVideoManager->createVideoClip(path.cStr(), mode, precached);
 				}
@@ -473,7 +473,7 @@ namespace aprilvideo
 				}
 #endif
 			}
-			mSound = xal::manager->createSound(this->dataset->getFilePath() + "/video/" + mAudioName, category);
+			mSound = xal::manager->createSound(hrdir::joinPath(hrdir::joinPath(this->dataset->getFilePath(), "video"), mAudioName), category);
 			if (mSound != NULL)
 			{
 				mAudioPlayer = xal::manager->createPlayer(mSound->getName());
