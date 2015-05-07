@@ -605,9 +605,9 @@ namespace aprilvideo
 		ImageBox::_draw();
 	}
 	
-	void VideoObject::update(float timeDelta)
+	void VideoObject::_update(float timeDelta)
 	{
-		ImageBox::update(timeDelta);
+		ImageBox::_update(timeDelta);
 		if (mClip)
 		{
 			if (mAudioPlayer)
