@@ -65,6 +65,7 @@ namespace aprilvideo
 		xal::Player* mAudioPlayer;
 		xal::Sound* mSound;
 		
+		void _update(float timeDelta);
 		void _draw();
 
 		april::Image::Format _getTextureFormat();
@@ -102,7 +103,6 @@ namespace aprilvideo
 		int getClipHeight();
 		bool hasAlphaChannel();
 		
-		void update(float timeDelta);
 		void updateFrame();
 		
 		void setAlphaThreshold(int threshold);
