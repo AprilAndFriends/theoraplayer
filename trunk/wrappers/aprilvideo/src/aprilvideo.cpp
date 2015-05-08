@@ -35,11 +35,11 @@ namespace aprilvideo
 	{
 #ifdef _DEBUG
 		if (hstr(log.c_str()).contains("dropped"))
-			hlog::debug("aprilvideo", log.c_str());
+			hlog::debug(logTag, log.c_str());
 		else
-			hlog::write("aprilvideo", log.c_str());
+			hlog::write(logTag, log.c_str());
 #else
-		hlog::write("aprilvideo", log.c_str());
+		hlog::write(logTag, log.c_str());
 #endif
 	}
 

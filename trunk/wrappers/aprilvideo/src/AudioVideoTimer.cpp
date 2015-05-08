@@ -77,7 +77,7 @@ namespace aprilvideo
 						mSyncDiffFactor = (float) fabs(mSyncDiff);
 						mPrevTimePosition = timePosition;
 #if defined(_DEBUG) && 0 // debug testing
-						hlog::writef("aprilvideo_DEBUG", "sync diff: %.3f", mSyncDiff);
+						hlog::writef(logTag + "_DEBUG", "sync diff: %.3f", mSyncDiff);
 #endif
 					}
 					else
