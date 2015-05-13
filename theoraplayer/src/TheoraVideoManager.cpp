@@ -443,7 +443,7 @@ void TheoraVideoManager::createWorkerThreads(int n)
 
 void TheoraVideoManager::destroyWorkerThreads()
 {
-	foreach(TheoraWorkerThread*,mWorkerThreads)
+	foreach (TheoraWorkerThread*,mWorkerThreads)
 	{
 		(*it)->join();
 		delete (*it);
