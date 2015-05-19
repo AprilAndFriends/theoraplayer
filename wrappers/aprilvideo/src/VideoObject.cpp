@@ -506,7 +506,7 @@ namespace aprilvideo
 				int i = 1;
 				foreach (aprilui::Texture*, it, mTextures)
 				{
-					hlog::write(logTag, this->mClipName + "Reloading texture " + hstr(i));
+					hlog::write(logTag, this->mClipName + ": Reloading texture " + hstr(i));
 					(*it)->load();
 					i++;
 				}
