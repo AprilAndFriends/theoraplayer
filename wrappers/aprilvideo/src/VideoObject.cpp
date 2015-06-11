@@ -323,7 +323,7 @@ namespace aprilvideo
 		
 		try
 		{
-			TheoraOutputMode mode;
+			TheoraOutputMode mode = TH_RGBA;
 
 			if (textureFormat == april::Image::FORMAT_RGBA)				mode = TH_RGBA;
 			else if (textureFormat == april::Image::FORMAT_RGBX)		mode = TH_RGBX;
