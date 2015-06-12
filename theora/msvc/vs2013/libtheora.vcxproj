@@ -167,29 +167,28 @@
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
       <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Platform)'=='Android'">-mfpu=neon %(AdditionalOptions)</AdditionalOptions>
+      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
     <ClCompile Include="..\..\lib\arm_llvm\armfrag.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
       <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Platform)'=='Android'">-mfpu=neon %(AdditionalOptions)</AdditionalOptions>
+      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
     <ClCompile Include="..\..\lib\arm_llvm\armidct.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
       <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Platform)'=='Android'">-mfpu=neon %(AdditionalOptions)</AdditionalOptions>
+      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
     <ClCompile Include="..\..\lib\arm_llvm\armloop.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
       <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Platform)'=='Android'">-mfpu=neon %(AdditionalOptions)</AdditionalOptions>
+      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\lib\arm_llvm\armopts-gnu.s" />
     <None Include="..\..\lib\theora.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
