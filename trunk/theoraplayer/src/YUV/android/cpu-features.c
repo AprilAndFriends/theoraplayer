@@ -128,7 +128,7 @@ static __inline__ void x86_cpuid(int func, int values[4])
 static int
 get_file_size(const char* pathname)
 {
-    int fd, ret, result = 0;
+    int fd, result = 0;
     char buffer[256];
 
     fd = open(pathname, O_RDONLY);
@@ -200,7 +200,7 @@ extract_cpuinfo_field(const char* buffer, int buflen, const char* field)
     int  fieldlen = strlen(field);
     const char* bufend = buffer + buflen;
     char* result = NULL;
-    int len, ignore;
+    int len;
     const char *p, *q;
 
     /* Look for first field occurence, and ensures it starts the line. */
@@ -610,9 +610,6 @@ android_cpuInit(void)
 
 #ifdef __arm__
     {
-        char*  features = NULL;
-        char*  architecture = NULL;
-
         /* Extract architecture from the "CPU Architecture" field.
          * The list is well-known, unlike the the output of
          * the 'Processor' field which can vary greatly.
