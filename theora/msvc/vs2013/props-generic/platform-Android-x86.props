@@ -1,21 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Configuration">
-    <AndroidAPILevel>android-9</AndroidAPILevel>
+    <PlatformToolset>clang3.6</PlatformToolset>
+    <AndroidSdkLevel>22</AndroidSdkLevel>
+    <AndroidNdkLevel>9</AndroidNdkLevel>
+    <TargetArchitecture>x86</TargetArchitecture>
   </PropertyGroup>
   <ItemDefinitionGroup>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
     <ClCompile>
       <PreprocessorDefinitions>_ANDROID;ANDROID;_X86;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../..;../../src;../../../include;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <GccExceptionHandling>true</GccExceptionHandling>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <RuntimeTypeInfo>Enabled</RuntimeTypeInfo>
+      <PositionIndependentCode>true</PositionIndependentCode>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories>lib\lib\android;lib\android;..\lib\android;..\..\lib\android;lib\lib\android\x86;lib\android\x86;..\lib\android\x86;..\..\lib\android\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AndroidSystemLibs>c;m;log;gcc;dl;z;GLESv1_CM;%(AndroidSystemLibs)</AndroidSystemLibs>
+      <SystemLibraryDependencies>dl;z;GLESv1_CM;%(SystemLibraryDependencies)</SystemLibraryDependencies>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

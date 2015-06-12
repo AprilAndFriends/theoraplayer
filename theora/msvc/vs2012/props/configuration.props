@@ -40,6 +40,9 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">
+    <ClCompile>
+      <PreprocessorDefinitions>OC_ARM_CAN_UNALIGN_LDRD=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <Link>
       <AdditionalDependencies>-logg;-ltremor;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
