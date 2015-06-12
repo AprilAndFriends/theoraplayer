@@ -14,7 +14,7 @@
     <ClCompile>
       <PreprocessorDefinitions>_ANDROID;ANDROID;_X86;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../..;../../src;../../../include;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ExceptionHandling>Enabled</ExceptionHandling>
+      <ExceptionHandlingEnum>Enabled</ExceptionHandlingEnum>
       <RuntimeTypeInfoEnum>Enabled</RuntimeTypeInfoEnum>
       <PositionIndependentCode>true</PositionIndependentCode>
     </ClCompile>
