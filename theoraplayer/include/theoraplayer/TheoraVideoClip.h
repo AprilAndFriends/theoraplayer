@@ -82,11 +82,12 @@ protected:
 	int mThreadAccessCount; //! counter used by TheoraVideoManager to schedule workload
 	
 	int mSeekFrame; //! stores desired seek position as a frame number. next worker thread will do the seeking and reset this var to -1
-	float mDuration, mFrameDuration, mFPS;
+	float mDuration, mFrameDuration;
 	float mPriority; //! User assigned priority. Default value is 1
 	std::string mName;
 	int mWidth, mHeight, mStride;
 	int mNumFrames;
+	float mFPS;
 
 	int mSubFrameWidth, mSubFrameHeight, mSubFrameOffsetX, mSubFrameOffsetY;
 	float mAudioGain; //! multiplier for audio samples. between 0 and 1
