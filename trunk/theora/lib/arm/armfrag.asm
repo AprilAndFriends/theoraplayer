@@ -16,7 +16,7 @@
 
     .text;   .p2align 2
 
-	.include "armopts-gnu.S"
+	.include "armopts-gnu.s"
 
 @ Vanilla ARM v4 versions
 	.global	oc_frag_copy_list_arm
