@@ -21,42 +21,44 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 								 TheoraOutputMode output_mode,
 								 int nPrecachedFrames,
 								 bool usePower2Stride):
+	mFrameQueue(NULL),
 	mAudioInterface(NULL),
+	mStream(NULL),
+	mAssignedWorkerThread(NULL),
+	mUseAlpha(false),
+	mWaitingForCache(false),
 	mNumDroppedFrames(0),
 	mNumDisplayedFrames(0),
+	mNumPrecachedFrames(nPrecachedFrames),
+	mThreadAccessCount(0),
 	mSeekFrame(-1),
 	mDuration(-1),
+	mFrameDuration(0),
+	mPriority(1),
+	mName(data_source->repr()),
+	mWidth(0),
+	mHeight(0),
+	mStride(usePower2Stride),
 	mNumFrames(-1),
 	mFPS(1),
-	mUseAlpha(0),
-	mFrameDuration(0),
-	mName(data_source->repr()),
-	mStride(usePower2Stride),
 	mSubFrameWidth(0),
 	mSubFrameHeight(0),
 	mSubFrameOffsetX(0),
 	mSubFrameOffsetY(0),
-	mAudioGain(1),
+	mAudioGain(1.0f),
+	mOutputMode(TH_UNDEFINED),
 	mRequestedOutputMode(output_mode),
-	mAutoRestart(0),
-	mEndOfFile(0),
-	mRestarted(0),
+	mFirstFrameDisplayed(false),
+	mAutoRestart(false),
+	mEndOfFile(false),
+	mRestarted(false),
 	mIteration(0),
 	mPlaybackIteration(0),
-	mStream(0),
-	mThreadAccessCount(0),
-	mPriority(1),
-	mFirstFrameDisplayed(0),
-	mWaitingForCache(false),
-	mOutputMode(TH_UNDEFINED)
+	mAudioMutex(NULL)
 {
-	mAudioMutex = NULL;
 	mThreadAccessMutex = new TheoraMutex();
 	mTimer = mDefaultTimer = new TheoraTimer();
 
-	mFrameQueue = NULL;
-	mAssignedWorkerThread = NULL;
-	mNumPrecachedFrames = nPrecachedFrames;
 	setOutputMode(output_mode);
 }
 

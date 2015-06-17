@@ -147,7 +147,7 @@ public:
 };
 #endif
 	
-TheoraThread::TheoraThread() : mRunning(false), mId(0)
+TheoraThread::TheoraThread() : mId(0), mRunning(false)
 {
 #ifndef _WIN32
 	mId = (pthread_t*)malloc(sizeof(pthread_t));
