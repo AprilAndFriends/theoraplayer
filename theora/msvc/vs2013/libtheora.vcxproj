@@ -69,9 +69,9 @@
     <ClInclude Include="..\..\include\theora\theora.h" />
     <ClInclude Include="..\..\include\theora\theoradec.h" />
     <ClInclude Include="..\..\include\theora\theoraenc.h" />
-    <ClInclude Include="..\..\lib\arm_llvm\armbits.h" />
-    <ClInclude Include="..\..\lib\arm_llvm\armcpu.h" />
-    <ClInclude Include="..\..\lib\arm_llvm\armint.h" />
+    <ClInclude Include="..\..\lib\arm\armbits.h" />
+    <ClInclude Include="..\..\lib\arm\armcpu.h" />
+    <ClInclude Include="..\..\lib\arm\armint.h" />
     <ClInclude Include="..\..\lib\collect.h" />
     <ClInclude Include="..\..\lib\internal.h" />
     <ClInclude Include="..\..\lib\encint.h" />
@@ -94,10 +94,10 @@
     <ClCompile Include="..\..\lib\analyze.c">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armcpu.c">
+    <ClCompile Include="..\..\lib\arm\armcpu.c">
       <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armstate.c">
+    <ClCompile Include="..\..\lib\arm\armstate.c">
       <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\lib\collect.c" />
@@ -163,25 +163,25 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\lib\arm_llvm\armbits.asm">
+    <ClCompile Include="..\..\lib\arm\armbits.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
       <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
       <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armfrag.asm">
+    <ClCompile Include="..\..\lib\arm\armfrag.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
       <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
       <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armidct.asm">
+    <ClCompile Include="..\..\lib\arm\armidct.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
       <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
       <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armloop.asm">
+    <ClCompile Include="..\..\lib\arm\armloop.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
       <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
@@ -189,6 +189,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\lib\arm\armopts-gnu.s" />
     <None Include="..\..\lib\theora.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

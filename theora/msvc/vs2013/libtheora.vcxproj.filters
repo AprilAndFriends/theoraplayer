@@ -33,10 +33,10 @@
     <ClCompile Include="..\..\lib\x86_vc\mmxfrag.c" />
     <ClCompile Include="..\..\lib\x86_vc\mmxidct.c" />
     <ClCompile Include="..\..\lib\x86_vc\mmxstate.c" />
-    <ClCompile Include="..\..\lib\arm_llvm\armcpu.c">
+    <ClCompile Include="..\..\lib\arm\armcpu.c">
       <Filter>arm</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armstate.c">
+    <ClCompile Include="..\..\lib\arm\armstate.c">
       <Filter>arm</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lib\x86_vc\x86cpu.c">
@@ -48,16 +48,19 @@
     <ClCompile Include="..\..\lib\x86_vc\x86state.c">
       <Filter>x86</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armbits.asm">
+    <ClCompile Include="..\..\lib\arm\armbits.asm">
       <Filter>arm</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armfrag.asm">
+    <ClCompile Include="..\..\lib\arm\armfrag.asm">
       <Filter>arm</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armidct.asm">
+    <ClCompile Include="..\..\lib\arm\armidct.asm">
       <Filter>arm</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armloop.asm">
+    <ClCompile Include="..\..\lib\arm\armloop.asm">
+      <Filter>arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm\armopts-gnu.s">
       <Filter>arm</Filter>
     </ClCompile>
   </ItemGroup>
@@ -82,13 +85,13 @@
     <ClInclude Include="..\..\lib\huffman.h" />
     <ClInclude Include="..\..\lib\ocintrin.h" />
     <ClInclude Include="..\..\lib\quant.h" />
-    <ClInclude Include="..\..\lib\arm_llvm\armbits.h">
+    <ClInclude Include="..\..\lib\arm\armbits.h">
       <Filter>arm</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\lib\arm_llvm\armcpu.h">
+    <ClInclude Include="..\..\lib\arm\armcpu.h">
       <Filter>arm</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\lib\arm_llvm\armint.h">
+    <ClInclude Include="..\..\lib\arm\armint.h">
       <Filter>arm</Filter>
     </ClInclude>
     <ClInclude Include="..\..\lib\x86_vc\x86cpu.h">
