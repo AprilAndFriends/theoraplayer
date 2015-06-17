@@ -18,8 +18,6 @@
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <CompileAs>CompileAsC</CompileAs>
-      <ExceptionHandlingEnum>Disabled</ExceptionHandlingEnum>
-      <RuntimeTypeInfoEnum>Disabled</RuntimeTypeInfoEnum>
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>../../lib/theora.def</ModuleDefinitionFile>
@@ -37,7 +35,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>../../lib/arm_llvm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../lib/arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>OC_ARM_ASM;OC_ARM_ASM_EDSP=1;OC_ARM_ASM_MEDIA=1;OC_ARM_ASM_NEON=1;OC_ARM_CAN_UNALIGN=1;OC_ARM_CAN_UNALIGN_LDRD=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
