@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Configuration">
-    <PlatformToolset>clang3.6</PlatformToolset>
     <AndroidSdkLevel>22</AndroidSdkLevel>
     <AndroidNdkLevel>9</AndroidNdkLevel>
   </PropertyGroup>
