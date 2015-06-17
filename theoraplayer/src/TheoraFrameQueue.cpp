@@ -167,7 +167,7 @@ int TheoraFrameQueue::getReadyCount()
 
 bool TheoraFrameQueue::isFull()
 {
-	return getReadyCount() == mQueue.size();
+	return (size_t)getReadyCount() == mQueue.size();
 }
 
 std::list<TheoraVideoFrame*>& TheoraFrameQueue::_getFrameQueue()
