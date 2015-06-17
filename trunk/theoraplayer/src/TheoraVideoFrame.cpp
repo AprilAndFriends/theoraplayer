@@ -113,7 +113,7 @@ void TheoraVideoFrame::decode(struct TheoraPixelTransform* t)
 {
 	if (t->raw != NULL)
 	{
-		int bufferStride = mParent->getWidth() * mBpp;
+		unsigned int bufferStride = mParent->getWidth() * mBpp;
 		if (bufferStride == t->rawStride)
 		{
 			memcpy(mBuffer, t->raw, t->rawStride * mParent->getHeight());

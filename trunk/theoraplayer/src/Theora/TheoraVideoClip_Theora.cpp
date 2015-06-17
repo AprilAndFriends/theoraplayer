@@ -236,7 +236,7 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 	mSubFrameHeight	 = mInfo.TheoraInfo.pic_height;
 	mSubFrameOffsetX = mInfo.TheoraInfo.pic_x;
 	mSubFrameOffsetY = mInfo.TheoraInfo.pic_y;
-	mStride = (mStride == 1) ? mStride = _nextPow2(getWidth()) : getWidth();
+	mStride = (mStride == 1) ? _nextPow2(getWidth()) : getWidth();
 	mFPS = mInfo.TheoraInfo.fps_numerator / (float) mInfo.TheoraInfo.fps_denominator;
 	
 #ifdef _DEBUG
@@ -248,7 +248,7 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 	// having ogg decode pages, extract the granule pos from
 	// the last theora page and seek back to beginning of the file
 	uint64_t streamSize = mStream->size(), seekPos;
-	for (int i = 1; i <= 50; ++i)
+	for (unsigned int i = 1; i <= 50; ++i)
 	{
 		ogg_sync_reset(&mInfo.OggSyncState);
 		if (4096 * i > streamSize)
