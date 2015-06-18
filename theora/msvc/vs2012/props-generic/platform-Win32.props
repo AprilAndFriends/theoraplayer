@@ -4,6 +4,10 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v110_xp</PlatformToolset>
   </PropertyGroup>
+  <Import Condition="(exists('..\..\lib\msvc\vs2012\$(Platform).props'))" Project="..\..\lib\msvc\vs2012\$(Platform).props"/>
+  <Import Condition="(exists('..\..\msvc\vs2012\$(Platform).props'))" Project="..\..\msvc\vs2012\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\msvc\vs2012\$(Platform).props'))" Project="..\..\..\msvc\vs2012\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\..\msvc\vs2012\$(Platform).props'))" Project="..\..\..\..\msvc\vs2012\$(Platform).props"/>
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>_WIN32;WIN32;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>

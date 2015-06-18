@@ -4,6 +4,10 @@
     <AndroidSdkLevel>22</AndroidSdkLevel>
     <AndroidNdkLevel>9</AndroidNdkLevel>
   </PropertyGroup>
+  <Import Condition="(exists('..\..\lib\msvc\vs2012\$(Platform).props'))" Project="..\..\lib\msvc\vs2012\$(Platform).props"/>
+  <Import Condition="(exists('..\..\msvc\vs2012\$(Platform).props'))" Project="..\..\msvc\vs2012\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\msvc\vs2012\$(Platform).props'))" Project="..\..\..\msvc\vs2012\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\..\msvc\vs2012\$(Platform).props'))" Project="..\..\..\..\msvc\vs2012\$(Platform).props"/>
   <ItemDefinitionGroup>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
