@@ -93,12 +93,22 @@ static const int  android_cpufeatures_debug = 0;
 #  define DEFAULT_CPU_FAMILY  ANDROID_CPU_FAMILY_UNKNOWN
 #endif
 
+#ifndef _ANDROID
 #define  D(...) \
     do { \
         if (android_cpufeatures_debug) { \
             printf(__VA_ARGS__); fflush(stdout); \
         } \
     } while (0)
+#else
+#include <android/log.h>
+#define  D(...) \
+    do { \
+        if (android_cpufeatures_debug) { \
+			__android_log_print(ANDROID_LOG_WARN, "theora_debug", __VA_ARGS__); \
+        } \
+    } while (0)
+#endif
 
 #ifdef __i386__
 static __inline__ void x86_cpuid(int func, int values[4])
