@@ -528,7 +528,7 @@ namespace aprilvideo
 			}
 			if (f)
 			{
-				gvec2 size = this->image->getSrcSize();
+				gvec2 size;
 				size.x = f->getWidth();
 				size.y = f->getHeight();
 				april::Image::Format textureFormat = _getTextureFormat();
