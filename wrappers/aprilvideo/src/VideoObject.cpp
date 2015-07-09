@@ -14,7 +14,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include <april/april.h>
 #include <april/Platform.h>
 #include <aprilui/Dataset.h>
-#include <aprilui/NullImage.h>
+#include <aprilui/Image.h>
 #include <aprilui/Texture.h>
 #include <hltypes/hrdir.h>
 #include <xal/Player.h>
@@ -170,9 +170,9 @@ namespace aprilvideo
 	{
 		if (type == aprilui::Event::AttachedToObject)
 		{
-			if (this->image != mVideoImage)
+			if (this->image != (aprilui::BaseImage*)mVideoImage)
 			{
-				this->image = this->dataset->getImage(APRILUI_IMAGE_NAME_NULL);
+				this->image = NULL;
 			}
 		}
 		ImageBox::notifyEvent(type, args);
@@ -185,7 +185,7 @@ namespace aprilvideo
 			delete *it;
 		}
 		mVideoImage = NULL;
-		this->image = this->dataset != NULL ? this->dataset->getImage(APRILUI_IMAGE_NAME_NULL) : NULL;
+		this->image = NULL;
 		mVideoImages.clear();
 
 		foreach (aprilui::Texture*, it, mTextures)
