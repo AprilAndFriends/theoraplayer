@@ -145,7 +145,6 @@ void setDebugTitle(char* out)
 
 void init()
 {
-	resourceExtension = ".ogg"; // temp, mp4 files need to be reexported in 512x512
 	mgr=new TheoraVideoManager(3);
 	light[0] = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lightmap/light1" + resourceExtension), TH_RGB);
 	light[1] = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lightmap/light2" + resourceExtension), TH_RGB);

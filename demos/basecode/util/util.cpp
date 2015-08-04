@@ -7,12 +7,12 @@
 
 bool shader_on = 0;
 float FOVY = 45;
-std::string resourceExtension =
-#ifdef MP4_VIDEO
-".mp4";
-#else
-".ogg";
-#endif
+std::string resourceExtension = ".ogv";
+//#ifdef MP4_VIDEO
+//".mp4";
+//#else
+//".ogg";
+//#endif
 
 #ifndef WIN32
 unsigned long GetTickCount()

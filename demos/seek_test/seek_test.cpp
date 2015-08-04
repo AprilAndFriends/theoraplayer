@@ -34,7 +34,7 @@ void draw()
 				nWrongSeeks++;
 			cFrame++;
 			if (cFrame >= clip->getNumFrames()) cFrame = 0;
-			printf("Displayed frame %d\n", f->getFrameNumber());
+			printf("Displayed frame %d\n", (int)f->getFrameNumber());
 			clip->popFrame();
 		}
 	}

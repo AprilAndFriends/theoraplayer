@@ -47,7 +47,7 @@ void draw()
 	TheoraVideoFrame* f=clip->getNextFrame();
 	if (f)
 	{
-		index = f->getFrameNumber();
+		index = (int)f->getFrameNumber();
 		glBindTexture(GL_TEXTURE_2D,tex_id);
 		unsigned char* buffer = f->getBuffer();
 		int x, len = f->getWidth() * f->getHeight() * 3;
@@ -132,7 +132,6 @@ void setDebugTitle(char* out)
 
 void init()
 {
-	resourceExtension = ".ogg"; // temp, mp4 files need to be reexported
 	FILE* f = fopen("media/lighting/camera.txt", "r");
 
 	xyz pos;

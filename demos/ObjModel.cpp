@@ -125,9 +125,9 @@ void ObjModel::load(std::string filename,unsigned int texture_id, bool normals)
 	mVertices=new ObjVertex[faces.size()];
 	for (std::vector<ObjFace>::iterator it=faces.begin();it!=faces.end();it++)
 	{
-		_v = it->v > 0 ? it->v - 1 : v.size() + it->v;
-		_t = it->t > 0 ? it->t - 1 : t.size() + it->t;
-		if (normals) _n = it->n > 0 ? it->n - 1 : vn.size() + it->n;
+		_v = it->v > 0 ? it->v - 1 : (int)(v.size() + it->v);
+		_t = it->t > 0 ? it->t - 1 : (int)(t.size() + it->t);
+		if (normals) _n = it->n > 0 ? it->n - 1 : (int)(vn.size() + it->n);
 		mVertices[mNumVertices].x=v[_v].x;
 		mVertices[mNumVertices].y=v[_v].y;
 		mVertices[mNumVertices].z=v[_v].z;

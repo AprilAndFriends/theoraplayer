@@ -98,9 +98,8 @@ void setDebugTitle(char* out)
 
 void init()
 {
-//	resourceExtension = ".ogg";
 	mgr = new TheoraVideoManager(2);
-	water = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_water.ogg"/* + resourceExtension*/), TH_RGB, 4);
+	water = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_water" + resourceExtension), TH_RGB, 4);
     water->setPlaybackSpeed(0.5f);
 	water->setAutoRestart(1);
 

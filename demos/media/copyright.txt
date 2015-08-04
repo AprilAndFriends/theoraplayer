@@ -7,7 +7,7 @@ room  - http://commons.wikimedia.org/wiki/File:Geba.ogv
 titan - http://commons.wikimedia.org/wiki/File:Wikititananimation.ogg
 
 
-brawe/brawe_*.ogg:
+brawe/brawe_*.ogv:
 ------------
 Sprite animation has been borrowed with authors permission from the game:
  - Kaptain Brawe ( http://kaptainbrawe.cateia.com/ )
