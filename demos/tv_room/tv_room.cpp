@@ -11,8 +11,6 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 COPYRIGHT INFO: The room 3D models and textures are licensed under the terms of the
                 GNU General Public License (GPL).
 *************************************************************************************/
-#define __3D_PROJECTION
-#define __ZBUFFER
 #include "demo_basecode.h"
 #include <theoraplayer/TheoraPlayer.h>
 #include <theoraplayer/TheoraDataSource.h>

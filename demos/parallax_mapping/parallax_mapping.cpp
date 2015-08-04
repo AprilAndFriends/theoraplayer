@@ -6,8 +6,6 @@ Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
-#define __3D_PROJECTION
-#define __ZBUFFER
 #include "demo_basecode.h"
 #include <theoraplayer/TheoraPlayer.h>
 #include <theoraplayer/TheoraDataSource.h>

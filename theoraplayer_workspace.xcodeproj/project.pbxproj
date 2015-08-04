@@ -160,8 +160,8 @@
 		D1D88F0016B587B400CCE8CE /* Ogg.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D1D098D2155F05C5009F6AAA /* Ogg.framework */; };
 		D1D88F0116B587B400CCE8CE /* Vorbis.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D1D098DE155F05CC009F6AAA /* Vorbis.framework */; };
 		D1D88F0216B587B400CCE8CE /* Theora.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D1D098EB155F05D2009F6AAA /* Theora.framework */; };
-		D1D88F0316B587B400CCE8CE /* theoraplayer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D167758B155C4F8F0050EC64 /* theoraplayer.framework */; };
 		D1D89D5C1B70FE7D0053378D /* multiple_videos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776C8155C56B20050EC64 /* multiple_videos.cpp */; };
+		D1D89D5F1B7106E70053378D /* theoraplayer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D1CDFF7D1696C88F00609AB0 /* theoraplayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D1E39A96169A3EC0003A6CB5 /* icon_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A8E169A3E4E003A6CB5 /* icon_iphone.png */; };
 		D1E39A97169A3EC2003A6CB5 /* icon_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A90169A3E55003A6CB5 /* icon_iphone@2x.png */; };
 		D1E39A98169A3ECB003A6CB5 /* icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A92169A3E65003A6CB5 /* icon_ipad.png */; };
@@ -458,10 +458,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D1D89D5F1B7106E70053378D /* theoraplayer.framework in CopyFiles */,
 				D1D88F0016B587B400CCE8CE /* Ogg.framework in CopyFiles */,
 				D1D88F0116B587B400CCE8CE /* Vorbis.framework in CopyFiles */,
 				D1D88F0216B587B400CCE8CE /* Theora.framework in CopyFiles */,
-				D1D88F0316B587B400CCE8CE /* theoraplayer.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,12 +761,12 @@
 				D147416E150CB74200B20490 /* multiple_videos */,
 				D147416F150CB74B00B20490 /* sprite_animation */,
 				D12C20781534D4A000B4904B /* composite_animation */,
+				D1474170150CB75800B20490 /* seek_test */,
 				D17613961561B2AA00F645DE /* environment_mapping */,
 				D1474171150CB76400B20490 /* tv_room */,
 				D1C0151F15619E2B00FBEF81 /* lightmap_demo */,
 				D1663358156ADACE009E98F1 /* video_lighting */,
 				D1C134C415797376005E8A5B /* parallax_mapping */,
-				D1474170150CB75800B20490 /* seek_test */,
 				D16D9DDF150CBC5D001BD35C /* common */,
 				D16776D6155C57E90050EC64 /* media */,
 				D1473F2C150CA69B00B20490 /* Frameworks */,
@@ -1023,8 +1023,8 @@
 			buildPhases = (
 				D12C207B1534D58B00B4904B /* Sources */,
 				D12C207E1534D58B00B4904B /* Frameworks */,
-				D16776C1155C56000050EC64 /* link media folder */,
 				D1E39AA7169A4440003A6CB5 /* Resources */,
+				D16776C1155C56000050EC64 /* link media folder */,
 			);
 			buildRules = (
 			);
@@ -1042,8 +1042,8 @@
 			buildPhases = (
 				D1474020150CAF0D00B20490 /* Sources */,
 				D1474021150CAF0D00B20490 /* Frameworks */,
-				D16776B5155C53D90050EC64 /* link media folder */,
 				D1E39A9F169A441F003A6CB5 /* Resources */,
+				D16776B5155C53D90050EC64 /* link media folder */,
 				D1D88EFF16B587A400CCE8CE /* CopyFiles */,
 			);
 			buildRules = (
@@ -1062,8 +1062,8 @@
 			buildPhases = (
 				D14740E8150CB45E00B20490 /* Sources */,
 				D14740EB150CB45E00B20490 /* Frameworks */,
-				D16776BB155C55C20050EC64 /* link media folder */,
 				D1E39AA1169A442F003A6CB5 /* Resources */,
+				D16776BB155C55C20050EC64 /* link media folder */,
 			);
 			buildRules = (
 			);
@@ -1081,8 +1081,8 @@
 			buildPhases = (
 				D147410B150CB6F300B20490 /* Sources */,
 				D147410F150CB6F300B20490 /* Frameworks */,
-				D16776BD155C55D70050EC64 /* link media folder */,
 				D1E39AA3169A4435003A6CB5 /* Resources */,
+				D16776BD155C55D70050EC64 /* link media folder */,
 			);
 			buildRules = (
 			);
@@ -1100,8 +1100,8 @@
 			buildPhases = (
 				D1474124150CB6F600B20490 /* Sources */,
 				D1474128150CB6F600B20490 /* Frameworks */,
-				D16776BF155C55EC0050EC64 /* link media folder */,
 				D1E39AA5169A443B003A6CB5 /* Resources */,
+				D16776BF155C55EC0050EC64 /* link media folder */,
 			);
 			buildRules = (
 			);
@@ -1119,8 +1119,8 @@
 			buildPhases = (
 				D147413D150CB6F900B20490 /* Sources */,
 				D1474141150CB6F900B20490 /* Frameworks */,
-				D16776C5155C56290050EC64 /* link media folder */,
 				D1E39AA9169A4449003A6CB5 /* Resources */,
+				D16776C5155C56290050EC64 /* link media folder */,
 			);
 			buildRules = (
 			);
@@ -1138,8 +1138,8 @@
 			buildPhases = (
 				D1474156150CB70D00B20490 /* Sources */,
 				D147415A150CB70D00B20490 /* Frameworks */,
-				D16776C3155C56150050EC64 /* link media folder */,
 				D1E39AAD169A4454003A6CB5 /* Resources */,
+				D16776C3155C56150050EC64 /* link media folder */,
 			);
 			buildRules = (
 			);
@@ -1157,8 +1157,8 @@
 			buildPhases = (
 				D166335B156ADAE8009E98F1 /* Sources */,
 				D1663360156ADAE8009E98F1 /* Frameworks */,
-				D1663365156ADAE8009E98F1 /* link media folder */,
 				D1E39AB1169A4461003A6CB5 /* Resources */,
+				D1663365156ADAE8009E98F1 /* link media folder */,
 			);
 			buildRules = (
 			);
@@ -1197,8 +1197,8 @@
 			buildPhases = (
 				D17613821561B21500F645DE /* Sources */,
 				D17613871561B21500F645DE /* Frameworks */,
-				D176138C1561B21500F645DE /* link media folder */,
 				D1E39AAB169A444F003A6CB5 /* Resources */,
+				D176138C1561B21500F645DE /* link media folder */,
 			);
 			buildRules = (
 			);
@@ -1216,8 +1216,8 @@
 			buildPhases = (
 				D1C014EF15619D4700FBEF81 /* Sources */,
 				D1C014F015619D4700FBEF81 /* Frameworks */,
-				D1C0151E15619E1F00FBEF81 /* link media folder */,
 				D1E39AAF169A445C003A6CB5 /* Resources */,
+				D1C0151E15619E1F00FBEF81 /* link media folder */,
 			);
 			buildRules = (
 			);
@@ -1568,7 +1568,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/lighting\"\n        cp \"${SRC_PATH}/lighting/room.obj\" \"${DEST_PATH}/lighting\"\n        cp \"${SRC_PATH}/lighting/lighting.ogv\" \"${DEST_PATH}/lighting\"\n        cp \"${SRC_PATH}/lighting/diffuse_map.tga\" \"${DEST_PATH}/lighting\"\n        cp \"${SRC_PATH}/lighting/camera.txt\" \"${DEST_PATH}/lighting\"\n    fi\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		D16776B5155C53D90050EC64 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1582,7 +1583,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		D16776BB155C55C20050EC64 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1596,7 +1598,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		D16776BD155C55D70050EC64 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1610,7 +1613,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/konqi.ogv\" \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/room.ogv\" \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/titan.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		D16776BF155C55EC0050EC64 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1624,7 +1628,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_W.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_SW.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_SE.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_S.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_NW.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_NE.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_N.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_E.ogv\" \"${DEST_PATH}/brawe\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D16776C1155C56000050EC64 /* link media folder */ = {
@@ -1639,7 +1643,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_water.ogv\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_eve.ogv\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_main.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_clouds.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_bush.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_branch.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_birds.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_back.tga\" \"${DEST_PATH}/locv\"\n    fi\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		D16776C3155C56150050EC64 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1653,7 +1658,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/tv_room/tv.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/tv.obj\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/table.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/table.obj\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/room.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/room.obj\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/chair1.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/chair1.obj\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/chair2.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/chair2.obj\" \"${DEST_PATH}/tv_room\"\n    fi\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		D16776C5155C56290050EC64 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1667,7 +1673,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		D176138C1561B21500F645DE /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1681,7 +1688,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/environment_mapping\"\n        cp \"${SRC_PATH}/environment_mapping/room256.ogv\" \"${DEST_PATH}/environment_mapping\"\n        cp \"${SRC_PATH}/environment_mapping/teapot.obj\" \"${DEST_PATH}/environment_mapping\"\n    fi\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		D1C0151E15619E1F00FBEF81 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1695,7 +1703,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/room.obj\" \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/light1.ogv\" \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/light2.ogv\" \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/light3.ogv\" \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/diffuse_map.tga\" \"${DEST_PATH}/lightmap\"\n    fi\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		D1C134BA157972CF005E8A5B /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1709,7 +1718,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# creates a directory link to the demos media folder within the .app structure.\nDATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nif [ ! -e \"${DATA_PATH}/Resources\" ] ; then\n    mkdir \"${DATA_PATH}/Resources\"\nfi\nif [ ! -e \"${DATA_PATH}/Resources/media\" ] ; then\n    ln -s \"${PROJECT_DIR}/demos/media\" \"${DATA_PATH}/Resources/media\"\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/per_pixel_lighting.vert\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/per_pixel_lighting.frag\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/parallax.ogv\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/parallax_mapping.vert\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/parallax_mapping.frag\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/normal_mapping.vert\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/normal_mapping.frag\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/diffuse_map.tga\" \"${DEST_PATH}/parallax\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2284,6 +2293,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2299,6 +2310,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2314,6 +2327,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2329,6 +2344,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				PRODUCT_NAME = video_lighting;
@@ -2343,6 +2360,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				PRODUCT_NAME = video_lighting;
@@ -2357,6 +2376,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				PRODUCT_NAME = video_lighting;
@@ -2442,6 +2463,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				PRODUCT_NAME = environment_mapping;
@@ -2456,6 +2479,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				PRODUCT_NAME = environment_mapping;
@@ -2470,6 +2495,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				PRODUCT_NAME = environment_mapping;
@@ -2484,6 +2511,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2498,6 +2527,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2512,6 +2543,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2526,6 +2559,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				PRODUCT_NAME = parallax_mapping;
@@ -2540,6 +2575,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				PRODUCT_NAME = parallax_mapping;
@@ -2554,6 +2591,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					MP4_VIDEO,
+					__3D_PROJECTION,
+					__ZBUFFER,
 					"$(inherited)",
 				);
 				PRODUCT_NAME = parallax_mapping;
