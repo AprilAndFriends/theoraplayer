@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="basecode">
+      <UniqueIdentifier>{cb0e015b-30a0-40e0-a60d-feb28f661fa3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\glut_player.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\basecode\glut\glutBasecode.cpp">
+      <Filter>basecode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\basecode\util\util.cpp">
+      <Filter>basecode</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\basecode\util\util.h">
+      <Filter>basecode</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

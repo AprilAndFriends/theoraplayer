@@ -8,7 +8,7 @@ with all source files not needed for compiling libtheoraplayer removed.
 - Also, some code may have been changed to address certain compiler/platform
   specific problems and is so indicated in the source code.
 
-libtremor is owned and maintained by the Xiph.Org foundation and this distribution
+libvorbis is owned and maintained by the Xiph.Org foundation and this distribution
 is present here only for convenience and easier compilation of libtheoraplayer.
 
 If you want to use libtremor outside of libtheoraplayer, it is encouraged to use the
