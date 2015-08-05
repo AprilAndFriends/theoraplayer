@@ -871,18 +871,7 @@
 				D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */,
 				D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */,
 				D1C2F5C119F502A500A21F0D /* config */,
-				D1474109150CB6BD00B20490 /* glut_player */,
-				D1474107150CB6A700B20490 /* av_player */,
-				D147416E150CB74200B20490 /* multiple_videos */,
-				D147416F150CB74B00B20490 /* sprite_animation */,
-				D12C20781534D4A000B4904B /* composite_animation */,
-				D1474170150CB75800B20490 /* seek_test */,
-				D17613961561B2AA00F645DE /* environment_mapping */,
-				D1474171150CB76400B20490 /* tv_room */,
-				D1C0151F15619E2B00FBEF81 /* lightmap_demo */,
-				D1663358156ADACE009E98F1 /* video_lighting */,
-				D1C134C415797376005E8A5B /* parallax_mapping */,
-				D16D9DDF150CBC5D001BD35C /* common */,
+				D196833A1B722B030082BAEC /* demos */,
 				D16776D6155C57E90050EC64 /* media */,
 				D1473F2C150CA69B00B20490 /* Frameworks */,
 				D1473F2B150CA69B00B20490 /* Products */,
@@ -1070,6 +1059,25 @@
 				D17613971561B2EE00F645DE /* environment_mapping.cpp */,
 			);
 			name = environment_mapping;
+			sourceTree = "<group>";
+		};
+		D196833A1B722B030082BAEC /* demos */ = {
+			isa = PBXGroup;
+			children = (
+				D1474109150CB6BD00B20490 /* glut_player */,
+				D1474107150CB6A700B20490 /* av_player */,
+				D147416E150CB74200B20490 /* multiple_videos */,
+				D147416F150CB74B00B20490 /* sprite_animation */,
+				D12C20781534D4A000B4904B /* composite_animation */,
+				D1474170150CB75800B20490 /* seek_test */,
+				D17613961561B2AA00F645DE /* environment_mapping */,
+				D1474171150CB76400B20490 /* tv_room */,
+				D1C0151F15619E2B00FBEF81 /* lightmap_demo */,
+				D1663358156ADACE009E98F1 /* video_lighting */,
+				D1C134C415797376005E8A5B /* parallax_mapping */,
+				D16D9DDF150CBC5D001BD35C /* common */,
+			);
+			name = demos;
 			sourceTree = "<group>";
 		};
 		D1C0151F15619E2B00FBEF81 /* lightmap_demo */ = {
@@ -1685,7 +1693,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/lighting\"\n        cp \"${SRC_PATH}/lighting/room.obj\" \"${DEST_PATH}/lighting\"\n        cp \"${SRC_PATH}/lighting/lighting.ogv\" \"${DEST_PATH}/lighting\"\n        cp \"${SRC_PATH}/lighting/diffuse_map.tga\" \"${DEST_PATH}/lighting\"\n        cp \"${SRC_PATH}/lighting/camera.txt\" \"${DEST_PATH}/lighting\"\n    fi\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/lighting\"\n        cp \"${SRC_PATH}/lighting/room.obj\" \"${DEST_PATH}/lighting\"\n        cp \"${SRC_PATH}/lighting/lighting.ogv\" \"${DEST_PATH}/lighting\"\n        cp \"${SRC_PATH}/lighting/diffuse_map.tga\" \"${DEST_PATH}/lighting\"\n        cp \"${SRC_PATH}/lighting/camera.txt\" \"${DEST_PATH}/lighting\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D16776B5155C53D90050EC64 /* link media folder */ = {
@@ -1700,7 +1708,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ ${CONFIGURATION} = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        echo \"${CONFIGURATION}\"\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D16776BB155C55C20050EC64 /* link media folder */ = {
@@ -1715,7 +1723,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D16776BD155C55D70050EC64 /* link media folder */ = {
@@ -1730,7 +1738,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/konqi.ogv\" \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/room.ogv\" \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/titan.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/konqi.ogv\" \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/room.ogv\" \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/titan.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D16776BF155C55EC0050EC64 /* link media folder */ = {
@@ -1745,7 +1753,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_W.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_SW.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_SE.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_S.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_NW.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_NE.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_N.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_E.ogv\" \"${DEST_PATH}/brawe\"\n    fi\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_W.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_SW.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_SE.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_S.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_NW.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_NE.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_N.ogv\" \"${DEST_PATH}/brawe\"\n        cp \"${SRC_PATH}/brawe/brawe_E.ogv\" \"${DEST_PATH}/brawe\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D16776C1155C56000050EC64 /* link media folder */ = {
@@ -1760,7 +1768,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_water.ogv\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_eve.ogv\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_main.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_clouds.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_bush.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_branch.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_birds.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_back.tga\" \"${DEST_PATH}/locv\"\n    fi\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_water.ogv\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_eve.ogv\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_main.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_clouds.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_bush.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_branch.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_birds.tga\" \"${DEST_PATH}/locv\"\n        cp \"${SRC_PATH}/locv/locv_back.tga\" \"${DEST_PATH}/locv\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D16776C3155C56150050EC64 /* link media folder */ = {
@@ -1775,7 +1783,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/tv_room/tv.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/tv.obj\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/table.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/table.obj\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/room.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/room.obj\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/chair1.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/chair1.obj\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/chair2.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/chair2.obj\" \"${DEST_PATH}/tv_room\"\n    fi\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/tv_room/tv.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/tv.obj\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/table.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/table.obj\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/room.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/room.obj\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/chair1.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/chair1.obj\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/chair2.tga\" \"${DEST_PATH}/tv_room\"\n        cp \"${SRC_PATH}/tv_room/chair2.obj\" \"${DEST_PATH}/tv_room\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D16776C5155C56290050EC64 /* link media folder */ = {
@@ -1790,7 +1798,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D176138C1561B21500F645DE /* link media folder */ = {
@@ -1805,7 +1813,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/environment_mapping\"\n        cp \"${SRC_PATH}/environment_mapping/room256.ogv\" \"${DEST_PATH}/environment_mapping\"\n        cp \"${SRC_PATH}/environment_mapping/teapot.obj\" \"${DEST_PATH}/environment_mapping\"\n    fi\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/environment_mapping\"\n        cp \"${SRC_PATH}/environment_mapping/room256.ogv\" \"${DEST_PATH}/environment_mapping\"\n        cp \"${SRC_PATH}/environment_mapping/teapot.obj\" \"${DEST_PATH}/environment_mapping\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D1C0151E15619E1F00FBEF81 /* link media folder */ = {
@@ -1820,7 +1828,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/room.obj\" \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/light1.ogv\" \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/light2.ogv\" \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/light3.ogv\" \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/diffuse_map.tga\" \"${DEST_PATH}/lightmap\"\n    fi\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/room.obj\" \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/light1.ogv\" \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/light2.ogv\" \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/light3.ogv\" \"${DEST_PATH}/lightmap\"\n        cp \"${SRC_PATH}/lightmap/diffuse_map.tga\" \"${DEST_PATH}/lightmap\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D1C134BA157972CF005E8A5B /* link media folder */ = {
@@ -1835,7 +1843,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/per_pixel_lighting.vert\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/per_pixel_lighting.frag\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/parallax.ogv\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/parallax_mapping.vert\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/parallax_mapping.frag\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/normal_mapping.vert\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/normal_mapping.frag\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/diffuse_map.tga\" \"${DEST_PATH}/parallax\"\n    fi\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ \"${CONFIGURATION}\" = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        mkdir \"${DEST_PATH}\"\n        mkdir \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/per_pixel_lighting.vert\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/per_pixel_lighting.frag\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/parallax.ogv\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/parallax_mapping.vert\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/parallax_mapping.frag\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/normal_mapping.vert\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/normal_mapping.frag\" \"${DEST_PATH}/parallax\"\n        cp \"${SRC_PATH}/parallax/diffuse_map.tga\" \"${DEST_PATH}/parallax\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

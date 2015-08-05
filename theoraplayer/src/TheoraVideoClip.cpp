@@ -441,6 +441,10 @@ float TheoraVideoClip::waitForCache(float desired_cache_factor, float max_wait_t
 	bool paused = mTimer->isPaused();
 	if (!paused) mTimer->pause();
 	int elapsed = 0, nReady = 0, frameQueueSize = getNumPrecachedFrames();
+    if (mNumFrames < frameQueueSize)
+    {
+        frameQueueSize = mNumFrames;
+    }
 	int desired_num_precached_frames = (int) ceil(desired_cache_factor * frameQueueSize);
 	for (;;)
 	{
