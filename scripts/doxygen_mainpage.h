@@ -1,10 +1,10 @@
 
 /** @mainpage Theora Playback Library
 *
-* @authors kspes
+* @authors Kresimir Spes, Boris Mikic
 * @section intro Introduction
 * This is the API reference page for the library.
-* Consult the <a href="http://libtheoraplayer.sourceforge.net">Project Wiki</a> for tutorials and usage.
+* Consult the <a href="http://libtheoraplayer.cateia.com">Project Wiki</a> for tutorials and usage.
 * 
 * <hr>
 * @section notes Release Notes
