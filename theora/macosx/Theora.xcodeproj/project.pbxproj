@@ -444,7 +444,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = 4FADC24608B4156D00ABE55E /* Build configuration list for PBXProject "Theora" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -634,6 +634,7 @@
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
 				OTHER_LDFLAGS_i386 = "-Wl,-read_only_relocs,suppress";
+				PRODUCT_BUNDLE_IDENTIFIER = org.xiph.theora;
 				PRODUCT_NAME = Theora;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -686,6 +687,7 @@
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
 				OTHER_LDFLAGS_i386 = "-Wl,-read_only_relocs,suppress";
+				PRODUCT_BUNDLE_IDENTIFIER = org.xiph.theora;
 				PRODUCT_NAME = Theora;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -738,6 +740,7 @@
 				LIBRARY_STYLE = DYNAMIC;
 				MACH_O_TYPE = mh_dylib;
 				OTHER_LDFLAGS_i386 = "-Wl,-read_only_relocs,suppress";
+				PRODUCT_BUNDLE_IDENTIFIER = org.xiph.theora;
 				PRODUCT_NAME = Theora;
 				WRAPPER_EXTENSION = framework;
 			};
