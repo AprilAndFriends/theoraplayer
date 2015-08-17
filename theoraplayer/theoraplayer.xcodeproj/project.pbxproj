@@ -1388,7 +1388,7 @@
 		D1473F20150CA69B00B20490 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = D1473F23150CA69B00B20490 /* Build configuration list for PBXProject "theoraplayer" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1915,6 +1915,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -1977,6 +1978,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2039,6 +2041,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2289,6 +2292,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2308,6 +2312,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2327,6 +2332,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2347,6 +2353,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2367,6 +2374,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -2387,6 +2395,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = theoraplayer;
 				WRAPPER_EXTENSION = framework;
 			};
