@@ -55,18 +55,6 @@
     <RootNamespace>aprilvideo</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">
-    
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">
-    
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    
-  </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    
-  </PropertyGroup>
   <Import Project="props\default.props" />
   <Import Project="..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props" />
   <Import Project="..\..\..\hltypes\msvc\vs2013\props-generic\configurations.props" />
