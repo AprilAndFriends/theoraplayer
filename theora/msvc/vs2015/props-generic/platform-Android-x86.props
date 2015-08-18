@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Configuration">
+    <AndroidSdkLevel>22</AndroidSdkLevel>
+    <AndroidNdkLevel>9</AndroidNdkLevel>
+  </PropertyGroup>
+  <Import Condition="(exists('..\..\lib\msvc\vs2015\$(Platform).props'))" Project="..\..\lib\msvc\vs2015\$(Platform).props"/>
+  <Import Condition="(exists('..\..\msvc\vs2015\$(Platform).props'))" Project="..\..\msvc\vs2015\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\msvc\vs2015\$(Platform).props'))" Project="..\..\..\msvc\vs2015\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\..\msvc\vs2015\$(Platform).props'))" Project="..\..\..\..\msvc\vs2015\$(Platform).props"/>
+  <ItemDefinitionGroup>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ClCompile>
+      <PreprocessorDefinitions>_ANDROID;ANDROID;_X86;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../..;../../src;../../../include;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PositionIndependentCode>true</PositionIndependentCode>
+    </ClCompile>
+    <ClCompile Condition="'$(CompileAs)'=='CompileAsCpp'">
+      <ExceptionHandlingEnum>Enabled</ExceptionHandlingEnum>
+      <RuntimeTypeInfoEnum>Enabled</RuntimeTypeInfoEnum>
+      <AdditionalOptions>-Wno-overloaded-virtual %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Condition="'$(CompileAs)'!='CompileAsCpp'">
+      <ExceptionHandlingEnum></ExceptionHandlingEnum>
+      <RuntimeTypeInfoEnum></RuntimeTypeInfoEnum>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>lib\lib\android;lib\android;..\lib\android;..\..\lib\android;lib\lib\android\x86;lib\android\x86;..\lib\android\x86;..\..\lib\android\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SystemLibraryDependencies>dl;z;GLESv1_CM;%(SystemLibraryDependencies)</SystemLibraryDependencies>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>lib\lib\android;lib\android;..\lib\android;..\..\lib\android;lib\lib\android\x86;lib\android\x86;..\lib\android\x86;..\..\lib\android\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+</Project>
