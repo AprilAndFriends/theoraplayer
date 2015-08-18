@@ -745,6 +745,13 @@ namespace aprilvideo
 			{
 				if (mClip && !mClip->isPaused()) mClip->pause();
 			}
+			else if (value == "stopped")
+			{
+				if (mClip)
+				{
+					mClip->stop();
+				}
+			}
 			else throw Exception("VideoObject: unable to set state property to '" + value + "'.");
 		}
 		else return aprilui::ImageBox::setProperty(name, value);
