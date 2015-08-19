@@ -236,11 +236,11 @@ int main(int argc, char** argv)
 {
 #ifdef _MSC_VER // detect a msvc++ build and adjust the working directory
 	char cwd[513];
-	GetCurrentDirectory(512,cwd);
+	GetCurrentDirectoryA(512,cwd);
 	if (strstr(cwd,"msvc"))
 	{
 		*(strstr(cwd,"demos")+5)=0;
-		SetCurrentDirectory(cwd);
+		SetCurrentDirectoryA(cwd);
 	}
 #endif
 #ifdef __APPLE__
