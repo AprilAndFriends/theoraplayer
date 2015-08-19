@@ -7,7 +7,7 @@
  *  in the file PATENTS. All contributing project authors may
  *  be found in the AUTHORS file in the root of the source tree.
  */
-
+#if !defined(_IOS) || !defined(__aarch64__) // libtheoraplayer addition, for compiling on iOS arm64
 #include "libyuv/basic_types.h"
 #include "libyuv/row.h"
 
@@ -142,4 +142,5 @@ void ScaleARGBRowDownEvenBox_NEON(const uint8* src_argb, ptrdiff_t src_stride,
 #ifdef __cplusplus
 }  // extern "C"
 }  // namespace libyuv
+#endif
 #endif
