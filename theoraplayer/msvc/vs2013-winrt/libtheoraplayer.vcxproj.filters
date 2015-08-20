@@ -132,9 +132,6 @@
     <ClCompile Include="..\..\src\YUV\libyuv\src\cpu_id.cc">
       <Filter>src\YUV\libyuv\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\YUV\libyuv\src\format_conversion.cc">
-      <Filter>src\YUV\libyuv\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\YUV\libyuv\src\mjpeg_decoder.cc">
       <Filter>src\YUV\libyuv\src</Filter>
     </ClCompile>
@@ -180,9 +177,6 @@
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb.cc">
       <Filter>src\YUV\libyuv\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb_neon.cc">
-      <Filter>src\YUV\libyuv\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_mips.cc">
       <Filter>src\YUV\libyuv\src</Filter>
     </ClCompile>
@@ -203,6 +197,27 @@
     </ClCompile>
     <ClCompile Include="..\..\src\YUV\android\cpu-features.c">
       <Filter>src\YUV\libyuv\android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_gcc.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_neon64.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_neon64.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_gcc.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_neon64.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_any.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_gcc.cc">
+      <Filter>src\YUV\libyuv\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -282,9 +297,6 @@
       <Filter>src\YUV\libyuv\include\libyuv</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\cpu_id.h">
-      <Filter>src\YUV\libyuv\include\libyuv</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\format_conversion.h">
       <Filter>src\YUV\libyuv\include\libyuv</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\mjpeg_decoder.h">
