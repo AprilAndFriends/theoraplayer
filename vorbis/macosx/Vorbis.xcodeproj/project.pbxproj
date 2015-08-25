@@ -450,7 +450,7 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = 730F23F3091827B200AB638C /* Build configuration list for PBXProject "Vorbis" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -557,6 +557,7 @@
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = org.xiph.vorbis;
 				PRODUCT_NAME = Vorbis;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
@@ -592,6 +593,7 @@
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = org.xiph.vorbis;
 				PRODUCT_NAME = Vorbis;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
@@ -624,6 +626,7 @@
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
 				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = org.xiph.vorbis;
 				PRODUCT_NAME = Vorbis;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;

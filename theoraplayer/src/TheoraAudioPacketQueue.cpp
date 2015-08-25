@@ -58,15 +58,23 @@ void TheoraAudioPacketQueue::addAudioPacket(float** buffer, int numSamples, floa
 	{
 		// apply gain, let's attenuate the samples
 		for (i = 0; i < numSamples; ++i)
+		{
 			for (j = 0; j < mNumAudioChannels; j++, ++dataptr)
-				*dataptr = buffer[i][j] * gain;
+			{
+				*dataptr = buffer[j][i] * gain;
+			}
+		}
 	}
 	else
 	{
 		// do a simple copy, faster then the above method, when gain is 1.0f
 		for (i = 0; i < numSamples; ++i)
+		{
 			for (j = 0; j < mNumAudioChannels; j++, ++dataptr)
+			{
 				*dataptr = buffer[j][i];
+			}
+		}
 	}
 		
 	_addAudioPacket(data, numSamples * mNumAudioChannels);
