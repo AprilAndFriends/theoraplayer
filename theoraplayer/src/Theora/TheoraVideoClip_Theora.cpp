@@ -273,8 +273,8 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 			{
 				break;
 			}
-			// if page is not a theora page, skip it
-			if (ogg_page_serialno(&mInfo.OggPage) != mInfo.TheoraStreamState.serialno)
+			// if page is not a theora page or page is unsynced(-1), skip it
+			if (ret == -1 || ogg_page_serialno(&mInfo.OggPage) != mInfo.TheoraStreamState.serialno)
 			{
 				continue;
 			}
