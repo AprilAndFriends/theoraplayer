@@ -346,6 +346,8 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 	memset(&mInfo.VorbisDSPState, 0, sizeof(vorbis_dsp_state));
 	memset(&mInfo.VorbisBlock, 0, sizeof(vorbis_block));
 	memset(&mInfo.VorbisComment, 0, sizeof(vorbis_comment));
+    ogg_stream_state skeletonStream;
+    bool hasSkeleton = false, scannedSkeleton = false;
 	
 	ogg_sync_init(&mInfo.OggSyncState);
 	th_comment_init(&mInfo.TheoraComment);
@@ -357,10 +359,11 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 	{
 		char *buffer = ogg_sync_buffer(&mInfo.OggSyncState, 4096);
 		int bytes_read = mStream->read(buffer, 4096);
+        if (bytes_read == 0)
+        {
+            break;
+        }
 		ogg_sync_wrote(&mInfo.OggSyncState, bytes_read);
-		
-		if (bytes_read == 0)
-			break;
 		
 		while (ogg_sync_pageout(&mInfo.OggSyncState, &mInfo.OggPage) > 0)
 		{
@@ -370,41 +373,72 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 			if (!ogg_page_bos(&mInfo.OggPage))
 			{
 				//This is done blindly, because stream only accept themselves
-				if (mTheoraStreams) ogg_stream_pagein(&mInfo.TheoraStreamState, &mInfo.OggPage);
-				if (mVorbisStreams) ogg_stream_pagein(&mInfo.VorbisStreamState, &mInfo.OggPage);
-				
-				done=true;
+				if (mTheoraStreams)
+                {
+                    ogg_stream_pagein(&mInfo.TheoraStreamState, &mInfo.OggPage);
+                }
+				if (mVorbisStreams)
+                {
+                    ogg_stream_pagein(&mInfo.VorbisStreamState, &mInfo.OggPage);
+                }
+                if (hasSkeleton)
+                {
+                    ogg_stream_pagein(&skeletonStream, &mInfo.OggPage);
+                }
+				done = true;
 				break;
 			}
-			
 			ogg_stream_init(&OggStateTest, ogg_page_serialno(&mInfo.OggPage));
 			ogg_stream_pagein(&OggStateTest, &mInfo.OggPage);
-			ogg_stream_packetout(&OggStateTest, &tempOggPacket);
-			
-			//identify the codec
-			int ret;
-			if (!mTheoraStreams)
-			{
-				ret = th_decode_headerin(&mInfo.TheoraInfo, &mInfo.TheoraComment, &mInfo.TheoraSetup, &tempOggPacket);
-				
-				if (ret > 0)
-				{
-					//This is the Theora Header
-					memcpy(&mInfo.TheoraStreamState, &OggStateTest, sizeof(OggStateTest));
-					mTheoraStreams = 1;
-					continue;
-				}
-			}
-			if (decode_audio && !mVorbisStreams &&
-				vorbis_synthesis_headerin(&mInfo.VorbisInfo, &mInfo.VorbisComment, &tempOggPacket) >=0)
-			{
-				//This is vorbis header
-				memcpy(&mInfo.VorbisStreamState, &OggStateTest, sizeof(OggStateTest));
-				mVorbisStreams = 1;
-				continue;
-			}
+            if (ogg_stream_packetout(&OggStateTest, &tempOggPacket) > 0)
+            {
+                //identify the codec
+                int ret;
+                if (tempOggPacket.bytes >= 8 && strncmp((char*)tempOggPacket.packet, "fishead", 8) == 0)
+                {
+                    // Ogg skeleton header packet found
+                    // byte offsets taken from here: https://www.xiph.org/ogg/doc/skeleton.html
+                    unsigned char* data = tempOggPacket.packet;
+                    unsigned short skeletonVersionMajor = *((unsigned short*) (data + 8)),
+                                   skeletonVersionMinor = *((unsigned short*) (data + 10));
+                    if (skeletonVersionMajor == 4 && skeletonVersionMinor == 0) // only support skeleton 4.0
+                    {
+                        ogg_int64_t presentationTimeNumerator = *((ogg_int64_t*) (data + 12)),
+                                    presentationTimeDenominator = *((ogg_int64_t*) (data + 20)),
+                                    baseTimeNumerator = *((ogg_int64_t*) (data + 28)),
+                                    baseTimeDenominator = *((ogg_int64_t*) (data + 36));
+
+                        hasSkeleton = true;
+                        memcpy(&skeletonStream, &OggStateTest, sizeof(OggStateTest));
+                        continue;
+                    }
+                }
+                else
+                {
+                    if (!mTheoraStreams)
+                    {
+                        ret = th_decode_headerin(&mInfo.TheoraInfo, &mInfo.TheoraComment, &mInfo.TheoraSetup, &tempOggPacket);
+                        
+                        if (ret > 0)
+                        {
+                            //This is the Theora Header
+                            memcpy(&mInfo.TheoraStreamState, &OggStateTest, sizeof(OggStateTest));
+                            mTheoraStreams = 1;
+                            continue;
+                        }
+                    }
+                    if (decode_audio && !mVorbisStreams &&
+                        vorbis_synthesis_headerin(&mInfo.VorbisInfo, &mInfo.VorbisComment, &tempOggPacket) >=0)
+                    {
+                        //This is vorbis header
+                        memcpy(&mInfo.VorbisStreamState, &OggStateTest, sizeof(OggStateTest));
+                        mVorbisStreams = 1;
+                        continue;
+                    }
+                }
+            }
 			//Hmm. I guess it's not a header we support, so erase it
-			ogg_stream_clear(&OggStateTest);
+            ogg_stream_clear(&OggStateTest);
 		}
 	}
 	
@@ -444,11 +478,29 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 			++mVorbisStreams;
 		} //end while looking for more vorbis headers
 		
+        if (hasSkeleton)
+        {
+            while (ogg_stream_packetout(&skeletonStream, &tempOggPacket) > 0)
+            {
+                int i = 0;
+            }
+        }
+        
 		//Not finished with Headers, get some more file data
 		if (ogg_sync_pageout(&mInfo.OggSyncState, &mInfo.OggPage) > 0)
 		{
-			if (mTheoraStreams) ogg_stream_pagein(&mInfo.TheoraStreamState, &mInfo.OggPage);
-			if (mVorbisStreams) ogg_stream_pagein(&mInfo.VorbisStreamState, &mInfo.OggPage);
+			if (mTheoraStreams)
+            {
+                ogg_stream_pagein(&mInfo.TheoraStreamState, &mInfo.OggPage);
+            }
+			if (mVorbisStreams)
+            {
+                ogg_stream_pagein(&mInfo.VorbisStreamState, &mInfo.OggPage);
+            }
+            if (hasSkeleton)
+            {
+                ogg_stream_pagein(&skeletonStream, &mInfo.OggPage);
+            }
 		}
 		else
 		{
