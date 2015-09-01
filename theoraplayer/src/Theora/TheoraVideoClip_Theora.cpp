@@ -442,8 +442,9 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 		}
 	}
 	
-	while ((mTheoraStreams && (mTheoraStreams < 3)) ||
-		   (mVorbisStreams && (mVorbisStreams < 3)))
+	while ((mTheoraStreams && mTheoraStreams < 3) ||
+           (mVorbisStreams && mVorbisStreams < 3) ||
+           (hasSkeleton && !scannedSkeleton))
 	{
 		//Check 2nd'dary headers... Theora First
 		int iSuccess;
@@ -483,6 +484,7 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
             while (ogg_stream_packetout(&skeletonStream, &tempOggPacket) > 0)
             {
                 int i = 0;
+                scannedSkeleton = true;
             }
         }
         
