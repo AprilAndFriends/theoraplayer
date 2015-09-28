@@ -181,7 +181,7 @@ extern "C" {
 // Visual C 2012 required for AVX2.
 #if defined(_M_IX86) && !defined(__clang__) && \
     defined(_MSC_VER) && _MSC_VER >= 1700
-#define VISUALC_HAS_AVX2 1
+//#define VISUALC_HAS_AVX2 1
 #endif  // VisualStudio >= 2012
 
 // The following are available require VS2012.  Port to GCC.
