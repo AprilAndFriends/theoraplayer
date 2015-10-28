@@ -2352,7 +2352,7 @@
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
-					__AVFOUNDATION,
+					__THEORA,
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
@@ -2370,7 +2370,7 @@
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
-					__AVFOUNDATION,
+					__THEORA,
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
@@ -2388,7 +2388,7 @@
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
-					__AVFOUNDATION,
+					__THEORA,
 					_YUV_LIBYUV,
 					"$(inherited)",
 				);
