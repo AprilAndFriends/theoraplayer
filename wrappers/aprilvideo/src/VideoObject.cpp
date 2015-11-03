@@ -417,11 +417,10 @@ namespace aprilvideo
 		}
 
 		hlog::write(logTag, "Creating video textures for " + mClipName);
-		april::Texture* tex;
+		april::Texture* tex = NULL;
 		for (int i = 0; i < 2; i++)
 		{
 			tex = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
-			tex->setAddressMode(april::Texture::ADDRESS_CLAMP);
 			mTexture = new aprilui::Texture(tex->getFilename() + "_" + hstr(i + 1), tex);
 
 			mVideoImage = new aprilui::Image(mTexture, "video_img_" + hstr(i + 1), grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
@@ -486,7 +485,7 @@ namespace aprilvideo
 		}
 		mClip->setTimer(mTimer);
 		mClip->setPlaybackSpeed(mSpeed);
-		update(0); // to grab the first frame.
+		update(0.0f); // to grab the first frame.
 	}
 	
 	void VideoObject::updateFrame()
