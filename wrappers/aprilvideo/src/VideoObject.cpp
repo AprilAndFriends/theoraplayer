@@ -144,7 +144,7 @@ namespace aprilvideo
 
 	bool VideoObject::_isVideoPaused()
 	{
-		return this->mTimer->isPaused();
+		return (this->mTimer != NULL && this->mTimer->isPaused());
 	}
 
 	bool VideoObject::isStopped()
