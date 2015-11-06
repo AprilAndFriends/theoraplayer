@@ -32,6 +32,7 @@ namespace aprilvideo
 	public:
 		AudioVideoTimer(VideoObject* object, xal::Player* player, float sync_offset);
 		void update(float timeDelta);
+		void pause();
 	};
 }
 #endif

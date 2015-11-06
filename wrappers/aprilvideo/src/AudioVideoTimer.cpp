@@ -133,4 +133,34 @@ namespace aprilvideo
 			mTime = mT - mSyncOffset;
 		}
 	}
+
+	void AudioVideoTimer::pause()
+	{
+		TheoraTimer::pause();
+		this->update(0.0f);
+		/*
+		if (!mDisabledAudio)
+		{
+			bool paused = isPaused(), playerPaused = mPlayer->isPaused();
+			// use our own time calculation because april's could be tampered with (speedup/slowdown)
+			uint64_t tickCount = htickCount();
+			if (mPrevTickCount == 0)
+			{
+				mPrevTickCount = tickCount;
+			}
+			timeDelta = (tickCount - mPrevTickCount) / 1000.0f;
+			if (paused) timeDelta = 0;
+			if (!paused && !mStartedPlaying)
+			{
+				mStartedPlaying = 1;
+				mPlayer->play();
+			}
+			else if (paused && !playerPaused && mStartedPlaying && !mPlayer->isFadingOut())
+			{
+				mPlayer->pause();
+			}
+		}
+		*/
+	}
+
 };

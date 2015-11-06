@@ -125,7 +125,7 @@ namespace aprilvideo
 	
 	bool VideoObject::isPaused()
 	{
-		if  (mClip == NULL) return true;
+		if (mClip == NULL) return true;
 		if (mAlphaPauseThreshold == 0)
 		{
 			bool visible = isDerivedVisible();
@@ -140,6 +140,11 @@ namespace aprilvideo
 			int alpha = getDerivedAlpha() * getVisibilityFlag();
 			return alpha < mAlphaPauseThreshold;
 		}
+	}
+
+	bool VideoObject::_isVideoPaused()
+	{
+		return this->mTimer->isPaused();
 	}
 
 	bool VideoObject::isStopped()

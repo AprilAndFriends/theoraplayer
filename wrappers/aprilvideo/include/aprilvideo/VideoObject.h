@@ -89,6 +89,8 @@ namespace aprilvideo
 		bool isStopped();
 		float getTimePosition();
 		virtual bool isPaused();
+		/// @note This method checks the timer rather than alphaThreshold like isPaused()
+		bool _isVideoPaused();
 		float getInitialPrecacheFactor() { return mInitialPrecacheFactor; }
 		void setInitialPrecacheFactor(float value);
 		void setInitialPrecacheTimeout(float value);
