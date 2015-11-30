@@ -49,6 +49,9 @@
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props" />
   <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props')" Project="props-generic\configurations.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props" />
   <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props')" Project="props-generic\build-defaults.props" />
   <Import Project="props\configuration.props" />
@@ -151,34 +154,32 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\lib\arm\armbits.asm">
+    <MASM Include="..\..\lib\arm\armbits.s">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
-      <CompileAs Condition="'$(Platform)'=='ARM'">CompileAsAsm</CompileAs>
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Platform)'=='ARM'">-mfpu=neon %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\arm\armfrag.asm">
+    </MASM>
+    <MASM Include="..\..\lib\arm\armfrag.s">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
-      <CompileAs Condition="'$(Platform)'=='ARM'">CompileAsAsm</CompileAs>
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Platform)'=='ARM'">-mfpu=neon %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\arm\armidct.asm">
+    </MASM>
+    <MASM Include="..\..\lib\arm\armidct.s">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
-      <CompileAs Condition="'$(Platform)'=='ARM'">CompileAsAsm</CompileAs>
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Platform)'=='ARM'">-mfpu=neon %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\arm\armloop.asm">
+    </MASM>
+    <MASM Include="..\..\lib\arm\armloop.s">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
-      <CompileAs Condition="'$(Platform)'=='ARM'">CompileAsAsm</CompileAs>
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-      <AdditionalOptions Condition="'$(Platform)'=='ARM'">-mfpu=neon %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
+    </MASM>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\lib\arm\armopts-gnu.s" />
     <None Include="..\..\lib\theora.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
 </Project>

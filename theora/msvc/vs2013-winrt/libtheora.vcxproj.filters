@@ -48,18 +48,6 @@
     <ClCompile Include="..\..\lib\x86_vc\x86state.c">
       <Filter>x86</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm\armbits.asm">
-      <Filter>arm</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\arm\armfrag.asm">
-      <Filter>arm</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\arm\armidct.asm">
-      <Filter>arm</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\arm\armloop.asm">
-      <Filter>arm</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\theora\codec.h" />
@@ -104,9 +92,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\lib\arm\armopts-gnu.s">
-      <Filter>arm</Filter>
-    </None>
     <None Include="..\..\lib\theora.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="..\..\lib\arm\armbits.s">
+      <Filter>arm</Filter>
+    </MASM>
+    <MASM Include="..\..\lib\arm\armfrag.s">
+      <Filter>arm</Filter>
+    </MASM>
+    <MASM Include="..\..\lib\arm\armidct.s">
+      <Filter>arm</Filter>
+    </MASM>
+    <MASM Include="..\..\lib\arm\armloop.s">
+      <Filter>arm</Filter>
+    </MASM>
   </ItemGroup>
 </Project>
