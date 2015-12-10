@@ -18,6 +18,10 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 	#include <theora/codec.h>
 	#include <vorbis/codec.h>
 	#include "TheoraVideoClip_Theora.h"
+	
+#endif
+#ifdef __WEBM
+	#include "TheoraVideoClip_WebM.h"
 #endif
 #ifdef __AVFOUNDATION
 	#include "TheoraVideoClip_AVFoundation.h"
@@ -221,6 +225,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 	{
 		clip = new TheoraVideoClip_AVFoundation(data_source, output_mode, nPrecached, usePower2Stride);
 	}
+	
 #endif
 #if defined(__AVFOUNDATION) && defined(__THEORA)
 	else
@@ -229,7 +234,13 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 		clip = new TheoraVideoClip_Theora(data_source, output_mode, nPrecached, usePower2Stride);
 #endif
 #ifdef __FFMPEG
-		clip = new TheoraVideoClip_FFmpeg(data_source, output_mode, nPrecached, usePower2Stride);
+	clip = new TheoraVideoClip_FFmpeg(data_source, output_mode, nPrecached, usePower2Stride);
+#endif
+#ifdef __WEBM
+	{
+		
+		clip = new TheoraVideoClip_WebM(data_source, output_mode, nPrecached, usePower2Stride);
+	}
 #endif
 	if (clip != NULL)
 	{
