@@ -34,6 +34,4 @@ private:
 	bool GetFileSize();
 };
 
-
-
 #endif  // MKVREADER_HPP
