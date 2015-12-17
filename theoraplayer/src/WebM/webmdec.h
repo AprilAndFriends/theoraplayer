@@ -29,6 +29,7 @@
 		uint64_t timestamp_ns;
 		int is_key_frame;
 		int reached_eos;
+		float duration;
 	};
 
 	// Checks if the input is a WebM file. If so, initializes WebMInputContext so
@@ -63,6 +64,8 @@
 		// Guesses the frame rate of the input file based on the container timestamps.
 		int webm_guess_framerate(TheoraDataSource* dataSource, struct WebmInputContext *webm_ctx,
 		struct VpxInputContext *vpx_ctx);
+
+		int webm_guess_duration(struct WebmInputContext* webm_ctx);
 
 		// Resets the WebMInputContext.
 		void webm_free(struct WebmInputContext *webm_ctx);

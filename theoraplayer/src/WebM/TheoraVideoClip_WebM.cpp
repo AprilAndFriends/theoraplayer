@@ -127,6 +127,7 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 
 	//todo: change this to load the actual number of frames from the stream
 	mDuration = 1000000;
+	//mDuration = TheoraWebmDec::webm_guess_duration(input.webm_ctx);	this doesn't do anything
 
 	fourcc_interface = (VpxInterface*)get_vpx_decoder_by_fourcc(vpx_input_ctx.fourcc);
 	interf = fourcc_interface;

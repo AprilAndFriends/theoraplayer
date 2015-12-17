@@ -45,6 +45,7 @@ void reset(struct WebmInputContext *const webm_ctx) {
 	webm_ctx->video_track_index = 0;
 	webm_ctx->timestamp_ns = 0;
 	webm_ctx->is_key_frame = false;
+	webm_ctx->duration = 0;
 }
 
 void get_first_cluster(struct WebmInputContext *const webm_ctx) {
@@ -235,6 +236,21 @@ struct VpxInputContext *vpx_ctx) {
 	webm_ctx->reached_eos = 0;
 
 	return 0;
+}
+
+int TheoraWebmDec::webm_guess_duration(struct WebmInputContext* webm_ctx)
+{	
+	uint32_t i = 0;
+	uint8_t *buffer = NULL;
+	size_t bytes_in_buffer = 0;
+	size_t buffer_size = 0;
+
+	while (TheoraWebmDec::webm_read_frame(webm_ctx, &buffer, &bytes_in_buffer, &buffer_size) == 0)
+	{
+		i++;
+	}
+
+	return i;
 }
 
 void TheoraWebmDec::webm_free(struct WebmInputContext *webm_ctx) {

@@ -231,7 +231,9 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 	else
 #endif
 #ifdef __THEORA
+#ifndef __WEBM
 		clip = new TheoraVideoClip_Theora(data_source, output_mode, nPrecached, usePower2Stride);
+#endif
 #endif
 #ifdef __FFMPEG
 	clip = new TheoraVideoClip_FFmpeg(data_source, output_mode, nPrecached, usePower2Stride);
