@@ -71,7 +71,7 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 		}
 		if ((img = vpx_codec_get_frame(&decoder, &iter)))
 		{
-			printf("Frame W:%d H:%d\n", img->w, img->h);
+			//printf("Frame W:%d H:%d\n", img->w, img->h);
 
 			mFrame = img;
 
@@ -99,31 +99,20 @@ void TheoraVideoClip_WebM::_restart()
 }
 
 void TheoraVideoClip_WebM::load(TheoraDataSource* source)
-{
-	//int streamSize = source->size();
-	//unsigned char* buff = new unsigned char[streamSize];
-	//source->read(buff, streamSize);
-
-	////hack
-	//FILE* f = fopen("temp.bin", "wb");
-	//fwrite(buff, sizeof(unsigned char), streamSize, f);
-	//fclose(f);
-
-	//input.vpx_input_ctx->file = fopen("temp.bin", "rb");
-	
+{	
 	if (!TheoraWebmDec::file_is_webm(source, input.webm_ctx, input.vpx_input_ctx))
 	{
-		printf("Error: File is not webm.");
+		//printf("Error: File is not webm.");
 		return;
 	}
 
 	if (TheoraWebmDec::webm_guess_framerate(source, input.webm_ctx, input.vpx_input_ctx))
 	{
-		printf("Error: Unable to guess webm framerate.");
+		//printf("Error: Unable to guess webm framerate.");
 		return;
 	}
 
-	printf("(Debug) Frameratea: %d\n", input.vpx_input_ctx->framerate.numerator / input.vpx_input_ctx->framerate.denominator);
+	//printf("(Debug) Frameratea: %d\n", input.vpx_input_ctx->framerate.numerator / input.vpx_input_ctx->framerate.denominator);
 
 	mWidth = input.vpx_input_ctx->width;
 	mHeight = input.vpx_input_ctx->height;
@@ -137,12 +126,11 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 	mFrameDuration = 1.0f / mFPS;
 
 	//todo: change this to load the actual number of frames from the stream
-	mNumFrames = 812;
-	mDuration = mNumFrames / mFPS;
+	mDuration = 1000000;
 
 	fourcc_interface = (VpxInterface*)get_vpx_decoder_by_fourcc(vpx_input_ctx.fourcc);
 	interf = fourcc_interface;
-
+	
 	int dec_flags = 0;
 	if (vpx_codec_dec_init(&decoder, interf->codec_interface(),
 		&cfg, dec_flags)) 

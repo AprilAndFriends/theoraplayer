@@ -144,7 +144,7 @@ void init()
 	benchmark("media/hotel_intro.mp4");
 	benchmark("media/angels_intro.mp4");
 #endif
-    clip=mgr->createVideoClip("media/highres4k.webm", outputMode, 16);
+    clip=mgr->createVideoClip("media/out9.webm", outputMode, 16);
 
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);
