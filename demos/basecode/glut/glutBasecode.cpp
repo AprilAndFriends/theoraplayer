@@ -239,7 +239,8 @@ int main(int argc, char** argv)
 	GetCurrentDirectoryA(512,cwd);
 	if (strstr(cwd,"msvc"))
 	{
-		*(strstr(cwd,"demos")+5)=0;
+		*(strstr(cwd,"msvc"))=0;
+		strcat(cwd, "demos");
 		SetCurrentDirectoryA(cwd);
 	}
 #endif

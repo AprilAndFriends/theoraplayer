@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="src">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
@@ -10,18 +10,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\glut_player.cpp">
+    <ClCompile Include="..\..\demos\glut_player\glut_player.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\basecode\glut\glutBasecode.cpp">
+    <ClCompile Include="..\..\demos\basecode\glut\glutBasecode.cpp">
       <Filter>basecode</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\basecode\util\util.cpp">
+    <ClCompile Include="..\..\demos\basecode\util\util.cpp">
       <Filter>basecode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\basecode\util\util.h">
+    <ClInclude Include="..\..\demos\basecode\util\util.h">
       <Filter>basecode</Filter>
     </ClInclude>
   </ItemGroup>
