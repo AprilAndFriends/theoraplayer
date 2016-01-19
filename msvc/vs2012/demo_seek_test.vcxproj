@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS|Win32">
+      <Configuration>DebugS</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS|Win32">
+      <Configuration>ReleaseS</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BC62BC0C-9B59-43F6-9762-CD71B6CCF22C}</ProjectGuid>
+    <RootNamespace>seek_test</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="props-demos\default.props" />
+  <Import Condition="exists('..\..\hltypes\msvc\vs2012\props-generic\platform-$(Platform).prop')" Project="..\..\hltypes\msvc\vs2012\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\hltypes\msvc\vs2012\props-generic\platform-$(Platform).prop')" Project="..\..\theora\msvc\vs2012\props-generic\platform-$(Platform).props" />
+  <Import Project="props-demos\configurations.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Condition="exists('..\..\hltypes\msvc\vs2012\props-generic\build-defaults.props')" Project="..\..\hltypes\msvc\vs2012\props-generic\build-defaults.props" />
+  <Import Condition="!exists('..\..\hltypes\msvc\vs2012\props-generic\build-defaults.props')" Project="..\..\theora\msvc\vs2012\props-generic\build-defaults.props" />
+  <Import Project="props-demos\build-defaults.props" />
+  <Import Project="props-demos\configuration.props" />
+  <ItemGroup>
+    <ClCompile Include="..\..\demos\seek_test\seek_test.cpp" />
+    <ClCompile Include="..\..\demos\basecode\glut\glutBasecode.cpp" />
+    <ClCompile Include="..\..\demos\basecode\util\util.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\demos\basecode\util\util.h" />
+    <ClInclude Include="..\..\demos\demo_basecode.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>
