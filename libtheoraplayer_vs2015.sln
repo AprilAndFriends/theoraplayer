@@ -28,6 +28,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "demo_glut_player", "msvc\vs
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtheora", "theora\msvc\vs2015\libtheora.vcxproj", "{653F3841-3F26-49B9-AFCF-091DB4B67031}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "demo_av_player", "msvc\vs2015\demo_av_player.vcxproj", "{8805A1DD-75EC-46A0-9E7C-F8646D242C1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -84,6 +86,14 @@ Global
 		{653F3841-3F26-49B9-AFCF-091DB4B67031}.Release|Win32.Build.0 = Release|Win32
 		{653F3841-3F26-49B9-AFCF-091DB4B67031}.ReleaseS|Win32.ActiveCfg = ReleaseS|Win32
 		{653F3841-3F26-49B9-AFCF-091DB4B67031}.ReleaseS|Win32.Build.0 = ReleaseS|Win32
+		{8805A1DD-75EC-46A0-9E7C-F8646D242C1D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8805A1DD-75EC-46A0-9E7C-F8646D242C1D}.Debug|Win32.Build.0 = Debug|Win32
+		{8805A1DD-75EC-46A0-9E7C-F8646D242C1D}.DebugS|Win32.ActiveCfg = DebugS|Win32
+		{8805A1DD-75EC-46A0-9E7C-F8646D242C1D}.DebugS|Win32.Build.0 = DebugS|Win32
+		{8805A1DD-75EC-46A0-9E7C-F8646D242C1D}.Release|Win32.ActiveCfg = Release|Win32
+		{8805A1DD-75EC-46A0-9E7C-F8646D242C1D}.Release|Win32.Build.0 = Release|Win32
+		{8805A1DD-75EC-46A0-9E7C-F8646D242C1D}.ReleaseS|Win32.ActiveCfg = ReleaseS|Win32
+		{8805A1DD-75EC-46A0-9E7C-F8646D242C1D}.ReleaseS|Win32.Build.0 = ReleaseS|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

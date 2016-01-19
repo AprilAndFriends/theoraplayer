@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C874310F-9F73-4530-A591-86E98C2B192F}</ProjectGuid>
-    <RootNamespace>demo_glut_player</RootNamespace>
+    <ProjectGuid>{8805A1DD-75EC-46A0-9E7C-F8646D242C1D}</ProjectGuid>
+    <RootNamespace>av_player</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props-demos\default.props" />
@@ -33,13 +33,15 @@
   <Import Project="props-demos\build-defaults.props" />
   <Import Project="props-demos\configuration.props" />
   <ItemGroup>
+    <ClCompile Include="..\..\demos\av_player\av_player.cpp" />
     <ClCompile Include="..\..\demos\basecode\glut\glutBasecode.cpp" />
     <ClCompile Include="..\..\demos\basecode\util\util.cpp" />
-    <ClCompile Include="..\..\demos\glut_player\glut_player.cpp" />
+    <ClCompile Include="..\..\demos\OpenAL_AudioInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\demos\basecode\util\util.h" />
     <ClInclude Include="..\..\demos\demo_basecode.h" />
+    <ClInclude Include="..\..\demos\OpenAL_AudioInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

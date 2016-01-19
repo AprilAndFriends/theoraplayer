@@ -21,6 +21,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\demos\demo_basecode.h">
+      <Filter>basecode</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\demos\basecode\util\util.h">
       <Filter>basecode</Filter>
     </ClInclude>
