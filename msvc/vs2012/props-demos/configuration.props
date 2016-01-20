@@ -16,7 +16,6 @@
       <UACExecutionLevel>AsInvoker</UACExecutionLevel>
       <SubSystem>Console</SubSystem>
     </Link>
-    </Link>
     <PostBuildEvent>
       <Command>xcopy $(OutDir)..\..\*.dll $(OutDir) /d /y
 xcopy ..\..\demos\dependencies\win32\glut\lib\*.dll $(OutDir) /d /y
