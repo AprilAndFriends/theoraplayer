@@ -417,8 +417,8 @@ namespace aprilvideo
 		april::RenderSystem::Caps caps = april::rendersys->getCaps();
 		if (!caps.npotTexturesLimited && !caps.npotTextures)
 		{
-			tw = hpotceil(tw);
-			th = hpotceil(th);
+			tw = hpotCeil(tw);
+			th = hpotCeil(th);
 		}
 
 		hlog::write(logTag, "Creating video textures for " + mClipName);
