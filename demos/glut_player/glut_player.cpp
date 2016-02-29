@@ -135,7 +135,7 @@ void benchmark(const char* filename)
 void init()
 {
 	mgr = new TheoraVideoManager();
-
+	 
 #ifdef BENCHMARK
 	benchmark("media/witch_intro.ogv");
 	benchmark("media/hotel_intro.ogv");

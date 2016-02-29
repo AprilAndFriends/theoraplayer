@@ -35,6 +35,7 @@ protected:
 	VpxInterface* fourcc_interface;
 	VpxInterface* interf;
 	vpx_image* mFrame;
+	TheoraDataSource* data_source;
 	int mFrameNumber;
 	
 	void doSeek();

@@ -34,6 +34,8 @@ TheoraVideoClip_WebM::TheoraVideoClip_WebM(TheoraDataSource* data_source,
 	memset(&(webm_ctx), 0, sizeof(webm_ctx));
 	input.webm_ctx = &webm_ctx;
 	input.vpx_input_ctx = &vpx_input_ctx;
+	mSeekFrame = 0;
+	this->data_source = data_source;
 
 	mFrameNumber = 0;
 }
@@ -64,7 +66,7 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 		if (vpx_codec_decode(&decoder, buf, (unsigned int)bytes_in_buffer,
 			NULL, 0))
 		{
-			const char *detail = vpx_codec_error_detail(&decoder);			
+			const char *detail = vpx_codec_error_detail(&decoder);
 
 			if (detail)
 				warn("Additional information: %s", detail);
@@ -86,8 +88,7 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 
 			frame->decode(&t);
 		}
-	}
-		
+	}		
 	return 1;
 }
 
@@ -167,7 +168,34 @@ float TheoraVideoClip_WebM::decodeAudio()
 
 void TheoraVideoClip_WebM::doSeek()
 {
-	printf("seek");
+	uint32_t i = 0;
+	uint8_t *buffer = NULL;
+	size_t bytes_in_buffer = 0;
+	size_t buffer_size = 0;
+
+	int frame;
+	float time = mSeekFrame / getFPS();
+	mTimer->seek(time);
+	bool paused = mTimer->isPaused();
+	if (!paused) mTimer->pause();
+	
+	resetFrameQueue();	
+
+	/*while (TheoraWebmDec::webm_read_frame(input.webm_ctx, &buffer, &bytes_in_buffer, &buffer_size) == 0 && i<mSeekFrame)
+	{
+		i++;
+	}*/
+
+	//TheoraWebmDec::file_is_webm(data_source, input.webm_ctx, input.vpx_input_ctx);
+	//TheoraWebmDec::webm_guess_framerate(data_source, input.webm_ctx, input.vpx_input_ctx);
+
+	mLastDecodedFrameNumber = mSeekFrame;
+
+	////decodeNextFrame();
+
+	if (!paused) mTimer->play();
+	mSeekFrame = -1;
+	printf("ayy");
 }
 
 #endif

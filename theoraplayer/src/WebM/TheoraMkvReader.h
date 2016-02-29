@@ -24,7 +24,7 @@ public:
 	virtual int Read(long long position, long length, unsigned char* buffer);
 	virtual int Length(long long* total, long long* available);
 
-private:
+private:	
 	TheoraMkvReader(const TheoraMkvReader&);
 	TheoraMkvReader& operator=(const TheoraMkvReader&);	
 
