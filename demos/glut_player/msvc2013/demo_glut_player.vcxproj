@@ -24,6 +24,11 @@
   <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013\props-generic\build-defaults.props')" Project="..\..\..\theora\msvc\vs2013\props-generic\build-defaults.props" />
   <Import Project="..\..\..\msvc\vs2013\props-demos\build-defaults.props" />
   <Import Project="..\..\..\msvc\vs2013\props-demos\configuration.props" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>__WEBM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\basecode\glut\glutBasecode.cpp" />
     <ClCompile Include="..\..\basecode\util\util.cpp" />
