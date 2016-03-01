@@ -41,9 +41,6 @@ protected:
 	void doSeek();
 	unsigned long mLastDecodedFrameNumber;
 
-	TheoraMutex* mWebmMutex;
-
-
 public:
 	TheoraVideoClip_WebM(TheoraDataSource* data_source,
 						   TheoraOutputMode output_mode,

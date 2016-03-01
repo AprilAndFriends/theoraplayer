@@ -38,7 +38,7 @@ int window_w=800,window_h=600;
 
 void draw()
 {      
-	glBindTexture(GL_TEXTURE_2D,tex_id);
+	glBindTexture(GL_TEXTURE_2D,tex_id); 
 
 	TheoraVideoFrame* f=clip->getNextFrame();
 	if (f)
@@ -144,7 +144,7 @@ void init()
 	benchmark("media/hotel_intro.mp4");
 	benchmark("media/angels_intro.mp4");     
 #endif
-    clip=mgr->createVideoClip("media/out9.webm", outputMode, 16);           
+    clip=mgr->createVideoClip("media/bbb.webm", outputMode, 16);              
 	   
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);

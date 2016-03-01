@@ -36,9 +36,7 @@ TheoraVideoClip_WebM::TheoraVideoClip_WebM(TheoraDataSource* data_source,
 	input.vpx_input_ctx = &vpx_input_ctx;
 	mSeekFrame = 0;
 	this->data_source = data_source;
-
-	mWebmMutex = NULL;
-
+	
 	mFrameNumber = 0;
 }
 
@@ -61,20 +59,6 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 
 	uint8_t* buf = NULL;
 	size_t bytes_in_buffer = 0, buffer_size = 0;
-
-	/*if (mSeekFrame > -1)
-	{
-		TheoraWebmDec::webm_rewind(input.webm_ctx);
-
-		int i = 0;
-		while (i < mSeekFrame && !TheoraWebmDec::webm_read_frame(input.webm_ctx, &buf, &bytes_in_buffer, &buffer_size))
-		{
-			i++;
-		}
-		mSeekFrame = -1;
-	}*/
-
-	TheoraMutex::ScopeLock lock(mWebmMutex);
 
 	if (!TheoraWebmDec::webm_read_frame(input.webm_ctx, &buf, &bytes_in_buffer, &buffer_size))
 	{
@@ -111,7 +95,6 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 			frame->decode(&t);
 		}
 	}
-	lock.release();
 
 	//if (should_restart)
 		//_restart();
@@ -157,7 +140,7 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 
 	TheoraWebmDec::webm_rewind(input.webm_ctx);
 
-	printf("(Debug) Frameratea: %d\n", input.vpx_input_ctx->framerate.numerator / input.vpx_input_ctx->framerate.denominator);
+	printf("(Debug) Framerate: %d\n", input.vpx_input_ctx->framerate.numerator / input.vpx_input_ctx->framerate.denominator);
 
 	mWidth = input.vpx_input_ctx->width;
 	mHeight = input.vpx_input_ctx->height;
@@ -221,18 +204,7 @@ void TheoraVideoClip_WebM::doSeek()
 	printf("Seek frame: %d\n", mSeekFrame);
 
 	uint8_t* buf = NULL;
-	size_t bytes_in_buffer = 0, buffer_size = 0;
-
-	/*TheoraMutex::ScopeLock lock(mWebmMutex);
-
-	TheoraWebmDec::webm_rewind(input.webm_ctx);
-
-	while (!TheoraWebmDec::webm_read_frame(input.webm_ctx, &buf, &bytes_in_buffer, &buffer_size) && i<mSeekFrame)
-	{
-		i++;
-	}
-
-	lock.release();*/
+	size_t bytes_in_buffer = 0, buffer_size = 0;	
 
 	mLastDecodedFrameNumber = mSeekFrame;
 
