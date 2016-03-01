@@ -34,9 +34,7 @@ TheoraVideoClip_WebM::TheoraVideoClip_WebM(TheoraDataSource* data_source,
 	memset(&(webm_ctx), 0, sizeof(webm_ctx));
 	input.webm_ctx = &webm_ctx;
 	input.vpx_input_ctx = &vpx_input_ctx;
-	mSeekFrame = 0;
-	this->data_source = data_source;
-	
+	mSeekFrame = 0;	
 	mFrameNumber = 0;
 }
 
@@ -71,7 +69,7 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 			const char *detail = vpx_codec_error_detail(&decoder);
 
 			if (detail)
-				warn("Additional information: %s", detail);
+				th_writelog("Additional information: " + std::string(detail));
 		}
 		if ((img = vpx_codec_get_frame(&decoder, &iter)))
 		{
@@ -82,7 +80,7 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 			frame->_setFrameNumber(mFrameNumber++);
 			mLastDecodedFrameNumber = mFrameNumber;
 
-			if (mLastDecodedFrameNumber >= mNumFrames)
+			if (mLastDecodedFrameNumber >= (unsigned long) mNumFrames)
 				should_restart = true;
 
 			TheoraPixelTransform t;
@@ -95,9 +93,6 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 			frame->decode(&t);
 		}
 	}
-
-	//if (should_restart)
-		//_restart();
 
 	return 1;
 }
@@ -140,7 +135,10 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 
 	TheoraWebmDec::webm_rewind(input.webm_ctx);
 
-	printf("(Debug) Framerate: %d\n", input.vpx_input_ctx->framerate.numerator / input.vpx_input_ctx->framerate.denominator);
+#ifdef _DEBUG
+	float fps = (float)input.vpx_input_ctx->framerate.numerator / (float)input.vpx_input_ctx->framerate.denominator;
+	th_writelog("Framerate: " + strf(fps));
+#endif
 
 	mWidth = input.vpx_input_ctx->width;
 	mHeight = input.vpx_input_ctx->height;
@@ -150,11 +148,13 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 	mSubFrameOffsetY = 0;
 	mStride = (mStride == 1) ? _nextPow2(getWidth()) : getWidth();
 
-	mFPS = input.vpx_input_ctx->framerate.numerator / input.vpx_input_ctx->framerate.denominator;
+	mFPS = (float)input.vpx_input_ctx->framerate.numerator / (float)input.vpx_input_ctx->framerate.denominator;
 	mFrameDuration = 1.0f / mFPS;
 	mDuration = mNumFrames * mFrameDuration;
 
-	printf("Video duration: %f", mDuration);
+#ifdef _DEBUG
+	th_writelog("Video duration: " + strf(mDuration));
+#endif
 
 	fourcc_interface = (VpxInterface*)get_vpx_decoder_by_fourcc(vpx_input_ctx.fourcc);
 	interf = fourcc_interface;
@@ -163,8 +163,7 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 	if (vpx_codec_dec_init(&decoder, interf->codec_interface(),
 		&cfg, dec_flags))
 	{
-		fprintf(stderr, "Error: Failed to initialize decoder: %s\n",
-			vpx_codec_error(&decoder));
+		th_writelog("Error: Failed to initialize decoder: " + std::string(vpx_codec_error(&decoder)));
 		return;
 	}
 
@@ -191,9 +190,6 @@ float TheoraVideoClip_WebM::decodeAudio()
 
 void TheoraVideoClip_WebM::doSeek()
 {
-	uint32_t i = 0;
-
-	int frame;
 	float time = mSeekFrame / getFPS();
 	mTimer->seek(time);
 	bool paused = mTimer->isPaused();
@@ -201,10 +197,9 @@ void TheoraVideoClip_WebM::doSeek()
 
 	resetFrameQueue();
 
+#ifdef _DEBUG
 	printf("Seek frame: %d\n", mSeekFrame);
-
-	uint8_t* buf = NULL;
-	size_t bytes_in_buffer = 0, buffer_size = 0;	
+#endif
 
 	mLastDecodedFrameNumber = mSeekFrame;
 
