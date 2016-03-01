@@ -76,8 +76,6 @@ int TheoraMkvReader::Read(long long offset, long len, unsigned char* buffer) {
 
 	m_dataSource->read(buffer, len);
 
-	//const size_t size = fread(buffer, 1, len, m_file);
-
 	return 0;  // success
 }
 

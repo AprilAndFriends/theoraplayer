@@ -70,7 +70,7 @@ void update(float time_increase)
 	if (started)
 	{
 		// let's wait until the system caches up a few frames on startup
-		if (clip->getNumReadyFrames() < clip->getNumPrecachedFrames()*0.5f)
+		if (clip->getNumReadyFrames() < clip->getNumPrecachedFrames()*0.5f)  
 			return;
 		started=0;
 	}
@@ -142,18 +142,18 @@ void init()
 	benchmark("media/angels_intro.ogv");
 	benchmark("media/witch_intro.mp4");
 	benchmark("media/hotel_intro.mp4");
-	benchmark("media/angels_intro.mp4");
+	benchmark("media/angels_intro.mp4"); 
 #endif
-    clip=mgr->createVideoClip("media/out9.webm", outputMode, 16);
-
+    clip=mgr->createVideoClip("media/out9.webm", outputMode, 16);           
+	   
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);
 	clip->setAutoRestart(1);
 	
-	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()), textureFormat);
+	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()), textureFormat); 
 }
 
 void destroy()
 {
-	delete mgr;
+	delete mgr; 
 }

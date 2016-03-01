@@ -67,6 +67,8 @@
 
 		int webm_guess_duration(struct WebmInputContext* webm_ctx);
 
+		void webm_rewind(struct WebmInputContext* webm_ctx);
+
 		// Resets the WebMInputContext.
 		void webm_free(struct WebmInputContext *webm_ctx);
 	}

@@ -253,6 +253,15 @@ int TheoraWebmDec::webm_guess_duration(struct WebmInputContext* webm_ctx)
 	return i;
 }
 
+void TheoraWebmDec::webm_rewind(struct WebmInputContext *webm_ctx) {
+	get_first_cluster(webm_ctx);
+	webm_ctx->block = NULL;
+	webm_ctx->block_entry = NULL;
+	webm_ctx->block_frame_index = 0;
+	webm_ctx->timestamp_ns = 0;
+	webm_ctx->reached_eos = 0;
+}
+
 void TheoraWebmDec::webm_free(struct WebmInputContext *webm_ctx) {
 	reset(webm_ctx);
 }

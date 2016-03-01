@@ -25,12 +25,12 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include "webmdec.h"
 
 TheoraVideoClip_WebM::TheoraVideoClip_WebM(TheoraDataSource* data_source,
-										TheoraOutputMode output_mode,
-										int nPrecachedFrames,
-										bool usePower2Stride):
+	TheoraOutputMode output_mode,
+	int nPrecachedFrames,
+	bool usePower2Stride) :
 	TheoraVideoClip(data_source, output_mode, nPrecachedFrames, usePower2Stride),
 	TheoraAudioPacketQueue()
-{	
+{
 	memset(&(webm_ctx), 0, sizeof(webm_ctx));
 	input.webm_ctx = &webm_ctx;
 	input.vpx_input_ctx = &vpx_input_ctx;
@@ -51,15 +51,26 @@ bool TheoraVideoClip_WebM::_readData()
 }
 
 bool TheoraVideoClip_WebM::decodeNextFrame()
-{	
+{
 	TheoraVideoFrame* frame = mFrameQueue->requestEmptyFrame();
-	
+
 	if (!frame) return 0; // max number of precached frames reached
 	bool should_restart = 0;
 
 	uint8_t* buf = NULL;
 	size_t bytes_in_buffer = 0, buffer_size = 0;
-	
+
+	/*if (mSeekFrame > -1)
+	{
+		TheoraWebmDec::webm_rewind(input.webm_ctx);
+
+		int i = 0;
+		while (i < mSeekFrame && !TheoraWebmDec::webm_read_frame(input.webm_ctx, &buf, &bytes_in_buffer, &buffer_size))
+		{
+			i++;
+		}
+	}*/
+
 	if (!TheoraWebmDec::webm_read_frame(input.webm_ctx, &buf, &bytes_in_buffer, &buffer_size))
 	{
 		vpx_codec_iter_t  iter = NULL;
@@ -80,6 +91,7 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 			frame->mTimeToDisplay = mFrameNumber / mFPS;
 			frame->mIteration = mIteration;
 			frame->_setFrameNumber(mFrameNumber++);
+			mLastDecodedFrameNumber = mFrameNumber;
 
 			TheoraPixelTransform t;
 			memset(&t, 0, sizeof(TheoraPixelTransform));
@@ -90,17 +102,17 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 
 			frame->decode(&t);
 		}
-	}		
+	}
 	return 1;
 }
 
 void TheoraVideoClip_WebM::_restart()
 {
-	
+
 }
 
 void TheoraVideoClip_WebM::load(TheoraDataSource* source)
-{	
+{
 	if (!TheoraWebmDec::file_is_webm(source, input.webm_ctx, input.vpx_input_ctx))
 	{
 		th_writelog("Error: File is not webm.");
@@ -114,10 +126,8 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 	}
 
 	mNumFrames = TheoraWebmDec::webm_guess_duration(input.webm_ctx);
-	TheoraWebmDec::webm_free(input.webm_ctx); //hack, because no rewind functionality
 
-	TheoraWebmDec::file_is_webm(source, input.webm_ctx, input.vpx_input_ctx);
-	TheoraWebmDec::webm_guess_framerate(source, input.webm_ctx, input.vpx_input_ctx);
+	TheoraWebmDec::webm_rewind(input.webm_ctx);
 
 	printf("(Debug) Frameratea: %d\n", input.vpx_input_ctx->framerate.numerator / input.vpx_input_ctx->framerate.denominator);
 
@@ -129,7 +139,7 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 	mSubFrameOffsetY = 0;
 	mStride = (mStride == 1) ? _nextPow2(getWidth()) : getWidth();
 
-	mFPS = input.vpx_input_ctx->framerate.numerator / input.vpx_input_ctx->framerate.denominator;		
+	mFPS = input.vpx_input_ctx->framerate.numerator / input.vpx_input_ctx->framerate.denominator;
 	mFrameDuration = 1.0f / mFPS;
 	mDuration = mNumFrames * mFrameDuration;
 
@@ -137,21 +147,21 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 
 	fourcc_interface = (VpxInterface*)get_vpx_decoder_by_fourcc(vpx_input_ctx.fourcc);
 	interf = fourcc_interface;
-	
+
 	int dec_flags = 0;
 	if (vpx_codec_dec_init(&decoder, interf->codec_interface(),
-		&cfg, dec_flags)) 
+		&cfg, dec_flags))
 	{
 		fprintf(stderr, "Error: Failed to initialize decoder: %s\n",
 			vpx_codec_error(&decoder));
 		return;
 	}
 
-	if (mFrameQueue == NULL) 
+	if (mFrameQueue == NULL)
 	{
 		mFrameQueue = new TheoraFrameQueue(this);
 		mFrameQueue->setSize(mNumPrecachedFrames);
-	}		
+	}
 }
 
 void TheoraVideoClip_WebM::decodedAudioCheck()
@@ -177,26 +187,23 @@ void TheoraVideoClip_WebM::doSeek()
 	mTimer->seek(time);
 	bool paused = mTimer->isPaused();
 	if (!paused) mTimer->pause();
-	
-	resetFrameQueue();	
 
-	printf("%d", mSeekFrame);
+	resetFrameQueue();
+
+	printf("Seek frame: %d\n", mSeekFrame);
 
 	/*uint8_t* buf = NULL;
 	size_t bytes_in_buffer = 0, buffer_size = 0;
 
 	while (!TheoraWebmDec::webm_read_frame(input.webm_ctx, &buf, &bytes_in_buffer, &buffer_size) && i<mSeekFrame)
 	{
-		i++;
+	i++;
 	}*/
 
 	mLastDecodedFrameNumber = mSeekFrame;
 
-	decodeNextFrame();
-
 	if (!paused) mTimer->play();
 	mSeekFrame = -1;
-	printf("ayy");
 }
 
 #endif

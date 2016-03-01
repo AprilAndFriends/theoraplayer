@@ -24,11 +24,6 @@ struct VpxDecInputContext {
 	struct WebmInputContext *webm_ctx;
 };
 
-struct WebMFrame
-{
-	
-};
-
 class TheoraVideoClip_WebM : public TheoraVideoClip, public TheoraAudioPacketQueue
 {
 protected:	
@@ -40,11 +35,13 @@ protected:
 	VpxInterface* fourcc_interface;
 	VpxInterface* interf;
 	vpx_image* mFrame;
-	TheoraDataSource* data_source;
+	TheoraDataSource* data_source;	
 	int mFrameNumber;
 	
 	void doSeek();
 	unsigned long mLastDecodedFrameNumber;
+
+
 public:
 	TheoraVideoClip_WebM(TheoraDataSource* data_source,
 						   TheoraOutputMode output_mode,
