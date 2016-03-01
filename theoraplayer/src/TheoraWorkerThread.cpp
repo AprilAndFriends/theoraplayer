@@ -87,7 +87,8 @@ void TheoraWorkerThread::execute()
 
 		lock.acquire(mClip->mThreadAccessMutex);
 		// if user requested seeking, do that then.
-		if (mClip->mSeekFrame >= 0) mClip->doSeek();
+		if (mClip->mSeekFrame >= 0) 
+			mClip->doSeek();
 
 		if (!mClip->decodeNextFrame())
 			_psleep(1); // this happens when the video frame queue is full.

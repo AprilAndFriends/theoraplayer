@@ -24,6 +24,11 @@ struct VpxDecInputContext {
 	struct WebmInputContext *webm_ctx;
 };
 
+struct WebMFrame
+{
+	
+};
+
 class TheoraVideoClip_WebM : public TheoraVideoClip, public TheoraAudioPacketQueue
 {
 protected:	

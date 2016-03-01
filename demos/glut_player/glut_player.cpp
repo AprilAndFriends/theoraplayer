@@ -97,7 +97,7 @@ void OnClick(float x,float y)
 {
 	if (y > 570)
 	{
-		clip->seek((x/window_w)*clip->getDuration());
+ 		clip->seek((x/window_w)*clip->getDuration());   
 	}
 }
 
@@ -134,7 +134,7 @@ void benchmark(const char* filename)
 
 void init()
 {
-	mgr = new TheoraVideoManager();
+	mgr = new TheoraVideoManager();     
 	 
 #ifdef BENCHMARK
 	benchmark("media/witch_intro.ogv");

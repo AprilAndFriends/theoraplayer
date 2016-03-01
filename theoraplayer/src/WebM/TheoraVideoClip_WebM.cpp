@@ -53,7 +53,9 @@ bool TheoraVideoClip_WebM::_readData()
 bool TheoraVideoClip_WebM::decodeNextFrame()
 {	
 	TheoraVideoFrame* frame = mFrameQueue->requestEmptyFrame();
-	if (!frame) return 0;
+	
+	if (!frame) return 0; // max number of precached frames reached
+	bool should_restart = 0;
 
 	uint8_t* buf = NULL;
 	size_t bytes_in_buffer = 0, buffer_size = 0;
@@ -111,7 +113,7 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 		return;
 	}
 
-	mDuration = TheoraWebmDec::webm_guess_duration(input.webm_ctx);
+	mNumFrames = TheoraWebmDec::webm_guess_duration(input.webm_ctx);
 	TheoraWebmDec::webm_free(input.webm_ctx); //hack, because no rewind functionality
 
 	TheoraWebmDec::file_is_webm(source, input.webm_ctx, input.vpx_input_ctx);
@@ -129,7 +131,7 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 
 	mFPS = input.vpx_input_ctx->framerate.numerator / input.vpx_input_ctx->framerate.denominator;		
 	mFrameDuration = 1.0f / mFPS;
-	mDuration *= mFrameDuration;
+	mDuration = mNumFrames * mFrameDuration;
 
 	printf("Video duration: %f", mDuration);
 
@@ -169,9 +171,6 @@ float TheoraVideoClip_WebM::decodeAudio()
 void TheoraVideoClip_WebM::doSeek()
 {
 	uint32_t i = 0;
-	uint8_t *buffer = NULL;
-	size_t bytes_in_buffer = 0;
-	size_t buffer_size = 0;
 
 	int frame;
 	float time = mSeekFrame / getFPS();
@@ -181,17 +180,19 @@ void TheoraVideoClip_WebM::doSeek()
 	
 	resetFrameQueue();	
 
-	/*while (TheoraWebmDec::webm_read_frame(input.webm_ctx, &buffer, &bytes_in_buffer, &buffer_size) == 0 && i<mSeekFrame)
+	printf("%d", mSeekFrame);
+
+	/*uint8_t* buf = NULL;
+	size_t bytes_in_buffer = 0, buffer_size = 0;
+
+	while (!TheoraWebmDec::webm_read_frame(input.webm_ctx, &buf, &bytes_in_buffer, &buffer_size) && i<mSeekFrame)
 	{
 		i++;
 	}*/
 
-	//TheoraWebmDec::file_is_webm(data_source, input.webm_ctx, input.vpx_input_ctx);
-	//TheoraWebmDec::webm_guess_framerate(data_source, input.webm_ctx, input.vpx_input_ctx);
-
 	mLastDecodedFrameNumber = mSeekFrame;
 
-	////decodeNextFrame();
+	decodeNextFrame();
 
 	if (!paused) mTimer->play();
 	mSeekFrame = -1;
