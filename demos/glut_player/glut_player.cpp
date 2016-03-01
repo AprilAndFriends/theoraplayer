@@ -37,7 +37,7 @@ int window_w=800,window_h=600;
 #endif
 
 void draw()
-{
+{      
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 
 	TheoraVideoFrame* f=clip->getNextFrame();
@@ -62,7 +62,7 @@ void draw()
 	drawWiredQuad(0,570,800,29,1,1,1,1);
 
 	float x=clip->getTimePosition()/clip->getDuration();
-	drawColoredQuad(3,573,794*x,24,1,1,1,1);
+	drawColoredQuad(3,573,794*x,24,1,1,1,1);  
 }
 
 void update(float time_increase)
@@ -137,18 +137,18 @@ void init()
 	mgr = new TheoraVideoManager();     
 	 
 #ifdef BENCHMARK
-	benchmark("media/witch_intro.ogv");
+	benchmark("media/witch_intro.ogv");    
 	benchmark("media/hotel_intro.ogv");
 	benchmark("media/angels_intro.ogv");
-	benchmark("media/witch_intro.mp4");
+	benchmark("media/witch_intro.mp4"); 
 	benchmark("media/hotel_intro.mp4");
-	benchmark("media/angels_intro.mp4"); 
+	benchmark("media/angels_intro.mp4");     
 #endif
     clip=mgr->createVideoClip("media/out9.webm", outputMode, 16);           
 	   
 //  use this if you want to preload the file into ram and stream from there
 //	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);
-	clip->setAutoRestart(1);
+	clip->setAutoRestart(1); 
 	
 	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()), textureFormat); 
 }

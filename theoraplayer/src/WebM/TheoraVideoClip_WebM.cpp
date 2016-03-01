@@ -37,6 +37,8 @@ TheoraVideoClip_WebM::TheoraVideoClip_WebM(TheoraDataSource* data_source,
 	mSeekFrame = 0;
 	this->data_source = data_source;
 
+	mWebmMutex = NULL;
+
 	mFrameNumber = 0;
 }
 
@@ -69,7 +71,10 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 		{
 			i++;
 		}
+		mSeekFrame = -1;
 	}*/
+
+	TheoraMutex::ScopeLock lock(mWebmMutex);
 
 	if (!TheoraWebmDec::webm_read_frame(input.webm_ctx, &buf, &bytes_in_buffer, &buffer_size))
 	{
@@ -93,6 +98,9 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 			frame->_setFrameNumber(mFrameNumber++);
 			mLastDecodedFrameNumber = mFrameNumber;
 
+			if (mLastDecodedFrameNumber >= mNumFrames)
+				should_restart = true;
+
 			TheoraPixelTransform t;
 			memset(&t, 0, sizeof(TheoraPixelTransform));
 
@@ -103,12 +111,32 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 			frame->decode(&t);
 		}
 	}
+	lock.release();
+
+	//if (should_restart)
+		//_restart();
+
 	return 1;
 }
 
 void TheoraVideoClip_WebM::_restart()
 {
+	bool paused = mTimer->isPaused();
+	if (!paused) mTimer->pause();
 
+	TheoraWebmDec::webm_rewind(input.webm_ctx);
+	mFrameNumber = 0;
+	mLastDecodedFrameNumber = -1;
+	mSeekFrame = 0;
+
+	mEndOfFile = false;
+
+	mRestarted = 1;
+
+	if (!paused)
+	{
+		mTimer->play();
+	}
 }
 
 void TheoraVideoClip_WebM::load(TheoraDataSource* source)
@@ -192,13 +220,19 @@ void TheoraVideoClip_WebM::doSeek()
 
 	printf("Seek frame: %d\n", mSeekFrame);
 
-	/*uint8_t* buf = NULL;
+	uint8_t* buf = NULL;
 	size_t bytes_in_buffer = 0, buffer_size = 0;
+
+	/*TheoraMutex::ScopeLock lock(mWebmMutex);
+
+	TheoraWebmDec::webm_rewind(input.webm_ctx);
 
 	while (!TheoraWebmDec::webm_read_frame(input.webm_ctx, &buf, &bytes_in_buffer, &buffer_size) && i<mSeekFrame)
 	{
-	i++;
-	}*/
+		i++;
+	}
+
+	lock.release();*/
 
 	mLastDecodedFrameNumber = mSeekFrame;
 
