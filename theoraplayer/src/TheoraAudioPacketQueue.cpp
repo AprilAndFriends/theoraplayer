@@ -36,7 +36,6 @@ void TheoraAudioPacketQueue::_addAudioPacket(float* data, int numSamples)
 	packet->numSamples = numSamples;
 	packet->next = NULL;
 
-
 	if (this->theoraAudioPacketQueue == NULL) this->theoraAudioPacketQueue = packet;
 	else
 	{

@@ -120,9 +120,13 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 	sprintf(s, "  - Android: CPU Features: %u\n", (unsigned int) features);
 	msg += s;
 	if ((features & ANDROID_CPU_ARM_FEATURE_NEON) == 0)
+	{
 		msg += "  - Android: NEON features NOT SUPPORTED by CPU\n";
+	}
 	else
+	{
 		msg += "  - Android: Detected NEON CPU features\n";
+	}
 #endif
 
 #ifdef __AVFOUNDATION
@@ -213,7 +217,10 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 	if (fileDataSource == NULL)
 	{
 		TheoraMemoryFileDataSource* memoryDataSource = dynamic_cast<TheoraMemoryFileDataSource*>(data_source);
-		if (memoryDataSource != NULL) filename = memoryDataSource->getFilename();
+		if (memoryDataSource != NULL)
+		{
+			filename = memoryDataSource->getFilename();
+		}
 		// if the user has his own data source, it's going to be a problem for AVAssetReader since it only supports reading from files...
 	}
 	else
@@ -281,7 +288,10 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 			}
 			_psleep(1);
 		}
-		if (reported) th_writelog(" - WorkerThread done, destroying...");
+		if (reported)
+		{
+			th_writelog(" - WorkerThread done, destroying...");
+		}
 		
 		// erase the clip from the clip list
 		foreach (TheoraVideoClip*, this->clips)
@@ -306,7 +316,10 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 
 TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 {
-	if (!this->workMutex) return NULL;
+	if (!this->workMutex)
+	{
+		return NULL;
+	}
 	TheoraMutex::ScopeLock lock(this->workMutex);
 
 	TheoraVideoClip* selectedClip = NULL;
@@ -326,9 +339,15 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 		foreach (TheoraVideoClip*, this->clips)
 		{
 			clip = *it;
-			if (clip->isBusy() || (i == 0 && clip->isPaused() && !clip->waitingForCache)) continue;
+			if (clip->isBusy() || (i == 0 && clip->isPaused() && !clip->waitingForCache))
+			{
+				continue;
+			}
 			nReadyFrames = clip->getNumReadyFrames();
-			if (nReadyFrames == clip->getFrameQueue()->getSize()) continue;
+			if (nReadyFrames == clip->getFrameQueue()->getSize())
+			{
+				continue;
+			}
 
 			candidate.clip = clip;
 			candidate.priority = clip->getPriority();
@@ -336,15 +355,24 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 			candidate.workTime = (float) clip->threadAccessCount;
 			
 			totalAccessCount += candidate.workTime;
-			if (maxQueuedTime < candidate.queuedTime) maxQueuedTime = candidate.queuedTime;
+			if (maxQueuedTime < candidate.queuedTime)
+			{
+				maxQueuedTime = candidate.queuedTime;
+			}
 
 			candidates.push_back(candidate);
 		}
 	}
 
 	// prevent division by zero
-	if (totalAccessCount == 0) totalAccessCount = 1;
-	if (maxQueuedTime == 0) maxQueuedTime = 1;
+	if (totalAccessCount == 0)
+	{
+		totalAccessCount = 1;
+	}
+	if (maxQueuedTime == 0)
+	{
+		maxQueuedTime = 1;
+	}
 
 	// normalize candidate values
 	foreach (TheoraWorkCandidate, candidates)
