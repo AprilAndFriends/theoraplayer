@@ -64,7 +64,42 @@
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2013\props-generic\build-defaults.props')" Project="..\..\..\hltypes\msvc\vs2013\props-generic\build-defaults.props" />
   <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013\props-generic\build-defaults.props')" Project="..\..\..\theora\msvc\vs2013\props-generic\build-defaults.props" />
   <Import Project="props\configuration.props" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../../../vpx/;../../src/WebM;../../../vpx/third_party/libwebm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__WEBM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../../../vpx/;../../src/WebM;../../../vpx/third_party/libwebm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__WEBM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../../../vpx/;../../src/WebM;../../../vpx/third_party/libwebm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__WEBM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>../../../vpx/Win32/Debug;../../../Win32/Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vpxmdd.lib;vpxdec.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../../../vpx/;../../src/WebM;../../../vpx/third_party/libwebm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__WEBM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>../../../vpx/Win32/Release;../../../Win32/Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vpxmd.lib;vpxdec.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\WebM\TheoraMkvReader.cpp" />
+    <ClCompile Include="..\..\src\WebM\TheoraVideoClip_WebM.cpp" />
+    <ClCompile Include="..\..\src\WebM\webmdec.cc" />
     <ClCompile Include="..\..\src\YUV\android\cpu-features.c">
       <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -155,6 +190,9 @@
     <ClInclude Include="..\..\include\theoraplayer\TheoraVideoFrame.h" />
     <ClInclude Include="..\..\include\theoraplayer\TheoraVideoManager.h" />
     <ClInclude Include="..\..\include\theoraplayer\TheoraWorkerThread.h" />
+    <ClInclude Include="..\..\src\WebM\TheoraMkvReader.h" />
+    <ClInclude Include="..\..\src\WebM\TheoraVideoClip_WebM.h" />
+    <ClInclude Include="..\..\src\WebM\webmdec.h" />
     <ClInclude Include="..\..\src\YUV\android\cpu-features.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\basic_types.h" />
@@ -184,6 +222,14 @@
     <ResourceCompile Include="..\..\fileproperties.rc">
       <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86' or '$(ConfigurationType)'=='StaticLibrary'">true</ExcludedFromBuild>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\vpx\vpx.vcxproj">
+      <Project>{dce19daf-69ac-46db-b14a-39f0faa5db74}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\vpx\vpxdec.vcxproj">
+      <Project>{ba5fe66f-38dd-e034-f542-b1578c5fb950}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

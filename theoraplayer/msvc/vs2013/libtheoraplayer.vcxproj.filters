@@ -37,6 +37,9 @@
     <Filter Include="src\YUV\libyuv\android">
       <UniqueIdentifier>{27f59d1b-29ec-41dd-962e-abc4e1177511}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\WebM">
+      <UniqueIdentifier>{571b97b3-038a-45de-8cdb-9f47820822b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\TheoraAsync.cpp">
@@ -210,6 +213,15 @@
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_gcc.cc">
       <Filter>src\YUV\libyuv\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\WebM\TheoraMkvReader.cpp">
+      <Filter>src\WebM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\WebM\TheoraVideoClip_WebM.cpp">
+      <Filter>src\WebM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\WebM\webmdec.cc">
+      <Filter>src\WebM</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Theora\TheoraVideoClip_Theora.h">
@@ -322,6 +334,15 @@
     </ClInclude>
     <ClInclude Include="..\..\src\YUV\android\cpu-features.h">
       <Filter>src\YUV\libyuv\android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\WebM\TheoraMkvReader.h">
+      <Filter>src\WebM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\WebM\TheoraVideoClip_WebM.h">
+      <Filter>src\WebM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\WebM\webmdec.h">
+      <Filter>src\WebM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

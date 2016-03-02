@@ -32,6 +32,26 @@
   <Import Condition="!exists('..\..\hltypes\msvc\vs2013\props-generic\build-defaults.props')" Project="..\..\theora\msvc\vs2013\props-generic\build-defaults.props" />
   <Import Project="props-demos\build-defaults.props" />
   <Import Project="props-demos\configuration.props" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>__WEBM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>__WEBM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>__WEBM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>__WEBM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\demos\basecode\glut\glutBasecode.cpp" />
     <ClCompile Include="..\..\demos\basecode\util\util.cpp" />
