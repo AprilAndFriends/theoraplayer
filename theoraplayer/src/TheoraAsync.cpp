@@ -221,7 +221,7 @@ void TheoraThread::join()
 		this->id = NULL;
 	}
 #else
-	IAsyncAction^ action = ((TheoraAsyncActionWrapper*)this->id)->mAsyncAction;
+	IAsyncAction^ action = ((TheoraAsyncActionWrapper*)this->id)->asyncAction;
 	int i = 0;
 	while (action->Status != AsyncStatus::Completed &&
 		action->Status != AsyncStatus::Canceled &&
@@ -288,7 +288,7 @@ void TheoraThread::stop()
 #ifndef _WINRT
 		TerminateThread(this->id, 0);
 #else
-		((TheoraAsyncActionWrapper*)this->id)->mAsyncAction->Cancel();
+		((TheoraAsyncActionWrapper*)this->id)->asyncAction->Cancel();
 #endif
 #elif defined(_ANDROID)
 		pthread_kill(*((pthread_t*)this->id), 0);

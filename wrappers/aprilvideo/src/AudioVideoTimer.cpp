@@ -120,17 +120,17 @@ namespace aprilvideo
 						mAudioPosition -= chunk;
 					}
 				}
-				mTime = mAudioPosition - mSyncOffset;
+				this->time = mAudioPosition - mSyncOffset;
 			}
 			else if (!xal::manager->isSuspended())
 			{
-				mTime += timeDelta;
+				this->time += timeDelta;
 			}
 		}
 		else
 		{
 			mT += timeDelta;
-			mTime = mT - mSyncOffset;
+			this->time = mT - mSyncOffset;
 		}
 	}
 
