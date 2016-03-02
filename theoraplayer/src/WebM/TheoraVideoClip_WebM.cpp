@@ -32,15 +32,15 @@ TheoraVideoClip_WebM::TheoraVideoClip_WebM(TheoraDataSource* data_source,
 	TheoraAudioPacketQueue()
 {
 	memset(&(webm_ctx), 0, sizeof(webm_ctx));
-	input.webm_ctx = &webm_ctx;
-	input.vpx_input_ctx = &vpx_input_ctx;
-	mSeekFrame = 0;	
-	mFrameNumber = 0;
+	this->input.webm_ctx = &webm_ctx;
+	this->input.vpx_input_ctx = &vpx_input_ctx;
+	this->seekFrame = 0;	
+	this->frameNumber = 0;
 }
 
 TheoraVideoClip_WebM::~TheoraVideoClip_WebM()
 {
-	TheoraWebmDec::webm_free(input.webm_ctx);
+	TheoraWebmDec::webm_free(this->input.webm_ctx);
 }
 
 bool TheoraVideoClip_WebM::_readData()
@@ -50,15 +50,18 @@ bool TheoraVideoClip_WebM::_readData()
 
 bool TheoraVideoClip_WebM::decodeNextFrame()
 {
-	TheoraVideoFrame* frame = mFrameQueue->requestEmptyFrame();
+	TheoraVideoFrame* frame = this->frameQueue->requestEmptyFrame();
 
-	if (!frame) return 0; // max number of precached frames reached
+	if (!frame)
+	{
+		return 0; // max number of precached frames reached
+	}
 	bool should_restart = 0;
 
 	uint8_t* buf = NULL;
 	size_t bytes_in_buffer = 0, buffer_size = 0;
 
-	if (!TheoraWebmDec::webm_read_frame(input.webm_ctx, &buf, &bytes_in_buffer, &buffer_size))
+	if (!TheoraWebmDec::webm_read_frame(this->input.webm_ctx, &buf, &bytes_in_buffer, &buffer_size))
 	{
 		vpx_codec_iter_t  iter = NULL;
 		vpx_image_t    *img;
@@ -73,22 +76,22 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 		}
 		if ((img = vpx_codec_get_frame(&decoder, &iter)))
 		{
-			mFrame = img;
+			this->frame = img;
 
-			frame->mTimeToDisplay = mFrameNumber / mFPS;
-			frame->mIteration = mIteration;
-			frame->_setFrameNumber(mFrameNumber++);
-			mLastDecodedFrameNumber = mFrameNumber;
+			frame->timeToDisplay = this->frameNumber / this->FPS;
+			frame->iteration = this->iteration;
+			frame->_setFrameNumber(this->frameNumber++);
+			this->lastDecodedFrameNumber = this->frameNumber;
 
-			if (mLastDecodedFrameNumber >= (unsigned long) mNumFrames)
+			if (this->lastDecodedFrameNumber >= (unsigned long)this->numFrames)
 				should_restart = true;
 
 			TheoraPixelTransform t;
 			memset(&t, 0, sizeof(TheoraPixelTransform));
 
-			t.y = mFrame->planes[0]; t.yStride = mFrame->stride[0];
-			t.u = mFrame->planes[1]; t.uStride = mFrame->stride[1];
-			t.v = mFrame->planes[2]; t.vStride = mFrame->stride[2];
+			t.y = this->frame->planes[0]; t.yStride = this->frame->stride[0];
+			t.u = this->frame->planes[1]; t.uStride = this->frame->stride[1];
+			t.v = this->frame->planes[2]; t.vStride = this->frame->stride[2];
 
 			frame->decode(&t);
 		}
@@ -99,21 +102,21 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 
 void TheoraVideoClip_WebM::_restart()
 {
-	bool paused = mTimer->isPaused();
-	if (!paused) mTimer->pause();
+	bool paused = this->timer->isPaused();
+	if (!paused) this->timer->pause();
 
 	TheoraWebmDec::webm_rewind(input.webm_ctx);
-	mFrameNumber = 0;
-	mLastDecodedFrameNumber = -1;
-	mSeekFrame = 0;
+	this->frameNumber = 0;
+	this->lastDecodedFrameNumber = -1;
+	this->seekFrame = 0;
 
-	mEndOfFile = false;
+	this->endOfFile = false;
 
-	mRestarted = 1;
+	this->restarted = 1;
 
 	if (!paused)
 	{
-		mTimer->play();
+		this->timer->play();
 	}
 }
 
@@ -131,7 +134,7 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 		return;
 	}
 
-	mNumFrames = TheoraWebmDec::webm_guess_duration(input.webm_ctx);
+	this->numFrames = TheoraWebmDec::webm_guess_duration(input.webm_ctx);
 
 	TheoraWebmDec::webm_rewind(input.webm_ctx);
 
@@ -140,20 +143,20 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 	th_writelog("Framerate: " + strf(fps));
 #endif
 
-	mWidth = input.vpx_input_ctx->width;
-	mHeight = input.vpx_input_ctx->height;
-	mSubFrameWidth = input.vpx_input_ctx->width;
-	mSubFrameHeight = input.vpx_input_ctx->height;
-	mSubFrameOffsetX = 0;
-	mSubFrameOffsetY = 0;
-	mStride = (mStride == 1) ? _nextPow2(getWidth()) : getWidth();
+	this->width = input.vpx_input_ctx->width;
+	this->height = input.vpx_input_ctx->height;
+	this->subFrameWidth = input.vpx_input_ctx->width;
+	this->subFrameHeight = input.vpx_input_ctx->height;
+	this->subFrameOffsetX = 0;
+	this->subFrameOffsetY = 0;
+	this->stride = (this->stride == 1) ? _nextPow2(getWidth()) : getWidth();
 
-	mFPS = (float)input.vpx_input_ctx->framerate.numerator / (float)input.vpx_input_ctx->framerate.denominator;
-	mFrameDuration = 1.0f / mFPS;
-	mDuration = mNumFrames * mFrameDuration;
+	this->FPS = (float)input.vpx_input_ctx->framerate.numerator / (float)input.vpx_input_ctx->framerate.denominator;
+	this->frameDuration = 1.0f / this->FPS;
+	this->duration = this->numFrames * this->frameDuration;
 
 #ifdef _DEBUG
-	th_writelog("Video duration: " + strf(mDuration));
+	th_writelog("Video duration: " + strf(this->duration));
 #endif
 
 	fourcc_interface = (VpxInterface*)get_vpx_decoder_by_fourcc(vpx_input_ctx.fourcc);
@@ -167,19 +170,19 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 		return;
 	}
 
-	if (mFrameQueue == NULL)
+	if (this->frameQueue == NULL)
 	{
-		mFrameQueue = new TheoraFrameQueue(this);
-		mFrameQueue->setSize(mNumPrecachedFrames);
+		this->frameQueue = new TheoraFrameQueue(this);
+		this->frameQueue->setSize(this->numPrecachedFrames);
 	}
 }
 
 void TheoraVideoClip_WebM::decodedAudioCheck()
 {
-	if (!mAudioInterface || mTimer->isPaused()) return;
+	if (!this->audioInterface || this->timer->isPaused()) return;
 
-	TheoraMutex::ScopeLock lock(mAudioMutex);
-	flushAudioPackets(mAudioInterface);
+	TheoraMutex::ScopeLock lock(this->audioMutex);
+	flushAudioPackets(this->audioInterface);
 	lock.release();
 }
 
@@ -190,21 +193,21 @@ float TheoraVideoClip_WebM::decodeAudio()
 
 void TheoraVideoClip_WebM::doSeek()
 {
-	float time = mSeekFrame / getFPS();
-	mTimer->seek(time);
-	bool paused = mTimer->isPaused();
-	if (!paused) mTimer->pause();
+	float time = this->seekFrame / getFPS();
+	this->timer->seek(time);
+	bool paused = this->timer->isPaused();
+	if (!paused) this->timer->pause();
 
 	resetFrameQueue();
 
 #ifdef _DEBUG
-	printf("Seek frame: %d\n", mSeekFrame);
+	printf("Seek frame: %d\n", this->seekFrame);
 #endif
 
-	mLastDecodedFrameNumber = mSeekFrame;
+	this->lastDecodedFrameNumber = this->seekFrame;
 
-	if (!paused) mTimer->play();
-	mSeekFrame = -1;
+	if (!paused) this->timer->play();
+	this->seekFrame = -1;
 }
 
 #endif

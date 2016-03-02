@@ -7,8 +7,8 @@ This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
 
-#ifndef _TheoraTimer_h
-#define _TheoraTimer_h
+#ifndef THEORA_TIMER_H
+#define THEORA_TIMER_H
 
 #include "TheoraExport.h"
 
@@ -20,11 +20,6 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
  */
 class TheoraPlayerExport TheoraTimer
 {
-protected:
-	//! Current time in seconds
-	float mTime,mSpeed;
-	//! Is the timer paused or not
-	bool mPaused;
 public:
 	TheoraTimer();
 	virtual ~TheoraTimer();
@@ -64,6 +59,12 @@ public:
 		the time offset there
 	 */
 	virtual void seek(float time);
+
+protected:
+	//! Current time in seconds
+	float time, speed;
+	//! Is the timer paused or not
+	bool paused;
 };
 #endif
 

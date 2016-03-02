@@ -7,17 +7,20 @@ This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
 
-#ifndef _TheoraVideoManager_h
-#define _TheoraVideoManager_h
+#ifndef THEORA_VIDEOMANAGER_H
+#define THEORA_VIDEOMANAGER_H
 
 #include <vector>
 #include <list>
 #include <string>
-#include "TheoraExport.h"
-#include "TheoraVideoClip.h"
+
 #ifdef _WIN32
 #pragma warning( disable: 4251 ) // MSVC++
 #endif
+
+#include "TheoraExport.h"
+#include "TheoraVideoClip.h"
+
 // forward class declarations
 class TheoraWorkerThread;
 class TheoraMutex;
@@ -28,33 +31,6 @@ class TheoraAudioInterfaceFactory;
 */
 class TheoraPlayerExport TheoraVideoManager
 {
-protected:
-	friend class TheoraWorkerThread;
-	typedef std::vector<TheoraVideoClip*> ClipList;
-	typedef std::vector<TheoraWorkerThread*> ThreadList;
-
-	//! stores pointers to worker threads which are decoding video and audio
-	ThreadList mWorkerThreads;
-	//! stores pointers to created video clips
-	ClipList mClips;
-	
-	//! stores pointer to clips that were docoded in the past in order to achieve fair scheduling
-	std::list<TheoraVideoClip*> mWorkLog;
-
-	int mDefaultNumPrecachedFrames;
-
-	TheoraMutex* mWorkMutex;
-	TheoraAudioInterfaceFactory* mAudioFactory;
-
-	void createWorkerThreads(int n);
-	void destroyWorkerThreads();
-	
-	float calcClipWorkTime(TheoraVideoClip* clip);
-
-	/**
-	 * Called by TheoraWorkerThread to request a TheoraVideoClip instance to work on decoding
-	 */
-	TheoraVideoClip* requestWork(TheoraWorkerThread* caller);
 public:
 	TheoraVideoManager(int num_worker_threads = 1);
 	virtual ~TheoraVideoManager();
@@ -105,6 +81,34 @@ public:
 
 	//! returns the supported decoders (eg. Theora, AVFoundation...)
 	std::vector<std::string> getSupportedDecoders();
+
+protected:
+	friend class TheoraWorkerThread;
+	typedef std::vector<TheoraVideoClip*> ClipList;
+	typedef std::vector<TheoraWorkerThread*> ThreadList;
+
+	//! stores pointers to worker threads which are decoding video and audio
+	ThreadList workerThreads;
+	//! stores pointers to created video clips
+	ClipList clips;
+
+	//! stores pointer to clips that were docoded in the past in order to achieve fair scheduling
+	std::list<TheoraVideoClip*> workLog;
+
+	int mDefaultNumPrecachedFrames;
+
+	TheoraMutex* workMutex;
+	TheoraAudioInterfaceFactory* audioFactory;
+
+	void createWorkerThreads(int n);
+	void destroyWorkerThreads();
+
+	float calcClipWorkTime(TheoraVideoClip* clip);
+
+	/**
+	* Called by TheoraWorkerThread to request a TheoraVideoClip instance to work on decoding
+	*/
+	TheoraVideoClip* requestWork(TheoraWorkerThread* caller);
 };
 #endif
 

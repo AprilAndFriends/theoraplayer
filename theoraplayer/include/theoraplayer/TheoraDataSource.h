@@ -6,12 +6,13 @@ Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
-#ifndef _TheoraDataSource_h
-#define _TheoraDataSource_h
+#ifndef THEORA_DATASOURCE_H
+#define THEORA_DATASOURCE_H
 
 #include <stdint.h>
 #include <limits.h>
 #include <string>
+
 #include "TheoraExport.h"
 
 /**
@@ -45,23 +46,25 @@ public:
 	provides standard file IO
 */
 class TheoraPlayerExport TheoraFileDataSource : public TheoraDataSource
-{
-	FILE* mFilePtr;
-	std::string mFilename;
-	uint64_t mSize;
-	
-	void openFile();
+{	
 public:
 	TheoraFileDataSource(std::string filename);
 	~TheoraFileDataSource();
 
 	int read(void* output,int nBytes);
 	void seek(uint64_t byte_index);
-	std::string repr() { return mFilename; }
+	std::string repr() { return this->filename; }
 	uint64_t size();
 	uint64_t tell();
 	
-	std::string getFilename() { return mFilename; }
+	std::string getFilename() { return this->filename; }
+
+private:
+	FILE* filePtr;
+	std::string filename;
+	uint64_t length;
+
+	void openFile();
 };
 
 /**
@@ -71,20 +74,22 @@ public:
 */
 class TheoraPlayerExport TheoraMemoryFileDataSource : public TheoraDataSource
 {
-	std::string mFilename;
-	uint64_t mSize, mReadPointer;
-	unsigned char* mData;
 public:
 	TheoraMemoryFileDataSource(unsigned char* data, long size, const std::string& filename = "memory");
 	TheoraMemoryFileDataSource(std::string filename);
 	~TheoraMemoryFileDataSource();
 
-	int read(void* output,int nBytes);
+	int read(void* output,int bytes);
 	void seek(uint64_t byte_index);
-	std::string repr() { return "MEM:"+mFilename; }
+	std::string repr() { return "MEM:"+this->filename; }
 	uint64_t size();
 	uint64_t tell();
-	std::string getFilename() { return mFilename; }
+	std::string getFilename() { return this->filename; }
+
+private:
+	std::string filename;
+	uint64_t length, readPointer;
+	unsigned char* data;
 };
 
 #endif

@@ -6,8 +6,8 @@ Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
-#ifndef _TheoraAudioInterface_h
-#define _TheoraAudioInterface_h
+#ifndef THEORA_AUDIOINTERFACE_H
+#define THEORA_AUDIOINTERFACE_H
 
 #include "TheoraExport.h"
 
@@ -23,11 +23,11 @@ class TheoraPlayerExport TheoraAudioInterface
 {
 public:
 	//! PCM frequency, usualy 44100 Hz
-	int mFreq;
+	int freq;
 	//! Mono or stereo
-	int mNumChannels;
+	int numChannels;
 	//! Pointer to the parent TheoraVideoClip object
-	TheoraVideoClip* mClip;
+	TheoraVideoClip* clip;
 	
 	TheoraAudioInterface(TheoraVideoClip* owner, int nChannels, int freq);
 	virtual ~TheoraAudioInterface();

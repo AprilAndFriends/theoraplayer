@@ -6,8 +6,8 @@ Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
-#ifndef _TheoraWorkerThread_h
-#define _TheoraWorkerThread_h
+#ifndef THEORA_WORKER_THREAD_H
+#define THEORA_WORKER_THREAD_H
 
 #include "TheoraAsync.h"
 
@@ -19,12 +19,12 @@ class TheoraVideoClip;
 */
 class TheoraWorkerThread : public TheoraThread
 {
-	TheoraVideoClip* mClip;
+	TheoraVideoClip* clip;
 public:
 	TheoraWorkerThread();
 	~TheoraWorkerThread();
 
-	TheoraVideoClip* getAssignedClip() { return mClip; }
+	TheoraVideoClip* getAssignedClip() { return this->clip; }
 
 	//! Main Thread Body - do not call directly!
 	void execute();

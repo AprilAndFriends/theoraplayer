@@ -65,63 +65,66 @@ static void (*conversion_functions[])(struct TheoraPixelTransform*) = {0,
 
 TheoraVideoFrame::TheoraVideoFrame(TheoraVideoClip* parent)
 {
-	mReady = mInUse = false;
-	mParent = parent;
-	mIteration = 0;
+	this->ready = this->inUse = false;
+	this->parent = parent;
+	this->iteration = 0;
 	// number of bytes based on output mode
 	int bytemap[] = {0, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4, 1, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4};
-	mBpp = bytemap[mParent->getOutputMode()];
-	unsigned int size = mParent->getStride() * mParent->mHeight * mBpp;
+	this->bpp = bytemap[this->parent->getOutputMode()];
+	unsigned int size = this->parent->getStride() * this->parent->height * this->bpp;
 	try
 	{
-		mBuffer = new unsigned char[size];
+		this->buffer = new unsigned char[size];
 	}
 	catch (std::bad_alloc)
 	{
-		mBuffer = NULL;
+		this->buffer = NULL;
 		return;
 	}
-	memset(mBuffer, 255, size);
+	memset(this->buffer, 255, size);
 }
 
 TheoraVideoFrame::~TheoraVideoFrame()
 {
-	if (mBuffer) delete[] mBuffer;
+	if (this->buffer)
+	{
+		delete[] this->buffer;
+	}
 }
 
 int TheoraVideoFrame::getWidth()
 {
-	return mParent->getWidth();
+	return this->parent->getWidth();
 }
 
 int TheoraVideoFrame::getStride()
 {
-	return mParent->mStride;
+	return this->parent->stride;
 }
 
 int TheoraVideoFrame::getHeight()
 {
-	return mParent->getHeight();
+	return this->parent->getHeight();
 }
 
 unsigned char* TheoraVideoFrame::getBuffer()
 {
-	return mBuffer;
+	return this->buffer;
 }
 
 void TheoraVideoFrame::decode(struct TheoraPixelTransform* t)
 {
 	if (t->raw != NULL)
 	{
-		unsigned int bufferStride = mParent->getWidth() * mBpp;
+		unsigned int bufferStride = this->parent->getWidth() * this->bpp;
 		if (bufferStride == t->rawStride)
 		{
-			memcpy(mBuffer, t->raw, t->rawStride * mParent->getHeight());
+			memcpy(this->buffer, t->raw, t->rawStride * this->parent->getHeight());
 		}
 		else
 		{
-			unsigned char *buff = mBuffer, *src = t->raw;
-			int i, h = mParent->getHeight();
+			unsigned char *buff = this->buffer, *src = t->raw;
+			int i, h = this->parent->getHeight();
 			for (i = 0; i < h; ++i, buff += bufferStride, src += t->rawStride)
 			{
 				memcpy(buff, src, bufferStride);
@@ -130,9 +133,9 @@ void TheoraVideoFrame::decode(struct TheoraPixelTransform* t)
 	}
 	else
 	{
-		t->out = mBuffer;
-		t->w = mParent->getWidth();
-		t->h = mParent->getHeight();
+		t->out = this->buffer;
+		t->w = this->parent->getWidth();
+		t->h = this->parent->getHeight();
 		
 #ifdef YUV_TEST // when benchmarking yuv conversion functions during development, do a timed average
 		#define N 1000
@@ -147,13 +150,13 @@ void TheoraVideoFrame::decode(struct TheoraPixelTransform* t)
 		sprintf(s, "%.2f", diff / N);
 		TheoraVideoManager::getSingleton().logMessage("YUV Decoding time: " + std::string(s) + " ms\n");
 #else
-		conversion_functions[mParent->getOutputMode()](t);
+		conversion_functions[this->parent->getOutputMode()](t);
 #endif
 	}
-	mReady = true;
+	this->ready = true;
 }
 
 void TheoraVideoFrame::clear()
 {
-	mInUse = mReady = false;
+	this->inUse = this->ready = false;
 }

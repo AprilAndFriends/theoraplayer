@@ -6,8 +6,8 @@ Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
-#ifndef _TheoraAsync_h
-#define _TheoraAsync_h
+#ifndef THEORA_ASYNC_H
+#define THEORA_ASYNC_H
 
 #include <stdlib.h>
 #ifndef _WIN32
@@ -27,9 +27,8 @@ public:
 		bool release();
 
 	protected:
-		TheoraMutex* mMutex;
-		bool mLogUnhandledUnlocks;
-
+		TheoraMutex* mutex;
+		bool logUnhandledUnlocks;
 	};
 
 	TheoraMutex();
@@ -38,14 +37,13 @@ public:
 	void unlock();
 		
 protected:
-	void* mHandle;
+	void* handle;
 		
 };
 
 /// @note Based on hltypes::Thread
 class TheoraThread
-{
-	TheoraMutex mRunningMutex;
+{	
 public:
 	TheoraThread();
 	virtual ~TheoraThread();
@@ -58,9 +56,11 @@ public:
 	void join();
 		
 protected:
-	void* mId;
-	volatile bool mRunning;
-		
+	void* id;
+	volatile bool running;
+
+private:
+	TheoraMutex runningMutex;		
 };
 
 #endif

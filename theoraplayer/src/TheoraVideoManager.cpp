@@ -6,14 +6,15 @@ Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
-#include "TheoraVideoManager.h"
-#include "TheoraWorkerThread.h"
-#include "TheoraVideoClip.h"
-#include "TheoraFrameQueue.h"
 #include "TheoraAudioInterface.h"
-#include "TheoraUtil.h"
 #include "TheoraDataSource.h"
 #include "TheoraException.h"
+#include "TheoraVideoClip.h"
+#include "TheoraVideoManager.h"
+#include "TheoraFrameQueue.h"
+#include "TheoraUtil.h"
+#include "TheoraWorkerThread.h"
+
 #ifdef __THEORA
 	#include <theora/codec.h>
 	#include <vorbis/codec.h>
@@ -132,8 +133,8 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 #endif
 	
 	logMessage(msg + "------------------------------------");
-	mAudioFactory = NULL;
-	mWorkMutex = new TheoraMutex();
+	this->audioFactory = NULL;
+	this->workMutex = new TheoraMutex();
 
 	// for CPU based yuv2rgb decoding
 	initYUVConversionModule();
@@ -144,15 +145,15 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 TheoraVideoManager::~TheoraVideoManager()
 {
 	destroyWorkerThreads();
-	TheoraMutex::ScopeLock lock(mWorkMutex);
+	TheoraMutex::ScopeLock lock(this->workMutex);
 	ClipList::iterator ci;
-	for (ci = mClips.begin(); ci != mClips.end(); ++ci)
+	for (ci = this->clips.begin(); ci != this->clips.end(); ++ci)
 	{
 		delete (*ci);
 	}
-	mClips.clear();
+	this->clips.clear();
 	lock.release();
-	delete mWorkMutex;
+	delete this->workMutex;
 }
 
 void TheoraVideoManager::logMessage(std::string msg)
@@ -163,8 +164,8 @@ void TheoraVideoManager::logMessage(std::string msg)
 TheoraVideoClip* TheoraVideoManager::getVideoClipByName(std::string name)
 {
 	TheoraVideoClip* clip = NULL;
-	TheoraMutex::ScopeLock lock(mWorkMutex);
-	foreach (TheoraVideoClip*, mClips)
+	TheoraMutex::ScopeLock lock(this->workMutex);
+	foreach (TheoraVideoClip*, this->clips)
 	{
 		if ((*it)->getName() == name)
 		{
@@ -178,12 +179,12 @@ TheoraVideoClip* TheoraVideoManager::getVideoClipByName(std::string name)
 
 void TheoraVideoManager::setAudioInterfaceFactory(TheoraAudioInterfaceFactory* factory)
 {
-	mAudioFactory = factory;
+	this->audioFactory = factory;
 }
 
 TheoraAudioInterfaceFactory* TheoraVideoManager::getAudioInterfaceFactory()
 {
-	return mAudioFactory;
+	return this->audioFactory;
 }
 
 TheoraVideoClip* TheoraVideoManager::createVideoClip(std::string filename,
@@ -200,7 +201,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 													 int numPrecachedOverride,
 													 bool usePower2Stride)
 {
-	TheoraMutex::ScopeLock lock(mWorkMutex);
+	TheoraMutex::ScopeLock lock(this->workMutex);
 
 	TheoraVideoClip* clip = NULL;
 	int nPrecached = numPrecachedOverride ? numPrecachedOverride : mDefaultNumPrecachedFrames;
@@ -250,7 +251,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 		}
 		clip->decodeNextFrame(); // ensure the first frame is always preloaded and have the main thread do it to prevent potential thread starvation
 
-		mClips.push_back(clip);
+		this->clips.push_back(clip);
 	}
 	else
 	{
@@ -269,9 +270,9 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 	if (clip)
 	{
 		th_writelog("Destroying video clip: " + clip->getName());
-		TheoraMutex::ScopeLock lock(mWorkMutex);
+		TheoraMutex::ScopeLock lock(this->workMutex);
 		bool reported = 0;
-		while (clip->mAssignedWorkerThread)
+		while (clip->assignedWorkerThread)
 		{
 			if (!reported)
 			{
@@ -283,16 +284,16 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 		if (reported) th_writelog(" - WorkerThread done, destroying...");
 		
 		// erase the clip from the clip list
-		foreach (TheoraVideoClip*, mClips)
+		foreach (TheoraVideoClip*, this->clips)
 		{
 			if ((*it) == clip)
 			{
-				mClips.erase(it);
+				this->clips.erase(it);
 				break;
 			}
 		}
 		// remove all it's references from the work log
-		mWorkLog.remove(clip);
+		this->workLog.remove(clip);
 
 		// delete the actual clip
 		delete clip;
@@ -305,8 +306,8 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 
 TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 {
-	if (!mWorkMutex) return NULL;
-	TheoraMutex::ScopeLock lock(mWorkMutex);
+	if (!this->workMutex) return NULL;
+	TheoraMutex::ScopeLock lock(this->workMutex);
 
 	TheoraVideoClip* selectedClip = NULL;
 	float maxQueuedTime = 0, totalAccessCount = 0, prioritySum = 0, diff, maxDiff = -1;
@@ -322,17 +323,17 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 
 	for (int i = 0; i < 2 && candidates.size() == 0; ++i)
 	{
-		foreach (TheoraVideoClip*, mClips)
+		foreach (TheoraVideoClip*, this->clips)
 		{
 			clip = *it;
-			if (clip->isBusy() || (i == 0 && clip->isPaused() && !clip->mWaitingForCache)) continue;
+			if (clip->isBusy() || (i == 0 && clip->isPaused() && !clip->waitingForCache)) continue;
 			nReadyFrames = clip->getNumReadyFrames();
 			if (nReadyFrames == clip->getFrameQueue()->getSize()) continue;
 
 			candidate.clip = clip;
 			candidate.priority = clip->getPriority();
 			candidate.queuedTime = (float) nReadyFrames / (clip->getFPS() * clip->getPlaybackSpeed());
-			candidate.workTime = (float) clip->mThreadAccessCount;
+			candidate.workTime = (float) clip->threadAccessCount;
 			
 			totalAccessCount += candidate.workTime;
 			if (maxQueuedTime < candidate.queuedTime) maxQueuedTime = candidate.queuedTime;
@@ -374,37 +375,37 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 
 	if (selectedClip)
 	{
-		selectedClip->mAssignedWorkerThread = caller;
+		selectedClip->assignedWorkerThread = caller;
 		
-		int nClips = (int) mClips.size();
+		int nClips = (int) this->clips.size();
 		unsigned int maxWorkLogSize = (nClips - 1) * 50;
 
 		if (nClips > 1)
 		{
-			mWorkLog.push_front(selectedClip);
-			++selectedClip->mThreadAccessCount;
+			this->workLog.push_front(selectedClip);
+			++selectedClip->threadAccessCount;
 		}
 		
 		TheoraVideoClip* c;
-		while (mWorkLog.size() > maxWorkLogSize)
+		while (this->workLog.size() > maxWorkLogSize)
 		{
-			c = mWorkLog.back();
-			mWorkLog.pop_back();
-			--c->mThreadAccessCount;
+			c = this->workLog.back();
+			this->workLog.pop_back();
+			--c->threadAccessCount;
 		}
 #ifdef _SCHEDULING_DEBUG
-		if (mClips.size() > 1)
+		if (this->clips.size() > 1)
 		{
-			int accessCount = mWorkLog.size();
+			int accessCount = this->workLog.size();
 			if (gThreadDiagnosticTimer > 2.0f)
 			{
 				gThreadDiagnosticTimer = 0;
 				std::string logstr = "-----\nTheora Playback Library debug CPU time analysis (" + str(accessCount) + "):\n";
 				int percent;
-				foreach (TheoraVideoClip*, mClips)
+				foreach (TheoraVideoClip*, this->clips)
 				{
-					percent = ((float) (*it)->mThreadAccessCount / mWorkLog.size()) * 100.0f;
-					logstr += (*it)->getName() + " (" + str((*it)->getPriority()) + "): " + str((*it)->mThreadAccessCount) + ", " + str(percent) + "%\n";
+					percent = ((float) (*it)->threadAccessCount / this->workLog.size()) * 100.0f;
+					logstr += (*it)->getName() + " (" + str((*it)->getPriority()) + "): " + str((*it)->threadAccessCount) + ", " + str(percent) + "%\n";
 				}
 				logstr += "-----";
 				th_writelog(logstr);
@@ -419,8 +420,8 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 
 void TheoraVideoManager::update(float timeDelta)
 {
-	TheoraMutex::ScopeLock lock(mWorkMutex);
-	foreach (TheoraVideoClip*, mClips)
+	TheoraMutex::ScopeLock lock(this->workMutex);
+	foreach (TheoraVideoClip*, this->clips)
 	{
 		(*it)->update(timeDelta);
 		(*it)->decodedAudioCheck();
@@ -433,7 +434,7 @@ void TheoraVideoManager::update(float timeDelta)
 
 int TheoraVideoManager::getNumWorkerThreads()
 {
-	return (int) mWorkerThreads.size();
+	return (int) this->workerThreads.size();
 }
 
 void TheoraVideoManager::createWorkerThreads(int n)
@@ -443,18 +444,18 @@ void TheoraVideoManager::createWorkerThreads(int n)
 	{
 		t=new TheoraWorkerThread();
 		t->start();
-		mWorkerThreads.push_back(t);
+		this->workerThreads.push_back(t);
 	}
 }
 
 void TheoraVideoManager::destroyWorkerThreads()
 {
-	foreach (TheoraWorkerThread*,mWorkerThreads)
+	foreach (TheoraWorkerThread*, this->workerThreads)
 	{
 		(*it)->join();
 		delete (*it);
 	}
-	mWorkerThreads.clear();
+	this->workerThreads.clear();
 }
 
 void TheoraVideoManager::setNumWorkerThreads(int n)

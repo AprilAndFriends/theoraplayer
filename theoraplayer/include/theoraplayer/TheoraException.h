@@ -6,17 +6,18 @@ Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
-#ifndef EXCEPTION_H
-#define EXCEPTION_H
+#ifndef THEORA_EXCEPTION_H
+#define THEORA_EXCEPTION_H
 
 #include <string>
+
 #include "TheoraExport.h"
 
 class TheoraPlayerExport _TheoraGenericException
 {
 public:
-	std::string mErrText,mFile,mType;
-	int mLineNumber;
+	std::string errText, file, type;
+	int lineNumber;
 
 	_TheoraGenericException(const std::string& errorText, std::string type = "",std::string file = "", int line = 0);
 	virtual ~_TheoraGenericException() {}
@@ -25,9 +26,9 @@ public:
 	
 	void writeOutput();
 	
-	virtual const std::string& getErrorText() { return mErrText; }
+	virtual const std::string& getErrorText() { return this->errText; }
 	
-	const std::string getType(){ return mType; }
+	const std::string getType(){ return this->type; }
 };
 
 #define TheoraGenericException(msg) _TheoraGenericException(msg, "TheoraGenericException", __FILE__, __LINE__)

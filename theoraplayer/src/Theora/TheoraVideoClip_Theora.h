@@ -6,12 +6,13 @@ Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
-#if defined(__THEORA) && !defined(_TheoraVideoClip_Theora_h)
-#define _TheoraVideoClip_Theora_h
+#if defined(__THEORA) && !defined(THEORA_VIDEOCLIP_THEORA_H)
+#define THEORA_VIDEOCLIP_THEORA_H
 
 #include <ogg/ogg.h>
 #include <vorbis/vorbisfile.h>
 #include <theora/theoradec.h>
+
 #include "TheoraAudioPacketQueue.h"
 #include "TheoraVideoClip.h"
 
@@ -36,15 +37,6 @@ struct TheoraInfoStruct
 
 class TheoraVideoClip_Theora : public TheoraVideoClip, public TheoraAudioPacketQueue
 {
-protected:
-	TheoraInfoStruct mInfo; // a pointer is used to avoid having to include theora & vorbis headers
-	int mTheoraStreams, mVorbisStreams;	// Keeps track of Theora and Vorbis Streams
-
-	long seekPage(long targetFrame, bool return_keyframe);
-	void doSeek();
-	void readTheoraVorbisHeaders();
-	unsigned int mReadAudioSamples;
-	unsigned long mLastDecodedFrameNumber;
 public:
 	TheoraVideoClip_Theora(TheoraDataSource* data_source,
 						   TheoraOutputMode output_mode,
@@ -59,6 +51,17 @@ public:
 	float decodeAudio();
 	void decodedAudioCheck();
 	std::string getDecoderName() { return "Theora"; }
+
+protected:
+	TheoraInfoStruct info; // a pointer is used to avoid having to include theora & vorbis headers
+	int theoraStreams, vorbisStreams;	// Keeps track of Theora and Vorbis Streams
+
+	long seekPage(long targetFrame, bool return_keyframe);
+	void doSeek();
+	void readTheoraVorbisHeaders();
+
+	unsigned int readAudioSamples;
+	unsigned long lastDecodedFrameNumber;
 };
 
 #endif

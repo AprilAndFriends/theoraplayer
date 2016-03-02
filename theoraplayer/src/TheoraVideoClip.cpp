@@ -7,6 +7,7 @@ This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
 #include <math.h>
+
 #include "TheoraVideoClip.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoFrame.h"
@@ -21,43 +22,43 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 								 TheoraOutputMode output_mode,
 								 int nPrecachedFrames,
 								 bool usePower2Stride):
-	mFrameQueue(NULL),
-	mAudioInterface(NULL),
-	mStream(NULL),
-	mAssignedWorkerThread(NULL),
-	mUseAlpha(false),
-	mWaitingForCache(false),
-	mNumDroppedFrames(0),
-	mNumDisplayedFrames(0),
-	mNumPrecachedFrames(nPrecachedFrames),
-	mThreadAccessCount(0),
-	mSeekFrame(-1),
-	mDuration(-1),
-	mFrameDuration(0),
-	mPriority(1),
-	mName(data_source->repr()),
-	mWidth(0),
-	mHeight(0),
-	mStride(usePower2Stride),
-	mNumFrames(-1),
-	mFPS(1),
-	mSubFrameWidth(0),
-	mSubFrameHeight(0),
-	mSubFrameOffsetX(0),
-	mSubFrameOffsetY(0),
-	mAudioGain(1.0f),
-	mOutputMode(TH_UNDEFINED),
-	mRequestedOutputMode(output_mode),
-	mFirstFrameDisplayed(false),
-	mAutoRestart(false),
-	mEndOfFile(false),
-	mRestarted(false),
-	mIteration(0),
-	mPlaybackIteration(0),
-	mAudioMutex(NULL)
+	frameQueue(NULL),
+	audioInterface(NULL),
+	stream(NULL),
+	assignedWorkerThread(NULL),
+	useAlpha(false),
+	waitingForCache(false),
+	numDroppedFrames(0),
+	numDisplayedFrames(0),
+	numPrecachedFrames(nPrecachedFrames),
+	threadAccessCount(0),
+	seekFrame(-1),
+	duration(-1),
+	frameDuration(0),
+	priority(1),
+	name(data_source->repr()),
+	width(0),
+	height(0),
+	stride(usePower2Stride),
+	numFrames(-1),
+	FPS(1),
+	subFrameWidth(0),
+	subFrameHeight(0),
+	subFrameOffsetX(0),
+	subFrameOffsetY(0),
+	audioGain(1.0f),
+	outputMode(TH_UNDEFINED),
+	requestedOutputMode(output_mode),
+	firstFrameDisplayed(false),
+	autoRestart(false),
+	endOfFile(false),
+	restarted(false),
+	iteration(0),
+	playbackIteration(0),
+	audioMutex(NULL)
 {
-	mThreadAccessMutex = new TheoraMutex();
-	mTimer = mDefaultTimer = new TheoraTimer();
+	this->threadAccessMutex = new TheoraMutex();
+	this->timer = this->defaultTimer = new TheoraTimer();
 
 	setOutputMode(output_mode);
 }
@@ -65,184 +66,211 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 TheoraVideoClip::~TheoraVideoClip()
 {
 	// wait untill a worker thread is done decoding the frame
-	TheoraMutex::ScopeLock lock(mThreadAccessMutex);
+	TheoraMutex::ScopeLock lock(this->threadAccessMutex);
 
-	delete mDefaultTimer;
+	delete this->defaultTimer;
 
-	if (mStream) delete mStream;
-
-	if (mFrameQueue) delete mFrameQueue;
-
-	if (mAudioInterface)
+	if (this->stream) 
 	{
-		TheoraMutex::ScopeLock audioMutexLock(mAudioMutex); // ensure a thread isn't using this mutex
-		delete mAudioInterface; // notify audio interface it's time to call it a day
+		delete this->stream;
+	}
+
+	if (this->frameQueue) 
+	{
+		delete this->frameQueue;
+	}
+
+	if (this->audioInterface)
+	{
+		TheoraMutex::ScopeLock audioMutexLock(this->audioMutex); // ensure a thread isn't using this mutex
+		delete this->audioInterface; // notify audio interface it's time to call it a day
 		audioMutexLock.release();
-		delete mAudioMutex;
+		delete this->audioMutex;
 	}
 	
 	lock.release();
-	delete mThreadAccessMutex;
+	delete this->threadAccessMutex;
 }
 
 TheoraTimer* TheoraVideoClip::getTimer()
 {
-	return mTimer;
+	return this->timer;
 }
 
 void TheoraVideoClip::setTimer(TheoraTimer* timer)
 {
-	if (!timer) mTimer = mDefaultTimer;
-	else mTimer = timer;
+	if (!timer)
+	{
+		this->timer = this->defaultTimer;
+	}
+	else
+	{
+		this->timer = timer;
+	}
 }
 
 void TheoraVideoClip::resetFrameQueue()
 {
-	mFrameQueue->clear();
-	mPlaybackIteration = mIteration = 0;
+	this->frameQueue->clear();
+	this->playbackIteration = this->iteration = 0;
 }
 
 void TheoraVideoClip::restart()
 {
-	mEndOfFile = true; //temp, to prevent threads to decode while restarting
-	TheoraMutex::ScopeLock lock(mThreadAccessMutex);
+	this->endOfFile = true; //temp, to prevent threads to decode while restarting
+	TheoraMutex::ScopeLock lock(this->threadAccessMutex);
 	_restart();
-	mTimer->seek(0);
-	mFirstFrameDisplayed = false;
+	this->timer->seek(0);
+	this->firstFrameDisplayed = false;
 	resetFrameQueue();
-	mEndOfFile = false;
-	mRestarted = false;
-	mSeekFrame = -1;
+	this->endOfFile = false;
+	this->restarted = false;
+	this->seekFrame = -1;
 	lock.release();
 }
 
 void TheoraVideoClip::update(float timeDelta)
 {
-	if (mTimer->isPaused())
+	if (this->timer->isPaused())
 	{
-		mTimer->update(0); // update timer in case there is some code that needs to execute each frame
+		this->timer->update(0); // update timer in case there is some code that needs to execute each frame
 		return;
 	}
-	float time = mTimer->getTime(), speed = mTimer->getSpeed();
-	if (time + timeDelta * speed >= mDuration)
+	float time = this->timer->getTime(), speed = this->timer->getSpeed();
+	if (time + timeDelta * speed >= this->duration)
 	{
-		if (mAutoRestart && mRestarted)
+		if (this->autoRestart && this->restarted)
 		{
 			float seekTime = time + timeDelta * speed;
-			for (;seekTime >= mDuration;)
+			for (;seekTime >= this->duration;)
 			{
-				seekTime -= mDuration;
-				++mPlaybackIteration;
+				seekTime -= this->duration;
+				++this->playbackIteration;
 			}
 
-			mTimer->seek(seekTime);
+			this->timer->seek(seekTime);
 		}
 		else
 		{
-			if (time != mDuration)
+			if (time != this->duration)
 			{
-				mTimer->update((mDuration - time) / speed);
+				this->timer->update((this->duration - time) / speed);
 			}
 		}
 	}
 	else
 	{
-		mTimer->update(timeDelta);
+		this->timer->update(timeDelta);
 	}
 }
 
 float TheoraVideoClip::updateToNextFrame()
 {
-	TheoraVideoFrame* f = mFrameQueue->getFirstAvailableFrame();
-	if (!f) return 0;
+	TheoraVideoFrame* f = this->frameQueue->getFirstAvailableFrame();
+	if (!f)
+	{
+		return 0;
+	}
 
-	float time = f->mTimeToDisplay - mTimer->getTime();
+	float time = f->timeToDisplay - this->timer->getTime();
 	update(time);
 	return time;
 }
 
 TheoraFrameQueue* TheoraVideoClip::getFrameQueue()
 {
-	return mFrameQueue;
+	return this->frameQueue;
 }
 
 void TheoraVideoClip::popFrame()
 {
-	++mNumDisplayedFrames;
+	++this->numDisplayedFrames;
 	
 	// after transfering frame data to the texture, free the frame
 	// so it can be used again
-	if (!mFirstFrameDisplayed)
+	if (!this->firstFrameDisplayed)
 	{
-		TheoraMutex::ScopeLock lock(mFrameQueue->getMutex());
-		mFrameQueue->_pop(1);
-		mFirstFrameDisplayed = true;
+		TheoraMutex::ScopeLock lock(this->frameQueue->getMutex());
+		this->frameQueue->_pop(1);
+		this->firstFrameDisplayed = true;
 		lock.release();
 	}
 	else
 	{
-		mFrameQueue->pop();
+		this->frameQueue->pop();
 	}
 }
 
 int TheoraVideoClip::getWidth()
 {
-	return mUseAlpha ? mWidth / 2 : mWidth;
+	return this->useAlpha ? this->width / 2 : this->width;
 }
 
 int TheoraVideoClip::getHeight()
 {
-	return mHeight;
+	return this->height;
 }
 
 int TheoraVideoClip::getSubFrameWidth()
 {
-	return mUseAlpha ? mWidth / 2 : mSubFrameWidth;
+	return this->useAlpha ? this->width / 2 : this->subFrameWidth;
 }
 
 int TheoraVideoClip::getSubFrameHeight()
 {
-	return mUseAlpha ? mHeight : mSubFrameHeight;
+	return this->useAlpha ? this->height : this->subFrameHeight;
 }
 
 int TheoraVideoClip::getSubFrameOffsetX()
 {
-	return mUseAlpha ? 0 : mSubFrameOffsetX;
+	return this->useAlpha ? 0 : this->subFrameOffsetX;
 }
 
 int TheoraVideoClip::getSubFrameOffsetY()
 {
-	return mUseAlpha ? 0 : mSubFrameOffsetY;
+	return this->useAlpha ? 0 : this->subFrameOffsetY;
 }
 
 float TheoraVideoClip::getAbsPlaybackTime()
 {
-	return mTimer->getTime() + mPlaybackIteration * mDuration;
+	return this->timer->getTime() + this->playbackIteration * this->duration;
 }
 
 int TheoraVideoClip::discardOutdatedFrames(float absTime)
 {
-	int nReady = mFrameQueue->_getReadyCount();
+	int nReady = this->frameQueue->_getReadyCount();
 	// only drop frames if you have more frames to show. otherwise even the late frame will do..
-	if (nReady == 1) return 0;
+	if (nReady == 1)
+	{
+		return 0;
+	}
 	float time = absTime;
 
 	int nPop = 0;
 	TheoraVideoFrame* frame;
 	float timeToDisplay;
 	
-	std::list<TheoraVideoFrame*>& queue = mFrameQueue->_getFrameQueue();
+	std::list<TheoraVideoFrame*>& queue = this->frameQueue->_getFrameQueue();
 	foreach_l (TheoraVideoFrame*, queue)
 	{
 		frame = *it;
-		if (!frame->mReady) break;
-		timeToDisplay = frame->mTimeToDisplay + frame->mIteration * mDuration;
-		if (time > timeToDisplay + mFrameDuration)
+		if (!frame->ready)
+		{
+			break;
+		}
+		timeToDisplay = frame->timeToDisplay + frame->iteration * this->duration;
+		if (time > timeToDisplay + this->frameDuration)
 		{
 			++nPop;
-			if (nReady - nPop == 1) break; // always leave at least one in the queue
+			if (nReady - nPop == 1)
+			{
+				break; // always leave at least one in the queue
+			}
 		}
-		else break;
+		else
+		{
+			break;
+		}
 	}
 	
 	if (nPop > 0)
@@ -262,8 +290,8 @@ int TheoraVideoClip::discardOutdatedFrames(float absTime)
 		}
 		th_writelog(log);
 #endif
-		mNumDroppedFrames += nPop;
-		mFrameQueue->_pop(nPop);
+		this->numDroppedFrames += nPop;
+		this->frameQueue->_pop(nPop);
 	}
 	
 	return nPop;
@@ -274,16 +302,16 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 	TheoraVideoFrame* frame;
 	// if we are about to seek, then the current frame queue is invalidated
 	// (will be cleared when a worker thread does the actual seek)
-	if (mSeekFrame != -1) return NULL;
+	if (this->seekFrame != -1) return NULL;
 	
-	TheoraMutex::ScopeLock lock(mFrameQueue->getMutex());
+	TheoraMutex::ScopeLock lock(this->frameQueue->getMutex());
 	float time = getAbsPlaybackTime();
 	discardOutdatedFrames(time);
 	
-	frame = mFrameQueue->_getFirstAvailableFrame();
+	frame = this->frameQueue->_getFirstAvailableFrame();
 	if (frame != NULL)
 	{
-		if (frame->mTimeToDisplay + frame->mIteration * mDuration > time && mFirstFrameDisplayed)
+		if (frame->timeToDisplay + frame->iteration * this->duration > time && this->firstFrameDisplayed)
 		{
 			frame = NULL; // frame is ready but it's not yet time to display it, except when we haven't displayed any frames yet
 		}
@@ -295,28 +323,28 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 
 std::string TheoraVideoClip::getName()
 {
-	return mName;
+	return this->name;
 }
 
 bool TheoraVideoClip::isBusy()
 {
-	return mAssignedWorkerThread || mOutputMode != mRequestedOutputMode;
+	return this->assignedWorkerThread || this->outputMode != this->requestedOutputMode;
 }
 
 TheoraOutputMode TheoraVideoClip::getOutputMode()
 {
-	return mOutputMode;
+	return this->outputMode;
 }
 
 void TheoraVideoClip::setOutputMode(TheoraOutputMode mode)
 {
 	if (mode == TH_UNDEFINED)
 	{
-		throw TheoraGenericException("Invalid output mode: TH_UNDEFINED for video: " + mName);
+		throw TheoraGenericException("Invalid output mode: TH_UNDEFINED for video: " + this->name);
 	}
-	if (mOutputMode == mode) return;
-	mRequestedOutputMode = mode;
-	mUseAlpha = (mode == TH_RGBA   ||
+	if (this->outputMode == mode) return;
+	this->requestedOutputMode = mode;
+	this->useAlpha = (mode == TH_RGBA   ||
 				 mode == TH_ARGB   ||
 				 mode == TH_BGRA   ||
 				 mode == TH_ABGR   ||
@@ -324,80 +352,79 @@ void TheoraVideoClip::setOutputMode(TheoraOutputMode mode)
 				 mode == TH_AGREY3 ||
 				 mode == TH_YUVA   ||
 				 mode == TH_AYUV);
-	if (mAssignedWorkerThread)
+	if (this->assignedWorkerThread)
 	{
-		TheoraMutex::ScopeLock lock(mThreadAccessMutex);
+		TheoraMutex::ScopeLock lock(this->threadAccessMutex);
 		// discard current frames and recreate them
-		mFrameQueue->setSize(mFrameQueue->getSize());
+		this->frameQueue->setSize(this->frameQueue->getSize());
 		lock.release();
 
 	}
-	mOutputMode = mRequestedOutputMode;
+	this->outputMode = this->requestedOutputMode;
 }
 
 float TheoraVideoClip::getTimePosition()
 {
-	return mTimer->getTime();
+	return this->timer->getTime();
 }
 
 int TheoraVideoClip::getNumPrecachedFrames()
 {
-	return mFrameQueue->getSize();
+	return this->frameQueue->getSize();
 }
 
 void TheoraVideoClip::setNumPrecachedFrames(int n)
 {
-	if (mFrameQueue->getSize() != n)
-		mFrameQueue->setSize(n);
+	if (this->frameQueue->getSize() != n)
+		this->frameQueue->setSize(n);
 }
 
 int TheoraVideoClip::_getNumReadyFrames()
 {
-	if (mSeekFrame != -1) return 0;
-	return mFrameQueue->_getReadyCount();
+	if (this->seekFrame != -1) return 0;
+	return this->frameQueue->_getReadyCount();
 }
 
 int TheoraVideoClip::getNumReadyFrames()
 {
-	if (mSeekFrame != -1) return 0; // we are about to seek, consider frame queue empty even though it will be emptied upon seek
-	return mFrameQueue->getReadyCount();
+	if (this->seekFrame != -1) return 0; // we are about to seek, consider frame queue empty even though it will be emptied upon seek
+	return this->frameQueue->getReadyCount();
 }
 
 float TheoraVideoClip::getDuration()
 {
-	return mDuration;
+	return this->duration;
 }
 
 float TheoraVideoClip::getFPS()
 {
-	return mFPS;
+	return this->FPS;
 }
 
 void TheoraVideoClip::play()
 {
-	mTimer->play();
+	this->timer->play();
 }
 
 void TheoraVideoClip::pause()
 {
-	mTimer->pause();
+	this->timer->pause();
 }
 
 bool TheoraVideoClip::isPaused()
 {
-	return mTimer->isPaused();
+	return this->timer->isPaused();
 }
 
 bool TheoraVideoClip::isDone()
 {
-	if (mEndOfFile)
+	if (this->endOfFile)
 	{
-		TheoraVideoFrame* frame = mFrameQueue->getFirstAvailableFrame();
-		if (frame == NULL || frame->mTimeToDisplay >= mDuration) // in some cases, there could be a diference between the reported video duration and timestamp on the last frame(s)
+		TheoraVideoFrame* frame = this->frameQueue->getFirstAvailableFrame();
+		if (frame == NULL || frame->timeToDisplay >= this->duration) // in some cases, there could be a diference between the reported video duration and timestamp on the last frame(s)
 		{
 			return true;
 		}
-
 	}
 	return false;
 }
@@ -406,18 +433,18 @@ void TheoraVideoClip::stop()
 {
 	pause();
 	resetFrameQueue();
-	mFirstFrameDisplayed = false;
+	this->firstFrameDisplayed = false;
 	seek(0);
 }
 
 void TheoraVideoClip::setPlaybackSpeed(float speed)
 {
-	mTimer->setSpeed(speed);
+	this->timer->setSpeed(speed);
 }
 
 float TheoraVideoClip::getPlaybackSpeed()
 {
-	return mTimer->getSpeed();
+	return this->timer->getSpeed();
 }
 
 void TheoraVideoClip::seek(float time)
@@ -427,87 +454,123 @@ void TheoraVideoClip::seek(float time)
 
 void TheoraVideoClip::seekToFrame(int frame)
 {
-	if      (frame < 0)          mSeekFrame = 0;
-	else if (frame > mNumFrames) mSeekFrame = mNumFrames;
-	else                         mSeekFrame = frame;
+	if (frame < 0)
+	{
+		this->seekFrame = 0;
+	}
+	else if (frame > this->numFrames)
+	{
+		this->seekFrame = this->numFrames;
+	}
+	else
+	{
+		this->seekFrame = frame;
+	}
 
-	mFirstFrameDisplayed = false;
-	mEndOfFile = false;
+	this->firstFrameDisplayed = false;
+	this->endOfFile = false;
 }
 
 float TheoraVideoClip::waitForCache(float desired_cache_factor, float max_wait_time)
 {
-	mWaitingForCache = true;
-	bool paused = mTimer->isPaused();
-	if (!paused) mTimer->pause();
+	this->waitingForCache = true;
+	bool paused = this->timer->isPaused();
+	if (!paused)
+	{
+		this->timer->pause();
+	}
 	int elapsed = 0, nReady = 0, frameQueueSize = getNumPrecachedFrames();
-    if (mNumFrames < frameQueueSize)
+    if (this->numFrames < frameQueueSize)
     {
-        frameQueueSize = mNumFrames;
+        frameQueueSize = this->numFrames;
     }
 	int desired_num_precached_frames = (int) ceil(desired_cache_factor * frameQueueSize);
 	for (;;)
 	{
 		nReady = getNumReadyFrames();
-		if (nReady >= desired_num_precached_frames) break;
+		if (nReady >= desired_num_precached_frames)
+		{
+			break;
+		}
 		_psleep(10);
 		elapsed += 10;
-		if (elapsed >= max_wait_time * 1000) break;
+		if (elapsed >= max_wait_time * 1000)
+		{
+			break;
+		}
 	}
-	if (!paused) mTimer->play();
-	mWaitingForCache = false;
+	if (!paused)
+	{
+		this->timer->play();
+	}
+	this->waitingForCache = false;
 
 	return (float) nReady / (float) frameQueueSize;
 }
 
 float TheoraVideoClip::getPriority()
 {
-	return mPriority;
+	return this->priority;
 }
 
 void TheoraVideoClip::setPriority(float priority)
 {
-	mPriority = priority;
+	this->priority = priority;
 }
 
 float TheoraVideoClip::getPriorityIndex()
 {
 	float priority = (float) getNumReadyFrames();
-	if (mTimer->isPaused()) priority += getNumPrecachedFrames() / 2;
+	if (this->timer->isPaused()) priority += getNumPrecachedFrames() / 2;
 	
 	return priority;
 }
 
 void TheoraVideoClip::setAudioInterface(TheoraAudioInterface* iface)
 {
-	mAudioInterface = iface;
-	if (iface && !mAudioMutex) mAudioMutex = new TheoraMutex;
-	if (!iface && mAudioMutex)
+	this->audioInterface = iface;
+	if (iface && !this->audioMutex)
 	{
-		delete mAudioMutex;
-		mAudioMutex = NULL;
+		this->audioMutex = new TheoraMutex;
+	}
+	if (!iface && this->audioMutex)
+	{
+		delete this->audioMutex;
+		this->audioMutex = NULL;
 	}
 }
 
 TheoraAudioInterface* TheoraVideoClip::getAudioInterface()
 {
-	return mAudioInterface;
+	return this->audioInterface;
 }
 
 void TheoraVideoClip::setAudioGain(float gain)
 {
-	if (gain > 1) mAudioGain=1;
-	if (gain < 0) mAudioGain=0;
-	else          mAudioGain=gain;
+	if (gain > 1)
+	{
+		this->audioGain = 1;
+	}
+	if (gain < 0)
+	{
+		this->audioGain = 0;
+	}
+	else
+	{
+		this->audioGain = gain;
+	}
 }
 
 float TheoraVideoClip::getAudioGain()
 {
-	return mAudioGain;
+	return this->audioGain;
 }
 
 void TheoraVideoClip::setAutoRestart(bool value)
 {
-	mAutoRestart = value;
-	if (value) mEndOfFile = false;
+	this->autoRestart = value;
+	if (value)
+	{
+		this->endOfFile = false;
+	}
 }

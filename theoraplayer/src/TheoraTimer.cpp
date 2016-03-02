@@ -10,9 +10,9 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 TheoraTimer::TheoraTimer()
 {
-	mTime = 0;
-	mPaused = 0;
-	mSpeed = 1.0f;
+	this->time = 0;
+	this->paused = 0;
+	this->speed = 1.0f;
 }
 
 TheoraTimer::~TheoraTimer()
@@ -24,29 +24,29 @@ void TheoraTimer::update(float timeDelta)
 {
 	if (!isPaused())
 	{
-		mTime += timeDelta * mSpeed;
+		this->time += timeDelta * this->speed;
 	}
 }
 
 float TheoraTimer::getTime()
 {
-	return mTime;
+	return this->time;
 }
 
 void TheoraTimer::pause()
 {
-	mPaused = true;
+	this->paused = true;
 }
 
 void TheoraTimer::play()
 {
-	mPaused = false;
+	this->paused = false;
 }
 
 
 bool TheoraTimer::isPaused()
 {
-	return mPaused;
+	return this->paused;
 }
 
 void TheoraTimer::stop()
@@ -56,15 +56,15 @@ void TheoraTimer::stop()
 
 void TheoraTimer::seek(float time)
 {
-	mTime = time;
+	this->time = time;
 }
 
 void TheoraTimer::setSpeed(float speed)
 {
-	mSpeed = speed;
+	this->speed = speed;
 }
 
 float TheoraTimer::getSpeed()
 {
-	return mSpeed;
+	return this->speed;
 }

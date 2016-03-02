@@ -12,13 +12,13 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include <pthread.h>
 #endif
 
-#include "TheoraUtil.h"
-#include "TheoraException.h"
-
 #ifdef _WIN32
 #include <windows.h>
 #pragma warning( disable: 4996 ) // MSVC++
 #endif
+
+#include "TheoraUtil.h"
+#include "TheoraException.h"
 
 std::string str(int i)
 {

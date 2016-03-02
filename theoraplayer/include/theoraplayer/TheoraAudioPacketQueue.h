@@ -6,8 +6,8 @@ Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
-#ifndef _TheoraAudioPacketQueue_h
-#define _TheoraAudioPacketQueue_h
+#ifndef THEORA_AUDIOPACKETQUEUE_H
+#define THEORA_AUDIOPACKETQUEUE_H
 
 #include "TheoraExport.h"
 
@@ -27,10 +27,6 @@ struct TheoraAudioPacket
  */
 class TheoraPlayerExport TheoraAudioPacketQueue
 {
-protected:
-	unsigned int mAudioFrequency, mNumAudioChannels;
-	TheoraAudioPacket* mTheoraAudioPacketQueue;
-	void _addAudioPacket(float* data, int numSamples);
 public:
 	TheoraAudioPacketQueue();
 	~TheoraAudioPacketQueue();
@@ -43,6 +39,11 @@ public:
 	void destroyAllAudioPackets();
 	
 	void flushAudioPackets(TheoraAudioInterface* audioInterface);
+
+protected:
+	unsigned int audioFrequency, numAudioChannels;
+	TheoraAudioPacket* theoraAudioPacketQueue;
+	void _addAudioPacket(float* data, int numSamples);
 };
 
 #endif

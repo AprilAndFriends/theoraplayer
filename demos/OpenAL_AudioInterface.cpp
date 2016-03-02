@@ -23,13 +23,13 @@ short float2short(float f)
 OpenAL_AudioInterface::OpenAL_AudioInterface(TheoraVideoClip* owner,int nChannels,int freq) :
 	TheoraAudioInterface(owner,nChannels,freq), TheoraTimer()
 {
-	mSourceNumChannels = mNumChannels;
-	if (mNumChannels > 2)
+	mSourceNumChannels = this->numChannels;
+	if (this->numChannels > 2)
 	{
 		// ignore audio with more than 2 channels, use only the stereo channels
-		mNumChannels = 2;
+		this->numChannels = 2;
 	}
-	mMaxBuffSize = freq * mNumChannels * 2;
+	mMaxBuffSize = freq * this->numChannels * 2;
 	mBuffSize = 0;
 	mNumProcessedSamples = 0;
 	mCurrentTimer = 0;
@@ -58,7 +58,7 @@ OpenAL_AudioInterface::~OpenAL_AudioInterface()
 
 float OpenAL_AudioInterface::getQueuedAudioSize()
 {
-	return ((float) (mNumProcessedSamples - mNumPlayedSamples)) / mFreq;
+	return ((float) (mNumProcessedSamples - mNumPlayedSamples)) / this->freq;
 }
 
 void OpenAL_AudioInterface::insertData(float* data, int nSamples)
@@ -83,16 +83,16 @@ void OpenAL_AudioInterface::insertData(float* data, int nSamples)
 		{
 			mTempBuffer[mBuffSize++]=float2short(data[i]);
 		}
-		if (mBuffSize == mFreq * mNumChannels / 10)
+		if (mBuffSize == this->freq * this->numChannels / 10)
 		{
 			OpenAL_Buffer buff;
 			alGenBuffers(1,&buff.id);
 
-			ALuint format = (mNumChannels == 1) ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16;
-			alBufferData(buff.id,format,mTempBuffer,mBuffSize*2,mFreq);
+			ALuint format = (this->numChannels == 1) ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16;
+			alBufferData(buff.id,format,mTempBuffer,mBuffSize*2, this->freq);
 			alSourceQueueBuffers(mSource, 1, &buff.id);
-			buff.nSamples=mBuffSize/mNumChannels;
-			mNumProcessedSamples+=mBuffSize/mNumChannels;
+			buff.nSamples=mBuffSize/this->numChannels;
+			mNumProcessedSamples+=mBuffSize/this->numChannels;
 			mBufferQueue.push(buff);
 
 			mBuffSize=0;
@@ -142,10 +142,10 @@ void OpenAL_AudioInterface::update(float time_increase)
 	//if (state == AL_PLAYING)
 		mCurrentTimer += time_increase;
 
-	mTime = mCurrentTimer + (float) mNumPlayedSamples/mFreq;
+	this->time = mCurrentTimer + (float) mNumPlayedSamples/this->freq;
 
-	float duration=mClip->getDuration();
-	if (mTime > duration) mTime=duration;
+	float duration=this->clip->getDuration();
+	if (this->time > duration) this->time = duration;
 }
 
 void OpenAL_AudioInterface::pause()
@@ -179,8 +179,8 @@ void OpenAL_AudioInterface::seek(float time)
 	mBuffSize=0;
 
 	mCurrentTimer = 0;
-	mNumPlayedSamples=mNumProcessedSamples=(int) (time*mFreq);
-	mTime = time;
+	mNumPlayedSamples=mNumProcessedSamples=(int) (time*this->freq);
+	this->time = time;
 }
 
 OpenAL_AudioInterfaceFactory::OpenAL_AudioInterfaceFactory()

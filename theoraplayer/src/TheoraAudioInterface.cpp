@@ -10,9 +10,9 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 TheoraAudioInterface::TheoraAudioInterface(TheoraVideoClip* owner, int nChannels, int freq)
 {
-	mFreq = freq;
-	mNumChannels = nChannels;
-	mClip = owner;
+	this->freq = freq;
+	this->numChannels = nChannels;
+	this->clip = owner;
 }
 
 TheoraAudioInterface::~TheoraAudioInterface()

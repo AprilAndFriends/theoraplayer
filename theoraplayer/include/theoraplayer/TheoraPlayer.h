@@ -6,8 +6,8 @@ Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
-#ifndef _TheoraPlayer_h
-#define _TheoraPlayer_h
+#ifndef THEORA_PLAYER_H
+#define THEORA_PLAYER_H
 
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip.h"

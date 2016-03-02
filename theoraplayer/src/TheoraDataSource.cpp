@@ -21,27 +21,27 @@ TheoraDataSource::~TheoraDataSource()
 
 TheoraFileDataSource::TheoraFileDataSource(std::string filename)
 {
-	mFilename = filename;
-	mFilePtr = NULL;
+	this->filename = filename;
+	this->filePtr = NULL;
 }
 
 TheoraFileDataSource::~TheoraFileDataSource()
 {
-	if (mFilePtr)
+	if (this->filePtr)
 	{
-		fclose(mFilePtr);
-		mFilePtr = NULL;
+		fclose(this->filePtr);
+		this->filePtr = NULL;
 	}
 }
 
 void TheoraFileDataSource::openFile()
 {
-	if (mFilePtr == NULL)
+	if (this->filePtr == NULL)
 	{
-		mFilePtr = fopen(mFilename.c_str(), "rb");
-		if (!mFilePtr)
+		this->filePtr = fopen(filename.c_str(), "rb");
+		if (!this->filePtr)
 		{
-			std::string msg = "Can't open video file: " + mFilename;
+			std::string msg = "Can't open video file: " + this->filename;
 			th_writelog(msg);
 			throw TheoraGenericException(msg);
 		}
@@ -49,61 +49,76 @@ void TheoraFileDataSource::openFile()
 		
 #ifdef _WIN32
 		struct _stat64 s;
-		_fstati64(_fileno(mFilePtr), &s);
+		_fstati64(_fileno(this->filePtr), &s);
 #else
 		struct stat s;
-		fstat(fileno(mFilePtr), &s);
+		fstat(fileno(this->filePtr), &s);
 #endif
-		mSize = (uint64_t) s.st_size;
+		this->length = (uint64_t)s.st_size;
 	}
 }
 
 int TheoraFileDataSource::read(void* output, int nBytes)
 {
-	if (mFilePtr == NULL) openFile();
-	uint64_t n = fread(output, 1, nBytes, mFilePtr);
+	if (this->filePtr == NULL)
+	{
+		openFile();
+	}
+	uint64_t n = fread(output, 1, nBytes, this->filePtr);
 	return (int) n;
 }
 
 void TheoraFileDataSource::seek(uint64_t byte_index)
 {
-	if (mFilePtr == NULL) openFile();
+	if (this->filePtr == NULL) 
+	{
+		openFile();
+	}
 #ifdef _LINUX //fpos_t is not a scalar in Linux, for more info refer here: https://code.google.com/p/libtheoraplayer/issues/detail?id=6
 	fpos_t fpos = { 0 };
 	fpos.__pos = byte_index;
 #else
 	fpos_t fpos = byte_index;
 #endif
-	fsetpos(mFilePtr, &fpos);
+	fsetpos(this->filePtr, &fpos);
 }
 
 uint64_t TheoraFileDataSource::size()
 {
-	if (mFilePtr == NULL) openFile();
-	return mSize;
+	if (this->filePtr == NULL)
+	{
+		openFile();
+	}
+	return this->length;
 }
 
 uint64_t TheoraFileDataSource::tell()
 {
-	if (mFilePtr == NULL) return 0;
+	if (this->filePtr == NULL) 
+	{
+		return 0;
+	}
 #ifdef _LINUX
 	fpos_t pos;
 	fgetpos(mFilePtr, &pos);
 	return (uint64_t) pos.__pos;
 #else
 	fpos_t pos;
-	fgetpos(mFilePtr, &pos);
+	fgetpos(this->filePtr, &pos);
 	return (uint64_t) pos;
 #endif
 }
 
 TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
-	mReadPointer(0),
-	mData(0)
+	readPointer(0),
+	data(0)
 {
-	mFilename = filename;
-	FILE* f = fopen(filename.c_str(),"rb");
-	if (!f) throw TheoraGenericException("Can't open video file: " + filename);
+	this->filename = filename;
+	FILE* f = fopen(this->filename.c_str(),"rb");
+	if (!f) 
+	{
+		throw TheoraGenericException("Can't open video file: " + this->filename);
+	}
 
 #ifdef _WIN32
 	struct _stat64 s;
@@ -112,15 +127,15 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
 	struct stat s;
 	fstat(fileno(f), &s);
 #endif
-	mSize = (uint64_t) s.st_size;
-	if (mSize > 0xFFFFFFFF)
+	this->length = (uint64_t)s.st_size;
+	if (this->length > 0xFFFFFFFF)
 	{
 		throw TheoraGenericException("TheoraMemoryFileDataSource doesn't support files larger than 4GB!");
 	}
-	mData = new unsigned char[(unsigned int) mSize];
-	if (mSize < UINT_MAX)
+	this->data = new unsigned char[(unsigned int) this->length];
+	if (this->length < UINT_MAX)
 	{
-		fread(mData, 1, (size_t) mSize, f);
+		fread(this->data, 1, (size_t) this->length, f);
 	}
 	else
 	{
@@ -132,37 +147,43 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
 
 TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(unsigned char* data, long size, const std::string& filename)
 {
-	mFilename = filename;
-	mData = data;
-	mSize = size;
-	mReadPointer = 0;
+	this->filename = filename;
+	this->data = data;
+	this->length = size;
+	this->readPointer = 0;
 }
 
 TheoraMemoryFileDataSource::~TheoraMemoryFileDataSource()
 {
-	if (mData) delete[] mData;
+	if (this->data) 
+	{
+		delete[] this->data;
+	}
 }
 
 int TheoraMemoryFileDataSource::read(void* output, int nBytes)
 {
-	int n = (int) ((mReadPointer+nBytes <= mSize) ? nBytes : mSize - mReadPointer);
-	if (!n) return 0;
-	memcpy(output, mData + mReadPointer, n);
-	mReadPointer += n;
+	int n = (int)((this->readPointer + nBytes <= this->length) ? nBytes : this->length - this->readPointer);
+	if (!n)
+	{
+		return 0;
+	}
+	memcpy(output, this->data + this->readPointer, n);
+	this->readPointer += n;
 	return n;
 }
 
 void TheoraMemoryFileDataSource::seek(uint64_t byte_index)
 {
-	mReadPointer = byte_index;
+	this->readPointer = byte_index;
 }
 
 uint64_t TheoraMemoryFileDataSource::size()
 {
-	return mSize;
+	return this->length;
 }
 
 uint64_t TheoraMemoryFileDataSource::tell()
 {
-	return mReadPointer;
+	return this->readPointer;
 }

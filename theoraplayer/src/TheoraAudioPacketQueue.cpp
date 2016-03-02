@@ -12,7 +12,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 TheoraAudioPacketQueue::TheoraAudioPacketQueue()
 {
-	mTheoraAudioPacketQueue = NULL;
+	this->theoraAudioPacketQueue = NULL;
 }
 
 TheoraAudioPacketQueue::~TheoraAudioPacketQueue()
@@ -23,10 +23,10 @@ TheoraAudioPacketQueue::~TheoraAudioPacketQueue()
 float TheoraAudioPacketQueue::getAudioPacketQueueLength()
 {
 	float len = 0;
-	for (TheoraAudioPacket* p = mTheoraAudioPacketQueue; p != NULL; p = p->next)
+	for (TheoraAudioPacket* p = this->theoraAudioPacketQueue; p != NULL; p = p->next)
 		len += p->numSamples;
 	
-	return len / (mAudioFrequency * mNumAudioChannels);
+	return len / (this->audioFrequency * this->numAudioChannels);
 }
 
 void TheoraAudioPacketQueue::_addAudioPacket(float* data, int numSamples)
@@ -37,10 +37,10 @@ void TheoraAudioPacketQueue::_addAudioPacket(float* data, int numSamples)
 	packet->next = NULL;
 
 
-	if (mTheoraAudioPacketQueue == NULL) mTheoraAudioPacketQueue = packet;
+	if (this->theoraAudioPacketQueue == NULL) this->theoraAudioPacketQueue = packet;
 	else
 	{
-		TheoraAudioPacket* last = mTheoraAudioPacketQueue;
+		TheoraAudioPacket* last = this->theoraAudioPacketQueue;
 		for (TheoraAudioPacket* p = last; p != NULL; p = p->next)
 			last = p;
 		last->next = packet;
@@ -49,7 +49,7 @@ void TheoraAudioPacketQueue::_addAudioPacket(float* data, int numSamples)
 
 void TheoraAudioPacketQueue::addAudioPacket(float** buffer, int numSamples, float gain)
 {
-	float* data = new float[numSamples * mNumAudioChannels];
+	float* data = new float[numSamples * this->numAudioChannels];
 	float* dataptr = data;
 	int i;
 	unsigned int j;
@@ -59,7 +59,7 @@ void TheoraAudioPacketQueue::addAudioPacket(float** buffer, int numSamples, floa
 		// apply gain, let's attenuate the samples
 		for (i = 0; i < numSamples; ++i)
 		{
-			for (j = 0; j < mNumAudioChannels; j++, ++dataptr)
+			for (j = 0; j < this->numAudioChannels; j++, ++dataptr)
 			{
 				*dataptr = buffer[j][i] * gain;
 			}
@@ -70,21 +70,21 @@ void TheoraAudioPacketQueue::addAudioPacket(float** buffer, int numSamples, floa
 		// do a simple copy, faster then the above method, when gain is 1.0f
 		for (i = 0; i < numSamples; ++i)
 		{
-			for (j = 0; j < mNumAudioChannels; j++, ++dataptr)
+			for (j = 0; j < this->numAudioChannels; j++, ++dataptr)
 			{
 				*dataptr = buffer[j][i];
 			}
 		}
 	}
 		
-	_addAudioPacket(data, numSamples * mNumAudioChannels);
+	_addAudioPacket(data, numSamples * this->numAudioChannels);
 }
 
 void TheoraAudioPacketQueue::addAudioPacket(float* buffer, int numSamples, float gain)
 {
-	float* data = new float[numSamples * mNumAudioChannels];
+	float* data = new float[numSamples * this->numAudioChannels];
 	float* dataptr = data;
-	int i, numFloats = numSamples * mNumAudioChannels;
+	int i, numFloats = numSamples * this->numAudioChannels;
 	
 	if (gain < 1.0f)
 	{
@@ -104,9 +104,9 @@ void TheoraAudioPacketQueue::addAudioPacket(float* buffer, int numSamples, float
 
 TheoraAudioPacket* TheoraAudioPacketQueue::popAudioPacket()
 {
-	if (mTheoraAudioPacketQueue == NULL) return NULL;
-	TheoraAudioPacket* p = mTheoraAudioPacketQueue;
-	mTheoraAudioPacketQueue = mTheoraAudioPacketQueue->next;
+	if (this->theoraAudioPacketQueue == NULL) return NULL;
+	TheoraAudioPacket* p = this->theoraAudioPacketQueue;
+	this->theoraAudioPacketQueue = this->theoraAudioPacketQueue->next;
 	return p;
 }
 

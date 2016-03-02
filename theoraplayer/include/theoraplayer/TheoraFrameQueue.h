@@ -7,11 +7,12 @@ This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
 
-#ifndef _TheoraFrameQueue_h
-#define _TheoraFrameQueue_h
+#ifndef THEORA_FRAMEQUEUE_H
+#define THEORA_FRAMEQUEUE_H
+
+#include <list>
 
 #include "TheoraAsync.h"
-#include <list>
 #include "TheoraExport.h"
 
 class TheoraVideoFrame;
@@ -23,13 +24,6 @@ class TheoraVideoClip;
 */
 class TheoraPlayerExport TheoraFrameQueue
 {
-protected:
-	std::list<TheoraVideoFrame*> mQueue;
-	TheoraVideoClip* mParent;
-	TheoraMutex mMutex;
-	
-	//! implementation function that returns a TheoraVideoFrame instance
-	TheoraVideoFrame* createFrameInstance(TheoraVideoClip* clip);
 public:
 	TheoraFrameQueue(TheoraVideoClip* parent);
 	~TheoraFrameQueue();
@@ -83,10 +77,18 @@ public:
 	//! return whether all frames in the queue are ready for display
 	bool isFull();
 
-	TheoraMutex* getMutex() { return &mMutex; }
+	TheoraMutex* getMutex() { return &this->mutex; }
 
 	//! returns the internal frame queue. Warning: Always lock / unlock queue's mutex before accessing frames directly!
 	std::list<TheoraVideoFrame*>& _getFrameQueue();
+
+protected:
+	std::list<TheoraVideoFrame*> queue;
+	TheoraVideoClip* parent;
+	TheoraMutex mutex;
+
+	//! implementation function that returns a TheoraVideoFrame instance
+	TheoraVideoFrame* createFrameInstance(TheoraVideoClip* clip);
 };
 
 #endif

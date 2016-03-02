@@ -56,7 +56,7 @@ static TheoraMutex counterMutex;
 
 TheoraWorkerThread::TheoraWorkerThread() : TheoraThread()
 {
-	mClip = NULL;
+	this->clip = NULL;
 }
 
 TheoraWorkerThread::~TheoraWorkerThread()
@@ -78,22 +78,27 @@ void TheoraWorkerThread::execute()
 #endif
 	while (isRunning())
 	{
-		mClip = TheoraVideoManager::getSingleton().requestWork(this);
-		if (!mClip)
+		this->clip = TheoraVideoManager::getSingleton().requestWork(this);
+		if (!this->clip)
 		{
 			_psleep(100);
 			continue;
 		}
 
-		lock.acquire(mClip->mThreadAccessMutex);
+		lock.acquire(this->clip->threadAccessMutex);
 		// if user requested seeking, do that then.
-		if (mClip->mSeekFrame >= 0) mClip->doSeek();
+		if (this->clip->seekFrame >= 0)
+		{
+			this->clip->doSeek();
+		}
 
-		if (!mClip->decodeNextFrame())
+		if (!this->clip->decodeNextFrame())
+		{
 			_psleep(1); // this happens when the video frame queue is full.
+		}
 
-		mClip->mAssignedWorkerThread = NULL;
+		this->clip->assignedWorkerThread = NULL;
 		lock.release();
-		mClip = NULL;
+		this->clip = NULL;
 	}
 }
