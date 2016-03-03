@@ -37,40 +37,6 @@ namespace aprilvideo
 	class aprilVideoExport VideoObject : public aprilui::ImageBox
 	{
 		APRILUI_CLONEABLE(VideoObject);
-	private:
-		static harray<aprilui::PropertyDescription> _propertyDescriptions;
-
-	protected:
-
-		bool mPrevDoneFlag;
-		bool mUseAlpha;
-		bool mLoop;
-		hstr mClipName;
-		TheoraVideoClip* mClip;
-		TheoraTimer* mTimer;
-		april::BlendMode mBlendMode;
-		harray<aprilui::Texture*> mTextures;
-		harray<aprilui::Image*> mVideoImages;
-		aprilui::Texture* mTexture;
-		aprilui::Image* mVideoImage;
-		float mSpeed;
-		unsigned long mPrevFrameNumber;
-		bool mSeeked;
-		int mAlphaPauseThreshold;
-		unsigned char mPrevAlpha;
-		float mInitialPrecacheFactor, mInitialPrecacheTimeout;
-		
-		float mAudioSyncOffset;
-		hstr mAudioName;
-		xal::Player* mAudioPlayer;
-		xal::Sound* mSound;
-		
-		void _update(float timeDelta);
-		void _draw();
-
-		april::Image::Format _getTextureFormat();
-		void destroyResources();
-
 	public:
 		VideoObject(chstr name);
 		static aprilui::Object* createInstance(chstr name);
@@ -81,43 +47,75 @@ namespace aprilvideo
 		
 		aprilui::Texture* getTexture();
 		const harray<aprilui::Texture*>& getTextures();
+		float getTimePosition();
+		float getInitialPrecacheFactor() { return this->initialPrecacheFactor; }
+		float getPrecacheFactor();
+		int getNumReadyFrames();
+		int getNumPrecachedFrames();
+		hstr getClipName() { return this->clipName; }
+		int getClipWidth();
+		int getClipHeight();
+		hstr getProperty(chstr name);
+		harray<aprilui::PropertyDescription> getPropertyDescriptions();
+		
+		inline int getAlphaThreshold() { return this->alphaPauseThreshold; }
+
+		DEPRECATED_ATTRIBUTE inline int getAlphaTreshold() { return this->alphaPauseThreshold; }
+
+		void setInitialPrecacheFactor(float value);
+		void setInitialPrecacheTimeout(float value);
+		void setAlphaThreshold(int threshold);
+		bool setProperty(chstr name, chstr value);
+		DEPRECATED_ATTRIBUTE void setAlphaTreshold(int threshold) { setAlphaThreshold(threshold); }
 
 		void play();
 		void pause();
 		void stop();
+		void _createClip(bool waitForCache = true);
+		void updateFrame();
+
+		void notifyEvent(chstr type, aprilui::EventArgs* args);
+			
 		bool isPlaying();
 		bool isStopped();
-		float getTimePosition();
 		virtual bool isPaused();
 		/// @note This method checks the timer rather than alphaThreshold like isPaused()
-		bool _isVideoPaused();
-		float getInitialPrecacheFactor() { return mInitialPrecacheFactor; }
-		void setInitialPrecacheFactor(float value);
-		void setInitialPrecacheTimeout(float value);
-
-		void _createClip(bool waitForCache = true);
-		bool _isClipCreated();
-		float getPrecacheFactor();
-		int getNumReadyFrames();
-		int getNumPrecachedFrames();
-		hstr getClipName() { return mClipName; }
-		int getClipWidth();
-		int getClipHeight();
+		bool _isVideoPaused();		
 		bool hasAlphaChannel();
+		bool _isClipCreated();
+
+	protected:
+		bool prevDoneFlag;
+		bool useAlpha;
+		bool loop;
+		hstr clipName;
+		TheoraVideoClip* clip;
+		TheoraTimer* timer;
+		april::BlendMode blendMode;
+		harray<aprilui::Texture*> textures;
+		harray<aprilui::Image*> videoImages;
+		aprilui::Texture* texture;
+		aprilui::Image* videoImage;
+		float speed;
+		unsigned long prevFrameNumber;
+		bool seeked;
+		int alphaPauseThreshold;
+		unsigned char prevAlpha;
+		float initialPrecacheFactor, initialPrecacheTimeout;
+
+		float audioSyncOffset;
+		hstr audioName;
+		xal::Player* audioPlayer;
+		xal::Sound* sound;
+
+		april::Image::Format _getTextureFormat();
+
+		void _update(float timeDelta);
+		void _draw();
 		
-		void updateFrame();
-		
-		void setAlphaThreshold(int threshold);
-		inline int getAlphaThreshold() { return mAlphaPauseThreshold; }
-		void notifyEvent(chstr type, aprilui::EventArgs* args);
-
-		hstr getProperty(chstr name);
-		bool setProperty(chstr name, chstr value);
-		harray<aprilui::PropertyDescription> getPropertyDescriptions();
-
-		DEPRECATED_ATTRIBUTE void setAlphaTreshold(int threshold) { setAlphaThreshold(threshold); }
-		DEPRECATED_ATTRIBUTE inline int getAlphaTreshold() { return mAlphaPauseThreshold; }
-
+		void destroyResources();
+	private:
+		static harray<aprilui::PropertyDescription> _propertyDescriptions;
 	};
 }
 #endif

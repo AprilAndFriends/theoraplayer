@@ -21,18 +21,20 @@ namespace aprilvideo
 	class VideoObject;
 	
 	class AudioVideoTimer : public VideoTimer
-	{
-		uint64_t mPrevTickCount;
-		float mSyncOffset, mPrevTimePosition, mAudioPosition;
-		float mSyncDiff, mSyncDiffFactor;
-		xal::Player* mPlayer;
-		float mT;
-		bool mDisabledAudio;
-		bool mStartedPlaying;
+	{		
 	public:
 		AudioVideoTimer(VideoObject* object, xal::Player* player, float sync_offset);
+
 		void update(float timeDelta);
 		void pause();
+	private:
+		uint64_t prevTickCount;
+		float syncOffset, prevTimePosition, audioPosition;
+		float syncDiff, syncDiffFactor;
+		xal::Player* player;
+		float t;
+		bool disabledAudio;
+		bool startedPlaying;
 	};
 }
 #endif

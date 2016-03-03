@@ -13,12 +13,12 @@ namespace aprilvideo
 {
 	VideoTimer::VideoTimer(VideoObject* object) : TheoraTimer()
 	{
-		mObject = object;
+		this->object = object;
 	}
 
 	bool VideoTimer::isPaused()
 	{
-		bool objPaused = mObject->isPaused();
+		bool objPaused = this->object->isPaused();
 		return TheoraTimer::isPaused() || objPaused;
 	}
 

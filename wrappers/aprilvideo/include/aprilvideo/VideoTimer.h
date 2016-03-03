@@ -21,11 +21,13 @@ namespace aprilvideo
 	class VideoObject;
 	
 	class VideoTimer : public TheoraTimer
-	{
-		VideoObject* mObject;
+	{		
 	public:
 		VideoTimer(VideoObject* object);
+
 		bool isPaused();
+	private:
+		VideoObject* object;
 	};
 }
 #endif

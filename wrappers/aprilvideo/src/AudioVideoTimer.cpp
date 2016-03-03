@@ -17,110 +17,116 @@ namespace aprilvideo
 {
 	AudioVideoTimer::AudioVideoTimer(VideoObject* object, xal::Player* player, float sync_offset) : VideoTimer(object)
 	{
-		mPrevTickCount = 0;
-		mSyncOffset = sync_offset;
-		mPrevTimePosition = -1;
-		mAudioPosition = 0;
-		mPlayer = player;
-		mSyncDiff = mSyncDiffFactor = 0;
-		mT = 0;
+		this->prevTickCount = 0;
+		this->syncOffset = sync_offset;
+		this->prevTimePosition = -1;
+		this->audioPosition = 0;
+		this->player = player;
+		this->syncDiff = this->syncDiffFactor = 0;
+		this->t = 0;
 		static hstr audiosystem = xal::manager->getName(); // XAL_AS_DISABLED audio system doesn't sync audio & video
-		mDisabledAudio = (audiosystem == XAL_AS_DISABLED || !xal::manager->isEnabled());
-		mStartedPlaying = 0;
+		this->disabledAudio = (audiosystem == XAL_AS_DISABLED || !xal::manager->isEnabled());
+		this->startedPlaying = 0;
 	}
 	
 	void AudioVideoTimer::update(float timeDelta)
 	{
 		VideoTimer::update(timeDelta);
-		if (!mDisabledAudio)
+		if (!this->disabledAudio)
 		{
-			bool paused = isPaused(), playerPaused = mPlayer->isPaused();
+			bool paused = isPaused(), playerPaused = this->player->isPaused();
 			// use our own time calculation because april's could be tampered with (speedup/slowdown)
 			uint64_t tickCount = htickCount();
-			if (mPrevTickCount == 0)
+			if (this->prevTickCount == 0)
 			{
-				mPrevTickCount = tickCount;
+				this->prevTickCount = tickCount;
 			}
-			timeDelta = (tickCount - mPrevTickCount) / 1000.0f;
-			if (paused) timeDelta = 0;
-			if (!paused && !mStartedPlaying)
+			timeDelta = (tickCount - this->prevTickCount) / 1000.0f;
+			if (paused)
 			{
-				mStartedPlaying = 1;
-				mPlayer->play();
+				timeDelta = 0;
 			}
-			else if (paused && !playerPaused && mStartedPlaying && !mPlayer->isFadingOut())
+			if (!paused && !this->startedPlaying)
 			{
-				mPlayer->pause();
+				this->startedPlaying = 1;
+				this->player->play();
+			}
+			else if (paused && !playerPaused && this->startedPlaying && !this->player->isFadingOut())
+			{
+				this->player->pause();
 			}
 			else if (!paused && playerPaused)
 			{
-				mPlayer->play();
+				this->player->play();
 			}
 			
-			else if (timeDelta > 0.1f) timeDelta = 0.1f; // prevent long hiccups when defoucsing window
+			else if (timeDelta > 0.1f)
+			{
+				timeDelta = 0.1f; // prevent long hiccups when defoucsing window
+			}
 
-			mPrevTickCount = tickCount;
-			if (mPlayer->isPlaying())
+			this->prevTickCount = tickCount;
+			if (this->player->isPlaying())
 			{
 				// on some platforms, getTimePosition() isn't accurate enough, so we need to manually update our timer and
 				// use the audio position for syncing
 #if defined(_DEBUG) && 0 // debug testing
-				float timePosition = (int) mPlayer->getTimePosition();
+				float timePosition = (int) this->player->getTimePosition();
 #else
-				float timePosition = mPlayer->getTimePosition();
+				float timePosition = this->player->getTimePosition();
 #endif
-				if (timePosition != mPrevTimePosition)
+				if (timePosition != this->prevTimePosition)
 				{
-					if (timePosition - mPrevTimePosition > 0.1f)
+					if (timePosition - this->prevTimePosition > 0.1f)
 					{
-						mSyncDiff = timePosition - mAudioPosition;
-						mSyncDiffFactor = (float) fabs(mSyncDiff);
-						mPrevTimePosition = timePosition;
+						this->syncDiff = timePosition - this->audioPosition;
+						this->syncDiffFactor = (float) fabs(this->syncDiff);
+						this->prevTimePosition = timePosition;
 #if defined(_DEBUG) && 0 // debug testing
-						hlog::writef(logTag + "_DEBUG", "sync diff: %.3f", mSyncDiff);
+						hlog::writef(logTag + "_DEBUG", "sync diff: %.3f", this->syncDiff);
 #endif
 					}
 					else
 					{
-						mAudioPosition = mPrevTimePosition = timePosition;
+						this->audioPosition = this->prevTimePosition = timePosition;
 					}
 				}
 				else
 				{
-					mAudioPosition += timeDelta;
+					this->audioPosition += timeDelta;
 				}
-				if (mSyncDiff != 0)
+				if (this->syncDiff != 0)
 				{
-					float chunk = timeDelta * mSyncDiffFactor;
+					float chunk = timeDelta * this->syncDiffFactor;
 					
-					if (mSyncDiff > 0)
+					if (this->syncDiff > 0)
 					{
-						if (mSyncDiff - chunk < 0)
+						if (this->syncDiff - chunk < 0)
 						{
-							chunk = mSyncDiff;
-							mSyncDiff = 0;
+							chunk = this->syncDiff;
+							this->syncDiff = 0;
 						}
 						else
 						{
-							mSyncDiff -= chunk;
+							this->syncDiff -= chunk;
 						}
-						mAudioPosition += chunk;
+						this->audioPosition += chunk;
 					}
 					else
 					{
-						if (mSyncDiff + chunk > 0)
+						if (this->syncDiff + chunk > 0)
 						{
-							chunk = -mSyncDiff;
-							mSyncDiff = 0;
+							chunk = -this->syncDiff;
+							this->syncDiff = 0;
 						}
 						else
 						{
-							mSyncDiff += chunk;
+							this->syncDiff += chunk;
 						}
-						mAudioPosition -= chunk;
+						this->audioPosition -= chunk;
 					}
 				}
-				this->time = mAudioPosition - mSyncOffset;
+				this->time = this->audioPosition - this->syncOffset;
 			}
 			else if (!xal::manager->isSuspended())
 			{
@@ -129,8 +135,8 @@ namespace aprilvideo
 		}
 		else
 		{
-			mT += timeDelta;
-			this->time = mT - mSyncOffset;
+			this->t += timeDelta;
+			this->time = this->t - this->syncOffset;
 		}
 	}
 
@@ -139,25 +145,25 @@ namespace aprilvideo
 		TheoraTimer::pause();
 		this->update(0.0f);
 		/*
-		if (!mDisabledAudio)
+		if (!this->disabledAudio)
 		{
-			bool paused = isPaused(), playerPaused = mPlayer->isPaused();
+			bool paused = isPaused(), playerPaused = this->player->isPaused();
 			// use our own time calculation because april's could be tampered with (speedup/slowdown)
 			uint64_t tickCount = htickCount();
-			if (mPrevTickCount == 0)
+			if (this->prevTickCount == 0)
 			{
-				mPrevTickCount = tickCount;
+				this->prevTickCount = tickCount;
 			}
-			timeDelta = (tickCount - mPrevTickCount) / 1000.0f;
+			timeDelta = (tickCount - this->prevTickCount) / 1000.0f;
 			if (paused) timeDelta = 0;
-			if (!paused && !mStartedPlaying)
+			if (!paused && !this->startedPlaying)
 			{
-				mStartedPlaying = 1;
-				mPlayer->play();
+				this->startedPlaying = 1;
+				this->player->play();
 			}
-			else if (paused && !playerPaused && mStartedPlaying && !mPlayer->isFadingOut())
+			else if (paused && !playerPaused && this->startedPlaying && !this->player->isFadingOut())
 			{
-				mPlayer->pause();
+				this->player->pause();
 			}
 		}
 		*/

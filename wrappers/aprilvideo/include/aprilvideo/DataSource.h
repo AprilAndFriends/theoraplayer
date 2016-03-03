@@ -15,20 +15,25 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include <theoraplayer/TheoraDataSource.h>
 
 class AprilVideoDataSource : public TheoraDataSource
-{
-	hresource mResource;
-	hstr mFilename;
-	unsigned long mSize;
+{	
 public:
 	AprilVideoDataSource(hstr filename);
 	~AprilVideoDataSource();
-	
+
+	hstr getFilename() { return this->filename; }
+
+	uint64_t getSize();
+	uint64_t getPosition();
+
+	std::string toString() { return ("HRESOURCE:" + this->filename).cStr(); }
+
 	int read(void* output, int nBytes);
 	void seek(uint64_t byte_index);
-	std::string repr() { return ("HRESOURCE:" + mFilename).cStr(); }
-	uint64_t size();
-	uint64_t tell();
-	hstr getFilename() { return mFilename; }
+	
+private:
+	hresource resource;
+	hstr filename;
+	unsigned long size;
 };
 
 #endif

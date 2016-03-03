@@ -10,33 +10,33 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 AprilVideoDataSource::AprilVideoDataSource(hstr filename)
 {
-	mFilename = filename;
-	mResource.open(filename);
+	this->filename = filename;
+	this->resource.open(filename);
 	
-	mSize = (unsigned long) mResource.size();
+	this->size = (unsigned long) this->resource.size();
 }
 
 AprilVideoDataSource::~AprilVideoDataSource()
 {
-	mResource.close();
+	this->resource.close();
 }
 
 int AprilVideoDataSource::read(void* output, int nBytes)
 {
-	return mResource.readRaw(output, nBytes);
+	return this->resource.readRaw(output, nBytes);
 }
 
 void AprilVideoDataSource::seek(uint64_t byte_index)
 {
-	mResource.seek((long) byte_index, hresource::START);
+	this->resource.seek((long) byte_index, hresource::START);
 }
 
-uint64_t AprilVideoDataSource::size()
+uint64_t AprilVideoDataSource::getSize()
 {
-	return mSize;
+	return this->size;
 }
 
-uint64_t AprilVideoDataSource::tell()
+uint64_t AprilVideoDataSource::getPosition()
 {
-	return mResource.position();
+	return this->resource.position();
 }

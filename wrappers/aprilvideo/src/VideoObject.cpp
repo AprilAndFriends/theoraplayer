@@ -39,30 +39,30 @@ namespace aprilvideo
 	
 	VideoObject::VideoObject(chstr name) : aprilui::ImageBox(name)
 	{
-		mUseAlpha = 0;
-		mPrevDoneFlag = 0;
-		mLoop = 1;
-		mSpeed = 1.0f;
-		mClip = NULL;
-		mVideoImage = NULL;
-		mTexture = NULL;
-		mTimer = NULL;
-		mSound = NULL;
-		mAudioPlayer = NULL;
-		mAudioSyncOffset = 0;
+		this->useAlpha = 0;
+		this->prevDoneFlag = 0;
+		this->loop = 1;
+		this->speed = 1.0f;
+		this->clip = NULL;
+		this->videoImage = NULL;
+		this->texture = NULL;
+		this->timer = NULL;
+		this->sound = NULL;
+		this->audioPlayer = NULL;
+		this->audioSyncOffset = 0;
 		hmutex::ScopeLock lock(&gReferenceMutex);
 		gReferences += this;
 		lock.release();
-		mAlphaPauseThreshold = 0;
-		mPrevFrameNumber = 0;
-		mSeeked = 0;
-		mPrevAlpha = 255;
-		mBlendMode = april::BM_DEFAULT;
-		mInitialPrecacheTimeout = 0.5f;
+		this->alphaPauseThreshold = 0;
+		this->prevFrameNumber = 0;
+		this->seeked = 0;
+		this->prevAlpha = 255;
+		this->blendMode = april::BM_DEFAULT;
+		this->initialPrecacheTimeout = 0.5f;
 #if defined(_ANDROID) || defined(_WINRT)
-		mInitialPrecacheFactor = 0.9f; // slower devices, better to precache more
+		this->initialPrecacheFactor = 0.9f; // slower devices, better to precache more
 #else
-		mInitialPrecacheFactor = 0.5f;
+		this->initialPrecacheFactor = 0.5f;
 #endif
 		
 		if (!gVideoManager)
@@ -86,28 +86,28 @@ namespace aprilvideo
 
 	VideoObject::VideoObject(const VideoObject& other) : aprilui::ImageBox(other)
 	{
-		mUseAlpha = other.mUseAlpha;
-		mPrevDoneFlag = other.mPrevDoneFlag;
-		mLoop = other.mLoop;
-		mSpeed = other.mSpeed;
-		mClipName = other.mClipName;
-		mClip = NULL;
-		mBlendMode = other.mBlendMode;
-		mVideoImage = NULL;
-		mTexture = NULL;
-		mTimer = NULL;
-		mSound = NULL;
-		mAudioPlayer = NULL;
-		mAudioSyncOffset = 0;
+		this->useAlpha = other.useAlpha;
+		this->prevDoneFlag = other.prevDoneFlag;
+		this->loop = other.loop;
+		this->speed = other.speed;
+		this->clipName = other.clipName;
+		this->clip = NULL;
+		this->blendMode = other.blendMode;
+		this->videoImage = NULL;
+		this->texture = NULL;
+		this->timer = NULL;
+		this->sound = NULL;
+		this->audioPlayer = NULL;
+		this->audioSyncOffset = 0;
 		hmutex::ScopeLock lock(&gReferenceMutex);
 		gReferences += this;
 		lock.release();
-		mAlphaPauseThreshold = other.mAlphaPauseThreshold;
-		mPrevFrameNumber = 0;
-		mSeeked = 0;
-		mPrevAlpha = 255;
-		mInitialPrecacheFactor = other.mInitialPrecacheFactor;
-		mInitialPrecacheTimeout = other.mInitialPrecacheTimeout;
+		this->alphaPauseThreshold = other.alphaPauseThreshold;
+		this->prevFrameNumber = 0;
+		this->seeked = 0;
+		this->prevAlpha = 255;
+		this->initialPrecacheFactor = other.initialPrecacheFactor;
+		this->initialPrecacheTimeout = other.initialPrecacheTimeout;
 	}
 
 	VideoObject::~VideoObject()
@@ -120,50 +120,50 @@ namespace aprilvideo
 	
 	bool VideoObject::isPlaying()
 	{
-		return (mClip != NULL && !isPaused() && !mClip->isDone());
+		return (this->clip != NULL && !isPaused() && !this->clip->isDone());
 	}
 	
 	bool VideoObject::isPaused()
 	{
-		if (mClip == NULL) return true;
-		if (mAlphaPauseThreshold == 0)
+		if (this->clip == NULL) return true;
+		if (this->alphaPauseThreshold == 0)
 		{
 			bool visible = isDerivedVisible();
 			return !visible;
 		}
-		else if (mAlphaPauseThreshold < 0)
+		else if (this->alphaPauseThreshold < 0)
 		{
 			return false;
 		}
 		else
 		{
 			int alpha = getDerivedAlpha() * getVisibilityFlag();
-			return alpha < mAlphaPauseThreshold;
+			return alpha < this->alphaPauseThreshold;
 		}
 	}
 
 	bool VideoObject::_isVideoPaused()
 	{
-		return (this->mTimer != NULL && this->mTimer->isPaused());
+		return (this->timer != NULL && this->timer->isPaused());
 	}
 
 	bool VideoObject::isStopped()
 	{
-		return (mClip == NULL || mClip->isDone());
+		return (this->clip == NULL || this->clip->isDone());
 	}
 	
 	float VideoObject::getTimePosition()
 	{
-		return (mClip != NULL ? mClip->getTimePosition() : 0.0f);
+		return (this->clip != NULL ? this->clip->getTimePosition() : 0.0f);
 	}
 
 	void VideoObject::setInitialPrecacheFactor(float value)
 	{
-		mInitialPrecacheFactor = hclamp(value, 0.0f, 1.0f);
+		this->initialPrecacheFactor = hclamp(value, 0.0f, 1.0f);
 	}
 	void VideoObject::setInitialPrecacheTimeout(float value)
 	{
-		mInitialPrecacheTimeout = hmax(value, 0.0f);
+		this->initialPrecacheTimeout = hmax(value, 0.0f);
 	}
 
 	aprilui::Object* VideoObject::createInstance(chstr name)
@@ -175,7 +175,7 @@ namespace aprilvideo
 	{
 		if (type == aprilui::Event::AttachedToObject)
 		{
-			if (this->image != (aprilui::BaseImage*)mVideoImage)
+			if (this->image != (aprilui::BaseImage*)this->videoImage)
 			{
 				this->image = NULL;
 			}
@@ -185,47 +185,47 @@ namespace aprilvideo
 	
 	void VideoObject::destroyResources()
 	{
-		foreach (aprilui::Image*, it, mVideoImages)
+		foreach (aprilui::Image*, it, this->videoImages)
 		{
 			delete *it;
 		}
-		mVideoImage = NULL;
+		this->videoImage = NULL;
 		this->image = NULL;
-		mVideoImages.clear();
+		this->videoImages.clear();
 
-		foreach (aprilui::Texture*, it, mTextures)
+		foreach (aprilui::Texture*, it, this->textures)
 		{
 			delete *it;
 		}
-		mTextures.clear();
-		mTexture = NULL;
+		this->textures.clear();
+		this->texture = NULL;
 
-		if (mClip)
+		if (this->clip)
 		{
-			gVideoManager->destroyVideoClip(mClip);
-			mClip = NULL;
+			gVideoManager->destroyVideoClip(this->clip);
+			this->clip = NULL;
 		}
-		if (mAudioPlayer)
+		if (this->audioPlayer)
 		{
-			xal::manager->destroyPlayer(mAudioPlayer);
-			mAudioPlayer = NULL;
+			xal::manager->destroyPlayer(this->audioPlayer);
+			this->audioPlayer = NULL;
 		}
-		if (mSound)
+		if (this->sound)
 		{
-			xal::manager->destroySound(mSound);
-			mSound = NULL;
+			xal::manager->destroySound(this->sound);
+			this->sound = NULL;
 		}
 		
-		if (mTimer)
+		if (this->timer)
 		{
-			delete mTimer;
-			mTimer = NULL;
+			delete this->timer;
+			this->timer = NULL;
 		}
 	}
 	
 	hstr VideoObject::getFullPath()
 	{
-		hstr path = hrdir::joinPath(hrdir::joinPath(this->dataset->getFilePath(), "video"), mClipName);
+		hstr path = hrdir::joinPath(hrdir::joinPath(this->dataset->getFilePath(), "video"), this->clipName);
 		if (!path.endsWith(".ogg") && !path.endsWith(".ogv") && !path.endsWith(".mp4"))
 		{
 			if (hresource::exists(path + defaultFileExtension))
@@ -241,31 +241,31 @@ namespace aprilvideo
 	
 	void VideoObject::play()
 	{
-		if (mClip)
+		if (this->clip)
 		{
-			mClip->play();
+			this->clip->play();
 		}
 	}
 	
 	void VideoObject::pause()
 	{
-		if (mClip)
+		if (this->clip)
 		{
-			mClip->pause();
+			this->clip->pause();
 		}
 	}
 	
 	void VideoObject::stop()
 	{
-		if (mClip)
+		if (this->clip)
 		{
-			mClip->stop();
+			this->clip->stop();
 		}
 	}
 	
 	april::Image::Format VideoObject::_getTextureFormat()
 	{
-		if (mUseAlpha)
+		if (this->useAlpha)
 		{
 			return april::rendersys->getNativeTextureFormat(april::Image::FORMAT_RGBA);
 		}
@@ -278,37 +278,37 @@ namespace aprilvideo
 	
 	bool VideoObject::_isClipCreated()
 	{
-		return mClip != NULL;
+		return this->clip != NULL;
 	}
 	
 	float VideoObject::getPrecacheFactor()
 	{
-		return mClip == NULL ? 0 : ((float) mClip->getNumReadyFrames()) / mClip->getNumPrecachedFrames();
+		return this->clip == NULL ? 0 : ((float) this->clip->getNumReadyFrames()) / this->clip->getNumPrecachedFrames();
 	}
 
 	int VideoObject::getNumReadyFrames()
 	{
-		return mClip == NULL ? 0 : mClip->getNumReadyFrames();
+		return this->clip == NULL ? 0 : this->clip->getNumReadyFrames();
 	}
 
 	int VideoObject::getNumPrecachedFrames()
 	{
-		return mClip == NULL ? 0 : mClip->getNumPrecachedFrames();
+		return this->clip == NULL ? 0 : this->clip->getNumPrecachedFrames();
 	}
 
 	bool VideoObject::hasAlphaChannel()
 	{
-		return mClip == NULL ? false : mClip->hasAlphaChannel();
+		return this->clip == NULL ? false : this->clip->hasAlphaChannel();
 	}
 
 	int VideoObject::getClipWidth()
 	{
-		return mClip == NULL ? 0 : mClip->getWidth();
+		return this->clip == NULL ? 0 : this->clip->getWidth();
 	}
 
 	int VideoObject::getClipHeight()
 	{
-		return mClip == NULL ? false : mClip->getHeight();
+		return this->clip == NULL ? false : this->clip->getHeight();
 	}
 
 	void VideoObject::_createClip(bool waitForCache)
@@ -362,9 +362,9 @@ namespace aprilvideo
 				try
 				{
 					if (april::window->getName() == "OpenKODE") // because mp4's are opened via apple's api, and that doesn't play nice with OpenKODE dir structure.
-						mClip = gVideoManager->createVideoClip(hrdir::joinPath("res", path).cStr(), mode, precached);
+						this->clip = gVideoManager->createVideoClip(hrdir::joinPath("res", path).cStr(), mode, precached);
 					else
-						mClip = gVideoManager->createVideoClip(path.cStr(), mode, precached);
+						this->clip = gVideoManager->createVideoClip(path.cStr(), mode, precached);
 				}
 				catch (_TheoraGenericException& e)
 				{
@@ -395,13 +395,13 @@ namespace aprilvideo
 						source = new AprilVideoDataSource(path);
 					}
 					
-					mClip = gVideoManager->createVideoClip(source, mode, precached);
+					this->clip = gVideoManager->createVideoClip(source, mode, precached);
 					r.close();
 					hlog::write(logTag, "Created video clip.");
 				}
 				else
 				{
-					mClip = gVideoManager->createVideoClip(new AprilVideoDataSource(path), mode, precached);
+					this->clip = gVideoManager->createVideoClip(new AprilVideoDataSource(path), mode, precached);
 				}
 			}
 		}
@@ -409,11 +409,11 @@ namespace aprilvideo
 		{
 			throw Exception(e.getErrorText().c_str());
 		}
-		if (mClip->getWidth() == 0) throw Exception("Failed to load video file: " + path);
-		mClip->setAutoRestart(mLoop);
+		if (this->clip->getWidth() == 0) throw Exception("Failed to load video file: " + path);
+		this->clip->setAutoRestart(this->loop);
 		
-		int tw = mClip->getWidth();
-		int th = mClip->getHeight();
+		int tw = this->clip->getWidth();
+		int th = this->clip->getHeight();
 		april::RenderSystem::Caps caps = april::rendersys->getCaps();
 		if (!caps.npotTexturesLimited && !caps.npotTextures)
 		{
@@ -421,30 +421,30 @@ namespace aprilvideo
 			th = hpotCeil(th);
 		}
 
-		hlog::write(logTag, "Creating video textures for " + mClipName);
+		hlog::write(logTag, "Creating video textures for " + this->clipName);
 		april::Texture* tex = NULL;
 		for (int i = 0; i < 2; i++)
 		{
 			tex = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
-			mTexture = new aprilui::Texture(tex->getFilename() + "_" + hstr(i + 1), tex);
+			this->texture = new aprilui::Texture(tex->getFilename() + "_" + hstr(i + 1), tex);
 
-			mVideoImage = new aprilui::Image(mTexture, "video_img_" + hstr(i + 1), grect(mClip->getSubFrameOffsetX(), mClip->getSubFrameOffsetY(), mClip->getSubFrameWidth(), mClip->getSubFrameHeight()));
-			mVideoImage->setBlendMode(mBlendMode);
+			this->videoImage = new aprilui::Image(this->texture, "video_img_" + hstr(i + 1), grect(this->clip->getSubFrameOffsetX(), this->clip->getSubFrameOffsetY(), this->clip->getSubFrameWidth(), this->clip->getSubFrameHeight()));
+			this->videoImage->setBlendMode(this->blendMode);
 
-			mTextures += mTexture;
-			mVideoImages += mVideoImage;
+			this->textures += this->texture;
+			this->videoImages += this->videoImage;
 		}
 
-		if (waitForCache && mInitialPrecacheFactor > 0.0f)
+		if (waitForCache && this->initialPrecacheFactor > 0.0f)
 		{
-			float factor = hmax(2.0f / mClip->getNumPrecachedFrames(), mInitialPrecacheFactor);
-			float precached = (float) mClip->getNumReadyFrames() / mClip->getNumPrecachedFrames();
+			float factor = hmax(2.0f / this->clip->getNumPrecachedFrames(), this->initialPrecacheFactor);
+			float precached = (float) this->clip->getNumReadyFrames() / this->clip->getNumPrecachedFrames();
 			if (precached < factor)
 			{
 				hlog::writef(logTag, "Waiting for cache (%.1f%% / %.1f%%): %s", precached * 100.0f, factor * 100.0f, path.cStr());
 				if (factor > 0)
 				{
-					precached = mClip->waitForCache(factor, mInitialPrecacheTimeout); // better to wait a while then to display an empty image
+					precached = this->clip->waitForCache(factor, this->initialPrecacheTimeout); // better to wait a while then to display an empty image
 				}
 				if (precached < factor)
 				{
@@ -453,12 +453,12 @@ namespace aprilvideo
 			}
 		}
 
-		if (mAudioName != "")
+		if (this->audioName != "")
 		{
 			hstr category = "video";
-			if (mAudioName.contains("/"))
+			if (this->audioName.contains("/"))
 			{
-				harray<hstr> folders = hrdir::splitPath(mAudioName);
+				harray<hstr> folders = hrdir::splitPath(this->audioName);
 				hstr path_category = folders[folders.size() - 2];
 				if (xal::manager->hasCategory(path_category)) category = path_category;
 			}
@@ -477,57 +477,57 @@ namespace aprilvideo
 				}
 #endif
 			}
-			mSound = xal::manager->createSound(hrdir::joinPath(hrdir::joinPath(this->dataset->getFilePath(), "video"), mAudioName), category);
-			if (mSound != NULL)
+			this->sound = xal::manager->createSound(hrdir::joinPath(hrdir::joinPath(this->dataset->getFilePath(), "video"), this->audioName), category);
+			if (this->sound != NULL)
 			{
-				mAudioPlayer = xal::manager->createPlayer(mSound->getName());
-				mTimer = new AudioVideoTimer(this, mAudioPlayer, mAudioSyncOffset);
+				this->audioPlayer = xal::manager->createPlayer(this->sound->getName());
+				this->timer = new AudioVideoTimer(this, this->audioPlayer, this->audioSyncOffset);
 			}
 		}
-		if (mTimer == NULL)
+		if (this->timer == NULL)
 		{
-			mTimer = new VideoTimer(this);
+			this->timer = new VideoTimer(this);
 		}
-		mClip->setTimer(mTimer);
-		mClip->setPlaybackSpeed(mSpeed);
+		this->clip->setTimer(this->timer);
+		this->clip->setPlaybackSpeed(this->speed);
 		update(0.0f); // to grab the first frame.
 	}
 	
 	void VideoObject::updateFrame()
 	{
-		if (mClip == NULL && mClipName != "")
+		if (this->clip == NULL && this->clipName != "")
 		{
 			_createClip();
 		}
-		if (mClip)
+		if (this->clip)
 		{
-			TheoraVideoFrame* f = mClip->getNextFrame();
+			TheoraVideoFrame* f = this->clip->getNextFrame();
 			bool pop = true, restoringTexture = false;
-			if (!mTexture->isLoaded())
+			if (!this->texture->isLoaded())
 			{
 				restoringTexture = true;
-				hlog::write(logTag, this->mClipName + ": Textures unloaded, reloading");
+				hlog::write(logTag, this->clipName + ": Textures unloaded, reloading");
 				int i = 1;
-				foreach (aprilui::Texture*, it, mTextures)
+				foreach (aprilui::Texture*, it, this->textures)
 				{
-					hlog::write(logTag, this->mClipName + ": Reloading texture " + hstr(i));
+					hlog::write(logTag, this->clipName + ": Reloading texture " + hstr(i));
 					(*it)->load();
 					i++;
 				}
 				if (!f)
 				{
-					hlog::write(logTag, this->mClipName + ": Texture restored, waiting for video frame to decode to fill texture.");
-					int nReady = mClip->getNumReadyFrames();
+					hlog::write(logTag, this->clipName + ": Texture restored, waiting for video frame to decode to fill texture.");
+					int nReady = this->clip->getNumReadyFrames();
 					if (nReady == 0)
 					{
-						mClip->waitForCache();
+						this->clip->waitForCache();
 					}
-					f = mClip->getFrameQueue()->getFirstAvailableFrame();
+					f = this->clip->getFrameQueue()->getFirstAvailableFrame();
 					pop = false;
 				}
 				else
 				{
-					hlog::write(logTag, this->mClipName + ": Texture restored, using current frame to fill restored texture content.");
+					hlog::write(logTag, this->clipName + ": Texture restored, using current frame to fill restored texture content.");
 				}
 			}
 			if (f)
@@ -537,57 +537,57 @@ namespace aprilvideo
 				size.y = f->getHeight();
 				april::Image::Format textureFormat = _getTextureFormat();
 				// switch textures each frame to optimize GPU pipeline
-				int index = mVideoImage == mVideoImages[0] ? 1 : 0;
-				mTexture = mTextures[index];
+				int index = this->videoImage == this->videoImages[0] ? 1 : 0;
+				this->texture = this->textures[index];
 
 				if (restoringTexture)
 				{
-					if (mTextures[index]->isLoaded())
+					if (this->textures[index]->isLoaded())
 					{
-						hlog::write(logTag, this->mClipName + ": Verified that new texture is loaded.");
+						hlog::write(logTag, this->clipName + ": Verified that new texture is loaded.");
 					}
 					else
 					{
-						hlog::error(logTag, this->mClipName + ": New texture is not loaded!");
+						hlog::error(logTag, this->clipName + ": New texture is not loaded!");
 					}
 				}
 
-				mVideoImage = mVideoImages[index];
-				this->image = mVideoImage;
+				this->videoImage = this->videoImages[index];
+				this->image = this->videoImage;
 #ifdef _TEXWRITE_BENCHMARK
 				long t = clock();
 				int n = 256;
 				char msg[1024];
 				for (int i = 0; i < n; i++)
 				{
-					mTexture->getTexture()->write(0, 0, (int)size.x, (int)size.y, 0, 0, f->getBuffer(), (int)size.x, (int)size.y, textureFormat);
+					this->texture->getTexture()->write(0, 0, (int)size.x, (int)size.y, 0, 0, f->getBuffer(), (int)size.x, (int)size.y, textureFormat);
 				}
 				float diff = ((float) (clock() - t) * 1000.0f) / CLOCKS_PER_SEC;
 				sprintf(msg, "BENCHMARK: uploading n %dx%d video frames to texture took %.1fms (%.2fms average per frame)\n", (int)size.x, (int)size.y, diff, diff / n);
 				hlog::write(logTag, msg);
 #else
-				mTexture->getTexture()->write(0, 0, (int)size.x, (int)size.y, 0, 0, f->getBuffer(), (int)size.x, (int)size.y, textureFormat);
+				this->texture->getTexture()->write(0, 0, (int)size.x, (int)size.y, 0, 0, f->getBuffer(), (int)size.x, (int)size.y, textureFormat);
 #endif
 				if (pop)
 				{
-					mClip->popFrame();
+					this->clip->popFrame();
 				}
-				if (mLoop)
+				if (this->loop)
 				{
 					unsigned long number = f->getFrameNumber();
-					if (mSeeked) mSeeked = 0;
-					else if (number < mPrevFrameNumber)
+					if (this->seeked) this->seeked = 0;
+					else if (number < this->prevFrameNumber)
 					{
 #ifdef _PLAYBACK_DONE_DEBUG
-						hlog::writef(logTag, "PlaybackDone(looping): %s", mClipName.cStr());
+						hlog::writef(logTag, "PlaybackDone(looping): %s", this->clipName.cStr());
 #endif
 						triggerEvent("PlaybackDone");
 					}
-					mPrevFrameNumber = number;
+					this->prevFrameNumber = number;
 				}
 				if (restoringTexture)
 				{
-					hlog::write(logTag, this->mClipName + ": Successfully uploaded video frame to restored texture.");
+					hlog::write(logTag, this->clipName + ": Successfully uploaded video frame to restored texture.");
 				}
 			}
 		}
@@ -595,12 +595,12 @@ namespace aprilvideo
 
 	aprilui::Texture* VideoObject::getTexture()
 	{
-		return mTexture;
+		return this->texture;
 	}
 
 	const harray<aprilui::Texture*>& VideoObject::getTextures()
 	{
-		return mTextures;
+		return this->textures;
 	}
 
 	void VideoObject::_draw()
@@ -612,42 +612,42 @@ namespace aprilvideo
 	void VideoObject::_update(float timeDelta)
 	{
 		ImageBox::_update(timeDelta);
-		if (mClip)
+		if (this->clip)
 		{
-			if (mAudioPlayer)
+			if (this->audioPlayer)
 			{
-				float pitch = mAudioPlayer->getPitch();
-				float desiredPitch = mSpeed;
+				float pitch = this->audioPlayer->getPitch();
+				float desiredPitch = this->speed;
 				if (pitch != desiredPitch)
 				{
-					mAudioPlayer->setPitch(desiredPitch);
+					this->audioPlayer->setPitch(desiredPitch);
 				}
 			}
 
-			if (!mLoop)
+			if (!this->loop)
 			{
-				bool done = mClip->isDone();
-				if (done && mAudioPlayer != NULL && mAudioPlayer->isPlaying())
+				bool done = this->clip->isDone();
+				if (done && this->audioPlayer != NULL && this->audioPlayer->isPlaying())
 				{
 					done = false;
 				}
-				if (mPrevDoneFlag == 0 && done == 1)
+				if (this->prevDoneFlag == 0 && done == 1)
 				{
 //#ifdef _PLAYBACK_DONE_DEBUG
-					hlog::writef(logTag, "PlaybackDone: %s", mClipName.cStr());
+					hlog::writef(logTag, "PlaybackDone: %s", this->clipName.cStr());
 //#endif
 					triggerEvent("PlaybackDone");
 				}
-				mPrevDoneFlag = done;
+				this->prevDoneFlag = done;
 			}
-			mClip->update(timeDelta);
+			this->clip->update(timeDelta);
 
-			if (mAlphaPauseThreshold < 0 && !isDerivedVisible() && !isPaused())
+			if (this->alphaPauseThreshold < 0 && !isDerivedVisible() && !isPaused())
 			{
 				updateFrame();
 				if (isDebugModeEnabled())
 				{
-					hlog::write(logTag, mClipName + ": Video object is not visible, but alpha_pause_threshold is set to -1, updating frame");
+					hlog::write(logTag, this->clipName + ": Video object is not visible, but alpha_pause_threshold is set to -1, updating frame");
 				}
 			}
 		}
@@ -655,18 +655,18 @@ namespace aprilvideo
 	
 	void VideoObject::setAlphaThreshold(int threshold)
 	{
-		mAlphaPauseThreshold = hclamp(threshold, -1, 255); // -1 indicates a situation where the user wants the video playing all the time
+		this->alphaPauseThreshold = hclamp(threshold, -1, 255); // -1 indicates a situation where the user wants the video playing all the time
 	}
 	
 	bool VideoObject::setProperty(chstr name, chstr value)
 	{
 		if      (name == "video")
 		{
-			mClipName = value;
+			this->clipName = value;
 			hstr path = getFullPath();
 			if (!hresource::exists(path)) throw Exception("Unable to find video file: " + path);
 		}
-		else if (name == "video_alpha") mUseAlpha = value;
+		else if (name == "video_alpha") this->useAlpha = value;
 		else if (name == "alpha_pause_threshold") setAlphaThreshold(value);
 		else if (name == "alpha_pause_treshold")
 		{
@@ -675,10 +675,10 @@ namespace aprilvideo
 		}
 		else if (name == "loop")
 		{
-			mLoop = value;
-			if (mClip)
+			this->loop = value;
+			if (this->clip)
 			{
-				mClip->setAutoRestart(mLoop);
+				this->clip->setAutoRestart(this->loop);
 			}
 		}
 		else if (name == "initial_precache_factor")
@@ -691,23 +691,23 @@ namespace aprilvideo
 		}
 		else if (name == "speed")
 		{
-			mSpeed = value;
-			if (mClip) mClip->setPlaybackSpeed(mSpeed);
+			this->speed = value;
+			if (this->clip) this->clip->setPlaybackSpeed(this->speed);
 		}
 		else if (name == "time")
 		{
-			if (!mClip && mClipName != "") update(0); // try to create the clip if it hasn't been created already
-			if (mClip)
+			if (!this->clip && this->clipName != "") update(0); // try to create the clip if it hasn't been created already
+			if (this->clip)
 			{
 				float time = value;
-				mSeeked = 1;
-				mClip->seek(time);
+				this->seeked = 1;
+				this->clip->seek(time);
 			}
-			else hlog::warn(logTag, "VideoObject ignoring 'time' param, mClip is NULL");
+			else hlog::warn(logTag, "VideoObject ignoring 'time' param, this->clip is NULL");
 		}
 		else if (name == "audio")
 		{
-			mAudioName = value;
+			this->audioName = value;
 		}
 		else if (name == "alpha")
 		{
@@ -715,7 +715,7 @@ namespace aprilvideo
 		}
 		else if (name == "sync_offset")
 		{
-			mAudioSyncOffset = value;
+			this->audioSyncOffset = value;
 		}
 		else if (name == "blend_mode")
 		{
@@ -730,30 +730,30 @@ namespace aprilvideo
 				hlog::errorf(logTag, "Unknown VideoObject blend mode: %s", name.cStr());
 				return 1;
 			}
-			mBlendMode = mode;
-			if (mVideoImage)
+			this->blendMode = mode;
+			if (this->videoImage)
 			{
-				mVideoImage->setBlendMode(mode);
+				this->videoImage->setBlendMode(mode);
 			}
 		}
 		else if (name == "state")
 		{
 			if (value == "playing")
 			{
-				if (mClip && mClip->isPaused())
+				if (this->clip && this->clip->isPaused())
 				{
-					mClip->play();
+					this->clip->play();
 				}
 			}
 			else if (value == "paused")
 			{
-				if (mClip && !mClip->isPaused()) mClip->pause();
+				if (this->clip && !this->clip->isPaused()) this->clip->pause();
 			}
 			else if (value == "stopped")
 			{
-				if (mClip)
+				if (this->clip)
 				{
-					mClip->stop();
+					this->clip->stop();
 				}
 			}
 			else throw Exception("VideoObject: unable to set state property to '" + value + "'.");
@@ -764,42 +764,42 @@ namespace aprilvideo
 	
 	hstr VideoObject::getProperty(chstr name)
 	{
-		if (name == "video")						return mClipName;
-		if (name == "video_alpha")					return mUseAlpha ? "1" : "0";
-		if (name == "alpha_pause_threshold")		return mAlphaPauseThreshold;
+		if (name == "video")						return this->clipName;
+		if (name == "video_alpha")					return this->useAlpha ? "1" : "0";
+		if (name == "alpha_pause_threshold")		return this->alphaPauseThreshold;
 		if (name == "alpha_pause_treshold")
 		{
 			hlog::warn(logTag, "'alpha_pause_treshold' is deprecated. Use 'alpha_pause_threshold' instead."); // DEPRECATED
-			return mAlphaPauseThreshold;
+			return this->alphaPauseThreshold;
 		}
-		if (name == "loop")							return mLoop ? "1" : "0";
-		if (name == "speed")						return mSpeed;
-		if (name == "initial_precache_factor")		return mInitialPrecacheFactor;
-		if (name == "initial_precache_timeout")		return mInitialPrecacheTimeout;
+		if (name == "loop")							return this->loop ? "1" : "0";
+		if (name == "speed")						return this->speed;
+		if (name == "initial_precache_factor")		return this->initialPrecacheFactor;
+		if (name == "initial_precache_timeout")		return this->initialPrecacheTimeout;
 		if (name == "time")							return this->getTimePosition();
 		if (name == "videoWidth" || name == "videoHeight" || name == "duration")
 		{
-			if (mClip == NULL && mClipName != "")
+			if (this->clip == NULL && this->clipName != "")
 			{
 				_createClip();
 			}
-			if (name == "duration")		return mClip ? hstr(mClip->getDuration()) : "0";
-			if (name == "videoWidth")	return mClip ? hstr(mClip->getWidth()) : "0";
-			if (name == "videoHeight")	return mClip ? hstr(mClip->getHeight()) : "0";
+			if (name == "duration")		return this->clip ? hstr(this->clip->getDuration()) : "0";
+			if (name == "videoWidth")	return this->clip ? hstr(this->clip->getWidth()) : "0";
+			if (name == "videoHeight")	return this->clip ? hstr(this->clip->getHeight()) : "0";
 			// should never happen
 			return "0";
 		}
-		if (name == "audio")						return mAudioName;
-		if (name == "sync_offset")					return mAudioSyncOffset;
+		if (name == "audio")						return this->audioName;
+		if (name == "sync_offset")					return this->audioSyncOffset;
 		if (name == "blend_mode")
 		{
-			if (mVideoImage)
+			if (this->videoImage)
 			{
-				if (mBlendMode == april::BM_DEFAULT)	return "default";
-				if (mBlendMode == april::BM_ALPHA)		return "alpha";
-				if (mBlendMode == april::BM_ADD)		return "add";
-				if (mBlendMode == april::BM_SUBTRACT)	return "subtract";
-				if (mBlendMode == april::BM_OVERWRITE)	return "overwrite";
+				if (this->blendMode == april::BM_DEFAULT)	return "default";
+				if (this->blendMode == april::BM_ALPHA)		return "alpha";
+				if (this->blendMode == april::BM_ADD)		return "add";
+				if (this->blendMode == april::BM_SUBTRACT)	return "subtract";
+				if (this->blendMode == april::BM_OVERWRITE)	return "overwrite";
 				return "unknown";
 			}
 			hlog::error(logTag, "Unable to get blend_mode to VideoObject, image is NULL");
