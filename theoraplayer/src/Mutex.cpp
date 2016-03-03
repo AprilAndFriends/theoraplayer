@@ -14,10 +14,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Exception.h"
 #include "Mutex.h"
 #include "Thread.h"
-
-#include "TheoraException.h"
 
 namespace theoraplayer
 {
@@ -129,14 +128,14 @@ namespace theoraplayer
 	{
 		// TODOth
 		//throw ObjectCannotCopyException("canno theoraplayer::Mutex");
-		throw _TheoraGenericException("Cannot copy theoraplayer::Mutex object!");
+		throw TheoraplayerException("Cannot copy theoraplayer::Mutex object!");
 	}
 
 	Mutex& Mutex::operator=(Mutex& other)
 	{
 		// TODOth
 		//throw ObjectCannotAssignException("theoraplayer::Mutex");
-		throw _TheoraGenericException("Cannot assign theoraplayer::Mutex object!");
+		throw TheoraplayerException("Cannot assign theoraplayer::Mutex object!");
 		return (*this);
 	}
 

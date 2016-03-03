@@ -16,10 +16,10 @@
 #include "TheoraTimer.h"
 #include "TheoraDataSource.h"
 #include "TheoraUtil.h"
-#include "TheoraException.h"
 #include "TheoraVideoClip_Theora.h"
 #include "TheoraPixelTransform.h"
 
+#include "Exception.h"
 #include "Mutex.h"
 
 TheoraVideoClip_Theora::TheoraVideoClip_Theora(TheoraDataSource* data_source,
@@ -440,11 +440,11 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 		{
 			if (iSuccess < 0)
 			{
-				throw TheoraGenericException("Error parsing Theora stream headers.");
+				throw TheoraplayerException("Error parsing Theora stream headers!");
 			}
 			if (!th_decode_headerin(&this->info.TheoraInfo, &this->info.TheoraComment, &this->info.TheoraSetup, &tempOggPacket))
 			{
-				throw TheoraGenericException("invalid theora stream");
+				throw TheoraplayerException("Invalid theora stream!");
 			}
 			
 			++this->theoraStreams;
@@ -455,12 +455,12 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 		{
 			if (iSuccess < 0)
 			{
-				throw TheoraGenericException("Error parsing vorbis stream headers");
+				throw TheoraplayerException("Error parsing vorbis stream headers!");
 			}
 			
 			if (vorbis_synthesis_headerin(&this->info.VorbisInfo, &this->info.VorbisComment,&tempOggPacket))
 			{
-				throw TheoraGenericException("invalid stream");
+				throw TheoraplayerException("Invalid stream!");
 			}
 			
 			++this->vorbisStreams;
@@ -486,7 +486,7 @@ void TheoraVideoClip_Theora::readTheoraVorbisHeaders()
 			
 			if (bytes_read == 0)
 			{
-				throw TheoraGenericException("End of file found prematurely");
+				throw TheoraplayerException("End of file found prematurely!");
 			}
 		}
 	} //end while looking for all headers

@@ -16,8 +16,8 @@
 #include "TheoraTimer.h"
 #include "TheoraDataSource.h"
 #include "TheoraUtil.h"
-#include "TheoraException.h"
 
+#include "Exception.h"
 #include "Mutex.h"
 
 using namespace theoraplayer; // TODOth - remove
@@ -347,7 +347,7 @@ void TheoraVideoClip::setOutputMode(TheoraOutputMode mode)
 {
 	if (mode == TH_UNDEFINED)
 	{
-		throw TheoraGenericException("Invalid output mode: TH_UNDEFINED for video: " + this->name);
+		throw TheoraplayerException("Invalid output mode: TH_UNDEFINED for video: " + this->name);
 	}
 	if (this->outputMode == mode)
 	{

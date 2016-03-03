@@ -17,10 +17,9 @@
 
 #define DEFAULT_THREAD_NAME "Theoraplayer Worker Thread"
 
+#include "Exception.h"
 #include "Mutex.h"
 #include "Thread.h"
-
-#include "TheoraException.h"
 
 #ifdef _WINRT
 using namespace Windows::Foundation;
@@ -179,9 +178,7 @@ namespace theoraplayer
 			{
 				(*this->function)(this);
 			}
-			// TODOth
-			//catch (theoraplayer::_Exception& e)
-			catch (_TheoraGenericException& e)
+			catch (_Exception& e)
 			{
 				// TODOth
 				//theoraplayer::_platformPrint("FATAL", "Thread: " + this->name + "\n" + e.getMessage(), Log::LevelError);
@@ -330,14 +327,14 @@ namespace theoraplayer
 	{
 		// TODOth
 		//throw ObjectCannotCopyException("canno theoraplayer::Thread");
-		throw _TheoraGenericException("Cannot copy theoraplayer::Thread object!");
+		throw TheoraplayerException("Cannot copy theoraplayer::Thread object!");
 	}
 
 	Thread& Thread::operator=(Thread& other)
 	{
 		// TODOth
 		//throw ObjectCannotAssignException("theoraplayer::Thread");
-		throw _TheoraGenericException("Cannot assign theoraplayer::Thread object!");
+		throw TheoraplayerException("Cannot assign theoraplayer::Thread object!");
 		return (*this);
 	}
 

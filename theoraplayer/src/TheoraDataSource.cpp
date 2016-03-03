@@ -6,13 +6,15 @@
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
+#include <memory.h>
 #include <stdio.h>
 #include <sys/stat.h>
-#include <memory.h>
+
 #include "TheoraDataSource.h"
-#include "TheoraException.h"
 #include "TheoraVideoManager.h"
 #include "TheoraUtil.h"
+
+#include "Exception.h"
 
 TheoraDataSource::~TheoraDataSource()
 {
@@ -43,7 +45,7 @@ void TheoraFileDataSource::openFile()
 		{
 			std::string msg = "Can't open video file: " + this->filename;
 			th_writelog(msg);
-			throw TheoraGenericException(msg);
+			throw TheoraplayerException(msg);
 		}
 
 		
@@ -117,7 +119,7 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
 	FILE* f = fopen(this->filename.c_str(),"rb");
 	if (!f) 
 	{
-		throw TheoraGenericException("Can't open video file: " + this->filename);
+		throw TheoraplayerException("Can't open video file: " + this->filename);
 	}
 
 #ifdef _WIN32
@@ -130,7 +132,7 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
 	this->length = (uint64_t)s.st_size;
 	if (this->length > 0xFFFFFFFF)
 	{
-		throw TheoraGenericException("TheoraMemoryFileDataSource doesn't support files larger than 4GB!");
+		throw TheoraplayerException("TheoraMemoryFileDataSource doesn't support files larger than 4GB!");
 	}
 	this->data = new unsigned char[(unsigned int) this->length];
 	if (this->length < UINT_MAX)
@@ -139,7 +141,7 @@ TheoraMemoryFileDataSource::TheoraMemoryFileDataSource(std::string filename) :
 	}
 	else
 	{
-		throw TheoraGenericException("Unable to preload file to memory, file is too large.");
+		throw TheoraplayerException("Unable to preload file to memory, file is too large.");
 	}
 
 	fclose(f);

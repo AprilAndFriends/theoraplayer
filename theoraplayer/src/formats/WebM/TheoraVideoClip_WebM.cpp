@@ -16,12 +16,12 @@
 #include "TheoraTimer.h"
 #include "TheoraDataSource.h"
 #include "TheoraUtil.h"
-#include "TheoraException.h"
 #include "TheoraVideoClip_WebM.h"
 #include "TheoraPixelTransform.h"
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Exception.h"
 #include "Mutex.h"
 
 #include "webmdec.h"

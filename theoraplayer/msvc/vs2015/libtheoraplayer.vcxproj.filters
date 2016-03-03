@@ -75,9 +75,6 @@
     <ClCompile Include="..\..\src\TheoraDataSource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\TheoraException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\TheoraFrameQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -255,6 +252,9 @@
     <ClCompile Include="..\..\src\formats\FFmpeg\TheoraVideoClip_FFmpeg.cpp">
       <Filter>Source Files\formats\FFmpeg</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\theoraplayer\TheoraAudioInterface.h">
@@ -264,9 +264,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\theoraplayer\TheoraDataSource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\theoraplayer\TheoraException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\theoraplayer\TheoraFrameQueue.h">
@@ -388,6 +385,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\formats\WebM\webmdec.h">
       <Filter>Header Files\formats\WebM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\Exception.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

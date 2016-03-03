@@ -97,6 +97,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\Exception.cpp" />
     <ClCompile Include="..\..\src\formats\FFmpeg\TheoraVideoClip_FFmpeg.cpp" />
     <ClCompile Include="..\..\src\formats\Theora\TheoraVideoClip_Theora.cpp" />
     <ClCompile Include="..\..\src\formats\WebM\TheoraMkvReader.cpp" />
@@ -160,7 +161,6 @@
     <ClCompile Include="..\..\src\TheoraAudioInterface.cpp" />
     <ClCompile Include="..\..\src\TheoraAudioPacketQueue.cpp" />
     <ClCompile Include="..\..\src\TheoraDataSource.cpp" />
-    <ClCompile Include="..\..\src\TheoraException.cpp" />
     <ClCompile Include="..\..\src\TheoraFrameQueue.cpp" />
     <ClCompile Include="..\..\src\TheoraTimer.cpp" />
     <ClCompile Include="..\..\src\TheoraUtil.cpp" />
@@ -177,10 +177,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\theoraplayer\Exception.h" />
     <ClInclude Include="..\..\include\theoraplayer\TheoraAudioInterface.h" />
     <ClInclude Include="..\..\include\theoraplayer\TheoraAudioPacketQueue.h" />
     <ClInclude Include="..\..\include\theoraplayer\TheoraDataSource.h" />
-    <ClInclude Include="..\..\include\theoraplayer\TheoraException.h" />
     <ClInclude Include="..\..\include\theoraplayer\TheoraFrameQueue.h" />
     <ClInclude Include="..\..\include\theoraplayer\TheoraPixelTransform.h" />
     <ClInclude Include="..\..\include\theoraplayer\theoraplayer.h" />

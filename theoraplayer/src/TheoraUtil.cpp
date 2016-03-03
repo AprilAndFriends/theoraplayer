@@ -14,13 +14,13 @@
 #include <pthread.h>
 #endif
 
+// TODOth - can be removed
 #ifdef _WIN32
 #include <windows.h>
 #pragma warning( disable: 4996 ) // MSVC++
 #endif
 
 #include "TheoraUtil.h"
-#include "TheoraException.h"
 
 std::string str(int i)
 {
@@ -36,6 +36,7 @@ std::string strf(float i)
 	return std::string(s);
 }
 
+// TODOth - can be removed
 void _psleep(int miliseconds)
 {
 #ifdef _WIN32
@@ -49,7 +50,7 @@ void _psleep(int miliseconds)
 #endif
 }
 
-
+// TODOth - replace with potceil
 int _nextPow2(int x)
 {
 	int y;

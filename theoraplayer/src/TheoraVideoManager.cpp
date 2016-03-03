@@ -8,12 +8,12 @@
 
 #include "TheoraAudioInterface.h"
 #include "TheoraDataSource.h"
-#include "TheoraException.h"
 #include "TheoraVideoClip.h"
 #include "TheoraVideoManager.h"
 #include "TheoraFrameQueue.h"
 #include "TheoraUtil.h"
 
+#include "Exception.h"
 #include "WorkerThread.h"
 using namespace theoraplayer; // TODOth - remove this later
 
@@ -106,7 +106,7 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 {
 	if (num_worker_threads < 1)
 	{
-		throw TheoraGenericException("Unable to create TheoraVideoManager, at least one worker thread is reqired");
+		throw TheoraplayerException("Unable to create TheoraVideoManager, at least one worker thread is reqired");
 	}
 
 	g_ManagerSingleton = this;
@@ -253,7 +253,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 		{
 			clip->load(data_source);
 		}
-		catch (_TheoraGenericException& e)
+		catch (_Exception& e)
 		{
 			delete clip;
 			throw e;
@@ -496,7 +496,7 @@ void TheoraVideoManager::setNumWorkerThreads(int n)
 	}
 	if (n < 1)
 	{
-		throw TheoraGenericException("Unable to change the number of worker threads in TheoraVideoManager, at least one worker thread is reqired");
+		throw TheoraplayerException("Unable to change the number of worker threads in TheoraVideoManager, at least one worker thread is reqired");
 	}
 
 	th_writelog("changing number of worker threats to: "+str(n));
@@ -524,10 +524,10 @@ std::string TheoraVideoManager::getVersionString()
 	return out;
 }
 
-void TheoraVideoManager::getVersion(int* a, int* b, int* c) // TODO, return a struct instead of the current solution.
+void TheoraVideoManager::getVersion(int* a, int* b, int* c) // TODOth, return a struct instead of the current solution.
 {
-	*a = 1;
-	*b = 1;
+	*a = 2;
+	*b = 0;
 	*c = 0;
 }
 
