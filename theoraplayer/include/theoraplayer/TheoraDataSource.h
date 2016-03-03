@@ -32,13 +32,13 @@ public:
 	*/
 	virtual int read(void* output,int nBytes) = 0;
 	//! returns a string representation of the DataSource, eg 'File: source.ogg'
-	virtual std::string repr() = 0;
+	virtual std::string toString() = 0;
 	//! position the source pointer to byte_index from the start of the source
 	virtual void seek(uint64_t byte_index) = 0;
 	//! return the size of the stream in bytes
-	virtual uint64_t size() = 0;
+	virtual uint64_t getSize() = 0;
 	//! return the current position of the source pointer
-	virtual uint64_t tell() = 0;
+	virtual uint64_t getPosition() = 0;
 };
 
 
@@ -51,13 +51,14 @@ public:
 	TheoraFileDataSource(std::string filename);
 	~TheoraFileDataSource();
 
-	int read(void* output,int nBytes);
-	void seek(uint64_t byte_index);
-	std::string repr() { return this->filename; }
-	uint64_t size();
-	uint64_t tell();
-	
+	uint64_t getSize();
+	uint64_t getPosition();
 	std::string getFilename() { return this->filename; }
+
+	std::string toString() { return this->filename; }
+
+	int read(void* output,int nBytes);
+	void seek(uint64_t byte_index);	
 
 private:
 	FILE* filePtr;
@@ -81,9 +82,9 @@ public:
 
 	int read(void* output,int bytes);
 	void seek(uint64_t byte_index);
-	std::string repr() { return "MEM:"+this->filename; }
-	uint64_t size();
-	uint64_t tell();
+	std::string toString() { return "MEM:" + this->filename; }
+	uint64_t getSize();
+	uint64_t getPosition();
 	std::string getFilename() { return this->filename; }
 
 private:

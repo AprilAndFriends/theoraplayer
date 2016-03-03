@@ -209,7 +209,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 
 	TheoraVideoClip* clip = NULL;
 	int nPrecached = numPrecachedOverride ? numPrecachedOverride : mDefaultNumPrecachedFrames;
-	logMessage("Creating video from data source: " + data_source->repr() + " [" + str(nPrecached) + " precached frames].");
+	logMessage("Creating video from data source: " + data_source->toString() + " [" + str(nPrecached) + " precached frames].");
 	
 #ifdef __AVFOUNDATION
 	TheoraFileDataSource* fileDataSource = dynamic_cast<TheoraFileDataSource*>(data_source);
@@ -228,7 +228,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 		filename = fileDataSource->getFilename();
 	}
 
-	if (filename.size() > 4 && filename.substr(filename.size() - 4, filename.size()) == ".mp4")
+	if (filename.getSize() > 4 && filename.substr(filename.getSize() - 4, filename.getSize()) == ".mp4")
 	{
 		clip = new TheoraVideoClip_AVFoundation(data_source, output_mode, nPrecached, usePower2Stride);
 	}
@@ -262,7 +262,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 	}
 	else
 	{
-		th_writelog("Failed creating video clip: " + data_source->repr());
+		th_writelog("Failed creating video clip: " + data_source->toString());
 	}
 	lock.release();
 	
@@ -351,7 +351,7 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 
 			candidate.clip = clip;
 			candidate.priority = clip->getPriority();
-			candidate.queuedTime = (float) nReadyFrames / (clip->getFPS() * clip->getPlaybackSpeed());
+			candidate.queuedTime = (float) nReadyFrames / (clip->getFps() * clip->getPlaybackSpeed());
 			candidate.workTime = (float) clip->threadAccessCount;
 			
 			totalAccessCount += candidate.workTime;
@@ -422,9 +422,9 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 			--c->threadAccessCount;
 		}
 #ifdef _SCHEDULING_DEBUG
-		if (this->clips.size() > 1)
+		if (this->clips.getSize() > 1)
 		{
-			int accessCount = this->workLog.size();
+			int accessCount = this->workLog.getSize();
 			if (gThreadDiagnosticTimer > 2.0f)
 			{
 				gThreadDiagnosticTimer = 0;
@@ -432,7 +432,7 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 				int percent;
 				foreach (TheoraVideoClip*, this->clips)
 				{
-					percent = ((float) (*it)->threadAccessCount / this->workLog.size()) * 100.0f;
+					percent = ((float) (*it)->threadAccessCount / this->workLog.getSize()) * 100.0f;
 					logstr += (*it)->getName() + " (" + str((*it)->getPriority()) + "): " + str((*it)->threadAccessCount) + ", " + str(percent) + "%\n";
 				}
 				logstr += "-----";
@@ -510,8 +510,14 @@ std::string TheoraVideoManager::getVersionString()
 	std::string out = str(a) + "." + str(b);
 	if (c != 0)
 	{
-		if (c < 0) out += " RC" + str(-c);
-		else       out += "." + str(c);
+		if (c < 0)
+		{
+			out += " RC" + str(-c);
+		}
+		else
+		{
+			out += "." + str(c);
+		}
 	}
 	return out;
 }

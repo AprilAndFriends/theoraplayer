@@ -22,7 +22,7 @@ _TheoraGenericException::_TheoraGenericException(const std::string& errorText, s
 }
 
 
-std::string _TheoraGenericException::repr()
+std::string _TheoraGenericException::toString()
 {
 	std::string text = getType();
 	if (text != "")
@@ -40,5 +40,5 @@ std::string _TheoraGenericException::repr()
 
 void _TheoraGenericException::writeOutput()
 {
-	th_writelog("----------------\nException Error!\n\n" + repr() + "\n----------------");
+	th_writelog("----------------\nException Error!\n\n" + toString() + "\n----------------");
 }

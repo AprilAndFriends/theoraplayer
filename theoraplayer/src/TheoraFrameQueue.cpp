@@ -11,7 +11,6 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include "TheoraVideoManager.h"
 #include "TheoraUtil.h"
 
-
 TheoraFrameQueue::TheoraFrameQueue(TheoraVideoClip* parent)
 {
 	this->parent = parent;

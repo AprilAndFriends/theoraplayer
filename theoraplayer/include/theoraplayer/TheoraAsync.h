@@ -23,6 +23,7 @@ public:
 	public:
 		ScopeLock(TheoraMutex* mutex = NULL, bool logUnhandledUnlocks = true);
 		~ScopeLock();
+
 		bool acquire(TheoraMutex* mutex);
 		bool release();
 
@@ -33,12 +34,12 @@ public:
 
 	TheoraMutex();
 	~TheoraMutex();
+
 	void lock();
 	void unlock();
 		
 protected:
-	void* handle;
-		
+	void* handle;		
 };
 
 /// @note Based on hltypes::Thread
@@ -47,6 +48,7 @@ class TheoraThread
 public:
 	TheoraThread();
 	virtual ~TheoraThread();
+
 	void start();
 	void stop();
 	void resume();

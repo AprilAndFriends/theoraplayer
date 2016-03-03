@@ -32,9 +32,12 @@ public:
 	~TheoraAudioPacketQueue();
 	
 	float getAudioPacketQueueLength();
+
 	void addAudioPacket(float** buffer, int numSamples, float gain);
 	void addAudioPacket(float* buffer, int numSamples, float gain);
+
 	TheoraAudioPacket* popAudioPacket();
+
 	void destroyAudioPacket(TheoraAudioPacket* p);
 	void destroyAllAudioPackets();
 	
@@ -43,6 +46,7 @@ public:
 protected:
 	unsigned int audioFrequency, numAudioChannels;
 	TheoraAudioPacket* theoraAudioPacketQueue;
+
 	void _addAudioPacket(float* data, int numSamples);
 };
 

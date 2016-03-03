@@ -36,12 +36,12 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	duration(-1),
 	frameDuration(0),
 	priority(1),
-	name(data_source->repr()),
+	name(data_source->toString()),
 	width(0),
 	height(0),
 	stride(usePower2Stride),
 	numFrames(-1),
-	FPS(1),
+	fps(1),
 	subFrameWidth(0),
 	subFrameHeight(0),
 	subFrameOffsetX(0),
@@ -302,7 +302,10 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 	TheoraVideoFrame* frame;
 	// if we are about to seek, then the current frame queue is invalidated
 	// (will be cleared when a worker thread does the actual seek)
-	if (this->seekFrame != -1) return NULL;
+	if (this->seekFrame != -1)
+	{
+		return NULL;
+	}
 	
 	TheoraMutex::ScopeLock lock(this->frameQueue->getMutex());
 	float time = getAbsPlaybackTime();
@@ -342,7 +345,10 @@ void TheoraVideoClip::setOutputMode(TheoraOutputMode mode)
 	{
 		throw TheoraGenericException("Invalid output mode: TH_UNDEFINED for video: " + this->name);
 	}
-	if (this->outputMode == mode) return;
+	if (this->outputMode == mode)
+	{
+		return;
+	}
 	this->requestedOutputMode = mode;
 	this->useAlpha = (mode == TH_RGBA   ||
 				 mode == TH_ARGB   ||
@@ -376,18 +382,26 @@ int TheoraVideoClip::getNumPrecachedFrames()
 void TheoraVideoClip::setNumPrecachedFrames(int n)
 {
 	if (this->frameQueue->getSize() != n)
+	{
 		this->frameQueue->setSize(n);
+	}
 }
 
 int TheoraVideoClip::_getNumReadyFrames()
 {
-	if (this->seekFrame != -1) return 0;
+	if (this->seekFrame != -1)
+	{
+		return 0;
+	}
 	return this->frameQueue->_getReadyCount();
 }
 
 int TheoraVideoClip::getNumReadyFrames()
 {
-	if (this->seekFrame != -1) return 0; // we are about to seek, consider frame queue empty even though it will be emptied upon seek
+	if (this->seekFrame != -1)
+	{
+		return 0; // we are about to seek, consider frame queue empty even though it will be emptied upon seek
+	}
 	return this->frameQueue->getReadyCount();
 }
 
@@ -396,9 +410,9 @@ float TheoraVideoClip::getDuration()
 	return this->duration;
 }
 
-float TheoraVideoClip::getFPS()
+float TheoraVideoClip::getFps()
 {
-	return this->FPS;
+	return this->fps;
 }
 
 void TheoraVideoClip::play()
@@ -449,7 +463,7 @@ float TheoraVideoClip::getPlaybackSpeed()
 
 void TheoraVideoClip::seek(float time)
 {
-	seekToFrame((int) (time * getFPS()));
+	seekToFrame((int) (time * getFps()));
 }
 
 void TheoraVideoClip::seekToFrame(int frame)
@@ -521,7 +535,10 @@ void TheoraVideoClip::setPriority(float priority)
 float TheoraVideoClip::getPriorityIndex()
 {
 	float priority = (float) getNumReadyFrames();
-	if (this->timer->isPaused()) priority += getNumPrecachedFrames() / 2;
+	if (this->timer->isPaused())
+	{
+		priority += getNumPrecachedFrames() / 2;
+	}
 	
 	return priority;
 }

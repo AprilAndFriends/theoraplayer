@@ -21,14 +21,13 @@ public:
 
 	_TheoraGenericException(const std::string& errorText, std::string type = "",std::string file = "", int line = 0);
 	virtual ~_TheoraGenericException() {}
-	
-	virtual std::string repr();
-	
-	void writeOutput();
-	
+
 	virtual const std::string& getErrorText() { return this->errText; }
-	
 	const std::string getType(){ return this->type; }
+	
+	virtual std::string toString();	
+	
+	void writeOutput();	
 };
 
 #define TheoraGenericException(msg) _TheoraGenericException(msg, "TheoraGenericException", __FILE__, __LINE__)

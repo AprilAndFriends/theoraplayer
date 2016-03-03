@@ -248,17 +248,17 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 	this->subFrameOffsetX = this->info.TheoraInfo.pic_x;
 	this->subFrameOffsetY = this->info.TheoraInfo.pic_y;
 	this->stride = (this->stride == 1) ? _nextPow2(getWidth()) : getWidth();
-	this->FPS = this->info.TheoraInfo.fps_numerator / (float) this->info.TheoraInfo.fps_denominator;
+	this->fps = this->info.TheoraInfo.fps_numerator / (float) this->info.TheoraInfo.fps_denominator;
 	
 #ifdef _DEBUG
-	th_writelog("width: " + str(this->width) + ", height: " + str(this->height) + ", fps: " + str((int)getFPS()));
+	th_writelog("width: " + str(this->width) + ", height: " + str(this->height) + ", fps: " + str((int)getFps()));
 #endif
 	this->frameQueue = new TheoraFrameQueue(this);
 	this->frameQueue->setSize(this->numPrecachedFrames);
 	// find out the duration of the file by seeking to the end
 	// having ogg decode pages, extract the granule pos from
 	// the last theora page and seek back to beginning of the file
-	uint64_t streamSize = this->stream->size(), seekPos;
+	uint64_t streamSize = this->stream->getSize(), seekPos;
 	for (unsigned int i = 1; i <= 50; ++i)
 	{
 		ogg_sync_reset(&this->info.OggSyncState);
@@ -312,7 +312,7 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 	}
 	else
 	{
-		this->duration = this->numFrames / this->FPS;
+		this->duration = this->numFrames / this->fps;
 #ifdef _DEBUG
 		th_writelog("duration: " + strf(this->duration) + " seconds");
 #endif
@@ -337,7 +337,7 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 		}
 	}
 	
-	this->frameDuration = 1.0f / getFPS();
+	this->frameDuration = 1.0f / getFps();
 #ifdef _DEBUG
 	th_writelog("-----");
 #endif
@@ -514,8 +514,8 @@ float TheoraVideoClip_Theora::decodeAudio()
 	bool read_past_timestamp = 0;
 	
 	float factor = 1.0f / (this->audioFrequency);
-	float videoTime = (float) this->lastDecodedFrameNumber / this->FPS;
-	float min = this->frameQueue->getSize() / this->FPS + 1.0f;
+	float videoTime = (float) this->lastDecodedFrameNumber / this->fps;
+	float min = this->frameQueue->getSize() / this->fps + 1.0f;
 
 	for (;;)
 	{
@@ -570,7 +570,7 @@ float TheoraVideoClip_Theora::decodeAudio()
 long TheoraVideoClip_Theora::seekPage(long targetFrame, bool return_keyframe)
 {
 	int i;
-	uint64_t seek_min = 0, seek_max = this->stream->size();
+	uint64_t seek_min = 0, seek_max = this->stream->getSize();
 	long frame;
 	ogg_int64_t granule = 0;
 	
@@ -638,7 +638,7 @@ void TheoraVideoClip_Theora::doSeek()
 	th_writelog(this->name + " [seek]: seeking to frame " + str(this->seekFrame));
 #endif
 	int frame;
-	float time = this->seekFrame / getFPS();
+	float time = this->seekFrame / getFps();
 	this->timer->seek(time);
 	bool paused = this->timer->isPaused();
 	if (!paused) this->timer->pause(); // pause until seeking is done

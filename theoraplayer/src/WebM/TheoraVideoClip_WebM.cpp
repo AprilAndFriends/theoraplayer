@@ -78,7 +78,7 @@ bool TheoraVideoClip_WebM::decodeNextFrame()
 		{
 			this->frame = img;
 
-			frame->timeToDisplay = this->frameNumber / this->FPS;
+			frame->timeToDisplay = this->frameNumber / this->fps;
 			frame->iteration = this->iteration;
 			frame->_setFrameNumber(this->frameNumber++);
 			this->lastDecodedFrameNumber = this->frameNumber;
@@ -151,8 +151,8 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 	this->subFrameOffsetY = 0;
 	this->stride = (this->stride == 1) ? _nextPow2(getWidth()) : getWidth();
 
-	this->FPS = (float)input.vpx_input_ctx->framerate.numerator / (float)input.vpx_input_ctx->framerate.denominator;
-	this->frameDuration = 1.0f / this->FPS;
+	this->fps = (float)input.vpx_input_ctx->framerate.numerator / (float)input.vpx_input_ctx->framerate.denominator;
+	this->frameDuration = 1.0f / this->fps;
 	this->duration = this->numFrames * this->frameDuration;
 
 #ifdef _DEBUG
@@ -193,7 +193,7 @@ float TheoraVideoClip_WebM::decodeAudio()
 
 void TheoraVideoClip_WebM::doSeek()
 {
-	float time = this->seekFrame / getFPS();
+	float time = this->seekFrame / getFps();
 	this->timer->seek(time);
 	bool paused = this->timer->isPaused();
 	if (!paused) this->timer->pause();

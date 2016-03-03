@@ -83,7 +83,7 @@ void TheoraFileDataSource::seek(uint64_t byte_index)
 	fsetpos(this->filePtr, &fpos);
 }
 
-uint64_t TheoraFileDataSource::size()
+uint64_t TheoraFileDataSource::getSize()
 {
 	if (this->filePtr == NULL)
 	{
@@ -92,7 +92,7 @@ uint64_t TheoraFileDataSource::size()
 	return this->length;
 }
 
-uint64_t TheoraFileDataSource::tell()
+uint64_t TheoraFileDataSource::getPosition()
 {
 	if (this->filePtr == NULL) 
 	{
@@ -178,12 +178,12 @@ void TheoraMemoryFileDataSource::seek(uint64_t byte_index)
 	this->readPointer = byte_index;
 }
 
-uint64_t TheoraMemoryFileDataSource::size()
+uint64_t TheoraMemoryFileDataSource::getSize()
 {
 	return this->length;
 }
 
-uint64_t TheoraMemoryFileDataSource::tell()
+uint64_t TheoraMemoryFileDataSource::getPosition()
 {
 	return this->readPointer;
 }

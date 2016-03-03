@@ -33,18 +33,19 @@ public:
 	TheoraVideoFrame(TheoraVideoClip* parent);
 	virtual ~TheoraVideoFrame();
 
-	//! internal function, do not use directly
-	void _setFrameNumber(unsigned long number) { this->frameNumber = number; }
 	//! returns the frame number of this frame in the theora stream
 	unsigned long getFrameNumber() { return this->frameNumber; }
-
-	void clear();
 
 	int getWidth();
 	int getStride();
 	int getHeight();
 
 	unsigned char* getBuffer();
+
+	//! internal function, do not use directly
+	void _setFrameNumber(unsigned long number) { this->frameNumber = number; }	
+
+	void clear();	
 
 	//! Called by TheoraVideoClip to decode a source buffer onto itself
 	virtual void decode(struct TheoraPixelTransform* t);

@@ -84,7 +84,7 @@ void OnClick(float x,float y)
 
 void setDebugTitle(char* out)
 {
-	sprintf(out, " (%dx%d@%d) %d wrong seeks", clip->getWidth(), clip->getHeight(), (int) clip->getFPS(), nWrongSeeks);
+	sprintf(out, " (%dx%d@%d) %d wrong seeks", clip->getWidth(), clip->getHeight(), (int) clip->getFps(), nWrongSeeks);
 }
 
 void init()

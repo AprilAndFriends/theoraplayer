@@ -47,6 +47,26 @@ public:
 	int _getReadyCount();
 
 	/**
+	\brief set's the size of the frame queue.
+
+	Beware, currently stored ready frames will be lost upon this call
+	*/
+	void setSize(int n);
+	//! return the size of the queue
+	int getSize();
+
+	//! return whether all frames in the queue are ready for display
+	bool isFull();
+
+	TheoraMutex* getMutex() { return &this->mutex; }
+
+	//! returns the internal frame queue. Warning: Always lock / unlock queue's mutex before accessing frames directly!
+	std::list<TheoraVideoFrame*>& _getFrameQueue();
+
+	//! Called by WorkerThreads when they need to unload frame data, do not call directly!
+	TheoraVideoFrame* requestEmptyFrame();
+
+	/**
 		\brief remove the first N available frame from the queue.
 
 		Use this every time you display a frame	so you can get the next one when the time comes.
@@ -61,26 +81,7 @@ public:
 	void _pop(int n);
 
 	//! frees all decoded frames for reuse (does not destroy memory, just marks them as free)
-	void clear();
-	//! Called by WorkerThreads when they need to unload frame data, do not call directly!
-	TheoraVideoFrame* requestEmptyFrame();
-
-	/** 
-		\brief set's the size of the frame queue.
-
-		Beware, currently stored ready frames will be lost upon this call
-	*/
-	void setSize(int n);
-	//! return the size of the queue
-	int getSize();
-	
-	//! return whether all frames in the queue are ready for display
-	bool isFull();
-
-	TheoraMutex* getMutex() { return &this->mutex; }
-
-	//! returns the internal frame queue. Warning: Always lock / unlock queue's mutex before accessing frames directly!
-	std::list<TheoraVideoFrame*>& _getFrameQueue();
+	void clear();	
 
 protected:
 	std::list<TheoraVideoFrame*> queue;

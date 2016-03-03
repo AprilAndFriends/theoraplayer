@@ -57,12 +57,12 @@ static int64_t seekFunction(void* data, int64_t offset, int whence)
 
 	TheoraDataSource* src = (TheoraDataSource*) data;
 	if (whence == AVSEEK_SIZE)
-		return src->size();
+		return src->getSize();
 	else if (whence == SEEK_SET)
 		src->seek((long) offset);
 	else if (whence == SEEK_END)
-		src->seek(src->size() - (long) offset);
-	return src->tell();
+		src->seek(src->getSize() - (long) offset);
+	return src->getPosition();
 }
 
 static void avlog_theoraplayer(void* p, int level, const char* fmt, va_list vargs)

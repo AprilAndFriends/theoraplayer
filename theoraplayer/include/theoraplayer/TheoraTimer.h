@@ -25,6 +25,11 @@ public:
 	virtual ~TheoraTimer();
 
 	virtual float getTime();
+
+	//! return the update speed 1.0 is the default
+	virtual float getSpeed();
+
+	virtual bool isPaused();
 	/**
 		\brief advance the time.
 
@@ -36,8 +41,7 @@ public:
 	virtual void update(float timeDelta);
 
 	virtual void pause();
-	virtual void play();
-	virtual bool isPaused();
+	virtual void play();	
 	virtual void stop();
 	/**
 		\brief set's playback speed
@@ -48,9 +52,7 @@ public:
 		NOTE: depending on Timer implementation, it may not support setting the speed
 		 
 	 */
-	virtual void setSpeed(float speed);
-	//! return the update speed 1.0 is the default
-	virtual float getSpeed();
+	virtual void setSpeed(float speed);	
 
 	/**
 		\brief change the current time.

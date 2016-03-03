@@ -12,7 +12,7 @@
 
 TheoraMkvReader::TheoraMkvReader(TheoraDataSource* dataSource) : m_dataSource(dataSource)
 {
-	m_length = (int)dataSource->size();
+	m_length = (int)dataSource->getSize();
 }
 
 TheoraMkvReader::~TheoraMkvReader() {	
@@ -32,7 +32,7 @@ bool TheoraMkvReader::GetFileSize()
 	if (m_dataSource == NULL)
 		return false;
 
-	m_length = (int)m_dataSource->size();
+	m_length = (int)m_dataSource->getSize();
 
 	assert(m_length >= 0);
 

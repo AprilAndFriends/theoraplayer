@@ -42,45 +42,46 @@ public:
 
 	//! search registered clips by name
 	TheoraVideoClip* getVideoClipByName(std::string name);
+	TheoraAudioInterfaceFactory* getAudioInterfaceFactory();
+	int getNumWorkerThreads();
+	int getDefaultNumPrecachedFrames() { return mDefaultNumPrecachedFrames; }
+
+	//! get nicely formated version string
+	std::string getVersionString();
+
+	/**
+	\brief get version numbers
+
+	if c is negative, it means it's a release candidate -c
+	*/
+	void getVersion(int* a, int* b, int* c);
+
+	//! returns the supported decoders (eg. Theora, AVFoundation...)
+	std::vector<std::string> getSupportedDecoders();
+
+	/**
+	\brief you can set your own log function to recieve theora's log calls
+
+	This way you can integrate libtheoraplayer's log messages in your own
+	logging system, prefix them, mute them or whatever you want
+	*/
+	static void setLogFunction(void(*fn)(std::string));
+
+	void setAudioInterfaceFactory(TheoraAudioInterfaceFactory* factory);
+
+	void setNumWorkerThreads(int n);
+
+	void setDefaultNumPrecachedFrames(int n) { mDefaultNumPrecachedFrames = n; }
 
 	TheoraVideoClip* createVideoClip(std::string filename,TheoraOutputMode output_mode=TH_RGB,int numPrecachedOverride=0,bool usePower2Stride=0);
 	TheoraVideoClip* createVideoClip(TheoraDataSource* data_source,TheoraOutputMode output_mode=TH_RGB,int numPrecachedOverride=0,bool usePower2Stride=0);
 
 	void update(float timeDelta);
 
-	void destroyVideoClip(TheoraVideoClip* clip);
-
-	void setAudioInterfaceFactory(TheoraAudioInterfaceFactory* factory);
-	TheoraAudioInterfaceFactory* getAudioInterfaceFactory();
-
-	int getNumWorkerThreads();
-	void setNumWorkerThreads(int n);
-
-	void setDefaultNumPrecachedFrames(int n) { mDefaultNumPrecachedFrames=n; }
-	int getDefaultNumPrecachedFrames() { return mDefaultNumPrecachedFrames; }
+	void destroyVideoClip(TheoraVideoClip* clip);	
 
 	//! used by libtheoraplayer functions
 	void logMessage(std::string msg);
-
-	/**
-		\brief you can set your own log function to recieve theora's log calls
-
-		This way you can integrate libtheoraplayer's log messages in your own
-		logging system, prefix them, mute them or whatever you want
-	 */
-	static void setLogFunction(void (*fn)(std::string));
-
-	//! get nicely formated version string
-	std::string getVersionString();
-	/**
-		\brief get version numbers
-
-		if c is negative, it means it's a release candidate -c
-	 */
-	void getVersion(int* a,int* b,int* c);
-
-	//! returns the supported decoders (eg. Theora, AVFoundation...)
-	std::vector<std::string> getSupportedDecoders();
 
 protected:
 	friend class TheoraWorkerThread;
