@@ -12,13 +12,13 @@
 #include "TheoraAudioInterface.h"
 #include "TheoraDataSource.h"
 #include "TheoraException.h"
-#include "TheoraTimer.h"
 #include "TheoraUtil.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip_AVFoundation.h"
 #include "TheoraPixelTransform.h"
 
 #include "FrameQueue.h"
+#include "Timer.h"
 #include "VideoFrame.h"
 
 #ifdef _AVFOUNDATION_BGRX

@@ -20,8 +20,8 @@ short float2short(float f)
 	return (short) (f*32767);
 }
 
-OpenAL_AudioInterface::OpenAL_AudioInterface(TheoraVideoClip* owner,int nChannels,int freq) :
-	TheoraAudioInterface(owner,nChannels,freq), TheoraTimer()
+OpenAL_AudioInterface::OpenAL_AudioInterface(TheoraVideoClip* owner, int nChannels, int freq) :
+	TheoraAudioInterface(owner, nChannels, freq), theoraplayer::Timer()
 {
 	mSourceNumChannels = this->numChannels;
 	if (this->numChannels > 2)
@@ -151,13 +151,13 @@ void OpenAL_AudioInterface::update(float time_increase)
 void OpenAL_AudioInterface::pause()
 {
 	alSourcePause(mSource);
-	TheoraTimer::pause();
+	Timer::pause();
 }
 
 void OpenAL_AudioInterface::play()
 {
 	alSourcePlay(mSource);
-	TheoraTimer::play();
+	Timer::play();
 }
 
 void OpenAL_AudioInterface::seek(float time)

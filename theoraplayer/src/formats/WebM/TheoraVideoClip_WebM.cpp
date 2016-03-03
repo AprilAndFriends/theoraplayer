@@ -11,7 +11,6 @@
 #include <algorithm>
 #include "TheoraVideoManager.h"
 #include "TheoraAudioInterface.h"
-#include "TheoraTimer.h"
 #include "TheoraDataSource.h"
 #include "TheoraVideoClip_WebM.h"
 #include "TheoraPixelTransform.h"
@@ -21,6 +20,7 @@
 #include "Exception.h"
 #include "FrameQueue.h"
 #include "Mutex.h"
+#include "Timer.h"
 #include "Utility.h"
 #include "VideoFrame.h"
 using namespace theoraplayer; // TODOth - remove this later

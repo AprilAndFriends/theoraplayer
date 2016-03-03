@@ -18,7 +18,6 @@
 #include "theoraplayerExport.h"
 
 // forward class declarations
-class TheoraTimer;
 class TheoraAudioInterface;
 class TheoraDataSource;
 
@@ -27,6 +26,7 @@ namespace theoraplayer
 	class FrameQueue;
 	class Mutex;
 	class WorkerThread;
+	class Timer;
 	class VideoFrame;
 }
 using namespace theoraplayer; // TODOth - remove
@@ -113,7 +113,7 @@ public:
 		*/
 	int getStride() { return this->stride; }
 	//! retur the timer objet associated with this object
-	TheoraTimer* getTimer();
+	Timer* getTimer();
 
 	FrameQueue* getFrameQueue();
 	/**
@@ -153,7 +153,7 @@ public:
 	float getPlaybackSpeed();
 
 	//! replace the timer object with a new one
-	void setTimer(TheoraTimer* timer);
+	void setTimer(Timer* timer);
 
 	void setAudioInterface(TheoraAudioInterface* iface);
 
@@ -225,7 +225,7 @@ protected:
 	TheoraAudioInterface* audioInterface;
 	TheoraDataSource* stream;
 
-	TheoraTimer *timer, *defaultTimer;
+	Timer *timer, *defaultTimer;
 
 	WorkerThread* assignedWorkerThread;
 

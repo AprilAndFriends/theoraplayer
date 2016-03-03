@@ -11,7 +11,6 @@
 #include <algorithm>
 #include "TheoraVideoManager.h"
 #include "TheoraAudioInterface.h"
-#include "TheoraTimer.h"
 #include "TheoraDataSource.h"
 #include "TheoraVideoClip_Theora.h"
 #include "TheoraPixelTransform.h"
@@ -19,6 +18,7 @@
 #include "FrameQueue.h"
 #include "Exception.h"
 #include "Mutex.h"
+#include "Timer.h"
 #include "Utility.h"
 #include "VideoFrame.h"
 

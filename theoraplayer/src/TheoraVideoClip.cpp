@@ -11,12 +11,12 @@
 #include "TheoraVideoClip.h"
 #include "TheoraVideoManager.h"
 #include "TheoraAudioInterface.h"
-#include "TheoraTimer.h"
 #include "TheoraDataSource.h"
 
 #include "Exception.h"
 #include "FrameQueue.h"
 #include "Mutex.h"
+#include "Timer.h"
 #include "Utility.h"
 #include "VideoFrame.h"
 
@@ -62,7 +62,7 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	audioMutex(NULL)
 {
 	this->threadAccessMutex = new Mutex();
-	this->timer = this->defaultTimer = new TheoraTimer();
+	this->timer = this->defaultTimer = new Timer();
 
 	setOutputMode(output_mode);
 }
@@ -96,12 +96,12 @@ TheoraVideoClip::~TheoraVideoClip()
 	delete this->threadAccessMutex;
 }
 
-TheoraTimer* TheoraVideoClip::getTimer()
+Timer* TheoraVideoClip::getTimer()
 {
 	return this->timer;
 }
 
-void TheoraVideoClip::setTimer(TheoraTimer* timer)
+void TheoraVideoClip::setTimer(Timer* timer)
 {
 	if (!timer)
 	{

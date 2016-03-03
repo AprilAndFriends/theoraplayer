@@ -11,7 +11,8 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 
 #include <theoraplayer/TheoraAudioInterface.h>
 #include <theoraplayer/TheoraVideoClip.h>
-#include <theoraplayer/TheoraTimer.h>
+
+#include <theoraplayer/Timer.h>
 
 #ifndef __APPLE__
 #include <AL/al.h>
@@ -22,7 +23,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #endif
 #include <queue>
 	
-class OpenAL_AudioInterface : public TheoraAudioInterface, TheoraTimer
+class OpenAL_AudioInterface : public TheoraAudioInterface, theoraplayer::Timer
 {
 	int mSourceNumChannels;
 	int mMaxBuffSize;

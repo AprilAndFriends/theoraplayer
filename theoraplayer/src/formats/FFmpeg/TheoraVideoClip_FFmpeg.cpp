@@ -10,13 +10,13 @@
 #include "TheoraAudioInterface.h"
 #include "TheoraDataSource.h"
 #include "TheoraException.h"
-#include "TheoraTimer.h"
 #include "TheoraUtil.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip_FFmpeg.h"
 #include "TheoraPixelTransform.h"
 
 #include "FrameQueue.h"
+#include "Timer.h"
 #include "VideoFrame.h"
 
 #define READ_BUFFER_SIZE 4096
