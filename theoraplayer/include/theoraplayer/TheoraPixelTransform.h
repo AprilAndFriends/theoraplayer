@@ -1,13 +1,19 @@
-/************************************************************************************
-This source file is part of the Theora Video Playback Library
-For latest info, see http://libtheoraplayer.googlecode.com
-*************************************************************************************
-Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
-This program is free software; you can redistribute it and/or modify it under
-the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
-*************************************************************************************/
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+/// 
+/// @section DESCRIPTION
+/// 
+/// Defines a utility struct for pixel transformation.
+
 #ifndef THEORA_PIXEL_TRANSFORM_H
 #define THEORA_PIXEL_TRANSFORM_H
+
+// TODOth - move to Utility as internal object?
 
 struct TheoraPixelTransform
 {

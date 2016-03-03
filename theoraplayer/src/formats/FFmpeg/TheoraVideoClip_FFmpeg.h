@@ -1,11 +1,15 @@
-/************************************************************************************
-This source file is part of the Theora Video Playback Library
-For latest info, see http://libtheoraplayer.googlecode.com
-*************************************************************************************
-Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
-This program is free software; you can redistribute it and/or modify it under
-the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
-*************************************************************************************/
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+/// 
+/// @section DESCRIPTION
+/// 
+/// Implements an interface to be able to process the FFMPEG codec.
+
 #if defined(__FFMPEG) && !defined(_TheoraVideoClip_FFmpeg_h)
 #define _TheoraVideoClip_FFmpeg_h
 
