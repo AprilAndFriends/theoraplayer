@@ -20,11 +20,11 @@ class AVAssetReaderTrackOutput;
 class TheoraVideoClip_AVFoundation : public TheoraVideoClip, public TheoraAudioPacketQueue
 {
 protected:
-	bool mLoaded;
-	int mFrameNumber;
-	AVAssetReader* mReader;
-	AVAssetReaderTrackOutput *mOutput, *mAudioOutput;
-	unsigned int mReadAudioSamples;
+	bool loaded;
+	int frameNumber;
+	AVAssetReader* reader;
+	AVAssetReaderTrackOutput *output, *audioOutput;
+	unsigned int readAudioSamples;
 	
 	void unload();
 	void doSeek();
