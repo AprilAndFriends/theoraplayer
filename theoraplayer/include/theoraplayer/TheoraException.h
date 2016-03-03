@@ -11,9 +11,9 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 #include <string>
 
-#include "TheoraExport.h"
+#include "theoraplayerExport.h"
 
-class TheoraPlayerExport _TheoraGenericException
+class theoraplayerExport _TheoraGenericException
 {
 public:
 	std::string errText, file, type;

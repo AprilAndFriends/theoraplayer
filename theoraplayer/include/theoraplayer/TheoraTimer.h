@@ -10,7 +10,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #ifndef THEORA_TIMER_H
 #define THEORA_TIMER_H
 
-#include "TheoraExport.h"
+#include "theoraplayerExport.h"
 
 /**
 	This is a Timer object, it is used to control the playback of a TheoraVideoClip.
@@ -18,7 +18,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 	You can inherit this class and make a timer that eg. plays twice as fast,
 	or playbacks an audio track and uses it's time offset for syncronizing Video etc.
  */
-class TheoraPlayerExport TheoraTimer
+class theoraplayerExport TheoraTimer
 {
 public:
 	TheoraTimer();

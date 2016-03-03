@@ -9,7 +9,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #ifndef THEORA_AUDIOPACKETQUEUE_H
 #define THEORA_AUDIOPACKETQUEUE_H
 
-#include "TheoraExport.h"
+#include "theoraplayerExport.h"
 
 class TheoraAudioInterface;
 /**
@@ -25,7 +25,7 @@ struct TheoraAudioPacket
 /**
 	This is a Mutex object, used in thread syncronization.
  */
-class TheoraPlayerExport TheoraAudioPacketQueue
+class theoraplayerExport TheoraAudioPacketQueue
 {
 public:
 	TheoraAudioPacketQueue();

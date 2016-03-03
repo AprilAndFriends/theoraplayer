@@ -18,6 +18,10 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include "TheoraUtil.h"
 #include "TheoraException.h"
 
+#include "Mutex.h"
+
+using namespace theoraplayer; // TODOth - remove
+
 TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 								 TheoraOutputMode output_mode,
 								 int nPrecachedFrames,
@@ -57,7 +61,7 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 	playbackIteration(0),
 	audioMutex(NULL)
 {
-	this->threadAccessMutex = new TheoraMutex();
+	this->threadAccessMutex = new Mutex();
 	this->timer = this->defaultTimer = new TheoraTimer();
 
 	setOutputMode(output_mode);
@@ -66,7 +70,7 @@ TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
 TheoraVideoClip::~TheoraVideoClip()
 {
 	// wait untill a worker thread is done decoding the frame
-	TheoraMutex::ScopeLock lock(this->threadAccessMutex);
+	Mutex::ScopeLock lock(this->threadAccessMutex);
 
 	delete this->defaultTimer;
 
@@ -82,7 +86,7 @@ TheoraVideoClip::~TheoraVideoClip()
 
 	if (this->audioInterface)
 	{
-		TheoraMutex::ScopeLock audioMutexLock(this->audioMutex); // ensure a thread isn't using this mutex
+		Mutex::ScopeLock audioMutexLock(this->audioMutex); // ensure a thread isn't using this mutex
 		delete this->audioInterface; // notify audio interface it's time to call it a day
 		audioMutexLock.release();
 		delete this->audioMutex;
@@ -118,7 +122,7 @@ void TheoraVideoClip::resetFrameQueue()
 void TheoraVideoClip::restart()
 {
 	this->endOfFile = true; //temp, to prevent threads to decode while restarting
-	TheoraMutex::ScopeLock lock(this->threadAccessMutex);
+	Mutex::ScopeLock lock(this->threadAccessMutex);
 	_restart();
 	this->timer->seek(0);
 	this->firstFrameDisplayed = false;
@@ -190,7 +194,7 @@ void TheoraVideoClip::popFrame()
 	// so it can be used again
 	if (!this->firstFrameDisplayed)
 	{
-		TheoraMutex::ScopeLock lock(this->frameQueue->getMutex());
+		Mutex::ScopeLock lock(this->frameQueue->getMutex());
 		this->frameQueue->_pop(1);
 		this->firstFrameDisplayed = true;
 		lock.release();
@@ -307,7 +311,7 @@ TheoraVideoFrame* TheoraVideoClip::getNextFrame()
 		return NULL;
 	}
 	
-	TheoraMutex::ScopeLock lock(this->frameQueue->getMutex());
+	Mutex::ScopeLock lock(this->frameQueue->getMutex());
 	float time = getAbsPlaybackTime();
 	discardOutdatedFrames(time);
 	
@@ -360,7 +364,7 @@ void TheoraVideoClip::setOutputMode(TheoraOutputMode mode)
 				 mode == TH_AYUV);
 	if (this->assignedWorkerThread)
 	{
-		TheoraMutex::ScopeLock lock(this->threadAccessMutex);
+		Mutex::ScopeLock lock(this->threadAccessMutex);
 		// discard current frames and recreate them
 		this->frameQueue->setSize(this->frameQueue->getSize());
 		lock.release();
@@ -548,7 +552,7 @@ void TheoraVideoClip::setAudioInterface(TheoraAudioInterface* iface)
 	this->audioInterface = iface;
 	if (iface && !this->audioMutex)
 	{
-		this->audioMutex = new TheoraMutex;
+		this->audioMutex = new Mutex();
 	}
 	if (!iface && this->audioMutex)
 	{

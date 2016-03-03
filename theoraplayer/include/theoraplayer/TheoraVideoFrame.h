@@ -9,14 +9,14 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #ifndef THEORA_VIDEOFRAME_H
 #define THEORA_VIDEOFRAME_H
 
-#include "TheoraExport.h"
+#include "theoraplayerExport.h"
 #include "TheoraVideoClip.h"
 
 struct TheoraPixelTransform;
 /**
 	
 */
-class TheoraPlayerExport TheoraVideoFrame
+class theoraplayerExport TheoraVideoFrame
 {
 public:
 	//! global time in seconds this frame should be displayed on

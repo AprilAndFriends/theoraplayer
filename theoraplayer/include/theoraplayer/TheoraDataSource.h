@@ -13,7 +13,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include <limits.h>
 #include <string>
 
-#include "TheoraExport.h"
+#include "theoraplayerExport.h"
 
 /**
 	This is a simple class that provides abstracted data feeding. You can use the
@@ -21,7 +21,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 	internet streaming solution, or a class that uses encrypted datafiles etc.
 	The sky is the limit
 */
-class TheoraPlayerExport TheoraDataSource
+class theoraplayerExport TheoraDataSource
 {
 public:
 
@@ -45,7 +45,7 @@ public:
 /**
 	provides standard file IO
 */
-class TheoraPlayerExport TheoraFileDataSource : public TheoraDataSource
+class theoraplayerExport TheoraFileDataSource : public TheoraDataSource
 {	
 public:
 	TheoraFileDataSource(std::string filename);
@@ -73,7 +73,7 @@ private:
 	Very useful if you're continuously displaying a video and want to avoid disk reads.
 	Not very practical for large files.
 */
-class TheoraPlayerExport TheoraMemoryFileDataSource : public TheoraDataSource
+class theoraplayerExport TheoraMemoryFileDataSource : public TheoraDataSource
 {
 public:
 	TheoraMemoryFileDataSource(unsigned char* data, long size, const std::string& filename = "memory");

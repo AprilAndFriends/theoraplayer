@@ -13,21 +13,23 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include "TheoraVideoManager.h"
 #include "TheoraFrameQueue.h"
 #include "TheoraUtil.h"
-#include "TheoraWorkerThread.h"
+
+#include "WorkerThread.h"
+using namespace theoraplayer; // TODOth - remove this later
 
 #ifdef __THEORA
 	#include <theora/codec.h>
 	#include <vorbis/codec.h>
-	#include "TheoraVideoClip_Theora.h"
+	#include "Theora/TheoraVideoClip_Theora.h"
 #endif
 #ifdef __WEBM
-	#include "TheoraVideoClip_WebM.h"
+	#include "WebM/TheoraVideoClip_WebM.h"
 #endif
 #ifdef __AVFOUNDATION
-	#include "TheoraVideoClip_AVFoundation.h"
+	#include "AVFoundation/TheoraVideoClip_AVFoundation.h"
 #endif
 #ifdef __FFMPEG
-	#include "TheoraVideoClip_FFmpeg.h"
+	#include "FFmpeg/TheoraVideoClip_FFmpeg.h"
 #endif
 #ifdef _ANDROID //libtheoraplayer addition for cpu feature detection
 	#include "cpu-features.h"
@@ -138,7 +140,7 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 	
 	logMessage(msg + "------------------------------------");
 	this->audioFactory = NULL;
-	this->workMutex = new TheoraMutex();
+	this->workMutex = new Mutex();
 
 	// for CPU based yuv2rgb decoding
 	initYUVConversionModule();
@@ -149,7 +151,7 @@ TheoraVideoManager::TheoraVideoManager(int num_worker_threads) :
 TheoraVideoManager::~TheoraVideoManager()
 {
 	destroyWorkerThreads();
-	TheoraMutex::ScopeLock lock(this->workMutex);
+	Mutex::ScopeLock lock(this->workMutex);
 	ClipList::iterator ci;
 	for (ci = this->clips.begin(); ci != this->clips.end(); ++ci)
 	{
@@ -168,7 +170,7 @@ void TheoraVideoManager::logMessage(std::string msg)
 TheoraVideoClip* TheoraVideoManager::getVideoClipByName(std::string name)
 {
 	TheoraVideoClip* clip = NULL;
-	TheoraMutex::ScopeLock lock(this->workMutex);
+	Mutex::ScopeLock lock(this->workMutex);
 	foreach (TheoraVideoClip*, this->clips)
 	{
 		if ((*it)->getName() == name)
@@ -205,7 +207,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 													 int numPrecachedOverride,
 													 bool usePower2Stride)
 {
-	TheoraMutex::ScopeLock lock(this->workMutex);
+	Mutex::ScopeLock lock(this->workMutex);
 
 	TheoraVideoClip* clip = NULL;
 	int nPrecached = numPrecachedOverride ? numPrecachedOverride : mDefaultNumPrecachedFrames;
@@ -277,7 +279,7 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 	if (clip)
 	{
 		th_writelog("Destroying video clip: " + clip->getName());
-		TheoraMutex::ScopeLock lock(this->workMutex);
+		Mutex::ScopeLock lock(this->workMutex);
 		bool reported = 0;
 		while (clip->assignedWorkerThread)
 		{
@@ -314,13 +316,13 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 	}
 }
 
-TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
+TheoraVideoClip* TheoraVideoManager::requestWork(WorkerThread* caller)
 {
 	if (!this->workMutex)
 	{
 		return NULL;
 	}
-	TheoraMutex::ScopeLock lock(this->workMutex);
+	Mutex::ScopeLock lock(this->workMutex);
 
 	TheoraVideoClip* selectedClip = NULL;
 	float maxQueuedTime = 0, totalAccessCount = 0, prioritySum = 0, diff, maxDiff = -1;
@@ -448,7 +450,7 @@ TheoraVideoClip* TheoraVideoManager::requestWork(TheoraWorkerThread* caller)
 
 void TheoraVideoManager::update(float timeDelta)
 {
-	TheoraMutex::ScopeLock lock(this->workMutex);
+	Mutex::ScopeLock lock(this->workMutex);
 	foreach (TheoraVideoClip*, this->clips)
 	{
 		(*it)->update(timeDelta);
@@ -467,10 +469,10 @@ int TheoraVideoManager::getNumWorkerThreads()
 
 void TheoraVideoManager::createWorkerThreads(int n)
 {
-	TheoraWorkerThread* t;
-	for (int i=0;i<n;++i)
+	WorkerThread* t = NULL;
+	for (int i = 0; i < n; ++i)
 	{
-		t=new TheoraWorkerThread();
+		t = new WorkerThread();
 		t->start();
 		this->workerThreads.push_back(t);
 	}
@@ -478,7 +480,7 @@ void TheoraVideoManager::createWorkerThreads(int n)
 
 void TheoraVideoManager::destroyWorkerThreads()
 {
-	foreach (TheoraWorkerThread*, this->workerThreads)
+	foreach (WorkerThread*, this->workerThreads)
 	{
 		(*it)->join();
 		delete (*it);

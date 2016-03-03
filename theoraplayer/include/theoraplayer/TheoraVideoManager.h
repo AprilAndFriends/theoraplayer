@@ -18,18 +18,24 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #pragma warning( disable: 4251 ) // MSVC++
 #endif
 
-#include "TheoraExport.h"
+#include "theoraplayerExport.h"
 #include "TheoraVideoClip.h"
 
 // forward class declarations
-class TheoraWorkerThread;
-class TheoraMutex;
 class TheoraDataSource;
 class TheoraAudioInterfaceFactory;
+
+namespace theoraplayer
+{
+	class Mutex;
+	class WorkerThread;
+}
+using namespace theoraplayer; // TODOth - remove
+
 /**
 	This is the main singleton class that handles all playback/sync operations
 */
-class TheoraPlayerExport TheoraVideoManager
+class theoraplayerExport TheoraVideoManager
 {
 public:
 	TheoraVideoManager(int num_worker_threads = 1);
@@ -84,9 +90,9 @@ public:
 	void logMessage(std::string msg);
 
 protected:
-	friend class TheoraWorkerThread;
+	friend class WorkerThread;
 	typedef std::vector<TheoraVideoClip*> ClipList;
-	typedef std::vector<TheoraWorkerThread*> ThreadList;
+	typedef std::vector<WorkerThread*> ThreadList;
 
 	//! stores pointers to worker threads which are decoding video and audio
 	ThreadList workerThreads;
@@ -98,7 +104,7 @@ protected:
 
 	int mDefaultNumPrecachedFrames;
 
-	TheoraMutex* workMutex;
+	Mutex* workMutex;
 	TheoraAudioInterfaceFactory* audioFactory;
 
 	void createWorkerThreads(int n);
@@ -109,7 +115,7 @@ protected:
 	/**
 	* Called by TheoraWorkerThread to request a TheoraVideoClip instance to work on decoding
 	*/
-	TheoraVideoClip* requestWork(TheoraWorkerThread* caller);
+	TheoraVideoClip* requestWork(WorkerThread* caller);
 };
 #endif
 

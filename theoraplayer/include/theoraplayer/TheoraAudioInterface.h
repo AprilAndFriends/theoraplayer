@@ -9,7 +9,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #ifndef THEORA_AUDIOINTERFACE_H
 #define THEORA_AUDIOINTERFACE_H
 
-#include "TheoraExport.h"
+#include "theoraplayerExport.h"
 
 class TheoraVideoClip;
 
@@ -19,7 +19,7 @@ class TheoraVideoClip;
  output and the audio playback library of your choice.
  The class gets mono or stereo PCM data in in floating point data
  */
-class TheoraPlayerExport TheoraAudioInterface
+class theoraplayerExport TheoraAudioInterface
 {
 public:
 	//! PCM frequency, usualy 44100 Hz
@@ -39,7 +39,7 @@ public:
 	virtual void insertData(float* data, int nSamples)=0;	
 };
 
-class TheoraPlayerExport TheoraAudioInterfaceFactory
+class theoraplayerExport TheoraAudioInterfaceFactory
 {
 public:
 	//! VideoManager calls this when creating a new TheoraVideoClip object

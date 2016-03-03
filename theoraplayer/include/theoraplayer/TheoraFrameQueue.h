@@ -12,17 +12,20 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 #include <list>
 
-#include "TheoraAsync.h"
-#include "TheoraExport.h"
+#include "Mutex.h"
+#include "theoraplayerExport.h"
+#include "Thread.h"
 
 class TheoraVideoFrame;
 class TheoraVideoClip;
+
+using namespace theoraplayer; // TODOth - remove
 
 /**
 	This class handles the frame queue. contains frames and handles their alloctation/deallocation
 	it is designed to be thread-safe
 */
-class TheoraPlayerExport TheoraFrameQueue
+class theoraplayerExport TheoraFrameQueue
 {
 public:
 	TheoraFrameQueue(TheoraVideoClip* parent);
@@ -58,7 +61,7 @@ public:
 	//! return whether all frames in the queue are ready for display
 	bool isFull();
 
-	TheoraMutex* getMutex() { return &this->mutex; }
+	Mutex* getMutex() { return &this->mutex; }
 
 	//! returns the internal frame queue. Warning: Always lock / unlock queue's mutex before accessing frames directly!
 	std::list<TheoraVideoFrame*>& _getFrameQueue();
@@ -86,7 +89,7 @@ public:
 protected:
 	std::list<TheoraVideoFrame*> queue;
 	TheoraVideoClip* parent;
-	TheoraMutex mutex;
+	Mutex mutex;
 
 	//! implementation function that returns a TheoraVideoFrame instance
 	TheoraVideoFrame* createFrameInstance(TheoraVideoClip* clip);

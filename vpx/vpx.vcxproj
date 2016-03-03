@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project
     DefaultTargets="Build"
-    ToolsVersion="4.0"
+    ToolsVersion="14.0"
     xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
     >
     <ItemGroup
@@ -35,7 +35,7 @@
         Label="Configuration"
         >
         <ConfigurationType>StaticLibrary</ConfigurationType>
-        <PlatformToolset>v120</PlatformToolset>
+        <PlatformToolset>v140_xp</PlatformToolset>
         <CharacterSet>Unicode</CharacterSet>
         <WholeProgramOptimization>true</WholeProgramOptimization>
     </PropertyGroup>
@@ -44,7 +44,7 @@
         Label="Configuration"
         >
         <ConfigurationType>StaticLibrary</ConfigurationType>
-        <PlatformToolset>v120</PlatformToolset>
+        <PlatformToolset>v140_xp</PlatformToolset>
         <CharacterSet>Unicode</CharacterSet>
     </PropertyGroup>
     <Import

@@ -11,6 +11,10 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include "TheoraVideoManager.h"
 #include "TheoraUtil.h"
 
+#include "Mutex.h"
+
+using namespace theoraplayer; // TODOth - remove
+
 TheoraFrameQueue::TheoraFrameQueue(TheoraVideoClip* parent)
 {
 	this->parent = parent;
@@ -38,7 +42,7 @@ TheoraVideoFrame* TheoraFrameQueue::createFrameInstance(TheoraVideoClip* clip)
 
 void TheoraFrameQueue::setSize(int n)
 {
-	TheoraMutex::ScopeLock lock(&this->mutex);
+	Mutex::ScopeLock lock(&this->mutex);
 	if (this->queue.size() > 0)
 	{
 		foreach_l (TheoraVideoFrame*, this->queue)
@@ -84,7 +88,7 @@ TheoraVideoFrame* TheoraFrameQueue::_getFirstAvailableFrame()
 
 TheoraVideoFrame* TheoraFrameQueue::getFirstAvailableFrame()
 {
-	TheoraMutex::ScopeLock lock(&this->mutex);
+	Mutex::ScopeLock lock(&this->mutex);
 	TheoraVideoFrame* frame = _getFirstAvailableFrame();
 	lock.release();
 	return frame;
@@ -92,7 +96,7 @@ TheoraVideoFrame* TheoraFrameQueue::getFirstAvailableFrame()
 
 void TheoraFrameQueue::clear()
 {
-	TheoraMutex::ScopeLock lock(&this->mutex);
+	Mutex::ScopeLock lock(&this->mutex);
 	foreach_l (TheoraVideoFrame*, this->queue)
 	{
 		(*it)->clear();
@@ -113,7 +117,7 @@ void TheoraFrameQueue::_pop(int n)
 
 void TheoraFrameQueue::pop(int n)
 {
-	TheoraMutex::ScopeLock lock(&this->mutex);
+	Mutex::ScopeLock lock(&this->mutex);
 	_pop(n);
 	lock.release();
 }
@@ -121,7 +125,7 @@ void TheoraFrameQueue::pop(int n)
 TheoraVideoFrame* TheoraFrameQueue::requestEmptyFrame()
 {
 	TheoraVideoFrame* frame = NULL;
-	TheoraMutex::ScopeLock lock(&this->mutex);
+	Mutex::ScopeLock lock(&this->mutex);
 	foreach_l (TheoraVideoFrame*, this->queue)
 	{
 		if (!(*it)->inUse)
@@ -138,7 +142,7 @@ TheoraVideoFrame* TheoraFrameQueue::requestEmptyFrame()
 
 int TheoraFrameQueue::getUsedCount()
 {
-	TheoraMutex::ScopeLock lock(&this->mutex);
+	Mutex::ScopeLock lock(&this->mutex);
 	int n = 0;
 	foreach_l (TheoraVideoFrame*, this->queue)
 	{
@@ -167,7 +171,7 @@ int TheoraFrameQueue::_getReadyCount()
 
 int TheoraFrameQueue::getReadyCount()
 {
-	TheoraMutex::ScopeLock lock(&this->mutex);
+	Mutex::ScopeLock lock(&this->mutex);
 	int n = _getReadyCount();
 	lock.release();
 	return n;

@@ -12,16 +12,21 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 #include <string>
 
-#include "TheoraExport.h"
+#include "theoraplayerExport.h"
 
 // forward class declarations
-class TheoraMutex;
 class TheoraFrameQueue;
 class TheoraTimer;
 class TheoraAudioInterface;
-class TheoraWorkerThread;
 class TheoraDataSource;
 class TheoraVideoFrame;
+
+namespace theoraplayer
+{
+	class Mutex;
+	class WorkerThread;
+}
+using namespace theoraplayer; // TODOth - remove
 
 /**
 	format of the TheoraVideoFrame pixels. Affects decoding time
@@ -59,9 +64,9 @@ enum TheoraOutputMode
 	This object contains all data related to video playback, eg. the open source file,
 	the frame queue etc.
 	*/
-class TheoraPlayerExport TheoraVideoClip
+class theoraplayerExport TheoraVideoClip
 {
-	friend class TheoraWorkerThread;
+	friend class WorkerThread;
 	friend class TheoraVideoFrame;
 	friend class TheoraVideoManager;
 
@@ -218,7 +223,7 @@ protected:
 
 	TheoraTimer *timer, *defaultTimer;
 
-	TheoraWorkerThread* assignedWorkerThread;
+	WorkerThread* assignedWorkerThread;
 
 	bool useAlpha;
 
@@ -246,8 +251,8 @@ protected:
 	bool endOfFile, restarted;
 	int iteration, playbackIteration; //! used to ensure smooth playback of looping videos
 
-	TheoraMutex* audioMutex; //! syncs audio decoding and extraction
-	TheoraMutex* threadAccessMutex;
+	Mutex* audioMutex; //! syncs audio decoding and extraction
+	Mutex* threadAccessMutex;
 
 	/**
 	* Get the priority of a video clip. based on a forumula that includes user
