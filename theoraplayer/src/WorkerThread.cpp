@@ -12,13 +12,13 @@
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip.h"
 
-#ifdef _THREAD_NAMING
-static int threadCounter = 1;
-static Mutex counterMutex;
-#endif
-
 namespace theoraplayer
 {
+#ifdef _THREAD_NAMING
+	static int threadCounter = 1;
+	static Mutex counterMutex;
+#endif
+
 	WorkerThread::WorkerThread() : Thread(&WorkerThread::_work)
 	{
 		this->clip = NULL;
@@ -41,27 +41,32 @@ namespace theoraplayer
 			lock.release();
 		}
 #endif
+		bool decoded = false;
 		while (self->executing)
 		{
-			self->clip = TheoraVideoManager::getSingleton().requestWork(self);
-			if (!self->clip)
-			{
-				Thread::sleep(100.0f);
-				continue;
-			}
 			lock.acquire(self->clip->threadAccessMutex);
-			// if user requested seeking, do that then.
-			if (self->clip->seekFrame >= 0)
+			self->clip = TheoraVideoManager::getSingleton().requestWork(self);
+			if (self->clip != NULL)
 			{
-				self->clip->doSeek();
+				// if user requested seeking, do that then.
+				if (self->clip->seekFrame >= 0)
+				{
+					self->clip->doSeek();
+				}
+				decoded = self->clip->decodeNextFrame();
+				self->clip->assignedWorkerThread = NULL;
+				self->clip = NULL;
+				lock.release();
+				if (!decoded)
+				{
+					Thread::sleep(1.0f); // this happens when the video frame queue is full.
+				}
 			}
-			if (!self->clip->decodeNextFrame())
+			else
 			{
-				Thread::sleep(1.0f); // this happens when the video frame queue is full.
+				lock.release();
+				Thread::sleep(100.0f);
 			}
-			self->clip->assignedWorkerThread = NULL;
-			lock.release();
-			self->clip = NULL;
 		}
 	}
 
