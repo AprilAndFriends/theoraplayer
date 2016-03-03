@@ -45,7 +45,7 @@ namespace theoraplayer
 		while (self->executing)
 		{
 			self->clip = TheoraVideoManager::getSingleton().requestWork(self);
-			if (!self->clip)
+			if (self->clip == NULL)
 			{
 				Thread::sleep(100.0f);
 				continue;
