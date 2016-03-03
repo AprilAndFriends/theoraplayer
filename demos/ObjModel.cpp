@@ -26,14 +26,14 @@ struct ObjFace
 
 ObjModel::ObjModel()
 {
-	mNumVertices=0; mVertices=0;
+	this->numVertices=0; this->vertices=0;
 }
 
 void ObjModel::load(std::string filename,unsigned int texture_id, bool normals)
 {
-	mNormals = normals;
-	mName=filename;
-	mTexture=texture_id;
+	this->normals = normals;
+	this->name=filename;
+	this->texture=texture_id;
 
 	std::vector<ObjVertex> v,t,vn;
 	std::vector<ObjFace> faces;
@@ -122,44 +122,44 @@ void ObjModel::load(std::string filename,unsigned int texture_id, bool normals)
 	fclose(f);
 
 	int _v, _t, _n;
-	mVertices=new ObjVertex[faces.size()];
+	this->vertices=new ObjVertex[faces.size()];
 	for (std::vector<ObjFace>::iterator it=faces.begin();it!=faces.end();it++)
 	{
 		_v = it->v > 0 ? it->v - 1 : (int)(v.size() + it->v);
 		_t = it->t > 0 ? it->t - 1 : (int)(t.size() + it->t);
 		if (normals) _n = it->n > 0 ? it->n - 1 : (int)(vn.size() + it->n);
-		mVertices[mNumVertices].x=v[_v].x;
-		mVertices[mNumVertices].y=v[_v].y;
-		mVertices[mNumVertices].z=v[_v].z;
+		this->vertices[this->numVertices].x=v[_v].x;
+		this->vertices[this->numVertices].y=v[_v].y;
+		this->vertices[this->numVertices].z=v[_v].z;
 		if (normals)
 		{
-			mVertices[mNumVertices].nx=vn[_n].nx;
-			mVertices[mNumVertices].ny=vn[_n].ny;
-			mVertices[mNumVertices].nz=vn[_n].nz;		
+			this->vertices[this->numVertices].nx=vn[_n].nx;
+			this->vertices[this->numVertices].ny=vn[_n].ny;
+			this->vertices[this->numVertices].nz=vn[_n].nz;		
 		}
-		mVertices[mNumVertices].u=t[_t].u;
-		mVertices[mNumVertices].v=1-t[_t].v;
-		mNumVertices++;
+		this->vertices[this->numVertices].u=t[_t].u;
+		this->vertices[this->numVertices].v=1-t[_t].v;
+		this->numVertices++;
 	}
 }
 
 ObjModel::~ObjModel()
 {
-	if (!mVertices) delete [] mVertices;
+	if (!this->vertices) delete [] this->vertices;
 }
 
 void ObjModel::draw(void (*texfunc)(float, float))
 {
-	glBindTexture(GL_TEXTURE_2D,mTexture);
+	glBindTexture(GL_TEXTURE_2D,this->texture);
 	glBegin(GL_TRIANGLES);
 
-	for (int i=0;i<mNumVertices;i++)
+	for (int i=0;i<this->numVertices;i++)
 	{
-		if (texfunc) texfunc(mVertices[i].u,mVertices[i].v);
-		else glTexCoord2f(mVertices[i].u,mVertices[i].v);
+		if (texfunc) texfunc(this->vertices[i].u,this->vertices[i].v);
+		else glTexCoord2f(this->vertices[i].u,this->vertices[i].v);
 
-		if (mNormals) glNormal3f(mVertices[i].nx,mVertices[i].ny,mVertices[i].nz);
-		glVertex3f(mVertices[i].x,mVertices[i].y,mVertices[i].z);
+		if (this->normals) glNormal3f(this->vertices[i].nx,this->vertices[i].ny,this->vertices[i].nz);
+		glVertex3f(this->vertices[i].x,this->vertices[i].y,this->vertices[i].z);
 	}
 	glEnd();
 }

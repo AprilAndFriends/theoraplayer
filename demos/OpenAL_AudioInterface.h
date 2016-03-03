@@ -6,8 +6,8 @@ Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
 This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
-#ifndef _OpenAL_AudioInterface_h
-#define _OpenAL_AudioInterface_h
+#ifndef OPENAL_AUDIOINTERFACE_H
+#define OPENAL_AUDIOINTERFACE_H
 
 #include <theoraplayer/TheoraAudioInterface.h>
 #include <theoraplayer/TheoraVideoClip.h>
@@ -23,35 +23,38 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <queue>
 	
 class OpenAL_AudioInterface : public TheoraAudioInterface, TheoraTimer
-{
-	int mSourceNumChannels;
-	int mMaxBuffSize;
-	int mBuffSize;
-	short *mTempBuffer;
-	float mCurrentTimer;
-
-	struct OpenAL_Buffer
-	{
-		ALuint id;
-		int nSamples;
-	};
-	std::queue<OpenAL_Buffer> mBufferQueue;
-
-	ALuint mSource;
-	int mNumProcessedSamples,mNumPlayedSamples;
+{	
 public:
 	OpenAL_AudioInterface(TheoraVideoClip* owner,int nChannels,int freq);
 	~OpenAL_AudioInterface();
-	void insertData(float* data,int nSamples);
 
 	//! queued audio buffers, expressed in seconds
 	float getQueuedAudioSize();
+
+	void insertData(float* data,int nSamples);	
 
 	void update(float time_increase);
 
 	void pause();
 	void play();
 	void seek(float time);
+
+private:
+	int sourceNumChannels;
+	int maxBuffSize;
+	int buffSize;
+	short *tempBuffer;
+	float currentTimer;
+
+	struct OpenAL_Buffer
+	{
+		ALuint id;
+		int nSamples;
+	};
+	std::queue<OpenAL_Buffer> bufferQueue;
+
+	ALuint source;
+	int numProcessedSamples, numPlayedSamples;
 };
 
 
