@@ -12,9 +12,9 @@
 
 #include "TheoraDataSource.h"
 #include "TheoraVideoManager.h"
-#include "TheoraUtil.h"
 
 #include "Exception.h"
+#include "Utility.h"
 
 TheoraDataSource::~TheoraDataSource()
 {

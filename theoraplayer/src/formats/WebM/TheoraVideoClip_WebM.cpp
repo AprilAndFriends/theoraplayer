@@ -15,7 +15,6 @@
 #include "TheoraAudioInterface.h"
 #include "TheoraTimer.h"
 #include "TheoraDataSource.h"
-#include "TheoraUtil.h"
 #include "TheoraVideoClip_WebM.h"
 #include "TheoraPixelTransform.h"
 #include <stdio.h>
@@ -23,6 +22,7 @@
 
 #include "Exception.h"
 #include "Mutex.h"
+#include "Utility.h"
 
 #include "webmdec.h"
 
@@ -151,7 +151,7 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 	this->subFrameHeight = input.vpx_input_ctx->height;
 	this->subFrameOffsetX = 0;
 	this->subFrameOffsetY = 0;
-	this->stride = (this->stride == 1) ? _nextPow2(getWidth()) : getWidth();
+	this->stride = (this->stride == 1) ? potCeil(getWidth()) : getWidth();
 
 	this->fps = (float)input.vpx_input_ctx->framerate.numerator / (float)input.vpx_input_ctx->framerate.denominator;
 	this->frameDuration = 1.0f / this->fps;

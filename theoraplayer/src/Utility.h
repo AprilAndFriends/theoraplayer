@@ -13,9 +13,38 @@
 #ifndef THEORAPLAYER_UTILITY_H
 #define THEORAPLAYER_UTILITY_H
 
-//#include <string>
+#include <string>
 
 #define LOG_TAG "theoraplayer"
+
+#define foreach(type, name, container) for (std::vector< type >::iterator name = (container).begin(); name != (container).end(); ++name)
+#define foreachc(type, name, container) for (std::vector< type >::const_iterator name = (container).begin(); name != (container).end(); ++name)
+#define foreach_r(type, name, container) for (std::vector< type >::riterator name = (container).rbegin(); name != (container).rend(); ++name)
+#define foreachc_r(type, name, container) for (std::vector< type >::const_riterator name = (container).rbegin(); name != (container).rend(); ++name)
+
+#define foreach_l(type, name, container) for (std::list< type >::iterator name = (container).begin(); name != (container).end(); ++name)
+#define foreachc_l(type, name, container) for (std::list< type >::const_iterator name = (container).begin(); name != (container).end(); ++name)
+#define foreach_lr(type, name, container) for (std::list< type >::reverse_iterator name = (container).rbegin(); name != (container).rend(); ++name)
+#define foreachc_lr(type, name, container) for (std::list< type >::const_reverse_iterator name = (container).rbegin(); name != (container).rend(); ++name)
+
+#define foreach_map(typeKey, typeValue, name, container) for (std::map< typeKey, typeValue >::iterator name = (container).begin(); name != (container).end(); ++name)
+#define foreachc_map(typeKey, typeValue, name, container) for (std::map< typeKey, typeValue >::const_iterator name = (container).begin(); name != (container).end(); ++name)
+#define foreach_m(type, name, container) for (std::map< hltypes::String, type >::iterator name = (container).begin(); name != (container).end(); ++name)
+#define foreachc_m(type, name, container) for (std::map< hltypes::String, type >::const_iterator name = (container).begin(); name != (container).end(); ++name)
+
+// TODOth - change this
+#define th_writelog(message) TheoraVideoManager::getSingleton().logMessage(message)
+
+namespace theoraplayer
+{
+	std::string str(int i);
+	std::string strf(float i);
+	int potCeil(int value);
+
+}
+
+
+
 
 //typedef std::string hstr;
 //typedef const std::string& chstr;

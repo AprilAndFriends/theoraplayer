@@ -11,7 +11,6 @@
 
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip.h"
-#include "TheoraUtil.h"
 
 #ifdef _THREAD_NAMING
 static int threadCounter = 1;

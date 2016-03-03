@@ -7,8 +7,7 @@
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 #include "Exception.h"
-
-#include "TheoraUtil.h"
+#include "Utility.h"
 
 namespace theoraplayer
 {

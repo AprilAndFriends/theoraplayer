@@ -15,10 +15,10 @@
 #include "TheoraAudioInterface.h"
 #include "TheoraTimer.h"
 #include "TheoraDataSource.h"
-#include "TheoraUtil.h"
 
 #include "Exception.h"
 #include "Mutex.h"
+#include "Utility.h"
 
 using namespace theoraplayer; // TODOth - remove
 
@@ -255,7 +255,7 @@ int TheoraVideoClip::discardOutdatedFrames(float absTime)
 	float timeToDisplay;
 	
 	std::list<TheoraVideoFrame*>& queue = this->frameQueue->_getFrameQueue();
-	foreach_l (TheoraVideoFrame*, queue)
+	foreach_l (TheoraVideoFrame*, it, queue)
 	{
 		frame = *it;
 		if (!frame->ready)
@@ -503,20 +503,16 @@ float TheoraVideoClip::waitForCache(float desired_cache_factor, float max_wait_t
         frameQueueSize = this->numFrames;
     }
 	int desired_num_precached_frames = (int) ceil(desired_cache_factor * frameQueueSize);
-	for (;;)
+	do
 	{
 		nReady = getNumReadyFrames();
 		if (nReady >= desired_num_precached_frames)
 		{
 			break;
 		}
-		_psleep(10);
+		Thread::sleep(10.0f);
 		elapsed += 10;
-		if (elapsed >= max_wait_time * 1000)
-		{
-			break;
-		}
-	}
+	} while (elapsed >= max_wait_time * 1000);
 	if (!paused)
 	{
 		this->timer->play();

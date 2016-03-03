@@ -9,9 +9,9 @@
 #include "TheoraFrameQueue.h"
 #include "TheoraVideoFrame.h"
 #include "TheoraVideoManager.h"
-#include "TheoraUtil.h"
 
 #include "Mutex.h"
+#include "Utility.h"
 
 using namespace theoraplayer; // TODOth - remove
 
@@ -22,7 +22,7 @@ TheoraFrameQueue::TheoraFrameQueue(TheoraVideoClip* parent)
 
 TheoraFrameQueue::~TheoraFrameQueue()
 {
-	foreach_l (TheoraVideoFrame*, this->queue)
+	foreach_l (TheoraVideoFrame*, it, this->queue)
 	{
 		delete (*it);
 	}
@@ -45,7 +45,7 @@ void TheoraFrameQueue::setSize(int n)
 	Mutex::ScopeLock lock(&this->mutex);
 	if (this->queue.size() > 0)
 	{
-		foreach_l (TheoraVideoFrame*, this->queue)
+		foreach_l (TheoraVideoFrame*, it, this->queue)
 		{
 			delete (*it);
 		}
@@ -97,7 +97,7 @@ TheoraVideoFrame* TheoraFrameQueue::getFirstAvailableFrame()
 void TheoraFrameQueue::clear()
 {
 	Mutex::ScopeLock lock(&this->mutex);
-	foreach_l (TheoraVideoFrame*, this->queue)
+	foreach_l (TheoraVideoFrame*, it, this->queue)
 	{
 		(*it)->clear();
 	}
@@ -126,7 +126,7 @@ TheoraVideoFrame* TheoraFrameQueue::requestEmptyFrame()
 {
 	TheoraVideoFrame* frame = NULL;
 	Mutex::ScopeLock lock(&this->mutex);
-	foreach_l (TheoraVideoFrame*, this->queue)
+	foreach_l (TheoraVideoFrame*, it, this->queue)
 	{
 		if (!(*it)->inUse)
 		{
@@ -144,7 +144,7 @@ int TheoraFrameQueue::getUsedCount()
 {
 	Mutex::ScopeLock lock(&this->mutex);
 	int n = 0;
-	foreach_l (TheoraVideoFrame*, this->queue)
+	foreach_l (TheoraVideoFrame*, it, this->queue)
 	{
 		if ((*it)->inUse)
 		{
@@ -158,7 +158,7 @@ int TheoraFrameQueue::getUsedCount()
 int TheoraFrameQueue::_getReadyCount()
 {
 	int n = 0;
-	foreach_l (TheoraVideoFrame*, this->queue)
+	foreach_l (TheoraVideoFrame*, it, this->queue)
 	{
 		if ((*it)->ready)
 		{

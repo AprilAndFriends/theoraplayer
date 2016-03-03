@@ -15,12 +15,12 @@
 #include "TheoraAudioInterface.h"
 #include "TheoraTimer.h"
 #include "TheoraDataSource.h"
-#include "TheoraUtil.h"
 #include "TheoraVideoClip_Theora.h"
 #include "TheoraPixelTransform.h"
 
 #include "Exception.h"
 #include "Mutex.h"
+#include "Utility.h"
 
 TheoraVideoClip_Theora::TheoraVideoClip_Theora(TheoraDataSource* data_source,
 										TheoraOutputMode output_mode,
@@ -249,7 +249,7 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 	this->subFrameHeight = this->info.TheoraInfo.pic_height;
 	this->subFrameOffsetX = this->info.TheoraInfo.pic_x;
 	this->subFrameOffsetY = this->info.TheoraInfo.pic_y;
-	this->stride = (this->stride == 1) ? _nextPow2(getWidth()) : getWidth();
+	this->stride = (this->stride == 1) ? potCeil(getWidth()) : getWidth();
 	this->fps = this->info.TheoraInfo.fps_numerator / (float) this->info.TheoraInfo.fps_denominator;
 	
 #ifdef _DEBUG

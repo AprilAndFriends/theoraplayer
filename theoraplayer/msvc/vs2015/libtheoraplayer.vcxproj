@@ -106,6 +106,7 @@
     <ClCompile Include="..\..\src\Mutex.cpp" />
     <ClCompile Include="..\..\src\theoraplayer.cpp" />
     <ClCompile Include="..\..\src\Thread.cpp" />
+    <ClCompile Include="..\..\src\Utility.cpp" />
     <ClCompile Include="..\..\src\WorkerThread.cpp" />
     <ClCompile Include="..\..\src\YUV\android\cpu-features.c">
       <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
@@ -163,7 +164,6 @@
     <ClCompile Include="..\..\src\TheoraDataSource.cpp" />
     <ClCompile Include="..\..\src\TheoraFrameQueue.cpp" />
     <ClCompile Include="..\..\src\TheoraTimer.cpp" />
-    <ClCompile Include="..\..\src\TheoraUtil.cpp" />
     <ClCompile Include="..\..\src\TheoraVideoClip.cpp" />
     <ClCompile Include="..\..\src\TheoraVideoFrame.cpp" />
     <ClCompile Include="..\..\src\TheoraVideoManager.cpp" />
@@ -186,7 +186,6 @@
     <ClInclude Include="..\..\include\theoraplayer\theoraplayer.h" />
     <ClInclude Include="..\..\include\theoraplayer\theoraplayerExport.h" />
     <ClInclude Include="..\..\include\theoraplayer\TheoraTimer.h" />
-    <ClInclude Include="..\..\include\theoraplayer\TheoraUtil.h" />
     <ClInclude Include="..\..\include\theoraplayer\TheoraVideoClip.h" />
     <ClInclude Include="..\..\include\theoraplayer\TheoraVideoFrame.h" />
     <ClInclude Include="..\..\include\theoraplayer\TheoraVideoManager.h" />

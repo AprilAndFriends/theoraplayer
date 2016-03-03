@@ -11,9 +11,9 @@
 #include "TheoraVideoClip.h"
 #include "TheoraVideoManager.h"
 #include "TheoraFrameQueue.h"
-#include "TheoraUtil.h"
 
 #include "Exception.h"
+#include "Utility.h"
 #include "WorkerThread.h"
 using namespace theoraplayer; // TODOth - remove this later
 
@@ -171,7 +171,7 @@ TheoraVideoClip* TheoraVideoManager::getVideoClipByName(std::string name)
 {
 	TheoraVideoClip* clip = NULL;
 	Mutex::ScopeLock lock(this->workMutex);
-	foreach (TheoraVideoClip*, this->clips)
+	foreach (TheoraVideoClip*, it, this->clips)
 	{
 		if ((*it)->getName() == name)
 		{
@@ -288,7 +288,7 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 				th_writelog(" - Waiting for WorkerThread to finish decoding in order to destroy");
 				reported = 1;
 			}
-			_psleep(1);
+			Thread::sleep(1.0f);
 		}
 		if (reported)
 		{
@@ -296,7 +296,7 @@ void TheoraVideoManager::destroyVideoClip(TheoraVideoClip* clip)
 		}
 		
 		// erase the clip from the clip list
-		foreach (TheoraVideoClip*, this->clips)
+		foreach (TheoraVideoClip*, it, this->clips)
 		{
 			if ((*it) == clip)
 			{
@@ -338,7 +338,7 @@ TheoraVideoClip* TheoraVideoManager::requestWork(WorkerThread* caller)
 
 	for (int i = 0; i < 2 && candidates.size() == 0; ++i)
 	{
-		foreach (TheoraVideoClip*, this->clips)
+		foreach (TheoraVideoClip*, it, this->clips)
 		{
 			clip = *it;
 			if (clip->isBusy() || (i == 0 && clip->isPaused() && !clip->waitingForCache))
@@ -377,14 +377,14 @@ TheoraVideoClip* TheoraVideoManager::requestWork(WorkerThread* caller)
 	}
 
 	// normalize candidate values
-	foreach (TheoraWorkCandidate, candidates)
+	foreach (TheoraWorkCandidate, it, candidates)
 	{
 		it->workTime /= totalAccessCount;
 		// adjust user priorities to favor clips that have fewer frames queued
 		it->priority *= 1.0f - (it->queuedTime / maxQueuedTime) * 0.5f;
 		prioritySum += it->priority;
 	}
-	foreach (TheoraWorkCandidate, candidates)
+	foreach (TheoraWorkCandidate, it, candidates)
 	{
 		it->entitledTime = it->priority / prioritySum;
 	}
@@ -392,7 +392,7 @@ TheoraVideoClip* TheoraVideoManager::requestWork(WorkerThread* caller)
 	// now, based on how much access time has been given to each clip in the work log
 	// and how much time should be given to each clip based on calculated priorities,
 	// we choose a best suited clip for this worker thread to decode next
-	foreach (TheoraWorkCandidate, candidates)
+	foreach (TheoraWorkCandidate, it, candidates)
 	{
 		diff = it->entitledTime - it->workTime;
 
@@ -451,7 +451,7 @@ TheoraVideoClip* TheoraVideoManager::requestWork(WorkerThread* caller)
 void TheoraVideoManager::update(float timeDelta)
 {
 	Mutex::ScopeLock lock(this->workMutex);
-	foreach (TheoraVideoClip*, this->clips)
+	foreach (TheoraVideoClip*, it, this->clips)
 	{
 		(*it)->update(timeDelta);
 		(*it)->decodedAudioCheck();
@@ -480,7 +480,7 @@ void TheoraVideoManager::createWorkerThreads(int n)
 
 void TheoraVideoManager::destroyWorkerThreads()
 {
-	foreach (WorkerThread*, this->workerThreads)
+	foreach (WorkerThread*, it, this->workerThreads)
 	{
 		(*it)->join();
 		delete (*it);
