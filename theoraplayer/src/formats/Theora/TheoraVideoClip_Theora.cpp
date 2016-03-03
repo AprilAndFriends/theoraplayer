@@ -11,12 +11,12 @@
 #include <algorithm>
 #include "TheoraVideoManager.h"
 #include "TheoraAudioInterface.h"
-#include "TheoraDataSource.h"
 #include "TheoraVideoClip_Theora.h"
 #include "TheoraPixelTransform.h"
 
-#include "FrameQueue.h"
+#include "DataSource.h"
 #include "Exception.h"
+#include "FrameQueue.h"
 #include "Mutex.h"
 #include "Timer.h"
 #include "Utility.h"
@@ -24,7 +24,7 @@
 
 using namespace theoraplayer; // TODOth - remove this later
 
-TheoraVideoClip_Theora::TheoraVideoClip_Theora(TheoraDataSource* data_source,
+TheoraVideoClip_Theora::TheoraVideoClip_Theora(DataSource* data_source,
 										TheoraOutputMode output_mode,
 										int nPrecachedFrames,
 										bool usePower2Stride):
@@ -238,7 +238,7 @@ void TheoraVideoClip_Theora::_restart()
 	}
 }
 
-void TheoraVideoClip_Theora::load(TheoraDataSource* source)
+void TheoraVideoClip_Theora::load(DataSource* source)
 {
 #ifdef _DEBUG
 	th_writelog("-----");

@@ -39,7 +39,7 @@ protected:
 	void unload();
 	void doSeek();
 public:
-	TheoraVideoClip_FFmpeg(TheoraDataSource* data_source,
+	TheoraVideoClip_FFmpeg(DataSource* data_source,
 								 TheoraOutputMode output_mode,
 								 int nPrecachedFrames,
 								 bool usePower2Stride);
@@ -48,7 +48,7 @@ public:
 	bool _readData();
 	bool decodeNextFrame();
 	void _restart();
-	void load(TheoraDataSource* source);
+	void load(DataSource* source);
 	float decodeAudio();
 	void decodedAudioCheck();
 	std::string getDecoderName() { return "FFmpeg"; }

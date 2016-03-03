@@ -12,7 +12,9 @@
 
 #include "./tools_common.h"
 
-#include "TheoraDataSource.h"
+#include "DataSource.h"
+
+using namespace theoraplayer; // TODOth - remove later
 
 
 	struct VpxInputContext;
@@ -38,7 +40,7 @@
 	// TODO(vigneshv): Refactor this function into two smaller functions specific
 	// to their task.
 	namespace TheoraWebmDec{
-		int file_is_webm(TheoraDataSource* dataSource, struct WebmInputContext *webm_ctx,
+		int file_is_webm(DataSource* dataSource, struct WebmInputContext *webm_ctx,
 		struct VpxInputContext *vpx_ctx);
 
 		// Reads a WebM Video Frame. Memory for the buffer is created, owned and managed
@@ -62,7 +64,7 @@
 			size_t *buffer_size);
 
 		// Guesses the frame rate of the input file based on the container timestamps.
-		int webm_guess_framerate(TheoraDataSource* dataSource, struct WebmInputContext *webm_ctx,
+		int webm_guess_framerate(DataSource* dataSource, struct WebmInputContext *webm_ctx,
 		struct VpxInputContext *vpx_ctx);
 
 		int webm_guess_duration(struct WebmInputContext* webm_ctx);

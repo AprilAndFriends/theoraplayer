@@ -10,13 +10,13 @@
 #define AVFOUNDATION_CLASSES_DEFINED
 #import <AVFoundation/AVFoundation.h>
 #include "TheoraAudioInterface.h"
-#include "TheoraDataSource.h"
 #include "TheoraException.h"
 #include "TheoraUtil.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip_AVFoundation.h"
 #include "TheoraPixelTransform.h"
 
+#include "DataSource.h"
 #include "FrameQueue.h"
 #include "Timer.h"
 #include "VideoFrame.h"
@@ -60,7 +60,7 @@ static CVPlanarPixelBufferInfo_YCbCrPlanar getYUVStruct(void* src)
 	return yuv;
 }
 
-TheoraVideoClip_AVFoundation::TheoraVideoClip_AVFoundation(TheoraDataSource* data_source,
+TheoraVideoClip_AVFoundation::TheoraVideoClip_AVFoundation(DataSource* data_source,
 											   TheoraOutputMode output_mode,
 											   int nPrecachedFrames,
 											   bool usePower2Stride):
@@ -249,7 +249,7 @@ void TheoraVideoClip_AVFoundation::_restart()
 	mRestarted = true;
 }
 
-void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
+void TheoraVideoClip_AVFoundation::load(DataSource* source)
 {
 	mStream = source;
 	mFrameNumber = 0;
@@ -259,7 +259,7 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	if (fileDataSource != NULL) filename = fileDataSource->getFilename();
 	else
 	{
-		TheoraMemoryFileDataSource* memoryDataSource = dynamic_cast<TheoraMemoryFileDataSource*>(source);
+		MemoryDataSource* memoryDataSource = dynamic_cast<MemoryDataSource*>(source);
 		if (memoryDataSource != NULL) filename = memoryDataSource->getFilename();
 		else
 		{

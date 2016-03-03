@@ -17,9 +17,12 @@ These grapchics ARE NOT ALLOWED to be used in any manner other then for the purp
 of this demo program.
 *************************************************************************************/
 #include <math.h>
+
 #include "demo_basecode.h"
+
+#include <theoraplayer/DataSource.h>
 #include <theoraplayer/TheoraPlayer.h>
-#include <theoraplayer/TheoraDataSource.h>
+
 #include "tga.h"
 
 unsigned int locv_main_tex, locv_back_tex, locv_branch_tex, locv_birds_tex,
@@ -99,11 +102,11 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr = new TheoraVideoManager(2);
-	water = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_water" + resourceExtension), TH_RGB, 4);
+	water = mgr->createVideoClip(new MemoryDataSource("media/locv/locv_water" + resourceExtension), TH_RGB, 4);
     water->setPlaybackSpeed(0.5f);
 	water->setAutoRestart(1);
 
-	eve = mgr->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_eve" + resourceExtension), TH_RGBA, 4);
+	eve = mgr->createVideoClip(new MemoryDataSource("media/locv/locv_eve" + resourceExtension), TH_RGBA, 4);
 	eve->setAutoRestart(1);
     
 	water_tex = createTexture(nextPow2(water->getWidth()), nextPow2(water->getHeight()));

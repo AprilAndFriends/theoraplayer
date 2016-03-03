@@ -11,12 +11,12 @@
 #include <algorithm>
 #include "TheoraVideoManager.h"
 #include "TheoraAudioInterface.h"
-#include "TheoraDataSource.h"
 #include "TheoraVideoClip_WebM.h"
 #include "TheoraPixelTransform.h"
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "DataSource.h"
 #include "Exception.h"
 #include "FrameQueue.h"
 #include "Mutex.h"
@@ -27,7 +27,7 @@ using namespace theoraplayer; // TODOth - remove this later
 
 #include "webmdec.h"
 
-TheoraVideoClip_WebM::TheoraVideoClip_WebM(TheoraDataSource* data_source,
+TheoraVideoClip_WebM::TheoraVideoClip_WebM(DataSource* data_source,
 	TheoraOutputMode output_mode,
 	int nPrecachedFrames,
 	bool usePower2Stride) :
@@ -122,7 +122,7 @@ void TheoraVideoClip_WebM::_restart()
 	}
 }
 
-void TheoraVideoClip_WebM::load(TheoraDataSource* source)
+void TheoraVideoClip_WebM::load(DataSource* source)
 {
 	if (!TheoraWebmDec::file_is_webm(source, input.webm_ctx, input.vpx_input_ctx))
 	{

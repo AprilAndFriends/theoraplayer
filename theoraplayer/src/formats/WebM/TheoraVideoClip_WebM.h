@@ -17,6 +17,7 @@
 #include <vorbis/vorbisfile.h>
 #include <theora/theoradec.h>
 
+#include "DataSource.h"
 #include "TheoraAudioPacketQueue.h"
 #include "TheoraVideoClip.h"
 
@@ -32,7 +33,7 @@ struct VpxDecInputContext {
 class TheoraVideoClip_WebM : public TheoraVideoClip, public TheoraAudioPacketQueue
 {
 public:
-	TheoraVideoClip_WebM(TheoraDataSource* data_source,
+	TheoraVideoClip_WebM(DataSource* data_source,
 						   TheoraOutputMode output_mode,
 						   int nPrecachedFrames,
 						   bool usePower2Stride);
@@ -41,7 +42,7 @@ public:
 	bool _readData();
 	bool decodeNextFrame();
 	void _restart();
-	void load(TheoraDataSource* source);
+	void load(DataSource* source);
 	float decodeAudio();
 	void decodedAudioCheck();
 	std::string getDecoderName() { return "WebM"; }

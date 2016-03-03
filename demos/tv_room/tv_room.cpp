@@ -12,8 +12,11 @@ COPYRIGHT INFO: The room 3D models and textures are licensed under the terms of 
                 GNU General Public License (GPL).
 *************************************************************************************/
 #include "demo_basecode.h"
+
+#include <theoraplayer/DataSource.h>
+
 #include <theoraplayer/TheoraPlayer.h>
-#include <theoraplayer/TheoraDataSource.h>
+
 #include "ObjModel.h"
 #include "tga.h"
 #include <math.h>
@@ -133,7 +136,7 @@ void init()
 	mgr=new TheoraVideoManager();
 	clip=mgr->createVideoClip("media/bunny" + resourceExtension,TH_RGB);
 //  use this if you want to preload the file into ram and stream from there
-//	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);
+//	clip=mgr->createVideoClip(new MemoryDataSource("../media/short" + resourceExtension),TH_RGB);
 	clip->setAutoRestart(1);
 
 	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));

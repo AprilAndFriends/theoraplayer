@@ -7,10 +7,10 @@
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 #include "TheoraAudioInterface.h"
-#include "TheoraDataSource.h"
 #include "TheoraVideoClip.h"
 #include "TheoraVideoManager.h"
 
+#include "DataSource.h"
 #include "Exception.h"
 #include "FrameQueue.h"
 #include "Utility.h"
@@ -198,11 +198,11 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(std::string filename,
 													 int numPrecachedOverride,
 													 bool usePower2Stride)
 {
-	TheoraDataSource* src = new TheoraFileDataSource(filename);
+	DataSource* src = new FileDataSource(filename);
 	return createVideoClip(src, output_mode, numPrecachedOverride, usePower2Stride);
 }
 
-TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_source,
+TheoraVideoClip* TheoraVideoManager::createVideoClip(DataSource* data_source,
 													 TheoraOutputMode output_mode,
 													 int numPrecachedOverride,
 													 bool usePower2Stride)
@@ -218,7 +218,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 	std::string filename;
 	if (fileDataSource == NULL)
 	{
-		TheoraMemoryFileDataSource* memoryDataSource = dynamic_cast<TheoraMemoryFileDataSource*>(data_source);
+		MemoryDataSource* memoryDataSource = dynamic_cast<MemoryDataSource*>(data_source);
 		if (memoryDataSource != NULL)
 		{
 			filename = memoryDataSource->getFilename();

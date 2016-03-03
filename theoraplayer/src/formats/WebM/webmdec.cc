@@ -17,7 +17,8 @@
 #include "third_party/libwebm/mkvparser.hpp"
 #include "third_party/libwebm/mkvreader.hpp"
 
-#include "TheoraDataSource.h"
+#include "DataSource.h"
+
 #include "TheoraMkvReader.h"
 
 namespace {
@@ -65,7 +66,7 @@ struct VpxInputContext *const vpx_ctx) {
 }
 
 
-int TheoraWebmDec::file_is_webm(TheoraDataSource *const dataSource, struct WebmInputContext *webm_ctx,
+int TheoraWebmDec::file_is_webm(DataSource *const dataSource, struct WebmInputContext *webm_ctx,
 struct VpxInputContext *vpx_ctx)
 {
 	TheoraMkvReader *const reader = new TheoraMkvReader(dataSource);
@@ -211,7 +212,7 @@ int TheoraWebmDec::webm_read_frame(struct WebmInputContext *webm_ctx,
 	return frame.Read(reader, *buffer) ? -1 : 0;
 }
 
-int TheoraWebmDec::webm_guess_framerate(TheoraDataSource *const dataSource, struct WebmInputContext *webm_ctx,
+int TheoraWebmDec::webm_guess_framerate(DataSource *const dataSource, struct WebmInputContext *webm_ctx,
 struct VpxInputContext *vpx_ctx) {
 	uint32_t i = 0;
 	uint8_t *buffer = NULL;

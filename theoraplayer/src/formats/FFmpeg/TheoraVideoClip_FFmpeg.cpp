@@ -8,13 +8,13 @@
 
 #ifdef __FFMPEG
 #include "TheoraAudioInterface.h"
-#include "TheoraDataSource.h"
 #include "TheoraException.h"
 #include "TheoraUtil.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip_FFmpeg.h"
 #include "TheoraPixelTransform.h"
 
+#include "DataSource.h"
 #include "FrameQueue.h"
 #include "Timer.h"
 #include "VideoFrame.h"
@@ -46,7 +46,7 @@ static int readFunction(void* data, uint8_t* buf, int buf_size)
 	th_writelog("reading " + str(buf_size) + " bytes");
 #endif
 
-	TheoraDataSource* src = (TheoraDataSource*) data;
+	DataSource* src = (DataSource*) data;
 	return src->read(buf, buf_size);
 }
 
@@ -56,7 +56,7 @@ static int64_t seekFunction(void* data, int64_t offset, int whence)
 	th_writelog("seeking: offset = " + str((long) offset) + ", whence = " + str(whence));
 #endif
 
-	TheoraDataSource* src = (TheoraDataSource*) data;
+	DataSource* src = (DataSource*) data;
 	if (whence == AVSEEK_SIZE)
 		return src->getSize();
 	else if (whence == SEEK_SET)
@@ -210,7 +210,7 @@ int show_codecs(void *optctx, const char *opt, const char *arg)
 	return 0;
 }
 
-TheoraVideoClip_FFmpeg::TheoraVideoClip_FFmpeg(TheoraDataSource* data_source,
+TheoraVideoClip_FFmpeg::TheoraVideoClip_FFmpeg(DataSource* data_source,
 														 TheoraOutputMode output_mode,
 														 int nPrecachedFrames,
 														 bool usePower2Stride):
@@ -229,7 +229,7 @@ TheoraVideoClip_FFmpeg::~TheoraVideoClip_FFmpeg()
 	unload();
 }
 
-void TheoraVideoClip_FFmpeg::load(TheoraDataSource* source)
+void TheoraVideoClip_FFmpeg::load(DataSource* source)
 {
 	mVideoStreamIndex = -1;
 	mFrameNumber = 0;

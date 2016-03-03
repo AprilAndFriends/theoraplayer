@@ -7,8 +7,10 @@ This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
 #include "demo_basecode.h"
+
+#include <theoraplayer/DataSource.h>
+
 #include <theoraplayer/TheoraPlayer.h>
-#include <theoraplayer/TheoraDataSource.h>
 
 unsigned int tex_id;
 TheoraVideoManager* mgr;
@@ -90,7 +92,7 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/bunny" + resourceExtension), TH_RGB, 4);
+	clip=mgr->createVideoClip(new MemoryDataSource("media/bunny" + resourceExtension), TH_RGB, 4);
 	clip->setAutoRestart(1);
 
 	tex_id=createTexture(nextPow2(clip->getWidth()), nextPow2(clip->getHeight()));

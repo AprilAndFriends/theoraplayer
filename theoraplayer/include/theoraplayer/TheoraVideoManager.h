@@ -25,11 +25,11 @@
 #include "TheoraVideoClip.h"
 
 // forward class declarations
-class TheoraDataSource;
 class TheoraAudioInterfaceFactory;
 
 namespace theoraplayer
 {
+	class DataSource;
 	class Mutex;
 	class WorkerThread;
 }
@@ -83,7 +83,7 @@ public:
 	void setDefaultNumPrecachedFrames(int n) { mDefaultNumPrecachedFrames = n; }
 
 	TheoraVideoClip* createVideoClip(std::string filename,TheoraOutputMode output_mode=TH_RGB,int numPrecachedOverride=0,bool usePower2Stride=0);
-	TheoraVideoClip* createVideoClip(TheoraDataSource* data_source,TheoraOutputMode output_mode=TH_RGB,int numPrecachedOverride=0,bool usePower2Stride=0);
+	TheoraVideoClip* createVideoClip(DataSource* data_source,TheoraOutputMode output_mode=TH_RGB,int numPrecachedOverride=0,bool usePower2Stride=0);
 
 	void update(float timeDelta);
 

@@ -9,13 +9,16 @@
 #ifndef THEORAMKVREADER_HPP
 #define THEORAMKVREADER_HPP
 
-#include <mkvparser.hpp>
-#include "TheoraDataSource.h"
 #include <cstdio>
+#include <mkvparser.hpp>
 
-class TheoraMkvReader : public mkvparser::IMkvReader {
+#include "DataSource.h"
+using namespace theoraplayer; // TODOth - remove this later
+
+class TheoraMkvReader : public mkvparser::IMkvReader
+{
 public:
-	explicit TheoraMkvReader(TheoraDataSource* dataSource);
+	explicit TheoraMkvReader(DataSource* dataSource);
 	virtual ~TheoraMkvReader();
 
 	int Open(const char*);
@@ -29,9 +32,10 @@ private:
 	TheoraMkvReader& operator=(const TheoraMkvReader&);	
 
 	int m_length;
-	TheoraDataSource* m_dataSource;
+	DataSource* m_dataSource;
 
 	bool GetFileSize();
+
 };
 
 #endif  // MKVREADER_HPP

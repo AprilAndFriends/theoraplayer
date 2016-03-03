@@ -12,8 +12,11 @@ COPYRIGHT INFO: The room 3D models and lightmap textures and textures are licens
                 under the terms of the GNU General Public License (GPL).
 *************************************************************************************/
 #include "demo_basecode.h"
+
+#include <theoraplayer/DataSource.h>
+
 #include <theoraplayer/TheoraPlayer.h>
-#include <theoraplayer/TheoraDataSource.h>
+
 #include "ObjModel.h"
 #include "tga.h"
 #include <math.h>
@@ -143,7 +146,7 @@ void init()
 	
 	FOVY = 54.495f;
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/lighting/lighting" + resourceExtension), TH_RGB);
+	clip=mgr->createVideoClip(new MemoryDataSource("media/lighting/lighting" + resourceExtension), TH_RGB);
 	clip->setAutoRestart(1);
 	//clip->setPlaybackSpeed(0.5f);
 	

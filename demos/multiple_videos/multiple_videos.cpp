@@ -7,8 +7,10 @@ This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
 #include "demo_basecode.h"
+
+#include <theoraplayer/DataSource.h>
+
 #include <theoraplayer/TheoraPlayer.h>
-#include <theoraplayer/TheoraDataSource.h>
 
 TheoraVideoClip* clips[4];
 unsigned int textures[4];
@@ -124,7 +126,7 @@ void init()
 	mgr->setDefaultNumPrecachedFrames(16);
 	for (int i=0;i<4;i++)
 	{
-		clips[i]=mgr->createVideoClip(new TheoraMemoryFileDataSource(files[i]), outputMode);
+		clips[i]=mgr->createVideoClip(new MemoryDataSource(files[i]), outputMode);
 
 		clips[i]->setAutoRestart(1);
 		textures[i]=createTexture(nextPow2(clips[i]->getWidth()),nextPow2(clips[i]->getHeight()), textureFormat);

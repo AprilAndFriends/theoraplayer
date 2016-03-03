@@ -17,6 +17,9 @@
 #include <vorbis/vorbisfile.h>
 #include <theora/theoradec.h>
 
+#include "DataSource.h"
+using namespace theoraplayer; // TODOth - remove later
+
 #include "TheoraAudioPacketQueue.h"
 #include "TheoraVideoClip.h"
 
@@ -42,7 +45,7 @@ struct TheoraInfoStruct
 class TheoraVideoClip_Theora : public TheoraVideoClip, public TheoraAudioPacketQueue
 {
 public:
-	TheoraVideoClip_Theora(TheoraDataSource* data_source,
+	TheoraVideoClip_Theora(DataSource* data_source,
 						   TheoraOutputMode output_mode,
 						   int nPrecachedFrames,
 						   bool usePower2Stride);
@@ -51,7 +54,7 @@ public:
 	bool _readData();
 	bool decodeNextFrame();
 	void _restart();
-	void load(TheoraDataSource* source);
+	void load(DataSource* source);
 	float decodeAudio();
 	void decodedAudioCheck();
 	std::string getDecoderName() { return "Theora"; }

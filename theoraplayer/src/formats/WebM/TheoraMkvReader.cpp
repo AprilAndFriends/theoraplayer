@@ -10,7 +10,7 @@
 
 #include <cassert>
 
-TheoraMkvReader::TheoraMkvReader(TheoraDataSource* dataSource) : m_dataSource(dataSource)
+TheoraMkvReader::TheoraMkvReader(DataSource* dataSource) : m_dataSource(dataSource)
 {
 	m_length = (int)dataSource->getSize();
 }

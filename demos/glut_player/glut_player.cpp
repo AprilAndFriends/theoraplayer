@@ -7,8 +7,10 @@ This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
 #include "demo_basecode.h"
+
+#include <theoraplayer/DataSource.h>
+
 #include <theoraplayer/TheoraPlayer.h>
-#include <theoraplayer/TheoraDataSource.h>
 
 //#define BENCHMARK // uncomment this to benchmark decoding times
 #ifdef BENCHMARK
@@ -151,7 +153,7 @@ void init()
 #endif
 
 //  use this if you want to preload the file into ram and stream from there
-//	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);
+//	clip=mgr->createVideoClip(new MemoryDataSource("../media/short" + resourceExtension),TH_RGB);
 	clip->setAutoRestart(1);
 	
 	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()), textureFormat);

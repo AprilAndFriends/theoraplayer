@@ -11,8 +11,8 @@
 #include "TheoraVideoClip.h"
 #include "TheoraVideoManager.h"
 #include "TheoraAudioInterface.h"
-#include "TheoraDataSource.h"
 
+#include "DataSource.h"
 #include "Exception.h"
 #include "FrameQueue.h"
 #include "Mutex.h"
@@ -22,7 +22,7 @@
 
 using namespace theoraplayer; // TODOth - remove
 
-TheoraVideoClip::TheoraVideoClip(TheoraDataSource* data_source,
+TheoraVideoClip::TheoraVideoClip(DataSource* data_source,
 								 TheoraOutputMode output_mode,
 								 int nPrecachedFrames,
 								 bool usePower2Stride):

@@ -7,8 +7,11 @@ This program is free software; you can redistribute it and/or modify it under
 the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
 #include "demo_basecode.h"
+
+#include <theoraplayer/DataSource.h>
+
 #include <theoraplayer/TheoraPlayer.h>
-#include <theoraplayer/TheoraDataSource.h>
+
 #include "ObjModel.h"
 #include "tga.h"
 #include <math.h>
@@ -64,7 +67,7 @@ void setDebugTitle(char* out)
 void init()
 {
 	mgr=new TheoraVideoManager();
-	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("media/environment_mapping/room256" + resourceExtension), TH_RGB);
+	clip=mgr->createVideoClip(new MemoryDataSource("media/environment_mapping/room256" + resourceExtension), TH_RGB);
 	clip->setAutoRestart(1);
 
 	tex_id = createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()));

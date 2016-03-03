@@ -119,7 +119,7 @@ void init()
 	//*/
 	clip=mgr->createVideoClip("media/bunny" + resourceExtension, outputMode, 16);
 //  use this if you want to preload the file into ram and stream from there
-//	clip=mgr->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);
+//	clip=mgr->createVideoClip(new MemoryDataSource("../media/short" + resourceExtension),TH_RGB);
 	clip->setAutoRestart(1);
 	clip->pause();
 	tex_id=createTexture(nextPow2(clip->getWidth()),nextPow2(clip->getHeight()), textureFormat);

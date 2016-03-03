@@ -19,10 +19,10 @@
 
 // forward class declarations
 class TheoraAudioInterface;
-class TheoraDataSource;
 
 namespace theoraplayer
 {
+	class DataSource;
 	class FrameQueue;
 	class Mutex;
 	class WorkerThread;
@@ -75,7 +75,7 @@ public:
 
 	friend class VideoFrame;
 
-	TheoraVideoClip(TheoraDataSource* data_source, TheoraOutputMode output_mode, int nPrecachedFrames, bool usePower2Stride);
+	TheoraVideoClip(DataSource* data_source, TheoraOutputMode output_mode, int nPrecachedFrames, bool usePower2Stride);
 	virtual ~TheoraVideoClip();
 
 	std::string getName();
@@ -223,7 +223,7 @@ public:
 protected:
 	FrameQueue* frameQueue;
 	TheoraAudioInterface* audioInterface;
-	TheoraDataSource* stream;
+	DataSource* stream;
 
 	Timer *timer, *defaultTimer;
 
@@ -284,7 +284,7 @@ protected:
 	void resetFrameQueue();
 	int discardOutdatedFrames(float absTime);
 	float getAbsPlaybackTime();
-	virtual void load(TheoraDataSource* source) = 0;
+	virtual void load(DataSource* source) = 0;
 
 	virtual void _restart() = 0; // resets the decoder and stream but leaves the frame queue intact
 };

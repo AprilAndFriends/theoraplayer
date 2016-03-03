@@ -72,9 +72,6 @@
     <ClCompile Include="..\..\src\TheoraAudioPacketQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\TheoraDataSource.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\TheoraVideoClip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -255,15 +252,15 @@
     <ClCompile Include="..\..\src\Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\DataSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\theoraplayer\TheoraAudioInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\theoraplayer\TheoraAudioPacketQueue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\theoraplayer\TheoraDataSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\theoraplayer\TheoraPixelTransform.h">
@@ -384,6 +381,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\theoraplayer\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\DataSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
