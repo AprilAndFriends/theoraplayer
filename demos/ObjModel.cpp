@@ -145,7 +145,10 @@ void ObjModel::load(std::string filename,unsigned int texture_id, bool normals)
 
 ObjModel::~ObjModel()
 {
-	if (!this->vertices) delete [] this->vertices;
+	if (!this->vertices)
+	{
+		delete[] this->vertices;
+	}
 }
 
 void ObjModel::draw(void (*texfunc)(float, float))
@@ -155,10 +158,19 @@ void ObjModel::draw(void (*texfunc)(float, float))
 
 	for (int i=0;i<this->numVertices;i++)
 	{
-		if (texfunc) texfunc(this->vertices[i].u,this->vertices[i].v);
-		else glTexCoord2f(this->vertices[i].u,this->vertices[i].v);
+		if (texfunc)
+		{
+			texfunc(this->vertices[i].u, this->vertices[i].v);
+		}
+		else
+		{
+			glTexCoord2f(this->vertices[i].u, this->vertices[i].v);
+		}
 
-		if (this->normals) glNormal3f(this->vertices[i].nx,this->vertices[i].ny,this->vertices[i].nz);
+		if (this->normals)
+		{
+			glNormal3f(this->vertices[i].nx, this->vertices[i].ny, this->vertices[i].nz);
+		}
 		glVertex3f(this->vertices[i].x,this->vertices[i].y,this->vertices[i].z);
 	}
 	glEnd();

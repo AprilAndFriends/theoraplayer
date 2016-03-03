@@ -14,8 +14,14 @@ ALCcontext* gContext=0;
 
 short float2short(float f)
 {
-	if      (f >  1) f= 1;
-	else if (f < -1) f=-1;
+	if (f > 1)
+	{
+		f = 1;
+	}
+	else if (f < -1)
+	{
+		f = -1;
+	}
 	return (short) (f*32767);
 }
 
@@ -41,7 +47,10 @@ OpenAL_AudioInterface::OpenAL_AudioInterface(TheoraVideoClip* owner,int nChannel
 
 OpenAL_AudioInterface::~OpenAL_AudioInterface()
 {
-	if (this->tempBuffer) delete [] this->tempBuffer;
+	if (this->tempBuffer)
+	{
+		delete[] this->tempBuffer;
+	}
 	
 	if (this->source)
 	{
@@ -144,7 +153,10 @@ void OpenAL_AudioInterface::update(float time_increase)
 	this->time = this->currentTimer + (float) this->numPlayedSamples/this->freq;
 
 	float duration=this->clip->getDuration();
-	if (this->time > duration) this->time = duration;
+	if (this->time > duration)
+	{
+		this->time = duration;
+	}
 }
 
 void OpenAL_AudioInterface::pause()
@@ -188,11 +200,20 @@ OpenAL_AudioInterfaceFactory::OpenAL_AudioInterfaceFactory()
 	// if you want to use this interface in your own program, you'll
 	// probably want to remove the openal init/destory lines
 	gDevice = alcOpenDevice("");
-	if (alcGetError(gDevice) != ALC_NO_ERROR) goto Fail;
+	if (alcGetError(gDevice) != ALC_NO_ERROR)
+	{
+		goto Fail;
+	}
 	gContext = alcCreateContext(gDevice, NULL);
-	if (alcGetError(gDevice) != ALC_NO_ERROR) goto Fail;
+	if (alcGetError(gDevice) != ALC_NO_ERROR)
+	{
+		goto Fail;
+	}
 	alcMakeContextCurrent(gContext);
-	if (alcGetError(gDevice) != ALC_NO_ERROR) goto Fail;
+	if (alcGetError(gDevice) != ALC_NO_ERROR)
+	{
+		goto Fail;
+	}
 
 	return;
 Fail:
