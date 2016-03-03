@@ -17,9 +17,9 @@
 
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip.h"
-#include "TheoraVideoFrame.h"
 
 #include "theoraplayerExport.h"
+#include "VideoFrame.h"
 
 namespace theoraplayer
 {

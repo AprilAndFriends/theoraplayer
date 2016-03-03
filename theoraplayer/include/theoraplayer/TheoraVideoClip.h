@@ -18,21 +18,21 @@
 #include "theoraplayerExport.h"
 
 // forward class declarations
-class TheoraFrameQueue;
 class TheoraTimer;
 class TheoraAudioInterface;
 class TheoraDataSource;
-class TheoraVideoFrame;
 
 namespace theoraplayer
 {
+	class FrameQueue;
 	class Mutex;
 	class WorkerThread;
+	class VideoFrame;
 }
 using namespace theoraplayer; // TODOth - remove
 
 /**
-	format of the TheoraVideoFrame pixels. Affects decoding time
+	format of the VideoFrame pixels. Affects decoding time
 	*/
 enum TheoraOutputMode
 {
@@ -69,11 +69,12 @@ enum TheoraOutputMode
 	*/
 class theoraplayerExport TheoraVideoClip
 {
+public:
 	friend class WorkerThread;
-	friend class TheoraVideoFrame;
 	friend class TheoraVideoManager;
 
-public:
+	friend class VideoFrame;
+
 	TheoraVideoClip(TheoraDataSource* data_source, TheoraOutputMode output_mode, int nPrecachedFrames, bool usePower2Stride);
 	virtual ~TheoraVideoClip();
 
@@ -114,13 +115,13 @@ public:
 	//! retur the timer objet associated with this object
 	TheoraTimer* getTimer();
 
-	TheoraFrameQueue* getFrameQueue();
+	FrameQueue* getFrameQueue();
 	/**
 	\brief Returns the first available frame in the queue or NULL if no frames are available.
 
-	see TheoraFrameQueue::getFirstAvailableFrame() for more details
+	see FrameQueue::getFirstAvailableFrame() for more details
 	*/
-	TheoraVideoFrame* getNextFrame();
+	VideoFrame* getNextFrame();
 
 	TheoraAudioInterface* getAudioInterface();
 
@@ -193,7 +194,7 @@ public:
 	/**
 		\brief pop the frame from the front of the FrameQueue
 
-		see TheoraFrameQueue::pop() for more details
+		see FrameQueue::pop() for more details
 		*/
 	void popFrame();
 
@@ -220,7 +221,7 @@ public:
 	float waitForCache(float desired_cache_factor = 0.5f, float max_wait_time = 1.0f);
 
 protected:
-	TheoraFrameQueue* frameQueue;
+	FrameQueue* frameQueue;
 	TheoraAudioInterface* audioInterface;
 	TheoraDataSource* stream;
 

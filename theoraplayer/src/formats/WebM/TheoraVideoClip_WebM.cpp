@@ -10,8 +10,6 @@
 #include <memory.h>
 #include <algorithm>
 #include "TheoraVideoManager.h"
-#include "TheoraFrameQueue.h"
-#include "TheoraVideoFrame.h"
 #include "TheoraAudioInterface.h"
 #include "TheoraTimer.h"
 #include "TheoraDataSource.h"
@@ -21,8 +19,11 @@
 #include <stdlib.h>
 
 #include "Exception.h"
+#include "FrameQueue.h"
 #include "Mutex.h"
 #include "Utility.h"
+#include "VideoFrame.h"
+using namespace theoraplayer; // TODOth - remove this later
 
 #include "webmdec.h"
 
@@ -52,9 +53,8 @@ bool TheoraVideoClip_WebM::_readData()
 
 bool TheoraVideoClip_WebM::decodeNextFrame()
 {
-	TheoraVideoFrame* frame = this->frameQueue->requestEmptyFrame();
-
-	if (!frame)
+	VideoFrame* frame = this->frameQueue->requestEmptyFrame();
+	if (frame == NULL)
 	{
 		return 0; // max number of precached frames reached
 	}
@@ -174,7 +174,7 @@ void TheoraVideoClip_WebM::load(TheoraDataSource* source)
 
 	if (this->frameQueue == NULL)
 	{
-		this->frameQueue = new TheoraFrameQueue(this);
+		this->frameQueue = new FrameQueue(this);
 		this->frameQueue->setSize(this->numPrecachedFrames);
 	}
 }

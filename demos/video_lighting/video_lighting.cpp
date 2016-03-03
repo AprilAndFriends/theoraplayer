@@ -42,7 +42,7 @@ void draw()
 	float x1, y1, z1, x2=-65.147f, y2=80.219f, z2=12.301f;
 	static int index = 0;
 
-	TheoraVideoFrame* f=clip->getNextFrame();
+	theoraplayer::VideoFrame* f=clip->getNextFrame();
 	if (f)
 	{
 		index = (int)f->getFrameNumber();

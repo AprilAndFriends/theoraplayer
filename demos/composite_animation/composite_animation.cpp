@@ -53,7 +53,7 @@ void draw()
 	glPopMatrix();
 
 	glBindTexture(GL_TEXTURE_2D, water_tex);    
-	TheoraVideoFrame* f = water->getNextFrame();
+	theoraplayer::VideoFrame* f = water->getNextFrame();
 	if (f)
 	{
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, f->getWidth(), f->getHeight(), GL_RGB, GL_UNSIGNED_BYTE, f->getBuffer());

@@ -10,17 +10,19 @@
 #include <memory.h>
 #include <algorithm>
 #include "TheoraVideoManager.h"
-#include "TheoraFrameQueue.h"
-#include "TheoraVideoFrame.h"
 #include "TheoraAudioInterface.h"
 #include "TheoraTimer.h"
 #include "TheoraDataSource.h"
 #include "TheoraVideoClip_Theora.h"
 #include "TheoraPixelTransform.h"
 
+#include "FrameQueue.h"
 #include "Exception.h"
 #include "Mutex.h"
 #include "Utility.h"
+#include "VideoFrame.h"
+
+using namespace theoraplayer; // TODOth - remove this later
 
 TheoraVideoClip_Theora::TheoraVideoClip_Theora(TheoraDataSource* data_source,
 										TheoraOutputMode output_mode,
@@ -118,8 +120,11 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 		return 0;
 	}
 	
-	TheoraVideoFrame* frame = this->frameQueue->requestEmptyFrame();
-	if (!frame) return 0; // max number of precached frames reached
+	VideoFrame* frame = this->frameQueue->requestEmptyFrame();
+	if (frame == NULL)
+	{
+		return 0; // max number of precached frames reached
+	}
 	bool should_restart = 0;
 	ogg_packet opTheora;
 	ogg_int64_t granulePos;
@@ -255,7 +260,7 @@ void TheoraVideoClip_Theora::load(TheoraDataSource* source)
 #ifdef _DEBUG
 	th_writelog("width: " + str(this->width) + ", height: " + str(this->height) + ", fps: " + str((int)getFps()));
 #endif
-	this->frameQueue = new TheoraFrameQueue(this);
+	this->frameQueue = new FrameQueue(this);
 	this->frameQueue->setSize(this->numPrecachedFrames);
 	// find out the duration of the file by seeking to the end
 	// having ogg decode pages, extract the granule pos from

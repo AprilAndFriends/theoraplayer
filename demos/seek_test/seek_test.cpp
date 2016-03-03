@@ -25,7 +25,7 @@ void draw()
 
 	if (!needsSeek)
 	{
-		TheoraVideoFrame* f=clip->getNextFrame();
+		theoraplayer::VideoFrame* f=clip->getNextFrame();
 		if (f)
 		{
 			glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());

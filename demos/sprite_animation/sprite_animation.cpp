@@ -31,7 +31,7 @@ void draw()
 {
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 
-	TheoraVideoFrame* f=clips[cClip]->getNextFrame();
+	theoraplayer::VideoFrame* f=clips[cClip]->getNextFrame();
 	if (f)
 	{
 		unsigned char* src=f->getBuffer();

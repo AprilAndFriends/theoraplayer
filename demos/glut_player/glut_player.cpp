@@ -13,7 +13,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 //#define BENCHMARK // uncomment this to benchmark decoding times
 #ifdef BENCHMARK
     #include <time.h>
-#include <theoraplayer/TheoraFrameQueue.h>
+	#include <theoraplayer/FrameQueue.h>
 #endif
 unsigned int tex_id;
 TheoraVideoManager* mgr;
@@ -40,7 +40,7 @@ void draw()
 {
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 
-	TheoraVideoFrame* f=clip->getNextFrame();
+	theoraplayer::VideoFrame* f=clip->getNextFrame();
 	if (f)
 	{
 		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),textureFormat,GL_UNSIGNED_BYTE,f->getBuffer());

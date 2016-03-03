@@ -30,7 +30,7 @@ void draw()
 	gluLookAt(0,2000,1000,  0,0,0,  0,-1,0);
 
 	glRotatef(angle, 0, 0, 1);
-	TheoraVideoFrame* f=clip->getNextFrame();
+	theoraplayer::VideoFrame* f=clip->getNextFrame();
 	if (f)
 	{
 		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),GL_RGB,GL_UNSIGNED_BYTE,f->getBuffer());

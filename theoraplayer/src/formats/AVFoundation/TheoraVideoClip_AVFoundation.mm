@@ -14,11 +14,12 @@
 #include "TheoraException.h"
 #include "TheoraTimer.h"
 #include "TheoraUtil.h"
-#include "TheoraFrameQueue.h"
-#include "TheoraVideoFrame.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip_AVFoundation.h"
 #include "TheoraPixelTransform.h"
+
+#include "FrameQueue.h"
+#include "VideoFrame.h"
 
 #ifdef _AVFOUNDATION_BGRX
 // a fast function developed to use kernel byte swapping calls to optimize alpha decoding.
@@ -133,7 +134,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 		th_writelog("AVAssetReader restart succeeded!");
 	}
 
-	TheoraVideoFrame* frame = mFrameQueue->requestEmptyFrame();
+	VideoFrame* frame = mFrameQueue->requestEmptyFrame();
 	if (!frame) return 0;
 
 	CMSampleBufferRef sampleBuffer = NULL;
@@ -303,7 +304,7 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 	mNumFrames = mDuration * mFPS;
 	if (mFrameQueue == NULL)
 	{
-		mFrameQueue = new TheoraFrameQueue(this);
+		mFrameQueue = new FrameQueue(this);
 		mFrameQueue->setSize(mNumPrecachedFrames);
 	}
 

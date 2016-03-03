@@ -10,9 +10,9 @@
 #include "TheoraDataSource.h"
 #include "TheoraVideoClip.h"
 #include "TheoraVideoManager.h"
-#include "TheoraFrameQueue.h"
 
 #include "Exception.h"
+#include "FrameQueue.h"
 #include "Utility.h"
 #include "WorkerThread.h"
 using namespace theoraplayer; // TODOth - remove this later

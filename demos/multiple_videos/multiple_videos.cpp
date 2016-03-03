@@ -32,7 +32,7 @@ void drawVideo(int x,int y,unsigned int tex_id,TheoraVideoClip* clip)
 	//glTranslatef(x,y,0);
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 
-	TheoraVideoFrame* f=clip->getNextFrame();
+	theoraplayer::VideoFrame* f=clip->getNextFrame();
 	if (f)
 	{
 		glTexSubImage2D(GL_TEXTURE_2D,0,0,0,clip->getWidth(),f->getHeight(),uploadFormat,GL_UNSIGNED_BYTE,f->getBuffer());

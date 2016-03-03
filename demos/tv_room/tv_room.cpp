@@ -35,7 +35,7 @@ void draw()
 	glLoadIdentity();
 	gluLookAt(sin(anglex)*400-200,angley,cos(anglex)*400,  -200,150,0,  0,1,0);
 
-	TheoraVideoFrame* f=clip->getNextFrame();
+	theoraplayer::VideoFrame* f=clip->getNextFrame();
 	if (f)
 	{
 		unsigned char* data=f->getBuffer();

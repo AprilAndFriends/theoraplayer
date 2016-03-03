@@ -30,7 +30,7 @@ void draw()
 {
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 
-	TheoraVideoFrame* f=clip->getNextFrame();
+	theoraplayer::VideoFrame* f=clip->getNextFrame();
 
 	if (f)
 	{

@@ -12,11 +12,12 @@
 #include "TheoraException.h"
 #include "TheoraTimer.h"
 #include "TheoraUtil.h"
-#include "TheoraFrameQueue.h"
-#include "TheoraVideoFrame.h"
 #include "TheoraVideoManager.h"
 #include "TheoraVideoClip_FFmpeg.h"
 #include "TheoraPixelTransform.h"
+
+#include "FrameQueue.h"
+#include "VideoFrame.h"
 
 #define READ_BUFFER_SIZE 4096
 
@@ -335,7 +336,7 @@ void TheoraVideoClip_FFmpeg::load(TheoraDataSource* source)
 	
 	if (mFrameQueue == NULL) // todo - why is this set in the backend class? it should be set in the base class, check other backends as well
 	{
-		mFrameQueue = new TheoraFrameQueue(this);
+		mFrameQueue = new FrameQueue(this);
 		mFrameQueue->setSize(mNumPrecachedFrames);
 	}
 }
@@ -376,7 +377,7 @@ bool TheoraVideoClip_FFmpeg::_readData()
 
 bool TheoraVideoClip_FFmpeg::decodeNextFrame()
 {
-	TheoraVideoFrame* frame = mFrameQueue->requestEmptyFrame();
+	VideoFrame* frame = mFrameQueue->requestEmptyFrame();
 	if (!frame) return 0;
 
 	AVPacket packet;

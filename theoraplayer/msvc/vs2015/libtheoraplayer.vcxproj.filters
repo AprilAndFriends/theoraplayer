@@ -75,16 +75,10 @@
     <ClCompile Include="..\..\src\TheoraDataSource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\TheoraFrameQueue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\TheoraTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\TheoraVideoClip.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\TheoraVideoFrame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\TheoraVideoManager.cpp">
@@ -255,6 +249,12 @@
     <ClCompile Include="..\..\src\Utility.cpp">
       <Filter>Source Files\internal</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\FrameQueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\VideoFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\theoraplayer\TheoraAudioInterface.h">
@@ -266,9 +266,6 @@
     <ClInclude Include="..\..\include\theoraplayer\TheoraDataSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\theoraplayer\TheoraFrameQueue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\theoraplayer\TheoraPixelTransform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -276,9 +273,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\theoraplayer\TheoraVideoClip.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\theoraplayer\TheoraVideoFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\theoraplayer\TheoraVideoManager.h">
@@ -384,6 +378,12 @@
       <Filter>Header Files\formats\WebM</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\theoraplayer\Exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\FrameQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\theoraplayer\VideoFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

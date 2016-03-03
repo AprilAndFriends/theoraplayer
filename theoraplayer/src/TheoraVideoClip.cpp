@@ -10,15 +10,15 @@
 
 #include "TheoraVideoClip.h"
 #include "TheoraVideoManager.h"
-#include "TheoraVideoFrame.h"
-#include "TheoraFrameQueue.h"
 #include "TheoraAudioInterface.h"
 #include "TheoraTimer.h"
 #include "TheoraDataSource.h"
 
 #include "Exception.h"
+#include "FrameQueue.h"
 #include "Mutex.h"
 #include "Utility.h"
+#include "VideoFrame.h"
 
 using namespace theoraplayer; // TODOth - remove
 
@@ -170,8 +170,8 @@ void TheoraVideoClip::update(float timeDelta)
 
 float TheoraVideoClip::updateToNextFrame()
 {
-	TheoraVideoFrame* f = this->frameQueue->getFirstAvailableFrame();
-	if (!f)
+	VideoFrame* f = this->frameQueue->getFirstAvailableFrame();
+	if (f == NULL)
 	{
 		return 0;
 	}
@@ -181,7 +181,7 @@ float TheoraVideoClip::updateToNextFrame()
 	return time;
 }
 
-TheoraFrameQueue* TheoraVideoClip::getFrameQueue()
+FrameQueue* TheoraVideoClip::getFrameQueue()
 {
 	return this->frameQueue;
 }
@@ -251,11 +251,11 @@ int TheoraVideoClip::discardOutdatedFrames(float absTime)
 	float time = absTime;
 
 	int nPop = 0;
-	TheoraVideoFrame* frame;
-	float timeToDisplay;
+	VideoFrame* frame = NULL;
+	float timeToDisplay = 0.0f;
 	
-	std::list<TheoraVideoFrame*>& queue = this->frameQueue->_getFrameQueue();
-	foreach_l (TheoraVideoFrame*, it, queue)
+	std::list<VideoFrame*>& queue = this->frameQueue->_getFrameQueue();
+	foreach_l (VideoFrame*, it, queue)
 	{
 		frame = *it;
 		if (!frame->ready)
@@ -263,17 +263,14 @@ int TheoraVideoClip::discardOutdatedFrames(float absTime)
 			break;
 		}
 		timeToDisplay = frame->timeToDisplay + frame->iteration * this->duration;
-		if (time > timeToDisplay + this->frameDuration)
-		{
-			++nPop;
-			if (nReady - nPop == 1)
-			{
-				break; // always leave at least one in the queue
-			}
-		}
-		else
+		if (time <= timeToDisplay + this->frameDuration)
 		{
 			break;
+		}
+		++nPop;
+		if (nReady - nPop == 1)
+		{
+			break; // always leave at least one in the queue
 		}
 	}
 	
@@ -283,7 +280,7 @@ int TheoraVideoClip::discardOutdatedFrames(float absTime)
 		std::string log = getName() + ": dropped frame ";
 	
 		int i = nPop;
-		foreach_l (TheoraVideoFrame*, queue)
+		foreach_l (VideoFrame*, queue)
 		{
 			log += str((int) (*it)->getFrameNumber());
 			if (i-- > 1)
@@ -301,9 +298,9 @@ int TheoraVideoClip::discardOutdatedFrames(float absTime)
 	return nPop;
 }
 
-TheoraVideoFrame* TheoraVideoClip::getNextFrame()
+VideoFrame* TheoraVideoClip::getNextFrame()
 {
-	TheoraVideoFrame* frame;
+	VideoFrame* frame = NULL;
 	// if we are about to seek, then the current frame queue is invalidated
 	// (will be cleared when a worker thread does the actual seek)
 	if (this->seekFrame != -1)
@@ -438,7 +435,7 @@ bool TheoraVideoClip::isDone()
 {
 	if (this->endOfFile)
 	{
-		TheoraVideoFrame* frame = this->frameQueue->getFirstAvailableFrame();
+		VideoFrame* frame = this->frameQueue->getFirstAvailableFrame();
 		if (frame == NULL || frame->timeToDisplay >= this->duration) // in some cases, there could be a diference between the reported video duration and timestamp on the last frame(s)
 		{
 			return true;
