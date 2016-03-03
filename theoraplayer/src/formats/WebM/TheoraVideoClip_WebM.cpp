@@ -22,6 +22,8 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Mutex.h"
+
 #include "webmdec.h"
 
 TheoraVideoClip_WebM::TheoraVideoClip_WebM(TheoraDataSource* data_source,
@@ -181,7 +183,7 @@ void TheoraVideoClip_WebM::decodedAudioCheck()
 {
 	if (!this->audioInterface || this->timer->isPaused()) return;
 
-	TheoraMutex::ScopeLock lock(this->audioMutex);
+	Mutex::ScopeLock lock(this->audioMutex);
 	flushAudioPackets(this->audioInterface);
 	lock.release();
 }

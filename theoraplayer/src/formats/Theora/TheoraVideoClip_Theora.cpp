@@ -20,6 +20,8 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include "TheoraVideoClip_Theora.h"
 #include "TheoraPixelTransform.h"
 
+#include "Mutex.h"
+
 TheoraVideoClip_Theora::TheoraVideoClip_Theora(TheoraDataSource* data_source,
 										TheoraOutputMode output_mode,
 										int nPrecachedFrames,
@@ -176,7 +178,7 @@ bool TheoraVideoClip_Theora::decodeNextFrame()
 	
 	if (this->audioInterface != NULL)
 	{
-		TheoraMutex::ScopeLock lock(this->audioMutex);
+		Mutex::ScopeLock lock(this->audioMutex);
 		decodeAudio();
 		lock.release();
 	}
@@ -498,7 +500,7 @@ void TheoraVideoClip_Theora::decodedAudioCheck()
 		return;
 	}
 
-	TheoraMutex::ScopeLock lock(this->audioMutex);
+	Mutex::ScopeLock lock(this->audioMutex);
 	flushAudioPackets(this->audioInterface);
 	lock.release();
 }
@@ -652,7 +654,7 @@ void TheoraVideoClip_Theora::doSeek()
 	th_decode_free(this->info.TheoraDecoder);
 	this->info.TheoraDecoder = th_decode_alloc(&this->info.TheoraInfo, this->info.TheoraSetup);
 
-	TheoraMutex::ScopeLock audioMutexLock;
+	Mutex::ScopeLock audioMutexLock;
 	if (this->audioInterface)
 	{
 		audioMutexLock.acquire(this->audioMutex);
