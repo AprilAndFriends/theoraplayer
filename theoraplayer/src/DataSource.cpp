@@ -50,7 +50,7 @@ namespace theoraplayer
 			{
 				std::string message = "Can't open video file: " + this->filename;
 				log(message);
-				throw TheoraplayerException(msg);
+				throw TheoraplayerException(message);
 			}
 #ifdef _WIN32
 			struct _stat64 s;

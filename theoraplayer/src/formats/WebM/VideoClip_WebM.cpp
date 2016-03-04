@@ -23,19 +23,21 @@
 #include "FrameQueue.h"
 #include "Mutex.h"
 #include "Timer.h"
+#include "theoraplayer.h"
 #include "Utility.h"
 #include "VideoClip_WebM.h"
 #include "VideoFrame.h"
 
-#include "webmdec.h"
+// TODOth - rename
+#include "WebM/webmdec.h"
 
 namespace theoraplayer
 {
-	VideoClip_WebM::VideoClip_WebM(DataSource* data_source,
+	VideoClip_WebM::VideoClip_WebM(DataSource* dataSource,
 		TheoraOutputMode output_mode,
 		int nPrecachedFrames,
 		bool usePower2Stride) :
-		VideoClip(data_source, output_mode, nPrecachedFrames, usePower2Stride),
+		VideoClip(dataSource, output_mode, nPrecachedFrames, usePower2Stride),
 		TheoraAudioPacketQueue()
 	{
 		memset(&(webm_ctx), 0, sizeof(webm_ctx));
@@ -76,9 +78,10 @@ namespace theoraplayer
 				NULL, 0))
 			{
 				const char *detail = vpx_codec_error_detail(&decoder);
-
-				if (detail)
-					th_writelog("Additional information: " + std::string(detail));
+				if (detail != NULL)
+				{
+					log("Additional information: " + std::string(detail));
+				}
 			}
 			if ((img = vpx_codec_get_frame(&decoder, &iter)))
 			{
@@ -126,17 +129,17 @@ namespace theoraplayer
 		}
 	}
 
-	void VideoClip_WebM::load(DataSource* source)
+	void VideoClip_WebM::_load(DataSource* source)
 	{
 		if (!TheoraWebmDec::file_is_webm(source, input.webm_ctx, input.vpx_input_ctx))
 		{
-			th_writelog("Error: File is not webm.");
+			log("Error: File is not webm.");
 			return;
 		}
 
 		if (TheoraWebmDec::webm_guess_framerate(source, input.webm_ctx, input.vpx_input_ctx))
 		{
-			th_writelog("Error: Unable to guess webm framerate.");
+			log("Error: Unable to guess webm framerate.");
 			return;
 		}
 
@@ -146,7 +149,7 @@ namespace theoraplayer
 
 #ifdef _DEBUG
 		float fps = (float)input.vpx_input_ctx->framerate.numerator / (float)input.vpx_input_ctx->framerate.denominator;
-		th_writelog("Framerate: " + strf(fps));
+		log("Framerate: " + strf(fps));
 #endif
 
 		this->width = input.vpx_input_ctx->width;
@@ -162,7 +165,7 @@ namespace theoraplayer
 		this->duration = this->numFrames * this->frameDuration;
 
 #ifdef _DEBUG
-		th_writelog("Video duration: " + strf(this->duration));
+		log("Video duration: " + strf(this->duration));
 #endif
 
 		fourcc_interface = (VpxInterface*)get_vpx_decoder_by_fourcc(vpx_input_ctx.fourcc);
@@ -172,14 +175,14 @@ namespace theoraplayer
 		if (vpx_codec_dec_init(&decoder, interf->codec_interface(),
 			&cfg, dec_flags))
 		{
-			th_writelog("Error: Failed to initialize decoder: " + std::string(vpx_codec_error(&decoder)));
+			log("Error: Failed to initialize decoder: " + std::string(vpx_codec_error(&decoder)));
 			return;
 		}
 
 		if (this->frameQueue == NULL)
 		{
 			this->frameQueue = new FrameQueue(this);
-			this->frameQueue->setSize(this->numPrecachedFrames);
+			this->frameQueue->setSize(this->precachedFramesCount);
 		}
 	}
 
@@ -202,17 +205,19 @@ namespace theoraplayer
 		float time = this->seekFrame / getFps();
 		this->timer->seek(time);
 		bool paused = this->timer->isPaused();
-		if (!paused) this->timer->pause();
-
-		resetFrameQueue();
-
+		if (!paused)
+		{
+			this->timer->pause();
+		}
+		this->resetFrameQueue();
 #ifdef _DEBUG
-		printf("Seek frame: %d\n", this->seekFrame);
+		log("Seek frame: " + str(this->seekFrame));
 #endif
-
 		this->lastDecodedFrameNumber = this->seekFrame;
-
-		if (!paused) this->timer->play();
+		if (!paused)
+		{
+			this->timer->play();
+		}
 		this->seekFrame = -1;
 	}
 

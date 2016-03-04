@@ -39,6 +39,7 @@ using namespace theoraplayer; // TODOth - remove later
 	// Returns 1 on success and 0 on failure or input is not WebM file.
 	// TODO(vigneshv): Refactor this function into two smaller functions specific
 	// to their task.
+	// TODOth - remove this namespace
 	namespace TheoraWebmDec{
 		int file_is_webm(DataSource* dataSource, struct WebmInputContext *webm_ctx,
 		struct VpxInputContext *vpx_ctx);
