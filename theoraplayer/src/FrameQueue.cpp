@@ -10,6 +10,7 @@
 
 #include "FrameQueue.h"
 #include "Mutex.h"
+#include "theoraplayer.h"
 #include "Utility.h"
 #include "VideoFrame.h"
 
@@ -61,7 +62,7 @@ namespace theoraplayer
 			}
 			else
 			{
-				TheoraVideoManager::getSingleton().logMessage("FrameQueue: unable to create " + str(n) + " frames, out of memory. Created " + str((int) this->queue.size()) + " frames.");
+				log("FrameQueue: unable to create " + str(n) + " frames, out of memory. Created " + str((int) this->queue.size()) + " frames.");
 				break;
 			}
 		}

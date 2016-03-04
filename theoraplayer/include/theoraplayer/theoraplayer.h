@@ -14,6 +14,7 @@
 #define THEORAPLAYER_H
 
 #include "theoraplayerExport.h"
+#include <string>
 
 namespace theoraplayer
 {

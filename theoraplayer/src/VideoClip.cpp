@@ -8,7 +8,7 @@
 
 #include <math.h>
 
-#include "TheoraVideoManager.h"
+#include "Manager.h"
 #include "TheoraAudioInterface.h"
 
 #include "DataSource.h"
@@ -32,9 +32,9 @@ namespace theoraplayer
 		assignedWorkerThread(NULL),
 		useAlpha(false),
 		waitingForCache(false),
-		numDroppedFrames(0),
-		numDisplayedFrames(0),
-		numPrecachedFrames(nPrecachedFrames),
+		droppedFramesCount(0),
+		displayedFramesCount(0),
+		precachedFramesCount(nPrecachedFrames),
 		threadAccessCount(0),
 		seekFrame(-1),
 		duration(-1),
@@ -188,7 +188,7 @@ namespace theoraplayer
 
 	void VideoClip::popFrame()
 	{
-		++this->numDisplayedFrames;
+		++this->displayedFramesCount;
 
 		// after transfering frame data to the texture, free the frame
 		// so it can be used again
@@ -291,7 +291,7 @@ namespace theoraplayer
 			}
 			th_writelog(log);
 #endif
-			this->numDroppedFrames += nPop;
+			this->droppedFramesCount += nPop;
 			this->frameQueue->_pop(nPop);
 		}
 

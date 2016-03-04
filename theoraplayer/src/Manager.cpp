@@ -112,12 +112,12 @@ namespace theoraplayer
 		log(message + "\n------------------------------------");
 		// for CPU based yuv2rgb decoding
 		initYUVConversionModule();
-		this->createWorkerThreads(workerThreadCount);
+		this->_createWorkerThreads(workerThreadCount);
 	}
 
 	Manager::~Manager()
 	{
-		this->destroyWorkerThreads();
+		this->_destroyWorkerThreads();
 		Mutex::ScopeLock lock(this->workMutex);
 		foreach (VideoClip*, it, this->clips)
 		{
@@ -160,8 +160,8 @@ namespace theoraplayer
 		if (value != this->getWorkerThreadCount())
 		{
 			log("changing number of worker threats to: " + str(value));
-			this->destroyWorkerThreads();
-			this->createWorkerThreads(value);
+			this->_destroyWorkerThreads();
+			this->_createWorkerThreads(value);
 		}
 	}
 

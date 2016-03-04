@@ -9,7 +9,7 @@
 #include <memory.h>
 
 #include "TheoraPixelTransform.h"
-#include "TheoraVideoManager.h"
+#include "Manager.h"
 
 #include "VideoClip.h"
 #include "VideoFrame.h"

@@ -7,8 +7,9 @@
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 #include "TheoraAudioInterface.h"
+#include "theoraplayer.h"
 
-TheoraAudioInterface::TheoraAudioInterface(VideoClip* owner, int nChannels, int freq)
+TheoraAudioInterface::TheoraAudioInterface(theoraplayer::VideoClip* owner, int nChannels, int freq)
 {
 	this->freq = freq;
 	this->numChannels = nChannels;
