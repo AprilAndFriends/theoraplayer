@@ -1,8 +1,14 @@
 #include "demo_multiple.h"
 
-TheoraVideoClip* clips_multiple[4];
+#include "theoraplayer/MemoryDataSource.h"
+#include "theoraplayer/theoraplayer.h"
+#include "theoraplayer/VideoFrame.h"
+
+using namespace theoraplayer;
+
+VideoClip* clips_multiple[4];
 unsigned int textures_multiple[4];
-TheoraVideoManager* mgr_multiple;
+Manager* mgr_multiple;
 
 #ifdef MP4_VIDEO
 TheoraOutputMode outputMode_multiple = TH_BGRX;
@@ -14,13 +20,13 @@ unsigned int textureFormat_multiple = GL_RGB;
 unsigned int uploadFormat_multiple = GL_RGB;
 #endif
 
-void drawVideo(int x, int y, unsigned int tex_id, TheoraVideoClip* clip)
+void drawVideo(int x, int y, unsigned int tex_id, VideoClip* clip)
 {
 	//glLoadIdentity();
 	//glTranslatef(x,y,0);
 	glBindTexture(GL_TEXTURE_2D, tex_id);
 
-	TheoraVideoFrame* f = clip->getNextFrame();
+	VideoFrame* f = clip->getNextFrame();
 	if (f)
 	{
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, clip->getWidth(), f->getHeight(), uploadFormat_multiple, GL_UNSIGNED_BYTE, f->getBuffer());
@@ -65,7 +71,7 @@ void multiple_setDebugTitle(char* out)
 		sprintf(temp, "%d/%d  ", clips_multiple[i]->getNumReadyFrames(), clips_multiple[i]->getNumPrecachedFrames());
 		strcat(out, temp);
 	}
-	sprintf(temp, "(%d worker threads)", mgr_multiple->getNumWorkerThreads());
+	sprintf(temp, "(%d worker threads)", mgr_multiple->getWorkerThreadCount());
 	strcat(out, temp);
 }
 
@@ -77,10 +83,10 @@ void playPause(int index)
 
 void multiple_OnKeyPress(int key)
 {
-	if (key == '1') mgr_multiple->setNumWorkerThreads(1);
-	if (key == '2') mgr_multiple->setNumWorkerThreads(2);
-	if (key == '3') mgr_multiple->setNumWorkerThreads(3);
-	if (key == '4') mgr_multiple->setNumWorkerThreads(4);
+	if (key == '1') mgr_multiple->setWorkerThreadCount(1);
+	if (key == '2') mgr_multiple->setWorkerThreadCount(2);
+	if (key == '3') mgr_multiple->setWorkerThreadCount(3);
+	if (key == '4') mgr_multiple->setWorkerThreadCount(4);
 	if (key >= 1 && key <= 4) playPause(key - 1); // Function keys are used for play/pause
 
 	if (key == 5 || key == 6 || key == 7)
@@ -108,11 +114,11 @@ void multiple_init()
 		"media/konqi" + resourceExtension,
 		"media/room" + resourceExtension,
 		"media/titan" + resourceExtension };
-	mgr_multiple = new TheoraVideoManager(4);
-	mgr_multiple->setDefaultNumPrecachedFrames(16);
+	mgr_multiple = new Manager(4);
+	mgr_multiple->setDefaultPrecachedFramesCount(16);
 	for (int i = 0;i<4;i++)
 	{
-		clips_multiple[i] = mgr_multiple->createVideoClip(new TheoraMemoryFileDataSource(files[i]), outputMode_multiple);
+		clips_multiple[i] = mgr_multiple->createVideoClip(new MemoryDataSource(files[i]), outputMode_multiple);
 
 		clips_multiple[i]->setAutoRestart(1);
 		textures_multiple[i] = createTexture(nextPow2(clips_multiple[i]->getWidth()), nextPow2(clips_multiple[i]->getHeight()), textureFormat_multiple);

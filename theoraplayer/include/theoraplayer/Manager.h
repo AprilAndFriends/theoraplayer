@@ -20,11 +20,12 @@
 #include "theoraplayerExport.h"
 #include "VideoClip.h"
 
-// forward class declarations
-class AudioInterfaceFactory;
+
 
 namespace theoraplayer
 {
+	// forward class declarations
+	class AudioInterfaceFactory;
 	class DataSource;
 	class Mutex;
 	class WorkerThread;

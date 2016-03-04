@@ -9,8 +9,8 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #ifndef OPENAL_AUDIOINTERFACE_H
 #define OPENAL_AUDIOINTERFACE_H
 
-#include <theoraplayer/TheoraAudioInterface.h>
-#include <theoraplayer/TheoraVideoClip.h>
+#include <theoraplayer/AudioInterface.h>
+#include <theoraplayer/VideoClip.h>
 
 #include <theoraplayer/Timer.h>
 
@@ -22,11 +22,11 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <OpenAL/alc.h>
 #endif
 #include <queue>
-	
-class OpenAL_AudioInterface : public TheoraAudioInterface, theoraplayer::Timer
+
+class OpenAL_AudioInterface : public theoraplayer::AudioInterface, theoraplayer::Timer
 {	
 public:
-	OpenAL_AudioInterface(TheoraVideoClip* owner,int nChannels,int freq);
+	OpenAL_AudioInterface(theoraplayer::VideoClip* owner,int nChannels,int freq);
 	~OpenAL_AudioInterface();
 
 	//! queued audio buffers, expressed in seconds
@@ -60,12 +60,12 @@ private:
 
 
 
-class OpenAL_AudioInterfaceFactory : public TheoraAudioInterfaceFactory
+class OpenAL_AudioInterfaceFactory : public theoraplayer::AudioInterfaceFactory
 {
 public:
 	OpenAL_AudioInterfaceFactory();
 	~OpenAL_AudioInterfaceFactory();
-	OpenAL_AudioInterface* createInstance(TheoraVideoClip* owner,int nChannels,int freq);
+	OpenAL_AudioInterface* createInstance(theoraplayer::VideoClip* owner,int nChannels,int freq);
 };
 
 #endif

@@ -9,7 +9,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
 #include "demo_basecode.h"
 #include <theoraplayer/TheoraPlayer.h>
-#include <theoraplayer/TheoraDataSource.h>
+#include <theoraplayer/DataSource.h>
 
 extern void seek_init();
 extern void seek_destroy();

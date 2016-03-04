@@ -1,8 +1,13 @@
 #include "demo_spriteanim.h"
+#include "theoraplayer/MemoryDataSource.h"
+#include "theoraplayer/theoraplayer.h"
+#include "theoraplayer/VideoFrame.h"
+
+using namespace theoraplayer;
 
 unsigned int tex_id_spriteanim;
-TheoraVideoManager* mgr_spriteanim;
-TheoraVideoClip* clips[8];
+Manager* mgr_spriteanim;
+VideoClip* clips[8];
 bool started_spriteanim = 1;
 int cClip = 0;
 unsigned char buffer[203 * 300 * 4];
@@ -11,7 +16,7 @@ void spriteanim_draw()
 {
 	glBindTexture(GL_TEXTURE_2D, tex_id_spriteanim);
 
-	TheoraVideoFrame* f = clips[cClip]->getNextFrame();
+	VideoFrame* f = clips[cClip]->getNextFrame();
 	if (f)
 	{
 		unsigned char* src = f->getBuffer();
@@ -98,12 +103,12 @@ void spriteanim_setDebugTitle(char* out)
 
 void spriteanim_init()
 {
-	mgr_spriteanim = new TheoraVideoManager();
+	mgr_spriteanim = new Manager(1);
 	std::string orientations[] = { "N","NE","E","SE","S","SW","W","NW" };
 	for (int i = 0;i<8;i++)
 	{
 		// Note - this demo isn't using TH_RGBA for now since the frames in this video are not mod 16 aligned.
-		clips[i] = mgr_spriteanim->createVideoClip(new TheoraMemoryFileDataSource("media/brawe/brawe_" + orientations[i] + "" + resourceExtension), TH_RGB, 8);
+		clips[i] = mgr_spriteanim->createVideoClip(new MemoryDataSource("media/brawe/brawe_" + orientations[i] + "" + resourceExtension), TH_RGB, 8);
 		clips[i]->setAutoRestart(1);
 		if (i != 0) clips[i]->pause();
 	}

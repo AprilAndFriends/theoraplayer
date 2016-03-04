@@ -1,10 +1,15 @@
 #include "demo_av.h"
 
+#include "theoraplayer/theoraplayer.h"
+#include "theoraplayer/VideoFrame.h"
+
+using namespace theoraplayer;
+
 unsigned int tex_id_av;
-TheoraVideoManager* mgr_av;
-TheoraVideoClip* clip_av;
+Manager* mgr_av;
+VideoClip* clip_av;
 bool started_av = 1;
-OpenAL_AudioInterfaceFactory* iface_factory;
+AudioInterfaceFactory* iface_factory;
 
 #ifdef MP4_VIDEO
 TheoraOutputMode outputMode_av = TH_BGRX;
@@ -18,7 +23,7 @@ void av_draw()
 {
 	glBindTexture(GL_TEXTURE_2D, tex_id_av);
 
-	TheoraVideoFrame* f = clip_av->getNextFrame();
+	VideoFrame* f = clip_av->getNextFrame();
 
 	if (f)
 	{
@@ -89,7 +94,7 @@ void av_setDebugTitle(char* out)
 
 void av_init()
 {
-	mgr_av = new TheoraVideoManager();
+	mgr_av = new Manager(1);
 	iface_factory = new OpenAL_AudioInterfaceFactory();
 	mgr_av->setAudioInterfaceFactory(iface_factory);
 

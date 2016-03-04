@@ -9,7 +9,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 *************************************************************************************/
 #include "demo_basecode.h"
 #include <theoraplayer/TheoraPlayer.h>
-#include <theoraplayer/TheoraDataSource.h>
+#include <theoraplayer/DataSource.h>
 
 extern void multiple_init();
 extern void multiple_destroy();

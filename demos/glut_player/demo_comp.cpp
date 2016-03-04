@@ -1,9 +1,14 @@
 #include "demo_comp.h"
+#include "theoraplayer/theoraplayer.h"
+#include "theoraplayer/VideoFrame.h"
+#include "theoraplayer/MemoryDataSource.h"
+
+using namespace theoraplayer;
 
 unsigned int locv_main_tex, locv_back_tex, locv_branch_tex, locv_birds_tex,
 locv_bush_tex, locv_clouds_tex, water_tex, eve_tex;
-TheoraVideoManager* mgr_comp;
-TheoraVideoClip *water, *eve;
+Manager* mgr_comp;
+VideoClip *water, *eve;
 unsigned char buffer_comp[256 * 336 * 4];
 float timer_comp = 0;
 
@@ -29,7 +34,7 @@ void comp_draw()
 	glPopMatrix();
 
 	glBindTexture(GL_TEXTURE_2D, water_tex);
-	TheoraVideoFrame* f = water->getNextFrame();
+	VideoFrame* f = water->getNextFrame();
 	if (f)
 	{
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, f->getWidth(), f->getHeight(), GL_RGB, GL_UNSIGNED_BYTE, f->getBuffer());
@@ -74,12 +79,12 @@ void comp_setDebugTitle(char* out)
 
 void comp_init()
 {
-	mgr_comp = new TheoraVideoManager(2);
-	water = mgr_comp->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_water" + resourceExtension), TH_RGB, 4);
+	mgr_comp = new Manager(2);
+	water = mgr_comp->createVideoClip(new MemoryDataSource("media/locv/locv_water" + resourceExtension), TH_RGB, 4);
 	water->setPlaybackSpeed(0.5f);
 	water->setAutoRestart(1);
 
-	eve = mgr_comp->createVideoClip(new TheoraMemoryFileDataSource("media/locv/locv_eve" + resourceExtension), TH_RGBA, 4);
+	eve = mgr_comp->createVideoClip(new MemoryDataSource("media/locv/locv_eve" + resourceExtension), TH_RGBA, 4);
 	eve->setAutoRestart(1);
 
 	water_tex = createTexture(nextPow2(water->getWidth()), nextPow2(water->getHeight()));

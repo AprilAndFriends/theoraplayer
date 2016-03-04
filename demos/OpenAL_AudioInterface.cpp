@@ -9,6 +9,8 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include <stdio.h>
 #include "OpenAL_AudioInterface.h"
 
+using namespace theoraplayer;
+
 ALCdevice* gDevice=0;
 ALCcontext* gContext=0;
 
@@ -25,8 +27,8 @@ short float2short(float f)
 	return (short) (f*32767);
 }
 
-OpenAL_AudioInterface::OpenAL_AudioInterface(TheoraVideoClip* owner, int nChannels, int freq) :
-	TheoraAudioInterface(owner, nChannels, freq), theoraplayer::Timer()
+OpenAL_AudioInterface::OpenAL_AudioInterface(VideoClip* owner, int nChannels, int freq) :
+	theoraplayer::AudioInterface(owner, nChannels, freq), theoraplayer::Timer()
 {
 	this->sourceNumChannels = this->numChannels;
 	if (this->numChannels > 2)
@@ -231,7 +233,7 @@ OpenAL_AudioInterfaceFactory::~OpenAL_AudioInterfaceFactory()
 	}
 }
 
-OpenAL_AudioInterface* OpenAL_AudioInterfaceFactory::createInstance(TheoraVideoClip* owner,int nChannels,int freq)
+OpenAL_AudioInterface* OpenAL_AudioInterfaceFactory::createInstance(VideoClip* owner,int nChannels,int freq)
 {
 	return new OpenAL_AudioInterface(owner,nChannels,freq);
 }

@@ -53,7 +53,7 @@ extern PFNGLACTIVETEXTUREARBPROC glActiveTextureARB;
 #endif
 
 #include "util.h"
-#include "theoraplayer/TheoraVideoManager.h"
+#include "theoraplayer/Manager.h"
 
 extern std::string resourceExtension;
 extern float FOVY;

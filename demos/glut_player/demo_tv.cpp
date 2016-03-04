@@ -1,8 +1,13 @@
 #include "demo_tv.h"
+#include "theoraplayer/MemoryDataSource.h"
+#include "theoraplayer/theoraplayer.h"
+#include "theoraplayer/VideoFrame.h"
+
+using namespace theoraplayer;
 
 unsigned int tex_id_tv;
-TheoraVideoManager* mgr_tv;
-TheoraVideoClip* clip_tv;
+Manager* mgr_tv;
+VideoClip* clip_tv;
 bool started_tv = 1;
 
 ObjModel chair1, chair2, tv, room, table;
@@ -16,7 +21,7 @@ void tv_draw()
 	glLoadIdentity();
 	gluLookAt(sin(anglex) * 400 - 200, angley, cos(anglex) * 400, -200, 150, 0, 0, 1, 0);
 
-	TheoraVideoFrame* f = clip_tv->getNextFrame();
+	VideoFrame* f = clip_tv->getNextFrame();
 	if (f)
 	{
 		unsigned char* data = f->getBuffer();
@@ -113,7 +118,7 @@ void tv_setDebugTitle(char* out)
 
 void tv_init()
 {
-	mgr_tv = new TheoraVideoManager();
+	mgr_tv = new Manager(1);
 	clip_tv = mgr_tv->createVideoClip("media/bunny" + resourceExtension, TH_RGB);
 	//  use this if you want to preload the file into ram and stream from there
 	//	clip_tv=mgr_tv->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);

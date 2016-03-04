@@ -1,8 +1,13 @@
 #include "demo_glut_player.h"
+#include "theoraplayer/MemoryDataSource.h"
+#include "theoraplayer/theoraplayer.h"
+#include "theoraplayer/VideoFrame.h"
+
+using namespace theoraplayer;
 
 unsigned int tex_id;
-TheoraVideoManager* mgr;
-TheoraVideoClip* clip;
+Manager* mgr;
+VideoClip* clip;
 bool started = 1;
 
 #ifdef MP4_VIDEO
@@ -17,7 +22,7 @@ void glutplayer_draw()
 {
 	glBindTexture(GL_TEXTURE_2D, tex_id);
 
-	TheoraVideoFrame* f = clip->getNextFrame();
+	VideoFrame* f = clip->getNextFrame();
 	if (f)
 	{
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, clip->getWidth(), f->getHeight(), textureFormat, GL_UNSIGNED_BYTE, f->getBuffer());
@@ -97,7 +102,7 @@ void glutplayer_benchmark(const char* filename)
 {
 	int nPrecached = 256;
 	int n = nPrecached;
-	TheoraVideoClip* clip = mgr->createVideoClip(filename, outputMode, 32);
+	VideoClip* clip = mgr->createVideoClip(filename, outputMode, 32);
 	clock_t t = clock();
 	while (n > 0)
 	{
@@ -113,7 +118,7 @@ void glutplayer_benchmark(const char* filename)
 
 void glutplayer_init()
 {
-	mgr = new TheoraVideoManager();
+	mgr = new Manager(1);
 
 #ifdef BENCHMARK
 	benchmark("media/witch_intro.ogv");

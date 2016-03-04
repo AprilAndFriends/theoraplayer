@@ -1,8 +1,14 @@
 #include "demo_light.h"
 
+#include "theoraplayer/MemoryDataSource.h"
+#include "theoraplayer/theoraplayer.h"
+#include "theoraplayer/VideoFrame.h"
+
+using namespace theoraplayer;
+
 unsigned int tex_id_light, diffuse_map;
-TheoraVideoManager* mgr_light;
-TheoraVideoClip* clip_light;
+Manager* mgr_light;
+VideoClip* clip_light;
 bool started_light = 1, diffuse_enabled = 1, lighting_enabled = 1;
 
 struct xyz
@@ -22,7 +28,7 @@ void light_draw()
 	float x1, y1, z1, x2 = -65.147f, y2 = 80.219f, z2 = 12.301f;
 	static int index = 0;
 
-	TheoraVideoFrame* f = clip_light->getNextFrame();
+	VideoFrame* f = clip_light->getNextFrame();
 	if (f)
 	{
 		index = (int)f->getFrameNumber();
@@ -122,8 +128,8 @@ void light_init()
 	fclose(f);
 
 	FOVY = 54.495f;
-	mgr_light = new TheoraVideoManager();
-	clip_light = mgr_light->createVideoClip(new TheoraMemoryFileDataSource("media/lighting/lighting" + resourceExtension), TH_RGB);
+	mgr_light = new Manager(1);
+	clip_light = mgr_light->createVideoClip(new MemoryDataSource("media/lighting/lighting" + resourceExtension), TH_RGB);
 	clip_light->setAutoRestart(1);
 	//clip_light->setPlaybackSpeed(0.5f);
 

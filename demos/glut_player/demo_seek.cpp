@@ -1,8 +1,13 @@
 #include "demo_seek.h"
+#include "theoraplayer/MemoryDataSource.h"
+#include "theoraplayer/theoraplayer.h"
+#include "theoraplayer/VideoFrame.h"
+
+using namespace theoraplayer;
 
 unsigned int tex_id_seek;
-TheoraVideoManager* mgr_seek;
-TheoraVideoClip* clip_seek;
+Manager* mgr_seek;
+VideoClip* clip_seek;
 bool started_seek = 1, needsSeek = 1;
 int cFrame_seek = 0, nWrongSeeks = 0;
 float delay = 0;
@@ -13,7 +18,7 @@ void seek_draw()
 
 	if (!needsSeek)
 	{
-		TheoraVideoFrame* f = clip_seek->getNextFrame();
+		VideoFrame* f = clip_seek->getNextFrame();
 		if (f)
 		{
 			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, clip_seek->getWidth(), f->getHeight(), GL_RGB, GL_UNSIGNED_BYTE, f->getBuffer());
@@ -77,8 +82,8 @@ void seek_setDebugTitle(char* out)
 
 void seek_init()
 {
-	mgr_seek = new TheoraVideoManager();
-	clip_seek = mgr_seek->createVideoClip(new TheoraMemoryFileDataSource("media/bunny" + resourceExtension), TH_RGB, 4);
+	mgr_seek = new Manager(1);
+	clip_seek = mgr_seek->createVideoClip(new MemoryDataSource("media/bunny" + resourceExtension), TH_RGB, 4);
 	clip_seek->setAutoRestart(1);
 
 	tex_id_seek = createTexture(nextPow2(clip_seek->getWidth()), nextPow2(clip_seek->getHeight()));

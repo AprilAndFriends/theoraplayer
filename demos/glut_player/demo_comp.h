@@ -20,7 +20,7 @@ of this demo program.
 #include <math.h>
 #include "demo_basecode.h"
 #include <theoraplayer/TheoraPlayer.h>
-#include <theoraplayer/TheoraDataSource.h>
+#include <theoraplayer/DataSource.h>
 #include "tga.h"
 
 extern void comp_init();

@@ -17,7 +17,7 @@ of this demo program.
 *************************************************************************************/
 #include "demo_basecode.h"
 #include <theoraplayer/TheoraPlayer.h>
-#include <theoraplayer/TheoraDataSource.h>
+#include <theoraplayer/DataSource.h>
 
 extern void spriteanim_init();
 extern void spriteanim_destroy();

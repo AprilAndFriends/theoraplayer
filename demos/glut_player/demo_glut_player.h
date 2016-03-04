@@ -2,7 +2,7 @@
 #include "demo_basecode.h"
 
 #include <theoraplayer/TheoraPlayer.h>
-#include <theoraplayer/TheoraDataSource.h>
+#include <theoraplayer/DataSource.h>
 
 //#define BENCHMARK // uncomment this to benchmark decoding times
 #ifdef BENCHMARK
