@@ -14,7 +14,7 @@
 #define THEORAPLAYER_VIDEO_FRAME_H
 
 #include "theoraplayerExport.h"
-#include "TheoraVideoClip.h"
+#include "VideoClip.h"
 #include "VideoFrame.h"
 
 struct TheoraPixelTransform;
@@ -35,7 +35,7 @@ namespace theoraplayer
 
 		int bpp;
 
-		VideoFrame(TheoraVideoClip* parent);
+		VideoFrame(VideoClip* parent);
 		virtual ~VideoFrame();
 
 		//! returns the frame number of this frame in the theora stream
@@ -52,11 +52,11 @@ namespace theoraplayer
 
 		void clear();
 
-		//! Called by TheoraVideoClip to decode a source buffer onto itself
+		//! Called by VideoClip to decode a source buffer onto itself
 		virtual void decode(struct TheoraPixelTransform* t);
 
 	protected:
-		TheoraVideoClip* parent;
+		VideoClip* parent;
 		unsigned char* buffer;
 		unsigned long frameNumber;
 

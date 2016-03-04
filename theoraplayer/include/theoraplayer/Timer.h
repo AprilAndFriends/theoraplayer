@@ -18,7 +18,7 @@
 namespace theoraplayer
 {
 	/**
-		This is a Timer object, it is used to control the playback of a TheoraVideoClip.
+		This is a Timer object, it is used to control the playback of a VideoClip.
 
 		You can inherit this class and make a timer that eg. plays twice as fast,
 		or playbacks an audio track and uses it's time offset for syncronizing Video etc.

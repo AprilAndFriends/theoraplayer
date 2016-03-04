@@ -9,9 +9,9 @@
 #include <memory.h>
 
 #include "TheoraPixelTransform.h"
-#include "TheoraVideoClip.h"
 #include "TheoraVideoManager.h"
 
+#include "VideoClip.h"
 #include "VideoFrame.h"
 
 //#define YUV_TEST // uncomment this if you want to benchmark YUV decoding functions
@@ -67,7 +67,7 @@ namespace theoraplayer
 		decodeXYUV
 	};
 
-	VideoFrame::VideoFrame(TheoraVideoClip* parent)
+	VideoFrame::VideoFrame(VideoClip* parent)
 	{
 		this->ready = this->inUse = false;
 		this->parent = parent;

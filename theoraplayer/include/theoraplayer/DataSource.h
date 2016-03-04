@@ -19,6 +19,8 @@
 
 #include "theoraplayerExport.h"
 
+// TODOth - split these into separate files
+
 namespace theoraplayer
 {
 	/**
@@ -45,8 +47,8 @@ namespace theoraplayer
 		virtual uint64_t getSize() = 0;
 		//! return the current position of the source pointer
 		virtual uint64_t getPosition() = 0;
-	};
 
+	};
 
 	/**
 		provides standard file IO
@@ -72,6 +74,7 @@ namespace theoraplayer
 		uint64_t length;
 
 		void openFile();
+
 	};
 
 	/**
@@ -86,17 +89,21 @@ namespace theoraplayer
 		MemoryDataSource(std::string filename);
 		~MemoryDataSource();
 
-		int read(void* output, int bytes);
-		void seek(uint64_t byte_index);
-		std::string toString() { return "MEM:" + this->filename; }
 		uint64_t getSize();
 		uint64_t getPosition();
 		std::string getFilename() { return this->filename; }
 
+		int read(void* output, int bytes);
+		void seek(uint64_t byte_index);
+
+		inline std::string toString() { return "MEM:" + this->filename; }
+
 	private:
 		std::string filename;
-		uint64_t length, readPointer;
+		uint64_t length;
+		uint64_t readPointer;
 		unsigned char* data;
+
 	};
 
 }

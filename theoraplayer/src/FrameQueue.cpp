@@ -15,7 +15,7 @@
 
 namespace theoraplayer
 {
-	FrameQueue::FrameQueue(TheoraVideoClip* parent)
+	FrameQueue::FrameQueue(VideoClip* parent)
 	{
 		this->parent = parent;
 	}
@@ -29,7 +29,7 @@ namespace theoraplayer
 		this->queue.clear();
 	}
 
-	VideoFrame* FrameQueue::createFrameInstance(TheoraVideoClip* clip)
+	VideoFrame* FrameQueue::createFrameInstance(VideoClip* clip)
 	{
 		VideoFrame* frame = new VideoFrame(clip);
 		if (frame->getBuffer() == NULL) // This can happen if you run out of memory

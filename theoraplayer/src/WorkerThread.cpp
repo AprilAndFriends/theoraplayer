@@ -6,11 +6,10 @@
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
+#include "Manager.h"
 #include "Mutex.h"
 #include "WorkerThread.h"
-
-#include "TheoraVideoManager.h"
-#include "TheoraVideoClip.h"
+#include "VideoClip.h"
 
 #ifdef _THREAD_NAMING
 static int threadCounter = 1;
@@ -44,7 +43,7 @@ namespace theoraplayer
 		bool decoded = false;
 		while (self->executing)
 		{
-			self->clip = TheoraVideoManager::getSingleton().requestWork(self);
+			self->clip = theoraplayer::manager->_requestWork(self);
 			if (self->clip == NULL)
 			{
 				Thread::sleep(100.0f);

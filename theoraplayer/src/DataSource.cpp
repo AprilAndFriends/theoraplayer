@@ -10,10 +10,10 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#include "TheoraVideoManager.h"
-
 #include "DataSource.h"
 #include "Exception.h"
+#include "Manager.h"
+#include "theoraplayer.h"
 #include "Utility.h"
 
 namespace theoraplayer
@@ -48,8 +48,8 @@ namespace theoraplayer
 			this->filePtr = fopen(filename.c_str(), "rb");
 			if (!this->filePtr)
 			{
-				std::string msg = "Can't open video file: " + this->filename;
-				th_writelog(msg);
+				std::string message = "Can't open video file: " + this->filename;
+				log(message);
 				throw TheoraplayerException(msg);
 			}
 #ifdef _WIN32
@@ -114,17 +114,14 @@ namespace theoraplayer
 #endif
 	}
 
-	MemoryDataSource::MemoryDataSource(std::string filename) :
-		readPointer(0),
-		data(0)
+	MemoryDataSource::MemoryDataSource(std::string filename) : readPointer(0), data(0)
 	{
 		this->filename = filename;
 		FILE* f = fopen(this->filename.c_str(), "rb");
-		if (!f)
+		if (f == NULL)
 		{
 			throw TheoraplayerException("Can't open video file: " + this->filename);
 		}
-
 #ifdef _WIN32
 		struct _stat64 s;
 		_fstati64(_fileno(f), &s);
@@ -146,7 +143,6 @@ namespace theoraplayer
 		{
 			throw TheoraplayerException("Unable to preload file to memory, file is too large.");
 		}
-
 		fclose(f);
 	}
 

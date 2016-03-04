@@ -5,20 +5,24 @@
 /// 
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+/// 
+/// @section DESCRIPTION
+/// 
+/// Implements an interface to be able to process AV Foundation for decoding MP4.
 
 #ifdef __AVFOUNDATION
 #define AVFOUNDATION_CLASSES_DEFINED
 #import <AVFoundation/AVFoundation.h>
 #include "TheoraAudioInterface.h"
-#include "TheoraException.h"
-#include "TheoraUtil.h"
 #include "TheoraVideoManager.h"
-#include "TheoraVideoClip_AVFoundation.h"
 #include "TheoraPixelTransform.h"
 
 #include "DataSource.h"
+#include "Exception.h"
 #include "FrameQueue.h"
 #include "Timer.h"
+#include "Utilility.h"
+#include "VideoClip_AVFoundation.h"
 #include "VideoFrame.h"
 
 #ifdef _AVFOUNDATION_BGRX
@@ -60,72 +64,72 @@ static CVPlanarPixelBufferInfo_YCbCrPlanar getYUVStruct(void* src)
 	return yuv;
 }
 
-TheoraVideoClip_AVFoundation::TheoraVideoClip_AVFoundation(DataSource* data_source,
+VideoClip_AVFoundation::VideoClip_AVFoundation(DataSource* data_source,
 											   TheoraOutputMode output_mode,
 											   int nPrecachedFrames,
 											   bool usePower2Stride):
-	TheoraVideoClip(data_source, output_mode, nPrecachedFrames, usePower2Stride),
+	VideoClip(data_source, output_mode, nPrecachedFrames, usePower2Stride),
 	TheoraAudioPacketQueue()
 {
-	mLoaded = 0;
-	mReader = NULL;
-	mOutput = mAudioOutput = NULL;
-	mReadAudioSamples = mAudioFrequency = mNumAudioChannels = 0;
+	this->loaded = 0;
+	this->reader = NULL;
+	this->output = this->audioOutput = NULL;
+	this->readAudioSamples = this->audioFrequency = this->numAudioChannels = 0;
 }
 
-TheoraVideoClip_AVFoundation::~TheoraVideoClip_AVFoundation()
+VideoClip_AVFoundation::~VideoClip_AVFoundation()
 {
 	unload();
 }
 
-void TheoraVideoClip_AVFoundation::unload()
+void VideoClip_AVFoundation::unload()
 {
-	if (mOutput != NULL || mAudioOutput != NULL || mReader != NULL)
+	if (this->output != NULL || this->audioOutput != NULL || this->reader != NULL)
 	{
 		NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 
-		if (mOutput != NULL)
+		if (this->output != NULL)
 		{
-			[mOutput release];
-			mOutput = NULL;
+			[this->output release];
+			this->output = NULL;
 		}
 		
-		if (mAudioOutput)
+		if (this->audioOutput)
 		{
-			[mAudioOutput release];
-			mAudioOutput = NULL;
+			[this->audioOutput release];
+			this->audioOutput = NULL;
 		}
 		
-		if (mReader != NULL)
+		if (this->reader != NULL)
 		{
-			[mReader release];
-			mReader = NULL;
+			[this->reader release];
+			this->reader = NULL;
 		}
 		
 		[pool release];
 	}
 }
 
-bool TheoraVideoClip_AVFoundation::_readData()
+bool VideoClip_AVFoundation::_readData()
 {
 	return 1;
 }
 
-bool TheoraVideoClip_AVFoundation::decodeNextFrame()
+bool VideoClip_AVFoundation::decodeNextFrame()
 {
-	if (mReader == NULL || mEndOfFile) return 0;
-	AVAssetReaderStatus status = [mReader status];
+	if (this->reader == NULL || this->endOfFile) return 0;
+	AVAssetReaderStatus status = [this->reader status];
 	if (status == AVAssetReaderStatusFailed)
 	{
 		// This can happen on iOS when you suspend the app... Only happens on the device, iOS simulator seems to work fine.
 		th_writelog("AVAssetReader reading failed, restarting...");
 
-		mSeekFrame = mTimer->getTime() * mFPS;
+		this->seekFrame = this->timer->getTime() * this->fps;
 		// just in case
-		if (mSeekFrame < 0) mSeekFrame = 0;
-		if (mSeekFrame > mDuration * mFPS - 1) mSeekFrame = mDuration * mFPS - 1;
+		if (this->seekFrame < 0) this->seekFrame = 0;
+		if (this->seekFrame > this->duration * this->fps - 1) this->seekFrame = this->duration * this->fps - 1;
 		_restart();
-		status = [mReader status];
+		status = [this->reader status];
 		if (status == AVAssetReaderStatusFailed)
 		{
 			th_writelog("AVAssetReader restart failed!");
@@ -134,34 +138,34 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 		th_writelog("AVAssetReader restart succeeded!");
 	}
 
-	VideoFrame* frame = mFrameQueue->requestEmptyFrame();
+	VideoFrame* frame = this->frameQueue->requestEmptyFrame();
 	if (!frame) return 0;
 
 	CMSampleBufferRef sampleBuffer = NULL;
 	NSAutoreleasePool* pool = NULL;
 	CMTime presentationTime;
 	
-	if (mAudioInterface) decodeAudio();
+	if (this->audioInterface) decodeAudio();
 	
 	if (status == AVAssetReaderStatusReading)
 	{
 		pool = [[NSAutoreleasePool alloc] init];
 		
-		while ((sampleBuffer = [mOutput copyNextSampleBuffer]))
+		while ((sampleBuffer = [this->output copyNextSampleBuffer]))
 		{
 			presentationTime = CMSampleBufferGetOutputPresentationTimeStamp(sampleBuffer);
-			frame->mTimeToDisplay = (float) CMTimeGetSeconds(presentationTime);
-			frame->mIteration = mIteration;
-			frame->_setFrameNumber(mFrameNumber);
-			++mFrameNumber;
-			if (frame->mTimeToDisplay < mTimer->getTime() && !mRestarted && mFrameNumber % 16 != 0)
+			frame->timeToDisplay = (float) CMTimeGetSeconds(presentationTime);
+			frame->iteration = iteration;
+			frame->_setFrameNumber(this->frameNumber);
+			++this->frameNumber;
+			if (frame->timeToDisplay < this->timer->getTime() && !this->restarted && this->frameNumber % 16 != 0)
 			{
 				// %16 operation is here to prevent a playback halt during video playback if the decoder can't keep up with demand.
 #ifdef _DEBUG_FRAMEDROP
-				th_writelog(mName + ": pre-dropped frame " + str(mFrameNumber - 1));
+				th_writelog(this->name + ": pre-dropped frame " + str(this->frameNumber - 1));
 #endif
-				++mNumDisplayedFrames;
-				++mNumDroppedFrames;
+				++this->numDisplayedFrames;
+				++this->numDroppedFrames;
 				CMSampleBufferInvalidate(sampleBuffer);
 				CFRelease(sampleBuffer);
 				sampleBuffer = NULL;
@@ -179,7 +183,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 			TheoraPixelTransform t;
 			memset(&t, 0, sizeof(TheoraPixelTransform));
 #ifdef _AVFOUNDATION_BGRX
-			if (mOutputMode == TH_BGRX || mOutputMode == TH_RGBA)
+			if (this->outputMode == TH_BGRX || this->outputMode == TH_RGBA)
 			{
 				t.raw = (unsigned char*) baseAddress;
 				t.rawStride = mStride;
@@ -194,14 +198,14 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 				t.v = (unsigned char*) baseAddress + yuv.componentInfoCr.offset; t.vStride = yuv.componentInfoCr.rowBytes;
 			}
 #ifdef _AVFOUNDATION_BGRX
-			if (mOutputMode == TH_RGBA)
+			if (this->outputMode == TH_RGBA)
 			{
 				unsigned char* buffer = frame->getBuffer();
 				for (int i = 0; i < 1000; ++i)
 				{
-					bgrx2rgba(buffer, mWidth / 2, mHeight, &t);
+					bgrx2rgba(buffer, this->width / 2, this->height, &t);
 				}
-				frame->mReady = true;
+				frame->ready = true;
 			}
 			else
 #endif
@@ -216,23 +220,23 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 	}
 	if (pool) [pool release];
 
-	if (!frame->mReady) // in case the frame wasn't used
+	if (!frame->ready) // in case the frame wasn't used
 	{
-		frame->mInUse = 0;
+		frame->inUse = 0;
 	}
 
-	if (sampleBuffer == NULL && mReader.status == AVAssetReaderStatusCompleted) // other cases could be app suspended
+	if (sampleBuffer == NULL && this->reader.status == AVAssetReaderStatusCompleted) // other cases could be app suspended
 	{
-		if (mAutoRestart)
+		if (this->autoRestart)
 		{
-			++mIteration;
+			++iteration;
 			_restart();
 		}
 		else
 		{
 			unload();
-			mEndOfFile = true;
-			th_writelog(mName + " finished playing");
+			this->endOfFile = true;
+			th_writelog(this->name + " finished playing");
 		}
 		return 0;
 	}
@@ -241,29 +245,29 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 	return 1;
 }
 
-void TheoraVideoClip_AVFoundation::_restart()
+void VideoClip_AVFoundation::_restart()
 {
-	mEndOfFile = false;
+	this->endOfFile = false;
 	unload();
-	load(mStream);
-	mRestarted = true;
+	load(this->stream);
+	this->restarted = true;
 }
 
-void TheoraVideoClip_AVFoundation::load(DataSource* source)
+void VideoClip_AVFoundation::load(DataSource* source)
 {
-	mStream = source;
-	mFrameNumber = 0;
-	mEndOfFile = false;
+	this->stream = source;
+	this->frameNumber = 0;
+	this->endOfFile = false;
 	TheoraFileDataSource* fileDataSource = dynamic_cast<TheoraFileDataSource*>(source);
 	std::string filename;
 	if (fileDataSource != NULL) filename = fileDataSource->getFilename();
 	else
 	{
-		MemoryDataSource* memoryDataSource = dynamic_cast<MemoryDataSource*>(source);
+		TheoraMemoryFileDataSource* memoryDataSource = dynamic_cast<TheoraMemoryFileDataSource*>(source);
 		if (memoryDataSource != NULL) filename = memoryDataSource->getFilename();
 		else
 		{
-			throw TheoraGenericException("Unable to load MP4 file");
+			throw TheoraplayerException("Unable to load MP4 file");
 		}
 	}
 	
@@ -272,11 +276,11 @@ void TheoraVideoClip_AVFoundation::load(DataSource* source)
 	NSError* err;
 	NSURL *url = [NSURL fileURLWithPath:path];
 	AVAsset* asset = [[AVURLAsset alloc] initWithURL:url options:nil];
-	mReader = [[AVAssetReader alloc] initWithAsset:asset error:&err];
+	this->reader = [[AVAssetReader alloc] initWithAsset:asset error:&err];
 	NSArray* tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
 	if ([tracks count] == 0)
 	{
-		throw TheoraGenericException("Unable to open video file: " + filename);
+		throw TheoraplayerException("Unable to open video file: " + filename);
 	}
 	AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
 
@@ -284,34 +288,34 @@ void TheoraVideoClip_AVFoundation::load(DataSource* source)
 	AVAssetTrack *audioTrack = audioTracks.count > 0 ? [audioTracks objectAtIndex:0] : NULL;
 	
 #ifdef _AVFOUNDATION_BGRX
-	bool yuv_output = (mOutputMode != TH_BGRX && mOutputMode != TH_RGBA);
+	bool yuv_output = (this->outputMode != TH_BGRX && this->outputMode != TH_RGBA);
 #else
 	bool yuv_output = true;
 #endif
 	
 	NSDictionary *videoOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(yuv_output) ? kCVPixelFormatType_420YpCbCr8Planar : kCVPixelFormatType_32BGRA], kCVPixelBufferPixelFormatTypeKey, nil];
 
-	mOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:videoTrack outputSettings:videoOptions];
-	[mReader addOutput:mOutput];
-	if ([mOutput respondsToSelector:@selector(setAlwaysCopiesSampleData:)]) // Not supported on iOS versions older than 5.0
-		mOutput.alwaysCopiesSampleData = NO;
+	this->output = [[AVAssetReaderTrackOutput alloc] initWithTrack:videoTrack outputSettings:videoOptions];
+	[this->reader addOutput:this->output];
+	if ([this->output respondsToSelector:@selector(setAlwaysCopiesSampleData:)]) // Not supported on iOS versions older than 5.0
+		this->output.alwaysCopiesSampleData = NO;
 
-	mFPS = videoTrack.nominalFrameRate;
-	mWidth = mSubFrameWidth = mStride = videoTrack.naturalSize.width;
-	mHeight = mSubFrameHeight = videoTrack.naturalSize.height;
-	mFrameDuration = 1.0f / mFPS;
-	mDuration = (float) CMTimeGetSeconds(asset.duration);
-	mNumFrames = mDuration * mFPS;
-	if (mFrameQueue == NULL)
+	this->fps = videoTrack.nominalFrameRate;
+	this->width = this->subFrameWidth = mStride = videoTrack.naturalSize.width;
+	this->height = this->subFrameHeight = videoTrack.naturalSize.height;
+	frameDuration = 1.0f / this->fps;
+	this->duration = (float) CMTimeGetSeconds(asset.duration);
+	mNumFrames = this->duration * this->fps;
+	if (this->frameQueue == NULL)
 	{
-		mFrameQueue = new FrameQueue(this);
-		mFrameQueue->setSize(mNumPrecachedFrames);
+		this->frameQueue = new TheoraFrameQueue(this);
+		this->frameQueue->setSize(this->numPrecachedFrames);
 	}
 
-	if (mSeekFrame != -1)
+	if (this->seekFrame != -1)
 	{
-		mFrameNumber = mSeekFrame;
-		[mReader setTimeRange: CMTimeRangeMake(CMTimeMakeWithSeconds(mSeekFrame / mFPS, 1), kCMTimePositiveInfinity)];
+		this->frameNumber = this->seekFrame;
+		[this->reader setTimeRange: CMTimeRangeMake(CMTimeMakeWithSeconds(this->seekFrame / this->fps, 1), kCMTimePositiveInfinity)];
 	}
 	if (audioTrack)
 	{
@@ -326,94 +330,94 @@ void TheoraVideoClip_AVFoundation::load(DataSource* source)
 										  [NSNumber numberWithInt:32], AVLinearPCMBitDepthKey,
 										  nil];
 
-			mAudioOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:audioTrack outputSettings:audioOptions];
-			[mReader addOutput:mAudioOutput];
-			if ([mAudioOutput respondsToSelector:@selector(setAlwaysCopiesSampleData:)]) // Not supported on iOS versions older than 5.0
-				mAudioOutput.alwaysCopiesSampleData = NO;
+			this->audioOutput = [[AVAssetReaderTrackOutput alloc] initWithTrack:audioTrack outputSettings:audioOptions];
+			[this->reader addOutput:this->audioOutput];
+			if ([this->audioOutput respondsToSelector:@selector(setAlwaysCopiesSampleData:)]) // Not supported on iOS versions older than 5.0
+				this->audioOutput.alwaysCopiesSampleData = NO;
 			
 			NSArray* desclst = audioTrack.formatDescriptions;
 			CMAudioFormatDescriptionRef desc = (CMAudioFormatDescriptionRef) [desclst objectAtIndex:0];
 			const AudioStreamBasicDescription* audioDesc = CMAudioFormatDescriptionGetStreamBasicDescription(desc);
-			mAudioFrequency = (unsigned int) audioDesc->mSampleRate;
-			mNumAudioChannels = audioDesc->mChannelsPerFrame;
+			this->audioFrequency = (unsigned int) audioDesc->mSampleRate;
+			this->numAudioChannels = audioDesc->mChannelsPerFrame;
 			
-			if (mSeekFrame != -1)
+			if (this->seekFrame != -1)
 			{
-				mReadAudioSamples = mFrameNumber * (mAudioFrequency * mNumAudioChannels) / mFPS;
+				this->readAudioSamples = this->frameNumber * (this->audioFrequency * this->numAudioChannels) / this->fps;
 			}
-			else mReadAudioSamples = 0;
+			else this->readAudioSamples = 0;
 
-			if (mAudioInterface == NULL)
-				setAudioInterface(audio_factory->createInstance(this, mNumAudioChannels, mAudioFrequency));
+			if (this->audioInterface == NULL)
+				setAudioInterface(audio_factory->createInstance(this, this->numAudioChannels, this->audioFrequency));
 		}
 	}
 	
 #ifdef _DEBUG
-	else if (!mLoaded)
+	else if (!this->loaded)
 	{
-		th_writelog("-----\nwidth: " + str(mWidth) + ", height: " + str(mHeight) + ", fps: " + str((int) getFPS()));
-		th_writelog("duration: " + strf(mDuration) + " seconds\n-----");
+		th_writelog("-----\nwidth: " + str(this->width) + ", height: " + str(this->height) + ", fps: " + str((int) getFPS()));
+		th_writelog("duration: " + strf(this->duration) + " seconds\n-----");
 	}
 #endif
-	[mReader startReading];
+	[this->reader startReading];
 	[pool release];
-	mLoaded = true;
+	this->loaded = true;
 }
  
-void TheoraVideoClip_AVFoundation::decodedAudioCheck()
+void VideoClip_AVFoundation::decodedAudioCheck()
 {
-	if (!mAudioInterface || mTimer->isPaused()) return;
+	if (!this->audioInterface || this->timer->isPaused()) return;
 	
-	Mutex::ScopeLock lock(mAudioMutex);
-	flushAudioPackets(mAudioInterface);
+	Mutex::ScopeLock lock(this->audioMutex);
+	flushAudioPackets(this->audioInterface);
 	lock.release();
 }
 
-float TheoraVideoClip_AVFoundation::decodeAudio()
+float VideoClip_AVFoundation::decodeAudio()
 {
-	if (mRestarted) return -1;
+	if (this->restarted) return -1;
 
-	if (mReader == NULL || mEndOfFile) return 0;
-	AVAssetReaderStatus status = [mReader status];
+	if (this->reader == NULL || this->endOfFile) return 0;
+	AVAssetReaderStatus status = [this->reader status];
 
-	if (mAudioOutput)
+	if (this->audioOutput)
 	{
 		CMSampleBufferRef sampleBuffer = NULL;
 		NSAutoreleasePool* pool = NULL;
 		bool mutexLocked = 0;
 		Mutex::ScopeLock audioMutexLock;
 
-		float factor = 1.0f / (mAudioFrequency * mNumAudioChannels);
-		float videoTime = (float) mFrameNumber / mFPS;
-		float min = mFrameQueue->getSize() / mFPS + 1.0f;
+		float factor = 1.0f / (this->audioFrequency * this->numAudioChannels);
+		float videoTime = (float) this->frameNumber / this->fps;
+		float min = this->frameQueue->getSize() / this->fps + 1.0f;
 		
 		if (status == AVAssetReaderStatusReading)
 		{
 			pool = [[NSAutoreleasePool alloc] init];
 
 			// always buffer up of audio ahead of the frames
-			while (mReadAudioSamples * factor - videoTime < min)
+			while (this->readAudioSamples * factor - videoTime < min)
 			{
-				if ((sampleBuffer = [mAudioOutput copyNextSampleBuffer]))
+				if ((sampleBuffer = [this->audioOutput copyNextSampleBuffer]))
 				{
 					AudioBufferList audioBufferList;
 					
 					CMBlockBufferRef blockBuffer = NULL;
 					CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sampleBuffer, NULL, &audioBufferList, sizeof(audioBufferList), NULL, NULL, 0, &blockBuffer);
 					
-					for (int y = 0; y < audioBufferList.mNumberBuffers; ++y)
+					for (int y = 0; y < audioBufferList.numberBuffers; ++y)
 					{
-						AudioBuffer audioBuffer = audioBufferList.mBuffers[y];
-						float *frame = (float*) audioBuffer.mData;
+						AudioBuffer audioBuffer = audioBufferList.buffers[y];
+						float *frame = (float*) audioBuffer.data;
 
 						if (!mutexLocked)
 						{
-							audioMutexLock.acquire(mAudioMutex);
+							audioMutexLock.acquire(this->audioMutex);
 							mutexLocked = 1;
 						}
-						addAudioPacket(frame, audioBuffer.mDataByteSize / (mNumAudioChannels * sizeof(float)), mAudioGain);
+						addAudioPacket(frame, audioBuffer.dataByteSize / (this->numAudioChannels * sizeof(float)), mAudioGain);
 						
-						mReadAudioSamples += audioBuffer.mDataByteSize / (sizeof(float));
+						this->readAudioSamples += audioBuffer.dataByteSize / (sizeof(float));
 					}
 
 					CFRelease(blockBuffer);
@@ -422,8 +426,8 @@ float TheoraVideoClip_AVFoundation::decodeAudio()
 				}
 				else
 				{
-					[mAudioOutput release];
-					mAudioOutput = nil;
+					[this->audioOutput release];
+					this->audioOutput = nil;
 					break;
 				}
 			}
@@ -435,32 +439,32 @@ float TheoraVideoClip_AVFoundation::decodeAudio()
 	return -1;
 }
 
-void TheoraVideoClip_AVFoundation::doSeek()
+void VideoClip_AVFoundation::doSeek()
 {
 #if _DEBUG
-	th_writelog(mName + " [seek]: seeking to frame " + str(mSeekFrame));
+	th_writelog(this->name + " [seek]: seeking to frame " + str(this->seekFrame));
 #endif
 	int frame;
-	float time = mSeekFrame / getFPS();
-	mTimer->seek(time);
-	bool paused = mTimer->isPaused();
-	if (!paused) mTimer->pause(); // pause until seeking is done
+	float time = this->seekFrame / getFPS();
+	this->timer->seek(time);
+	bool paused = this->timer->isPaused();
+	if (!paused) this->timer->pause(); // pause until seeking is done
 	
-	mEndOfFile = false;
-	mRestarted = false;
+	this->endOfFile = false;
+	this->restarted = false;
 	
 	resetFrameQueue();
 	unload();
-	load(mStream);
+	load(this->stream);
 
-	if (mAudioInterface)
+	if (this->audioInterface)
 	{
-		Mutex::ScopeLock lock(mAudioMutex);
+		Mutex::ScopeLock lock(this->audioMutex);
 		destroyAllAudioPackets();
 		lock.release();
 	}
 
-	if (!paused) mTimer->play();
-	mSeekFrame = -1;
+	if (!paused) this->timer->play();
+	this->seekFrame = -1;
 }
 #endif

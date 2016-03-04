@@ -1,0 +1,461 @@
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+
+#include "TheoraAudioInterface.h"
+
+#include "DataSource.h"
+#include "Exception.h"
+#include "FrameQueue.h"
+#include "Manager.h"
+#include "theoraplayer.h"
+#include "Utility.h"
+#include "VideoClip.h"
+#include "WorkerThread.h"
+
+#ifdef __THEORA
+	#include <theora/codec.h>
+	#include <vorbis/codec.h>
+	#include "Theora/VideoClip_Theora.h"
+#endif
+#ifdef __WEBM
+	#include "WebM/VideoClip_WebM.h"
+#endif
+#ifdef __AVFOUNDATION
+	#include "AVFoundation/VideoClip_AVFoundation.h"
+#endif
+#ifdef __FFMPEG
+	#include "FFmpeg/VideoClip_FFmpeg.h"
+#endif
+#ifdef _ANDROID //libtheoraplayer addition for cpu feature detection
+	#include "cpu-features.h"
+#endif
+
+// declaring function prototype here so I don't have to put it in a header file
+// it only needs to be used by this plugin and called once
+extern "C"
+{
+	void initYUVConversionModule();
+}
+
+//#define _DECODING_BENCHMARK //uncomment to test average decoding time on a given device
+
+namespace theoraplayer
+{
+#ifdef _SCHEDULING_DEBUG
+	static float threadDiagnosticTimer = 0.0f;
+#endif
+#ifdef _DECODING_BENCHMARK
+	void benchmark(VideoClip* clip)
+	{
+		int precachedFramesCount = 256;
+		int count = precachedFramesCount;
+		char message[1024] = {0};
+		clock_t t = clock();
+		while (count > 0)
+		{
+			clip->waitForCache(1.0f, 1000000);
+			count -= 32;
+			clip->getFrameQueue()->clear();
+		}
+		float diff = ((float)(clock() - t) * 1000.0f) / CLOCKS_PER_SEC;
+		sprintf(message, "BENCHMARK: %s: Decoding %d frames took %.1fms (%.2fms average per frame)\n", clip->getName().c_str(), precachedFramesCount, diff, diff / precachedFramesCount);
+		log(message);
+		clip->seek(0);
+	}
+#endif
+
+	struct TheoraWorkCandidate
+	{
+		VideoClip* clip;
+		float priority, queuedTime, workTime, entitledTime;
+	};
+
+	Manager* manager = NULL;
+
+	Manager::Manager(int workerThreadCount) : defaultPrecachedFramesCount(8), workMutex(new Mutex()) audioInterfaceFactory(NULL)
+	{
+		if (workerThreadCount < 1)
+		{
+			workerThreadCount = 1;
+		}
+		std::string message = "Initializing Theora Playback Library (" + this->getVersionString() + ")\n";
+#ifdef __THEORA
+		message += "  - libtheora version: " + std::string(th_version_string()) + "\n" +
+			"  - libvorbis version: " + std::string(vorbis_version_string()) + "\n";
+#endif
+#ifdef _ANDROID
+		uint64_t features = libtheoraplayer_android_getCpuFeaturesExt();
+		char s[128] = { 0 };
+		sprintf(s, "  - Android: CPU Features: %u\n", (unsigned int)features);
+		message += s;
+		if ((features & ANDROID_CPU_ARM_FEATURE_NEON) == 0)
+		{
+			message += "  - Android: NEON features NOT SUPPORTED by CPU\n";
+		}
+		else
+		{
+			message += "  - Android: Detected NEON CPU features\n";
+		}
+#endif
+#ifdef __AVFOUNDATION
+		message += "  - using Apple AVFoundation classes.\n";
+#endif
+#ifdef __FFMPEG
+		message += "  - using FFmpeg library.\n";
+#endif
+
+		log(message + "\n------------------------------------");
+		// for CPU based yuv2rgb decoding
+		initYUVConversionModule();
+		this->createWorkerThreads(workerThreadCount);
+	}
+
+	Manager::~Manager()
+	{
+		this->destroyWorkerThreads();
+		Mutex::ScopeLock lock(this->workMutex);
+		foreach (VideoClip*, it, this->clips)
+		{
+			delete (*it);
+		}
+		this->clips.clear();
+		lock.release();
+		delete this->workMutex;
+	}
+
+	std::vector<std::string> Manager::getSupportedDecoders()
+	{
+		std::vector<std::string> result;
+#ifdef __THEORA
+		result.push_back("Theora");
+#endif
+#ifdef __WEBM
+		result.push_back("WebM");
+#endif
+#ifdef __AVFOUNDATION
+		result.push_back("AVFoundation");
+#endif
+#ifdef __FFMPEG
+		result.push_back("FFmpeg");
+#endif
+		return result;
+	}
+
+	int Manager::getWorkerThreadCount()
+	{
+		return (int)this->workerThreads.size();
+	}
+
+	void Manager::setWorkerThreadCount(int value)
+	{
+		if (value < 1)
+		{
+			value = 1;
+		}
+		if (value != this->getWorkerThreadCount())
+		{
+			log("changing number of worker threats to: " + str(value));
+			this->destroyWorkerThreads();
+			this->createWorkerThreads(value);
+		}
+	}
+
+	std::string Manager::getVersionString()
+	{
+		int major = 0;
+		int minor = 0;
+		int revision = 0;
+		this->getVersion(&major, &minor, &revision);
+		std::string result = str(major) + "." + str(minor);
+		if (revision != 0)
+		{
+			result += (revision < 0 ? " RC" + str(-revision) : "." + str(revision));
+		}
+		return result;
+	}
+
+	void Manager::getVersion(int* major, int* minor, int* revision)
+	{
+		*major = 2;
+		*minor = 0;
+		*revision = 0;
+	}
+
+	VideoClip* Manager::getVideoClipByName(const std::string& name)
+	{
+		Mutex::ScopeLock lock(this->workMutex);
+		foreach (VideoClip*, it, this->clips)
+		{
+			if ((*it)->getName() == name)
+			{
+				return (*it);
+			}
+		}
+		return NULL;
+	}
+
+	VideoClip* Manager::createVideoClip(const std::string& filename, TheoraOutputMode outputMode, int precachedFramesCountOverride, bool usePotStride)
+	{
+		return this->createVideoClip(new FileDataSource(filename), outputMode, precachedFramesCountOverride, usePotStride);
+	}
+
+	VideoClip* Manager::createVideoClip(DataSource* dataSource, TheoraOutputMode outputMode, int precachedFramesCountOverride, bool usePotStride)
+	{
+		Mutex::ScopeLock lock(this->workMutex);
+		VideoClip* clip = NULL;
+		int precachedFramesCount = (precachedFramesCountOverride > 0 ? precachedFramesCountOverride : this->defaultPrecachedFramesCount);
+		log("Creating video from data source: " + dataSource->toString() + " [" + str(precachedFramesCount) + " precached frames].");
+#ifdef __AVFOUNDATION
+		FileDataSource* fileDataSource = dynamic_cast<FileDataSource*>(dataSource);
+		std::string filename;
+		if (fileDataSource == NULL)
+		{
+			MemoryDataSource* memoryDataSource = dynamic_cast<MemoryDataSource*>(data_source);
+			if (memoryDataSource != NULL)
+			{
+				filename = memoryDataSource->getFilename();
+			}
+			// if the user has his own data source, it's going to be a problem for AVAssetReader since it only supports reading from files...
+		}
+		else
+		{
+			filename = fileDataSource->getFilename();
+		}
+		if (filename.size() > 4 && filename.substr(filename.size() - 4, filename.size()) == ".mp4")
+		{
+			clip = new VideoClip_AVFoundation(dataSource, outputMode, precachedFramesCount, usePotStride);
+		}
+#endif
+#ifdef __THEORA
+		if (clip == NULL)
+		{
+			clip = new VideoClip_Theora(dataSource, outputMode, precachedFramesCount, usePotStride);
+		}
+#endif
+#ifdef __FFMPEG
+		if (clip == NULL)
+		{
+			clip = new VideoClip_FFmpeg(dataSource, outputMode, precachedFramesCount, usePotStride);
+		}
+#endif
+#ifdef __WEBM
+		if (clip == NULL)
+		{
+			clip = new VideoClip_WebM(dataSource, outputMode, precachedFramesCount, usePotStride);
+		}
+#endif
+		if (clip != NULL)
+		{
+			try
+			{
+				clip->_load(dataSource);
+			}
+			catch (_Exception& e)
+			{
+				delete clip;
+				// TODOth - should dataSource be deleted as well? as it causes a memory leak when called through the createVideoClip() override
+				throw e;
+			}
+			clip->decodeNextFrame(); // ensure the first frame is always preloaded and have the main thread do it to prevent potential thread starvation
+			this->clips.push_back(clip);
+		}
+		else
+		{
+			log("Failed creating video clip: " + dataSource->toString());
+		}
+		lock.release();
+#ifdef _DECODING_BENCHMARK
+		benchmark(clip);
+#endif
+		return clip;
+	}
+
+	void Manager::destroyVideoClip(VideoClip* clip)
+	{
+		if (clip == NULL)
+		{
+			return;
+		}
+		log("Destroying video clip: " + clip->getName());
+		Mutex::ScopeLock lock(this->workMutex);
+		bool reported = false;
+		while (clip->assignedWorkerThread != NULL)
+		{
+			if (!reported)
+			{
+				log(" - Waiting for WorkerThread to finish decoding in order to destroy");
+				reported = true;
+			}
+			Thread::sleep(1.0f);
+		}
+		if (reported)
+		{
+			log(" - WorkerThread done, destroying clip now...");
+		}
+		ClipList::iterator it = std::find(this->clips.begin(), this->clips.end(), clip);
+		if (it != this->clips.end())
+		{
+			this->clips.erase(it);
+		}
+		// remove all it's references from the work log
+		this->workLog.remove(clip);
+		// delete the actual clip
+		delete clip;
+#ifdef _DEBUG
+		log("Destroyed video clip.");
+#endif
+	}
+
+	void Manager::update(float timeDelta)
+	{
+		Mutex::ScopeLock lock(this->workMutex);
+		foreach(VideoClip*, it, this->clips)
+		{
+			(*it)->update(timeDelta);
+			(*it)->decodedAudioCheck();
+		}
+		lock.release();
+#ifdef _SCHEDULING_DEBUG
+		threadDiagnosticTimer += timeDelta;
+#endif
+	}
+
+	void Manager::_createWorkerThreads(int count)
+	{
+		WorkerThread* t = NULL;
+		for (int i = 0; i < count; ++i)
+		{
+			t = new WorkerThread();
+			this->workerThreads.push_back(t);
+			t->start();
+		}
+	}
+
+	void Manager::_destroyWorkerThreads()
+	{
+		foreach (WorkerThread*, it, this->workerThreads)
+		{
+			(*it)->join();
+			delete (*it);
+		}
+		this->workerThreads.clear();
+	}
+
+	VideoClip* Manager::_requestWork(WorkerThread* caller)
+	{
+		Mutex::ScopeLock lock(this->workMutex);
+		float maxQueuedTime = 0;
+		int totalAccessCount = 0;
+		int readyFramesCount = 0;
+		std::vector<TheoraWorkCandidate> candidates;
+		TheoraWorkCandidate candidate;
+		// first pass is for playing videos, but if no such videos are available for decoding
+		// paused videos are selected in the second pass.
+		// Note that paused videos that are waiting for cache are considered equal to playing
+		// videos in the scheduling context
+		for (int i = 0; i < 2 && candidates.size() == 0; ++i)
+		{
+			foreach (VideoClip*, it, this->clips)
+			{
+				if (!(*it)->isBusy() && (i > 0 || (*it)->isPaused() || !(*it)->waitingForCache))
+				{
+					readyFramesCount = (*it)->getNumReadyFrames();
+					if (readyFramesCount != (*it)->getFrameQueue()->getSize())
+					{
+						candidate.clip = (*it);
+						candidate.priority = (*it)->getPriority();
+						candidate.queuedTime = (float)readyFramesCount / ((*it)->getFps() * (*it)->getPlaybackSpeed());
+						candidate.workTime = (float)(*it)->threadAccessCount;
+						totalAccessCount += candidate.workTime;
+						if (maxQueuedTime < candidate.queuedTime)
+						{
+							maxQueuedTime = candidate.queuedTime;
+						}
+						candidates.push_back(candidate);
+					}
+				}
+			}
+		}
+		// prevent division by zero
+		if (totalAccessCount == 0)
+		{
+			totalAccessCount = 1;
+		}
+		if (maxQueuedTime == 0)
+		{
+			maxQueuedTime = 1;
+		}
+		// normalize candidate values
+		int prioritySum = 0;
+		foreach (TheoraWorkCandidate, it, candidates)
+		{
+			it->workTime /= totalAccessCount;
+			// adjust user priorities to favor clips that have fewer frames queued
+			it->priority *= 1.0f - (it->queuedTime / maxQueuedTime) * 0.5f;
+			prioritySum += it->priority;
+		}
+		foreach (TheoraWorkCandidate, it, candidates)
+		{
+			it->entitledTime = it->priority / prioritySum;
+		}
+		// now, based on how much access time has been given to each clip in the work log
+		// and how much time should be given to each clip based on calculated priorities,
+		// we choose a best suited clip for this worker thread to decode next
+		int maxDiff = -1;
+		int diff = 0;
+		VideoClip* selectedClip = NULL;
+		foreach (TheoraWorkCandidate, it, candidates)
+		{
+			diff = it->entitledTime - it->workTime;
+			if (maxDiff < diff)
+			{
+				maxDiff = diff;
+				selectedClip = it->clip;
+			}
+		}
+		if (selectedClip != NULL)
+		{
+			selectedClip->assignedWorkerThread = caller;
+			int clipsCount = (int)this->clips.size();
+			unsigned int maxWorkLogSize = (clipsCount - 1) * 50;
+			if (clipsCount > 1)
+			{
+				this->workLog.push_front(selectedClip);
+				++selectedClip->threadAccessCount;
+			}
+			VideoClip* clip = NULL;
+			while (this->workLog.size() > maxWorkLogSize)
+			{
+				clip = this->workLog.back();
+				this->workLog.pop_back();
+				--clip->threadAccessCount;
+			}
+#ifdef _SCHEDULING_DEBUG
+			if (this->clips.size() > 1)
+			{
+				int accessCount = (int)this->workLog.size();
+				if (threadDiagnosticTimer > 2.0f)
+				{
+					threadDiagnosticTimer = 0.0f;
+					std::string message = "-----\nTheora Playback Library debug CPU time analysis (" + str(accessCount) + "):\n";
+					int percent;
+					foreach (VideoClip*, it, this->clips)
+					{
+						percent = ((float)(*it)->threadAccessCount / (int)this->workLog.size()) * 100.0f;
+						message += (*it)->getName() + " (" + str((*it)->getPriority()) + "): " + str((*it)->threadAccessCount) + ", " + str(percent) + "%\n";
+					}
+					message += "-----";
+					log(message);
+				}
+			}
+#endif
+		}
+		return selectedClip;
+	}
+
+}

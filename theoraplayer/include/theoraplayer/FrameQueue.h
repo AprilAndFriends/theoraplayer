@@ -19,10 +19,9 @@
 #include "theoraplayerExport.h"
 #include "Thread.h"
 
-class TheoraVideoClip;
-
 namespace theoraplayer
 {
+	class VideoClip;
 	class VideoFrame;
 
 	/**
@@ -32,7 +31,7 @@ namespace theoraplayer
 	class theoraplayerExport FrameQueue
 	{
 	public:
-		FrameQueue(TheoraVideoClip* parent);
+		FrameQueue(VideoClip* parent);
 		~FrameQueue();
 
 		/**
@@ -92,11 +91,11 @@ namespace theoraplayer
 
 	protected:
 		std::list<VideoFrame*> queue;
-		TheoraVideoClip* parent;
+		VideoClip* parent;
 		Mutex mutex;
 
 		//! implementation function that returns a VideoFrame instance
-		VideoFrame* createFrameInstance(TheoraVideoClip* clip);
+		VideoFrame* createFrameInstance(VideoClip* clip);
 
 	};
 

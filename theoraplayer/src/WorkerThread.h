@@ -16,24 +16,25 @@
 #include "Mutex.h"
 #include "Thread.h"
 
-class TheoraVideoClip;
-
 namespace theoraplayer
 {
+	class VideoClip;
+
 	/**
-		This is the worker thread, requests work from TheoraVideoManager
-		and decodes assigned TheoraVideoClip objects
+		This is the worker thread, requests work from VideoManager
+		and decodes assigned VideoClip objects
 	*/
 	class WorkerThread : public Thread
 	{
-		TheoraVideoClip* clip;
 	public:
 		WorkerThread();
 		~WorkerThread();
 
-		TheoraVideoClip* getAssignedClip() { return this->clip; }
+		inline VideoClip* getAssignedClip() { return this->clip; }
 
 	protected:
+		VideoClip* clip;
+
 		static void _work(Thread* thread);
 
 	};

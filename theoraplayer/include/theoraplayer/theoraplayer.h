@@ -8,24 +8,20 @@
 /// 
 /// @section DESCRIPTION
 /// 
-/// Defines generic helper functions
+/// Defines a public interface with helper functions.
 
 #ifndef THEORAPLAYER_H
 #define THEORAPLAYER_H
 
-// TODOth - maybe move these headers elsewhere
-
-#include "TheoraVideoManager.h"
-#include "TheoraVideoClip.h"
-
 #include "theoraplayerExport.h"
-#include "VideoFrame.h"
 
 namespace theoraplayer
 {
-	theoraplayerFnExport void init();
+	theoraplayerFnExport void init(int workerThreadCount = 1);
 	theoraplayerFnExport void destroy();
 
+	theoraplayerFnExport void setLogFunction(void (*function)(const std::string&));
+	theoraplayerFnExport void log(const std::string& message);
 	theoraplayerFnExport void registerFormatLoader();
 
 }

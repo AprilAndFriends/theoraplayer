@@ -10,13 +10,15 @@
 /// 
 /// Provides an interface for connecting videos with audio.
 
-#ifndef THEORA_AUDIOINTERFACE_H
-#define THEORA_AUDIOINTERFACE_H
+#ifndef THEORAPLAYER_AUDIO_INTERFACE_H
+#define THEORAPLAYER_AUDIO_INTERFACE_H
 
 #include "theoraplayerExport.h"
 
-class TheoraVideoClip;
-
+namespace theoraplayer
+{
+	class VideoClip;
+}
 
 /**
  This is the class that serves as an interface between the library's audio
@@ -30,24 +32,26 @@ public:
 	int freq;
 	//! Mono or stereo
 	int numChannels;
-	//! Pointer to the parent TheoraVideoClip object
-	TheoraVideoClip* clip;
+	//! Pointer to the parent VideoClip object
+	VideoClip* clip;
 	
-	TheoraAudioInterface(TheoraVideoClip* owner, int nChannels, int freq);
+	TheoraAudioInterface(VideoClip* owner, int nChannels, int freq);
 	virtual ~TheoraAudioInterface();
-	//! A function that the TheoraVideoClip object calls once more audio packets are decoded
+	//! A function that the VideoClip object calls once more audio packets are decoded
 	/*!
 	 \param data contains one or two channels of float PCM data in the range [-1,1]
 	 \param nSamples contains the number of samples that the data parameter contains in each channel
 	 */
-	virtual void insertData(float* data, int nSamples)=0;	
+	virtual void insertData(float* data, int nSamples) = 0;
+
 };
 
 class theoraplayerExport TheoraAudioInterfaceFactory
 {
 public:
-	//! VideoManager calls this when creating a new TheoraVideoClip object
-	virtual TheoraAudioInterface* createInstance(TheoraVideoClip* owner, int nChannels, int freq) = 0;
+	//! VideoManager calls this when creating a new VideoClip object
+	virtual TheoraAudioInterface* createInstance(VideoClip* owner, int nChannels, int freq) = 0;
+
 };
 
 

@@ -8,7 +8,7 @@
 
 #include "TheoraAudioInterface.h"
 
-TheoraAudioInterface::TheoraAudioInterface(TheoraVideoClip* owner, int nChannels, int freq)
+TheoraAudioInterface::TheoraAudioInterface(VideoClip* owner, int nChannels, int freq)
 {
 	this->freq = freq;
 	this->numChannels = nChannels;

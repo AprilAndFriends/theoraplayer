@@ -9,8 +9,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #include "demo_basecode.h"
 
 #include <theoraplayer/DataSource.h>
-
-#include <theoraplayer/TheoraPlayer.h>
+#include <theoraplayer/theoraplayer.h>
 
 //#define BENCHMARK // uncomment this to benchmark decoding times
 #ifdef BENCHMARK
@@ -19,7 +18,7 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #endif
 unsigned int tex_id;
 TheoraVideoManager* mgr;
-TheoraVideoClip* clip;
+theoraplayer::VideoClip* clip;
 std::string window_name="glut_player";
 bool started=1;
 int window_w=800,window_h=600;

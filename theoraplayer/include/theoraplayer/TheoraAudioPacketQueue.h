@@ -10,14 +10,14 @@
 /// 
 /// Defines an audio packet queue.
 
-#ifndef THEORA_AUDIOPACKETQUEUE_H
-#define THEORA_AUDIOPACKETQUEUE_H
+#ifndef THEORAPLAYER_AUDIO_PACKET_QUEUE_H
+#define THEORAPLAYER_AUDIO_PACKET_QUEUE_H
 
 #include "theoraplayerExport.h"
 
 class TheoraAudioInterface;
 /**
- This is an internal structure which TheoraVideoClip_Theora uses to store audio packets
+ This is an internal structure which VideoClip_Theora uses to store audio packets
  */
 struct TheoraAudioPacket
 {
@@ -48,10 +48,12 @@ public:
 	void flushAudioPackets(TheoraAudioInterface* audioInterface);
 
 protected:
-	unsigned int audioFrequency, numAudioChannels;
+	unsigned int audioFrequency;
+	unsigned int numAudioChannels;
 	TheoraAudioPacket* theoraAudioPacketQueue;
 
 	void _addAudioPacket(float* data, int numSamples);
+
 };
 
 #endif
