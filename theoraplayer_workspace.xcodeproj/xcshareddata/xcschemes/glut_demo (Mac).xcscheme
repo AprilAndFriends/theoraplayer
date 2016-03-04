@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D17613811561B21500F645DE"
-               BuildableName = "environment_mapping.app"
-               BlueprintName = "environment_mapping"
+               BlueprintIdentifier = "D14740E7150CB45E00B20490"
+               BuildableName = "av_player.app"
+               BlueprintName = "glut_demo (Mac)"
                ReferencedContainer = "container:theoraplayer_workspace.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D17613811561B21500F645DE"
-            BuildableName = "environment_mapping.app"
-            BlueprintName = "environment_mapping"
+            BlueprintIdentifier = "D14740E7150CB45E00B20490"
+            BuildableName = "av_player.app"
+            BlueprintName = "glut_demo (Mac)"
             ReferencedContainer = "container:theoraplayer_workspace.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -42,7 +42,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D17613811561B21500F645DE"
-            BuildableName = "environment_mapping.app"
-            BlueprintName = "environment_mapping"
+            BlueprintIdentifier = "D14740E7150CB45E00B20490"
+            BuildableName = "av_player.app"
+            BlueprintName = "glut_demo (Mac)"
             ReferencedContainer = "container:theoraplayer_workspace.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D17613811561B21500F645DE"
-            BuildableName = "environment_mapping.app"
-            BlueprintName = "environment_mapping"
+            BlueprintIdentifier = "D14740E7150CB45E00B20490"
+            BuildableName = "av_player.app"
+            BlueprintName = "glut_demo (Mac)"
             ReferencedContainer = "container:theoraplayer_workspace.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
