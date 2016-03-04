@@ -37,9 +37,9 @@ void seek_draw()
 	float tw = nextPow2(w), th = nextPow2(h);
 
 	glEnable(GL_TEXTURE_2D);
-	if (shader_on) enable_shader();
+	if (shaderActive) enableShader();
 	drawTexturedQuad(tex_id_seek, 0, 0, 800, 600, w / tw, h / th);
-	if (shader_on) disable_shader();
+	if (shaderActive) disableShader();
 
 	glDisable(GL_TEXTURE_2D);
 	drawColoredQuad(0, 570, 800, 30, 0, 0, 0, 1);

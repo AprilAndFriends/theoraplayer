@@ -35,9 +35,9 @@ void av_draw()
 	float tw = nextPow2(w), th = nextPow2(h);
 
 	glEnable(GL_TEXTURE_2D);
-	if (shader_on) enable_shader();
+	if (shaderActive) enableShader();
 	drawTexturedQuad(tex_id_av, 0, 0, 800, 570, w / tw, h / th);
-	if (shader_on) disable_shader();
+	if (shaderActive) disableShader();
 
 	glDisable(GL_TEXTURE_2D);
 	drawColoredQuad(0, 570, 800, 30, 0, 0, 0, 1);
@@ -76,20 +76,21 @@ void av_OnClick(float x, float y)
 {
 	if (y > 570)
 	{
-		clip_av->seek((x / window_w)*clip_av->getDuration());
+		clip_av->seek((x / windowWidth)*clip_av->getDuration());
 		clip_av->waitForCache();
 	}
 }
 
 void av_setDebugTitle(char* out)
 {
-	float buffer_size = 0;
-	OpenAL_AudioInterface* audio_iface = (OpenAL_AudioInterface*)clip_av->getAudioInterface();
-	if (audio_iface) buffer_size = audio_iface->getQueuedAudioSize();
-	int nDropped = clip_av->getNumDroppedFrames();
-	sprintf(out, "%d precached, %d dropped, buffered audio: %.2f s",
-		clip_av->getNumReadyFrames(), nDropped,
-		buffer_size);
+	float bufferSize = 0;
+	OpenAL_AudioInterface* audioInterface = (OpenAL_AudioInterface*)clip_av->getAudioInterface();
+	if (audioInterface != NULL)
+	{
+		bufferSize = audioInterface->getQueuedAudioSize();
+	}
+	int dropped = clip_av->getDroppedFramesCount();
+	sprintf(out, "%d precached, %d dropped, buffered audio: %.2f s", clip_av->getNumReadyFrames(), dropped, bufferSize);
 }
 
 void av_init()

@@ -17,9 +17,7 @@
 #include "VideoClip.h"
 #include "WorkerThread.h"
 
-#ifdef __THEORA
-	#include <theora/codec.h>
-	#include <vorbis/codec.h>
+#ifdef _USE_THEORA
 	#include "Theora/VideoClip_Theora.h"
 #endif
 #ifdef __WEBM
@@ -84,7 +82,7 @@ namespace theoraplayer
 			workerThreadCount = 1;
 		}
 		std::string message = "Initializing Theora Playback Library (" + this->getVersionString() + ")\n";
-#ifdef __THEORA
+#ifdef _USE_THEORA
 		message += "  - libtheora version: " + std::string(th_version_string()) + "\n" +
 			"  - libvorbis version: " + std::string(vorbis_version_string()) + "\n";
 #endif
@@ -109,7 +107,7 @@ namespace theoraplayer
 		message += "  - using FFmpeg library.\n";
 #endif
 
-		log(message + "\n------------------------------------");
+		log(message + "------------------------------------");
 		// for CPU based yuv2rgb decoding
 		initYUVConversionModule();
 		this->_createWorkerThreads(workerThreadCount);

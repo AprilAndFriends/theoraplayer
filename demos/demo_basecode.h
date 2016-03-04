@@ -57,9 +57,9 @@ extern PFNGLACTIVETEXTUREARBPROC glActiveTextureARB;
 
 extern std::string resourceExtension;
 extern float FOVY;
-extern bool shader_on;
-extern int window_w;
-extern int window_h;
+extern bool shaderActive;
+extern int windowWidth;
+extern int windowHeight;
 extern std::string window_name;
 
 struct Demo
@@ -92,8 +92,8 @@ void drawWiredQuad(float x,float y,float w,float h,float r,float g,float b,float
 void drawTexturedQuad(unsigned int texID, float x,float y,float w,float h,float sw,float sh,float sx=0,float sy=0);
 void toggle_YUV2RGB_shader();
 void getMultiTextureExtensionFuncPointers();
-void enable_shader();
-void disable_shader();
+void enableShader();
+void disableShader();
 
 unsigned int createTexture(int w,int h,unsigned int format=GL_RGB);
 

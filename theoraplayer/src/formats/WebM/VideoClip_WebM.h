@@ -10,7 +10,6 @@
 /// 
 /// Implements an interface to be able to process the WebM codec.
 
-#ifdef __THEORA
 #ifndef THEORAPLAYER_VIDEO_CLIP_WEBM_H
 #define THEORAPLAYER_VIDEO_CLIP_WEBM_H
 
@@ -66,5 +65,4 @@ namespace theoraplayer
 	};
 
 }
-#endif
 #endif

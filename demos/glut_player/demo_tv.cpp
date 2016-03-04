@@ -1,14 +1,12 @@
+#include <theoraplayer/MemoryDataSource.h>
+#include <theoraplayer/theoraplayer.h>
+#include <theoraplayer/VideoFrame.h>
+
 #include "demo_tv.h"
-#include "theoraplayer/MemoryDataSource.h"
-#include "theoraplayer/theoraplayer.h"
-#include "theoraplayer/VideoFrame.h"
 
-using namespace theoraplayer;
-
-unsigned int tex_id_tv;
-Manager* mgr_tv;
-VideoClip* clip_tv;
-bool started_tv = 1;
+unsigned int tex_id_tv = 0;
+theoraplayer::VideoClip* clip_tv = NULL;
+bool started_tv = true;
 
 ObjModel chair1, chair2, tv, room, table;
 float anglex = 0, angley = 0;
@@ -21,11 +19,11 @@ void tv_draw()
 	glLoadIdentity();
 	gluLookAt(sin(anglex) * 400 - 200, angley, cos(anglex) * 400, -200, 150, 0, 0, 1, 0);
 
-	VideoFrame* f = clip_tv->getNextFrame();
-	if (f)
+	theoraplayer::VideoFrame* frame = clip_tv->getNextFrame();
+	if (frame != NULL)
 	{
-		unsigned char* data = f->getBuffer();
-		unsigned int n = clip_tv->getWidth()*f->getHeight();
+		unsigned char* data = frame->getBuffer();
+		unsigned int n = clip_tv->getWidth() * frame->getHeight();
 
 		r = g = b = 0;
 		for (unsigned int i = 0;i<n;i++)
@@ -35,17 +33,22 @@ void tv_draw()
 			b += data[i * 3 + 2];
 		}
 		r /= n; g /= n; b /= n;
-		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, clip_tv->getWidth(), f->getHeight(), GL_RGB, GL_UNSIGNED_BYTE, f->getBuffer());
+		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, clip_tv->getWidth(), frame->getHeight(), GL_RGB, GL_UNSIGNED_BYTE, frame->getBuffer());
 		clip_tv->popFrame();
 	}
 
 
-	float w = clip_tv->getWidth(), h = clip_tv->getHeight();
-	float tw = nextPow2(w), th = nextPow2(h);
+	float w = clip_tv->getWidth();
+	float h = clip_tv->getHeight();
+	float tw = nextPow2(w);
+	float th = nextPow2(h);
 
 	glEnable(GL_TEXTURE_2D);
-	if (shader_on) enable_shader();
-	glColor3f(1, 1, 1);
+	if (shaderActive)
+	{
+		enableShader();
+	}
+	glColor3f(1.0f, 1.0f, 1.0f);
 
 
 	glPushMatrix();
@@ -54,10 +57,11 @@ void tv_draw()
 	drawTexturedQuad(tex_id_tv, -2 * 30, 190, 4 * 30, -3 * 25, w / tw, h / th);
 	glPopMatrix();
 
-	if (shader_on) disable_shader();
-	glColor3f(0.2f + 0.8f*(r / 255.0f),
-		0.2f + 0.8f*(g / 255.0f),
-		0.2f + 0.8f*(b / 255.0f));
+	if (shaderActive)
+	{
+		disableShader();
+	}
+	glColor3f(0.2f + 0.8f * (r / 255.0f), 0.2f + 0.8f * (g / 255.0f), 0.2f + 0.8f * (b / 255.0f));
 
 	chair1.draw();
 	chair2.draw();
@@ -73,8 +77,8 @@ void tv_update(float time_increase)
 {
 	float x, y;
 	getCursorPos(&x, &y);
-	anglex = -4 * 3.14f*x / window_w;
-	angley = 1500 * (y - 300) / window_h;
+	anglex = -4 * 3.14f*x / windowWidth;
+	angley = 1500 * (y - 300) / windowHeight;
 
 	if (started_tv)
 	{
@@ -83,7 +87,7 @@ void tv_update(float time_increase)
 			return;
 		started_tv = 0;
 	}
-	mgr_tv->update(time_increase);
+	theoraplayer::manager->update(time_increase);
 }
 
 void tv_OnKeyPress(int key)
@@ -93,33 +97,29 @@ void tv_OnKeyPress(int key)
 		if (clip_tv->isPaused()) clip_tv->play(); else clip_tv->pause();
 	}
 
-	if (key == 5) clip_tv->setOutputMode(TH_RGB);
-	if (key == 6) clip_tv->setOutputMode(TH_YUV);
-	if (key == 7) clip_tv->setOutputMode(TH_GREY3);
+	if (key == 5) clip_tv->setOutputMode(theoraplayer::TH_RGB);
+	if (key == 6) clip_tv->setOutputMode(theoraplayer::TH_YUV);
+	if (key == 7) clip_tv->setOutputMode(theoraplayer::TH_GREY3);
 }
 
 void tv_OnClick(float x, float y)
 {
 	if (y > 570)
-		clip_tv->seek((x / window_w)*clip_tv->getDuration());
+		clip_tv->seek((x / windowWidth)*clip_tv->getDuration());
 }
 
 void tv_setDebugTitle(char* out)
 {
-	int nDropped = clip_tv->getNumDroppedFrames(), nDisplayed = clip_tv->getNumDisplayedFrames();
-	float percent = 100 * ((float)nDropped / nDisplayed);
-	sprintf(out, " (%dx%d) %d precached, %d displayed, %d dropped (%.1f %%)", clip_tv->getWidth(),
-		clip_tv->getHeight(),
-		clip_tv->getNumReadyFrames(),
-		nDisplayed,
-		nDropped,
-		percent);
+	int dropped = clip_tv->getDroppedFramesCount();
+	int displayed = clip_tv->getDisplayedFramesCount();
+	float percent = 100 * ((float)dropped / displayed);
+	sprintf(out, " (%dx%d) %d precached, %d displayed, %d dropped (%.1f %%)", clip_tv->getWidth(), clip_tv->getHeight(), clip_tv->getNumReadyFrames(), displayed, dropped, percent);
 }
 
 void tv_init()
 {
-	mgr_tv = new Manager(1);
-	clip_tv = mgr_tv->createVideoClip("media/bunny" + resourceExtension, TH_RGB);
+	theoraplayer::init(1);
+	clip_tv = theoraplayer::manager->createVideoClip("media/bunny" + resourceExtension, theoraplayer::TH_RGB);
 	//  use this if you want to preload the file into ram and stream from there
 	//	clip_tv=mgr_tv->createVideoClip(new TheoraMemoryFileDataSource("../media/short" + resourceExtension),TH_RGB);
 	clip_tv->setAutoRestart(1);
@@ -141,5 +141,5 @@ void tv_init()
 
 void tv_destroy()
 {
-	delete mgr_tv;
+	theoraplayer::destroy();
 }

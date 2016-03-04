@@ -38,9 +38,9 @@ void drawVideo(int x, int y, unsigned int tex_id, VideoClip* clip)
 	float tw = nextPow2(w), th = nextPow2(h);
 
 	glEnable(GL_TEXTURE_2D);
-	if (shader_on) enable_shader();
+	if (shaderActive) enableShader();
 	drawTexturedQuad(tex_id, x, y, 395, 285, w / tw, h / th);
-	if (shader_on) disable_shader();
+	if (shaderActive) disableShader();
 
 	glDisable(GL_TEXTURE_2D);
 	drawColoredQuad(x, y + 285, 395, 15, 0, 0, 0, 1);

@@ -18,7 +18,7 @@
 		#define theoraplayerFnExport
 	#else
 		#ifdef _WIN32
-			#ifdef APRILUI_EXPORTS
+			#ifdef THEORAPLAYER_EXPORTS
 				#define theoraplayerExport __declspec(dllexport)
 				#define theoraplayerFnExport __declspec(dllexport)
 			#else

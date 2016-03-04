@@ -10,7 +10,7 @@
 /// 
 /// Implements an interface to be able to process the Theora codec.
 
-#ifdef __THEORA
+#ifdef _USE_THEORA
 #ifndef THEORAPLAYER_VIDEO_CLIP_THEORA_H
 #define THEORAPLAYER_VIDEO_CLIP_THEORA_H
 

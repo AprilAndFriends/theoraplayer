@@ -92,8 +92,8 @@ void light_update(float time_increase)
 {
 	float x, y;
 	getCursorPos(&x, &y);
-	angle_x = -4 * 3.14f*x / window_w;
-	angle_y = 1500 * (y - 300) / window_h;
+	angle_x = -4 * 3.14f*x / windowWidth;
+	angle_y = 1500 * (y - 300) / windowHeight;
 
 	mgr_light->update(time_increase);
 }

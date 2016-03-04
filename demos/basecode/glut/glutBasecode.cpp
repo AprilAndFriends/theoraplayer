@@ -3,7 +3,7 @@
 #include "glut_player/demo_glut_player.h"
 
 std::string window_name = "Glut Demo Player";
-int window_w = 800, window_h = 600;
+int windowWidth = 800, windowHeight = 600;
 float mx = 0, my = 0;
 
 Demo* currentDemo = &demoMenu;
@@ -132,11 +132,11 @@ void reshape(int w,int h)
 	glLoadIdentity();
     glViewport(0, 0, w, h);
 #ifdef __3D_PROJECTION
-    gluPerspective(FOVY,(float) window_w/window_h,10,10000);
+    gluPerspective(FOVY,(float) windowWidth/windowHeight,10,10000);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 #else
-	gluOrtho2D(0, window_w, window_h,0);
+	gluOrtho2D(0, windowWidth, windowHeight,0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 #endif
@@ -170,16 +170,16 @@ void mouse(int button,int state, int x, int y)
 {
 	if (state == GLUT_UP && button == GLUT_LEFT_BUTTON)
 	{
-		mx=((float) x/glutGet(GLUT_WINDOW_WIDTH))*window_w;
-		my=((float) y/glutGet(GLUT_WINDOW_HEIGHT))*window_h;
+		mx=((float) x/glutGet(GLUT_WINDOW_WIDTH))*windowWidth;
+		my=((float) y/glutGet(GLUT_WINDOW_HEIGHT))*windowHeight;
 		OnClick(mx, my);
 	}
 }
 
 void motion(int x,int y)
 {
-	mx=((float) x/glutGet(GLUT_WINDOW_WIDTH))*window_w;
-	my=((float) y/glutGet(GLUT_WINDOW_HEIGHT))*window_h;
+	mx=((float) x/glutGet(GLUT_WINDOW_WIDTH))*windowWidth;
+	my=((float) y/glutGet(GLUT_WINDOW_HEIGHT))*windowHeight;
 }
 
 void toggle_YUV2RGB_shader()
@@ -223,7 +223,7 @@ void toggle_YUV2RGB_shader()
 		glLinkProgram(program);
 		
 	}
-	shader_on=!shader_on;
+	shaderActive=!shaderActive;
 	
 #endif
 }
@@ -237,13 +237,13 @@ void getMultiTextureExtensionFuncPointers()
 #endif
 }
 
-void enable_shader()
+void enableShader()
 {
 #ifdef USE_SHADERS
 	glUseProgram(program);
 #endif
 }
-void disable_shader()
+void disableShader()
 {
 #ifdef USE_SHADERS
 	glUseProgram(0);
@@ -308,8 +308,8 @@ int main(int argc, char** argv)
 #else
 	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA);
 #endif
-	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)- window_w)/2,(glutGet(GLUT_SCREEN_HEIGHT)- window_h)/2);
-	glutInitWindowSize(window_w, window_h);
+	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)- windowWidth)/2,(glutGet(GLUT_SCREEN_HEIGHT)- windowHeight)/2);
+	glutInitWindowSize(windowWidth, windowHeight);
 	glutCreateWindow(window_name.c_str());
 	glShadeModel(GL_SMOOTH);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);

@@ -5,7 +5,7 @@
 #include <unistd.h>
 #endif
 
-bool shader_on = 0;
+bool shaderActive = false;
 float FOVY = 45;
 std::string resourceExtension = ".ogv";
 //#ifdef MP4_VIDEO
