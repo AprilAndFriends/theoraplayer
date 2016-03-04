@@ -20,8 +20,6 @@
 #include "theoraplayerExport.h"
 #include "VideoClip.h"
 
-
-
 namespace theoraplayer
 {
 	// forward class declarations
@@ -93,7 +91,7 @@ namespace theoraplayer
 
 	};
 
-	extern Manager* manager;
+	theoraplayerExport extern Manager* manager;
 
 }
 #endif

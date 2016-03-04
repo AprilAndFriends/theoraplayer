@@ -18,7 +18,7 @@
 
 namespace theoraplayer
 {	
-	FileDataSource::FileDataSource(std::string filename)
+	FileDataSource::FileDataSource(const std::string& filename)
 	{
 		this->filename = filename;
 		this->filePtr = NULL;
@@ -69,7 +69,7 @@ namespace theoraplayer
 	{
 		if (this->filePtr == NULL) 
 		{
-			openFile();
+			this->openFile();
 		}
 #ifdef _LINUX //fpos_t is not a scalar in Linux, for more info refer here: https://code.google.com/p/libtheoraplayer/issues/detail?id=6
 		fpos_t fpos = { 0 };
@@ -84,7 +84,7 @@ namespace theoraplayer
 	{
 		if (this->filePtr == NULL)
 		{
-			openFile();
+			this->openFile();
 		}
 		return this->length;
 	}

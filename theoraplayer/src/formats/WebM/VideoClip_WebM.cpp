@@ -6,6 +6,7 @@
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
+#if 0
 #include <algorithm>
 #include <memory.h>
 #include <string>
@@ -13,9 +14,6 @@
 #include "Manager.h"
 #include "AudioInterface.h"
 #include "PixelTransform.h"
-
-//#include <stdio.h>
-//#include <stdlib.h>
 
 #include "DataSource.h"
 #include "Exception.h"
@@ -221,3 +219,4 @@ namespace theoraplayer
 	}
 
 }
+#endif

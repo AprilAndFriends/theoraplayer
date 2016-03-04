@@ -8,15 +8,13 @@
 /// 
 /// @section DESCRIPTION
 /// 
-/// Provides an interface for a video data source.
+/// Provides an interface for a video data source from memory.
 
 #ifndef THEORAPLAYER_MEMORY_DATA_SOURCE_H
 #define THEORAPLAYER_MEMORY_DATA_SOURCE_H
 
 #include "DataSource.h"
 #include "theoraplayerExport.h"
-
-// TODOth - split these into separate files
 
 namespace theoraplayer
 {
@@ -29,22 +27,22 @@ namespace theoraplayer
 	{
 	public:
 		MemoryDataSource(unsigned char* data, long size, const std::string& filename = "memory");
-		MemoryDataSource(std::string filename);
+		MemoryDataSource(const std::string& filename);
 		~MemoryDataSource();
 
-		uint64_t getSize();
-		uint64_t getPosition();
-		std::string getFilename() { return this->filename; }
+		inline std::string getFilename() { return this->filename; }
+		inline uint64_t getSize() { return this->size; }
+		inline uint64_t getPosition() { return this->position; }
 
-		int read(void* output, int bytes);
-		void seek(uint64_t byte_index);
+		int read(void* output, int count);
+		void seek(uint64_t byteIndex);
 
 		inline std::string toString() { return "MEM:" + this->filename; }
 
 	private:
 		std::string filename;
-		uint64_t length;
-		uint64_t readPointer;
+		uint64_t size;
+		uint64_t position;
 		unsigned char* data;
 
 	};

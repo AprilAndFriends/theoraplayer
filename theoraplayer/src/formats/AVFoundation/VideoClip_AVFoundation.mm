@@ -74,7 +74,7 @@ VideoClip_AVFoundation::VideoClip_AVFoundation(DataSource* data_source,
 	this->loaded = 0;
 	this->reader = NULL;
 	this->output = this->audioOutput = NULL;
-	this->readAudioSamples = this->audioFrequency = this->numAudioChannels = 0;
+	this->readAudioSamples = this->audioFrequency = this->audioChannelsCount = 0;
 }
 
 VideoClip_AVFoundation::~VideoClip_AVFoundation()
@@ -339,16 +339,16 @@ void VideoClip_AVFoundation::load(DataSource* source)
 			CMAudioFormatDescriptionRef desc = (CMAudioFormatDescriptionRef) [desclst objectAtIndex:0];
 			const AudioStreamBasicDescription* audioDesc = CMAudioFormatDescriptionGetStreamBasicDescription(desc);
 			this->audioFrequency = (unsigned int) audioDesc->mSampleRate;
-			this->numAudioChannels = audioDesc->mChannelsPerFrame;
+			this->audioChannelsCount = audioDesc->mChannelsPerFrame;
 			
 			if (this->seekFrame != -1)
 			{
-				this->readAudioSamples = this->frameNumber * (this->audioFrequency * this->numAudioChannels) / this->fps;
+				this->readAudioSamples = this->frameNumber * (this->audioFrequency * this->audioChannelsCount) / this->fps;
 			}
 			else this->readAudioSamples = 0;
 
 			if (this->audioInterface == NULL)
-				setAudioInterface(audio_factory->createInstance(this, this->numAudioChannels, this->audioFrequency));
+				setAudioInterface(audio_factory->createInstance(this, this->audioChannelsCount, this->audioFrequency));
 		}
 	}
 	
@@ -387,7 +387,7 @@ float VideoClip_AVFoundation::decodeAudio()
 		bool mutexLocked = 0;
 		Mutex::ScopeLock audioMutexLock;
 
-		float factor = 1.0f / (this->audioFrequency * this->numAudioChannels);
+		float factor = 1.0f / (this->audioFrequency * this->audioChannelsCount);
 		float videoTime = (float) this->frameNumber / this->fps;
 		float min = this->frameQueue->getSize() / this->fps + 1.0f;
 		
@@ -415,7 +415,7 @@ float VideoClip_AVFoundation::decodeAudio()
 							audioMutexLock.acquire(this->audioMutex);
 							mutexLocked = 1;
 						}
-						addAudioPacket(frame, audioBuffer.dataByteSize / (this->numAudioChannels * sizeof(float)), mAudioGain);
+						addAudioPacket(frame, audioBuffer.dataByteSize / (this->audioChannelsCount * sizeof(float)), mAudioGain);
 						
 						this->readAudioSamples += audioBuffer.dataByteSize / (sizeof(float));
 					}

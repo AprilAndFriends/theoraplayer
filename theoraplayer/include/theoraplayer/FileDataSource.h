@@ -8,7 +8,7 @@
 /// 
 /// @section DESCRIPTION
 /// 
-/// Provides an interface for a video data source.
+/// Provides an interface for a video data source from a file.
 
 #ifndef THEORAPLAYER_FILE_DATA_SOURCE_H
 #define THEORAPLAYER_FILE_DATA_SOURCE_H
@@ -24,7 +24,7 @@ namespace theoraplayer
 	class theoraplayerExport FileDataSource : public DataSource
 	{
 	public:
-		FileDataSource(std::string filename);
+		FileDataSource(const std::string& filename);
 		~FileDataSource();
 
 		uint64_t getSize();

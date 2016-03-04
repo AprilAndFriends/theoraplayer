@@ -8,7 +8,7 @@
 *  be found in the AUTHORS file in the root of the source tree.
 */
 
-//#include "./webmdec.h"
+#if 0
 #include "webmdec.h"
 
 #include <cstring>
@@ -21,53 +21,53 @@
 
 #include "MkvReader.h"
 
-namespace {
-void reset(struct WebmInputContext *const webm_ctx) {
-	if (webm_ctx->reader != NULL) {
-		MkvReader *const reader =
-			reinterpret_cast<MkvReader*>(webm_ctx->reader);
-		delete reader;
+namespace
+{
+	void reset(struct WebmInputContext *const webm_ctx)
+	{
+		if (webm_ctx->reader != NULL)
+		{
+			MkvReader* const reader = reinterpret_cast<MkvReader*>(webm_ctx->reader);
+			delete reader;
+		}
+		if (webm_ctx->segment != NULL)
+		{
+			mkvparser::Segment* const segment = reinterpret_cast<mkvparser::Segment*>(webm_ctx->segment);
+			delete segment;
+		}
+		if (webm_ctx->buffer != NULL)
+		{
+			delete[] webm_ctx->buffer;
+		}
+		webm_ctx->reader = NULL;
+		webm_ctx->segment = NULL;
+		webm_ctx->buffer = NULL;
+		webm_ctx->cluster = NULL;
+		webm_ctx->block_entry = NULL;
+		webm_ctx->block = NULL;
+		webm_ctx->block_frame_index = 0;
+		webm_ctx->video_track_index = 0;
+		webm_ctx->timestamp_ns = 0;
+		webm_ctx->is_key_frame = false;
+		webm_ctx->duration = 0;
 	}
-	if (webm_ctx->segment != NULL) {
-		mkvparser::Segment *const segment =
-			reinterpret_cast<mkvparser::Segment*>(webm_ctx->segment);
-		delete segment;
+
+	void get_first_cluster(struct WebmInputContext* const webm_ctx)
+	{
+		mkvparser::Segment* const segment = reinterpret_cast<mkvparser::Segment*>(webm_ctx->segment);
+		const mkvparser::Cluster* const cluster = segment->GetFirst();
+		webm_ctx->cluster = cluster;
 	}
-	if (webm_ctx->buffer != NULL) {
-		delete[] webm_ctx->buffer;
+
+	void rewind_and_reset(struct WebmInputContext *const webm_ctx, struct VpxInputContext *const vpx_ctx)
+	{
+		MkvReader* const reader = reinterpret_cast<MkvReader*>(webm_ctx->reader);
+		//reset(webm_ctx);
 	}
-	webm_ctx->reader = NULL;
-	webm_ctx->segment = NULL;
-	webm_ctx->buffer = NULL;
-	webm_ctx->cluster = NULL;
-	webm_ctx->block_entry = NULL;
-	webm_ctx->block = NULL;
-	webm_ctx->block_frame_index = 0;
-	webm_ctx->video_track_index = 0;
-	webm_ctx->timestamp_ns = 0;
-	webm_ctx->is_key_frame = false;
-	webm_ctx->duration = 0;
+
 }
 
-void get_first_cluster(struct WebmInputContext *const webm_ctx) {
-	mkvparser::Segment *const segment =
-		reinterpret_cast<mkvparser::Segment*>(webm_ctx->segment);
-	const mkvparser::Cluster *const cluster = segment->GetFirst();
-	webm_ctx->cluster = cluster;
-}
-
-void rewind_and_reset(struct WebmInputContext *const webm_ctx,
-struct VpxInputContext *const vpx_ctx) {
-	MkvReader *const reader =
-		reinterpret_cast<MkvReader*>(webm_ctx->reader);
-
-	//reset(webm_ctx);
-}
-}
-
-
-int TheoraWebmDec::file_is_webm(DataSource *const dataSource, struct WebmInputContext *webm_ctx,
-struct VpxInputContext *vpx_ctx)
+int TheoraWebmDec::file_is_webm(DataSource *const dataSource, struct WebmInputContext *webm_ctx, struct VpxInputContext *vpx_ctx)
 {
 	MkvReader *const reader = new MkvReader(dataSource);
 	webm_ctx->reader = reader;
@@ -131,13 +131,12 @@ struct VpxInputContext *vpx_ctx)
 	return 1;
 }
 
-int TheoraWebmDec::webm_read_frame(struct WebmInputContext *webm_ctx,
-	uint8_t **buffer,
-	size_t *bytes_in_buffer,
-	size_t *buffer_size) {
+int TheoraWebmDec::webm_read_frame(struct WebmInputContext *webm_ctx, uint8_t **buffer, size_t *bytes_in_buffer, size_t *buffer_size)
+{
 	// This check is needed for frame parallel decoding, in which case this
 	// function could be called even after it has reached end of input stream.
-	if (webm_ctx->reached_eos) {
+	if (webm_ctx->reached_eos)
+	{
 		return 1;
 	}
 	mkvparser::Segment *const segment =
@@ -212,8 +211,8 @@ int TheoraWebmDec::webm_read_frame(struct WebmInputContext *webm_ctx,
 	return frame.Read(reader, *buffer) ? -1 : 0;
 }
 
-int TheoraWebmDec::webm_guess_framerate(DataSource *const dataSource, struct WebmInputContext *webm_ctx,
-struct VpxInputContext *vpx_ctx) {
+int TheoraWebmDec::webm_guess_framerate(DataSource *const dataSource, struct WebmInputContext *webm_ctx, struct VpxInputContext *vpx_ctx)
+{
 	uint32_t i = 0;
 	uint8_t *buffer = NULL;
 	size_t bytes_in_buffer = 0;
@@ -254,7 +253,8 @@ int TheoraWebmDec::webm_guess_duration(struct WebmInputContext* webm_ctx)
 	return i;
 }
 
-void TheoraWebmDec::webm_rewind(struct WebmInputContext *webm_ctx) {
+void TheoraWebmDec::webm_rewind(struct WebmInputContext* webm_ctx)
+{
 	get_first_cluster(webm_ctx);
 	webm_ctx->block = NULL;
 	webm_ctx->block_entry = NULL;
@@ -263,7 +263,8 @@ void TheoraWebmDec::webm_rewind(struct WebmInputContext *webm_ctx) {
 	webm_ctx->reached_eos = 0;
 }
 
-void TheoraWebmDec::webm_free(struct WebmInputContext *webm_ctx) {
+void TheoraWebmDec::webm_free(struct WebmInputContext* webm_ctx)
+{
 	reset(webm_ctx);
 }
-
+#endif

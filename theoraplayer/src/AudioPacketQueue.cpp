@@ -29,7 +29,7 @@ namespace theoraplayer
 		for (AudioPacket* p = this->theoraAudioPacketQueue; p != NULL; p = p->next)
 			len += p->numSamples;
 
-		return len / (this->audioFrequency * this->numAudioChannels);
+		return len / (this->audioFrequency * this->audioChannelsCount);
 	}
 
 	void AudioPacketQueue::_addAudioPacket(float* data, int numSamples)
@@ -51,7 +51,7 @@ namespace theoraplayer
 
 	void AudioPacketQueue::addAudioPacket(float** buffer, int numSamples, float gain)
 	{
-		float* data = new float[numSamples * this->numAudioChannels];
+		float* data = new float[numSamples * this->audioChannelsCount];
 		float* dataptr = data;
 		int i;
 		unsigned int j;
@@ -61,7 +61,7 @@ namespace theoraplayer
 			// apply gain, let's attenuate the samples
 			for (i = 0; i < numSamples; ++i)
 			{
-				for (j = 0; j < this->numAudioChannels; j++, ++dataptr)
+				for (j = 0; j < this->audioChannelsCount; j++, ++dataptr)
 				{
 					*dataptr = buffer[j][i] * gain;
 				}
@@ -72,21 +72,21 @@ namespace theoraplayer
 			// do a simple copy, faster then the above method, when gain is 1.0f
 			for (i = 0; i < numSamples; ++i)
 			{
-				for (j = 0; j < this->numAudioChannels; j++, ++dataptr)
+				for (j = 0; j < this->audioChannelsCount; j++, ++dataptr)
 				{
 					*dataptr = buffer[j][i];
 				}
 			}
 		}
 
-		_addAudioPacket(data, numSamples * this->numAudioChannels);
+		_addAudioPacket(data, numSamples * this->audioChannelsCount);
 	}
 
 	void AudioPacketQueue::addAudioPacket(float* buffer, int numSamples, float gain)
 	{
-		float* data = new float[numSamples * this->numAudioChannels];
+		float* data = new float[numSamples * this->audioChannelsCount];
 		float* dataptr = data;
-		int i, numFloats = numSamples * this->numAudioChannels;
+		int i, numFloats = numSamples * this->audioChannelsCount;
 
 		if (gain < 1.0f)
 		{

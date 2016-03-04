@@ -70,11 +70,11 @@ namespace theoraplayer
 		float time = this->timer->getTime();
 		if (this->restarted)
 		{
-			time = 0;
+			time = 0.0f;
 		}
 		char* buffer = NULL;
 		int bytesRead = 0;
-		ogg_int64_t g = 0;
+		ogg_int64_t granule = 0;
 		do
 		{
 			buffer = ogg_sync_buffer(&this->info.OggSyncState, BUFFER_SIZE);
@@ -90,7 +90,7 @@ namespace theoraplayer
 				return false;
 			}
 			// when we fill the stream with enough pages, it'll start spitting out packets
-			// which contain keyframes, delta frames or audio data
+			// which contain key frames, delta frames or audio data
 			while (ogg_sync_pageout(&this->info.OggSyncState, &this->info.OggPage) > 0)
 			{
 				serno = ogg_page_serialno(&this->info.OggPage);
@@ -98,15 +98,15 @@ namespace theoraplayer
 				{
 					ogg_stream_pagein(&this->info.TheoraStreamState, &this->info.OggPage);
 				}
-				if (this->audioInterface && serno == this->info.VorbisStreamState.serialno)
+				if (this->audioInterface != NULL && serno == this->info.VorbisStreamState.serialno)
 				{
-					g = ogg_page_granulepos(&this->info.OggPage);
-					audioTime = (float)vorbis_granule_time(&this->info.VorbisDSPState, g);
+					granule = ogg_page_granulepos(&this->info.OggPage);
+					audioTime = (float)vorbis_granule_time(&this->info.VorbisDSPState, granule);
 					audioEos = ogg_page_eos(&this->info.OggPage);
 					ogg_stream_pagein(&this->info.VorbisStreamState, &this->info.OggPage);
 				}
 			}
-		} while (!(this->audioInterface != NULL && audioEos != 0 && audioTime < time + 1.0f));
+		} while (this->audioInterface != NULL && audioEos == 0 && audioTime < time + 1.0f);
 		return true;
 	}
 
@@ -127,6 +127,9 @@ namespace theoraplayer
 		th_ycbcr_buffer buff;
 		int result = 0;
 		int attempts = 0;
+		int status = 0;
+		float time = 0.0f;
+		unsigned long frameNumber = 0;
 		while (true)
 		{
 			// ogg_stream_packetout can return -1 and the official docs suggest to do subsequent calls until it succeeds
@@ -137,13 +140,13 @@ namespace theoraplayer
 			}
 			if (result > 0)
 			{
-				int status = th_decode_packetin(this->info.TheoraDecoder, &opTheora, &granulePos);
-				if (status != 0 && status != TH_DUPFRAME)
+				status = th_decode_packetin(this->info.TheoraDecoder, &opTheora, &granulePos);
+				if (status != 0 && status != TH_DUPFRAME) // 0 means success
 				{
-					continue; // 0 means success
+					continue;
 				}
-				float time = (float)th_granule_time(this->info.TheoraDecoder, granulePos);
-				unsigned long frameNumber = (unsigned long)th_granule_frame(this->info.TheoraDecoder, granulePos);
+				time = (float)th_granule_time(this->info.TheoraDecoder, granulePos);
+				frameNumber = (unsigned long)th_granule_frame(this->info.TheoraDecoder, granulePos);
 				// %16 operation is here to prevent a playback halt during video playback if the decoder can't keep up with demand.
 				if (time < this->timer->getTime() && !this->restarted && frameNumber % 16 != 0)
 				{
@@ -242,7 +245,7 @@ namespace theoraplayer
 		this->subFrameOffsetX = this->info.TheoraInfo.pic_x;
 		this->subFrameOffsetY = this->info.TheoraInfo.pic_y;
 		this->stride = (this->stride == 1) ? potCeil(this->getWidth()) : this->getWidth();
-		this->fps = this->info.TheoraInfo.fps_numerator / (float) this->info.TheoraInfo.fps_denominator;
+		this->fps = this->info.TheoraInfo.fps_numerator / (float)this->info.TheoraInfo.fps_denominator;
 #ifdef _DEBUG
 		log("width: " + str(this->width) + ", height: " + str(this->height) + ", fps: " + str((int)this->getFps()));
 #endif
@@ -307,18 +310,17 @@ namespace theoraplayer
 		// restore to beginning of stream.
 		ogg_sync_reset(&this->info.OggSyncState);
 		this->stream->seek(0);
-		if (this->vorbisStreams > 0) // if there is no audio interface factory defined, even though the video
+		if (this->vorbisStreams > 0) // if there is no audio interface factory defined, even though the video clip might have audio, it will be ignored
 		{
-			// clip might have audio, it will be ignored
 			vorbis_synthesis_init(&this->info.VorbisDSPState, &this->info.VorbisInfo);
 			vorbis_block_init(&this->info.VorbisDSPState, &this->info.VorbisBlock);
-			this->numAudioChannels = this->info.VorbisInfo.channels;
+			this->audioChannelsCount = this->info.VorbisInfo.channels;
 			this->audioFrequency = (int) this->info.VorbisInfo.rate;
 			// create an audio interface instance if available
 			AudioInterfaceFactory* audioInterfaceFactory = theoraplayer::manager->getAudioInterfaceFactory();
 			if (audioInterfaceFactory != NULL)
 			{
-				this->setAudioInterface(audioInterfaceFactory->createInstance(this, this->numAudioChannels, this->audioFrequency));
+				this->setAudioInterface(audioInterfaceFactory->createInstance(this, this->audioChannelsCount, this->audioFrequency));
 			}
 		}
 		this->frameDuration = 1.0f / this->getFps();
@@ -367,14 +369,14 @@ namespace theoraplayer
 			{
 				memset(&oggStateTest, 0, sizeof(oggStateTest));
 				//is this an initial header? If not, stop
-				if (!ogg_page_bos(&this->info.OggPage))
+				if (ogg_page_bos(&this->info.OggPage) == 0)
 				{
 					//This is done blindly, because stream only accept themselves
-					if (this->theoraStreams)
+					if (this->theoraStreams > 0)
 					{
 						ogg_stream_pagein(&this->info.TheoraStreamState, &this->info.OggPage);
 					}
-					if (this->vorbisStreams)
+					if (this->vorbisStreams > 0)
 					{
 						ogg_stream_pagein(&this->info.VorbisStreamState, &this->info.OggPage);
 					}
@@ -384,62 +386,62 @@ namespace theoraplayer
 				ogg_stream_init(&oggStateTest, ogg_page_serialno(&this->info.OggPage));
 				ogg_stream_pagein(&oggStateTest, &this->info.OggPage);
 				ogg_stream_packetout(&oggStateTest, &tempOggPacket);
-				//identify the codec
+				// identify the codec
 				if (this->theoraStreams == 0 && th_decode_headerin(&this->info.TheoraInfo, &this->info.TheoraComment, &this->info.TheoraSetup, &tempOggPacket) > 0)
 				{
-					//This is the Theora Header
+					// This is the Theora Header
 					memcpy(&this->info.TheoraStreamState, &oggStateTest, sizeof(oggStateTest));
 					this->theoraStreams = 1;
 				}
-				else if (decodeAudio && !this->vorbisStreams && vorbis_synthesis_headerin(&this->info.VorbisInfo, &this->info.VorbisComment, &tempOggPacket) >= 0)
+				else if (decodeAudio && this->vorbisStreams == 0 && vorbis_synthesis_headerin(&this->info.VorbisInfo, &this->info.VorbisComment, &tempOggPacket) >= 0)
 				{
-					//This is vorbis header
+					// This is vorbis header
 					memcpy(&this->info.VorbisStreamState, &oggStateTest, sizeof(oggStateTest));
 					this->vorbisStreams = 1;
 				}
-				else //Hmm. I guess it's not a header we support, so erase it
+				else // Hm, guess it's not a header we support, so erase it
 				{
 					ogg_stream_clear(&oggStateTest);
 				}
 			}
 		}
 		int result = 0;
-		while ((this->theoraStreams && (this->theoraStreams < 3)) || (this->vorbisStreams && (this->vorbisStreams < 3)))
+		while ((this->theoraStreams > 0 && this->theoraStreams < 3) || (this->vorbisStreams && this->vorbisStreams < 3))
 		{
-			//Check 2nd'dary headers... Theora First
-			while (this->theoraStreams && this->theoraStreams < 3 && (result = ogg_stream_packetout(&this->info.TheoraStreamState, &tempOggPacket)))
+			// Check 2nd'dary headers... Theora First
+			while (this->theoraStreams > 0 && this->theoraStreams < 3 && (result = ogg_stream_packetout(&this->info.TheoraStreamState, &tempOggPacket)))
 			{
-				if (result  < 0)
+				if (result < 0)
 				{
 					throw TheoraplayerException("Error parsing Theora stream headers!");
 				}
-				if (!th_decode_headerin(&this->info.TheoraInfo, &this->info.TheoraComment, &this->info.TheoraSetup, &tempOggPacket))
+				if (th_decode_headerin(&this->info.TheoraInfo, &this->info.TheoraComment, &this->info.TheoraSetup, &tempOggPacket) == 0)
 				{
 					throw TheoraplayerException("Invalid theora stream!");
 				}
 				++this->theoraStreams;
-			} //end while looking for more theora headers
-			//look 2nd vorbis header packets
+			} // end while looking for more theora headers
+			// look 2nd vorbis header packets
 			while (this->vorbisStreams < 3 && (result = ogg_stream_packetout(&this->info.VorbisStreamState, &tempOggPacket)))
 			{
-				if (result  < 0)
+				if (result < 0)
 				{
 					throw TheoraplayerException("Error parsing vorbis stream headers!");
 				}
-				if (vorbis_synthesis_headerin(&this->info.VorbisInfo, &this->info.VorbisComment, &tempOggPacket))
+				if (vorbis_synthesis_headerin(&this->info.VorbisInfo, &this->info.VorbisComment, &tempOggPacket) != 0)
 				{
 					throw TheoraplayerException("Invalid stream!");
 				}
 				++this->vorbisStreams;
-			} //end while looking for more vorbis headers
-			//Not finished with Headers, get some more file data
+			} // end while looking for more vorbis headers
+			// Not finished with Headers, get some more file data
 			if (ogg_sync_pageout(&this->info.OggSyncState, &this->info.OggPage) > 0)
 			{
-				if (this->theoraStreams)
+				if (this->theoraStreams > 0)
 				{
 					ogg_stream_pagein(&this->info.TheoraStreamState, &this->info.OggPage);
 				}
-				if (this->vorbisStreams)
+				if (this->vorbisStreams > 0)
 				{
 					ogg_stream_pagein(&this->info.VorbisStreamState, &this->info.OggPage);
 				}
@@ -454,8 +456,8 @@ namespace theoraplayer
 					throw TheoraplayerException("End of file found prematurely!");
 				}
 			}
-		} //end while looking for all headers
-		//	log("Vorbis Headers: " + str(mVorbisHeaders) + " Theora Headers : " + str(mTheoraHeaders));
+		} // end while looking for all headers
+		//log("Vorbis Headers: " + str(mVorbisHeaders) + " Theora Headers : " + str(mTheoraHeaders));
 	}
 
 	void VideoClip_Theora::decodedAudioCheck()
@@ -512,7 +514,7 @@ namespace theoraplayer
 			}
 			if (length > 0)
 			{
-				addAudioPacket(pcm, length, this->audioGain);
+				this->addAudioPacket(pcm, length, this->audioGain);
 				this->readAudioSamples += length;
 				if (readPastTimestamp)
 				{
@@ -524,18 +526,17 @@ namespace theoraplayer
 		return timestamp;
 	}
 
-	long VideoClip_Theora::seekPage(long targetFrame, bool returnKeyframe)
+	long VideoClip_Theora::seekPage(long targetFrame, bool returnKeyFrame)
 	{
-		int i;
+		int i = 0;
 		uint64_t seekMin = 0;
 		uint64_t seekMax = this->stream->getSize();
-		long frame;
+		long frame = 0;
 		ogg_int64_t granule = 0;
 		if (targetFrame == 0)
 		{
 			this->stream->seek(0);
 		}
-		int serno = 0;
 		char* buffer = NULL;
 		int bytesRead = 0;
 		for (i = (targetFrame == 0) ? 100 : 0; i < 100; ++i)
@@ -548,8 +549,7 @@ namespace theoraplayer
 			{
 				if (ogg_sync_pageout(&this->info.OggSyncState, &this->info.OggPage) == 1)
 				{
-					serno = ogg_page_serialno(&this->info.OggPage);
-					if (serno == this->info.TheoraStreamState.serialno)
+					if (ogg_page_serialno(&this->info.OggPage) == this->info.TheoraStreamState.serialno)
 					{
 						granule = ogg_page_granulepos(&this->info.OggPage);
 						if (granule >= 0)
@@ -586,7 +586,7 @@ namespace theoraplayer
 				}
 			}
 		}
-		if (returnKeyframe)
+		if (returnKeyFrame)
 		{
 			return (long)(granule >> this->info.TheoraInfo.keyframe_granule_shift);
 		}
@@ -630,12 +630,12 @@ namespace theoraplayer
 			this->destroyAllAudioPackets();
 		}
 		// first seek to desired frame, then figure out the location of the
-		// previous keyframe and seek to it.
+		// previous key frame and seek to it.
 		// then by setting the correct time, the decoder will skip N frames untill
 		// we get the frame we want.
-		frame = (int)seekPage(this->seekFrame, 1); // find the keyframe nearest to the target frame
+		frame = (int)this->seekPage(this->seekFrame, 1); // find the key frame nearest to the target frame
 #ifdef _DEBUG
-	//		log(mName + " [seek]: nearest keyframe for frame " + str(mSeekFrame) + " is frame: " + str(frame));
+	//		log(mName + " [seek]: nearest key frame for frame " + str(mSeekFrame) + " is frame: " + str(frame));
 #endif
 		this->seekPage(std::max(0, frame - 1), 0);
 
@@ -655,10 +655,8 @@ namespace theoraplayer
 			th_decode_ctl(this->info.TheoraDecoder, TH_DECCTL_SET_GRANPOS, &granulePos, sizeof(granulePos));
 			granuleSet = true;
 		}
-
-		// now that we've found the keyframe that preceeds our desired frame, lets keep on decoding frames until we
+		// now that we've found the key frame that preceeds our desired frame, lets keep on decoding frames until we
 		// reach our target frame.
-
 		int status = 0;
 		while (this->seekFrame != 0)
 		{
@@ -669,10 +667,10 @@ namespace theoraplayer
 					// theora decoder requires to set the granule pos after seek to be able to determine the current frame
 					if (opTheora.granulepos < 0)
 					{
-						continue; // ignore prev delta frames until we hit a keyframe
+						continue; // ignore prev delta frames until we hit a key frame
 					}
 					th_decode_ctl(this->info.TheoraDecoder, TH_DECCTL_SET_GRANPOS, &opTheora.granulepos, sizeof(opTheora.granulepos));
-					granuleSet = 1;
+					granuleSet = true;
 				}
 				status = th_decode_packetin(this->info.TheoraDecoder, &opTheora, &granulePos);
 				if (status != 0 && status != TH_DUPFRAME)
@@ -685,10 +683,9 @@ namespace theoraplayer
 					break;
 				}
 			}
-			else if (!_readData())
+			else if (!this->_readData())
 			{
 				log(this->name + " [seek]: fineseeking failed, _readData failed!");
-				audioMutexLock.release();
 				return;
 			}
 		}
@@ -709,7 +706,7 @@ namespace theoraplayer
 				}
 				this->_readData();
 			}
-			float rate = (float)this->audioFrequency * this->numAudioChannels;
+			float rate = (float)this->audioFrequency * this->audioChannelsCount;
 			float queuedTime = this->getAudioPacketQueueLength();
 			int trimmedCount = 0;
 			// at this point there are only 2 possibilities: either we have too much packets and we have to delete
@@ -718,17 +715,12 @@ namespace theoraplayer
 			{
 				while (this->theoraAudioPacketQueue != NULL)
 				{
-					if (time > timestamp - queuedTime + this->theoraAudioPacketQueue->numSamples / rate)
-					{
-						queuedTime -= this->theoraAudioPacketQueue->numSamples / rate;
-						destroyAudioPacket(popAudioPacket());
-					}
-					else
+					if (time <= timestamp - queuedTime + this->theoraAudioPacketQueue->numSamples / rate)
 					{
 						trimmedCount = (int)((timestamp - queuedTime + this->theoraAudioPacketQueue->numSamples / rate - time) * rate);
 						if (this->theoraAudioPacketQueue->numSamples - trimmedCount <= 0)
 						{
-							destroyAudioPacket(popAudioPacket()); // if there's no data to be left, just destroy it
+							this->destroyAudioPacket(this->popAudioPacket()); // if there's no data to be left, just destroy it
 						}
 						else
 						{
@@ -740,30 +732,30 @@ namespace theoraplayer
 						}
 						break;
 					}
+					queuedTime -= this->theoraAudioPacketQueue->numSamples / rate;
+					this->destroyAudioPacket(this->popAudioPacket());
 				}
 			}
-			else
+			// expand the first packet with silence.
+			else if (this->theoraAudioPacketQueue != NULL)
 			{
-				// expand the first packet with silence.
-				if (this->theoraAudioPacketQueue) // just in case!
+				int i = 0;
+				int j = 0;
+				int missingCount = (int)((timestamp - queuedTime - time) * rate);
+				if (missingCount > 0)
 				{
-					int i = 0;
-					int j = 0;
-					int missingCount = (int)((timestamp - queuedTime - time) * rate);
-					if (missingCount > 0)
+					float* samples = new float[missingCount + this->theoraAudioPacketQueue->numSamples];
+					// TODOth - can this be done with a memset even though it's a float?
+					for (i = 0; i < missingCount; ++i)
 					{
-						float* samples = new float[missingCount + this->theoraAudioPacketQueue->numSamples];
-						for (i = 0; i < missingCount; ++i)
-						{
-							samples[i] = 0;
-						}
-						for (j = 0; i < missingCount + this->theoraAudioPacketQueue->numSamples; ++i, ++j)
-						{
-							samples[i] = this->theoraAudioPacketQueue->pcm[j];
-						}
-						delete[] this->theoraAudioPacketQueue->pcm;
-						this->theoraAudioPacketQueue->pcm = samples;
+						samples[i] = 0;
 					}
+					for (j = 0; i < missingCount + this->theoraAudioPacketQueue->numSamples; ++i, ++j)
+					{
+						samples[i] = this->theoraAudioPacketQueue->pcm[j];
+					}
+					delete[] this->theoraAudioPacketQueue->pcm;
+					this->theoraAudioPacketQueue->pcm = samples;
 				}
 			}
 			this->lastDecodedFrameNumber = this->seekFrame;

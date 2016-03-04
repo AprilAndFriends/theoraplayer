@@ -129,7 +129,7 @@ namespace theoraplayer
 	std::vector<std::string> Manager::getSupportedDecoders()
 	{
 		std::vector<std::string> result;
-#ifdef __THEORA
+#ifdef _USE_THEORA
 		result.push_back("Theora");
 #endif
 #ifdef __WEBM
@@ -229,7 +229,7 @@ namespace theoraplayer
 			clip = new VideoClip_AVFoundation(dataSource, outputMode, precachedFramesCount, usePotStride);
 		}
 #endif
-#ifdef __THEORA
+#ifdef _USE_THEORA
 		if (clip == NULL)
 		{
 			clip = new VideoClip_Theora(dataSource, outputMode, precachedFramesCount, usePotStride);

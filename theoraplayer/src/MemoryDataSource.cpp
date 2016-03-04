@@ -22,43 +22,69 @@ namespace theoraplayer
 	{
 		this->filename = filename;
 		this->data = data;
-		this->length = size;
-		this->readPointer = 0;
+		this->size = size;
+		this->position = 0;
+	}
+
+	MemoryDataSource::MemoryDataSource(const std::string& filename)
+	{
+		this->filename = filename;
+		this->data = NULL;
+		this->size = 0;
+		this->position = 0;
+		FILE* file = fopen(filename.c_str(), "rb");
+		// TODOth - change this, constructors must not throw exceptions
+		if (file == NULL)
+		{
+			throw TheoraplayerException("Can't open video file: " + filename);
+		}
+#ifdef _WIN32
+		struct _stat64 s;
+		_fstati64(_fileno(file), &s);
+#else
+		struct stat s;
+		fstat(fileno(file), &s);
+#endif
+		this->size = (uint64_t)s.st_size;
+		if (this->size > 0xFFFFFFFF)
+		{
+			throw TheoraplayerException("TheoraMemoryFileDataSource doesn't support files larger than 4GB!");
+		}
+		this->data = new unsigned char[(unsigned int)this->size];
+		if (this->size < UINT_MAX)
+		{
+			fread(this->data, 1, (size_t)this->size, file);
+		}
+		else
+		{
+			// TODOth - change this, constructors must not throw exceptions
+			throw TheoraplayerException("Unable to preload file to memory, file is too large.");
+		}
+		fclose(file);
 	}
 
 	MemoryDataSource::~MemoryDataSource()
 	{
-		if (this->data)
+		if (this->data != NULL)
 		{
 			delete[] this->data;
 		}
 	}
 
-	int MemoryDataSource::read(void* output, int nBytes)
+	int MemoryDataSource::read(void* output, int count)
 	{
-		int n = (int)((this->readPointer + nBytes <= this->length) ? nBytes : this->length - this->readPointer);
-		if (!n)
+		int result = (int)((this->position + count <= this->size) ? count : this->size - this->position);
+		if (result > 0)
 		{
-			return 0;
+			memcpy(output, this->data + this->position, result);
+			this->position += result;
 		}
-		memcpy(output, this->data + this->readPointer, n);
-		this->readPointer += n;
-		return n;
+		return result;
 	}
 
-	void MemoryDataSource::seek(uint64_t byte_index)
+	void MemoryDataSource::seek(uint64_t byteIndex)
 	{
-		this->readPointer = byte_index;
-	}
-
-	uint64_t MemoryDataSource::getSize()
-	{
-		return this->length;
-	}
-
-	uint64_t MemoryDataSource::getPosition()
-	{
-		return this->readPointer;
+		this->position = byteIndex;
 	}
 
 }

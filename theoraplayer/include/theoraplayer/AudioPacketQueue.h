@@ -52,7 +52,7 @@ namespace theoraplayer
 
 	protected:
 		unsigned int audioFrequency;
-		unsigned int numAudioChannels;
+		unsigned int audioChannelsCount;
 		AudioPacket* theoraAudioPacketQueue;
 
 		void _addAudioPacket(float* data, int numSamples);

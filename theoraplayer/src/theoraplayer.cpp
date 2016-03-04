@@ -7,6 +7,7 @@
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 #include "Manager.h"
+#include "theoraplayer.h"
 #include "Utility.h"
 
 namespace theoraplayer

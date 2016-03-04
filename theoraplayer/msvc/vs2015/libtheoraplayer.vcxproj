@@ -225,13 +225,5 @@
       <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86' or '$(ConfigurationType)'=='StaticLibrary'">true</ExcludedFromBuild>
     </ResourceCompile>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\vpx\vpx.vcxproj">
-      <Project>{dce19daf-69ac-46db-b14a-39f0faa5db74}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\vpx\vpxdec.vcxproj">
-      <Project>{ba5fe66f-38dd-e034-f542-b1578c5fb950}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

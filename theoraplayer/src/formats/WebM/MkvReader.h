@@ -10,7 +10,8 @@
 /// 
 /// Implements a reader for MKV files.
 
-#ifndef THEORAPLAYER_MKV_READER_H
+#if 0
+//#ifndef THEORAPLAYER_MKV_READER_H
 #define THEORAPLAYER_MKV_READER_H
 
 #include <mkvparser.hpp>

@@ -10,7 +10,8 @@
 /// 
 /// Implements an interface to be able to process the WebM codec.
 
-#ifndef THEORAPLAYER_VIDEO_CLIP_WEBM_H
+#if 0
+//#ifndef THEORAPLAYER_VIDEO_CLIP_WEBM_H
 #define THEORAPLAYER_VIDEO_CLIP_WEBM_H
 
 #include <ogg/ogg.h>

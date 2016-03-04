@@ -8,13 +8,12 @@
 /// 
 /// @section DESCRIPTION
 /// 
-/// Provides an interface for a video data source.
+/// Provides an interface for a generic video data source.
 
 #ifndef THEORAPLAYER_DATA_SOURCE_H
 #define THEORAPLAYER_DATA_SOURCE_H
 
 #include <stdint.h>
-#include <limits.h>
 #include <string>
 
 #include "theoraplayerExport.h"
@@ -47,5 +46,6 @@ namespace theoraplayer
 		virtual uint64_t getPosition() = 0;
 
 	};
+
 }
 #endif
