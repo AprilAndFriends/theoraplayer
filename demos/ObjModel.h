@@ -23,11 +23,11 @@ struct ObjVertex
 
 class ObjModel
 {
-	std::string mName;
-	unsigned int mTexture;
-	ObjVertex *mVertices;
-	int mNumVertices;
-	bool mNormals;
+	std::string name;
+	unsigned int texture;
+	ObjVertex *vertices;
+	int numVertices;
+	bool normals;
 public:
 	ObjModel();
 	~ObjModel();

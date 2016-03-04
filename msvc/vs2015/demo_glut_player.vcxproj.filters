@@ -19,6 +19,45 @@
     <ClCompile Include="..\..\demos\basecode\util\util.cpp">
       <Filter>basecode</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\demos\glut_player\demo_menu.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\glut_player\demo_glut_player.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\glut_player\demo_spriteanim.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\glut_player\demo_multiple.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\glut_player\demo_seek.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\glut_player\demo_tv.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\ObjModel.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\tga.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\glut_player\demo_light.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\glut_player\demo_av.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\OpenAL_AudioInterface.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\glut_player\demo_comp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\glut_player\demo_env.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\demos\demo_basecode.h">
@@ -26,6 +65,45 @@
     </ClInclude>
     <ClInclude Include="..\..\demos\basecode\util\util.h">
       <Filter>basecode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\glut_player\demo_menu.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\glut_player\demo_glut_player.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\glut_player\demo_spriteanim.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\glut_player\demo_multiple.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\glut_player\demo_seek.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\glut_player\demo_tv.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\ObjModel.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\tga.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\glut_player\demo_light.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\glut_player\demo_av.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\glut_player\demo_comp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\glut_player\demo_env.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\OpenAL_AudioInterface.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

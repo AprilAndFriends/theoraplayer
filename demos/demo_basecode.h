@@ -58,18 +58,32 @@ extern PFNGLACTIVETEXTUREARBPROC glActiveTextureARB;
 extern std::string resourceExtension;
 extern float FOVY;
 extern bool shader_on;
+extern int window_w;
+extern int window_h;
+extern std::string window_name;
+
+struct Demo
+{
+	void(*init)();
+	void(*destroy)();
+	void(*update)(float);
+	void(*draw)();
+	void(*setDebugTitle)(char*);
+	void(*OnKeyPress)(int);
+	void(*OnClick)(float, float);
+};
+
+void ChangeDemo(Demo* demo);
 
 // functions defined in demos
 // --------------------------
-extern std::string window_name;
-extern int window_w, window_h;
 void init();
 void destroy();
 void update(float);
 void draw();
 void setDebugTitle(char* out);
 void OnKeyPress(int key);
-void OnClick(float x,float y);
+void OnClick(float x, float y);
 // --------------------------
 void psleep(int milliseconds);
 int nextPow2(int x);

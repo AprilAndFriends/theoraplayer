@@ -1,6 +1,19 @@
 #include "demo_basecode.h"
+#include "glut_player/demo_menu.h"
+#include "glut_player/demo_glut_player.h"
 
+std::string window_name = "Glut Demo Player";
+int window_w = 800, window_h = 600;
 float mx = 0, my = 0;
+
+Demo* currentDemo = &demoMenu;
+
+void ChangeDemo(Demo* demo) 
+{
+	destroy();
+	currentDemo = demo;
+	init();
+}
 
 #ifndef _LINUX // temp, compilation issues
 #define USE_SHADERS
@@ -33,6 +46,42 @@ PFNGLACTIVETEXTUREARBPROC   glActiveTextureARB = 0;
 unsigned int program,shader;
 #endif
 
+void init()
+{
+	void(*func)() = currentDemo->init;
+	func();
+	
+}
+void destroy()
+{
+	void(*func)() = currentDemo->destroy;
+	func();
+}
+void update(float diff)
+{
+	void(*func)(float) = currentDemo->update;
+	func(diff);
+}
+void draw()
+{
+	void(*func)() = currentDemo->draw;
+	func();
+}
+void setDebugTitle(char* out)
+{
+	void(*func)(char*) = currentDemo->setDebugTitle;
+	func(out);
+}
+void OnKeyPress(int key)
+{
+	void(*func)(int) = currentDemo->OnKeyPress;
+	func(key);
+}
+void OnClick(float x, float y)
+{
+	void(*func)(float, float) = currentDemo->OnClick;
+	func(x, y);
+}
 
 void getCursorPos(float* xout,float* yout)
 {
@@ -47,7 +96,7 @@ void display()
 #else
 	glClear(GL_COLOR_BUFFER_BIT);
 #endif
-	
+		
 	draw();
 	
 	glutSwapBuffers();
@@ -87,7 +136,7 @@ void reshape(int w,int h)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 #else
-	gluOrtho2D(0,window_w,window_h,0);
+	gluOrtho2D(0, window_w, window_h,0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 #endif
@@ -98,8 +147,15 @@ void keyboard(unsigned char key,int x,int y)
 {
     if (key == 27) // esc
     {
-        destroy();
-        exit(0);
+		if (currentDemo == &demoMenu)
+		{
+			destroy();
+			exit(0);
+		}
+		else
+		{
+			ChangeDemo(&demoMenu);
+		}
     }
     else OnKeyPress(key);
 }
@@ -107,7 +163,7 @@ void keyboard(unsigned char key,int x,int y)
 void keyboard_special(int key,int x,int y)
 {
 	if (key == 10) toggle_YUV2RGB_shader(); // F10
-    OnKeyPress(key);
+	OnKeyPress(key);
 }
 
 void mouse(int button,int state, int x, int y)
@@ -157,9 +213,7 @@ void toggle_YUV2RGB_shader()
 		g=y-0.39173*u-0.81290*v;\
 		b=y+2.017*u;\
 		gl_FragColor = vec4(r,g,b,1.0);\
-		}";
-		
-		
+		}";		
 		
 		program = glCreateProgram();
 		shader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -234,6 +288,7 @@ void drawTexturedQuad(unsigned int texID, float x,float y,float w,float h,float 
 
 int main(int argc, char** argv)
 {
+	
 #ifdef _MSC_VER // detect a msvc++ build and adjust the working directory
 	char cwd[513];
 	GetCurrentDirectoryA(512,cwd);
@@ -253,13 +308,13 @@ int main(int argc, char** argv)
 #else
 	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA);
 #endif
-	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)-window_w)/2,(glutGet(GLUT_SCREEN_HEIGHT)-window_h)/2);
-	glutInitWindowSize(window_w,window_h);
+	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)- window_w)/2,(glutGet(GLUT_SCREEN_HEIGHT)- window_h)/2);
+	glutInitWindowSize(window_w, window_h);
 	glutCreateWindow(window_name.c_str());
 	glShadeModel(GL_SMOOTH);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 	glEnable(GL_TEXTURE_2D);
-	glPixelStorei(GL_UNPACK_ALIGNMENT,1);
+	glPixelStorei(GL_UNPACK_ALIGNMENT,1);	
 	
 	init();
 	glutDisplayFunc(display);
