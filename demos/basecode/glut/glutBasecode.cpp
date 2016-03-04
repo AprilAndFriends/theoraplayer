@@ -1,12 +1,15 @@
 #include "demo_basecode.h"
 #include "glut_player/demo_menu.h"
 #include "glut_player/demo_glut_player.h"
+#include "tga.h"
 
 std::string window_name = "Glut Demo Player";
 int window_w = 800, window_h = 600;
 float mx = 0, my = 0;
 
 Demo* currentDemo = &demoMenu;
+
+unsigned int backButtonId;
 
 void ChangeDemo(Demo* demo) 
 {
@@ -81,6 +84,8 @@ void OnClick(float x, float y)
 {
 	void(*func)(float, float) = currentDemo->OnClick;
 	func(x, y);
+
+
 }
 
 void getCursorPos(float* xout,float* yout)
@@ -98,6 +103,19 @@ void display()
 #endif
 		
 	draw();
+
+	if (currentDemo != &demoMenu)
+	{
+		glLoadIdentity();
+
+		glColor3f(1.0f, 1.0f, 1.0f);
+
+		glEnable(GL_TEXTURE_2D);
+		glDisable(GL_DEPTH_TEST);
+		glDisable(GL_COLOR_MATERIAL);
+
+		drawTexturedQuad(backButtonId, 0, 0, 128, 32, 1, 1);
+	}
 	
 	glutSwapBuffers();
 	
@@ -123,6 +141,8 @@ void display()
 	else fps_counter++;
 	
 	time=t;
+
+	
 	
 }
 
@@ -172,7 +192,17 @@ void mouse(int button,int state, int x, int y)
 	{
 		mx=((float) x/glutGet(GLUT_WINDOW_WIDTH))*window_w;
 		my=((float) y/glutGet(GLUT_WINDOW_HEIGHT))*window_h;
-		OnClick(mx, my);
+
+		if (currentDemo != &demoMenu)
+		{
+			if (mx < 128 && my < 32)
+			{
+				ChangeDemo(&demoMenu);
+				return;
+			}
+		}
+
+		OnClick(mx, my);		
 	}
 }
 
@@ -315,6 +345,9 @@ int main(int argc, char** argv)
 	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 	glEnable(GL_TEXTURE_2D);
 	glPixelStorei(GL_UNPACK_ALIGNMENT,1);	
+
+	int w, h;
+	backButtonId = loadTexture("media/buttonBack.tga", &w, &h);
 	
 	init();
 	glutDisplayFunc(display);
