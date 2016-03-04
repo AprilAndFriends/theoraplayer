@@ -8,7 +8,7 @@ float mx = 0, my = 0;
 
 Demo* currentDemo = &demoMenu;
 
-void ChangeDemo(Demo* demo)
+void ChangeDemo(Demo* demo) 
 {
 	destroy();
 	currentDemo = demo;

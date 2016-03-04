@@ -26,7 +26,6 @@ void av_draw()
 		clip_av->popFrame();
 	}
 
-
 	float w = clip_av->getWidth(), h = clip_av->getHeight();
 	float tw = nextPow2(w), th = nextPow2(h);
 
