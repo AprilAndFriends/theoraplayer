@@ -171,7 +171,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 			CVPixelBufferLockBaseAddress(imageBuffer, 0);
 			void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
 			
-			mStride = (int) CVPixelBufferGetBytesPerRow(imageBuffer);
+			this->stride = (int) CVPixelBufferGetBytesPerRow(imageBuffer);
 			size_t width = CVPixelBufferGetWidth(imageBuffer);
 			size_t height = CVPixelBufferGetHeight(imageBuffer);
 
@@ -181,7 +181,7 @@ bool TheoraVideoClip_AVFoundation::decodeNextFrame()
 			if (this->outputMode == TH_BGRX || this->outputMode == TH_RGBA)
 			{
 				t.raw = (unsigned char*) baseAddress;
-				t.rawStride = mStride;
+				t.rawStride = this->stride;
 			}
 			else
 #endif
@@ -296,11 +296,11 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 		this->output.alwaysCopiesSampleData = NO;
 
 	this->fps = videoTrack.nominalFrameRate;
-	this->width = this->subFrameWidth = mStride = videoTrack.naturalSize.width;
+	this->width = this->subFrameWidth = this->stride = videoTrack.naturalSize.width;
 	this->height = this->subFrameHeight = videoTrack.naturalSize.height;
 	frameDuration = 1.0f / this->fps;
 	this->duration = (float) CMTimeGetSeconds(asset.duration);
-	mNumFrames = this->duration * this->fps;
+	this->numFrames = this->duration * this->fps;
 	if (this->frameQueue == NULL)
 	{
 		this->frameQueue = new TheoraFrameQueue(this);
@@ -333,8 +333,8 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 			NSArray* desclst = audioTrack.formatDescriptions;
 			CMAudioFormatDescriptionRef desc = (CMAudioFormatDescriptionRef) [desclst objectAtIndex:0];
 			const AudioStreamBasicDescription* audioDesc = CMAudioFormatDescriptionGetStreamBasicDescription(desc);
-			this->audioFrequency = (unsigned int) audioDesc->mSampleRate;
-			this->numAudioChannels = audioDesc->mChannelsPerFrame;
+			this->audioFrequency = (unsigned int) audioDesc->sampleRate;
+			this->numAudioChannels = audioDesc->channelsPerFrame;
 			
 			if (this->seekFrame != -1)
 			{
@@ -350,7 +350,7 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 #ifdef _DEBUG
 	else if (!this->loaded)
 	{
-		th_writelog("-----\nwidth: " + str(this->width) + ", height: " + str(this->height) + ", fps: " + str((int) getFPS()));
+		th_writelog("-----\nwidth: " + str(this->width) + ", height: " + str(this->height) + ", fps: " + str((int) getFps()));
 		th_writelog("duration: " + strf(this->duration) + " seconds\n-----");
 	}
 #endif
@@ -410,7 +410,7 @@ float TheoraVideoClip_AVFoundation::decodeAudio()
 							audioMutexLock.acquire(this->audioMutex);
 							mutexLocked = 1;
 						}
-						addAudioPacket(frame, audioBuffer.dataByteSize / (this->numAudioChannels * sizeof(float)), mAudioGain);
+						addAudioPacket(frame, audioBuffer.dataByteSize / (this->numAudioChannels * sizeof(float)), this->audioGain);
 						
 						this->readAudioSamples += audioBuffer.dataByteSize / (sizeof(float));
 					}
