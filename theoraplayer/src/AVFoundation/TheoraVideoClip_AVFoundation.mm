@@ -333,8 +333,8 @@ void TheoraVideoClip_AVFoundation::load(TheoraDataSource* source)
 			NSArray* desclst = audioTrack.formatDescriptions;
 			CMAudioFormatDescriptionRef desc = (CMAudioFormatDescriptionRef) [desclst objectAtIndex:0];
 			const AudioStreamBasicDescription* audioDesc = CMAudioFormatDescriptionGetStreamBasicDescription(desc);
-			this->audioFrequency = (unsigned int) audioDesc->sampleRate;
-			this->numAudioChannels = audioDesc->channelsPerFrame;
+			this->audioFrequency = (unsigned int) audioDesc->mSampleRate;
+			this->numAudioChannels = audioDesc->mChannelsPerFrame;
 			
 			if (this->seekFrame != -1)
 			{
@@ -400,19 +400,19 @@ float TheoraVideoClip_AVFoundation::decodeAudio()
 					CMBlockBufferRef blockBuffer = NULL;
 					CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sampleBuffer, NULL, &audioBufferList, sizeof(audioBufferList), NULL, NULL, 0, &blockBuffer);
 					
-					for (int y = 0; y < audioBufferList.numberBuffers; ++y)
+					for (int y = 0; y < audioBufferList.mNumberBuffers; ++y)
 					{
-						AudioBuffer audioBuffer = audioBufferList.buffers[y];
-						float *frame = (float*) audioBuffer.data;
+						AudioBuffer audioBuffer = audioBufferList.mBuffers[y];
+						float *frame = (float*) audioBuffer.mData;
 
 						if (!mutexLocked)
 						{
 							audioMutexLock.acquire(this->audioMutex);
 							mutexLocked = 1;
 						}
-						addAudioPacket(frame, audioBuffer.dataByteSize / (this->numAudioChannels * sizeof(float)), this->audioGain);
+						addAudioPacket(frame, audioBuffer.mDataByteSize / (this->numAudioChannels * sizeof(float)), this->audioGain);
 						
-						this->readAudioSamples += audioBuffer.dataByteSize / (sizeof(float));
+						this->readAudioSamples += audioBuffer.mDataByteSize / (sizeof(float));
 					}
 
 					CFRelease(blockBuffer);

@@ -228,7 +228,7 @@ TheoraVideoClip* TheoraVideoManager::createVideoClip(TheoraDataSource* data_sour
 		filename = fileDataSource->getFilename();
 	}
 
-	if (filename.getSize() > 4 && filename.substr(filename.getSize() - 4, filename.getSize()) == ".mp4")
+	if (filename.size() > 4 && filename.substr(filename.size() - 4, filename.size()) == ".mp4")
 	{
 		clip = new TheoraVideoClip_AVFoundation(data_source, output_mode, nPrecached, usePower2Stride);
 	}
