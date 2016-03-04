@@ -371,7 +371,7 @@ namespace theoraplayer
 						candidate.priority = (*it)->getPriority();
 						candidate.queuedTime = (float)readyFramesCount / ((*it)->getFps() * (*it)->getPlaybackSpeed());
 						candidate.workTime = (float)(*it)->threadAccessCount;
-						totalAccessCount += candidate.workTime;
+						totalAccessCount += (*it)->threadAccessCount;
 						if (maxQueuedTime < candidate.queuedTime)
 						{
 							maxQueuedTime = candidate.queuedTime;
@@ -391,7 +391,7 @@ namespace theoraplayer
 			maxQueuedTime = 1;
 		}
 		// normalize candidate values
-		int prioritySum = 0;
+		float prioritySum = 0.0f;
 		foreach (TheoraWorkCandidate, it, candidates)
 		{
 			it->workTime /= totalAccessCount;
@@ -406,8 +406,8 @@ namespace theoraplayer
 		// now, based on how much access time has been given to each clip in the work log
 		// and how much time should be given to each clip based on calculated priorities,
 		// we choose a best suited clip for this worker thread to decode next
-		int maxDiff = -1;
-		int diff = 0;
+		float maxDiff = -1.0f;
+		float diff = 0.0f;
 		VideoClip* selectedClip = NULL;
 		foreach (TheoraWorkCandidate, it, candidates)
 		{
