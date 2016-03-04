@@ -81,9 +81,9 @@ namespace theoraplayer
 		virtual std::string getDecoderName() = 0;
 
 		//! benchmark function
-		int getNumDisplayedFrames() { return this->numDisplayedFrames; }
+		int getNumDisplayedFrames() { return this->getNumDisplayedFrames(); }
 		//! benchmark function
-		int getNumDroppedFrames() { return this->numDroppedFrames; }
+		int getNumDroppedFrames() { return this->getNumDroppedFrames(); }
 
 		//! return width in pixels of the video clip
 		int getWidth();

@@ -11,7 +11,7 @@
 #include <memory.h>
 #include <string>
 
-#include "TheoraVideoManager.h"
+#include "Manager.h"
 #include "TheoraAudioInterface.h"
 #include "TheoraPixelTransform.h"
 

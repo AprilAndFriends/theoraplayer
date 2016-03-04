@@ -33,9 +33,9 @@ public:
 	//! Mono or stereo
 	int numChannels;
 	//! Pointer to the parent VideoClip object
-	VideoClip* clip;
+	theoraplayer::VideoClip* clip;
 	
-	TheoraAudioInterface(VideoClip* owner, int nChannels, int freq);
+	TheoraAudioInterface(theoraplayer::VideoClip* owner, int nChannels, int freq);
 	virtual ~TheoraAudioInterface();
 	//! A function that the VideoClip object calls once more audio packets are decoded
 	/*!
@@ -50,7 +50,7 @@ class theoraplayerExport TheoraAudioInterfaceFactory
 {
 public:
 	//! VideoManager calls this when creating a new VideoClip object
-	virtual TheoraAudioInterface* createInstance(VideoClip* owner, int nChannels, int freq) = 0;
+	virtual TheoraAudioInterface* createInstance(theoraplayer::VideoClip* owner, int nChannels, int freq) = 0;
 
 };
 

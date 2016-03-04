@@ -19,13 +19,13 @@
 
 #include "DataSource.h"
 
-#include "TheoraMkvReader.h"
+#include "MkvReader.h"
 
 namespace {
 void reset(struct WebmInputContext *const webm_ctx) {
 	if (webm_ctx->reader != NULL) {
-		TheoraMkvReader *const reader =
-			reinterpret_cast<TheoraMkvReader*>(webm_ctx->reader);
+		MkvReader *const reader =
+			reinterpret_cast<MkvReader*>(webm_ctx->reader);
 		delete reader;
 	}
 	if (webm_ctx->segment != NULL) {
@@ -58,8 +58,8 @@ void get_first_cluster(struct WebmInputContext *const webm_ctx) {
 
 void rewind_and_reset(struct WebmInputContext *const webm_ctx,
 struct VpxInputContext *const vpx_ctx) {
-	TheoraMkvReader *const reader =
-		reinterpret_cast<TheoraMkvReader*>(webm_ctx->reader);
+	MkvReader *const reader =
+		reinterpret_cast<MkvReader*>(webm_ctx->reader);
 
 	//reset(webm_ctx);
 }
@@ -69,7 +69,7 @@ struct VpxInputContext *const vpx_ctx) {
 int TheoraWebmDec::file_is_webm(DataSource *const dataSource, struct WebmInputContext *webm_ctx,
 struct VpxInputContext *vpx_ctx)
 {
-	TheoraMkvReader *const reader = new TheoraMkvReader(dataSource);
+	MkvReader *const reader = new MkvReader(dataSource);
 	webm_ctx->reader = reader;
 	webm_ctx->reached_eos = 0;
 
