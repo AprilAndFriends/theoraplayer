@@ -8,7 +8,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
 #include "yuv_util.h"
 
-static void _decodeGrey3(struct TheoraPixelTransform* t, int stride, int nBytes)
+static void _decodeGrey3(struct PixelTransform* t, int stride, int nBytes)
 {
 	unsigned char *ySrc = t->y, *yLineEnd, *out = t->out;
 	unsigned int y;
@@ -17,7 +17,7 @@ static void _decodeGrey3(struct TheoraPixelTransform* t, int stride, int nBytes)
 			out[0] = out[1] = out[2] = *ySrc;
 }
 
-void decodeGrey(struct TheoraPixelTransform* t)
+void decodeGrey(struct PixelTransform* t)
 {
 	unsigned char *ySrc = t->y, *yLineEnd, *out = t->out;
 	unsigned int y;
@@ -27,29 +27,29 @@ void decodeGrey(struct TheoraPixelTransform* t)
 
 }
 
-void decodeGrey3(struct TheoraPixelTransform* t)
+void decodeGrey3(struct PixelTransform* t)
 {
 	_decodeGrey3(t, t->w * 3, 3);
 }
 
-void decodeGreyA(struct TheoraPixelTransform* t)
+void decodeGreyA(struct PixelTransform* t)
 {
 	_decodeGrey3(t, t->w * 4, 4);
 	_decodeAlpha(incOut(t, 3), t->w * 4);
 }
 
-void decodeGreyX(struct TheoraPixelTransform* t)
+void decodeGreyX(struct PixelTransform* t)
 {
 	_decodeGrey3(t, t->w * 4, 4);
 }
 
-void decodeAGrey(struct TheoraPixelTransform* t)
+void decodeAGrey(struct PixelTransform* t)
 {
 	_decodeGrey3(incOut(t, 1), t->w * 4, 4);
 	_decodeAlpha(t, t->w * 4);
 }
 
-void decodeXGrey(struct TheoraPixelTransform* t)
+void decodeXGrey(struct PixelTransform* t)
 {
 	_decodeGrey3(incOut(t, 1), t->w * 4, 4);
 }

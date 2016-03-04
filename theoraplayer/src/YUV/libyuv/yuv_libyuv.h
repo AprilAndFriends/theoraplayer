@@ -9,6 +9,6 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #ifndef _YUV_LIBYUV_h
 #define _YUV_LIBYUV_h
 
-#include "TheoraPixelTransform.h"
+#include "PixelTransform.h"
 
 #endif

@@ -7,9 +7,9 @@
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 #ifdef __FFMPEG
-#include "TheoraAudioInterface.h"
+#include "AudioInterface.h"
 #include "TheoraVideoManager.h"
-#include "TheoraPixelTransform.h"
+#include "PixelTransform.h"
 
 #include "DataSource.h"
 #include "Exception.h"
@@ -217,7 +217,7 @@ namespace theoraplayer
 															 int nPrecachedFrames,
 															 bool usePower2Stride):
 								 							 VideoClip(data_source, output_mode, nPrecachedFrames, usePower2Stride),
-															 TheoraAudioPacketQueue()
+															 AudioPacketQueue()
 	{
 		mFormatContext = NULL;
 		mCodecContext = NULL;
@@ -393,8 +393,8 @@ namespace theoraplayer
 			
 				if (frameFinished)
 				{
-					TheoraPixelTransform t;
-					memset(&t, 0, sizeof(TheoraPixelTransform));
+					PixelTransform t;
+					memset(&t, 0, sizeof(PixelTransform));
 
 					t.y = mFrame->data[0]; t.yStride = mFrame->linesize[0];
 					t.u = mFrame->data[1]; t.uStride = mFrame->linesize[1];

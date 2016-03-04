@@ -139,12 +139,12 @@ int RVTable[256];
 		}\
 	}\
 
-void decodeRGB(struct TheoraPixelTransform* t)
+void decodeRGB(struct PixelTransform* t)
 {
 	_decodeRGB(t, t->w * 3, 3, 0, 0, 1, 2, 3, 4, 5);
 }
 
-void decodeRGBA(struct TheoraPixelTransform* t)
+void decodeRGBA(struct PixelTransform* t)
 {
 	_decodeRGBA(t, t->w * 4, 4, 0, 0, 1, 2, 4, 5, 6, 3, 7);
 // This is the old 2-phase version, leaving it here in case more debugging is needed
@@ -152,12 +152,12 @@ void decodeRGBA(struct TheoraPixelTransform* t)
 //	_decodeAlpha(incOut(t, 3), t->w * 4);
 }
 
-void decodeRGBX(struct TheoraPixelTransform* t)
+void decodeRGBX(struct PixelTransform* t)
 {
 	_decodeRGB(t, t->w * 4, 4, 0, 0, 1, 2, 4, 5, 6);
 }
 
-void decodeARGB(struct TheoraPixelTransform* t)
+void decodeARGB(struct PixelTransform* t)
 {
 	_decodeRGBA(t, t->w * 4, 4, 0, 1, 2, 3, 5, 6, 7, 0, 4);
 // This is the old 2-phase version, leaving it here in case more debugging is needed
@@ -165,17 +165,17 @@ void decodeARGB(struct TheoraPixelTransform* t)
 //	_decodeAlpha(t, t->w * 4);
 }
 
-void decodeXRGB(struct TheoraPixelTransform* t)
+void decodeXRGB(struct PixelTransform* t)
 {
 	_decodeRGB(t, t->w * 4, 4, 0, 1, 2, 3, 5, 6, 7);
 }
 
-void decodeBGR(struct TheoraPixelTransform* t)
+void decodeBGR(struct PixelTransform* t)
 {
 	_decodeRGB(t, t->w * 3, 3, 0, 2, 1, 0, 5, 4, 3);
 }
 
-void decodeBGRA(struct TheoraPixelTransform* t)
+void decodeBGRA(struct PixelTransform* t)
 {
 	_decodeRGBA(t, t->w * 4, 4, 0, 2, 1, 0, 6, 5, 4, 3, 7);
 // This is the old 2-phase version, leaving it here in case more debugging is needed
@@ -183,12 +183,12 @@ void decodeBGRA(struct TheoraPixelTransform* t)
 //	_decodeAlpha(incOut(t, 3), t->w * 4);
 }
 
-void decodeBGRX(struct TheoraPixelTransform* t)
+void decodeBGRX(struct PixelTransform* t)
 {
 	_decodeRGB(t, t->w * 4, 4, 0, 2, 1, 0, 6, 5, 4);
 }
 
-void decodeABGR(struct TheoraPixelTransform* t)
+void decodeABGR(struct PixelTransform* t)
 {
 	_decodeRGBA(t, t->w * 4, 4, 0, 3, 2, 1, 7, 6, 5, 0, 4);
 // This is the old 2-phase version, leaving it here in case more debugging is needed
@@ -196,7 +196,7 @@ void decodeABGR(struct TheoraPixelTransform* t)
 //	_decodeAlpha(t, t->w * 4);
 }
 
-void decodeXBGR(struct TheoraPixelTransform* t)
+void decodeXBGR(struct PixelTransform* t)
 {
 	_decodeRGB(t, t->w * 4, 4, 0, 3, 2, 1, 7, 6, 5);
 }
@@ -233,7 +233,7 @@ void initYUVConversionModule()
  *
  *
 
-void _decodeRGB(struct TheoraPixelTransform* t, int stride, int nBytes, int maxWidth, int i1, int i2, int i3, int j1, int j2, int j3)
+void _decodeRGB(struct PixelTransform* t, int stride, int nBytes, int maxWidth, int i1, int i2, int i3, int j1, int j2, int j3)
 {
 	register int tmp;
 	int nBytes2 = nBytes * 2, cv, cu, rgbY1, rgbY2, rgbY3, rgbY4, rV, gUV, bU, width = maxWidth == 0 ? t->w : maxWidth;
@@ -283,7 +283,7 @@ void _decodeRGB(struct TheoraPixelTransform* t, int stride, int nBytes, int maxW
 	}
 }
  
-void _decodeRGBA(struct TheoraPixelTransform* t, int stride, int nBytes, int maxWidth, int i1, int i2, int i3, int j1, int j2, int j3, int aindex1, int aindex2)
+void _decodeRGBA(struct PixelTransform* t, int stride, int nBytes, int maxWidth, int i1, int i2, int i3, int j1, int j2, int j3, int aindex1, int aindex2)
 {
 	register int tmp;
 	int nBytes2 = nBytes * 2, cv, cu, rgbY1, rgbY2, rgbY3, rgbY4, a1, a2, a3, a4, rV, gUV, bU, width = maxWidth == 0 ? t->w : maxWidth;

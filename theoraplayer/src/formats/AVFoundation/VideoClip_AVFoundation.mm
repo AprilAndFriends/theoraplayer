@@ -13,9 +13,9 @@
 #ifdef __AVFOUNDATION
 #define AVFOUNDATION_CLASSES_DEFINED
 #import <AVFoundation/AVFoundation.h>
-#include "TheoraAudioInterface.h"
+#include "AudioInterface.h"
 #include "TheoraVideoManager.h"
-#include "TheoraPixelTransform.h"
+#include "PixelTransform.h"
 
 #include "DataSource.h"
 #include "Exception.h"
@@ -31,7 +31,7 @@
 // conversion on iOS seems to run faster than libtheoraplayer's implementation
 // This may change in the future with more optimizations to libtheoraplayers's YUV conversion
 // code, making this function obsolete.
-static void bgrx2rgba(unsigned char* dest, int w, int h, struct TheoraPixelTransform* t)
+static void bgrx2rgba(unsigned char* dest, int w, int h, struct PixelTransform* t)
 {
 	unsigned register int a;
 	unsigned int *dst = (unsigned int*) dest, *dstEnd;
@@ -69,7 +69,7 @@ VideoClip_AVFoundation::VideoClip_AVFoundation(DataSource* data_source,
 											   int nPrecachedFrames,
 											   bool usePower2Stride):
 	VideoClip(data_source, output_mode, nPrecachedFrames, usePower2Stride),
-	TheoraAudioPacketQueue()
+	AudioPacketQueue()
 {
 	this->loaded = 0;
 	this->reader = NULL;
@@ -180,8 +180,8 @@ bool VideoClip_AVFoundation::decodeNextFrame()
 			size_t width = CVPixelBufferGetWidth(imageBuffer);
 			size_t height = CVPixelBufferGetHeight(imageBuffer);
 
-			TheoraPixelTransform t;
-			memset(&t, 0, sizeof(TheoraPixelTransform));
+			PixelTransform t;
+			memset(&t, 0, sizeof(PixelTransform));
 #ifdef _AVFOUNDATION_BGRX
 			if (this->outputMode == TH_BGRX || this->outputMode == TH_RGBA)
 			{
@@ -319,7 +319,7 @@ void VideoClip_AVFoundation::load(DataSource* source)
 	}
 	if (audioTrack)
 	{
-		TheoraAudioInterfaceFactory* audio_factory = TheoraVideoManager::getSingleton().getAudioInterfaceFactory();
+		AudioInterfaceFactory* audio_factory = TheoraVideoManager::getSingleton().getAudioInterfaceFactory();
 		if (audio_factory)
 		{
 			NSDictionary *audioOptions = [NSDictionary dictionaryWithObjectsAndKeys:

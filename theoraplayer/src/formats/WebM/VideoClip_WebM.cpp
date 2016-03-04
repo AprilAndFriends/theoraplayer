@@ -12,8 +12,8 @@
 #include <string>
 
 #include "Manager.h"
-#include "TheoraAudioInterface.h"
-#include "TheoraPixelTransform.h"
+#include "AudioInterface.h"
+#include "PixelTransform.h"
 
 //#include <stdio.h>
 //#include <stdlib.h>
@@ -38,7 +38,7 @@ namespace theoraplayer
 		int nPrecachedFrames,
 		bool usePower2Stride) :
 		VideoClip(dataSource, output_mode, nPrecachedFrames, usePower2Stride),
-		TheoraAudioPacketQueue()
+		AudioPacketQueue()
 	{
 		memset(&(webm_ctx), 0, sizeof(webm_ctx));
 		this->input.webm_ctx = &webm_ctx;
@@ -95,8 +95,8 @@ namespace theoraplayer
 				if (this->lastDecodedFrameNumber >= (unsigned long)this->numFrames)
 					should_restart = true;
 
-				TheoraPixelTransform t;
-				memset(&t, 0, sizeof(TheoraPixelTransform));
+				PixelTransform t;
+				memset(&t, 0, sizeof(PixelTransform));
 
 				t.y = this->frame->planes[0]; t.yStride = this->frame->stride[0];
 				t.u = this->frame->planes[1]; t.uStride = this->frame->stride[1];
@@ -185,7 +185,7 @@ namespace theoraplayer
 			this->frameQueue->setSize(this->precachedFramesCount);
 		}
 	}
-
+	
 	void VideoClip_WebM::decodedAudioCheck()
 	{
 		if (!this->audioInterface || this->timer->isPaused()) return;

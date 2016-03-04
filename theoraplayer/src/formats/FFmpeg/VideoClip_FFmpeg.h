@@ -14,7 +14,7 @@
 #ifndef THEORAPLAYER_VIDEO_CLIP_FFMPEG_H
 #define THEORAPLAYER_VIDEO_CLIP_FFMPEG_H
 
-#include "TheoraAudioPacketQueue.h"
+#include "AudioPacketQueue.h"
 
 #include "VideoClip.h"
 
@@ -27,7 +27,7 @@ struct AVIOContext;
 // TODOth - refactor for new convention
 namespace theoraplayer
 {
-	class VideoClip_FFmpeg : public VideoClip, public TheoraAudioPacketQueue
+	class VideoClip_FFmpeg : public VideoClip, public AudioPacketQueue
 	{
 	protected:
 		bool mLoaded;

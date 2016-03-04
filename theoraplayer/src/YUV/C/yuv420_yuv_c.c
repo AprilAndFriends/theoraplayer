@@ -8,7 +8,7 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
 #include "yuv_util.h"
 
-static void _decodeYUV(struct TheoraPixelTransform* t, int stride, int nBytes, int maxWidth)
+static void _decodeYUV(struct PixelTransform* t, int stride, int nBytes, int maxWidth)
 {
 	int cv, cu, y1, y2, y3, y4, width = maxWidth == 0 ? t->w : maxWidth;
 	unsigned char *ySrcEven, *ySrcOdd, *yLineEnd, *uSrc, *vSrc, *out1, *out2;
@@ -57,29 +57,29 @@ static void _decodeYUV(struct TheoraPixelTransform* t, int stride, int nBytes, i
 	}
 }
 
-void decodeYUV(struct TheoraPixelTransform* t)
+void decodeYUV(struct PixelTransform* t)
 {
 	_decodeYUV(t, t->w * 3, 3, 0);
 }
 
-void decodeYUVA(struct TheoraPixelTransform* t)
+void decodeYUVA(struct PixelTransform* t)
 {
 	_decodeYUV(t, t->w * 4, 4, 0);
 	_decodeAlpha(incOut(t, 3), t->w * 4);
 }
 
-void decodeYUVX(struct TheoraPixelTransform* t)
+void decodeYUVX(struct PixelTransform* t)
 {
 	_decodeYUV(t, t->w * 4, 4, 0);
 }
 
-void decodeAYUV(struct TheoraPixelTransform* t)
+void decodeAYUV(struct PixelTransform* t)
 {
 	_decodeYUV(incOut(t, 1), t->w * 4, 4, 0);
 	_decodeAlpha(t, t->w * 4);
 }
 
-void decodeXYUV(struct TheoraPixelTransform* t)
+void decodeXYUV(struct PixelTransform* t)
 {
 	_decodeYUV(incOut(t, 1), t->w * 4, 4, 0);
 }

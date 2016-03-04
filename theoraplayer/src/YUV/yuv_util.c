@@ -8,14 +8,14 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 *************************************************************************************/
 #include "yuv_util.h"
 
-struct TheoraPixelTransform* incOut(struct TheoraPixelTransform* t, int n)
+struct PixelTransform* incOut(struct PixelTransform* t, int n)
 {
 	// used for XRGB, XBGR and similar
 	t->out += n;
 	return t;
 }
 
-void _decodeAlpha(struct TheoraPixelTransform* t, int stride)
+void _decodeAlpha(struct PixelTransform* t, int stride)
 {
 	int width = t->w;
 	unsigned char *ySrc, *yLineEnd, *out;

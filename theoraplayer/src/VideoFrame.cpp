@@ -8,7 +8,7 @@
 
 #include <memory.h>
 
-#include "TheoraPixelTransform.h"
+#include "PixelTransform.h"
 #include "Manager.h"
 
 #include "VideoClip.h"
@@ -18,32 +18,32 @@
 
 extern "C"
 {
-void decodeRGB  (struct TheoraPixelTransform* t);
-void decodeRGBA (struct TheoraPixelTransform* t);
-void decodeRGBX (struct TheoraPixelTransform* t);
-void decodeARGB (struct TheoraPixelTransform* t);
-void decodeXRGB (struct TheoraPixelTransform* t);
-void decodeBGR  (struct TheoraPixelTransform* t);
-void decodeBGRA (struct TheoraPixelTransform* t);
-void decodeBGRX (struct TheoraPixelTransform* t);
-void decodeABGR (struct TheoraPixelTransform* t);
-void decodeXBGR (struct TheoraPixelTransform* t);
-void decodeGrey (struct TheoraPixelTransform* t);
-void decodeGrey3(struct TheoraPixelTransform* t);
-void decodeGreyA(struct TheoraPixelTransform* t);
-void decodeGreyX(struct TheoraPixelTransform* t);
-void decodeAGrey(struct TheoraPixelTransform* t);
-void decodeXGrey(struct TheoraPixelTransform* t);
-void decodeYUV  (struct TheoraPixelTransform* t);
-void decodeYUVA (struct TheoraPixelTransform* t);
-void decodeYUVX (struct TheoraPixelTransform* t);
-void decodeAYUV (struct TheoraPixelTransform* t);
-void decodeXYUV (struct TheoraPixelTransform* t);
+void decodeRGB  (struct PixelTransform* t);
+void decodeRGBA (struct PixelTransform* t);
+void decodeRGBX (struct PixelTransform* t);
+void decodeARGB (struct PixelTransform* t);
+void decodeXRGB (struct PixelTransform* t);
+void decodeBGR  (struct PixelTransform* t);
+void decodeBGRA (struct PixelTransform* t);
+void decodeBGRX (struct PixelTransform* t);
+void decodeABGR (struct PixelTransform* t);
+void decodeXBGR (struct PixelTransform* t);
+void decodeGrey (struct PixelTransform* t);
+void decodeGrey3(struct PixelTransform* t);
+void decodeGreyA(struct PixelTransform* t);
+void decodeGreyX(struct PixelTransform* t);
+void decodeAGrey(struct PixelTransform* t);
+void decodeXGrey(struct PixelTransform* t);
+void decodeYUV  (struct PixelTransform* t);
+void decodeYUVA (struct PixelTransform* t);
+void decodeYUVX (struct PixelTransform* t);
+void decodeAYUV (struct PixelTransform* t);
+void decodeXYUV (struct PixelTransform* t);
 }
 
 namespace theoraplayer
 {
-	static void(*conversion_functions[])(struct TheoraPixelTransform*) = { 0,
+	static void(*conversion_functions[])(struct PixelTransform*) = { 0,
 		decodeRGB,
 		decodeRGBA,
 		decodeRGBX,
@@ -116,7 +116,7 @@ namespace theoraplayer
 		return this->buffer;
 	}
 
-	void VideoFrame::decode(struct TheoraPixelTransform* t)
+	void VideoFrame::decode(struct PixelTransform* t)
 	{
 		if (t->raw != NULL)
 		{

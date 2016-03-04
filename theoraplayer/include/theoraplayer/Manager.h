@@ -21,7 +21,7 @@
 #include "VideoClip.h"
 
 // forward class declarations
-class TheoraAudioInterfaceFactory;
+class AudioInterfaceFactory;
 
 namespace theoraplayer
 {
@@ -51,14 +51,14 @@ namespace theoraplayer
 		//! brief get version numbers
 		void getVersion(int* major, int* minor, int* revision);
 
-		inline TheoraAudioInterfaceFactory* getAudioInterfaceFactory() { return this->audioInterfaceFactory; }
+		inline AudioInterfaceFactory* getAudioInterfaceFactory() { return this->audioInterfaceFactory; }
 		/**
 		\brief you can set your own log function to recieve theora's log calls
 
 		This way you can integrate libtheoraplayer's log messages in your own
 		logging system, prefix them, mute them or whatever you want
 		*/
-		inline void setAudioInterfaceFactory(TheoraAudioInterfaceFactory* value) { this->audioInterfaceFactory = value; }
+		inline void setAudioInterfaceFactory(AudioInterfaceFactory* value) { this->audioInterfaceFactory = value; }
 
 		//! search registered clips by name
 		VideoClip* getVideoClipByName(const std::string& name);
@@ -81,7 +81,7 @@ namespace theoraplayer
 		std::list<VideoClip*> workLog;
 		int defaultPrecachedFramesCount;
 		Mutex* workMutex;
-		TheoraAudioInterfaceFactory* audioInterfaceFactory;
+		AudioInterfaceFactory* audioInterfaceFactory;
 
 		void _createWorkerThreads(int count);
 		void _destroyWorkerThreads();

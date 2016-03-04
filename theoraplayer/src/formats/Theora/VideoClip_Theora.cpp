@@ -11,8 +11,8 @@
 #include <memory.h>
 #include <string>
 
-#include "TheoraAudioInterface.h"
-#include "TheoraPixelTransform.h"
+#include "AudioInterface.h"
+#include "PixelTransform.h"
 
 #include "DataSource.h"
 #include "Exception.h"
@@ -31,7 +31,7 @@ namespace theoraplayer
 {
 	VideoClip_Theora::VideoClip_Theora(DataSource* data_source, TheoraOutputMode output_mode, int nPrecachedFrames, bool usePower2Stride) :
 		VideoClip(data_source, output_mode, nPrecachedFrames, usePower2Stride),
-		TheoraAudioPacketQueue()
+		AudioPacketQueue()
 	{
 		this->info.TheoraDecoder = NULL;
 		this->info.TheoraSetup = NULL;
@@ -158,8 +158,8 @@ namespace theoraplayer
 				frame->_setFrameNumber(frameNumber);
 				this->lastDecodedFrameNumber = frameNumber;
 				th_decode_ycbcr_out(this->info.TheoraDecoder, buff);
-				TheoraPixelTransform pixelTransform;
-				memset(&pixelTransform, 0, sizeof(TheoraPixelTransform));
+				PixelTransform pixelTransform;
+				memset(&pixelTransform, 0, sizeof(PixelTransform));
 				pixelTransform.y = buff[0].data; pixelTransform.yStride = buff[0].stride;
 				pixelTransform.u = buff[1].data; pixelTransform.uStride = buff[1].stride;
 				pixelTransform.v = buff[2].data; pixelTransform.vStride = buff[2].stride;
@@ -315,7 +315,7 @@ namespace theoraplayer
 			this->numAudioChannels = this->info.VorbisInfo.channels;
 			this->audioFrequency = (int) this->info.VorbisInfo.rate;
 			// create an audio interface instance if available
-			TheoraAudioInterfaceFactory* audioInterfaceFactory = theoraplayer::manager->getAudioInterfaceFactory();
+			AudioInterfaceFactory* audioInterfaceFactory = theoraplayer::manager->getAudioInterfaceFactory();
 			if (audioInterfaceFactory != NULL)
 			{
 				this->setAudioInterface(audioInterfaceFactory->createInstance(this, this->numAudioChannels, this->audioFrequency));

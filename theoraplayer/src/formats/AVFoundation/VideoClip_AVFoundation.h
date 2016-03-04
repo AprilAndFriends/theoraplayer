@@ -14,7 +14,7 @@
 #ifndef THEORAPLAYER_VIDEO_CLIP_AV_FOUNDATION_H
 #define THEORAPLAYER_VIDEO_CLIP_AV_FOUNDATION_H
 
-#include "TheoraAudioPacketQueue.h"
+#include "AudioPacketQueue.h"
 #include "VideoClip.h"
 
 #ifndef AVFOUNDATION_CLASSES_DEFINED
@@ -24,7 +24,7 @@ class AVAssetReaderTrackOutput;
 
 namespace theoraplayer
 {
-	class VideoClip_AVFoundation : public VideoClip, public TheoraAudioPacketQueue
+	class VideoClip_AVFoundation : public VideoClip, public AudioPacketQueue
 	{
 	protected:
 		bool loaded;

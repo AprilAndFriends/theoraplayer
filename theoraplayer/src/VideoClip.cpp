@@ -9,7 +9,7 @@
 #include <math.h>
 
 #include "Manager.h"
-#include "TheoraAudioInterface.h"
+#include "AudioInterface.h"
 
 #include "DataSource.h"
 #include "Exception.h"
@@ -540,7 +540,7 @@ namespace theoraplayer
 		return priority;
 	}
 
-	void VideoClip::setAudioInterface(TheoraAudioInterface* iface)
+	void VideoClip::setAudioInterface(AudioInterface* iface)
 	{
 		this->audioInterface = iface;
 		if (iface && !this->audioMutex)
@@ -554,7 +554,7 @@ namespace theoraplayer
 		}
 	}
 
-	TheoraAudioInterface* VideoClip::getAudioInterface()
+	AudioInterface* VideoClip::getAudioInterface()
 	{
 		return this->audioInterface;
 	}

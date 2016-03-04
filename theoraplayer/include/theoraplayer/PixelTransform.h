@@ -15,7 +15,7 @@
 
 // TODOth - move to Utility as internal object?
 
-struct TheoraPixelTransform
+struct PixelTransform
 {
 	unsigned char *raw, *y, *u, *v, *out;
 	unsigned int w, h, rawStride, yStride, uStride, vStride;

@@ -11,56 +11,56 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #include "yuv_util.h"
 #include "yuv_libyuv.h"
 
-void decodeRGB(struct TheoraPixelTransform* t)
+void decodeRGB(struct PixelTransform* t)
 {
 	I420ToRAW(t->y, t->yStride, t->u, t->uStride, t->v, t->vStride, t->out, t->w * 3, t->w, t->h);
 }
 
-void decodeRGBA(struct TheoraPixelTransform* t)
+void decodeRGBA(struct PixelTransform* t)
 {
 	I420ToABGR(t->y, t->yStride, t->u, t->uStride, t->v, t->vStride, t->out, t->w * 4, t->w, t->h);
 	_decodeAlpha(incOut(t, 3), t->w * 4);
 }
 
-void decodeRGBX(struct TheoraPixelTransform* t)
+void decodeRGBX(struct PixelTransform* t)
 {
     I420ToABGR(t->y, t->yStride, t->u, t->uStride, t->v, t->vStride, t->out, t->w * 4, t->w, t->h);
 }
 
-void decodeARGB(struct TheoraPixelTransform* t)
+void decodeARGB(struct PixelTransform* t)
 {
     I420ToBGRA(t->y, t->yStride, t->u, t->uStride, t->v, t->vStride, t->out, t->w * 4, t->w, t->h);
 	_decodeAlpha(t, t->w * 4);
 }
 
-void decodeXRGB(struct TheoraPixelTransform* t)
+void decodeXRGB(struct PixelTransform* t)
 {
     I420ToBGRA(t->y, t->yStride, t->u, t->uStride, t->v, t->vStride, t->out, t->w * 4, t->w, t->h);
 }
 
-void decodeBGR(struct TheoraPixelTransform* t)
+void decodeBGR(struct PixelTransform* t)
 {
 	I420ToRGB24(t->y, t->yStride, t->u, t->uStride, t->v, t->vStride, t->out, t->w * 3, t->w, t->h);
 }
 
-void decodeBGRA(struct TheoraPixelTransform* t)
+void decodeBGRA(struct PixelTransform* t)
 {
 	I420ToARGB(t->y, t->yStride, t->u, t->uStride, t->v, t->vStride, t->out, t->w * 4, t->w, t->h);
 	_decodeAlpha(incOut(t, 3), t->w * 4);
 }
 
-void decodeBGRX(struct TheoraPixelTransform* t)
+void decodeBGRX(struct PixelTransform* t)
 {
 	I420ToARGB(t->y, t->yStride, t->u, t->uStride, t->v, t->vStride, t->out, t->w * 4, t->w, t->h);
 }
 
-void decodeABGR(struct TheoraPixelTransform* t)
+void decodeABGR(struct PixelTransform* t)
 {
     I420ToRGBA(t->y, t->yStride, t->u, t->uStride, t->v, t->vStride, t->out, t->w * 4, t->w, t->h);
 	_decodeAlpha(t, t->w * 4);
 }
 
-void decodeXBGR(struct TheoraPixelTransform* t)
+void decodeXBGR(struct PixelTransform* t)
 {
 	I420ToRGBA(t->y, t->yStride, t->u, t->uStride, t->v, t->vStride, t->out, t->w * 4, t->w, t->h);
 }

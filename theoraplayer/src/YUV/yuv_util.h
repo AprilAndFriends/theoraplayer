@@ -9,9 +9,9 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 #ifndef _YUV_UTIL_h
 #define _YUV_UTIL_h
 
-#include "TheoraPixelTransform.h"
+#include "PixelTransform.h"
 
-struct TheoraPixelTransform* incOut(struct TheoraPixelTransform* t, int n);
-void _decodeAlpha(struct TheoraPixelTransform* t, int stride);
+struct PixelTransform* incOut(struct PixelTransform* t, int n);
+void _decodeAlpha(struct PixelTransform* t, int stride);
 
 #endif

@@ -18,7 +18,7 @@
 #include <theora/theoradec.h>
 #include <vorbis/vorbisfile.h>
 
-#include "TheoraAudioPacketQueue.h"
+#include "AudioPacketQueue.h"
 
 #include "DataSource.h"
 #include "VideoClip.h"
@@ -44,7 +44,7 @@ namespace theoraplayer
 		vorbis_comment   VorbisComment;
 	};
 
-	class VideoClip_Theora : public VideoClip, public TheoraAudioPacketQueue
+	class VideoClip_Theora : public VideoClip, public AudioPacketQueue
 	{
 	public:
 		VideoClip_Theora(DataSource* data_source, TheoraOutputMode output_mode, int nPrecachedFrames, bool usePower2Stride);

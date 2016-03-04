@@ -6,9 +6,9 @@
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
-#include "TheoraAudioInterface.h"
+#include "AudioInterface.h"
 
-#include "DataSource.h"
+#include "FileDataSource.h"
 #include "Exception.h"
 #include "FrameQueue.h"
 #include "Manager.h"
@@ -77,7 +77,7 @@ namespace theoraplayer
 
 	Manager* manager = NULL;
 
-	Manager::Manager(int workerThreadCount) : defaultPrecachedFramesCount(8), workMutex(new Mutex()) audioInterfaceFactory(NULL)
+	Manager::Manager(int workerThreadCount) : defaultPrecachedFramesCount(8), workMutex(new Mutex()), audioInterfaceFactory(NULL)
 	{
 		if (workerThreadCount < 1)
 		{

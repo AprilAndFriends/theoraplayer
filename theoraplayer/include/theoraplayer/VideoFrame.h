@@ -17,7 +17,7 @@
 #include "VideoClip.h"
 #include "VideoFrame.h"
 
-struct TheoraPixelTransform;
+struct PixelTransform;
 
 namespace theoraplayer
 {
@@ -53,7 +53,7 @@ namespace theoraplayer
 		void clear();
 
 		//! Called by VideoClip to decode a source buffer onto itself
-		virtual void decode(struct TheoraPixelTransform* t);
+		virtual void decode(struct PixelTransform* t);
 
 	protected:
 		VideoClip* parent;

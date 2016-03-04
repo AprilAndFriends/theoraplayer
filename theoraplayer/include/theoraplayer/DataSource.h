@@ -19,8 +19,6 @@
 
 #include "theoraplayerExport.h"
 
-// TODOth - split these into separate files
-
 namespace theoraplayer
 {
 	/**
@@ -49,62 +47,5 @@ namespace theoraplayer
 		virtual uint64_t getPosition() = 0;
 
 	};
-
-	/**
-		provides standard file IO
-	*/
-	class theoraplayerExport FileDataSource : public DataSource
-	{
-	public:
-		FileDataSource(std::string filename);
-		~FileDataSource();
-
-		uint64_t getSize();
-		uint64_t getPosition();
-		std::string getFilename() { return this->filename; }
-
-		std::string toString() { return this->filename; }
-
-		int read(void* output, int nBytes);
-		void seek(uint64_t byte_index);
-
-	private:
-		FILE* filePtr;
-		std::string filename;
-		uint64_t length;
-
-		void openFile();
-
-	};
-
-	/**
-		Pre-loads the entire file and streams from memory.
-		Very useful if you're continuously displaying a video and want to avoid disk reads.
-		Not very practical for large files.
-	*/
-	class theoraplayerExport MemoryDataSource : public DataSource
-	{
-	public:
-		MemoryDataSource(unsigned char* data, long size, const std::string& filename = "memory");
-		MemoryDataSource(std::string filename);
-		~MemoryDataSource();
-
-		uint64_t getSize();
-		uint64_t getPosition();
-		std::string getFilename() { return this->filename; }
-
-		int read(void* output, int bytes);
-		void seek(uint64_t byte_index);
-
-		inline std::string toString() { return "MEM:" + this->filename; }
-
-	private:
-		std::string filename;
-		uint64_t length;
-		uint64_t readPointer;
-		unsigned char* data;
-
-	};
-
 }
 #endif

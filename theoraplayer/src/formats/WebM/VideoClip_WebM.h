@@ -18,7 +18,7 @@
 #include <vorbis/vorbisfile.h>
 #include <theora/theoradec.h>
 
-#include "TheoraAudioPacketQueue.h"
+#include "AudioPacketQueue.h"
 
 #include "DataSource.h"
 #include "VideoClip.h"
@@ -35,7 +35,7 @@ namespace theoraplayer
 		struct WebmInputContext *webm_ctx;
 	};
 
-	class VideoClip_WebM : public VideoClip, public TheoraAudioPacketQueue
+	class VideoClip_WebM : public VideoClip, public AudioPacketQueue
 	{
 	public:
 		VideoClip_WebM(DataSource* data_source, TheoraOutputMode output_mode, int nPrecachedFrames, bool usePower2Stride);

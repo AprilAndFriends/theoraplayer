@@ -17,11 +17,9 @@
 
 #include "theoraplayerExport.h"
 
-// forward class declarations
-class TheoraAudioInterface;
-
 namespace theoraplayer
 {
+	// forward class declarations
 	class DataSource;
 	class FrameQueue;
 	class Manager;
@@ -29,6 +27,7 @@ namespace theoraplayer
 	class WorkerThread;
 	class Timer;
 	class VideoFrame;
+	class AudioInterface;
 
 	/**
 		format of the VideoFrame pixels. Affects decoding time
@@ -121,7 +120,7 @@ namespace theoraplayer
 		*/
 		VideoFrame* getNextFrame();
 
-		TheoraAudioInterface* getAudioInterface();
+		AudioInterface* getAudioInterface();
 
 		//! returns the size of the frame queue
 		int getNumPrecachedFrames();
@@ -153,7 +152,7 @@ namespace theoraplayer
 		//! replace the timer object with a new one
 		void setTimer(Timer* timer);
 
-		void setAudioInterface(TheoraAudioInterface* iface);
+		void setAudioInterface(AudioInterface* iface);
 
 		/**
 		\brief resize the frame queues
@@ -220,7 +219,7 @@ namespace theoraplayer
 
 	protected:
 		FrameQueue* frameQueue;
-		TheoraAudioInterface* audioInterface;
+		AudioInterface* audioInterface;
 		DataSource* stream;
 
 		Timer *timer, *defaultTimer;

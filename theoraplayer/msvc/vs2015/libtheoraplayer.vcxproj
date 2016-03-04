@@ -97,8 +97,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\AudioInterface.cpp" />
+    <ClCompile Include="..\..\src\AudioPacketQueue.cpp" />
     <ClCompile Include="..\..\src\DataSource.cpp" />
     <ClCompile Include="..\..\src\Exception.cpp" />
+    <ClCompile Include="..\..\src\FileDataSource.cpp" />
     <ClCompile Include="..\..\src\formats\FFmpeg\VideoClip_FFmpeg.cpp" />
     <ClCompile Include="..\..\src\formats\Theora\VideoClip_Theora.cpp" />
     <ClCompile Include="..\..\src\formats\WebM\MkvReader.cpp" />
@@ -106,6 +109,7 @@
     <ClCompile Include="..\..\src\formats\WebM\webmdec.cc" />
     <ClCompile Include="..\..\src\FrameQueue.cpp" />
     <ClCompile Include="..\..\src\Manager.cpp" />
+    <ClCompile Include="..\..\src\MemoryDataSource.cpp" />
     <ClCompile Include="..\..\src\Mutex.cpp" />
     <ClCompile Include="..\..\src\theoraplayer.cpp" />
     <ClCompile Include="..\..\src\Thread.cpp" />
@@ -165,8 +169,6 @@
     <ClCompile Include="..\..\src\YUV\libyuv\src\video_common.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\yuv_libyuv.c" />
     <ClCompile Include="..\..\src\YUV\yuv_util.c" />
-    <ClCompile Include="..\..\src\TheoraAudioInterface.cpp" />
-    <ClCompile Include="..\..\src\TheoraAudioPacketQueue.cpp" />
     <ClCompile Include="..\..\src\YUV\C\yuv420_grey_c.c" />
     <ClCompile Include="..\..\src\YUV\C\yuv420_rgb_c.c" />
     <ClCompile Include="..\..\src\YUV\C\yuv420_yuv_c.c" />
@@ -177,13 +179,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\theoraplayer\AudioInterface.h" />
+    <ClInclude Include="..\..\include\theoraplayer\AudioInterfaceFactory.h" />
+    <ClInclude Include="..\..\include\theoraplayer\AudioPacketQueue.h" />
     <ClInclude Include="..\..\include\theoraplayer\DataSource.h" />
     <ClInclude Include="..\..\include\theoraplayer\Exception.h" />
+    <ClInclude Include="..\..\include\theoraplayer\FileDataSource.h" />
     <ClInclude Include="..\..\include\theoraplayer\FrameQueue.h" />
     <ClInclude Include="..\..\include\theoraplayer\Manager.h" />
-    <ClInclude Include="..\..\include\theoraplayer\TheoraAudioInterface.h" />
-    <ClInclude Include="..\..\include\theoraplayer\TheoraAudioPacketQueue.h" />
-    <ClInclude Include="..\..\include\theoraplayer\TheoraPixelTransform.h" />
+    <ClInclude Include="..\..\include\theoraplayer\MemoryDataSource.h" />
+    <ClInclude Include="..\..\include\theoraplayer\PixelTransform.h" />
     <ClInclude Include="..\..\include\theoraplayer\theoraplayer.h" />
     <ClInclude Include="..\..\include\theoraplayer\theoraplayerExport.h" />
     <ClInclude Include="..\..\include\theoraplayer\Timer.h" />
