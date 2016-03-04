@@ -440,7 +440,7 @@ void TheoraVideoClip_AVFoundation::doSeek()
 	th_writelog(this->name + " [seek]: seeking to frame " + str(this->seekFrame));
 #endif
 	int frame;
-	float time = this->seekFrame / getFPS();
+	float time = this->seekFrame / getFps();
 	this->timer->seek(time);
 	bool paused = this->timer->isPaused();
 	if (!paused) this->timer->pause(); // pause until seeking is done
