@@ -90,6 +90,6 @@ void getMultiTextureExtensionFuncPointers();
 void enableShader();
 void disableShader();
 
-void getCursorPos(float* outX, float* outY);
+void getCursorPosition(float& outX, float& outY);
 
 #endif

@@ -1,22 +1,23 @@
-#pragma once
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+/// 
+/// @section DESCRIPTION
+/// 
+/// Demonstrates generic video.
+
+#ifndef THEORAPLAYER_DEMOS_GLUT_PLAYER_H
+#define THEORAPLAYER_DEMOS_GLUT_PLAYER_H
+
 #include "demo_basecode.h"
 
-#include <theoraplayer/TheoraPlayer.h>
-#include <theoraplayer/DataSource.h>
+namespace glutPlayer
+{
+	extern Demo demo;
 
-//#define BENCHMARK // uncomment this to benchmark decoding times
-#ifdef BENCHMARK
-#include <time.h>
-#include <theoraplayer/TheoraFrameQueue.h>
-#endif
-
-extern void glutplayer_init();
-extern void glutplayer_destroy();
-extern void glutplayer_update(float);
-extern void glutplayer_draw();
-extern void glutplayer_setDebugTitle(char* out);
-extern void glutplayer_onKeyPress(int key);
-extern void glutplayer_onClick(float x, float y);
-#ifdef BENCHMARK
-	extern void glutplayer_benchmark(const char* filename);
+}
 #endif

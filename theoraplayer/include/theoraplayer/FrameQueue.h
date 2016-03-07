@@ -15,12 +15,11 @@
 
 #include <list>
 
-#include "Mutex.h"
 #include "theoraplayerExport.h"
-#include "Thread.h"
 
 namespace theoraplayer
 {
+	class Mutex;
 	class VideoClip;
 	class VideoFrame;
 
@@ -64,7 +63,7 @@ namespace theoraplayer
 		//! return whether all frames in the queue are ready for display
 		bool isFull();
 
-		Mutex* getMutex() { return &this->mutex; }
+		Mutex* getMutex() { return this->mutex; }
 
 		//! returns the internal frame queue. Warning: Always lock / unlock queue's mutex before accessing frames directly!
 		std::list<VideoFrame*>& _getFrameQueue();
@@ -92,7 +91,7 @@ namespace theoraplayer
 	protected:
 		std::list<VideoFrame*> queue;
 		VideoClip* parent;
-		Mutex mutex;
+		Mutex* mutex;
 
 		//! implementation function that returns a VideoFrame instance
 		VideoFrame* createFrameInstance(VideoClip* clip);

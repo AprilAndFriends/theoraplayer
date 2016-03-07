@@ -158,7 +158,7 @@ namespace theoraplayer
 		int currentWorkerThreads = this->getWorkerThreadCount();
 		if (value != currentWorkerThreads)
 		{
-			log("changing number of worker threats to: " + str(value));
+			log("Changing number of worker threads to: " + str(value));
 			if (value > currentWorkerThreads)
 			{
 				this->_createWorkerThreads(value - currentWorkerThreads);
@@ -319,7 +319,7 @@ namespace theoraplayer
 	void Manager::update(float timeDelta)
 	{
 		Mutex::ScopeLock lock(this->workMutex);
-		foreach(VideoClip*, it, this->clips)
+		foreach (VideoClip*, it, this->clips)
 		{
 			(*it)->update(timeDelta);
 			(*it)->decodedAudioCheck();

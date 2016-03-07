@@ -12,22 +12,14 @@
 /// 
 /// Demostrates how to simulate light using videos.
 
-#ifndef THEORAPLAYER_DEMOS_LIGHT_H
-#define THEORAPLAYER_DEMOS_LIGHT_H
+#ifndef THEORAPLAYER_DEMOS_LIGHT_MAP_H
+#define THEORAPLAYER_DEMOS_LIGHT_MAP_H
 
 #include "demo_basecode.h"
 
-namespace light
+namespace lightMap
 {
 	extern Demo demo;
-
-	extern void init();
-	extern void destroy();
-	extern void update(float timeDelta);
-	extern void draw();
-	extern void setDebugTitle(char* out);
-	extern void onKeyPress(int key);
-	extern void onClick(float x, float y);
 
 }
 #endif

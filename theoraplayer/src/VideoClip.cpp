@@ -15,6 +15,7 @@
 #include "Exception.h"
 #include "FrameQueue.h"
 #include "Mutex.h"
+#include "Thread.h"
 #include "Timer.h"
 #include "Utility.h"
 #include "VideoClip.h"

@@ -41,7 +41,7 @@
     <ClCompile Include="..\..\demos\opengl_demos\demo_composite.cpp" />
     <ClCompile Include="..\..\demos\opengl_demos\demo_environment.cpp" />
     <ClCompile Include="..\..\demos\opengl_demos\demo_glutPlayer.cpp" />
-    <ClCompile Include="..\..\demos\opengl_demos\demo_light.cpp" />
+    <ClCompile Include="..\..\demos\opengl_demos\demo_lightMap.cpp" />
     <ClCompile Include="..\..\demos\opengl_demos\demo_menu.cpp" />
     <ClCompile Include="..\..\demos\opengl_demos\demo_multiple.cpp" />
     <ClCompile Include="..\..\demos\opengl_demos\demo_seek.cpp" />
@@ -58,7 +58,7 @@
     <ClInclude Include="..\..\demos\opengl_demos\demo_composite.h" />
     <ClInclude Include="..\..\demos\opengl_demos\demo_environment.h" />
     <ClInclude Include="..\..\demos\opengl_demos\demo_glutPlayer.h" />
-    <ClInclude Include="..\..\demos\opengl_demos\demo_light.h" />
+    <ClInclude Include="..\..\demos\opengl_demos\demo_lightMap.h" />
     <ClInclude Include="..\..\demos\opengl_demos\demo_menu.h" />
     <ClInclude Include="..\..\demos\opengl_demos\demo_multiple.h" />
     <ClInclude Include="..\..\demos\opengl_demos\demo_seek.h" />

@@ -28,9 +28,6 @@
     <ClCompile Include="..\..\demos\opengl_demos\demo_av.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\demos\opengl_demos\demo_light.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\demos\opengl_demos\demo_menu.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -55,6 +52,9 @@
     <ClCompile Include="..\..\demos\opengl_demos\demo_glutPlayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\demos\opengl_demos\demo_lightMap.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\demos\demo_basecode.h">
@@ -73,9 +73,6 @@
       <Filter>basecode</Filter>
     </ClInclude>
     <ClInclude Include="..\..\demos\opengl_demos\demo_av.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\demos\opengl_demos\demo_light.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\demos\opengl_demos\demo_menu.h">
@@ -100,6 +97,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\..\demos\opengl_demos\demo_glutPlayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\opengl_demos\demo_lightMap.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

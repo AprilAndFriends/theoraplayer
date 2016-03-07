@@ -12,7 +12,7 @@
 /// 
 /// @section DESCRIPTION
 /// 
-/// Demonstrats composite video rendering with an alpha channel.
+/// Demonstrates composite video rendering with an alpha channel.
 
 #ifndef THEORAPLAYER_DEMOS_COMPOSITE_H
 #define THEORAPLAYER_DEMOS_COMPOSITE_H

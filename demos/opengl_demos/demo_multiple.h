@@ -19,13 +19,5 @@ namespace multiple
 {
 	extern Demo demo;
 
-	extern void init();
-	extern void destroy();
-	extern void update(float timeDelta);
-	extern void draw();
-	extern void setDebugTitle(char* out);
-	extern void onKeyPress(int key);
-	extern void onClick(float x, float y);
-
 }
 #endif

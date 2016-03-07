@@ -20,7 +20,6 @@ namespace environment
 {
 	unsigned int textureId = 0;
 	theoraplayer::VideoClip* clip = NULL;
-	bool started = false;
 	float angle = 0.0f;
 	ObjModel teapot;
 
@@ -38,8 +37,10 @@ namespace environment
 		glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
 		glDisable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LESS);
+		// TODOth - fix this
+		//glEnable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		//glDepthFunc(GL_LESS);
 		glEnable(GL_COLOR_MATERIAL);
 	}
 
@@ -64,10 +65,12 @@ namespace environment
 
 	void draw()
 	{
-		glBindTexture(GL_TEXTURE_2D, textureId);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glLoadIdentity();
-		gluLookAt(0, 2000, 1000, 0, 0, 0, 0, -1, 0);
-		glRotatef(angle, 0, 0, 1);
+		// TODOth - fix this
+		//gluLookAt(0.0, 2000.0, 1000.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0);
+		//glRotatef(angle, 0.0f, 0.0f, 1.0f);
+		glBindTexture(GL_TEXTURE_2D, textureId);
 		theoraplayer::VideoFrame* frame = clip->getNextFrame();
 		if (frame != NULL)
 		{

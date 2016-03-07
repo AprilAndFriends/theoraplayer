@@ -11,23 +11,26 @@
 #include "FrameQueue.h"
 #include "Mutex.h"
 #include "theoraplayer.h"
+#include "Thread.h"
 #include "Utility.h"
 #include "VideoFrame.h"
 
 namespace theoraplayer
 {
-	FrameQueue::FrameQueue(VideoClip* parent)
+	FrameQueue::FrameQueue(VideoClip* parent) : mutex(new Mutex())
 	{
 		this->parent = parent;
 	}
 
 	FrameQueue::~FrameQueue()
 	{
+		// TODOth - is this safe to delete without a mutex lock?
 		foreach_l (VideoFrame*, it, this->queue)
 		{
 			delete (*it);
 		}
 		this->queue.clear();
+		delete this->mutex;
 	}
 
 	VideoFrame* FrameQueue::createFrameInstance(VideoClip* clip)
@@ -43,7 +46,7 @@ namespace theoraplayer
 
 	void FrameQueue::setSize(int n)
 	{
-		Mutex::ScopeLock lock(&this->mutex);
+		Mutex::ScopeLock lock(this->mutex);
 		if (this->queue.size() > 0)
 		{
 			foreach_l (VideoFrame*, it, this->queue)
@@ -82,7 +85,7 @@ namespace theoraplayer
 
 	VideoFrame* FrameQueue::getFirstAvailableFrame()
 	{
-		Mutex::ScopeLock lock(&this->mutex);
+		Mutex::ScopeLock lock(this->mutex);
 		VideoFrame* frame = this->_getFirstAvailableFrame();
 		lock.release();
 		return frame;
@@ -90,7 +93,7 @@ namespace theoraplayer
 
 	void FrameQueue::clear()
 	{
-		Mutex::ScopeLock lock(&this->mutex);
+		Mutex::ScopeLock lock(this->mutex);
 		foreach_l (VideoFrame*, it, this->queue)
 		{
 			(*it)->clear();
@@ -112,7 +115,7 @@ namespace theoraplayer
 
 	void FrameQueue::pop(int n)
 	{
-		Mutex::ScopeLock lock(&this->mutex);
+		Mutex::ScopeLock lock(this->mutex);
 		this->_pop(n);
 		lock.release();
 	}
@@ -120,7 +123,7 @@ namespace theoraplayer
 	VideoFrame* FrameQueue::requestEmptyFrame()
 	{
 		VideoFrame* frame = NULL;
-		Mutex::ScopeLock lock(&this->mutex);
+		Mutex::ScopeLock lock(this->mutex);
 		foreach_l (VideoFrame*, it, this->queue)
 		{
 			if (!(*it)->inUse)
@@ -137,38 +140,38 @@ namespace theoraplayer
 
 	int FrameQueue::getUsedCount()
 	{
-		Mutex::ScopeLock lock(&this->mutex);
-		int n = 0;
+		Mutex::ScopeLock lock(this->mutex);
+		int result = 0;
 		foreach_l (VideoFrame*, it, this->queue)
 		{
 			if ((*it)->inUse)
 			{
-				++n;
+				++result;
 			}
 		}
 		lock.release();
-		return n;
+		return result;
 	}
 
 	int FrameQueue::_getReadyCount()
 	{
-		int n = 0;
+		int result = 0;
 		foreach_l (VideoFrame*, it, this->queue)
 		{
 			if ((*it)->ready)
 			{
-				++n;
+				++result;
 			}
 		}
-		return n;
+		return result;
 	}
 
 	int FrameQueue::getReadyCount()
 	{
-		Mutex::ScopeLock lock(&this->mutex);
-		int n = this->_getReadyCount();
+		Mutex::ScopeLock lock(this->mutex);
+		int result = this->_getReadyCount();
 		lock.release();
-		return n;
+		return result;
 	}
 
 	bool FrameQueue::isFull()

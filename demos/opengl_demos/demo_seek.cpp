@@ -1,96 +1,111 @@
-#if 0
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+
+#include <theoraplayer/FrameQueue.h>
+#include <theoraplayer/Manager.h>
+#include <theoraplayer/MemoryDataSource.h>
+#include <theoraplayer/theoraplayer.h>
+#include <theoraplayer/VideoClip.h>
+#include <theoraplayer/VideoFrame.h>
+
 #include "demo_seek.h"
-#include "theoraplayer/MemoryDataSource.h"
-#include "theoraplayer/theoraplayer.h"
-#include "theoraplayer/VideoFrame.h"
+#include "util.h"
 
-using namespace theoraplayer;
-
-unsigned int tex_id_seek;
-VideoClip* clip_seek;
-bool started_seek = 1, needsSeek = 1;
-int cFrame_seek = 0, nWrongSeeks = 0;
-float delay = 0;
-
-void seek_draw()
+namespace seek
 {
-	glBindTexture(GL_TEXTURE_2D, tex_id_seek);
+	unsigned int textureId = 0;
+	theoraplayer::VideoClip* clip = NULL;
+	bool needsSeek = true;
+	int cFrame = 0;
+	int wrongSeeks = 0;
+	float delay = 0.0f;
 
-	if (!needsSeek)
+	void init()
 	{
-		VideoFrame* f = clip_seek->getNextFrame();
-		if (f)
+		clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/bunny" + resourceExtension), theoraplayer::TH_RGB, 4);
+		clip->setAutoRestart(true);
+		textureId = createTexture(potCeil(clip->getWidth()), potCeil(clip->getHeight()));
+	}
+
+	void destroy()
+	{
+		theoraplayer::manager->destroyVideoClip(clip);
+		clip = NULL;
+		glDeleteTextures(1, &textureId);
+		textureId = 0;
+	}
+
+	void update(float timeDelta)
+	{
+		if (needsSeek)
 		{
-			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, clip_seek->getWidth(), f->getHeight(), GL_RGB, GL_UNSIGNED_BYTE, f->getBuffer());
-			needsSeek = 1;
-			if (f->getFrameNumber() != cFrame_seek)
-				nWrongSeeks++;
-			cFrame_seek++;
-			if (cFrame_seek >= clip_seek->getNumFrames()) cFrame_seek = 0;
-			printf("Displayed frame %d\n", (int)f->getFrameNumber());
-			clip_seek->popFrame();
+			delay += timeDelta;
+			if (delay >= 0.0f)
+			{
+				delay = 0.0f;
+				printf("Requesting seek to frame %d\n", cFrame);
+				clip->seekToFrame(cFrame);
+				needsSeek = false;
+			}
 		}
 	}
 
-
-	float w = clip_seek->getWidth(), h = clip_seek->getHeight();
-	float tw = nextPow2(w), th = nextPow2(h);
-
-	glEnable(GL_TEXTURE_2D);
-	if (shaderActive) enableShader();
-	drawTexturedQuad(tex_id_seek, 0, 0, 800, 600, w / tw, h / th);
-	if (shaderActive) disableShader();
-
-	glDisable(GL_TEXTURE_2D);
-	drawColoredQuad(0, 570, 800, 30, 0, 0, 0, 1);
-	drawWiredQuad(0, 570, 800, 30, 1, 1, 1, 1);
-
-	float x = clip_seek->getTimePosition() / clip_seek->getDuration();
-	drawColoredQuad(3, 573, 794 * x, 24, 1, 1, 1, 1);
-}
-
-void seek_update(float timeDelta)
-{
-	mgr_seek->update(timeDelta / 10);
-	if (needsSeek)
+	void draw()
 	{
-		delay += timeDelta;
-		if (delay >= 0.0f)
+		glBindTexture(GL_TEXTURE_2D, textureId);
+		if (!needsSeek)
 		{
-			delay = 0;
-			printf("Requesting seek to frame %d\n", cFrame_seek);
-			clip_seek->seekToFrame(cFrame_seek);
-			needsSeek = 0;
+			theoraplayer::VideoFrame* frame = clip->getNextFrame();
+			if (frame != NULL)
+			{
+				glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, clip->getWidth(), frame->getHeight(), GL_RGB, GL_UNSIGNED_BYTE, frame->getBuffer());
+				needsSeek = true;
+				if (frame->getFrameNumber() != cFrame)
+				{
+					++wrongSeeks;
+				}
+				++cFrame;
+				if (cFrame >= clip->getNumFrames())
+				{
+					cFrame = 0;
+				}
+				printf("Displayed frame %d\n", (int)frame->getFrameNumber());
+				clip->popFrame();
+			}
 		}
+		float w = clip->getSubFrameWidth();
+		float h = clip->getSubFrameHeight();
+		float sx = clip->getSubFrameOffsetX();
+		float sy = clip->getSubFrameOffsetY();
+		float tw = potCeil(w);
+		float th = potCeil(h);
+		glEnable(GL_TEXTURE_2D);
+		if (shaderActive)
+		{
+			enableShader();
+		}
+		drawTexturedQuad(textureId, 0.0f, 0.0f, 800.0f, 570.0f, w / tw, h / th, sx / tw, sy / th);
+		if (shaderActive)
+		{
+			disableShader();
+		}
+		glDisable(GL_TEXTURE_2D);
+		drawColoredQuad(0.0f, 570.0f, 800.0f, 30.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+		drawWiredQuad(0.0f, 570.0f, 800.0f, 29.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+		float x = clip->getTimePosition() / clip->getDuration();
+		drawColoredQuad(3.0f, 573.0f, 794.0f * x, 24.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
-}
 
-void seek_onKeyPress(int key)
-{
+	void setDebugTitle(char* out)
+	{
+		sprintf(out, " (%dx%d@%d) %d wrong seeks", clip->getWidth(), clip->getHeight(), (int)clip->getFps(), wrongSeeks);
+	}
 
-}
-
-void seek_onClick(float x, float y)
-{
+	Demo demo = { init, destroy, update, draw, setDebugTitle, NULL, NULL };
 
 }
-
-void seek_setDebugTitle(char* out)
-{
-	sprintf(out, " (%dx%d@%d) %d wrong seeks", clip_seek->getWidth(), clip_seek->getHeight(), (int)clip_seek->getFps(), nWrongSeeks);
-}
-
-void seek_init()
-{
-	theoraplayer::init(1);
-	clip_seek = mgr_seek->createVideoClip(new MemoryDataSource("media/bunny" + resourceExtension), TH_RGB, 4);
-	clip_seek->setAutoRestart(1);
-
-	tex_id_seek = createTexture(nextPow2(clip_seek->getWidth()), nextPow2(clip_seek->getHeight()));
-}
-
-void seek_destroy()
-{
-	theoraplayer::destroy();
-}
-#endif

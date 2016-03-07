@@ -69,11 +69,11 @@ void destroy()
 
 void update(float timeDelta)
 {
+	theoraplayer::manager->update(timeDelta);
 	if (currentDemo->update != NULL)
 	{
 		(*currentDemo->update)(timeDelta);
 	}
-	theoraplayer::manager->update(timeDelta);
 }
 
 void draw()
@@ -108,7 +108,7 @@ void onClick(float x, float y)
 	}
 }
 
-void getCursorPos(float& outX, float& outY)
+void getCursorPosition(float& outX, float& outY)
 {
 	outX = mx;
 	outY = my;

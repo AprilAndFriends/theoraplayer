@@ -10,7 +10,7 @@
 #include "demo_composite.h"
 #include "demo_environment.h"
 #include "demo_glutPlayer.h"
-#include "demo_light.h"
+#include "demo_lightMap.h"
 #include "demo_menu.h"
 #include "demo_multiple.h"
 #include "demo_seek.h"
@@ -68,14 +68,12 @@ namespace menu
 		}
 		switch (selected)
 		{
-#if 0
 		case 1:		changeDemo(&glutPlayer::demo);		break;
 		case 2:		changeDemo(&spriteAnimation::demo);	break;
 		case 3:		changeDemo(&multiple::demo);		break;
 		case 4:		changeDemo(&seek::demo);			break;
 		case 5:		changeDemo(&tv::demo);				break;
-		case 6:		changeDemo(&light::demo);			break;
-#endif
+		case 6:		changeDemo(&lightMap::demo);		break;
 		case 7:		changeDemo(&av::demo);				break;
 		case 8:		changeDemo(&composite::demo);		break;
 		case 9:		changeDemo(&environment::demo);		break;
