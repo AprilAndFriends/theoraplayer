@@ -41,11 +41,15 @@ namespace theoraplayer
 		}
 #endif
 		bool decoded = false;
-		while (self->executing)
+		while (self->executing && self->isRunning())
 		{
 			self->clip = theoraplayer::manager->_requestWork(self);
 			if (self->clip == NULL)
 			{
+				if (!self->executing || !self->isRunning()) // don't pause if a destruction was given
+				{
+					break;
+				}
 				Thread::sleep(100.0f);
 				continue;
 			}

@@ -84,6 +84,7 @@ namespace theoraplayer
 
 		void _createWorkerThreads(int count);
 		void _destroyWorkerThreads();
+		void _destroyWorkerThreads(int count);
 		/**
 		* Called by WorkerThread to request a VideoClip instance to work on decoding
 		*/

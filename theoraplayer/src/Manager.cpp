@@ -155,11 +155,18 @@ namespace theoraplayer
 		{
 			value = 1;
 		}
-		if (value != this->getWorkerThreadCount())
+		int currentWorkerThreads = this->getWorkerThreadCount();
+		if (value != currentWorkerThreads)
 		{
 			log("changing number of worker threats to: " + str(value));
-			this->_destroyWorkerThreads();
-			this->_createWorkerThreads(value);
+			if (value > currentWorkerThreads)
+			{
+				this->_createWorkerThreads(value - currentWorkerThreads);
+			}
+			else
+			{
+				this->_destroyWorkerThreads(currentWorkerThreads - value);
+			}
 		}
 	}
 
@@ -342,6 +349,19 @@ namespace theoraplayer
 			delete (*it);
 		}
 		this->workerThreads.clear();
+	}
+
+	void Manager::_destroyWorkerThreads(int count)
+	{
+		WorkerThread* thread = NULL;
+		while (count > 0)
+		{
+			thread = this->workerThreads.back();
+			thread->join();
+			delete thread;
+			this->workerThreads.pop_back();
+			--count;
+		}
 	}
 
 	VideoClip* Manager::_requestWork(WorkerThread* caller)
