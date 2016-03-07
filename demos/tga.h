@@ -1,14 +1,20 @@
-/************************************************************************************
-This source file is part of the Theora Video Playback Library
-For latest info, see http://libtheoraplayer.sourceforge.net/
-*************************************************************************************
-Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
-This program is free software; you can redistribute it and/or modify it under
-the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
-*************************************************************************************/
-#ifndef _TGA_H
-#define _TGA_H
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+/// 
+/// @section DESCRIPTION
+/// 
+/// This file contains simple uncompressed OpenGL TGA texture file loading code.
+/// The reason TGA format was choosed for libtheoraplayer's demos is because it's a simple
+/// and portable format.
 
-unsigned int loadTexture(const char* filename, int* w_out = 0, int* h_out = 0);
+#ifndef THEORAYPLAYER_DEMOS_TGA_H
+#define THEORAYPLAYER_DEMOS_TGA_H
+
+unsigned int loadTexture(const char* filename, int* outWidth = NULL, int* outHeight = NULL);
 
 #endif

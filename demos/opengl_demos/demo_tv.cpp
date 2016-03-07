@@ -1,3 +1,4 @@
+#if 0
 #include <theoraplayer/MemoryDataSource.h>
 #include <theoraplayer/theoraplayer.h>
 #include <theoraplayer/VideoFrame.h>
@@ -81,7 +82,7 @@ void tv_update(float timeDelta)
 	theoraplayer::manager->update(timeDelta);
 }
 
-void tv_OnKeyPress(int key)
+void tv_onKeyPress(int key)
 {
 	if (key == ' ')
 	{
@@ -101,7 +102,7 @@ void tv_OnKeyPress(int key)
 	}
 }
 
-void tv_OnClick(float x, float y)
+void tv_onClick(float x, float y)
 {
 	if (y > 570)
 	{
@@ -142,3 +143,4 @@ void tv_destroy()
 {
 	theoraplayer::destroy();
 }
+#endif

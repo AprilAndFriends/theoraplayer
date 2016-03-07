@@ -34,7 +34,7 @@ public:
 
 	void insertData(float* data,int nSamples);	
 
-	void update(float time_increase);
+	void update(float timeDelta);
 
 	void pause();
 	void play();

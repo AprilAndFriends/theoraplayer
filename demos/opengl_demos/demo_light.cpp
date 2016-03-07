@@ -1,3 +1,4 @@
+#if 0
 #include "demo_light.h"
 
 #include "theoraplayer/MemoryDataSource.h"
@@ -7,7 +8,6 @@
 using namespace theoraplayer;
 
 unsigned int tex_id_light, diffuse_map;
-Manager* mgr_light;
 VideoClip* clip_light;
 bool started_light = 1, diffuse_enabled = 1, lighting_enabled = 1;
 
@@ -88,23 +88,23 @@ void light_draw()
 	}
 }
 
-void light_update(float time_increase)
+void light_update(float timeDelta)
 {
 	float x, y;
 	getCursorPos(&x, &y);
 	angle_x = -4 * 3.14f*x / windowWidth;
 	angle_y = 1500 * (y - 300) / windowHeight;
 
-	mgr_light->update(time_increase);
+	mgr_light->update(timeDelta);
 }
 
-void light_OnKeyPress(int key)
+void light_onKeyPress(int key)
 {
 	if (key == ' ') diffuse_enabled = !diffuse_enabled;
 	if (key == 13) lighting_enabled = !lighting_enabled; // 13 = ENTER key
 }
 
-void light_OnClick(float x, float y)
+void light_onClick(float x, float y)
 {
 
 }
@@ -128,7 +128,7 @@ void light_init()
 	fclose(f);
 
 	FOVY = 54.495f;
-	mgr_light = new Manager(1);
+	theoraplayer::manager->setWorkerThreadCount(1);
 	clip_light = mgr_light->createVideoClip(new MemoryDataSource("media/lighting/lighting" + resourceExtension), TH_RGB);
 	clip_light->setAutoRestart(1);
 	//clip_light->setPlaybackSpeed(0.5f);
@@ -148,5 +148,5 @@ void light_init()
 
 void light_destroy()
 {
-	delete mgr_light;
 }
+#endif

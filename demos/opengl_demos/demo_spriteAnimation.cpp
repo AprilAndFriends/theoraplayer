@@ -1,3 +1,4 @@
+#if 0
 #include "demo_spriteanim.h"
 #include "theoraplayer/MemoryDataSource.h"
 #include "theoraplayer/theoraplayer.h"
@@ -6,7 +7,6 @@
 using namespace theoraplayer;
 
 unsigned int tex_id_spriteanim;
-Manager* mgr_spriteanim;
 VideoClip* clips[8];
 bool started_spriteanim = 1;
 int cClip = 0;
@@ -43,7 +43,7 @@ void spriteanim_draw()
 	drawTexturedQuad(tex_id_spriteanim, 298, 150, 203, 300, 203.0f / 256.0f, 300.0f / 512.0f);
 }
 
-void spriteanim_update(float time_increase)
+void spriteanim_update(float timeDelta)
 {
 	int newindex = -1;
 	float x, y;
@@ -78,14 +78,14 @@ void spriteanim_update(float time_increase)
 		cClip = newindex;
 		clips[cClip]->play();
 	}
-	mgr_spriteanim->update(time_increase);
+	mgr_spriteanim->update(timeDelta);
 }
 
-void spriteanim_OnKeyPress(int key)
+void spriteanim_onKeyPress(int key)
 {
 }
 
-void spriteanim_OnClick(float x, float y)
+void spriteanim_onClick(float x, float y)
 {
 }
 
@@ -103,7 +103,7 @@ void spriteanim_setDebugTitle(char* out)
 
 void spriteanim_init()
 {
-	mgr_spriteanim = new Manager(1);
+	theoraplayer::init(1);
 	std::string orientations[] = { "N","NE","E","SE","S","SW","W","NW" };
 	for (int i = 0;i<8;i++)
 	{
@@ -122,5 +122,6 @@ void spriteanim_init()
 
 void spriteanim_destroy()
 {
-	delete mgr_spriteanim;
+	theoraplayer::destroy();
 }
+#endif

@@ -1,3 +1,4 @@
+#if 0
 #include <theoraplayer/MemoryDataSource.h>
 #include <theoraplayer/theoraplayer.h>
 #include <theoraplayer/VideoFrame.h>
@@ -50,7 +51,7 @@ void glutplayer_draw()
 	drawColoredQuad(3.0f, 573.0f, 794.0f * x, 24.0f, 1.0f, 1.0f, 1.0f, 1.0f);
 }
 
-void glutplayer_update(float time_increase)
+void glutplayer_update(float timeDelta)
 {
 	if (started)
 	{
@@ -61,10 +62,10 @@ void glutplayer_update(float time_increase)
 		}
 		started = false;
 	}
-	theoraplayer::manager->update(time_increase);
+	theoraplayer::manager->update(timeDelta);
 }
 
-void glutplayer_OnKeyPress(int key)
+void glutplayer_onKeyPress(int key)
 {
 	if (key == ' ')
 	{
@@ -90,7 +91,7 @@ void glutplayer_OnKeyPress(int key)
 	}
 }
 
-void glutplayer_OnClick(float x, float y)
+void glutplayer_onClick(float x, float y)
 {
 	if (y > 570)
 	{
@@ -153,3 +154,4 @@ void glutplayer_destroy()
 {
 	theoraplayer::destroy();
 }
+#endif

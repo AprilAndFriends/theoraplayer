@@ -72,9 +72,6 @@ namespace theoraplayer
 		friend class VideoFrame;
 		friend class WorkerThread;
 
-		VideoClip(DataSource* data_source, TheoraOutputMode output_mode, int nPrecachedFrames, bool usePower2Stride);
-		virtual ~VideoClip();
-
 		std::string getName();
 		//! Returns the string name of the decoder backend (eg. Theora, AVFoundation)
 		virtual std::string getDecoderName() = 0;
@@ -122,6 +119,7 @@ namespace theoraplayer
 
 		AudioInterface* getAudioInterface();
 
+		// TODOth - rename these
 		//! returns the size of the frame queue
 		int getNumPrecachedFrames();
 		//! returns the number of ready frames in the frame queue
@@ -256,6 +254,9 @@ namespace theoraplayer
 
 		Mutex* audioMutex; //! syncs audio decoding and extraction
 		Mutex* threadAccessMutex;
+
+		VideoClip(DataSource* data_source, TheoraOutputMode output_mode, int nPrecachedFrames, bool usePower2Stride);
+		virtual ~VideoClip();
 
 		/**
 		* Get the priority of a video clip. based on a forumula that includes user

@@ -1,17 +1,11 @@
-/************************************************************************************
-This source file is part of the Theora Video Playback Library
-For latest info, see http://libtheoraplayer.sourceforge.net/
-*************************************************************************************
-Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
-This program is free software; you can redistribute it and/or modify it under
-the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
-*************************************************************************************
- 
-This file contains simple uncompressed OpenGL TGA texture file loading code.
-The reason TGA format was choosed for libtheoraplayer's demos is because it's a simple
-and portable format.
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
-*************************************************************************************/
 #include "demo_basecode.h"
 
 // tga header info taken from http://www.organicbit.com/closecombat/formats/tga.html
@@ -35,44 +29,53 @@ struct TGAHEADER
     // pixel data follows header
 };
 
-unsigned int loadTexture(const char* filename, int* w_out, int* h_out)
+unsigned int loadTexture(const char* filename, int* outWidth, int* outHeight)
 {
+	FILE* file = fopen(filename, "rb");
+	if (file == NULL)
+	{
+		return 0;
+	}
 	TGAHEADER header;
-	
-	FILE* f = fopen(filename, "rb");
-	if (!f) return 0;
-	
-	fread(&header.identsize, 1, 1, f);
-	fread(&header.colourmaptype, 1, 1, f);
-	fread(&header.imagetype, 1, 1, f);
-	fseek(f, 9, SEEK_CUR);
-	fread(&header.width, 1, 2, f);
-	fread(&header.height, 1, 2, f);
-	fread(&header.bits, 1, 1, f);
-	fread(&header.descriptor, 1, 1, f);
-	if (header.identsize > 0) fseek(f, header.identsize, SEEK_CUR);
-
-	if (w_out) *w_out = header.width;
-	if (h_out) *h_out = header.height;
-
-	int bpp = header.bits == 24 ? 3 : 4;
+	fread(&header.identsize, 1, 1, file);
+	fread(&header.colourmaptype, 1, 1, file);
+	fread(&header.imagetype, 1, 1, file);
+	fseek(file, 9, SEEK_CUR);
+	fread(&header.width, 1, 2, file);
+	fread(&header.height, 1, 2, file);
+	fread(&header.bits, 1, 1, file);
+	fread(&header.descriptor, 1, 1, file);
+	if (header.identsize > 0)
+	{
+		fseek(file, header.identsize, SEEK_CUR);
+	}
+	if (outWidth != NULL)
+	{
+		*outWidth = header.width;
+	}
+	if (outHeight != NULL)
+	{
+		*outHeight = header.height;
+	}
+	int bpp = (header.bits == 24 ? 3 : 4);
 	int size = header.width * header.height * bpp;
 	byte* data = new byte[size];
 	byte* ptr = data;
 	byte temp;
-	int i, j, stride = 0;
-
-	if ((header.descriptor & 32) == 0) // upside down img
+	int i = 0;
+	int j = 0;
+	int stride = 0;
+	if ((header.descriptor & 0x20) == 0) // upside down img
 	{
 		ptr += size - header.width * bpp;
 		stride = -header.width * bpp * 2;
 	}
-
-	for (i = 0; i < header.height; i++)
+	for (i = 0; i < header.height; ++i)
 	{
-		for (j = 0; j < header.width; j++)
+		for (j = 0; j < header.width; ++j)
 		{
-			fread(ptr, 1, bpp, f);
+			fread(ptr, 1, bpp, file);
+			// switching pixels around so they are in RGBA format
 			temp = ptr[0];
 			ptr[0] = ptr[2];
 			ptr[2] = temp;
@@ -80,17 +83,14 @@ unsigned int loadTexture(const char* filename, int* w_out, int* h_out)
 		}
 		ptr += stride;
 	}
-	fclose(f);
-
-	unsigned int texid;
-
-	glGenTextures(1, &texid);
-	glBindTexture(GL_TEXTURE_2D, texid);
+	fclose(file);
+	// upload to GPU
+	unsigned int textureId = 0;
+	glGenTextures(1, &textureId);
+	glBindTexture(GL_TEXTURE_2D, textureId);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, bpp == 3 ? GL_RGB : GL_RGBA, header.width, header.height, 0,
-				 bpp == 3 ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, data);
-
+	glTexImage2D(GL_TEXTURE_2D, 0, bpp == 3 ? GL_RGB : GL_RGBA, header.width, header.height, 0, bpp == 3 ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, data);
 	delete [] data;
-	return texid;
+	return textureId;
 }

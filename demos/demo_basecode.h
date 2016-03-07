@@ -1,13 +1,17 @@
-/************************************************************************************
-This source file is part of the Theora Video Playback Library
-For latest info, see http://libtheoraplayer.sourceforge.net/
-*************************************************************************************
-Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
-This program is free software; you can redistribute it and/or modify it under
-the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
-*************************************************************************************/
-#ifndef _DEMO_BASECODE_H
-#define _DEMO_BASECODE_H
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+/// 
+/// @section DESCRIPTION
+/// 
+/// Contains some basic definitions that are required for all OpenGL related code to work.
+
+#ifndef THEORAPLAYER_DEMOS_DEMO_BASECODE_H
+#define THEORAPLAYER_DEMOS_DEMO_BASECODE_H
 
 #include <string.h>
 #include <stdio.h>
@@ -36,28 +40,22 @@ the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
 #endif
 
 #ifdef _WIN32
-#include <GL/glext.h>
-extern PFNGLCREATEPROGRAMPROC glCreateProgram;
-extern PFNGLCREATESHADERPROC glCreateShader;
-extern PFNGLLINKPROGRAMPROC glLinkProgram;
-extern PFNGLSHADERSOURCEPROC glShaderSource;
-extern PFNGLUSEPROGRAMPROC glUseProgram;
-extern PFNGLCOMPILESHADERPROC glCompileShader;
-extern PFNGLATTACHSHADERPROC glAttachShader;
-extern PFNGLMULTITEXCOORD2FARBPROC glMultiTexCoord2fARB;
-extern PFNGLACTIVETEXTUREARBPROC glActiveTextureARB;
+	#include <GL/glext.h>
+	extern PFNGLCREATEPROGRAMPROC glCreateProgram;
+	extern PFNGLCREATESHADERPROC glCreateShader;
+	extern PFNGLLINKPROGRAMPROC glLinkProgram;
+	extern PFNGLSHADERSOURCEPROC glShaderSource;
+	extern PFNGLUSEPROGRAMPROC glUseProgram;
+	extern PFNGLCOMPILESHADERPROC glCompileShader;
+	extern PFNGLATTACHSHADERPROC glAttachShader;
+	extern PFNGLMULTITEXCOORD2FARBPROC glMultiTexCoord2fARB;
+	extern PFNGLACTIVETEXTUREARBPROC glActiveTextureARB;
 #endif
 
 #ifdef _LINUX
-#include <GL/glext.h>
+	#include <GL/glext.h>
 #endif
 
-#include "util.h"
-#include "theoraplayer/Manager.h"
-
-extern std::string resourceExtension;
-extern float FOVY;
-extern bool shaderActive;
 extern int windowWidth;
 extern int windowHeight;
 extern std::string window_name;
@@ -69,34 +67,29 @@ struct Demo
 	void(*update)(float);
 	void(*draw)();
 	void(*setDebugTitle)(char*);
-	void(*OnKeyPress)(int);
-	void(*OnClick)(float, float);
+	void(*onKeyPress)(int);
+	void(*onClick)(float, float);
 };
 
-void ChangeDemo(Demo* demo);
+void changeDemo(Demo* demo);
 
 // functions defined in demos
-// --------------------------
 void init();
 void destroy();
 void update(float);
 void draw();
-void setDebugTitle(char* out);
-void OnKeyPress(int key);
-void OnClick(float x, float y);
-// --------------------------
-void psleep(int milliseconds);
-int nextPow2(int x);
-void drawColoredQuad(float x,float y,float w,float h,float r,float g,float b,float a);
-void drawWiredQuad(float x,float y,float w,float h,float r,float g,float b,float a);
-void drawTexturedQuad(unsigned int texID, float x,float y,float w,float h,float sw,float sh,float sx=0,float sy=0);
+void setDebugTitle(char* newTitle);
+void onKeyPress(int key);
+void onClick(float x, float y);
+
+void drawColoredQuad(float x, float y, float w, float h, float r, float g, float b, float a);
+void drawWiredQuad(float x, float y, float w, float h, float r, float g, float b, float a);
+void drawTexturedQuad(unsigned int textureId, float x, float y, float w, float h, float sw, float sh, float sx = 0.0f, float sy = 0.0f);
 void toggle_YUV2RGB_shader();
 void getMultiTextureExtensionFuncPointers();
 void enableShader();
 void disableShader();
 
-unsigned int createTexture(int w,int h,unsigned int format=GL_RGB);
-
-void getCursorPos(float* xout,float* yout);
+void getCursorPos(float* outX, float* outY);
 
 #endif

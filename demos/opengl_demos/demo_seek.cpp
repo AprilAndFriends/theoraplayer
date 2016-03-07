@@ -1,3 +1,4 @@
+#if 0
 #include "demo_seek.h"
 #include "theoraplayer/MemoryDataSource.h"
 #include "theoraplayer/theoraplayer.h"
@@ -6,7 +7,6 @@
 using namespace theoraplayer;
 
 unsigned int tex_id_seek;
-Manager* mgr_seek;
 VideoClip* clip_seek;
 bool started_seek = 1, needsSeek = 1;
 int cFrame_seek = 0, nWrongSeeks = 0;
@@ -49,12 +49,12 @@ void seek_draw()
 	drawColoredQuad(3, 573, 794 * x, 24, 1, 1, 1, 1);
 }
 
-void seek_update(float time_increase)
+void seek_update(float timeDelta)
 {
-	mgr_seek->update(time_increase / 10);
+	mgr_seek->update(timeDelta / 10);
 	if (needsSeek)
 	{
-		delay += time_increase;
+		delay += timeDelta;
 		if (delay >= 0.0f)
 		{
 			delay = 0;
@@ -65,12 +65,12 @@ void seek_update(float time_increase)
 	}
 }
 
-void seek_OnKeyPress(int key)
+void seek_onKeyPress(int key)
 {
 
 }
 
-void seek_OnClick(float x, float y)
+void seek_onClick(float x, float y)
 {
 
 }
@@ -82,7 +82,7 @@ void seek_setDebugTitle(char* out)
 
 void seek_init()
 {
-	mgr_seek = new Manager(1);
+	theoraplayer::init(1);
 	clip_seek = mgr_seek->createVideoClip(new MemoryDataSource("media/bunny" + resourceExtension), TH_RGB, 4);
 	clip_seek->setAutoRestart(1);
 
@@ -91,5 +91,6 @@ void seek_init()
 
 void seek_destroy()
 {
-	delete mgr_seek;
+	theoraplayer::destroy();
 }
+#endif

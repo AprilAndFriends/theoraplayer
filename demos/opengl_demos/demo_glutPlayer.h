@@ -15,8 +15,8 @@ extern void glutplayer_destroy();
 extern void glutplayer_update(float);
 extern void glutplayer_draw();
 extern void glutplayer_setDebugTitle(char* out);
-extern void glutplayer_OnKeyPress(int key);
-extern void glutplayer_OnClick(float x, float y);
+extern void glutplayer_onKeyPress(int key);
+extern void glutplayer_onClick(float x, float y);
 #ifdef BENCHMARK
 	extern void glutplayer_benchmark(const char* filename);
 #endif

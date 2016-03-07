@@ -1,4 +1,18 @@
-#include "demo_basecode.h"
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+/// 
+/// @section DESCRIPTION
+/// 
+/// Contains some basic definitions that are required for all OpenGL related code to work.
+
+#include <stdlib.h>
+
+#include "util.h"
 
 #ifndef WIN32
 #include <sys/time.h>
@@ -18,12 +32,22 @@ std::string resourceExtension = ".ogv";
 unsigned long GetTickCount()
 {
 	struct timeval tv;
-	if (gettimeofday(&tv, NULL) != 0) return 0;
+	if (gettimeofday(&tv, NULL) != 0)
+	{
+		return 0;
+	}
 	return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 }
 #endif
 
-void psleep(int milliseconds)
+std::string str(int i)
+{
+	char s[64] = { 0 };
+	sprintf(s, "%d", i);
+	return std::string(s);
+}
+
+void threadSleep(int milliseconds)
 {
 #ifdef _WIN32
 	Sleep(milliseconds);
@@ -32,24 +56,28 @@ void psleep(int milliseconds)
 #endif
 }
 
-int nextPow2(int x)
+int potCeil(int value)
 {
-	int y;
-	for (y=1;y<x;y*=2);
-	return y;
+	--value;
+	value |= value >> 1;
+	value |= value >> 2;
+	value |= value >> 4;
+	value |= value >> 8;
+	value |= value >> 16;
+	++value;
+	return value;
 }
 
-unsigned int createTexture(int w,int h,unsigned int format)
+unsigned int createTexture(int w, int h, unsigned int format)
 {
-	unsigned int tex_id;
-	glGenTextures(1,&tex_id);
-	glBindTexture(GL_TEXTURE_2D,tex_id);
-	unsigned char* b=new unsigned char[w*h*4];
-	memset(b,0,w*h*4);
-	
-	glTexImage2D(GL_TEXTURE_2D,0,format == GL_RGB ? GL_RGB : GL_RGBA,w,h,0,format,GL_UNSIGNED_BYTE,b);
+	unsigned int textureId = 0;
+	glGenTextures(1, &textureId);
+	glBindTexture(GL_TEXTURE_2D, textureId);
+	unsigned char* data = new unsigned char[w * h * 4];
+	memset(data, 0, w * h * 4);
+	glTexImage2D(GL_TEXTURE_2D, 0, format == GL_RGB ? GL_RGB : GL_RGBA, w, h, 0, format, GL_UNSIGNED_BYTE, data);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-	delete b;
-	return tex_id;
+	delete[] data;
+	return textureId;
 }

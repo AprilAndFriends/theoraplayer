@@ -204,9 +204,6 @@ namespace theoraplayer
 		if (this->audioInterface != NULL)
 		{
 			// empty the DSP buffer
-			//float **pcm;
-			//int len = vorbis_synthesis_pcmout(&this->info.VorbisDSPState,&pcm);
-			//if (len) vorbis_synthesis_read(&this->info.VorbisDSPState,len);
 			ogg_packet opVorbis;
 			this->readAudioSamples = 0;
 			while (ogg_stream_packetout(&this->info.VorbisStreamState, &opVorbis) > 0)
@@ -528,7 +525,6 @@ namespace theoraplayer
 
 	long VideoClip_Theora::seekPage(long targetFrame, bool returnKeyFrame)
 	{
-		int i = 0;
 		uint64_t seekMin = 0;
 		uint64_t seekMax = this->stream->getSize();
 		long frame = 0;
@@ -539,50 +535,53 @@ namespace theoraplayer
 		}
 		char* buffer = NULL;
 		int bytesRead = 0;
-		for (i = (targetFrame == 0) ? 100 : 0; i < 100; ++i)
+		if (targetFrame != 0)
 		{
-			ogg_sync_reset(&this->info.OggSyncState);
-			this->stream->seek(seekMin / 2 + seekMax / 2); // do a binary search
-			memset(&this->info.OggPage, 0, sizeof(ogg_page));
-			ogg_sync_pageseek(&this->info.OggSyncState, &this->info.OggPage);
-			while (i < 1000)
+			for (int i = 0; i < 100; ++i)
 			{
-				if (ogg_sync_pageout(&this->info.OggSyncState, &this->info.OggPage) == 1)
+				ogg_sync_reset(&this->info.OggSyncState);
+				this->stream->seek(seekMin / 2 + seekMax / 2); // do a binary search
+				memset(&this->info.OggPage, 0, sizeof(ogg_page));
+				ogg_sync_pageseek(&this->info.OggSyncState, &this->info.OggPage);
+				while (i < 1000)
 				{
-					if (ogg_page_serialno(&this->info.OggPage) == this->info.TheoraStreamState.serialno)
+					if (ogg_sync_pageout(&this->info.OggSyncState, &this->info.OggPage) == 1)
 					{
-						granule = ogg_page_granulepos(&this->info.OggPage);
-						if (granule >= 0)
+						if (ogg_page_serialno(&this->info.OggPage) == this->info.TheoraStreamState.serialno)
 						{
-							frame = (long)th_granule_frame(this->info.TheoraDecoder, granule);
-							if (frame < targetFrame && targetFrame - frame < 10)
+							granule = ogg_page_granulepos(&this->info.OggPage);
+							if (granule >= 0)
 							{
-								// we're close enough, let's break this.
-								i = 1000;
+								frame = (long)th_granule_frame(this->info.TheoraDecoder, granule);
+								if (frame < targetFrame && targetFrame - frame < 10)
+								{
+									// we're close enough, let's break this.
+									i = 1000;
+									break;
+								}
+								// we're not close enough, let's shorten the borders of the binary search
+								if (targetFrame - 1 > frame)
+								{
+									seekMin = seekMin / 2 + seekMax / 2;
+								}
+								else
+								{
+									seekMax = seekMin / 2 + seekMax / 2;
+								}
 								break;
 							}
-							// we're not close enough, let's shorten the borders of the binary search
-							if (targetFrame - 1 > frame)
-							{
-								seekMin = seekMin / 2 + seekMax / 2;
-							}
-							else
-							{
-								seekMax = seekMin / 2 + seekMax / 2;
-							}
-							break;
 						}
 					}
-				}
-				else
-				{
-					buffer = ogg_sync_buffer(&this->info.OggSyncState, BUFFER_SIZE);
-					bytesRead = this->stream->read(buffer, BUFFER_SIZE);
-					if (bytesRead == 0)
+					else
 					{
-						break;
+						buffer = ogg_sync_buffer(&this->info.OggSyncState, BUFFER_SIZE);
+						bytesRead = this->stream->read(buffer, BUFFER_SIZE);
+						if (bytesRead == 0)
+						{
+							break;
+						}
+						ogg_sync_wrote(&this->info.OggSyncState, bytesRead);
 					}
-					ogg_sync_wrote(&this->info.OggSyncState, bytesRead);
 				}
 			}
 		}

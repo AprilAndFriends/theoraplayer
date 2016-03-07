@@ -124,7 +124,7 @@ void OpenAL_AudioInterface::insertData(float* data, int nSamples)
 	}
 }
 
-void OpenAL_AudioInterface::update(float time_increase)
+void OpenAL_AudioInterface::update(float timeDelta)
 {
 	int i,/*state,*/nProcessed;
 	OpenAL_Buffer buff;
@@ -150,7 +150,7 @@ void OpenAL_AudioInterface::update(float time_increase)
 	// control playback and return time position
 	//alGetSourcei(this->source,AL_SOURCE_STATE,&state);
 	//if (state == AL_PLAYING)
-		this->currentTimer += time_increase;
+		this->currentTimer += timeDelta;
 
 	this->time = this->currentTimer + (float) this->numPlayedSamples/this->freq;
 
