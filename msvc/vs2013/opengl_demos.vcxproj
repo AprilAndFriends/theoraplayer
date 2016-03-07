@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C874310F-9F73-4530-A591-86E98C2B192F}</ProjectGuid>
-    <RootNamespace>demo_glut_player</RootNamespace>
+    <RootNamespace>opengl_demos</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props-demos\default.props" />
@@ -32,34 +32,39 @@
   <Import Condition="!exists('..\..\hltypes\msvc\vs2013\props-generic\build-defaults.props')" Project="..\..\theora\msvc\vs2013\props-generic\build-defaults.props" />
   <Import Project="props-demos\build-defaults.props" />
   <Import Project="props-demos\configuration.props" />
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">
-    <ClCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">
-    <ClCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-  </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\demos\basecode\glut\glutBasecode.cpp" />
+    <ClCompile Include="..\..\demos\basecode\glut\glut_basecode.cpp" />
     <ClCompile Include="..\..\demos\basecode\util\util.cpp" />
-    <ClCompile Include="..\..\demos\glut_player\glut_player.cpp" />
+    <ClCompile Include="..\..\demos\ObjModel.cpp" />
+    <ClCompile Include="..\..\demos\OpenAL_AudioInterface.cpp" />
+    <ClCompile Include="..\..\demos\opengl_demos\demo_av.cpp" />
+    <ClCompile Include="..\..\demos\opengl_demos\demo_composite.cpp" />
+    <ClCompile Include="..\..\demos\opengl_demos\demo_environment.cpp" />
+    <ClCompile Include="..\..\demos\opengl_demos\demo_glutPlayer.cpp" />
+    <ClCompile Include="..\..\demos\opengl_demos\demo_lightMap.cpp" />
+    <ClCompile Include="..\..\demos\opengl_demos\demo_menu.cpp" />
+    <ClCompile Include="..\..\demos\opengl_demos\demo_multiple.cpp" />
+    <ClCompile Include="..\..\demos\opengl_demos\demo_seek.cpp" />
+    <ClCompile Include="..\..\demos\opengl_demos\demo_spriteAnimation.cpp" />
+    <ClCompile Include="..\..\demos\opengl_demos\demo_tv.cpp" />
+    <ClCompile Include="..\..\demos\tga.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\demos\basecode\util\util.h" />
     <ClInclude Include="..\..\demos\demo_basecode.h" />
+    <ClInclude Include="..\..\demos\ObjModel.h" />
+    <ClInclude Include="..\..\demos\OpenAL_AudioInterface.h" />
+    <ClInclude Include="..\..\demos\opengl_demos\demo_av.h" />
+    <ClInclude Include="..\..\demos\opengl_demos\demo_composite.h" />
+    <ClInclude Include="..\..\demos\opengl_demos\demo_environment.h" />
+    <ClInclude Include="..\..\demos\opengl_demos\demo_glutPlayer.h" />
+    <ClInclude Include="..\..\demos\opengl_demos\demo_lightMap.h" />
+    <ClInclude Include="..\..\demos\opengl_demos\demo_menu.h" />
+    <ClInclude Include="..\..\demos\opengl_demos\demo_multiple.h" />
+    <ClInclude Include="..\..\demos\opengl_demos\demo_seek.h" />
+    <ClInclude Include="..\..\demos\opengl_demos\demo_spriteAnimation.h" />
+    <ClInclude Include="..\..\demos\opengl_demos\demo_tv.h" />
+    <ClInclude Include="..\..\demos\tga.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

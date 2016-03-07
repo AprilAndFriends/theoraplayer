@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="basecode">
+      <UniqueIdentifier>{cb0e015b-30a0-40e0-a60d-feb28f661fa3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\demos\basecode\util\util.cpp">
+      <Filter>basecode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\basecode\glut\glut_basecode.cpp">
+      <Filter>basecode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\ObjModel.cpp">
+      <Filter>basecode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\OpenAL_AudioInterface.cpp">
+      <Filter>basecode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\tga.cpp">
+      <Filter>basecode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\opengl_demos\demo_av.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\opengl_demos\demo_menu.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\opengl_demos\demo_multiple.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\opengl_demos\demo_seek.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\opengl_demos\demo_tv.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\opengl_demos\demo_spriteAnimation.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\opengl_demos\demo_composite.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\opengl_demos\demo_environment.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\opengl_demos\demo_glutPlayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\demos\opengl_demos\demo_lightMap.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\demos\demo_basecode.h">
+      <Filter>basecode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\basecode\util\util.h">
+      <Filter>basecode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\ObjModel.h">
+      <Filter>basecode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\OpenAL_AudioInterface.h">
+      <Filter>basecode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\tga.h">
+      <Filter>basecode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\opengl_demos\demo_av.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\opengl_demos\demo_menu.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\opengl_demos\demo_multiple.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\opengl_demos\demo_seek.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\opengl_demos\demo_tv.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\opengl_demos\demo_spriteAnimation.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\opengl_demos\demo_composite.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\opengl_demos\demo_environment.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\opengl_demos\demo_glutPlayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\demos\opengl_demos\demo_lightMap.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
