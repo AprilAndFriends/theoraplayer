@@ -68,6 +68,14 @@ namespace theoraplayer
 	class theoraplayerExport VideoClip
 	{
 	public:
+		struct Format
+		{
+			std::string name;
+			std::string extension;
+			VideoClip* (*createFunction)(DataSource*, TheoraOutputMode, int, bool);
+
+		};
+
 		friend class Manager;
 		friend class VideoFrame;
 		friend class WorkerThread;

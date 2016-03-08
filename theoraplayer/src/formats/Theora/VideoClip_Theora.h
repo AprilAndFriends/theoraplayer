@@ -58,6 +58,8 @@ namespace theoraplayer
 		void decodedAudioCheck();
 		std::string getDecoderName() { return "Theora"; }
 
+		static VideoClip* create(DataSource* dataSource, TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
+
 	protected:
 		// TODOth - the comment below seems incorrect
 		TheoraInfoStruct info; // a pointer is used to avoid having to include theora & vorbis headers

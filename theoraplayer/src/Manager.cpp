@@ -100,13 +100,6 @@ namespace theoraplayer
 			message += "  - Android: Detected NEON CPU features\n";
 		}
 #endif
-#ifdef __AVFOUNDATION
-		message += "  - using Apple AVFoundation classes.\n";
-#endif
-#ifdef __FFMPEG
-		message += "  - using FFmpeg library.\n";
-#endif
-
 		log(message + "------------------------------------");
 		// for CPU based yuv2rgb decoding
 		initYUVConversionModule();
@@ -124,24 +117,6 @@ namespace theoraplayer
 		this->clips.clear();
 		lock.release();
 		delete this->workMutex;
-	}
-
-	std::vector<std::string> Manager::getSupportedDecoders()
-	{
-		std::vector<std::string> result;
-#ifdef _USE_THEORA
-		result.push_back("Theora");
-#endif
-#ifdef __WEBM
-		result.push_back("WebM");
-#endif
-#ifdef __AVFOUNDATION
-		result.push_back("AVFoundation");
-#endif
-#ifdef __FFMPEG
-		result.push_back("FFmpeg");
-#endif
-		return result;
 	}
 
 	int Manager::getWorkerThreadCount()
@@ -168,6 +143,16 @@ namespace theoraplayer
 				this->_destroyWorkerThreads(currentWorkerThreads - value);
 			}
 		}
+	}
+
+	std::vector<std::string> Manager::getSupportedFormats()
+	{
+		std::vector<std::string> result;
+		foreach (VideoClip::Format, it, videoClipFormats)
+		{
+			result.push_back((*it).name);
+		}
+		return result;
 	}
 
 	std::string Manager::getVersionString()
@@ -215,45 +200,18 @@ namespace theoraplayer
 		VideoClip* clip = NULL;
 		int precachedFramesCount = (precachedFramesCountOverride > 0 ? precachedFramesCountOverride : this->defaultPrecachedFramesCount);
 		log("Creating video from data source: " + dataSource->toString() + " [" + str(precachedFramesCount) + " precached frames].");
-#ifdef __AVFOUNDATION
-		FileDataSource* fileDataSource = dynamic_cast<FileDataSource*>(dataSource);
-		std::string filename;
-		if (fileDataSource == NULL)
+		std::string formatName = dataSource->getFormatName();
+		if (formatName != "")
 		{
-			MemoryDataSource* memoryDataSource = dynamic_cast<MemoryDataSource*>(data_source);
-			if (memoryDataSource != NULL)
+			foreach (VideoClip::Format, it, videoClipFormats)
 			{
-				filename = memoryDataSource->getFilename();
+				if (formatName == (*it).name)
+				{
+					clip = (*(*it).createFunction)(dataSource, outputMode, precachedFramesCount, usePotStride);
+					break;
+				}
 			}
-			// if the user has his own data source, it's going to be a problem for AVAssetReader since it only supports reading from files...
 		}
-		else
-		{
-			filename = fileDataSource->getFilename();
-		}
-		if (filename.size() > 4 && filename.substr(filename.size() - 4, filename.size()) == ".mp4")
-		{
-			clip = new VideoClip_AVFoundation(dataSource, outputMode, precachedFramesCount, usePotStride);
-		}
-#endif
-#ifdef _USE_THEORA
-		if (clip == NULL)
-		{
-			clip = new VideoClip_Theora(dataSource, outputMode, precachedFramesCount, usePotStride);
-		}
-#endif
-#ifdef __FFMPEG
-		if (clip == NULL)
-		{
-			clip = new VideoClip_FFmpeg(dataSource, outputMode, precachedFramesCount, usePotStride);
-		}
-#endif
-#ifdef __WEBM
-		if (clip == NULL)
-		{
-			clip = new VideoClip_WebM(dataSource, outputMode, precachedFramesCount, usePotStride);
-		}
-#endif
 		if (clip != NULL)
 		{
 			try

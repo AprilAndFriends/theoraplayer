@@ -27,7 +27,7 @@ namespace environment
 	void init()
 	{
 		theoraplayer::manager->setWorkerThreadCount(1);
-		clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/environment_mapping/room256" + resourceExtension), theoraplayer::TH_RGB);
+		clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/environment_mapping/room256"), theoraplayer::TH_RGB);
 		clip->setAutoRestart(true);
 		textureId = createTexture(potCeil(clip->getWidth()), potCeil(clip->getHeight()));
 		teapot.load("media/environment_mapping/teapot.obj", textureId, true);

@@ -30,17 +30,20 @@ namespace theoraplayer
 		MemoryDataSource(const std::string& filename);
 		~MemoryDataSource();
 
-		inline std::string getFilename() { return this->filename; }
 		inline uint64_t getSize() { return this->size; }
 		inline uint64_t getPosition() { return this->position; }
+		inline std::string getFilename() { return this->filename; }
+		inline std::string getFormatName() { return this->formatName; }
 
 		int read(void* output, int count);
 		void seek(uint64_t byteIndex);
 
-		inline std::string toString() { return "MEM:" + this->filename; }
+		inline std::string toString() { return "MEM:" + this->filename + "(format: " + this->formatName + ")"; }
 
 	private:
 		std::string filename;
+		std::string fullFilename;
+		std::string formatName;
 		uint64_t size;
 		uint64_t position;
 		unsigned char* data;

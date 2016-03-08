@@ -6,9 +6,15 @@
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
+#include <string>
+#include <vector>
+
 #include "Manager.h"
 #include "theoraplayer.h"
 #include "Utility.h"
+#ifdef _USE_THEORA
+#include "Theora/VideoClip_Theora.h"
+#endif
 
 namespace theoraplayer
 {
@@ -18,15 +24,25 @@ namespace theoraplayer
 	}
 	static void (*logFunction)(const std::string&) = _log;
 
+	std::vector<VideoClip::Format> videoClipFormats;
+
 	void init(int workerThreadCount)
 	{
 		theoraplayer::manager = new Manager(workerThreadCount);
+#ifdef _USE_THEORA
+		VideoClip::Format theora;
+		theora.name = "Theora";
+		theora.extension = ".ogv";
+		theora.createFunction = &VideoClip_Theora::create;
+		registerVideoClipFormat(theora);
+#endif
 	}
 
 	void destroy()
 	{
 		delete theoraplayer::manager;
 		theoraplayer::manager = NULL;
+		videoClipFormats.clear();
 	}
 
 	void setLogFunction(void (*function)(const std::string&))
@@ -43,9 +59,21 @@ namespace theoraplayer
 		(*logFunction)(message);
 	}
 
-	void registerFormatLoader()
+	void registerVideoClipFormat(VideoClip::Format format)
 	{
+		videoClipFormats.push_back(format);
+	}
 
+	void unregisterVideoClipFormat(const std::string& name)
+	{
+		foreach (VideoClip::Format, it, videoClipFormats)
+		{
+			if ((*it).name == name)
+			{
+				videoClipFormats.erase(it);
+				break;
+			}
+		}
 	}
 
 }

@@ -41,6 +41,11 @@ namespace theoraplayer
 		this->lastDecodedFrameNumber = 0;
 	}
 
+	VideoClip* VideoClip_Theora::create(DataSource* dataSource, TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride)
+	{
+		return new VideoClip_Theora(dataSource, outputMode, precachedFramesCount, usePotStride);
+	}
+
 	VideoClip_Theora::~VideoClip_Theora()
 	{
 		if (this->info.TheoraDecoder != NULL)

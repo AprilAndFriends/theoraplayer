@@ -17,7 +17,6 @@
 
 #include "demo_basecode.h"
 
-extern std::string resourceExtension;
 extern float FOVY;
 extern bool shaderActive;
 

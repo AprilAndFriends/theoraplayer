@@ -36,10 +36,7 @@ namespace multiple
 	void init()
 	{
 		printf("---\nUSAGE: press buttons 1,2,3 or 4 to change the number of worker threads\n---\n");
-		std::string files[] = { "media/bunny" + resourceExtension,
-			"media/konqi" + resourceExtension,
-			"media/room" + resourceExtension,
-			"media/titan" + resourceExtension };
+		std::string files[] = { "media/bunny", "media/konqi", "media/room", "media/titan" };
 		theoraplayer::manager->setWorkerThreadCount(MAX_VIDEOS);
 		theoraplayer::manager->setDefaultPrecachedFramesCount(16);
 		for (int i = 0; i < MAX_VIDEOS; ++i)

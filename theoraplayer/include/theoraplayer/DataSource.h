@@ -36,6 +36,8 @@ namespace theoraplayer
 			if function returns less bytes then nBytes, the system assumes EOF is reached.
 		*/
 		virtual int read(void* output, int nBytes) = 0;
+		//! returns the name of the format used for creating a VideoClip
+		virtual std::string getFormatName() = 0;
 		//! returns a string representation of the DataSource, eg 'File: source.ogg'
 		virtual std::string toString() = 0;
 		//! position the source pointer to byte_index from the start of the source

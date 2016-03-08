@@ -57,12 +57,12 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props\default.props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).prop')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).prop')" Project="..\..\..\theora\msvc\vs2015\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).prop')" Project="props-generic\platform-$(Platform).props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\configurations.props')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\configurations.props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\configurations.props')" Project="..\..\..\theora\msvc\vs2015\props-generic\configurations.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\configurations.props')" Project="props-generic\configurations.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props')" Project="..\..\..\theora\msvc\vs2015\props-generic\build-defaults.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props')" Project="props-generic\build-defaults.props" />
   <Import Project="props\configuration.props" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">
     <ClCompile>
@@ -96,11 +96,7 @@
     <ClCompile Include="..\..\src\DataSource.cpp" />
     <ClCompile Include="..\..\src\Exception.cpp" />
     <ClCompile Include="..\..\src\FileDataSource.cpp" />
-    <ClCompile Include="..\..\src\formats\FFmpeg\VideoClip_FFmpeg.cpp" />
     <ClCompile Include="..\..\src\formats\Theora\VideoClip_Theora.cpp" />
-    <ClCompile Include="..\..\src\formats\WebM\MkvReader.cpp" />
-    <ClCompile Include="..\..\src\formats\WebM\VideoClip_WebM.cpp" />
-    <ClCompile Include="..\..\src\formats\WebM\webmdec.cc" />
     <ClCompile Include="..\..\src\FrameQueue.cpp" />
     <ClCompile Include="..\..\src\Manager.cpp" />
     <ClCompile Include="..\..\src\MemoryDataSource.cpp" />
@@ -166,7 +162,6 @@
     <ClCompile Include="..\..\src\YUV\C\yuv420_grey_c.c" />
     <ClCompile Include="..\..\src\YUV\C\yuv420_rgb_c.c" />
     <ClCompile Include="..\..\src\YUV\C\yuv420_yuv_c.c" />
-    <None Include="..\..\src\formats\AVFoundation\VideoClip_AVFoundation.mm" />
     <None Include="..\..\src\YUV\libyuv\src\row_x86.asm" />
     <None Include="..\..\src\YUV\libyuv\src\x86inc.asm">
       <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">true</ExcludedFromBuild>
@@ -188,12 +183,7 @@
     <ClInclude Include="..\..\include\theoraplayer\Timer.h" />
     <ClInclude Include="..\..\include\theoraplayer\VideoClip.h" />
     <ClInclude Include="..\..\include\theoraplayer\VideoFrame.h" />
-    <ClInclude Include="..\..\src\formats\AVFoundation\VideoClip_AVFoundation.h" />
-    <ClInclude Include="..\..\src\formats\FFmpeg\VideoClip_FFmpeg.h" />
     <ClInclude Include="..\..\src\formats\Theora\VideoClip_Theora.h" />
-    <ClInclude Include="..\..\src\formats\WebM\MkvReader.h" />
-    <ClInclude Include="..\..\src\formats\WebM\VideoClip_WebM.h" />
-    <ClInclude Include="..\..\src\formats\WebM\webmdec.h" />
     <ClInclude Include="..\..\src\Mutex.h" />
     <ClInclude Include="..\..\src\Thread.h" />
     <ClInclude Include="..\..\src\Utility.h" />

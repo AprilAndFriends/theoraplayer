@@ -39,16 +39,16 @@ namespace av
 		/*// Test Memory Leaks
 		while (true)
 		{
-			clip = mgr_av->createVideoClip("media/bunny.ogv", outputMode, 16);
+			clip = mgr_av->createVideoClip("media/bunny", outputMode, 16);
 			clip->seek((rand() % 50) / 10.0f);
 			//threadSleep(rand()%1000);
 			theoraplayer::manager->update(0.0f);
 			theoraplayer::manager->destroyVideoClip(clip);
 		}
 		//*/
-		clip = theoraplayer::manager->createVideoClip("media/bunny" + resourceExtension, outputMode, 16);
+		clip = theoraplayer::manager->createVideoClip("media/bunny", outputMode, 16);
 		//  use this if you want to preload the file into ram and stream from there
-		//	clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("../media/short" + resourceExtension), theoraplayer::TH_RGB);
+		//	clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("../media/short"), theoraplayer::TH_RGB);
 		clip->setAutoRestart(true);
 		clip->pause();
 		textureId = createTexture(potCeil(clip->getWidth()), potCeil(clip->getHeight()), textureFormat);

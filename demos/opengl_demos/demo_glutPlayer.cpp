@@ -42,13 +42,9 @@ namespace glutPlayer
 		benchmark("media/hotel_intro.mp4");
 		benchmark("media/angels_intro.mp4");
 #endif
-#ifndef __WEBM
-		clip = theoraplayer::manager->createVideoClip("media/bunny" + resourceExtension, outputMode, 16);
-#else
-		clip = theoraplayer::manager->createVideoClip("media/bunny.webm", outputMode, 16);
-#endif
+		clip = theoraplayer::manager->createVideoClip("media/bunny", outputMode, 16);
 		//  use this if you want to preload the file into ram and stream from there
-		//	clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("../media/short" + resourceExtension), theoraplayer::TH_RGB);
+		//	clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("../media/short"), theoraplayer::TH_RGB);
 		clip->setAutoRestart(true);
 		textureId = createTexture(potCeil(clip->getWidth()), potCeil(clip->getHeight()), textureFormat);
 	}

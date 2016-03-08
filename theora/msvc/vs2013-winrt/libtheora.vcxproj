@@ -45,15 +45,15 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props\default.props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).props')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).props')" Project="props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).props')" Project="..\..\..\theoraplayer\msvc\vs2013-winrt\props-generic\platform-$(Platform).props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props')" Project="props-generic\configurations.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props')" Project="..\..\..\theoraplayer\msvc\vs2013-winrt\props-generic\configurations.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   </ImportGroup>
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props')" Project="props-generic\build-defaults.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props')" Project="..\..\..\theoraplayer\msvc\vs2013-winrt\props-generic\build-defaults.props" />
   <Import Project="props\configuration.props" />
   <ItemGroup>
     <ClInclude Include="..\..\include\theora\codec.h" />

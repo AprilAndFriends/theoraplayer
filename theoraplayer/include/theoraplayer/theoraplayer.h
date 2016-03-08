@@ -16,6 +16,7 @@
 #include <string>
 
 #include "theoraplayerExport.h"
+#include "VideoClip.h"
 
 namespace theoraplayer
 {
@@ -24,7 +25,8 @@ namespace theoraplayer
 
 	theoraplayerFnExport void setLogFunction(void (*function)(const std::string&));
 	theoraplayerFnExport void log(const std::string& message);
-	theoraplayerFnExport void registerFormatLoader();
+	theoraplayerFnExport void registerVideoClipFormat(VideoClip::Format format);
+	theoraplayerFnExport void unregisterVideoClipFormat(const std::string& name);
 
 }
 #endif

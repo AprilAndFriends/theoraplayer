@@ -51,7 +51,7 @@ namespace lightMap
 		fclose(file);
 		FOVY = 54.495f;
 		theoraplayer::manager->setWorkerThreadCount(1);
-		clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/lighting/lighting" + resourceExtension), theoraplayer::TH_RGB);
+		clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/lighting/lighting"), theoraplayer::TH_RGB);
 		clip->setAutoRestart(true);
 		textureIdLightMap = createTexture(potCeil(clip->getWidth()), potCeil(clip->getHeight()));
 		textureIdDiffuseMap = loadTexture("media/lighting/diffuse_map.tga");

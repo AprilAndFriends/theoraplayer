@@ -22,6 +22,13 @@ namespace theoraplayer
 	{
 		this->filename = filename;
 		this->filePtr = NULL;
+		VideoClip::Format format;
+		FILE* file = openSupportedFormatFile(this->filename, format, this->fullFilename);
+		if (this->filePtr != NULL)
+		{
+			fclose(file);
+		}
+		this->formatName = format.name;
 	}
 
 	FileDataSource::~FileDataSource()
@@ -37,13 +44,15 @@ namespace theoraplayer
 	{
 		if (this->filePtr == NULL)
 		{
-			this->filePtr = fopen(filename.c_str(), "rb");
-			if (!this->filePtr)
+			VideoClip::Format format;
+			this->filePtr = openSupportedFormatFile(this->filename, format, this->fullFilename);
+			if (this->filePtr == NULL)
 			{
-				std::string message = "Can't open video file: " + this->filename;
+				std::string message = "Can't open or find video file: " + filename;
 				log(message);
 				throw TheoraplayerException(message);
 			}
+			this->formatName = format.name;
 #ifdef _WIN32
 			struct _stat64 s;
 			_fstati64(_fileno(this->filePtr), &s);
@@ -59,7 +68,7 @@ namespace theoraplayer
 	{
 		if (this->filePtr == NULL)
 		{
-			openFile();
+			this->openFile();
 		}
 		uint64_t n = fread(output, 1, nBytes, this->filePtr);
 		return (int) n;

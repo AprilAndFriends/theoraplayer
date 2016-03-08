@@ -14,6 +14,9 @@
 #define THEORAPLAYER_UTILITY_H
 
 #include <string>
+#include <vector>
+
+#include "VideoClip.h"
 
 #define LOG_TAG "theoraplayer"
 
@@ -29,22 +32,20 @@
 
 #define foreach_map(typeKey, typeValue, name, container) for (std::map< typeKey, typeValue >::iterator name = (container).begin(); name != (container).end(); ++name)
 #define foreachc_map(typeKey, typeValue, name, container) for (std::map< typeKey, typeValue >::const_iterator name = (container).begin(); name != (container).end(); ++name)
-#define foreach_m(type, name, container) for (std::map< hltypes::String, type >::iterator name = (container).begin(); name != (container).end(); ++name)
-#define foreachc_m(type, name, container) for (std::map< hltypes::String, type >::const_iterator name = (container).begin(); name != (container).end(); ++name)
-
-// TODOth - change this
-#define th_writelog(message) TheoraVideoManager::getSingleton().logMessage(message)
+#define foreach_m(type, name, container) for (std::map< std::string, type >::iterator name = (container).begin(); name != (container).end(); ++name)
+#define foreachc_m(type, name, container) for (std::map< std::string, type >::const_iterator name = (container).begin(); name != (container).end(); ++name)
 
 namespace theoraplayer
 {
+	extern std::vector<VideoClip::Format> videoClipFormats;
+
 	std::string str(int i);
 	std::string strf(float i);
+	bool stringEndsWith(const std::string& string, const std::string& suffix);
 	int potCeil(int value);
+	FILE* openSupportedFormatFile(const std::string& filename, VideoClip::Format& outFormat, std::string& outFullFilename);
 
 }
-
-
-
 
 //typedef std::string hstr;
 //typedef const std::string& chstr;

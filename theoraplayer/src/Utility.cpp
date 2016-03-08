@@ -8,6 +8,8 @@
 
 #include <string>
 
+#include "Exception.h"
+#include "theoraplayer.h"
 #include "Utility.h"
 
 namespace theoraplayer
@@ -26,6 +28,17 @@ namespace theoraplayer
 		return std::string(s);
 	}
 
+	bool stringEndsWith(const std::string& string, const std::string& suffix)
+	{
+		int thisLength = string.size();
+		int stringLength = suffix.size();
+		if (stringLength > thisLength)
+		{
+			return false;
+		}
+		return (strcmp(string.c_str() + thisLength - stringLength, suffix.c_str()) == 0);
+	}
+
 	int potCeil(int value)
 	{
 		--value;
@@ -36,6 +49,26 @@ namespace theoraplayer
 		value |= value >> 16;
 		++value;
 		return value;
+	}
+
+	FILE* openSupportedFormatFile(const std::string& filename, VideoClip::Format& outFormat, std::string& outFullFilename)
+	{
+		FILE* file = NULL;
+		foreach (VideoClip::Format, it, videoClipFormats)
+		{
+			outFullFilename = filename;
+			if (!stringEndsWith(filename, (*it).extension))
+			{
+				outFullFilename = filename + (*it).extension;
+			}
+			file = fopen(outFullFilename.c_str(), "rb");
+			if (file != NULL)
+			{
+				outFormat = (*it);
+				break;
+			}
+		}
+		return file;
 	}
 
 }

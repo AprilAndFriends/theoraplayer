@@ -29,9 +29,10 @@ namespace theoraplayer
 
 		uint64_t getSize();
 		uint64_t getPosition();
-		std::string getFilename() { return this->filename; }
+		inline std::string getFilename() { return this->filename; }
+		inline std::string getFormatName() { return this->formatName; }
 
-		std::string toString() { return this->filename; }
+		inline std::string toString() { return this->filename + "(format: " + this->formatName + ")"; }
 
 		int read(void* output, int nBytes);
 		void seek(uint64_t byte_index);
@@ -39,6 +40,8 @@ namespace theoraplayer
 	private:
 		FILE* filePtr;
 		std::string filename;
+		std::string fullFilename;
+		std::string formatName;
 		uint64_t length;
 
 		void openFile();

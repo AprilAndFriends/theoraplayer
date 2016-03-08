@@ -32,12 +32,17 @@ namespace theoraplayer
 		this->data = NULL;
 		this->size = 0;
 		this->position = 0;
-		FILE* file = fopen(filename.c_str(), "rb");
-		// TODOth - change this, constructors must not throw exceptions
+
+		VideoClip::Format format;
+		// TODOth - change this, constructors must not throw exceptions (openSupportedFormatFile can throw an exception)
+		FILE* file = openSupportedFormatFile(filename, format, this->fullFilename);
 		if (file == NULL)
 		{
-			throw TheoraplayerException("Can't open video file: " + filename);
+			std::string message = "Can't open or find video file: " + filename;
+			log(message);
+			throw TheoraplayerException(message);
 		}
+		this->formatName = format.name;
 #ifdef _WIN32
 		struct _stat64 s;
 		_fstati64(_fileno(file), &s);
@@ -48,6 +53,8 @@ namespace theoraplayer
 		this->size = (uint64_t)s.st_size;
 		if (this->size > 0xFFFFFFFF)
 		{
+			fclose(file);
+			// TODOth - change this, constructors must not throw exceptions
 			throw TheoraplayerException("TheoraMemoryFileDataSource doesn't support files larger than 4GB!");
 		}
 		this->data = new unsigned char[(unsigned int)this->size];
@@ -57,6 +64,7 @@ namespace theoraplayer
 		}
 		else
 		{
+			fclose(file);
 			// TODOth - change this, constructors must not throw exceptions
 			throw TheoraplayerException("Unable to preload file to memory, file is too large.");
 		}

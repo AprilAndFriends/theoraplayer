@@ -44,7 +44,7 @@ namespace theoraplayer
 		inline int getDefaultPrecachedFramesCount() { return this->defaultPrecachedFramesCount; }
 		inline void setDefaultPrecachedFramesCount(int value) { this->defaultPrecachedFramesCount = value; }
 		//! returns the supported decoders (eg. Theora, AVFoundation...)
-		std::vector<std::string> getSupportedDecoders();
+		std::vector<std::string> getSupportedFormats();
 		//! get nicely formated version string
 		std::string getVersionString();
 		//! brief get version numbers

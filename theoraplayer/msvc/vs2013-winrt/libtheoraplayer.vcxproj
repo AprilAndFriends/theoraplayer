@@ -45,12 +45,12 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props\default.props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).prop')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).prop')" Project="..\..\..\theora\msvc\vs2013-winrt\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).prop')" Project="props-generic\platform-$(Platform).props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props')" Project="..\..\..\theora\msvc\vs2013-winrt\props-generic\configurations.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props')" Project="props-generic\configurations.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props')" Project="..\..\..\theora\msvc\vs2013-winrt\props-generic\build-defaults.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props')" Project="props-generic\build-defaults.props" />
   <Import Project="props\configuration.props" />
   <ItemGroup>
     <ClCompile Include="..\..\src\YUV\android\cpu-features.c">

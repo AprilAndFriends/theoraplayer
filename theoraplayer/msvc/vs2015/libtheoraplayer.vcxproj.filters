@@ -16,17 +16,8 @@
     <Filter Include="Source Files\formats">
       <UniqueIdentifier>{6609f151-3f1c-46a3-ae93-0c9ab512079b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\formats\AVFoundation">
-      <UniqueIdentifier>{408f1a6a-f1f7-4ebd-be69-35b8b36dcf96}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\formats\FFmpeg">
-      <UniqueIdentifier>{49309935-ea86-4916-90d8-146993c9419d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\formats\Theora">
       <UniqueIdentifier>{e2cf3716-10e3-453d-bd3f-6e47e8023a09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\formats\WebM">
-      <UniqueIdentifier>{571b97b3-038a-45de-8cdb-9f47820822b9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\internal\YUV">
       <UniqueIdentifier>{019bf286-2095-466f-939d-385b0a6685df}</UniqueIdentifier>
@@ -52,17 +43,8 @@
     <Filter Include="Header Files\formats">
       <UniqueIdentifier>{57844cb9-0fa2-41d5-8fea-192d1c14f601}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\formats\AVFoundation">
-      <UniqueIdentifier>{2bbc1533-3e64-48c3-9ce9-8a9ad9bc444a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\formats\FFmpeg">
-      <UniqueIdentifier>{a914c6d4-0cc3-419b-993a-52c1a600f858}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\formats\Theora">
       <UniqueIdentifier>{92155f79-791e-4ca8-aefc-7417e2949953}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\formats\WebM">
-      <UniqueIdentifier>{48710248-79cd-4d8d-803a-258a001c02d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -210,9 +192,6 @@
     <ClCompile Include="..\..\src\WorkerThread.cpp">
       <Filter>Source Files\internal</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\formats\WebM\webmdec.cc">
-      <Filter>Source Files\formats\WebM</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Exception.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -234,17 +213,8 @@
     <ClCompile Include="..\..\src\VideoClip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\formats\FFmpeg\VideoClip_FFmpeg.cpp">
-      <Filter>Source Files\formats\FFmpeg</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\formats\Theora\VideoClip_Theora.cpp">
       <Filter>Source Files\formats\Theora</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\formats\WebM\MkvReader.cpp">
-      <Filter>Source Files\formats\WebM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\formats\WebM\VideoClip_WebM.cpp">
-      <Filter>Source Files\formats\WebM</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Manager.cpp">
       <Filter>Source Files</Filter>
@@ -344,9 +314,6 @@
     <ClInclude Include="..\..\src\WorkerThread.h">
       <Filter>Header Files\internal</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\formats\WebM\webmdec.h">
-      <Filter>Header Files\formats\WebM</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\theoraplayer\Exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -365,20 +332,8 @@
     <ClInclude Include="..\..\include\theoraplayer\VideoClip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\formats\AVFoundation\VideoClip_AVFoundation.h">
-      <Filter>Header Files\formats\AVFoundation</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\formats\FFmpeg\VideoClip_FFmpeg.h">
-      <Filter>Header Files\formats\FFmpeg</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\formats\Theora\VideoClip_Theora.h">
       <Filter>Header Files\formats\Theora</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\formats\WebM\VideoClip_WebM.h">
-      <Filter>Header Files\formats\WebM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\formats\WebM\MkvReader.h">
-      <Filter>Header Files\formats\WebM</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\theoraplayer\Manager.h">
       <Filter>Header Files</Filter>
@@ -408,9 +363,6 @@
     </None>
     <None Include="..\..\src\YUV\libyuv\src\x86inc.asm">
       <Filter>Source Files\internal\YUV\libyuv\src</Filter>
-    </None>
-    <None Include="..\..\src\formats\AVFoundation\VideoClip_AVFoundation.mm">
-      <Filter>Source Files\formats\AVFoundation</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
