@@ -6,6 +6,7 @@
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
+#ifdef _DEMO_SEEK
 #include <theoraplayer/FrameQueue.h>
 #include <theoraplayer/Manager.h>
 #include <theoraplayer/MemoryDataSource.h>
@@ -15,6 +16,8 @@
 
 #include "demo_seek.h"
 #include "util.h"
+
+// TODOth - is this demo still used?
 
 namespace seek
 {
@@ -109,3 +112,4 @@ namespace seek
 	Demo demo = { init, destroy, update, draw, setDebugTitle, NULL, NULL };
 
 }
+#endif

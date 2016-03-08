@@ -10,6 +10,7 @@
 /// 
 /// Defines a demo for audio-video time syncing.
 
+#ifdef _DEMO_AV
 #ifndef THEORAPLAYER_DEMOS_AV_H
 #define THEORAPLAYER_DEMOS_AV_H
 
@@ -20,4 +21,5 @@ namespace av
 	extern Demo demo;
 
 }
+#endif
 #endif

@@ -10,6 +10,7 @@
 /// These graphics ARE NOT ALLOWED to be used in any manner other then for the purpose
 /// of this demo program.
 
+#ifdef _DEMO_COMPOSITE
 #include <theoraplayer/Manager.h>
 #include <theoraplayer/MemoryDataSource.h>
 #include <theoraplayer/theoraplayer.h>
@@ -127,3 +128,4 @@ namespace composite
 	Demo demo = { init, destroy, update, draw, NULL, NULL, NULL };
 
 }
+#endif

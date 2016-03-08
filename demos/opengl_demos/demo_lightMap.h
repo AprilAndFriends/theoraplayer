@@ -12,6 +12,7 @@
 /// 
 /// Demostrates how to simulate light using videos.
 
+#ifdef _DEMO_LIGHT_MAP
 #ifndef THEORAPLAYER_DEMOS_LIGHT_MAP_H
 #define THEORAPLAYER_DEMOS_LIGHT_MAP_H
 
@@ -22,4 +23,5 @@ namespace lightMap
 	extern Demo demo;
 
 }
+#endif
 #endif

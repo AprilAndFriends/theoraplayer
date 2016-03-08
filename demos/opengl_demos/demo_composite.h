@@ -14,6 +14,7 @@
 /// 
 /// Demonstrates composite video rendering with an alpha channel.
 
+#ifdef _DEMO_COMPOSITE
 #ifndef THEORAPLAYER_DEMOS_COMPOSITE_H
 #define THEORAPLAYER_DEMOS_COMPOSITE_H
 
@@ -24,4 +25,5 @@ namespace composite
 	extern Demo demo;
 
 }
+#endif
 #endif

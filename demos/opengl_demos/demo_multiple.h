@@ -10,6 +10,7 @@
 /// 
 /// Demonstrates how multiple videos can be rendered at once easily.
 
+#ifdef _DEMO_MULTIPLE
 #ifndef THEORAPLAYER_DEMOS_MULTIPLE_H
 #define THEORAPLAYER_DEMOS_MULTIPLE_H
 
@@ -20,4 +21,5 @@ namespace multiple
 	extern Demo demo;
 
 }
+#endif
 #endif

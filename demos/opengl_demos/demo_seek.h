@@ -10,6 +10,7 @@
 /// 
 /// Demonstrates how video seeking works.
 
+#ifdef _DEMO_SEEK
 #ifndef THEORAPLAYER_DEMOS_SEEK_H
 #define THEORAPLAYER_DEMOS_SEEK_H
 
@@ -20,4 +21,5 @@ namespace seek
 	extern Demo demo;
 
 }
+#endif
 #endif

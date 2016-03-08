@@ -12,6 +12,7 @@
 /// 
 /// Demonstrates how to create lighting matching the content of a video.
 
+#ifdef _DEMO_TV
 #ifndef THEORAPLAYER_DEMOS_TV_H
 #define THEORAPLAYER_DEMOS_TV_H
 
@@ -22,4 +23,5 @@ namespace tv
 	extern Demo demo;
 
 }
+#endif
 #endif

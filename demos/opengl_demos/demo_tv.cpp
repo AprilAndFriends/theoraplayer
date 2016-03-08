@@ -8,6 +8,7 @@
 /// The room 3D models and textures are licensed under the terms of the
 /// GNU General Public License(GPL).
 
+#ifdef _DEMO_TV
 #include <theoraplayer/FrameQueue.h>
 #include <theoraplayer/Manager.h>
 #include <theoraplayer/MemoryDataSource.h>
@@ -192,3 +193,4 @@ namespace tv
 	Demo demo = { init, destroy, update, draw, setDebugTitle, onKeyPress, onClick };
 
 }
+#endif

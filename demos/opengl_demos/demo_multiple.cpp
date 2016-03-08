@@ -6,6 +6,7 @@
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
+#ifdef _DEMO_MULTIPLE
 #include <theoraplayer/Manager.h>
 #include <theoraplayer/MemoryDataSource.h>
 #include <theoraplayer/theoraplayer.h>
@@ -168,3 +169,4 @@ namespace multiple
 	Demo demo = { init, destroy, NULL, draw, setDebugTitle, onKeyPress, NULL };
 
 }
+#endif

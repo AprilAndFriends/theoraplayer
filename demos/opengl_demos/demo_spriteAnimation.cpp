@@ -10,6 +10,7 @@
 /// "Petar Ivancek". These graphics ARE NOT ALLOWED to be used in any manner other then
 /// for the purpose of this demo program.
 
+#ifdef _DEMO_SPRITE_ANIMATION
 #include <theoraplayer/FrameQueue.h>
 #include <theoraplayer/Manager.h>
 #include <theoraplayer/MemoryDataSource.h>
@@ -147,3 +148,4 @@ namespace spriteAnimation
 	Demo demo = { init, destroy, update, draw, setDebugTitle, NULL, NULL };
 
 }
+#endif

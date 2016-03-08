@@ -10,6 +10,7 @@
 /// 
 /// Demonstrates how to render environments using videos.
 
+#ifdef _DEMO_ENVIRONMENT
 #ifndef THEORAPLAYER_DEMOS_ENVIRONMENT_H
 #define THEORAPLAYER_DEMOS_ENVIRONMENT_H
 
@@ -20,4 +21,5 @@ namespace environment
 	extern Demo demo;
 
 }
+#endif
 #endif

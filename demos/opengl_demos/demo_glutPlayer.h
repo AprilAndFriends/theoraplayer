@@ -10,6 +10,7 @@
 /// 
 /// Demonstrates generic video.
 
+#ifdef _DEMO_GLUT_PLAYER
 #ifndef THEORAPLAYER_DEMOS_GLUT_PLAYER_H
 #define THEORAPLAYER_DEMOS_GLUT_PLAYER_H
 
@@ -20,4 +21,5 @@ namespace glutPlayer
 	extern Demo demo;
 
 }
+#endif
 #endif

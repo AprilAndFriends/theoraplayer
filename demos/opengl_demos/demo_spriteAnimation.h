@@ -14,6 +14,7 @@
 /// 
 /// Demonstrates how sprite animation can be accomplished with videos.
 
+#ifdef _DEMO_SPRITE_ANIMATION
 #ifndef THEORAPLAYER_DEMOS_SPRITE_ANIMATION_H
 #define THEORAPLAYER_DEMOS_SPRITE_ANIMATION_H
 
@@ -24,4 +25,5 @@ namespace spriteAnimation
 	extern Demo demo;
 
 }
+#endif
 #endif

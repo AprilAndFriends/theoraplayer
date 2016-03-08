@@ -6,6 +6,7 @@
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
+#ifdef _DEMO_GLUT_PLAYER
 #include <theoraplayer/FrameQueue.h>
 #include <theoraplayer/Manager.h>
 #include <theoraplayer/MemoryDataSource.h>
@@ -170,3 +171,4 @@ namespace glutPlayer
 	Demo demo = { init, destroy, update, draw, setDebugTitle, onKeyPress, onClick };
 
 }
+#endif

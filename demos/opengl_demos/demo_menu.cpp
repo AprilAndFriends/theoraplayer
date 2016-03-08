@@ -23,14 +23,37 @@
 
 namespace menu
 {
-	unsigned int ids[MAX_DEMOS];
+	unsigned int ids[MAX_DEMOS] = { 0 };
 
 	void init()
 	{
-		for (int i = 0; i < MAX_DEMOS; i++)
-		{
-			ids[i] = loadTexture(("media/button" + str(i + 1) + ".tga").c_str());
-		}
+#ifdef _DEMO_GLUT_PLAYER
+		ids[0] = loadTexture("media/button1.tga");
+#endif
+#ifdef _DEMO_SPRITE_ANIMATION
+		ids[1] = loadTexture("media/button2.tga");
+#endif
+#ifdef _DEMO_MULTIPLE
+		ids[2] = loadTexture("media/button3.tga");
+#endif
+#ifdef _DEMO_SEEK
+		ids[3] = loadTexture("media/button4.tga");
+#endif
+#ifdef _DEMO_TV
+		ids[4] = loadTexture("media/button5.tga");
+#endif
+#ifdef _DEMO_LIGHT_MAP
+		ids[5] = loadTexture("media/button6.tga");
+#endif
+#ifdef _DEMO_AV
+		ids[6] = loadTexture("media/button7.tga");
+#endif
+#ifdef _DEMO_COMPOSITE
+		ids[7] = loadTexture("media/button8.tga");
+#endif
+#ifdef _DEMO_ENVIRONMENT
+		ids[8] = loadTexture("media/button9.tga");
+#endif
 	}
 
 	void destroy()
@@ -49,7 +72,10 @@ namespace menu
 		glDisable(GL_COLOR_MATERIAL);
 		for (int i = 0; i < MAX_DEMOS; i++)
 		{
-			drawTexturedQuad(ids[i], 0.0f, i * 32.0f, 128.0f, 32.0f, 1.0f, 1.0f);
+			if (ids[i] != 0)
+			{
+				drawTexturedQuad(ids[i], 0.0f, i * 32.0f, 128.0f, 32.0f, 1.0f, 1.0f);
+			}
 		}
 	}
 
@@ -68,15 +94,33 @@ namespace menu
 		}
 		switch (selected)
 		{
+#ifdef _DEMO_GLUT_PLAYER
 		case 1:		changeDemo(&glutPlayer::demo);		break;
+#endif
+#ifdef _DEMO_SPRITE_ANIMATION
 		case 2:		changeDemo(&spriteAnimation::demo);	break;
+#endif
+#ifdef _DEMO_MULTIPLE
 		case 3:		changeDemo(&multiple::demo);		break;
+#endif
+#ifdef _DEMO_SEEK
 		case 4:		changeDemo(&seek::demo);			break;
+#endif
+#ifdef _DEMO_TV
 		case 5:		changeDemo(&tv::demo);				break;
+#endif
+#ifdef _DEMO_LIGHT_MAP
 		case 6:		changeDemo(&lightMap::demo);		break;
+#endif
+#ifdef _DEMO_AV
 		case 7:		changeDemo(&av::demo);				break;
+#endif
+#ifdef _DEMO_COMPOSITE
 		case 8:		changeDemo(&composite::demo);		break;
+#endif
+#ifdef _DEMO_ENVIRONMENT
 		case 9:		changeDemo(&environment::demo);		break;
+#endif
 		default:	changeDemo(&menu::demo);			break;
 		}
 	}

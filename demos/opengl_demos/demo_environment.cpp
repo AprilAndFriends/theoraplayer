@@ -6,6 +6,7 @@
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
+#ifdef _DEMO_ENVIRONMENT
 #include <theoraplayer/Manager.h>
 #include <theoraplayer/MemoryDataSource.h>
 #include <theoraplayer/theoraplayer.h>
@@ -83,3 +84,4 @@ namespace environment
 	Demo demo = { init, destroy, update, draw, NULL, NULL, NULL };
 
 }
+#endif
