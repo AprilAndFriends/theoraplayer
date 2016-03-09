@@ -7,8 +7,10 @@
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 #include <stdlib.h>
-#include "AudioPacketQueue.h"
+
 #include "AudioInterface.h"
+#include "AudioPacketQueue.h"
+#include "Mutex.h"
 
 namespace theoraplayer
 {
@@ -136,4 +138,11 @@ namespace theoraplayer
 			destroyAudioPacket(p);
 		}
 	}
+
+	void AudioPacketQueue::_flushSynchronizedAudioPackets(AudioInterface* audioInterface, Mutex* mutex)
+	{
+		Mutex::ScopeLock lock(mutex);
+		this->flushAudioPackets(audioInterface);
+	}
+
 }

@@ -6,13 +6,13 @@
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
-#if 0
-#include "DataSource.h"
+#include <theoraplayer/DataSource.h>
+
 #include "MkvReader.h"
 
-namespace theoraplayer
+namespace clipwebm
 {
-	MkvReader::MkvReader(DataSource* dataSource)
+	MkvReader::MkvReader(theoraplayer::DataSource* dataSource)
 	{
 		this->dataSource = dataSource;
 		this->length = (int)dataSource->getSize();
@@ -54,4 +54,3 @@ namespace theoraplayer
 	}
 
 }
-#endif

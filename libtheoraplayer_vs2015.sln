@@ -25,7 +25,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vpxdec", "vpx\vpxdec.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "opengl_demos", "msvc\vs2015\opengl_demos.vcxproj", "{C874310F-9F73-4530-A591-86E98C2B192F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "clipwebm", "theoraplayer\plugins\clipwebm\msvc\vs2015\clipwebm.vcxproj", "{3D1576F4-0991-473C-82D7-F22252CA4754}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libclipwebm", "theoraplayer\plugins\clipwebm\msvc\vs2015\libclipwebm.vcxproj", "{3D1576F4-0991-473C-82D7-F22252CA4754}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

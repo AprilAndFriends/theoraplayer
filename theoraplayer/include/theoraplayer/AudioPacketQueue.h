@@ -56,6 +56,7 @@ namespace theoraplayer
 		AudioPacket* theoraAudioPacketQueue;
 
 		void _addAudioPacket(float* data, int numSamples);
+		void _flushSynchronizedAudioPackets(AudioInterface* audioInterface, Mutex* mutex);
 
 	};
 }

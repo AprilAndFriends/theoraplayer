@@ -1,3 +1,4 @@
+#include <clipwebm/clipwebm.h>
 #include <theoraplayer/Manager.h>
 #include <theoraplayer/theoraplayer.h>
 
@@ -342,6 +343,7 @@ int main(int argc, char** argv)
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	// general init
 	theoraplayer::init(1);
+	clipwebm::init();
 	init();
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
@@ -360,6 +362,7 @@ int main(int argc, char** argv)
 	}
 	// destroy
 	destroy();
+	clipwebm::destroy();
 	theoraplayer::destroy();
 	glutDestroyWindow(0);
 	return 0;

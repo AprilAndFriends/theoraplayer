@@ -8,20 +8,19 @@
 /// 
 /// @section DESCRIPTION
 /// 
-/// Defines a public interface with helper functions.
+/// Defines internal utility functions.
 
-#ifndef CLIPWEBM_H
-#define CLIPWEBM_H
+#ifndef CLIPWEBM_UTILITY_H
+#define CLIPWEBM_UTILITY_H
 
 #include <string>
 
-#include "clipwebmExport.h"
-
 namespace clipwebm
 {
-	clipwebmFnExport void init();
-	clipwebmFnExport void destroy();
+	std::string str(int i);
+	std::string strf(float i);
+	int potCeil(int value);
 
 }
-#endif
 
+#endif

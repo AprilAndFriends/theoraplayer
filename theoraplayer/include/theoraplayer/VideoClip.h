@@ -228,7 +228,8 @@ namespace theoraplayer
 		AudioInterface* audioInterface;
 		DataSource* stream;
 
-		Timer *timer, *defaultTimer;
+		Timer* timer;
+		Timer* defaultTimer;
 
 		WorkerThread* assignedWorkerThread;
 

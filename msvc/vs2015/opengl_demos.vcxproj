@@ -66,5 +66,15 @@
     <ClInclude Include="..\..\demos\opengl_demos\demo_tv.h" />
     <ClInclude Include="..\..\demos\tga.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\theoraplayer\plugins\clipwebm\msvc\vs2015\libclipwebm.vcxproj">
+      <Project>{3d1576f4-0991-473c-82d7-f22252ca4754}</Project>
+      <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

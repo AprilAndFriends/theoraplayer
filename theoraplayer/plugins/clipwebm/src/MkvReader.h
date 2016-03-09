@@ -10,20 +10,22 @@
 /// 
 /// Implements a reader for MKV files.
 
-#if 0
-//#ifndef THEORAPLAYER_MKV_READER_H
-#define THEORAPLAYER_MKV_READER_H
+#ifndef CLIPWEBM_MKV_READER_H
+#define CLIPWEBM_MKV_READER_H
 
 #include <mkvparser.hpp>
 
 namespace theoraplayer
 {
 	class DataSource;
+}
 
+namespace clipwebm
+{
 	class MkvReader : public mkvparser::IMkvReader
 	{
 	public:
-		explicit MkvReader(DataSource* dataSource);
+		explicit MkvReader(theoraplayer::DataSource* dataSource);
 		virtual ~MkvReader();
 
 		// dictated by the interface
@@ -31,9 +33,10 @@ namespace theoraplayer
 		virtual int Length(long long* total, long long* available);
 
 	protected:
-		DataSource* dataSource;
+		theoraplayer::DataSource* dataSource;
 		int length;
 
+	private:
 		MkvReader(const MkvReader&);
 		MkvReader& operator=(const MkvReader&);
 

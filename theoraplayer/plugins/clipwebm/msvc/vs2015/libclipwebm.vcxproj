@@ -73,14 +73,26 @@
     <ClInclude Include="..\..\include\clipwebm\clipwebm.h" />
     <ClInclude Include="..\..\include\clipwebm\clipwebmExport.h" />
     <ClInclude Include="..\..\src\MkvReader.h" />
-    <ClInclude Include="..\..\src\VideoClip_WebM.h" />
+    <ClInclude Include="..\..\src\Utility.h" />
+    <ClInclude Include="..\..\src\VideoClip.h" />
     <ClInclude Include="..\..\src\webmdec.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\clipwebm.cpp" />
     <ClCompile Include="..\..\src\MkvReader.cpp" />
-    <ClCompile Include="..\..\src\VideoClip_WebM.cpp" />
+    <ClCompile Include="..\..\src\Utility.cpp" />
+    <ClCompile Include="..\..\src\VideoClip.cpp" />
     <ClCompile Include="..\..\src\webmdec.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\msvc\vs2015\libtheoraplayer.vcxproj">
+      <Project>{abe6907d-00ff-4198-8d36-65115af1d868}</Project>
+      <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

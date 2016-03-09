@@ -6,35 +6,33 @@
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
-#if 0
 #include <algorithm>
 #include <memory.h>
 #include <string>
 
-#include "Manager.h"
-#include "AudioInterface.h"
-#include "PixelTransform.h"
+//#include "Manager.h"
+//#include "AudioInterface.h"
 
-#include "DataSource.h"
-#include "Exception.h"
-#include "FrameQueue.h"
-#include "Mutex.h"
-#include "Timer.h"
-#include "theoraplayer.h"
+//#include "DataSource.h"
+//#include "Exception.h"
+//#include "Mutex.h"
+//#include "theoraplayer.h"
+//#include "Utility.h"
+#include <theoraplayer/PixelTransform.h>
+#include <theoraplayer/FrameQueue.h>
+#include <theoraplayer/Timer.h>
+#include <theoraplayer/VideoClip.h>
+#include <theoraplayer/VideoFrame.h>
+#include <tools_common.h>
+
 #include "Utility.h"
-#include "VideoClip_WebM.h"
-#include "VideoFrame.h"
+#include "VideoClip.h"
+#include "webmdec.h"
 
-// TODOth - rename
-#include "WebM/webmdec.h"
-
-namespace theoraplayer
+namespace clipwebm
 {
-	VideoClip_WebM::VideoClip_WebM(DataSource* dataSource,
-		TheoraOutputMode output_mode,
-		int nPrecachedFrames,
-		bool usePower2Stride) :
-		VideoClip(dataSource, output_mode, nPrecachedFrames, usePower2Stride),
+	VideoClip::VideoClip(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride) :
+		theoraplayer::VideoClip(dataSource, outputMode, precachedFramesCount, usePotStride),
 		AudioPacketQueue()
 	{
 		memset(&(webm_ctx), 0, sizeof(webm_ctx));
@@ -44,19 +42,24 @@ namespace theoraplayer
 		this->frameNumber = 0;
 	}
 
-	VideoClip_WebM::~VideoClip_WebM()
+	theoraplayer::VideoClip* VideoClip::create(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride)
 	{
-		TheoraWebmDec::webm_free(this->input.webm_ctx);
+		return new VideoClip(dataSource, outputMode, precachedFramesCount, usePotStride);
 	}
 
-	bool VideoClip_WebM::_readData()
+	VideoClip::~VideoClip()
+	{
+		webm_free(this->input.webm_ctx);
+	}
+
+	bool VideoClip::_readData()
 	{
 		return 1;
 	}
 
-	bool VideoClip_WebM::decodeNextFrame()
+	bool VideoClip::decodeNextFrame()
 	{
-		VideoFrame* frame = this->frameQueue->requestEmptyFrame();
+		theoraplayer::VideoFrame* frame = this->frameQueue->requestEmptyFrame();
 		if (frame == NULL)
 		{
 			return 0; // max number of precached frames reached
@@ -66,7 +69,7 @@ namespace theoraplayer
 		uint8_t* buf = NULL;
 		size_t bytes_in_buffer = 0, buffer_size = 0;
 
-		if (!TheoraWebmDec::webm_read_frame(this->input.webm_ctx, &buf, &bytes_in_buffer, &buffer_size))
+		if (!webm_read_frame(this->input.webm_ctx, &buf, &bytes_in_buffer, &buffer_size))
 		{
 			vpx_codec_iter_t  iter = NULL;
 			vpx_image_t    *img;
@@ -77,7 +80,7 @@ namespace theoraplayer
 				const char *detail = vpx_codec_error_detail(&decoder);
 				if (detail != NULL)
 				{
-					log("Additional information: " + std::string(detail));
+					theoraplayer::log("Additional information: " + std::string(detail));
 				}
 			}
 			if ((img = vpx_codec_get_frame(&decoder, &iter)))
@@ -106,12 +109,12 @@ namespace theoraplayer
 		return 1;
 	}
 
-	void VideoClip_WebM::_restart()
+	void VideoClip::_restart()
 	{
 		bool paused = this->timer->isPaused();
 		if (!paused) this->timer->pause();
 
-		TheoraWebmDec::webm_rewind(input.webm_ctx);
+		webm_rewind(input.webm_ctx);
 		this->frameNumber = 0;
 		this->lastDecodedFrameNumber = -1;
 		this->seekFrame = 0;
@@ -126,27 +129,27 @@ namespace theoraplayer
 		}
 	}
 
-	void VideoClip_WebM::_load(DataSource* source)
+	void VideoClip::_load(theoraplayer::DataSource* source)
 	{
-		if (!TheoraWebmDec::file_is_webm(source, input.webm_ctx, input.vpx_input_ctx))
+		if (!file_is_webm(source, input.webm_ctx, input.vpx_input_ctx))
 		{
-			log("Error: File is not webm.");
+			theoraplayer::log("Error: File is not webm.");
 			return;
 		}
 
-		if (TheoraWebmDec::webm_guess_framerate(source, input.webm_ctx, input.vpx_input_ctx))
+		if (webm_guess_framerate(source, input.webm_ctx, input.vpx_input_ctx))
 		{
-			log("Error: Unable to guess webm framerate.");
+			theoraplayer::log("Error: Unable to guess webm framerate.");
 			return;
 		}
 
-		this->numFrames = TheoraWebmDec::webm_guess_duration(input.webm_ctx);
+		this->numFrames = webm_guess_duration(input.webm_ctx);
 
-		TheoraWebmDec::webm_rewind(input.webm_ctx);
+		webm_rewind(input.webm_ctx);
 
 #ifdef _DEBUG
 		float fps = (float)input.vpx_input_ctx->framerate.numerator / (float)input.vpx_input_ctx->framerate.denominator;
-		log("Framerate: " + strf(fps));
+		theoraplayer::log("Framerate: " + strf(fps));
 #endif
 
 		this->width = input.vpx_input_ctx->width;
@@ -162,7 +165,7 @@ namespace theoraplayer
 		this->duration = this->numFrames * this->frameDuration;
 
 #ifdef _DEBUG
-		log("Video duration: " + strf(this->duration));
+		theoraplayer::log("Video duration: " + strf(this->duration));
 #endif
 
 		fourcc_interface = (VpxInterface*)get_vpx_decoder_by_fourcc(vpx_input_ctx.fourcc);
@@ -172,32 +175,31 @@ namespace theoraplayer
 		if (vpx_codec_dec_init(&decoder, interf->codec_interface(),
 			&cfg, dec_flags))
 		{
-			log("Error: Failed to initialize decoder: " + std::string(vpx_codec_error(&decoder)));
+			theoraplayer::log("Error: Failed to initialize decoder: " + std::string(vpx_codec_error(&decoder)));
 			return;
 		}
 
 		if (this->frameQueue == NULL)
 		{
-			this->frameQueue = new FrameQueue(this);
+			this->frameQueue = new theoraplayer::FrameQueue(this);
 			this->frameQueue->setSize(this->precachedFramesCount);
 		}
 	}
 	
-	void VideoClip_WebM::decodedAudioCheck()
+	void VideoClip::decodedAudioCheck()
 	{
-		if (!this->audioInterface || this->timer->isPaused()) return;
-
-		Mutex::ScopeLock lock(this->audioMutex);
-		flushAudioPackets(this->audioInterface);
-		lock.release();
+		if (this->audioInterface != NULL && !this->timer->isPaused())
+		{
+			this->_flushSynchronizedAudioPackets(this->audioInterface, this->audioMutex);
+		}
 	}
 
-	float VideoClip_WebM::decodeAudio()
+	float VideoClip::decodeAudio()
 	{
 		return -1;
 	}
 
-	void VideoClip_WebM::doSeek()
+	void VideoClip::doSeek()
 	{
 		float time = this->seekFrame / getFps();
 		this->timer->seek(time);
@@ -208,7 +210,7 @@ namespace theoraplayer
 		}
 		this->resetFrameQueue();
 #ifdef _DEBUG
-		log("Seek frame: " + str(this->seekFrame));
+		theoraplayer::log("Seek frame: " + str(this->seekFrame));
 #endif
 		this->lastDecodedFrameNumber = this->seekFrame;
 		if (!paused)
@@ -219,4 +221,3 @@ namespace theoraplayer
 	}
 
 }
-#endif

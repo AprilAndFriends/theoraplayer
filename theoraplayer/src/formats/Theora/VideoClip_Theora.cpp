@@ -12,13 +12,13 @@
 #include <string>
 
 #include "AudioInterface.h"
-#include "PixelTransform.h"
-
+#include "AudioInterfaceFactory.h"
 #include "DataSource.h"
 #include "Exception.h"
 #include "FrameQueue.h"
 #include "Manager.h"
 #include "Mutex.h"
+#include "PixelTransform.h"
 #include "Timer.h"
 #include "theoraplayer.h"
 #include "Utility.h"
@@ -466,8 +466,7 @@ namespace theoraplayer
 	{
 		if (this->audioInterface != NULL && !this->timer->isPaused())
 		{
-			Mutex::ScopeLock lock(this->audioMutex);
-			this->flushAudioPackets(this->audioInterface);
+			this->_flushSynchronizedAudioPackets(this->audioInterface, this->audioMutex);
 		}
 	}
 

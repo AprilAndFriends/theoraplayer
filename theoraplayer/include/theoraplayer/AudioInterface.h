@@ -14,10 +14,10 @@
 #define THEORAPLAYER_AUDIO_INTERFACE_H
 
 #include "theoraplayerExport.h"
-#include "AudioInterfaceFactory.h"
 
 namespace theoraplayer
 {
+	class Mutex;
 	class VideoClip;
 
 	/**
@@ -43,9 +43,9 @@ namespace theoraplayer
 		 \param nSamples contains the number of samples that the data parameter contains in each channel
 		 */
 		virtual void insertData(float* data, int nSamples) = 0;
+
 	};
+
 }
-
-
 #endif
 
