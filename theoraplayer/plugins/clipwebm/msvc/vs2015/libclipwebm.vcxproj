@@ -85,6 +85,22 @@
     <ClCompile Include="..\..\src\webmdec.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\vpx\msvc\vs2015\libvpx.vcxproj">
+      <Project>{d6940d7e-caff-40d9-9322-a53e7d322393}</Project>
+      <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\vpx\msvc\vs2015\libvpxdec.vcxproj">
+      <Project>{2aeb472f-a5d9-4463-adf2-983dc6fd3eb8}</Project>
+      <Private>false</Private>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\msvc\vs2015\libtheoraplayer.vcxproj">
       <Project>{abe6907d-00ff-4198-8d36-65115af1d868}</Project>
       <Private>false</Private>
