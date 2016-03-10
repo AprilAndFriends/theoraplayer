@@ -8,29 +8,24 @@
 /// 
 /// @section DESCRIPTION
 /// 
-/// Implements an interface to be able to process the WebM codec.
+/// Implements an interface to be able to process the MP4 codec through AVFoundation.
 
-#ifndef CLIPWEBM_VIDEO_CLIP_H
-#define CLIPWEBM_VIDEO_CLIP_H
+#ifndef CLIPAVFOUNDATION_VIDEO_CLIP_H
+#define CLIPAVFOUNDATION_VIDEO_CLIP_H
 
 #include <theoraplayer/AudioPacketQueue.h>
 #include <theoraplayer/DataSource.h>
 #include <theoraplayer/VideoClip.h>
-#include <vpx/vpx_decoder.h>
-#include <vpx/vp8dx.h>
 
-#include "webmdec.h"
+#ifndef AVFOUNDATION_CLASSES_DEFINED
+class AVAssetReader;
+class AVAssetReaderTrackOutput;
+#endif
 
-#define FORMAT_NAME "WebM"
+#define FORMAT_NAME "AVFoundation"
 
-namespace clipwebm
+namespace clipavfoundation
 {
-	struct VpxDecInputContext
-	{
-		struct VpxInputContext* vpxInputContext;
-		struct WebmInputContext* webmContext;
-	};
-
 	class VideoClip : public theoraplayer::VideoClip, public theoraplayer::AudioPacketQueue
 	{
 	public:
@@ -47,19 +42,17 @@ namespace clipwebm
 		static theoraplayer::VideoClip* create(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
 
 	protected:
-		vpx_codec_ctx_t decoder;
-		vpx_codec_dec_cfg_t cfg;
-		VpxDecInputContext input;
-		VpxInputContext vpxInputContext;
-		WebmInputContext webmContext;
-		VpxInterface* fourccInterface;
-		vpx_image* frame;
+		bool loaded;
 		int frameNumber;
-		unsigned long lastDecodedFrameNumber;
+		AVAssetReader* reader;
+		AVAssetReaderTrackOutput* output;
+		AVAssetReaderTrackOutput* audioOutput;
+		unsigned int readAudioSamples;
 
-		void doSeek();
+		void unload();
 		void _load(theoraplayer::DataSource* source);
-
+		void doSeek();
+		
 	};
 
 }

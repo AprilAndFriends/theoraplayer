@@ -17,6 +17,8 @@
 
 #include "theoraplayerExport.h"
 
+// TODOth - needs to be refactored
+
 namespace theoraplayer
 {
 	// forward class declarations
@@ -280,6 +282,9 @@ namespace theoraplayer
 		virtual void doSeek() = 0; //! called by WorkerThread to seek to mSeekFrame
 		virtual bool _readData() = 0;
 		bool isBusy();
+
+		void _lockAudioMutex();
+		void _unlockAudioMutex();
 
 		/**
 		* decodes audio from the vorbis stream and stores it in audio packets

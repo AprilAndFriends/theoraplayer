@@ -21,6 +21,8 @@
 #include "VideoClip.h"
 #include "VideoFrame.h"
 
+// TODOth - needs to be refactored
+
 namespace theoraplayer
 {
 	VideoClip::VideoClip(DataSource* data_source,
@@ -588,6 +590,16 @@ namespace theoraplayer
 		{
 			this->endOfFile = false;
 		}
+	}
+
+	void VideoClip::_lockAudioMutex()
+	{
+		this->audioMutex->lock();
+	}
+
+	void VideoClip::_unlockAudioMutex()
+	{
+		this->audioMutex->unlock();
 	}
 
 }

@@ -8,27 +8,29 @@
 /// 
 /// @section DESCRIPTION
 /// 
-/// Implements an interface to be able to process the WebM codec.
+/// Implements an interface to be able to process the FFmpeg codec.
 
-#ifndef CLIPWEBM_VIDEO_CLIP_H
-#define CLIPWEBM_VIDEO_CLIP_H
+#ifndef CLIPFFMPEG_VIDEO_CLIP_H
+#define CLIPFFMPEG_VIDEO_CLIP_H
 
 #include <theoraplayer/AudioPacketQueue.h>
 #include <theoraplayer/DataSource.h>
 #include <theoraplayer/VideoClip.h>
-#include <vpx/vpx_decoder.h>
-#include <vpx/vp8dx.h>
 
-#include "webmdec.h"
+struct AVFormatContext;
+struct AVCodecContext;
+struct AVCodec;
+struct AVFrame;
+struct AVIOContext;
 
-#define FORMAT_NAME "WebM"
+#define FORMAT_NAME "FFmpeg"
 
-namespace clipwebm
+namespace clipffmeg
 {
 	struct VpxDecInputContext
 	{
-		struct VpxInputContext* vpxInputContext;
-		struct WebmInputContext* webmContext;
+		struct VpxInputContext* vpx_input_ctx;
+		struct WebmInputContext* webm_ctx;
 	};
 
 	class VideoClip : public theoraplayer::VideoClip, public theoraplayer::AudioPacketQueue
@@ -40,6 +42,7 @@ namespace clipwebm
 		bool _readData();
 		bool decodeNextFrame();
 		void _restart();
+		void _load(theoraplayer::DataSource* source);
 		float decodeAudio();
 		void decodedAudioCheck();
 		std::string getDecoderName() { return FORMAT_NAME; }
@@ -47,18 +50,18 @@ namespace clipwebm
 		static theoraplayer::VideoClip* create(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
 
 	protected:
-		vpx_codec_ctx_t decoder;
-		vpx_codec_dec_cfg_t cfg;
-		VpxDecInputContext input;
-		VpxInputContext vpxInputContext;
-		WebmInputContext webmContext;
-		VpxInterface* fourccInterface;
-		vpx_image* frame;
+		bool loaded;
+		AVFormatContext* formatContext;
+		AVCodecContext* codecContext;
+		AVIOContext* avioContext;
+		AVCodec* codec;
+		AVFrame* frame;
+		unsigned char* inputBuffer;
+		int videoStreamIndex;
 		int frameNumber;
-		unsigned long lastDecodedFrameNumber;
 
+		void unload();
 		void doSeek();
-		void _load(theoraplayer::DataSource* source);
 
 	};
 

@@ -64,7 +64,7 @@
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props" />
   <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\build-defaults.props" />
   <Import Project="props\configuration.props" />
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">
+  <ItemDefinitionGroup>
     <CustomBuild>
       <Message>Assembling %(Filename)%(Extension)</Message>
 	  <TargetFileName>$(IntDir)%(Filename)_asm.obj</TargetFileName>

@@ -1,4 +1,12 @@
+#ifdef _USE_WEBM
 #include <clipwebm/clipwebm.h>
+#endif
+#ifdef _USE_FFMPEG
+#include <clipffmpeg/clipffmpeg.h>
+#endif
+#ifdef _USE_AVFOUNDATION
+#include <clipavfoundation/clipavfoundation.h>
+#endif
 #include <theoraplayer/Manager.h>
 #include <theoraplayer/theoraplayer.h>
 
@@ -343,7 +351,15 @@ int main(int argc, char** argv)
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	// general init
 	theoraplayer::init(1);
+#ifdef _USE_WEBM
 	clipwebm::init();
+#endif
+#ifdef _USE_FFMPEG
+	clipffmpeg::init();
+#endif
+#ifdef _USE_AVFOUNDATION
+	clipavfoundation::init();
+#endif
 	init();
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
@@ -362,7 +378,15 @@ int main(int argc, char** argv)
 	}
 	// destroy
 	destroy();
+#ifdef _USE_AVFOUNDATION
+	clipavfoundation::destroy();
+#endif
+#ifdef _USE_FFMPEG
+	clipffmpeg::destroy();
+#endif
+#ifdef _USE_WEBM
 	clipwebm::destroy();
+#endif
 	theoraplayer::destroy();
 	glutDestroyWindow(0);
 	return 0;

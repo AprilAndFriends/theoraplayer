@@ -11,8 +11,8 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>../../demos/dependencies/win32/glut/lib;../../demos/dependencies/win32/openal/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OpenAL32.lib;glut32.lib;libtheoraplayer.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalDependencies Condition="'$(Configuration)'=='DebugS' or '$(Configuration)'=='ReleaseS'">libtheora.lib;libogg.lib;libvorbis.lib;libvorbisfile.lib;libclipwebm.lib;libvpx.lib;libvpxdec.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenAL32.lib;glut32.lib;libtheoraplayer.lib;libclipwebm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)'=='DebugS' or '$(Configuration)'=='ReleaseS'">libtheora.lib;libogg.lib;libvorbis.lib;libvorbisfile.lib;libvpx.lib;libvpxdec.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <UACExecutionLevel>AsInvoker</UACExecutionLevel>
       <SubSystem>Console</SubSystem>
     </Link>
