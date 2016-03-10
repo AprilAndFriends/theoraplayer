@@ -46,6 +46,9 @@
     <Filter Include="Header Files\formats\Theora">
       <UniqueIdentifier>{92155f79-791e-4ca8-aefc-7417e2949953}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{b81c49c5-0d47-4da0-aace-99635af87c76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\YUV\C\yuv420_grey_c.c">
@@ -231,6 +234,9 @@
     <ClCompile Include="..\..\src\MemoryDataSource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\AudioInterfaceFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\YUV\yuv_util.h">
@@ -366,6 +372,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\fileproperties.rc" />
+    <ResourceCompile Include="..\..\fileproperties.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

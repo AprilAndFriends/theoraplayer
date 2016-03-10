@@ -23,10 +23,13 @@ namespace theoraplayer
 	class theoraplayerExport AudioInterfaceFactory
 	{
 	public:
+		AudioInterfaceFactory();
+		virtual ~AudioInterfaceFactory();
+
 		//! VideoManager calls this when creating a new VideoClip object
 		virtual AudioInterface* createInstance(theoraplayer::VideoClip* owner, int nChannels, int freq) = 0;
 
 	};
-}
 
+}
 #endif

@@ -397,7 +397,7 @@ namespace clipavfoundation
 			CMSampleBufferRef sampleBuffer = NULL;
 			NSAutoreleasePool* pool = NULL;
 			bool mutexLocked = false;
-			// TODOth - this needs to be refactored without using a scope lock since it's local in theoraplayer
+			// TODOth - this needs to be refactored without using a scope lock since it's local in theoraplayer, maybe use this->_lockAudioMutex() and a try-catch block
 			Mutex::ScopeLock audioMutexLock;
 			float factor = 1.0f / (this->audioFrequency * this->audioChannelsCount);
 			float videoTime = (float) this->frameNumber / this->fps;

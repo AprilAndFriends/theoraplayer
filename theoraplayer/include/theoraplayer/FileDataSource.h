@@ -32,7 +32,7 @@ namespace theoraplayer
 		inline std::string getFilename() { return this->filename; }
 		inline std::string getFormatName() { return this->formatName; }
 
-		inline std::string toString() { return this->filename + "(format: " + this->formatName + ")"; }
+		inline std::string toString() { return this->filename + " (format: " + this->formatName + ")"; }
 
 		int read(void* output, int nBytes);
 		void seek(uint64_t byte_index);
