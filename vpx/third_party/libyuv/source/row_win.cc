@@ -20,7 +20,7 @@
 namespace libyuv {
 extern "C" {
 #endif
-
+	
 // This module is for Visual C.
 #if !defined(LIBYUV_DISABLE_X86) && (defined(_M_IX86) || defined(_M_X64)) && \
     defined(_MSC_VER) && !defined(__clang__)

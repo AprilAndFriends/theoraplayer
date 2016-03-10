@@ -64,6 +64,19 @@
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props" />
   <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\build-defaults.props" />
   <Import Project="props\configuration.props" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">
+    <CustomBuild>
+      <Message>Assembling %(Filename)%(Extension)</Message>
+	  <TargetFileName>$(IntDir)%(Filename)_asm.obj</TargetFileName>
+      <Outputs>%(TargetFileName)</Outputs>
+      <Command Condition="'$(WholeProgramOptimization)'!='true'">IF EXIST "$(IntDir)%(Filename)_asm.obj" del "$(IntDir)%(Filename)_asm.obj" /q
+vsyasm -Xvc -g cv8 -f win32 -I"../.." -o "$(IntDir)%(Filename)_asm.obj" "%(FullPath)"
+IF EXIST "$(IntDir)%(Filename).obj" ren "$(IntDir)%(Filename).obj" "%(Filename)_asm.obj"</Command>
+      <Command Condition="'$(WholeProgramOptimization)'=='true'">IF EXIST "$(IntDir)%(Filename)_asm.obj" del "$(IntDir)%(Filename)_asm.obj" /q
+vsyasm -Xvc -f win32 -I"../.." -o "$(IntDir)%(Filename)_asm.obj" "%(FullPath)"
+IF EXIST "$(IntDir)%(Filename).obj" ren "$(IntDir)%(Filename).obj" "%(Filename)_asm.obj"</Command>
+    </CustomBuild>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\vpx\src\vpx_decoder.c" />
     <ClCompile Include="..\..\vpx\src\vpx_encoder.c" />
@@ -76,95 +89,32 @@
     <ClCompile Include="..\..\vpx_scale\generic\yv12extend.c" />
     <ClCompile Include="..\..\vpx_scale\generic\gen_scalers.c" />
     <ClCompile Include="..\..\vpx_scale\vpx_scale_rtcd.c" />
-    <CustomBuild Include="..\..\vpx_ports\emms.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_ports_emms_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_ports_emms_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_ports_emms_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_ports_emms_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vpx_ports\emms.asm" />
     <ClCompile Include="..\..\vpx_dsp\prob.c" />
     <ClCompile Include="..\..\vpx_dsp\bitwriter.c" />
     <ClCompile Include="..\..\vpx_dsp\bitwriter_buffer.c" />
     <ClCompile Include="..\..\vpx_dsp\bitreader.c" />
     <ClCompile Include="..\..\vpx_dsp\bitreader_buffer.c" />
     <ClCompile Include="..\..\vpx_dsp\intrapred.c" />
-    <CustomBuild Include="..\..\vpx_dsp\x86\intrapred_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_intrapred_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_intrapred_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_intrapred_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_intrapred_sse2_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vpx_dsp\x86\intrapred_ssse3.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_intrapred_ssse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_intrapred_ssse3_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_intrapred_ssse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_intrapred_ssse3_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vpx_dsp\x86\vpx_subpixel_8t_ssse3.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_vpx_subpixel_8t_ssse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_vpx_subpixel_8t_ssse3_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_vpx_subpixel_8t_ssse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_vpx_subpixel_8t_ssse3_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vpx_dsp\x86\intrapred_sse2.asm" />
+    <CustomBuild Include="..\..\vpx_dsp\x86\intrapred_ssse3.asm" />
+    <CustomBuild Include="..\..\vpx_dsp\x86\vpx_subpixel_8t_ssse3.asm" />
     <ClCompile Include="..\..\vpx_dsp\vpx_convolve.c" />
     <ClCompile Include="..\..\vpx_dsp\x86\vpx_asm_stubs.c" />
-    <CustomBuild Include="..\..\vpx_dsp\x86\vpx_subpixel_8t_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_vpx_subpixel_8t_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_vpx_subpixel_8t_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_vpx_subpixel_8t_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_vpx_subpixel_8t_sse2_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vpx_dsp\x86\vpx_subpixel_bilinear_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_vpx_subpixel_bilinear_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_vpx_subpixel_bilinear_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_vpx_subpixel_bilinear_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_vpx_subpixel_bilinear_sse2_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vpx_dsp\x86\vpx_subpixel_bilinear_ssse3.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_vpx_subpixel_bilinear_ssse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_vpx_subpixel_bilinear_ssse3_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_vpx_subpixel_bilinear_ssse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_vpx_subpixel_bilinear_ssse3_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vpx_dsp\x86\vpx_subpixel_8t_sse2.asm" />
+    <CustomBuild Include="..\..\vpx_dsp\x86\vpx_subpixel_bilinear_sse2.asm" />
+    <CustomBuild Include="..\..\vpx_dsp\x86\vpx_subpixel_bilinear_ssse3.asm" />
     <ClCompile Include="..\..\vpx_dsp\x86\vpx_subpixel_8t_intrin_avx2.c">
       <AdditionalOptions>/arch:AVX</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="..\..\vpx_dsp\x86\vpx_subpixel_8t_intrin_ssse3.c" />
-    <CustomBuild Include="..\..\vpx_dsp\x86\vpx_convolve_copy_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_vpx_convolve_copy_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_vpx_convolve_copy_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_vpx_convolve_copy_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_vpx_convolve_copy_sse2_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vpx_dsp\x86\vpx_convolve_copy_sse2.asm" />
     <ClCompile Include="..\..\vpx_dsp\loopfilter.c" />
     <ClCompile Include="..\..\vpx_dsp\x86\loopfilter_sse2.c" />
     <ClCompile Include="..\..\vpx_dsp\x86\loopfilter_avx2.c">
       <AdditionalOptions>/arch:AVX</AdditionalOptions>
     </ClCompile>
-    <CustomBuild Include="..\..\vpx_dsp\x86\loopfilter_mmx.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_loopfilter_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_loopfilter_mmx_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_loopfilter_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_loopfilter_mmx_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vpx_dsp\x86\loopfilter_mmx.asm" />
     <ClCompile Include="..\..\vpx_dsp\fwd_txfm.c" />
     <ClCompile Include="..\..\vpx_dsp\x86\fwd_txfm_sse2.c" />
     <ClCompile Include="..\..\vpx_dsp\x86\fwd_txfm_avx2.c">
@@ -172,114 +122,37 @@
     </ClCompile>
     <ClCompile Include="..\..\vpx_dsp\inv_txfm.c" />
     <ClCompile Include="..\..\vpx_dsp\x86\inv_txfm_sse2.c" />
-    <CustomBuild Include="..\..\vpx_dsp\x86\inv_wht_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_inv_wht_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_inv_wht_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_inv_wht_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_inv_wht_sse2_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vpx_dsp\x86\inv_wht_sse2.asm" />
     <ClCompile Include="..\..\vpx_dsp\quantize.c" />
     <ClCompile Include="..\..\vpx_dsp\x86\quantize_sse2.c" />
     <ClCompile Include="..\..\vpx_dsp\sad.c" />
     <ClCompile Include="..\..\vpx_dsp\subtract.c" />
-    <CustomBuild Include="..\..\vpx_dsp\x86\sad_mmx.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_sad_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_sad_mmx_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_sad_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_sad_mmx_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vpx_dsp\x86\sad_sse3.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_sad_sse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_sad_sse3_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_sad_sse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_sad_sse3_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vpx_dsp\x86\sad_ssse3.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_sad_ssse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_sad_ssse3_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_sad_ssse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_sad_ssse3_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vpx_dsp\x86\sad_sse4.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_sad_sse4_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_sad_sse4_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_sad_sse4_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_sad_sse4_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vpx_dsp\x86\sad_mmx.asm" />
+    <CustomBuild Include="..\..\vpx_dsp\x86\sad_sse3.asm" />
+    <CustomBuild Include="..\..\vpx_dsp\x86\sad_ssse3.asm" />
+    <CustomBuild Include="..\..\vpx_dsp\x86\sad_sse4.asm" />
     <ClCompile Include="..\..\vpx_dsp\x86\sad4d_avx2.c">
       <AdditionalOptions>/arch:AVX</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="..\..\vpx_dsp\x86\sad_avx2.c">
       <AdditionalOptions>/arch:AVX</AdditionalOptions>
     </ClCompile>
-    <CustomBuild Include="..\..\vpx_dsp\x86\sad4d_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_sad4d_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_sad4d_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_sad4d_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_sad4d_sse2_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vpx_dsp\x86\sad_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_sad_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_sad_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_sad_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_sad_sse2_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vpx_dsp\x86\subtract_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_subtract_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_subtract_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_subtract_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_subtract_sse2_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vpx_dsp\x86\sad4d_sse2.asm" />
+    <CustomBuild Include="..\..\vpx_dsp\x86\sad_sse2.asm" />
+    <CustomBuild Include="..\..\vpx_dsp\x86\subtract_sse2.asm" />
     <ClCompile Include="..\..\vpx_dsp\variance.c" />
     <ClCompile Include="..\..\vpx_dsp\x86\variance_mmx.c" />
-    <CustomBuild Include="..\..\vpx_dsp\x86\variance_impl_mmx.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_variance_impl_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_variance_impl_mmx_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_variance_impl_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_variance_impl_mmx_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vpx_dsp\x86\variance_impl_mmx.asm" />
     <ClCompile Include="..\..\vpx_dsp\x86\variance_sse2.c" />
     <ClCompile Include="..\..\vpx_dsp\x86\halfpix_variance_sse2.c" />
-    <CustomBuild Include="..\..\vpx_dsp\x86\halfpix_variance_impl_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_halfpix_variance_impl_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_halfpix_variance_impl_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_halfpix_variance_impl_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_halfpix_variance_impl_sse2_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vpx_dsp\x86\halfpix_variance_impl_sse2.asm" />
     <ClCompile Include="..\..\vpx_dsp\x86\variance_avx2.c">
       <AdditionalOptions>/arch:AVX</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="..\..\vpx_dsp\x86\variance_impl_avx2.c">
       <AdditionalOptions>/arch:AVX</AdditionalOptions>
     </ClCompile>
-    <CustomBuild Include="..\..\vpx_dsp\x86\subpel_variance_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_subpel_variance_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vpx_dsp_x86_subpel_variance_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vpx_dsp_x86_subpel_variance_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vpx_dsp_x86_subpel_variance_sse2_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vpx_dsp\x86\subpel_variance_sse2.asm" />
     <ClCompile Include="..\..\vpx_dsp\vpx_dsp_rtcd.c" />
     <ClCompile Include="..\..\vpx_util\vpx_thread.c" />
     <ClCompile Include="..\..\vp8\common\alloccommon.c" />
@@ -313,144 +186,25 @@
     <ClCompile Include="..\..\vp8\common\x86\loopfilter_x86.c" />
     <ClCompile Include="..\..\vp8\common\mfqe.c" />
     <ClCompile Include="..\..\vp8\common\postproc.c" />
-    <CustomBuild Include="..\..\vp8\common\x86\dequantize_mmx.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_dequantize_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_dequantize_mmx_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_dequantize_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_dequantize_mmx_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vp8\common\x86\dequantize_mmx.asm" />
     <ClCompile Include="..\..\vp8\common\x86\idct_blk_mmx.c" />
-    <CustomBuild Include="..\..\vp8\common\x86\idctllm_mmx.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_idctllm_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_idctllm_mmx_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_idctllm_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_idctllm_mmx_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\iwalsh_mmx.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_iwalsh_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_iwalsh_mmx_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_iwalsh_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_iwalsh_mmx_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\vp8_loopfilter_mmx.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_vp8_loopfilter_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_vp8_loopfilter_mmx_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_vp8_loopfilter_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_vp8_loopfilter_mmx_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\recon_mmx.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_recon_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_recon_mmx_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_recon_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_recon_mmx_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\subpixel_mmx.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_subpixel_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_subpixel_mmx_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_subpixel_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_subpixel_mmx_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\copy_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_copy_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_copy_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_copy_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_copy_sse2_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vp8\common\x86\idctllm_mmx.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\iwalsh_mmx.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\vp8_loopfilter_mmx.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\recon_mmx.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\subpixel_mmx.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\copy_sse2.asm" />
     <ClCompile Include="..\..\vp8\common\x86\idct_blk_sse2.c" />
-    <CustomBuild Include="..\..\vp8\common\x86\idctllm_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_idctllm_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_idctllm_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_idctllm_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_idctllm_sse2_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\recon_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_recon_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_recon_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_recon_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_recon_sse2_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\subpixel_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_subpixel_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_subpixel_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_subpixel_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_subpixel_sse2_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\loopfilter_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_loopfilter_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_loopfilter_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_loopfilter_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_loopfilter_sse2_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\iwalsh_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_iwalsh_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_iwalsh_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_iwalsh_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_iwalsh_sse2_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\copy_sse3.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_copy_sse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_copy_sse3_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_copy_sse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_copy_sse3_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\subpixel_ssse3.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_subpixel_ssse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_subpixel_ssse3_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_subpixel_ssse3_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_subpixel_ssse3_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\postproc_mmx.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_postproc_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_postproc_mmx_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_postproc_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_postproc_mmx_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\mfqe_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_mfqe_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_mfqe_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_mfqe_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_mfqe_sse2_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\common\x86\postproc_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_postproc_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_common_x86_postproc_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_common_x86_postproc_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_common_x86_postproc_sse2_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vp8\common\x86\idctllm_sse2.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\recon_sse2.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\subpixel_sse2.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\loopfilter_sse2.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\iwalsh_sse2.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\copy_sse3.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\subpixel_ssse3.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\postproc_mmx.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\mfqe_sse2.asm" />
+    <CustomBuild Include="..\..\vp8\common\x86\postproc_sse2.asm" />
     <ClCompile Include="..\..\vp8\vp8_cx_iface.c" />
     <ClCompile Include="..\..\vp8\encoder\bitstream.c" />
     <ClCompile Include="..\..\vp8\encoder\boolhuff.c" />
@@ -475,60 +229,18 @@
     <ClCompile Include="..\..\vp8\encoder\tokenize.c" />
     <ClCompile Include="..\..\vp8\encoder\treewriter.c" />
     <ClCompile Include="..\..\vp8\encoder\temporal_filter.c" />
-    <CustomBuild Include="..\..\vp8\encoder\x86\dct_mmx.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_encoder_x86_dct_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_encoder_x86_dct_mmx_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_encoder_x86_dct_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_encoder_x86_dct_mmx_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vp8\encoder\x86\dct_mmx.asm" />
     <ClCompile Include="..\..\vp8\encoder\x86\vp8_enc_stubs_mmx.c" />
-    <CustomBuild Include="..\..\vp8\encoder\x86\dct_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_encoder_x86_dct_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_encoder_x86_dct_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_encoder_x86_dct_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_encoder_x86_dct_sse2_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\encoder\x86\fwalsh_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_encoder_x86_fwalsh_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_encoder_x86_fwalsh_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_encoder_x86_fwalsh_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_encoder_x86_fwalsh_sse2_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vp8\encoder\x86\dct_sse2.asm" />
+    <CustomBuild Include="..\..\vp8\encoder\x86\fwalsh_sse2.asm" />
     <ClCompile Include="..\..\vp8\encoder\x86\vp8_quantize_sse2.c" />
     <ClCompile Include="..\..\vp8\encoder\x86\quantize_ssse3.c" />
     <ClCompile Include="..\..\vp8\encoder\x86\quantize_sse4.c" />
     <ClCompile Include="..\..\vp8\encoder\x86\denoising_sse2.c" />
-    <CustomBuild Include="..\..\vp8\encoder\x86\temporal_filter_apply_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_encoder_x86_temporal_filter_apply_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_encoder_x86_temporal_filter_apply_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_encoder_x86_temporal_filter_apply_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_encoder_x86_temporal_filter_apply_sse2_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vp8\encoder\x86\temporal_filter_apply_sse2.asm" />
     <ClCompile Include="..\..\vp8\encoder\x86\vp8_enc_stubs_sse2.c" />
-    <CustomBuild Include="..\..\vp8\encoder\x86\quantize_mmx.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_encoder_x86_quantize_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_encoder_x86_quantize_mmx_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_encoder_x86_quantize_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_encoder_x86_quantize_mmx_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp8\encoder\x86\encodeopt.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_encoder_x86_encodeopt_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp8_encoder_x86_encodeopt_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp8_encoder_x86_encodeopt_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp8_encoder_x86_encodeopt_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vp8\encoder\x86\quantize_mmx.asm" />
+    <CustomBuild Include="..\..\vp8\encoder\x86\encodeopt.asm" />
     <ClCompile Include="..\..\vp8\vp8_dx_iface.c" />
     <ClCompile Include="..\..\vp8\decoder\dboolhuff.c" />
     <ClCompile Include="..\..\vp8\decoder\decodemv.c" />
@@ -595,34 +307,13 @@
     <ClCompile Include="..\..\vp9\encoder\vp9_temporal_filter.c" />
     <ClCompile Include="..\..\vp9\encoder\vp9_mbgraph.c" />
     <ClCompile Include="..\..\vp9\encoder\x86\vp9_avg_intrin_sse2.c" />
-    <CustomBuild Include="..\..\vp9\encoder\x86\vp9_temporal_filter_apply_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp9_encoder_x86_vp9_temporal_filter_apply_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp9_encoder_x86_vp9_temporal_filter_apply_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp9_encoder_x86_vp9_temporal_filter_apply_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp9_encoder_x86_vp9_temporal_filter_apply_sse2_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vp9\encoder\x86\vp9_temporal_filter_apply_sse2.asm" />
     <ClCompile Include="..\..\vp9\encoder\x86\vp9_quantize_sse2.c" />
     <ClCompile Include="..\..\vp9\encoder\x86\vp9_diamond_search_sad_avx.c">
       <AdditionalOptions>/arch:AVX</AdditionalOptions>
     </ClCompile>
-    <CustomBuild Include="..\..\vp9\encoder\x86\vp9_dct_mmx.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp9_encoder_x86_vp9_dct_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp9_encoder_x86_vp9_dct_mmx_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp9_encoder_x86_vp9_dct_mmx_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp9_encoder_x86_vp9_dct_mmx_asm.obj</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="..\..\vp9\encoder\x86\vp9_error_sse2.asm">
-      <Message Condition="'$(WholeProgramOptimization)'!='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">yasm -Xvc -g cv8 -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp9_encoder_x86_vp9_error_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'!='true'">$(IntDir)vp9_encoder_x86_vp9_error_sse2_asm.obj</Outputs>
-      <Message Condition="'$(WholeProgramOptimization)'=='true'">Assembling %(Filename)%(Extension)</Message>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">yasm -Xvc -f win32  -I"." -I"D:/cateia/libvpx/libvpx-master" "%(FullPath)" -o $(IntDir)vp9_encoder_x86_vp9_error_sse2_asm.obj</Command>
-      <Outputs Condition="'$(WholeProgramOptimization)'=='true'">$(IntDir)vp9_encoder_x86_vp9_error_sse2_asm.obj</Outputs>
-    </CustomBuild>
+    <CustomBuild Include="..\..\vp9\encoder\x86\vp9_dct_mmx.asm" />
+    <CustomBuild Include="..\..\vp9\encoder\x86\vp9_error_sse2.asm" />
     <ClCompile Include="..\..\vp9\encoder\x86\vp9_dct_sse2.c" />
     <ClCompile Include="..\..\vp9\encoder\x86\vp9_dct_ssse3.c" />
     <ClCompile Include="..\..\vp9\encoder\x86\vp9_error_intrin_avx2.c">
