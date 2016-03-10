@@ -132,7 +132,7 @@
     <None Include="..\..\win32\vorbis.def" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\ogg\msvc\vs2013-winp8-winp8\libogg.vcxproj">
+    <ProjectReference Include="..\..\..\ogg\msvc\vs2013-winp8\libogg.vcxproj">
       <Project>{15cbfeff-7965-41f5-b4e2-21e8795c9159}</Project>
       <Private>false</Private>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>

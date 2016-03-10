@@ -2,8 +2,8 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemDefinitionGroup>
     <ClCompile>
-      <PreprocessorDefinitions>_DEMO_GLUT_PLAYER;_DEMO_SPRITE_ANIMATION;_DEMO_MULTIPLE;_DEMO_SEEK;_DEMO_TV;_DEMO_LIGHT_MAP;_DEMO_AV;_DEMO_COMPOSITE;_DEMO_ENVIRONMENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../demos;../../demos/dependencies/win32/glut/include;../../demos/dependencies/win32/glext;../../demos/dependencies/win32/openal/include;../../demos/basecode/util;../../ogg/include;../../vorbis/include;../../theora/include;../../theoraplayer/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEMO_GLUT_PLAYER;_DEMO_SPRITE_ANIMATION;_DEMO_MULTIPLE;_DEMO_SEEK;_DEMO_TV;_DEMO_LIGHT_MAP;_DEMO_AV;_DEMO_COMPOSITE;_DEMO_ENVIRONMENT;_USE_WEBM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../demos;../../demos/dependencies/win32/glut/include;../../demos/dependencies/win32/glext;../../demos/dependencies/win32/openal/include;../../demos/basecode/util;../../ogg/include;../../vorbis/include;../../theora/include;../../theoraplayer/include;../../theoraplayer/plugins/clipwebm/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
       <DisableSpecificWarnings>4251;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
