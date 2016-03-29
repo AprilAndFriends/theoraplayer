@@ -17,32 +17,36 @@
 
 namespace theoraplayer
 {
-	class Mutex;
+	class AudioInterfaceFactory;
 	class VideoClip;
 
-	/**
-	 This is the class that serves as an interface between the library's audio
-	 output and the audio playback library of your choice.
-	 The class gets mono or stereo PCM data in in floating point data
-	 */
+	/// @brief This is the class that serves as an interface between the library's audio output and the audio playback library of your choice.
+	///        The class gets mono or stereo PCM data in floating point data
 	class theoraplayerExport AudioInterface
 	{
 	public:
-		//! PCM frequency, usualy 44100 Hz
-		int freq;
-		//! Mono or stereo
-		int numChannels;
-		//! Pointer to the parent VideoClip object
-		theoraplayer::VideoClip* clip;
+		friend class AudioInterfaceFactory;
 
-		AudioInterface(theoraplayer::VideoClip* owner, int nChannels, int freq);
 		virtual ~AudioInterface();
-		//! A function that the VideoClip object calls once more audio packets are decoded
-		/*!
-		 \param data contains one or two channels of float PCM data in the range [-1,1]
-		 \param nSamples contains the number of samples that the data parameter contains in each channel
-		 */
-		virtual void insertData(float* data, int nSamples) = 0;
+
+		inline theoraplayer::VideoClip* getClip() { return this->clip; }
+		inline int getChannelsCount() { return this->channelsCount; }
+		inline int getFrequency() { return this->frequency; }
+
+		/// @brief A function that the VideoClip object calls once more audio packets are decoded
+		/// @param[in] data contains one or two channels of float PCM data in the range [-1,1]
+		/// @param[in] samplesCount contains the number of samples that the data parameter contains in each channel
+		virtual void insertData(float* data, int samplesCount) = 0;
+
+	protected:
+		/// @brief Pointer to the parent VideoClip object
+		theoraplayer::VideoClip* clip;
+		/// @brief 1 for mono or 2 for stereo.
+		int channelsCount;
+		/// @brief PCM frequency in Hz (usually 44100).
+		int frequency;
+
+		AudioInterface(theoraplayer::VideoClip* owner, int channelsCount, int frequency);
 
 	};
 

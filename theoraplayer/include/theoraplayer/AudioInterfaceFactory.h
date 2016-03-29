@@ -26,8 +26,8 @@ namespace theoraplayer
 		AudioInterfaceFactory();
 		virtual ~AudioInterfaceFactory();
 
-		//! VideoManager calls this when creating a new VideoClip object
-		virtual AudioInterface* createInstance(theoraplayer::VideoClip* owner, int nChannels, int freq) = 0;
+		/// @brief VideoManager calls this when creating a new VideoClip object
+		virtual AudioInterface* createInstance(theoraplayer::VideoClip* clip, int channelsCount, int frequency) = 0;
 
 	};
 

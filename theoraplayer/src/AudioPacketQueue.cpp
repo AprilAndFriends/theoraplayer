@@ -14,7 +14,6 @@
 
 namespace theoraplayer
 {
-
 	AudioPacketQueue::AudioPacketQueue()
 	{
 		this->theoraAudioPacketQueue = NULL;

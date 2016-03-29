@@ -10,11 +10,11 @@
 
 namespace theoraplayer
 {
-	AudioInterface::AudioInterface(theoraplayer::VideoClip* owner, int nChannels, int freq)
+	AudioInterface::AudioInterface(theoraplayer::VideoClip* clip, int channelsCount, int frequency)
 	{
-		this->freq = freq;
-		this->numChannels = nChannels;
-		this->clip = owner;
+		this->clip = clip;
+		this->channelsCount = channelsCount;
+		this->frequency = frequency;
 	}
 
 	AudioInterface::~AudioInterface()

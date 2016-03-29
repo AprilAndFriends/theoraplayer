@@ -1,60 +1,57 @@
-/************************************************************************************
-This source file is part of the Theora Video Playback Library
-For latest info, see http://libtheoraplayer.sourceforge.net/
-*************************************************************************************
-Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
-This program is free software; you can redistribute it and/or modify it under
-the terms of the BSD license: http://www.opensource.org/licenses/bsd-license.php
-*************************************************************************************/
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+
 #include <stdio.h>
+
 #include "OpenAL_AudioInterface.h"
 
-using namespace theoraplayer;
-
-ALCdevice* gDevice=0;
-ALCcontext* gContext=0;
+ALCdevice* gDevice = 0;
+ALCcontext* gContext = 0;
 
 short float2short(float f)
 {
-	if (f > 1)
+	if (f > 1.0f)
 	{
-		f = 1;
+		f = 1.0f;
 	}
-	else if (f < -1)
+	else if (f < -1.0f)
 	{
-		f = -1;
+		f = -1.0f;
 	}
-	return (short) (f*32767);
+	return (short)(f * 32767);
 }
 
-OpenAL_AudioInterface::OpenAL_AudioInterface(VideoClip* owner, int nChannels, int freq) :
-	theoraplayer::AudioInterface(owner, nChannels, freq), theoraplayer::Timer()
+OpenAL_AudioInterface::OpenAL_AudioInterface(theoraplayer::VideoClip* clip, int channelsCount, int frequency) :
+	theoraplayer::AudioInterface(clip, channelsCount, frequency), theoraplayer::Timer()
 {
-	this->sourceNumChannels = this->numChannels;
-	if (this->numChannels > 2)
+	this->sourceNumChannels = this->channelsCount;
+	if (this->channelsCount > 2)
 	{
 		// ignore audio with more than 2 channels, use only the stereo channels
-		this->numChannels = 2;
+		this->channelsCount = 2;
 	}
-	this->maxBuffSize = freq * this->numChannels * 2;
+	this->maxBuffSize = frequency * this->channelsCount * 2;
 	this->buffSize = 0;
 	this->numProcessedSamples = 0;
 	this->currentTimer = 0;
-
 	this->tempBuffer = new short[this->maxBuffSize];
 	alGenSources(1, &this->source);
-	owner->setTimer(this);
+	clip->setTimer(this);
 	this->numPlayedSamples = 0;
 }
 
 OpenAL_AudioInterface::~OpenAL_AudioInterface()
 {
-	if (this->tempBuffer)
+	if (this->tempBuffer != NULL)
 	{
 		delete[] this->tempBuffer;
 	}
-	
-	if (this->source)
+	if (this->source != 0)
 	{
 		alSourcei(this->source, AL_BUFFER, NULL);
 		alDeleteSources(1, &this->source);
@@ -68,93 +65,89 @@ OpenAL_AudioInterface::~OpenAL_AudioInterface()
 
 float OpenAL_AudioInterface::getQueuedAudioSize()
 {
-	return ((float) (this->numProcessedSamples - this->numPlayedSamples)) / this->freq;
+	return ((float)(this->numProcessedSamples - this->numPlayedSamples)) / this->frequency;
 }
 
-void OpenAL_AudioInterface::insertData(float* data, int nSamples)
+void OpenAL_AudioInterface::insertData(float* data, int samplesCount)
 {
 	float* tempData = NULL;
 	if (this->sourceNumChannels > 2)
 	{
-		tempData = new float[nSamples * 2 / this->sourceNumChannels + 16]; // 16 padding just in case
-		int i, n;
-		for (n = 0, i = 0; i < nSamples; i += this->sourceNumChannels, n += 2)
+		tempData = new float[samplesCount * 2 / this->sourceNumChannels + 16]; // 16 padding just in case
+		int i = 0;
+		int n = 0;
+		for (n = 0, i = 0; i < samplesCount; i += this->sourceNumChannels, n += 2)
 		{
 			tempData[n] = data[i];
 			tempData[n + 1] = data[i + 1];
 		}
 		data = tempData;
-		nSamples = n;
+		samplesCount = n;
 	}
-	//printf("got %d bytes, %d buffers queued\n",nSamples,(int)this->bufferQueue.size());
-	for (int i = 0; i < nSamples; i++)
+	//printf("got %d bytes, %d buffers queued\n",samplesCount,(int)this->bufferQueue.size());
+	int state = 0;
+	OpenAL_Buffer buff;
+	ALuint format;
+	for (int i = 0; i < samplesCount; ++i)
 	{
 		if (this->buffSize < this->maxBuffSize)
 		{
-			this->tempBuffer[this->buffSize++]=float2short(data[i]);
+			this->tempBuffer[this->buffSize] = float2short(data[i]);
+			++this->buffSize;
 		}
-		if (this->buffSize == this->freq * this->numChannels / 10)
+		if (this->buffSize == this->frequency * this->channelsCount / 10)
 		{
-			OpenAL_Buffer buff;
-			alGenBuffers(1,&buff.id);
-
-			ALuint format = (this->numChannels == 1) ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16;
-			alBufferData(buff.id,format,this->tempBuffer,this->buffSize*2, this->freq);
+			memset(&buff, 0, sizeof(OpenAL_Buffer));
+			alGenBuffers(1, &buff.id);
+			format = (this->channelsCount == 1) ? AL_FORMAT_MONO16 : AL_FORMAT_STEREO16;
+			alBufferData(buff.id, format, this->tempBuffer, this->buffSize * 2, this->frequency);
 			alSourceQueueBuffers(this->source, 1, &buff.id);
-			buff.nSamples=this->buffSize/this->numChannels;
-			this->numProcessedSamples+=this->buffSize/this->numChannels;
+			buff.samplesCount = this->buffSize / this->channelsCount;
+			this->numProcessedSamples += this->buffSize / this->channelsCount;
 			this->bufferQueue.push(buff);
-
-			this->buffSize=0;
-
-			int state;
-			alGetSourcei(this->source,AL_SOURCE_STATE,&state);
+			this->buffSize = 0;
+			state = 0;
+			alGetSourcei(this->source, AL_SOURCE_STATE, &state);
 			if (state != AL_PLAYING)
 			{
 				//alSourcef(this->source,AL_PITCH,0.5); // debug
 				//alSourcef(this->source,AL_SAMPLE_OFFSET,(float) this->numProcessedSamples-mFreq/4);
 				alSourcePlay(this->source);
 			}
-
 		}
 	}
-	if (tempData)
+	if (tempData != NULL)
 	{
-		delete [] tempData;
+		delete[] tempData;
 	}
 }
 
 void OpenAL_AudioInterface::update(float timeDelta)
 {
-	int i,/*state,*/nProcessed;
+	int i = 0;
+	int nProcessed = 0;
 	OpenAL_Buffer buff;
-
 	// process played buffers
-
-	alGetSourcei(this->source,AL_BUFFERS_PROCESSED,&nProcessed);
-	
-	for (i=0;i<nProcessed;i++)
+	alGetSourcei(this->source, AL_BUFFERS_PROCESSED, &nProcessed);
+	for (i = 0; i < nProcessed; ++i)
 	{
-		buff=this->bufferQueue.front();
+		buff = this->bufferQueue.front();
 		this->bufferQueue.pop();
-		this->numPlayedSamples+=buff.nSamples;
-		alSourceUnqueueBuffers(this->source,1,&buff.id);
-		alDeleteBuffers(1,&buff.id);
+		this->numPlayedSamples += buff.samplesCount;
+		alSourceUnqueueBuffers(this->source, 1, &buff.id);
+		alDeleteBuffers(1, &buff.id);
 	}
 	if (nProcessed != 0)
 	{
 		// update offset
-		alGetSourcef(this->source,AL_SEC_OFFSET,&this->currentTimer);
+		alGetSourcef(this->source, AL_SEC_OFFSET, &this->currentTimer);
 	}
-
 	// control playback and return time position
 	//alGetSourcei(this->source,AL_SOURCE_STATE,&state);
 	//if (state == AL_PLAYING)
-		this->currentTimer += timeDelta;
-
-	this->time = this->currentTimer + (float) this->numPlayedSamples/this->freq;
-
-	float duration=this->clip->getDuration();
+	this->currentTimer += timeDelta;
+	this->time = this->currentTimer + (float) this->numPlayedSamples / this->frequency;
+	float duration = this->clip->getDuration();
 	if (this->time > duration)
 	{
 		this->time = duration;
@@ -176,23 +169,21 @@ void OpenAL_AudioInterface::play()
 void OpenAL_AudioInterface::seek(float time)
 {
 	OpenAL_Buffer buff;
-
 	alSourceStop(this->source);
 	while (!this->bufferQueue.empty())
 	{
-		buff=this->bufferQueue.front();
+		buff = this->bufferQueue.front();
 		this->bufferQueue.pop();
-		alSourceUnqueueBuffers(this->source,1,&buff.id);
-		alDeleteBuffers(1,&buff.id);
+		alSourceUnqueueBuffers(this->source, 1, &buff.id);
+		alDeleteBuffers(1, &buff.id);
 	}
-//		int nProcessed;
-//		alGetSourcei(this->source,AL_BUFFERS_PROCESSED,&nProcessed);
-//		if (nProcessed != 0)
-//			nProcessed=nProcessed;
-	this->buffSize=0;
-
+	//		int nProcessed;
+	//		alGetSourcei(this->source,AL_BUFFERS_PROCESSED,&nProcessed);
+	//		if (nProcessed != 0)
+	//			nProcessed=nProcessed;
+	this->buffSize = 0;
 	this->currentTimer = 0;
-	this->numPlayedSamples=this->numProcessedSamples=(int) (time*this->freq);
+	this->numPlayedSamples = this->numProcessedSamples = (int)(time * this->frequency);
 	this->time = time;
 }
 
@@ -202,30 +193,30 @@ OpenAL_AudioInterfaceFactory::OpenAL_AudioInterfaceFactory()
 	// if you want to use this interface in your own program, you'll
 	// probably want to remove the openal init/destory lines
 	gDevice = alcOpenDevice("");
-	if (alcGetError(gDevice) != ALC_NO_ERROR)
+	if (alcGetError(gDevice) == ALC_NO_ERROR)
 	{
-		goto Fail;
+		return;
 	}
 	gContext = alcCreateContext(gDevice, NULL);
-	if (alcGetError(gDevice) != ALC_NO_ERROR)
+	if (alcGetError(gDevice) == ALC_NO_ERROR)
 	{
-		goto Fail;
+		alcCloseDevice(gDevice);
+		gDevice = NULL;
+		return;
 	}
 	alcMakeContextCurrent(gContext);
 	if (alcGetError(gDevice) != ALC_NO_ERROR)
 	{
-		goto Fail;
+		alcDestroyContext(gContext);
+		gContext = NULL;
+		alcCloseDevice(gDevice);
+		gDevice = NULL;
 	}
-
-	return;
-Fail:
-	gDevice=NULL;
-	gContext=NULL;
 }
 
 OpenAL_AudioInterfaceFactory::~OpenAL_AudioInterfaceFactory()
 {
-	if (gDevice)
+	if (gDevice != NULL)
 	{
 		alcMakeContextCurrent(NULL);
 		alcDestroyContext(gContext);
@@ -233,7 +224,7 @@ OpenAL_AudioInterfaceFactory::~OpenAL_AudioInterfaceFactory()
 	}
 }
 
-OpenAL_AudioInterface* OpenAL_AudioInterfaceFactory::createInstance(VideoClip* owner,int nChannels,int freq)
+OpenAL_AudioInterface* OpenAL_AudioInterfaceFactory::createInstance(theoraplayer::VideoClip* clip, int channelsCount, int frequency)
 {
-	return new OpenAL_AudioInterface(owner,nChannels,freq);
+	return new OpenAL_AudioInterface(clip, channelsCount, frequency);
 }
