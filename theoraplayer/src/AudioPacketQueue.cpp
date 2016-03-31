@@ -14,127 +14,139 @@
 
 namespace theoraplayer
 {
-	AudioPacketQueue::AudioPacketQueue()
+	AudioPacketQueue::AudioPacketQueue() : audioFrequency(0), audioChannelsCount(0), audioPacketQueue(NULL)
 	{
-		this->theoraAudioPacketQueue = NULL;
 	}
 
 	AudioPacketQueue::~AudioPacketQueue()
 	{
-		destroyAllAudioPackets();
+		this->destroyAllAudioPackets();
 	}
 
 	float AudioPacketQueue::getAudioPacketQueueLength()
 	{
-		float len = 0;
-		for (AudioPacket* p = this->theoraAudioPacketQueue; p != NULL; p = p->next)
-			len += p->numSamples;
-
-		return len / (this->audioFrequency * this->audioChannelsCount);
+		int count = 0;
+		for (AudioPacket* packet = this->audioPacketQueue; packet != NULL; packet = packet->next)
+		{
+			count += packet->samplesCount;
+		}
+		return (float)count / (this->audioFrequency * this->audioChannelsCount);
 	}
 
-	void AudioPacketQueue::_addAudioPacket(float* data, int numSamples)
+	void AudioPacketQueue::_addAudioPacket(float* data, int samplesCount)
 	{
 		AudioPacket* packet = new AudioPacket;
-		packet->pcm = data;
-		packet->numSamples = numSamples;
+		packet->pcmData = data;
+		packet->samplesCount = samplesCount;
 		packet->next = NULL;
-
-		if (this->theoraAudioPacketQueue == NULL) this->theoraAudioPacketQueue = packet;
+		if (this->audioPacketQueue == NULL)
+		{
+			this->audioPacketQueue = packet;
+		}
 		else
 		{
-			AudioPacket* last = this->theoraAudioPacketQueue;
-			for (AudioPacket* p = last; p != NULL; p = p->next)
-				last = p;
+			AudioPacket* last = this->audioPacketQueue;
+			for (AudioPacket* current = last; current != NULL; current = current->next)
+			{
+				last = current;
+			}
 			last->next = packet;
 		}
 	}
 
-	void AudioPacketQueue::addAudioPacket(float** buffer, int numSamples, float gain)
+	void AudioPacketQueue::addAudioPacket(float** buffer, int samplesCount, float gain)
 	{
-		float* data = new float[numSamples * this->audioChannelsCount];
+		int size = samplesCount * this->audioChannelsCount;
+		float* data = new float[size];
+		memset(data, 0, size * sizeof(float));
 		float* dataptr = data;
-		int i;
-		unsigned int j;
-
+		int i = 0;
+		unsigned int j = 0;
 		if (gain < 1.0f)
 		{
 			// apply gain, let's attenuate the samples
-			for (i = 0; i < numSamples; ++i)
+			for (i = 0; i < samplesCount; ++i)
 			{
-				for (j = 0; j < this->audioChannelsCount; j++, ++dataptr)
+				for (j = 0; j < this->audioChannelsCount; ++j, ++dataptr)
 				{
 					*dataptr = buffer[j][i] * gain;
 				}
 			}
 		}
-		else
+		else if (gain > 0.0f)
 		{
 			// do a simple copy, faster then the above method, when gain is 1.0f
-			for (i = 0; i < numSamples; ++i)
+			for (i = 0; i < samplesCount; ++i)
 			{
-				for (j = 0; j < this->audioChannelsCount; j++, ++dataptr)
+				for (j = 0; j < this->audioChannelsCount; ++j, ++dataptr)
 				{
 					*dataptr = buffer[j][i];
 				}
 			}
 		}
-
-		_addAudioPacket(data, numSamples * this->audioChannelsCount);
+		this->_addAudioPacket(data, samplesCount * this->audioChannelsCount);
 	}
 
-	void AudioPacketQueue::addAudioPacket(float* buffer, int numSamples, float gain)
+	void AudioPacketQueue::addAudioPacket(float* buffer, int samplesCount, float gain)
 	{
-		float* data = new float[numSamples * this->audioChannelsCount];
+		int size = samplesCount * this->audioChannelsCount;
+		float* data = new float[size];
+		memset(data, 0, size * sizeof(float));
 		float* dataptr = data;
-		int i, numFloats = numSamples * this->audioChannelsCount;
-
+		int i = 0;
+		int floatCount = samplesCount * this->audioChannelsCount;
 		if (gain < 1.0f)
 		{
 			// apply gain, let's attenuate the samples
-			for (i = 0; i < numFloats; ++i, dataptr++)
+			for (i = 0; i < floatCount; ++i, ++dataptr)
+			{
 				*dataptr = buffer[i] * gain;
+			}
 		}
-		else
+		else if (gain > 0.0f)
 		{
 			// do a simple copy, faster then the above method, when gain is 1.0f
-			for (i = 0; i < numFloats; ++i, dataptr++)
+			for (i = 0; i < floatCount; ++i, ++dataptr)
+			{
 				*dataptr = buffer[i];
+			}
 		}
-
-		_addAudioPacket(data, numFloats);
+		this->_addAudioPacket(data, floatCount);
 	}
 
-	AudioPacket* AudioPacketQueue::popAudioPacket()
+	AudioPacketQueue::AudioPacket* AudioPacketQueue::popAudioPacket()
 	{
-		if (this->theoraAudioPacketQueue == NULL) return NULL;
-		AudioPacket* p = this->theoraAudioPacketQueue;
-		this->theoraAudioPacketQueue = this->theoraAudioPacketQueue->next;
-		return p;
-	}
-
-	void AudioPacketQueue::destroyAudioPacket(AudioPacket* p)
-	{
-		if (p != NULL)
+		AudioPacket* result = this->audioPacketQueue;
+		if (result != NULL)
 		{
-			delete[] p->pcm;
-			delete p;
+			this->audioPacketQueue = result->next;
+		}
+		return result;
+	}
+
+	void AudioPacketQueue::destroyAudioPacket(AudioPacket* packet)
+	{
+		if (packet != NULL)
+		{
+			delete[] packet->pcmData;
+			delete packet;
 		}
 	}
 
 	void AudioPacketQueue::destroyAllAudioPackets()
 	{
-		for (AudioPacket* p = popAudioPacket(); p != NULL; p = popAudioPacket())
-			destroyAudioPacket(p);
+		for (AudioPacket* packet = this->popAudioPacket(); packet != NULL; packet = this->popAudioPacket())
+		{
+			this->destroyAudioPacket(packet);
+		}
 	}
 
 	void AudioPacketQueue::flushAudioPackets(AudioInterface* audioInterface)
 	{
-
-		for (AudioPacket* p = popAudioPacket(); p != NULL; p = popAudioPacket())
+		for (AudioPacket* packet = this->popAudioPacket(); packet != NULL; packet = this->popAudioPacket())
 		{
-			audioInterface->insertData(p->pcm, p->numSamples);
-			destroyAudioPacket(p);
+			audioInterface->insertData(packet->pcmData, packet->samplesCount);
+			this->destroyAudioPacket(packet);
 		}
 	}
 

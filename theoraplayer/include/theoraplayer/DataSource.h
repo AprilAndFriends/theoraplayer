@@ -20,32 +20,28 @@
 
 namespace theoraplayer
 {
-	/**
-		This is a simple class that provides abstracted data feeding. You can use the
-		TheoraFileDataSource for regular file playback or you can implement your own
-		internet streaming solution, or a class that uses encrypted datafiles etc.
-		The sky is the limit
-	*/
+	/// @brief This is a simple class that provides abstracted data feeding. You can use FileDataSource for regular file playback or
+	/// you can implement your own internal streaming solution or a class that uses encrypted datafiles etc. The sky is the limit.
 	class theoraplayerExport DataSource
 	{
 	public:
 		DataSource();
 		virtual ~DataSource();
-		/**
-			Reads nBytes bytes from data source and returns number of read bytes.
-			if function returns less bytes then nBytes, the system assumes EOF is reached.
-		*/
-		virtual int read(void* output, int nBytes) = 0;
-		//! returns the name of the format used for creating a VideoClip
+
+		/// @return The name of the format used for creating a VideoClip
 		virtual std::string getFormatName() = 0;
-		//! returns a string representation of the DataSource, eg 'File: source.ogg'
-		virtual std::string toString() = 0;
-		//! position the source pointer to byte_index from the start of the source
-		virtual void seek(uint64_t byte_index) = 0;
-		//! return the size of the stream in bytes
+		/// @return The size of the stream in bytes
 		virtual uint64_t getSize() = 0;
-		//! return the current position of the source pointer
+		/// @return The current position of the source pointer
 		virtual uint64_t getPosition() = 0;
+
+		/// @brief Reads bytesCount bytes from data source and returns number of read bytes
+		/// @note If function returns less bytes then nBytes, the system assumes EOF is reached.
+		virtual int read(void* output, int bytesCount) = 0;
+		/// @brief Positions the source pointer to byteIndex from the start of the source.
+		virtual void seek(uint64_t byteIndex) = 0;
+		/// @return A string representation of the DataSource, eg 'File: source.ogg'
+		virtual std::string toString() = 0;
 
 	};
 

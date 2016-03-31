@@ -716,49 +716,49 @@ namespace theoraplayer
 			// the first N ones, or we don't have enough, so let's fill the gap with silence.
 			if (time > timestamp - queuedTime)
 			{
-				while (this->theoraAudioPacketQueue != NULL)
+				while (this->audioPacketQueue != NULL)
 				{
-					if (time <= timestamp - queuedTime + this->theoraAudioPacketQueue->numSamples / rate)
+					if (time <= timestamp - queuedTime + this->audioPacketQueue->samplesCount / rate)
 					{
-						trimmedCount = (int)((timestamp - queuedTime + this->theoraAudioPacketQueue->numSamples / rate - time) * rate);
-						if (this->theoraAudioPacketQueue->numSamples - trimmedCount <= 0)
+						trimmedCount = (int)((timestamp - queuedTime + this->audioPacketQueue->samplesCount / rate - time) * rate);
+						if (this->audioPacketQueue->samplesCount - trimmedCount <= 0)
 						{
 							this->destroyAudioPacket(this->popAudioPacket()); // if there's no data to be left, just destroy it
 						}
 						else
 						{
-							for (int i = trimmedCount, j = 0; i < this->theoraAudioPacketQueue->numSamples; ++i, ++j)
+							for (int i = trimmedCount, j = 0; i < this->audioPacketQueue->samplesCount; ++i, ++j)
 							{
-								this->theoraAudioPacketQueue->pcm[j] = this->theoraAudioPacketQueue->pcm[i];
+								this->audioPacketQueue->pcmData[j] = this->audioPacketQueue->pcmData[i];
 							}
-							this->theoraAudioPacketQueue->numSamples -= trimmedCount;
+							this->audioPacketQueue->samplesCount -= trimmedCount;
 						}
 						break;
 					}
-					queuedTime -= this->theoraAudioPacketQueue->numSamples / rate;
+					queuedTime -= this->audioPacketQueue->samplesCount / rate;
 					this->destroyAudioPacket(this->popAudioPacket());
 				}
 			}
 			// expand the first packet with silence.
-			else if (this->theoraAudioPacketQueue != NULL)
+			else if (this->audioPacketQueue != NULL)
 			{
 				int i = 0;
 				int j = 0;
 				int missingCount = (int)((timestamp - queuedTime - time) * rate);
 				if (missingCount > 0)
 				{
-					float* samples = new float[missingCount + this->theoraAudioPacketQueue->numSamples];
+					float* samples = new float[missingCount + this->audioPacketQueue->samplesCount];
 					// TODOth - can this be done with a memset even though it's a float?
 					for (i = 0; i < missingCount; ++i)
 					{
 						samples[i] = 0;
 					}
-					for (j = 0; i < missingCount + this->theoraAudioPacketQueue->numSamples; ++i, ++j)
+					for (j = 0; i < missingCount + this->audioPacketQueue->samplesCount; ++i, ++j)
 					{
-						samples[i] = this->theoraAudioPacketQueue->pcm[j];
+						samples[i] = this->audioPacketQueue->pcmData[j];
 					}
-					delete[] this->theoraAudioPacketQueue->pcm;
-					this->theoraAudioPacketQueue->pcm = samples;
+					delete[] this->audioPacketQueue->pcmData;
+					this->audioPacketQueue->pcmData = samples;
 				}
 			}
 			this->lastDecodedFrameNumber = this->seekFrame;

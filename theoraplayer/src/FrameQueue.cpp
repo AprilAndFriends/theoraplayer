@@ -33,7 +33,7 @@ namespace theoraplayer
 		delete this->mutex;
 	}
 
-	VideoFrame* FrameQueue::createFrameInstance(VideoClip* clip)
+	VideoFrame* FrameQueue::_createFrameInstance(VideoClip* clip)
 	{
 		VideoFrame* frame = new VideoFrame(clip);
 		if (frame->getBuffer() == NULL) // This can happen if you run out of memory
@@ -58,7 +58,7 @@ namespace theoraplayer
 		VideoFrame* frame = NULL;
 		for (int i = 0; i < n; ++i)
 		{
-			frame = this->createFrameInstance(this->parent);
+			frame = this->_createFrameInstance(this->parent);
 			if (frame != NULL)
 			{
 				this->queue.push_back(frame);

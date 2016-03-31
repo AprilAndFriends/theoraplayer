@@ -18,24 +18,22 @@
 
 namespace theoraplayer
 {	
-	/**
-		provides standard file IO
-	*/
+	/// @brief Provides file IO through standard C-API.
 	class theoraplayerExport FileDataSource : public DataSource
 	{
 	public:
 		FileDataSource(const std::string& filename);
 		~FileDataSource();
 
+		inline std::string getFormatName() { return this->formatName; }
+		inline std::string getFilename() { return this->filename; }
 		uint64_t getSize();
 		uint64_t getPosition();
-		inline std::string getFilename() { return this->filename; }
-		inline std::string getFormatName() { return this->formatName; }
-
-		inline std::string toString() { return this->filename + " (format: " + this->formatName + ")"; }
 
 		int read(void* output, int nBytes);
 		void seek(uint64_t byte_index);
+
+		inline std::string toString() { return this->filename + " (format: " + this->formatName + ")"; }
 
 	private:
 		FILE* filePtr;
@@ -44,8 +42,9 @@ namespace theoraplayer
 		std::string formatName;
 		uint64_t length;
 
-		void openFile();
+		void _openFile();
 
 	};
+
 }
 #endif

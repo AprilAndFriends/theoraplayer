@@ -23,6 +23,7 @@ namespace theoraplayer
 		this->filename = filename;
 		this->filePtr = NULL;
 		VideoClip::Format format;
+		// used for determining the file format, does not throw an exception inside the ctor
 		FILE* file = openSupportedFormatFile(this->filename, format, this->fullFilename);
 		if (this->filePtr != NULL)
 		{
@@ -33,14 +34,14 @@ namespace theoraplayer
 
 	FileDataSource::~FileDataSource()
 	{
-		if (this->filePtr)
+		if (this->filePtr != NULL)
 		{
 			fclose(this->filePtr);
 			this->filePtr = NULL;
 		}
 	}
 
-	void FileDataSource::openFile()
+	void FileDataSource::_openFile()
 	{
 		if (this->filePtr == NULL)
 		{
@@ -68,7 +69,7 @@ namespace theoraplayer
 	{
 		if (this->filePtr == NULL)
 		{
-			this->openFile();
+			this->_openFile();
 		}
 		uint64_t n = fread(output, 1, nBytes, this->filePtr);
 		return (int) n;
@@ -78,9 +79,10 @@ namespace theoraplayer
 	{
 		if (this->filePtr == NULL) 
 		{
-			this->openFile();
+			this->_openFile();
 		}
-#ifdef _LINUX //fpos_t is not a scalar in Linux, for more info refer here: https://code.google.com/p/libtheoraplayer/issues/detail?id=6
+		// fpos_t is not a scalar in Linux, for more info refer here: https://code.google.com/p/libtheoraplayer/issues/detail?id=6
+#ifdef _LINUX
 		fpos_t fpos = { 0 };
 		fpos.__pos = byte_index;
 #else
@@ -93,7 +95,7 @@ namespace theoraplayer
 	{
 		if (this->filePtr == NULL)
 		{
-			this->openFile();
+			this->_openFile();
 		}
 		return this->length;
 	}

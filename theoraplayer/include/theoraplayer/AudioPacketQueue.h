@@ -19,33 +19,33 @@
 namespace theoraplayer
 {
 	class AudioInterface;
-	/**
-	 This is an internal structure which VideoClip_Theora uses to store audio packets
-	 */
-	struct AudioPacket
-	{
-		float* pcm;
-		int numSamples; //! size in number of float samples (stereo has twice the number of samples)
-		AudioPacket* next; // pointer to the next audio packet, to implement a linked list
-	};
 
-	/**
-		This is a Mutex object, used in thread syncronization.
-	 */
+	/// @brief This is a Mutex object, used in thread syncronization.
 	class theoraplayerExport AudioPacketQueue
 	{
 	public:
+		/// @brief This is an internal structure which VideoClip_Theora uses to store audio packets
+		struct AudioPacket
+		{
+			float* pcmData;
+			/// @brief Size in number of float samples.
+			/// @note Stereo has twice the number of samples.
+			int samplesCount;
+			/// @brief The next AudioPacket* instance.
+			AudioPacket* next;
+		};
+
 		AudioPacketQueue();
 		~AudioPacketQueue();
 
 		float getAudioPacketQueueLength();
 
-		void addAudioPacket(float** buffer, int numSamples, float gain);
-		void addAudioPacket(float* buffer, int numSamples, float gain);
+		void addAudioPacket(float** buffer, int samplesCount, float gain = 1.0f);
+		void addAudioPacket(float* buffer, int samplesCount, float gain = 1.0f);
 
 		AudioPacket* popAudioPacket();
 
-		void destroyAudioPacket(AudioPacket* p);
+		void destroyAudioPacket(AudioPacket* packet);
 		void destroyAllAudioPackets();
 
 		void flushAudioPackets(AudioInterface* audioInterface);
@@ -53,9 +53,9 @@ namespace theoraplayer
 	protected:
 		unsigned int audioFrequency;
 		unsigned int audioChannelsCount;
-		AudioPacket* theoraAudioPacketQueue;
+		AudioPacket* audioPacketQueue;
 
-		void _addAudioPacket(float* data, int numSamples);
+		void _addAudioPacket(float* data, int samplesCount);
 		void _flushSynchronizedAudioPackets(AudioInterface* audioInterface, Mutex* mutex);
 
 	};
