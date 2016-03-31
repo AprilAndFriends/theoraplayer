@@ -12,23 +12,23 @@
 #include "clipffmpeg.h"
 #include "VideoClip.h"
 
-namespace clipffmeg
+namespace clipffmpeg
 {
 	static bool initialized = false;
 
 	void init()
 	{
-		theoraplayer::log("Initializing WebM VideoClip support for Theoraplayer.");
+		theoraplayer::log("Initializing mp4 VideoClip support for Theoraplayer.");
 		theoraplayer::VideoClip::Format format;
 		format.name = FORMAT_NAME;
-		format.extension = ".webm";
-		format.createFunction = &clipffmeg::VideoClip::create;
+		format.extension = ".mp4";
+		format.createFunction = &clipffmpeg::VideoClip::create;
 		theoraplayer::registerVideoClipFormat(format);
 	}
 
 	void destroy()
 	{
-		theoraplayer::log("Destroying WebM VideoClip for Theoraplayer.");
+		theoraplayer::log("Destroying mp4 VideoClip for Theoraplayer.");
 		theoraplayer::unregisterVideoClipFormat(FORMAT_NAME);
 	}
 

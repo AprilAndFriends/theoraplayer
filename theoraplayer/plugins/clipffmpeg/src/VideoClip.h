@@ -25,7 +25,7 @@ struct AVIOContext;
 
 #define FORMAT_NAME "FFmpeg"
 
-namespace clipffmeg
+namespace clipffmpeg
 {
 	struct VpxDecInputContext
 	{

@@ -15,7 +15,7 @@
 
 #include <string>
 
-namespace clipffmeg
+namespace clipffmpeg
 {
 	std::string str(int i);
 	std::string strf(float i);

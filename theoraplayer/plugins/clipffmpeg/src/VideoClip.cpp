@@ -36,7 +36,7 @@ extern "C"
 #include "libavutil/avassert.h"
 }
 
-namespace clipffmeg
+namespace clipffmpeg
 {
 	static bool ffmpegInitialised = false;
 

@@ -10,7 +10,7 @@
 
 #include "Utility.h"
 
-namespace clipffmeg
+namespace clipffmpeg
 {
 	std::string str(int i)
 	{

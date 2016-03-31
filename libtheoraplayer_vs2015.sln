@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 14 for Windows Desktop
+# Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libogg", "ogg\msvc\vs2015\libogg.vcxproj", "{15CBFEFF-7965-41F5-B4E2-21E8795C9159}"
@@ -113,8 +113,8 @@ Global
 		{ABE6907D-00FF-4198-8D36-65115AF1D868}.DebugS|Android.Build.0 = DebugS_Theora|Android
 		{ABE6907D-00FF-4198-8D36-65115AF1D868}.DebugS|Android-x86.ActiveCfg = DebugS_Theora|Android-x86
 		{ABE6907D-00FF-4198-8D36-65115AF1D868}.DebugS|Android-x86.Build.0 = DebugS_Theora|Android-x86
-		{ABE6907D-00FF-4198-8D36-65115AF1D868}.DebugS|Win32.ActiveCfg = DebugS_Theora|Win32
-		{ABE6907D-00FF-4198-8D36-65115AF1D868}.DebugS|Win32.Build.0 = DebugS_Theora|Win32
+		{ABE6907D-00FF-4198-8D36-65115AF1D868}.DebugS|Win32.ActiveCfg = DebugS|Win32
+		{ABE6907D-00FF-4198-8D36-65115AF1D868}.DebugS|Win32.Build.0 = DebugS|Win32
 		{ABE6907D-00FF-4198-8D36-65115AF1D868}.Release|Android.ActiveCfg = Release_Theora|Android
 		{ABE6907D-00FF-4198-8D36-65115AF1D868}.Release|Android.Build.0 = Release_Theora|Android
 		{ABE6907D-00FF-4198-8D36-65115AF1D868}.Release|Android-x86.ActiveCfg = Release_Theora|Android-x86
@@ -138,7 +138,6 @@ Global
 		{653F3841-3F26-49B9-AFCF-091DB4B67031}.DebugS|Android-x86.ActiveCfg = DebugS|Android-x86
 		{653F3841-3F26-49B9-AFCF-091DB4B67031}.DebugS|Android-x86.Build.0 = DebugS|Android-x86
 		{653F3841-3F26-49B9-AFCF-091DB4B67031}.DebugS|Win32.ActiveCfg = DebugS|Win32
-		{653F3841-3F26-49B9-AFCF-091DB4B67031}.DebugS|Win32.Build.0 = DebugS|Win32
 		{653F3841-3F26-49B9-AFCF-091DB4B67031}.Release|Android.ActiveCfg = Release|Android
 		{653F3841-3F26-49B9-AFCF-091DB4B67031}.Release|Android.Build.0 = Release|Android
 		{653F3841-3F26-49B9-AFCF-091DB4B67031}.Release|Android-x86.ActiveCfg = Release|Android-x86
@@ -178,7 +177,6 @@ Global
 		{3D1576F4-0991-473C-82D7-F22252CA4754}.DebugS|Android-x86.ActiveCfg = DebugS|Android-x86
 		{3D1576F4-0991-473C-82D7-F22252CA4754}.DebugS|Android-x86.Build.0 = DebugS|Android-x86
 		{3D1576F4-0991-473C-82D7-F22252CA4754}.DebugS|Win32.ActiveCfg = DebugS|Win32
-		{3D1576F4-0991-473C-82D7-F22252CA4754}.DebugS|Win32.Build.0 = DebugS|Win32
 		{3D1576F4-0991-473C-82D7-F22252CA4754}.Release|Android.ActiveCfg = Release|Android
 		{3D1576F4-0991-473C-82D7-F22252CA4754}.Release|Android.Build.0 = Release|Android
 		{3D1576F4-0991-473C-82D7-F22252CA4754}.Release|Android-x86.ActiveCfg = Release|Android-x86
@@ -202,7 +200,6 @@ Global
 		{2AEB472F-A5D9-4463-ADF2-983DC6FD3EB8}.DebugS|Android-x86.ActiveCfg = DebugS|Android-x86
 		{2AEB472F-A5D9-4463-ADF2-983DC6FD3EB8}.DebugS|Android-x86.Build.0 = DebugS|Android-x86
 		{2AEB472F-A5D9-4463-ADF2-983DC6FD3EB8}.DebugS|Win32.ActiveCfg = DebugS|Win32
-		{2AEB472F-A5D9-4463-ADF2-983DC6FD3EB8}.DebugS|Win32.Build.0 = DebugS|Win32
 		{2AEB472F-A5D9-4463-ADF2-983DC6FD3EB8}.Release|Android.ActiveCfg = Release|Android
 		{2AEB472F-A5D9-4463-ADF2-983DC6FD3EB8}.Release|Android.Build.0 = Release|Android
 		{2AEB472F-A5D9-4463-ADF2-983DC6FD3EB8}.Release|Android-x86.ActiveCfg = Release|Android-x86
@@ -226,7 +223,6 @@ Global
 		{D6940D7E-CAFF-40D9-9322-A53E7D322393}.DebugS|Android-x86.ActiveCfg = DebugS|Android-x86
 		{D6940D7E-CAFF-40D9-9322-A53E7D322393}.DebugS|Android-x86.Build.0 = DebugS|Android-x86
 		{D6940D7E-CAFF-40D9-9322-A53E7D322393}.DebugS|Win32.ActiveCfg = DebugS|Win32
-		{D6940D7E-CAFF-40D9-9322-A53E7D322393}.DebugS|Win32.Build.0 = DebugS|Win32
 		{D6940D7E-CAFF-40D9-9322-A53E7D322393}.Release|Android.ActiveCfg = Release|Android
 		{D6940D7E-CAFF-40D9-9322-A53E7D322393}.Release|Android.Build.0 = Release|Android
 		{D6940D7E-CAFF-40D9-9322-A53E7D322393}.Release|Android-x86.ActiveCfg = Release|Android-x86
@@ -271,6 +267,7 @@ Global
 		{6022F4BA-F8D8-4422-8A44-25FD56C97BD4}.DebugS|Android-x86.ActiveCfg = DebugS|Android-x86
 		{6022F4BA-F8D8-4422-8A44-25FD56C97BD4}.DebugS|Android-x86.Build.0 = DebugS|Android-x86
 		{6022F4BA-F8D8-4422-8A44-25FD56C97BD4}.DebugS|Win32.ActiveCfg = DebugS|Win32
+		{6022F4BA-F8D8-4422-8A44-25FD56C97BD4}.DebugS|Win32.Build.0 = DebugS|Win32
 		{6022F4BA-F8D8-4422-8A44-25FD56C97BD4}.Release|Android.ActiveCfg = Release|Android
 		{6022F4BA-F8D8-4422-8A44-25FD56C97BD4}.Release|Android.Build.0 = Release|Android
 		{6022F4BA-F8D8-4422-8A44-25FD56C97BD4}.Release|Android-x86.ActiveCfg = Release|Android-x86

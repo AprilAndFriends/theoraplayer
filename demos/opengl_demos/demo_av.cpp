@@ -46,7 +46,7 @@ namespace av
 			theoraplayer::manager->destroyVideoClip(clip);
 		}
 		//*/
-		clip = theoraplayer::manager->createVideoClip("media/bunny", outputMode, 16);
+		clip = theoraplayer::manager->createVideoClip("media/sample", outputMode, 16);
 		//  use this if you want to preload the file into ram and stream from there
 		//	clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("../media/short"), theoraplayer::TH_RGB);
 		clip->setAutoRestart(true);

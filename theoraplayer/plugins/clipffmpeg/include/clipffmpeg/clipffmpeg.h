@@ -17,7 +17,7 @@
 
 #include "clipffmpegExport.h"
 
-namespace clipffmeg
+namespace clipffmpeg
 {
 	clipffmegFnExport void init();
 	clipffmegFnExport void destroy();

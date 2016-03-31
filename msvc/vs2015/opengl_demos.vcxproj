@@ -67,13 +67,17 @@
     <ClInclude Include="..\..\demos\tga.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\theoraplayer\plugins\clipffmpeg\msvc\vs2015\libclipffmpeg.vcxproj">
+      <Project>{6022f4ba-f8d8-4422-8a44-25fd56c97bd4}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\theoraplayer\plugins\clipwebm\msvc\vs2015\libclipwebm.vcxproj">
       <Project>{3d1576f4-0991-473c-82d7-f22252ca4754}</Project>
-      <Private>false</Private>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-      <LinkLibraryDependencies>false</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\..\vpx\msvc\vs2015\libvpx.vcxproj">
+      <Project>{d6940d7e-caff-40d9-9322-a53e7d322393}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\vpx\msvc\vs2015\libvpxdec.vcxproj">
+      <Project>{2aeb472f-a5d9-4463-adf2-983dc6fd3eb8}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
