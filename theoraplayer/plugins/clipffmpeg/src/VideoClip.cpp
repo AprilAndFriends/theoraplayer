@@ -292,17 +292,15 @@ namespace clipffmpeg
 				avcodec_decode_video2(this->codecContext, this->frame, &frameFinished, &packet);
 				if (frameFinished != 0)
 				{
-					PixelTransform t;
-					memset(&t, 0, sizeof(PixelTransform));
-
-					t.y = this->frame->data[0]; t.yStride = this->frame->linesize[0];
-					t.u = this->frame->data[1]; t.uStride = this->frame->linesize[1];
-					t.v = this->frame->data[2]; t.vStride = this->frame->linesize[2];
-
-					frame->decode(&t);
-					frame->timeToDisplay = this->frameNumber / this->fps;
-					frame->iteration = this->iteration;
-					frame->_setFrameNumber(this->frameNumber);
+					Theoraplayer_PixelTransform pixelTransform;
+					memset(&pixelTransform, 0, sizeof(Theoraplayer_PixelTransform));
+					pixelTransform.y = this->frame->data[0];	pixelTransform.yStride = this->frame->linesize[0];
+					pixelTransform.u = this->frame->data[1];	pixelTransform.uStride = this->frame->linesize[1];
+					pixelTransform.v = this->frame->data[2];	pixelTransform.vStride = this->frame->linesize[2];
+					frame->decode(&pixelTransform);
+					this->_setVideoFrameTimeToDisplay(frame, this->frameNumber / this->fps);
+					this->_setVideoFrameIteration(frame, this->iteration);
+					this->_setVideoFrameFrameNumber(frame, this->frameNumber);
 					++this->frameNumber;
 					av_packet_unref(&packet);
 					break;
@@ -366,7 +364,7 @@ namespace clipffmpeg
 		// Dump information about file onto standard error
 		//av_dump_format(mFormatContext, 0, "", 0);
 		// Find the first video stream
-		for (int i = 0; i < this->formatContext->nb_streams; ++i)
+		for (unsigned int i = 0; i < this->formatContext->nb_streams; ++i)
 		{
 			if (this->formatContext->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO)
 			{
@@ -406,7 +404,7 @@ namespace clipffmpeg
 		this->width = this->stride = this->codecContext->width;
 		this->height = this->codecContext->height;
 		this->frameDuration = 1.0f / this->fps;
-		this->duration = this->formatContext->duration / AV_TIME_BASE;
+		this->duration = (float)(this->formatContext->duration / AV_TIME_BASE);
 		if (this->frameQueue == NULL) // todo - why is this set in the backend class? it should be set in the base class, check other backends as well
 		{
 			this->frameQueue = new theoraplayer::FrameQueue(this);
@@ -427,7 +425,7 @@ namespace clipffmpeg
 		return -1.0f;
 	}
 
-	void VideoClip::doSeek()
+	void VideoClip::_doSeek()
 	{
 	}
 

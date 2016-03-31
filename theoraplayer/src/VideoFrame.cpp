@@ -8,9 +8,8 @@
 
 #include <memory.h>
 
-#include "PixelTransform.h"
 #include "Manager.h"
-
+#include "PixelTransform.h"
 #include "VideoClip.h"
 #include "VideoFrame.h"
 
@@ -18,32 +17,34 @@
 
 extern "C"
 {
-void decodeRGB  (struct PixelTransform* t);
-void decodeRGBA (struct PixelTransform* t);
-void decodeRGBX (struct PixelTransform* t);
-void decodeARGB (struct PixelTransform* t);
-void decodeXRGB (struct PixelTransform* t);
-void decodeBGR  (struct PixelTransform* t);
-void decodeBGRA (struct PixelTransform* t);
-void decodeBGRX (struct PixelTransform* t);
-void decodeABGR (struct PixelTransform* t);
-void decodeXBGR (struct PixelTransform* t);
-void decodeGrey (struct PixelTransform* t);
-void decodeGrey3(struct PixelTransform* t);
-void decodeGreyA(struct PixelTransform* t);
-void decodeGreyX(struct PixelTransform* t);
-void decodeAGrey(struct PixelTransform* t);
-void decodeXGrey(struct PixelTransform* t);
-void decodeYUV  (struct PixelTransform* t);
-void decodeYUVA (struct PixelTransform* t);
-void decodeYUVX (struct PixelTransform* t);
-void decodeAYUV (struct PixelTransform* t);
-void decodeXYUV (struct PixelTransform* t);
+	void decodeRGB  (struct Theoraplayer_PixelTransform* t);
+	void decodeRGBA (struct Theoraplayer_PixelTransform* t);
+	void decodeRGBX (struct Theoraplayer_PixelTransform* t);
+	void decodeARGB (struct Theoraplayer_PixelTransform* t);
+	void decodeXRGB (struct Theoraplayer_PixelTransform* t);
+	void decodeBGR  (struct Theoraplayer_PixelTransform* t);
+	void decodeBGRA (struct Theoraplayer_PixelTransform* t);
+	void decodeBGRX (struct Theoraplayer_PixelTransform* t);
+	void decodeABGR (struct Theoraplayer_PixelTransform* t);
+	void decodeXBGR (struct Theoraplayer_PixelTransform* t);
+	void decodeGrey (struct Theoraplayer_PixelTransform* t);
+	void decodeGrey3(struct Theoraplayer_PixelTransform* t);
+	void decodeGreyA(struct Theoraplayer_PixelTransform* t);
+	void decodeGreyX(struct Theoraplayer_PixelTransform* t);
+	void decodeAGrey(struct Theoraplayer_PixelTransform* t);
+	void decodeXGrey(struct Theoraplayer_PixelTransform* t);
+	void decodeYUV  (struct Theoraplayer_PixelTransform* t);
+	void decodeYUVA (struct Theoraplayer_PixelTransform* t);
+	void decodeYUVX (struct Theoraplayer_PixelTransform* t);
+	void decodeAYUV (struct Theoraplayer_PixelTransform* t);
+	void decodeXYUV (struct Theoraplayer_PixelTransform* t);
 }
 
 namespace theoraplayer
 {
-	static void(*conversion_functions[])(struct PixelTransform*) = { 0,
+	static void(*conversion_functions[])(struct Theoraplayer_PixelTransform*) =
+	{
+		0,
 		decodeRGB,
 		decodeRGBA,
 		decodeRGBX,
@@ -67,15 +68,13 @@ namespace theoraplayer
 		decodeXYUV
 	};
 
-	VideoFrame::VideoFrame(VideoClip* parent)
+	VideoFrame::VideoFrame(VideoClip* clip) : timeToDisplay(0.0f), ready(false), inUse(false), iteration(0), bpp(0), clip(NULL), buffer(NULL), frameNumber(0)
 	{
-		this->ready = this->inUse = false;
-		this->parent = parent;
-		this->iteration = 0;
+		this->clip = clip;
 		// number of bytes based on output mode
 		int bytemap[] = { 0, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4, 1, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4 };
-		this->bpp = bytemap[this->parent->getOutputMode()];
-		unsigned int size = this->parent->getStride() * this->parent->height * this->bpp;
+		this->bpp = bytemap[this->clip->getOutputMode()];
+		unsigned int size = this->clip->getStride() * this->clip->height * this->bpp;
 		try
 		{
 			this->buffer = new unsigned char[size];
@@ -98,37 +97,34 @@ namespace theoraplayer
 
 	int VideoFrame::getWidth()
 	{
-		return this->parent->getWidth();
+		return this->clip->getWidth();
 	}
 
 	int VideoFrame::getStride()
 	{
-		return this->parent->stride;
+		return this->clip->stride;
 	}
 
 	int VideoFrame::getHeight()
 	{
-		return this->parent->getHeight();
+		return this->clip->getHeight();
 	}
 
-	unsigned char* VideoFrame::getBuffer()
-	{
-		return this->buffer;
-	}
-
-	void VideoFrame::decode(struct PixelTransform* t)
+	void VideoFrame::decode(struct Theoraplayer_PixelTransform* t)
 	{
 		if (t->raw != NULL)
 		{
-			unsigned int bufferStride = this->parent->getWidth() * this->bpp;
+			unsigned int bufferStride = this->clip->getWidth() * this->bpp;
 			if (bufferStride == t->rawStride)
 			{
-				memcpy(this->buffer, t->raw, t->rawStride * this->parent->getHeight());
+				memcpy(this->buffer, t->raw, t->rawStride * this->clip->getHeight());
 			}
 			else
 			{
-				unsigned char *buff = this->buffer, *src = t->raw;
-				int i, h = this->parent->getHeight();
+				unsigned char* buff = this->buffer;
+				unsigned char* src = t->raw;
+				int i;
+				int h = this->clip->getHeight();
 				for (i = 0; i < h; ++i, buff += bufferStride, src += t->rawStride)
 				{
 					memcpy(buff, src, bufferStride);
@@ -138,9 +134,8 @@ namespace theoraplayer
 		else
 		{
 			t->out = this->buffer;
-			t->w = this->parent->getWidth();
-			t->h = this->parent->getHeight();
-
+			t->w = this->clip->getWidth();
+			t->h = this->clip->getHeight();
 #ifdef YUV_TEST // when benchmarking yuv conversion functions during development, do a timed average
 #define N 1000
 			clock_t time = clock();
@@ -149,12 +144,11 @@ namespace theoraplayer
 				conversion_functions[mParent->getOutputMode()](t);
 			}
 			float diff = (clock() - time) * 1000.0f / CLOCKS_PER_SEC;
-
-			char s[128];
+			char s[128] = { '\0' };
 			sprintf(s, "%.2f", diff / N);
 			TheoraVideoManager::getSingleton().logMessage("YUV Decoding time: " + std::string(s) + " ms\n");
 #else
-			conversion_functions[this->parent->getOutputMode()](t);
+			conversion_functions[this->clip->getOutputMode()](t);
 #endif
 		}
 		this->ready = true;
@@ -162,7 +156,8 @@ namespace theoraplayer
 
 	void VideoFrame::clear()
 	{
-		this->inUse = this->ready = false;
+		this->inUse = false;
+		this->ready = false;
 	}
 
 }

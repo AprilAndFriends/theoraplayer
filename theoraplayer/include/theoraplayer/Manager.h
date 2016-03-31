@@ -22,15 +22,12 @@
 
 namespace theoraplayer
 {
-	// forward class declarations
 	class AudioInterfaceFactory;
 	class DataSource;
 	class Mutex;
 	class WorkerThread;
 
-	/**
-		This is the main singleton class that handles all playback/sync operations
-	*/
+	/// @brief This is the main singleton class that handles all playback/sync operations.
 	class theoraplayerExport Manager
 	{
 	public:
@@ -43,24 +40,18 @@ namespace theoraplayer
 		void setWorkerThreadCount(int value);
 		inline int getDefaultPrecachedFramesCount() { return this->defaultPrecachedFramesCount; }
 		inline void setDefaultPrecachedFramesCount(int value) { this->defaultPrecachedFramesCount = value; }
-		//! returns the supported decoders (eg. Theora, AVFoundation...)
+		/// @return The supported decoders (eg. Theora, AVFoundation...)
 		std::vector<std::string> getSupportedFormats();
-		//! get nicely formated version string
+		/// @return Nicely formated version string.
 		std::string getVersionString();
-		//! brief get version numbers
+		/// @return Version numbers.
 		void getVersion(int* major, int* minor, int* revision);
 
 		inline AudioInterfaceFactory* getAudioInterfaceFactory() { return this->audioInterfaceFactory; }
-		/**
-		\brief you can set your own log function to recieve theora's log calls
-
-		This way you can integrate libtheoraplayer's log messages in your own
-		logging system, prefix them, mute them or whatever you want
-		*/
 		inline void setAudioInterfaceFactory(AudioInterfaceFactory* value) { this->audioInterfaceFactory = value; }
 
-		//! search registered clips by name
-		VideoClip* getVideoClipByName(const std::string& name);
+		/// @brief Searches registered clips by name
+		VideoClip* findVideoClipByName(const std::string& name);
 
 		VideoClip* createVideoClip(const std::string& filename, TheoraOutputMode outputMode = TH_RGB, int precachedFramesCountOverride = 0, bool usePotStride = false);
 		VideoClip* createVideoClip(DataSource* dataSource, TheoraOutputMode outputMode = TH_RGB, int precachedFramesCountOverride = 0, bool usePotStride = false);

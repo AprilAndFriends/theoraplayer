@@ -51,7 +51,7 @@ namespace clipavfoundation
 
 		void unload();
 		void _load(theoraplayer::DataSource* source);
-		void doSeek();
+		void _doSeek();
 		
 	};
 

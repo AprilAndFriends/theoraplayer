@@ -602,4 +602,29 @@ namespace theoraplayer
 		this->audioMutex->unlock();
 	}
 
+	void VideoClip::_setVideoFrameTimeToDisplay(VideoFrame* frame, float value)
+	{
+		frame->timeToDisplay = value;
+	}
+
+	void VideoClip::_setVideoFrameReady(VideoFrame* frame, bool value)
+	{
+		frame->ready = value;
+	}
+
+	void VideoClip::_setVideoFrameInUse(VideoFrame* frame, bool value)
+	{
+		frame->inUse = value;
+	}
+
+	void VideoClip::_setVideoFrameIteration(VideoFrame* frame, int value)
+	{
+		frame->iteration = value;
+	}
+
+	void VideoClip::_setVideoFrameFrameNumber(VideoFrame* frame, int value)
+	{
+		frame->frameNumber = value;
+	}
+
 }

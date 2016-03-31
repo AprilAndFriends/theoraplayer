@@ -18,11 +18,8 @@
 
 namespace theoraplayer
 {
-	/**
-		Pre-loads the entire file and streams from memory.
-		Very useful if you're continuously displaying a video and want to avoid disk reads.
-		Not very practical for large files.
-	*/
+	/// @brief Pre-loads the entire file and streams from memory. Very useful if you're continuously displaying a video
+	/// and want to avoid disk reads. Not very practical for large files.
 	class theoraplayerExport MemoryDataSource : public DataSource
 	{
 	public:
@@ -30,10 +27,10 @@ namespace theoraplayer
 		MemoryDataSource(const std::string& filename);
 		~MemoryDataSource();
 
+		inline std::string getFormatName() { return this->formatName; }
+		inline std::string getFilename() { return this->filename; }
 		inline uint64_t getSize() { return this->size; }
 		inline uint64_t getPosition() { return this->position; }
-		inline std::string getFilename() { return this->filename; }
-		inline std::string getFormatName() { return this->formatName; }
 
 		int read(void* output, int count);
 		void seek(uint64_t byteIndex);

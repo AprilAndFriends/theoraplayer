@@ -1,21 +1,21 @@
-/************************************************************************************
-This source file is part of the Theora Video Playback Library
-For latest info, see http://libtheoraplayer.googlecode.com
-*************************************************************************************
-Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
-This program is free software; you can redistribute it and/or modify it under
-the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
-*************************************************************************************/
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+
 #include "yuv_util.h"
 
-struct PixelTransform* incOut(struct PixelTransform* t, int n)
+struct Theoraplayer_PixelTransform* incOut(struct Theoraplayer_PixelTransform* t, int n)
 {
 	// used for XRGB, XBGR and similar
 	t->out += n;
 	return t;
 }
 
-void _decodeAlpha(struct PixelTransform* t, int stride)
+void _decodeAlpha(struct Theoraplayer_PixelTransform* t, int stride)
 {
 	int width = t->w;
 	unsigned char *ySrc, *yLineEnd, *out;

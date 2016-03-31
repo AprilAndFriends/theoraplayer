@@ -442,7 +442,7 @@ namespace clipavfoundation
 		return -1.0f;
 	}
 
-	void VideoClip::doSeek()
+	void VideoClip::_doSeek()
 	{
 		float time = this->seekFrame / getFps();
 		this->timer->seek(time);

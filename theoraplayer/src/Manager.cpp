@@ -176,7 +176,7 @@ namespace theoraplayer
 		*revision = 0;
 	}
 
-	VideoClip* Manager::getVideoClipByName(const std::string& name)
+	VideoClip* Manager::findVideoClipByName(const std::string& name)
 	{
 		Mutex::ScopeLock lock(this->workMutex);
 		foreach (VideoClip*, it, this->clips)

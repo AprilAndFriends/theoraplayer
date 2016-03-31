@@ -279,7 +279,7 @@ namespace theoraplayer
 		*/
 		int calculatePriority();
 		void readTheoraVorbisHeaders();
-		virtual void doSeek() = 0; //! called by WorkerThread to seek to mSeekFrame
+		virtual void _doSeek() = 0; //! called by WorkerThread to seek to mSeekFrame
 		virtual bool _readData() = 0;
 		bool isBusy();
 
@@ -299,6 +299,12 @@ namespace theoraplayer
 		int discardOutdatedFrames(float absTime);
 		float getAbsPlaybackTime();
 		virtual void _load(DataSource* source) = 0;
+
+		void _setVideoFrameTimeToDisplay(VideoFrame* frame, float value);
+		void _setVideoFrameReady(VideoFrame* frame, bool value);
+		void _setVideoFrameInUse(VideoFrame* frame, bool value);
+		void _setVideoFrameIteration(VideoFrame* frame, int value);
+		void _setVideoFrameFrameNumber(VideoFrame* frame, int value);
 
 		virtual void _restart() = 0; // resets the decoder and stream but leaves the frame queue intact
 

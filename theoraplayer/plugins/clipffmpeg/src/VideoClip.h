@@ -61,7 +61,7 @@ namespace clipffmpeg
 		int frameNumber;
 
 		void unload();
-		void doSeek();
+		void _doSeek();
 
 	};
 

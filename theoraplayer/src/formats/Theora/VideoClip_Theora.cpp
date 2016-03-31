@@ -161,22 +161,22 @@ namespace theoraplayer
 					++this->droppedFramesCount;
 					continue; // drop frame
 				}
-				frame->timeToDisplay = time - this->frameDuration;
-				frame->iteration = this->iteration;
-				frame->_setFrameNumber(frameNumber);
+				this->_setVideoFrameTimeToDisplay(frame, time - this->frameDuration);
+				this->_setVideoFrameIteration(frame, this->iteration);
+				this->_setVideoFrameFrameNumber(frame, frameNumber);
 				this->lastDecodedFrameNumber = frameNumber;
 				th_decode_ycbcr_out(this->info.TheoraDecoder, buff);
-				PixelTransform pixelTransform;
-				memset(&pixelTransform, 0, sizeof(PixelTransform));
-				pixelTransform.y = buff[0].data; pixelTransform.yStride = buff[0].stride;
-				pixelTransform.u = buff[1].data; pixelTransform.uStride = buff[1].stride;
-				pixelTransform.v = buff[2].data; pixelTransform.vStride = buff[2].stride;
+				Theoraplayer_PixelTransform pixelTransform;
+				memset(&pixelTransform, 0, sizeof(Theoraplayer_PixelTransform));
+				pixelTransform.y = buff[0].data;	pixelTransform.yStride = buff[0].stride;
+				pixelTransform.u = buff[1].data;	pixelTransform.uStride = buff[1].stride;
+				pixelTransform.v = buff[2].data;	pixelTransform.vStride = buff[2].stride;
 				frame->decode(&pixelTransform);
 				break;
 			}
 			if (!this->_readData())
 			{
-				frame->inUse = false;
+				this->_setVideoFrameInUse(frame, false);
 				shouldRestart = this->autoRestart;
 				break;
 			}
@@ -604,7 +604,7 @@ namespace theoraplayer
 		return -1;
 	}
 
-	void VideoClip_Theora::doSeek()
+	void VideoClip_Theora::_doSeek()
 	{
 #if _DEBUG
 		log(this->name + " [seek]: seeking to frame " + str(this->seekFrame));

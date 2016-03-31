@@ -67,7 +67,7 @@ namespace theoraplayer
 		int vorbisStreams;	// Keeps track of Theora and Vorbis Streams
 
 		long seekPage(long targetFrame, bool returnKeyFrame);
-		void doSeek();
+		void _doSeek();
 		void readTheoraVorbisHeaders();
 
 		unsigned int readAudioSamples;

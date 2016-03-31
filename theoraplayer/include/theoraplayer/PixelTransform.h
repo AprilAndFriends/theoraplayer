@@ -10,15 +10,23 @@
 /// 
 /// Defines a utility struct for pixel transformation.
 
-#ifndef THEORA_PIXEL_TRANSFORM_H
-#define THEORA_PIXEL_TRANSFORM_H
+#ifndef THEORAPLAYER_PIXEL_TRANSFORM_H
+#define THEORAPLAYER_PIXEL_TRANSFORM_H
 
-// TODOth - move to Utility as internal object?
+// no theoraplayer namespace, because this is included in C files
 
-struct PixelTransform
+struct Theoraplayer_PixelTransform
 {
-	unsigned char *raw, *y, *u, *v, *out;
-	unsigned int w, h, rawStride, yStride, uStride, vStride;
+	unsigned char* raw;
+	unsigned char* y;
+	unsigned char* u;
+	unsigned char* v;
+	unsigned char* out;
+	unsigned int w;
+	unsigned int h;
+	unsigned int rawStride;
+	unsigned int yStride;
+	unsigned int uStride;
+	unsigned int vStride;
 };
-
 #endif

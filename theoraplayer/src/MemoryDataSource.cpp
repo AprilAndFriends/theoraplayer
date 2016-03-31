@@ -32,9 +32,8 @@ namespace theoraplayer
 		this->data = NULL;
 		this->size = 0;
 		this->position = 0;
-
 		VideoClip::Format format;
-		// TODOth - change this, constructors must not throw exceptions (openSupportedFormatFile can throw an exception)
+		// TODOth - change this, constructors must not throw exceptions (openSupportedFormatFile does not throw an exception)
 		FILE* file = openSupportedFormatFile(filename, format, this->fullFilename);
 		if (file == NULL)
 		{

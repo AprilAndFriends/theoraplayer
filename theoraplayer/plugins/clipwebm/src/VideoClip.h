@@ -57,8 +57,8 @@ namespace clipwebm
 		int frameNumber;
 		unsigned long lastDecodedFrameNumber;
 
-		void doSeek();
 		void _load(theoraplayer::DataSource* source);
+		void _doSeek();
 
 	};
 

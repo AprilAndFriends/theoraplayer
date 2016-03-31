@@ -75,21 +75,21 @@ namespace clipwebm
 			if ((img = vpx_codec_get_frame(&decoder, &iter)))
 			{
 				this->frame = img;
-				frame->timeToDisplay = this->frameNumber / this->fps;
-				frame->iteration = this->iteration;
-				frame->_setFrameNumber(this->frameNumber);
+				this->_setVideoFrameTimeToDisplay(frame, this->frameNumber / this->fps);
+				this->_setVideoFrameIteration(frame, this->iteration);
+				this->_setVideoFrameFrameNumber(frame, this->frameNumber);
 				++this->frameNumber;
 				this->lastDecodedFrameNumber = this->frameNumber;
 				if (this->lastDecodedFrameNumber >= (unsigned long)this->numFrames)
 				{
 					shouldRestart = true;
 				}
-				PixelTransform t;
-				memset(&t, 0, sizeof(PixelTransform));
-				t.y = this->frame->planes[0]; t.yStride = this->frame->stride[0];
-				t.u = this->frame->planes[1]; t.uStride = this->frame->stride[1];
-				t.v = this->frame->planes[2]; t.vStride = this->frame->stride[2];
-				frame->decode(&t);
+				Theoraplayer_PixelTransform pixelTransform;
+				memset(&pixelTransform, 0, sizeof(Theoraplayer_PixelTransform));
+				pixelTransform.y = this->frame->planes[0];	pixelTransform.yStride = this->frame->stride[0];
+				pixelTransform.u = this->frame->planes[1];	pixelTransform.uStride = this->frame->stride[1];
+				pixelTransform.v = this->frame->planes[2];	pixelTransform.vStride = this->frame->stride[2];
+				frame->decode(&pixelTransform);
 			}
 		}
 		return true;
@@ -171,7 +171,7 @@ namespace clipwebm
 		return -1;
 	}
 
-	void VideoClip::doSeek()
+	void VideoClip::_doSeek()
 	{
 		float time = this->seekFrame / getFps();
 		this->timer->seek(time);

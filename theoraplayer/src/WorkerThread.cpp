@@ -57,7 +57,7 @@ namespace theoraplayer
 			// if user requested seeking, do that then.
 			if (self->clip->seekFrame >= 0)
 			{
-				self->clip->doSeek();
+				self->clip->_doSeek();
 			}
 			decoded = self->clip->decodeNextFrame();
 			// TODOth - this is a potential hazard as assignedWorkerThread is set under a VideoManager::workMutex lock, but accessed here under a VideoClip::threadAccessMutex lock

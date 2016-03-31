@@ -17,47 +17,49 @@
 #include "VideoClip.h"
 #include "VideoFrame.h"
 
-struct PixelTransform;
+struct Theoraplayer_PixelTransform;
 
 namespace theoraplayer
 {
+	class FrameQueue;
+	class VideoClip;
+
 	class theoraplayerExport VideoFrame
 	{
 	public:
-		//! global time in seconds this frame should be displayed on
-		float timeToDisplay;
-		//! whether the frame is ready for display or not
-		bool ready;
-		//! indicates the frame is being used by TheoraWorkerThread instance
-		bool inUse;
-		//! used to keep track of linear time in looping videos
-		int iteration;
+		friend class FrameQueue;
+		friend class VideoClip;
 
-		int bpp;
-
-		VideoFrame(VideoClip* parent);
+		VideoFrame(VideoClip* clip);
 		virtual ~VideoFrame();
 
-		//! returns the frame number of this frame in the theora stream
-		unsigned long getFrameNumber() { return this->frameNumber; }
-
+		inline unsigned char* getBuffer() { return this->buffer; }
+		inline unsigned long getFrameNumber() { return this->frameNumber; }
 		int getWidth();
 		int getStride();
 		int getHeight();
 
-		unsigned char* getBuffer();
-
-		//! internal function, do not use directly
-		void _setFrameNumber(unsigned long number) { this->frameNumber = number; }
-
 		void clear();
 
 		//! Called by VideoClip to decode a source buffer onto itself
-		virtual void decode(struct PixelTransform* t);
+		virtual void decode(struct Theoraplayer_PixelTransform* t);
 
 	protected:
-		VideoClip* parent;
+		/// @brief Global time in seconds this frame should be displayed on.
+		float timeToDisplay;
+		/// @brief Whether the frame is ready for display or not.
+		bool ready;
+		/// @brief Indicates the frame is being used by TheoraWorkerThread instance.
+		bool inUse;
+		/// @brief Used to keep track of linear time in looping videos.
+		int iteration;
+		/// @brief Bytes per pixel.
+		int bpp;
+		/// @brief The VideoClip.
+		VideoClip* clip;
+		/// @brief Current buffer.
 		unsigned char* buffer;
+		/// @brief Current frame number.
 		unsigned long frameNumber;
 
 	};
