@@ -1,0 +1,896 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		084C31FE0FE4E5BD00117FC9 /* apiwrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31D90FE4E5BD00117FC9 /* apiwrapper.c */; };
+		084C31FF0FE4E5BD00117FC9 /* apiwrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 084C31DA0FE4E5BD00117FC9 /* apiwrapper.h */; };
+		084C32000FE4E5BD00117FC9 /* bitpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31DB0FE4E5BD00117FC9 /* bitpack.c */; };
+		084C32010FE4E5BD00117FC9 /* bitpack.h in Headers */ = {isa = PBXBuildFile; fileRef = 084C31DC0FE4E5BD00117FC9 /* bitpack.h */; };
+		084C32020FE4E5BD00117FC9 /* dct.h in Headers */ = {isa = PBXBuildFile; fileRef = 084C31DD0FE4E5BD00117FC9 /* dct.h */; };
+		084C32030FE4E5BD00117FC9 /* decapiwrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31DE0FE4E5BD00117FC9 /* decapiwrapper.c */; };
+		084C32040FE4E5BD00117FC9 /* decinfo.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31DF0FE4E5BD00117FC9 /* decinfo.c */; };
+		084C32050FE4E5BD00117FC9 /* decint.h in Headers */ = {isa = PBXBuildFile; fileRef = 084C31E00FE4E5BD00117FC9 /* decint.h */; };
+		084C32060FE4E5BD00117FC9 /* decode.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E10FE4E5BD00117FC9 /* decode.c */; };
+		084C32070FE4E5BD00117FC9 /* dequant.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E20FE4E5BD00117FC9 /* dequant.c */; };
+		084C32080FE4E5BD00117FC9 /* dequant.h in Headers */ = {isa = PBXBuildFile; fileRef = 084C31E30FE4E5BD00117FC9 /* dequant.h */; };
+		084C32090FE4E5BD00117FC9 /* fragment.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E40FE4E5BD00117FC9 /* fragment.c */; };
+		084C320A0FE4E5BD00117FC9 /* huffdec.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E50FE4E5BD00117FC9 /* huffdec.c */; };
+		084C320B0FE4E5BD00117FC9 /* huffdec.h in Headers */ = {isa = PBXBuildFile; fileRef = 084C31E60FE4E5BD00117FC9 /* huffdec.h */; };
+		084C320C0FE4E5BD00117FC9 /* huffman.h in Headers */ = {isa = PBXBuildFile; fileRef = 084C31E70FE4E5BD00117FC9 /* huffman.h */; };
+		084C320D0FE4E5BD00117FC9 /* idct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E80FE4E5BD00117FC9 /* idct.c */; };
+		084C320E0FE4E5BD00117FC9 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E90FE4E5BD00117FC9 /* info.c */; };
+		084C320F0FE4E5BD00117FC9 /* internal.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EA0FE4E5BD00117FC9 /* internal.c */; };
+		084C32100FE4E5BD00117FC9 /* ocintrin.h in Headers */ = {isa = PBXBuildFile; fileRef = 084C31EB0FE4E5BD00117FC9 /* ocintrin.h */; };
+		084C32110FE4E5BD00117FC9 /* quant.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EC0FE4E5BD00117FC9 /* quant.c */; };
+		084C32120FE4E5BD00117FC9 /* quant.h in Headers */ = {isa = PBXBuildFile; fileRef = 084C31ED0FE4E5BD00117FC9 /* quant.h */; };
+		084C32130FE4E5BD00117FC9 /* state.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EE0FE4E5BD00117FC9 /* state.c */; };
+		084C32140FE4E5BD00117FC9 /* mmxfrag.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31F00FE4E5BD00117FC9 /* mmxfrag.c */; };
+		084C32160FE4E5BD00117FC9 /* mmxidct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31F20FE4E5BD00117FC9 /* mmxidct.c */; };
+		084C32170FE4E5BD00117FC9 /* mmxloop.h in Headers */ = {isa = PBXBuildFile; fileRef = 084C31F30FE4E5BD00117FC9 /* mmxloop.h */; };
+		084C32180FE4E5BD00117FC9 /* mmxstate.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31F40FE4E5BD00117FC9 /* mmxstate.c */; };
+		084C32190FE4E5BD00117FC9 /* x86int.h in Headers */ = {isa = PBXBuildFile; fileRef = 084C31F50FE4E5BD00117FC9 /* x86int.h */; };
+		084C321A0FE4E5BD00117FC9 /* x86state.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31F60FE4E5BD00117FC9 /* x86state.c */; };
+		084C326B0FE4E5D500117FC9 /* fdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C324E0FE4E5D500117FC9 /* fdct.c */; };
+		084C326E0FE4E5D500117FC9 /* mathops.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32510FE4E5D500117FC9 /* mathops.c */; };
+		084C326F0FE4E5D500117FC9 /* mathops.h in Headers */ = {isa = PBXBuildFile; fileRef = 084C32520FE4E5D500117FC9 /* mathops.h */; };
+		084C32710FE4E5D500117FC9 /* modedec.h in Headers */ = {isa = PBXBuildFile; fileRef = 084C32540FE4E5D500117FC9 /* modedec.h */; };
+		084C32720FE4E5D500117FC9 /* rate.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32550FE4E5D500117FC9 /* rate.c */; };
+		084C32730FE4E5D500117FC9 /* tokenize.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32560FE4E5D500117FC9 /* tokenize.c */; };
+		084C32760FE4E5D500117FC9 /* mmxfdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C325A0FE4E5D500117FC9 /* mmxfdct.c */; };
+		084C32770FE4E5D500117FC9 /* sse2fdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C325B0FE4E5D500117FC9 /* sse2fdct.c */; };
+		097729950BCAC60000303091 /* codec.h in Headers */ = {isa = PBXBuildFile; fileRef = 097729930BCAC60000303091 /* codec.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		097729960BCAC60000303091 /* theoradec.h in Headers */ = {isa = PBXBuildFile; fileRef = 097729940BCAC60000303091 /* theoradec.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37C9B0140EBB831F0046849C /* theoraenc.h in Headers */ = {isa = PBXBuildFile; fileRef = 37C9B0130EBB831F0046849C /* theoraenc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37CA8E390DD747F1005C8CB6 /* internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 37CA8E380DD747F1005C8CB6 /* internal.h */; };
+		734A751909D76ADD002D8FAE /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734A751809D76ADD002D8FAE /* Ogg.framework */; };
+		734A75BF09D76BB9002D8FAE /* theora.h in Headers */ = {isa = PBXBuildFile; fileRef = 734A75BE09D76BB9002D8FAE /* theora.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1095042162056DB00C5B181 /* collect.c in Sources */ = {isa = PBXBuildFile; fileRef = D109503F162056DB00C5B181 /* collect.c */; };
+		D1095044162056DB00C5B181 /* collect.c in Sources */ = {isa = PBXBuildFile; fileRef = D109503F162056DB00C5B181 /* collect.c */; };
+		D1095045162056DB00C5B181 /* collect.h in Headers */ = {isa = PBXBuildFile; fileRef = D1095040162056DB00C5B181 /* collect.h */; };
+		D1095048162056DB00C5B181 /* state.h in Headers */ = {isa = PBXBuildFile; fileRef = D1095041162056DB00C5B181 /* state.h */; };
+		D10950541620571200C5B181 /* sse2idct.c in Sources */ = {isa = PBXBuildFile; fileRef = D109504C1620571200C5B181 /* sse2idct.c */; };
+		D10950571620571200C5B181 /* sse2trans.h in Headers */ = {isa = PBXBuildFile; fileRef = D109504D1620571200C5B181 /* sse2trans.h */; };
+		D109505A1620571200C5B181 /* x86cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = D109504E1620571200C5B181 /* x86cpu.c */; };
+		D109505D1620571200C5B181 /* x86cpu.h in Headers */ = {isa = PBXBuildFile; fileRef = D109504F1620571200C5B181 /* x86cpu.h */; };
+		D109509216206F2200C5B181 /* encoder_disabled.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C324B0FE4E5D500117FC9 /* encoder_disabled.c */; };
+		D139469D17C10DB00091F4A4 /* sse2idct.c in Sources */ = {isa = PBXBuildFile; fileRef = D109504C1620571200C5B181 /* sse2idct.c */; };
+		D139469F17C10DB00091F4A4 /* x86cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = D109504E1620571200C5B181 /* x86cpu.c */; };
+		D13946A117C10DB00091F4A4 /* mmxfrag.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31F00FE4E5BD00117FC9 /* mmxfrag.c */; };
+		D13946A217C10DB00091F4A4 /* mmxidct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31F20FE4E5BD00117FC9 /* mmxidct.c */; };
+		D13946A417C10DB00091F4A4 /* mmxstate.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31F40FE4E5BD00117FC9 /* mmxstate.c */; };
+		D13946A617C10DB00091F4A4 /* x86state.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31F60FE4E5BD00117FC9 /* x86state.c */; };
+		D13946A717C10DB00091F4A4 /* mmxfdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C325A0FE4E5D500117FC9 /* mmxfdct.c */; };
+		D13946A817C10DB00091F4A4 /* sse2fdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C325B0FE4E5D500117FC9 /* sse2fdct.c */; };
+		D1BB6F94150E9D8C00EF9400 /* encoder_disabled.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C324B0FE4E5D500117FC9 /* encoder_disabled.c */; };
+		D1BB6F96150E9D8C00EF9400 /* fdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C324E0FE4E5D500117FC9 /* fdct.c */; };
+		D1BB6F98150E9D8C00EF9400 /* mathops.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32510FE4E5D500117FC9 /* mathops.c */; };
+		D1BB6F9A150E9D8C00EF9400 /* rate.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32550FE4E5D500117FC9 /* rate.c */; };
+		D1BB6F9B150E9D8C00EF9400 /* tokenize.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32560FE4E5D500117FC9 /* tokenize.c */; };
+		D1BB6F9C150E9D8C00EF9400 /* apiwrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31D90FE4E5BD00117FC9 /* apiwrapper.c */; };
+		D1BB6F9D150E9D8C00EF9400 /* bitpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31DB0FE4E5BD00117FC9 /* bitpack.c */; };
+		D1BB6F9E150E9D8C00EF9400 /* decapiwrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31DE0FE4E5BD00117FC9 /* decapiwrapper.c */; };
+		D1BB6F9F150E9D8C00EF9400 /* decinfo.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31DF0FE4E5BD00117FC9 /* decinfo.c */; };
+		D1BB6FA0150E9D8C00EF9400 /* decode.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E10FE4E5BD00117FC9 /* decode.c */; };
+		D1BB6FA1150E9D8C00EF9400 /* dequant.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E20FE4E5BD00117FC9 /* dequant.c */; };
+		D1BB6FA2150E9D8C00EF9400 /* fragment.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E40FE4E5BD00117FC9 /* fragment.c */; };
+		D1BB6FA3150E9D8C00EF9400 /* huffdec.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E50FE4E5BD00117FC9 /* huffdec.c */; };
+		D1BB6FA4150E9D8C00EF9400 /* idct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E80FE4E5BD00117FC9 /* idct.c */; };
+		D1BB6FA5150E9D8C00EF9400 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E90FE4E5BD00117FC9 /* info.c */; };
+		D1BB6FA6150E9D8C00EF9400 /* internal.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EA0FE4E5BD00117FC9 /* internal.c */; };
+		D1BB6FA7150E9D8C00EF9400 /* quant.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EC0FE4E5BD00117FC9 /* quant.c */; };
+		D1BB6FA8150E9D8C00EF9400 /* state.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EE0FE4E5BD00117FC9 /* state.c */; };
+		D1BCE04418F3EF2D00C83470 /* armbits.asm in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE03918F3EF2D00C83470 /* armbits.asm */; };
+		D1BCE04518F3EF2D00C83470 /* armcpu.c in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE03B18F3EF2D00C83470 /* armcpu.c */; };
+		D1BCE04618F3EF2D00C83470 /* armenc.c in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE03D18F3EF2D00C83470 /* armenc.c */; };
+		D1BCE04718F3EF2D00C83470 /* armfrag.asm in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE03F18F3EF2D00C83470 /* armfrag.asm */; };
+		D1BCE04818F3EF2D00C83470 /* armidct.asm in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE04018F3EF2D00C83470 /* armidct.asm */; };
+		D1BCE04918F3EF2D00C83470 /* armloop.asm in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE04218F3EF2D00C83470 /* armloop.asm */; };
+		D1BCE04A18F3EF2D00C83470 /* armstate.c in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE04318F3EF2D00C83470 /* armstate.c */; };
+		D1F279BB177A2B3400E5C131 /* encoder_disabled.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C324B0FE4E5D500117FC9 /* encoder_disabled.c */; };
+		D1F279BC177A2B3400E5C131 /* fdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C324E0FE4E5D500117FC9 /* fdct.c */; };
+		D1F279BD177A2B3400E5C131 /* mathops.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32510FE4E5D500117FC9 /* mathops.c */; };
+		D1F279BE177A2B3400E5C131 /* rate.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32550FE4E5D500117FC9 /* rate.c */; };
+		D1F279BF177A2B3400E5C131 /* tokenize.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C32560FE4E5D500117FC9 /* tokenize.c */; };
+		D1F279C0177A2B3400E5C131 /* apiwrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31D90FE4E5BD00117FC9 /* apiwrapper.c */; };
+		D1F279C1177A2B3400E5C131 /* bitpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31DB0FE4E5BD00117FC9 /* bitpack.c */; };
+		D1F279C2177A2B3400E5C131 /* decapiwrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31DE0FE4E5BD00117FC9 /* decapiwrapper.c */; };
+		D1F279C3177A2B3400E5C131 /* decinfo.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31DF0FE4E5BD00117FC9 /* decinfo.c */; };
+		D1F279C4177A2B3400E5C131 /* decode.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E10FE4E5BD00117FC9 /* decode.c */; };
+		D1F279C5177A2B3400E5C131 /* dequant.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E20FE4E5BD00117FC9 /* dequant.c */; };
+		D1F279C6177A2B3400E5C131 /* fragment.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E40FE4E5BD00117FC9 /* fragment.c */; };
+		D1F279C7177A2B3400E5C131 /* huffdec.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E50FE4E5BD00117FC9 /* huffdec.c */; };
+		D1F279C8177A2B3400E5C131 /* idct.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E80FE4E5BD00117FC9 /* idct.c */; };
+		D1F279C9177A2B3400E5C131 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31E90FE4E5BD00117FC9 /* info.c */; };
+		D1F279CA177A2B3400E5C131 /* internal.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EA0FE4E5BD00117FC9 /* internal.c */; };
+		D1F279CB177A2B3400E5C131 /* quant.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EC0FE4E5BD00117FC9 /* quant.c */; };
+		D1F279CC177A2B3400E5C131 /* state.c in Sources */ = {isa = PBXBuildFile; fileRef = 084C31EE0FE4E5BD00117FC9 /* state.c */; };
+		D1F279CD177A2B3400E5C131 /* collect.c in Sources */ = {isa = PBXBuildFile; fileRef = D109503F162056DB00C5B181 /* collect.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		084C31D90FE4E5BD00117FC9 /* apiwrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = apiwrapper.c; sourceTree = "<group>"; };
+		084C31DA0FE4E5BD00117FC9 /* apiwrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apiwrapper.h; sourceTree = "<group>"; };
+		084C31DB0FE4E5BD00117FC9 /* bitpack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bitpack.c; sourceTree = "<group>"; };
+		084C31DC0FE4E5BD00117FC9 /* bitpack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitpack.h; sourceTree = "<group>"; };
+		084C31DD0FE4E5BD00117FC9 /* dct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dct.h; sourceTree = "<group>"; };
+		084C31DE0FE4E5BD00117FC9 /* decapiwrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = decapiwrapper.c; sourceTree = "<group>"; };
+		084C31DF0FE4E5BD00117FC9 /* decinfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = decinfo.c; sourceTree = "<group>"; };
+		084C31E00FE4E5BD00117FC9 /* decint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = decint.h; sourceTree = "<group>"; };
+		084C31E10FE4E5BD00117FC9 /* decode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = decode.c; sourceTree = "<group>"; };
+		084C31E20FE4E5BD00117FC9 /* dequant.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dequant.c; sourceTree = "<group>"; };
+		084C31E30FE4E5BD00117FC9 /* dequant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dequant.h; sourceTree = "<group>"; };
+		084C31E40FE4E5BD00117FC9 /* fragment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fragment.c; sourceTree = "<group>"; };
+		084C31E50FE4E5BD00117FC9 /* huffdec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = huffdec.c; sourceTree = "<group>"; };
+		084C31E60FE4E5BD00117FC9 /* huffdec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = huffdec.h; sourceTree = "<group>"; };
+		084C31E70FE4E5BD00117FC9 /* huffman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = huffman.h; sourceTree = "<group>"; };
+		084C31E80FE4E5BD00117FC9 /* idct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = idct.c; sourceTree = "<group>"; };
+		084C31E90FE4E5BD00117FC9 /* info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = info.c; sourceTree = "<group>"; };
+		084C31EA0FE4E5BD00117FC9 /* internal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = internal.c; sourceTree = "<group>"; };
+		084C31EB0FE4E5BD00117FC9 /* ocintrin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ocintrin.h; sourceTree = "<group>"; };
+		084C31EC0FE4E5BD00117FC9 /* quant.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = quant.c; sourceTree = "<group>"; };
+		084C31ED0FE4E5BD00117FC9 /* quant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quant.h; sourceTree = "<group>"; };
+		084C31EE0FE4E5BD00117FC9 /* state.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = state.c; sourceTree = "<group>"; };
+		084C31F00FE4E5BD00117FC9 /* mmxfrag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxfrag.c; sourceTree = "<group>"; };
+		084C31F20FE4E5BD00117FC9 /* mmxidct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxidct.c; sourceTree = "<group>"; };
+		084C31F30FE4E5BD00117FC9 /* mmxloop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmxloop.h; sourceTree = "<group>"; };
+		084C31F40FE4E5BD00117FC9 /* mmxstate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxstate.c; sourceTree = "<group>"; };
+		084C31F50FE4E5BD00117FC9 /* x86int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x86int.h; sourceTree = "<group>"; };
+		084C31F60FE4E5BD00117FC9 /* x86state.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = x86state.c; sourceTree = "<group>"; };
+		084C324B0FE4E5D500117FC9 /* encoder_disabled.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = encoder_disabled.c; sourceTree = "<group>"; };
+		084C324E0FE4E5D500117FC9 /* fdct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fdct.c; sourceTree = "<group>"; };
+		084C32510FE4E5D500117FC9 /* mathops.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mathops.c; sourceTree = "<group>"; };
+		084C32520FE4E5D500117FC9 /* mathops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mathops.h; sourceTree = "<group>"; };
+		084C32530FE4E5D500117FC9 /* mcenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mcenc.c; sourceTree = "<group>"; };
+		084C32540FE4E5D500117FC9 /* modedec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = modedec.h; sourceTree = "<group>"; };
+		084C32550FE4E5D500117FC9 /* rate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rate.c; sourceTree = "<group>"; };
+		084C32560FE4E5D500117FC9 /* tokenize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tokenize.c; sourceTree = "<group>"; };
+		084C325A0FE4E5D500117FC9 /* mmxfdct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxfdct.c; sourceTree = "<group>"; };
+		084C325B0FE4E5D500117FC9 /* sse2fdct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sse2fdct.c; sourceTree = "<group>"; };
+		097729930BCAC60000303091 /* codec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = codec.h; path = ../include/theora/codec.h; sourceTree = SOURCE_ROOT; };
+		097729940BCAC60000303091 /* theoradec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = theoradec.h; path = ../include/theora/theoradec.h; sourceTree = SOURCE_ROOT; };
+		37C9B0130EBB831F0046849C /* theoraenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = theoraenc.h; path = ../include/theora/theoraenc.h; sourceTree = SOURCE_ROOT; };
+		37CA8E380DD747F1005C8CB6 /* internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = internal.h; path = ../lib/internal.h; sourceTree = SOURCE_ROOT; };
+		734A751809D76ADD002D8FAE /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = /Library/Frameworks/Ogg.framework; sourceTree = "<absolute>"; };
+		734A75BE09D76BB9002D8FAE /* theora.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = theora.h; path = ../include/theora/theora.h; sourceTree = SOURCE_ROOT; };
+		8D07F2C70486CC7A007CD1D0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D07F2C80486CC7A007CD1D0 /* Theora.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Theora.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D109503F162056DB00C5B181 /* collect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = collect.c; sourceTree = "<group>"; };
+		D1095040162056DB00C5B181 /* collect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = collect.h; sourceTree = "<group>"; };
+		D1095041162056DB00C5B181 /* state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = state.h; sourceTree = "<group>"; };
+		D109504C1620571200C5B181 /* sse2idct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sse2idct.c; sourceTree = "<group>"; };
+		D109504D1620571200C5B181 /* sse2trans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sse2trans.h; sourceTree = "<group>"; };
+		D109504E1620571200C5B181 /* x86cpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = x86cpu.c; sourceTree = "<group>"; };
+		D109504F1620571200C5B181 /* x86cpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x86cpu.h; sourceTree = "<group>"; };
+		D1358BB318D7760B00A36FDC /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = iOS.xcconfig; path = ../xcconfig/iOS.xcconfig; sourceTree = "<group>"; };
+		D1358BB418D7760B00A36FDC /* Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Mac.xcconfig; path = ../xcconfig/Mac.xcconfig; sourceTree = "<group>"; };
+		D1BB6F7E150E9CFD00EF9400 /* libtheora.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheora.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1BB6F80150E9CFD00EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D1BCE03918F3EF2D00C83470 /* armbits.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armbits.asm; path = arm_llvm/armbits.asm; sourceTree = "<group>"; };
+		D1BCE03A18F3EF2D00C83470 /* armbits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = armbits.h; path = arm_llvm/armbits.h; sourceTree = "<group>"; };
+		D1BCE03B18F3EF2D00C83470 /* armcpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = armcpu.c; path = arm_llvm/armcpu.c; sourceTree = "<group>"; };
+		D1BCE03C18F3EF2D00C83470 /* armcpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = armcpu.h; path = arm_llvm/armcpu.h; sourceTree = "<group>"; };
+		D1BCE03D18F3EF2D00C83470 /* armenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = armenc.c; path = arm_llvm/armenc.c; sourceTree = "<group>"; };
+		D1BCE03E18F3EF2D00C83470 /* armenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = armenc.h; path = arm_llvm/armenc.h; sourceTree = "<group>"; };
+		D1BCE03F18F3EF2D00C83470 /* armfrag.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armfrag.asm; path = arm_llvm/armfrag.asm; sourceTree = "<group>"; };
+		D1BCE04018F3EF2D00C83470 /* armidct.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armidct.asm; path = arm_llvm/armidct.asm; sourceTree = "<group>"; };
+		D1BCE04118F3EF2D00C83470 /* armint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = armint.h; path = arm_llvm/armint.h; sourceTree = "<group>"; };
+		D1BCE04218F3EF2D00C83470 /* armloop.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = armloop.asm; path = arm_llvm/armloop.asm; sourceTree = "<group>"; };
+		D1BCE04318F3EF2D00C83470 /* armstate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = armstate.c; path = arm_llvm/armstate.c; sourceTree = "<group>"; };
+		D1F279D4177A2B3400E5C131 /* libtheora.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheora.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D07F2C30486CC7A007CD1D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				734A751909D76ADD002D8FAE /* Ogg.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DDFF38A45A11DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D07F2C80486CC7A007CD1D0 /* Theora.framework */,
+				D1BB6F7E150E9CFD00EF9400 /* libtheora.a */,
+				D1F279D4177A2B3400E5C131 /* libtheora.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		084C31D80FE4E5BD00117FC9 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				D12CA53A17732E6D00412E5B /* arm */,
+				084C32570FE4E5D500117FC9 /* x86 */,
+				D109503F162056DB00C5B181 /* collect.c */,
+				D1095040162056DB00C5B181 /* collect.h */,
+				D1095041162056DB00C5B181 /* state.h */,
+				084C324B0FE4E5D500117FC9 /* encoder_disabled.c */,
+				084C324E0FE4E5D500117FC9 /* fdct.c */,
+				084C32510FE4E5D500117FC9 /* mathops.c */,
+				084C32520FE4E5D500117FC9 /* mathops.h */,
+				084C32530FE4E5D500117FC9 /* mcenc.c */,
+				084C32540FE4E5D500117FC9 /* modedec.h */,
+				084C32550FE4E5D500117FC9 /* rate.c */,
+				084C32560FE4E5D500117FC9 /* tokenize.c */,
+				084C31D90FE4E5BD00117FC9 /* apiwrapper.c */,
+				084C31DA0FE4E5BD00117FC9 /* apiwrapper.h */,
+				084C31DB0FE4E5BD00117FC9 /* bitpack.c */,
+				084C31DC0FE4E5BD00117FC9 /* bitpack.h */,
+				084C31DD0FE4E5BD00117FC9 /* dct.h */,
+				084C31DE0FE4E5BD00117FC9 /* decapiwrapper.c */,
+				084C31DF0FE4E5BD00117FC9 /* decinfo.c */,
+				084C31E00FE4E5BD00117FC9 /* decint.h */,
+				084C31E10FE4E5BD00117FC9 /* decode.c */,
+				084C31E20FE4E5BD00117FC9 /* dequant.c */,
+				084C31E30FE4E5BD00117FC9 /* dequant.h */,
+				084C31E40FE4E5BD00117FC9 /* fragment.c */,
+				084C31E50FE4E5BD00117FC9 /* huffdec.c */,
+				084C31E60FE4E5BD00117FC9 /* huffdec.h */,
+				084C31E70FE4E5BD00117FC9 /* huffman.h */,
+				084C31E80FE4E5BD00117FC9 /* idct.c */,
+				084C31E90FE4E5BD00117FC9 /* info.c */,
+				084C31EA0FE4E5BD00117FC9 /* internal.c */,
+				084C31EB0FE4E5BD00117FC9 /* ocintrin.h */,
+				084C31EC0FE4E5BD00117FC9 /* quant.c */,
+				084C31ED0FE4E5BD00117FC9 /* quant.h */,
+				084C31EE0FE4E5BD00117FC9 /* state.c */,
+			);
+			name = lib;
+			path = ../lib;
+			sourceTree = SOURCE_ROOT;
+		};
+		084C32570FE4E5D500117FC9 /* x86 */ = {
+			isa = PBXGroup;
+			children = (
+				D109504C1620571200C5B181 /* sse2idct.c */,
+				D109504D1620571200C5B181 /* sse2trans.h */,
+				D109504E1620571200C5B181 /* x86cpu.c */,
+				D109504F1620571200C5B181 /* x86cpu.h */,
+				084C31F00FE4E5BD00117FC9 /* mmxfrag.c */,
+				084C31F20FE4E5BD00117FC9 /* mmxidct.c */,
+				084C31F30FE4E5BD00117FC9 /* mmxloop.h */,
+				084C31F40FE4E5BD00117FC9 /* mmxstate.c */,
+				084C31F50FE4E5BD00117FC9 /* x86int.h */,
+				084C31F60FE4E5BD00117FC9 /* x86state.c */,
+				084C325A0FE4E5D500117FC9 /* mmxfdct.c */,
+				084C325B0FE4E5D500117FC9 /* sse2fdct.c */,
+			);
+			path = x86;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* Theora */ = {
+			isa = PBXGroup;
+			children = (
+				D1358BB218D775FE00A36FDC /* config */,
+				734A75BD09D76B96002D8FAE /* Headers */,
+				08FB77ACFE841707C02AAC07 /* Source */,
+				089C1665FE841158C02AAC07 /* Resources */,
+				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
+				D1BB6F7F150E9CFD00EF9400 /* Frameworks */,
+				034768DDFF38A45A11DB9C8B /* Products */,
+			);
+			name = Theora;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				734A751809D76ADD002D8FAE /* Ogg.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C1665FE841158C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77ACFE841707C02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				084C31D80FE4E5BD00117FC9 /* lib */,
+				37CA8E380DD747F1005C8CB6 /* internal.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		734A75BD09D76B96002D8FAE /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				37C9B0130EBB831F0046849C /* theoraenc.h */,
+				097729940BCAC60000303091 /* theoradec.h */,
+				097729930BCAC60000303091 /* codec.h */,
+				734A75BE09D76BB9002D8FAE /* theora.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		D12CA53A17732E6D00412E5B /* arm */ = {
+			isa = PBXGroup;
+			children = (
+				D1BCE03918F3EF2D00C83470 /* armbits.asm */,
+				D1BCE03A18F3EF2D00C83470 /* armbits.h */,
+				D1BCE03B18F3EF2D00C83470 /* armcpu.c */,
+				D1BCE03C18F3EF2D00C83470 /* armcpu.h */,
+				D1BCE03D18F3EF2D00C83470 /* armenc.c */,
+				D1BCE03E18F3EF2D00C83470 /* armenc.h */,
+				D1BCE03F18F3EF2D00C83470 /* armfrag.asm */,
+				D1BCE04018F3EF2D00C83470 /* armidct.asm */,
+				D1BCE04118F3EF2D00C83470 /* armint.h */,
+				D1BCE04218F3EF2D00C83470 /* armloop.asm */,
+				D1BCE04318F3EF2D00C83470 /* armstate.c */,
+			);
+			name = arm;
+			sourceTree = "<group>";
+		};
+		D1358BB218D775FE00A36FDC /* config */ = {
+			isa = PBXGroup;
+			children = (
+				D1358BB318D7760B00A36FDC /* iOS.xcconfig */,
+				D1358BB418D7760B00A36FDC /* Mac.xcconfig */,
+				8D07F2C70486CC7A007CD1D0 /* Info.plist */,
+			);
+			name = config;
+			sourceTree = "<group>";
+		};
+		D1BB6F7F150E9CFD00EF9400 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D1BB6F80150E9CFD00EF9400 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8D07F2BD0486CC7A007CD1D0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				734A75BF09D76BB9002D8FAE /* theora.h in Headers */,
+				097729950BCAC60000303091 /* codec.h in Headers */,
+				097729960BCAC60000303091 /* theoradec.h in Headers */,
+				37CA8E390DD747F1005C8CB6 /* internal.h in Headers */,
+				37C9B0140EBB831F0046849C /* theoraenc.h in Headers */,
+				084C31FF0FE4E5BD00117FC9 /* apiwrapper.h in Headers */,
+				084C32010FE4E5BD00117FC9 /* bitpack.h in Headers */,
+				084C32020FE4E5BD00117FC9 /* dct.h in Headers */,
+				084C32050FE4E5BD00117FC9 /* decint.h in Headers */,
+				084C32080FE4E5BD00117FC9 /* dequant.h in Headers */,
+				084C320B0FE4E5BD00117FC9 /* huffdec.h in Headers */,
+				084C320C0FE4E5BD00117FC9 /* huffman.h in Headers */,
+				084C32100FE4E5BD00117FC9 /* ocintrin.h in Headers */,
+				084C32120FE4E5BD00117FC9 /* quant.h in Headers */,
+				084C32170FE4E5BD00117FC9 /* mmxloop.h in Headers */,
+				084C32190FE4E5BD00117FC9 /* x86int.h in Headers */,
+				084C326F0FE4E5D500117FC9 /* mathops.h in Headers */,
+				084C32710FE4E5D500117FC9 /* modedec.h in Headers */,
+				D1095045162056DB00C5B181 /* collect.h in Headers */,
+				D1095048162056DB00C5B181 /* state.h in Headers */,
+				D10950571620571200C5B181 /* sse2trans.h in Headers */,
+				D109505D1620571200C5B181 /* x86cpu.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D07F2BC0486CC7A007CD1D0 /* theora */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4FADC24208B4156D00ABE55E /* Build configuration list for PBXNativeTarget "theora" */;
+			buildPhases = (
+				8D07F2BD0486CC7A007CD1D0 /* Headers */,
+				8D07F2BF0486CC7A007CD1D0 /* Resources */,
+				8D07F2C10486CC7A007CD1D0 /* Sources */,
+				8D07F2C30486CC7A007CD1D0 /* Frameworks */,
+				8D07F2C50486CC7A007CD1D0 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = theora;
+			productInstallPath = "$(HOME)/Library/Frameworks";
+			productName = Theora;
+			productReference = 8D07F2C80486CC7A007CD1D0 /* Theora.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D1BB6F7D150E9CFD00EF9400 /* theora (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1BB6F8D150E9CFE00EF9400 /* Build configuration list for PBXNativeTarget "theora (iOS)" */;
+			buildPhases = (
+				D1BB6F7A150E9CFD00EF9400 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "theora (iOS)";
+			productName = libtheora;
+			productReference = D1BB6F7E150E9CFD00EF9400 /* libtheora.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D1F279B9177A2B3400E5C131 /* theora (Mac) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1F279CE177A2B3400E5C131 /* Build configuration list for PBXNativeTarget "theora (Mac)" */;
+			buildPhases = (
+				D1F279BA177A2B3400E5C131 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "theora (Mac)";
+			productName = libtheora;
+			productReference = D1F279D4177A2B3400E5C131 /* libtheora.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+			};
+			buildConfigurationList = 4FADC24608B4156D00ABE55E /* Build configuration list for PBXProject "Theora" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* Theora */;
+			productRefGroup = 034768DDFF38A45A11DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = ..;
+			targets = (
+				8D07F2BC0486CC7A007CD1D0 /* theora */,
+				D1F279B9177A2B3400E5C131 /* theora (Mac) */,
+				D1BB6F7D150E9CFD00EF9400 /* theora (iOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D07F2BF0486CC7A007CD1D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		8D07F2C50486CC7A007CD1D0 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D07F2C10486CC7A007CD1D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D109509216206F2200C5B181 /* encoder_disabled.c in Sources */,
+				084C31FE0FE4E5BD00117FC9 /* apiwrapper.c in Sources */,
+				084C32000FE4E5BD00117FC9 /* bitpack.c in Sources */,
+				084C32030FE4E5BD00117FC9 /* decapiwrapper.c in Sources */,
+				084C32040FE4E5BD00117FC9 /* decinfo.c in Sources */,
+				084C32060FE4E5BD00117FC9 /* decode.c in Sources */,
+				084C32070FE4E5BD00117FC9 /* dequant.c in Sources */,
+				084C32090FE4E5BD00117FC9 /* fragment.c in Sources */,
+				084C320A0FE4E5BD00117FC9 /* huffdec.c in Sources */,
+				084C320D0FE4E5BD00117FC9 /* idct.c in Sources */,
+				084C320E0FE4E5BD00117FC9 /* info.c in Sources */,
+				084C320F0FE4E5BD00117FC9 /* internal.c in Sources */,
+				084C32110FE4E5BD00117FC9 /* quant.c in Sources */,
+				084C32130FE4E5BD00117FC9 /* state.c in Sources */,
+				084C32140FE4E5BD00117FC9 /* mmxfrag.c in Sources */,
+				084C32160FE4E5BD00117FC9 /* mmxidct.c in Sources */,
+				084C32180FE4E5BD00117FC9 /* mmxstate.c in Sources */,
+				084C321A0FE4E5BD00117FC9 /* x86state.c in Sources */,
+				084C326B0FE4E5D500117FC9 /* fdct.c in Sources */,
+				084C326E0FE4E5D500117FC9 /* mathops.c in Sources */,
+				084C32720FE4E5D500117FC9 /* rate.c in Sources */,
+				084C32730FE4E5D500117FC9 /* tokenize.c in Sources */,
+				084C32760FE4E5D500117FC9 /* mmxfdct.c in Sources */,
+				084C32770FE4E5D500117FC9 /* sse2fdct.c in Sources */,
+				D1095042162056DB00C5B181 /* collect.c in Sources */,
+				D10950541620571200C5B181 /* sse2idct.c in Sources */,
+				D109505A1620571200C5B181 /* x86cpu.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1BB6F7A150E9CFD00EF9400 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1BB6F94150E9D8C00EF9400 /* encoder_disabled.c in Sources */,
+				D1BB6F96150E9D8C00EF9400 /* fdct.c in Sources */,
+				D1BB6F98150E9D8C00EF9400 /* mathops.c in Sources */,
+				D1BB6F9A150E9D8C00EF9400 /* rate.c in Sources */,
+				D1BB6F9B150E9D8C00EF9400 /* tokenize.c in Sources */,
+				D1BB6F9C150E9D8C00EF9400 /* apiwrapper.c in Sources */,
+				D1BB6F9D150E9D8C00EF9400 /* bitpack.c in Sources */,
+				D1BB6F9E150E9D8C00EF9400 /* decapiwrapper.c in Sources */,
+				D1BB6F9F150E9D8C00EF9400 /* decinfo.c in Sources */,
+				D1BB6FA0150E9D8C00EF9400 /* decode.c in Sources */,
+				D1BB6FA1150E9D8C00EF9400 /* dequant.c in Sources */,
+				D1BB6FA2150E9D8C00EF9400 /* fragment.c in Sources */,
+				D1BCE04A18F3EF2D00C83470 /* armstate.c in Sources */,
+				D1BCE04518F3EF2D00C83470 /* armcpu.c in Sources */,
+				D1BCE04918F3EF2D00C83470 /* armloop.asm in Sources */,
+				D1BB6FA3150E9D8C00EF9400 /* huffdec.c in Sources */,
+				D1BCE04818F3EF2D00C83470 /* armidct.asm in Sources */,
+				D1BB6FA4150E9D8C00EF9400 /* idct.c in Sources */,
+				D1BCE04718F3EF2D00C83470 /* armfrag.asm in Sources */,
+				D1BB6FA5150E9D8C00EF9400 /* info.c in Sources */,
+				D1BB6FA6150E9D8C00EF9400 /* internal.c in Sources */,
+				D1BCE04418F3EF2D00C83470 /* armbits.asm in Sources */,
+				D1BB6FA7150E9D8C00EF9400 /* quant.c in Sources */,
+				D1BB6FA8150E9D8C00EF9400 /* state.c in Sources */,
+				D1095044162056DB00C5B181 /* collect.c in Sources */,
+				D1BCE04618F3EF2D00C83470 /* armenc.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1F279BA177A2B3400E5C131 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D139469D17C10DB00091F4A4 /* sse2idct.c in Sources */,
+				D139469F17C10DB00091F4A4 /* x86cpu.c in Sources */,
+				D13946A117C10DB00091F4A4 /* mmxfrag.c in Sources */,
+				D13946A217C10DB00091F4A4 /* mmxidct.c in Sources */,
+				D13946A417C10DB00091F4A4 /* mmxstate.c in Sources */,
+				D13946A617C10DB00091F4A4 /* x86state.c in Sources */,
+				D13946A717C10DB00091F4A4 /* mmxfdct.c in Sources */,
+				D13946A817C10DB00091F4A4 /* sse2fdct.c in Sources */,
+				D1F279BB177A2B3400E5C131 /* encoder_disabled.c in Sources */,
+				D1F279BC177A2B3400E5C131 /* fdct.c in Sources */,
+				D1F279BD177A2B3400E5C131 /* mathops.c in Sources */,
+				D1F279BE177A2B3400E5C131 /* rate.c in Sources */,
+				D1F279BF177A2B3400E5C131 /* tokenize.c in Sources */,
+				D1F279C0177A2B3400E5C131 /* apiwrapper.c in Sources */,
+				D1F279C1177A2B3400E5C131 /* bitpack.c in Sources */,
+				D1F279C2177A2B3400E5C131 /* decapiwrapper.c in Sources */,
+				D1F279C3177A2B3400E5C131 /* decinfo.c in Sources */,
+				D1F279C4177A2B3400E5C131 /* decode.c in Sources */,
+				D1F279C5177A2B3400E5C131 /* dequant.c in Sources */,
+				D1F279C6177A2B3400E5C131 /* fragment.c in Sources */,
+				D1F279C7177A2B3400E5C131 /* huffdec.c in Sources */,
+				D1F279C8177A2B3400E5C131 /* idct.c in Sources */,
+				D1F279C9177A2B3400E5C131 /* info.c in Sources */,
+				D1F279CA177A2B3400E5C131 /* internal.c in Sources */,
+				D1F279CB177A2B3400E5C131 /* quant.c in Sources */,
+				D1F279CC177A2B3400E5C131 /* state.c in Sources */,
+				D1F279CD177A2B3400E5C131 /* collect.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D1473F11150CA45300B20490 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${SRCROOT}/../../ogg/include",
+					"${SRCROOT}/../../vorbis/include",
+					"${SRCROOT}/../../xal/lib/ogg/include",
+					"${SRCROOT}/../../xal/lib/vorbis/include",
+					../include,
+					"../lib/**",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				SKIP_INSTALL = YES;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Debug;
+		};
+		D1473F12150CA45300B20490 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BB418D7760B00A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Library/Frameworks,
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					__MACOSX__,
+				);
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				LIBRARY_STYLE = DYNAMIC;
+				MACH_O_TYPE = mh_dylib;
+				OTHER_LDFLAGS_i386 = "-Wl,-read_only_relocs,suppress";
+				PRODUCT_BUNDLE_IDENTIFIER = org.xiph.theora;
+				PRODUCT_NAME = Theora;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		D1473F16150CA45B00B20490 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${SRCROOT}/../../ogg/include",
+					"${SRCROOT}/../../vorbis/include",
+					"${SRCROOT}/../../xal/lib/ogg/include",
+					"${SRCROOT}/../../xal/lib/vorbis/include",
+					../include,
+					"../lib/**",
+				);
+				OTHER_CFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-fomit-frame-pointer",
+					"-finline-functions",
+					"-funroll-loops",
+				);
+				SKIP_INSTALL = YES;
+				WARNING_CFLAGS = "-w";
+			};
+			name = "App Store";
+		};
+		D1473F17150CA45B00B20490 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BB418D7760B00A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Library/Frameworks,
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					__MACOSX__,
+				);
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				LIBRARY_STYLE = DYNAMIC;
+				MACH_O_TYPE = mh_dylib;
+				OTHER_LDFLAGS_i386 = "-Wl,-read_only_relocs,suppress";
+				PRODUCT_BUNDLE_IDENTIFIER = org.xiph.theora;
+				PRODUCT_NAME = Theora;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = "App Store";
+		};
+		D1473F1A150CA46100B20490 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"${SRCROOT}/../../ogg/include",
+					"${SRCROOT}/../../vorbis/include",
+					"${SRCROOT}/../../xal/lib/ogg/include",
+					"${SRCROOT}/../../xal/lib/vorbis/include",
+					../include,
+					"../lib/**",
+				);
+				OTHER_CFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-fomit-frame-pointer",
+					"-finline-functions",
+					"-funroll-loops",
+				);
+				SKIP_INSTALL = YES;
+				WARNING_CFLAGS = "-w";
+			};
+			name = Release;
+		};
+		D1473F1B150CA46100B20490 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BB418D7760B00A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Library/Frameworks,
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					__MACOSX__,
+				);
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				LIBRARY_STYLE = DYNAMIC;
+				MACH_O_TYPE = mh_dylib;
+				OTHER_LDFLAGS_i386 = "-Wl,-read_only_relocs,suppress";
+				PRODUCT_BUNDLE_IDENTIFIER = org.xiph.theora;
+				PRODUCT_NAME = Theora;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		D1BB6F89150E9CFE00EF9400 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BB318D7760B00A36FDC /* iOS.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARM_PREPR = "_IOS OC_ARM_ASM OC_ARM_ASM_EDSP=1 OC_ARM_ASM_MEDIA=1 OC_ARM_ASM_NEON=1 OC_ARM_CAN_UNALIGN=1 OC_ARM_CAN_UNALIGN_LDRD=0 $(inherited)";
+				COPY_PHASE_STRIP = NO;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = "$(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=armv7]" = "$(ARM_PREPR)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*][arch=armv7s]" = "$(ARM_PREPR)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = "$(inherited)";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				PRODUCT_NAME = theora;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D1BB6F8B150E9CFE00EF9400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BB318D7760B00A36FDC /* iOS.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARM_PREPR = "_IOS OC_ARM_ASM OC_ARM_ASM_EDSP=1 OC_ARM_ASM_MEDIA=1 OC_ARM_ASM_NEON=1 OC_ARM_CAN_UNALIGN=1 OC_ARM_CAN_UNALIGN_LDRD=0 $(inherited)";
+				COPY_PHASE_STRIP = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = " ";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = "$(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=armv7]" = "$(ARM_PREPR)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*][arch=armv7s]" = "$(ARM_PREPR)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = "$(inherited)";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				PRODUCT_NAME = theora;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D1BB6F8C150E9CFE00EF9400 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BB318D7760B00A36FDC /* iOS.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARM_PREPR = "_IOS OC_ARM_ASM OC_ARM_ASM_EDSP=1 OC_ARM_ASM_MEDIA=1 OC_ARM_ASM_NEON=1 OC_ARM_CAN_UNALIGN=1 OC_ARM_CAN_UNALIGN_LDRD=0 $(inherited)";
+				COPY_PHASE_STRIP = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = " ";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=arm64]" = "$(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=armv7]" = "$(ARM_PREPR)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*][arch=armv7s]" = "$(ARM_PREPR)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = "$(inherited)";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				PRODUCT_NAME = theora;
+				SKIP_INSTALL = YES;
+			};
+			name = "App Store";
+		};
+		D1F279D0177A2B3400E5C131 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BB418D7760B00A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					__MACOSX__,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				PRODUCT_NAME = theora;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D1F279D2177A2B3400E5C131 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BB418D7760B00A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					__MACOSX__,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				PRODUCT_NAME = theora;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D1F279D3177A2B3400E5C131 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BB418D7760B00A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					OC_X86_ASM,
+					__MACOSX__,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				PRODUCT_NAME = theora;
+				SKIP_INSTALL = YES;
+			};
+			name = "App Store";
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4FADC24208B4156D00ABE55E /* Build configuration list for PBXNativeTarget "theora" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1473F12150CA45300B20490 /* Debug */,
+				D1473F1B150CA46100B20490 /* Release */,
+				D1473F17150CA45B00B20490 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4FADC24608B4156D00ABE55E /* Build configuration list for PBXProject "Theora" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1473F11150CA45300B20490 /* Debug */,
+				D1473F1A150CA46100B20490 /* Release */,
+				D1473F16150CA45B00B20490 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D1BB6F8D150E9CFE00EF9400 /* Build configuration list for PBXNativeTarget "theora (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1BB6F89150E9CFE00EF9400 /* Debug */,
+				D1BB6F8B150E9CFE00EF9400 /* Release */,
+				D1BB6F8C150E9CFE00EF9400 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D1F279CE177A2B3400E5C131 /* Build configuration list for PBXNativeTarget "theora (Mac)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1F279D0177A2B3400E5C131 /* Debug */,
+				D1F279D2177A2B3400E5C131 /* Release */,
+				D1F279D3177A2B3400E5C131 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}

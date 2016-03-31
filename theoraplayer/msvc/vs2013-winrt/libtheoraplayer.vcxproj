@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS|Win32">
+      <Configuration>DebugS</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS|Win32">
+      <Configuration>ReleaseS</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS|ARM">
+      <Configuration>DebugS</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS|ARM">
+      <Configuration>ReleaseS</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Theora|Win32">
+      <Configuration>Debug_Theora</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS_Theora|Win32">
+      <Configuration>DebugS_Theora</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Theora|Win32">
+      <Configuration>Release_Theora</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS_Theora|Win32">
+      <Configuration>ReleaseS_Theora</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Theora|ARM">
+      <Configuration>Debug_Theora</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS_Theora|ARM">
+      <Configuration>DebugS_Theora</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Theora|ARM">
+      <Configuration>Release_Theora</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS_Theora|ARM">
+      <Configuration>ReleaseS_Theora</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{ABE6907D-00FF-4198-8D36-65115AF1D868}</ProjectGuid>
+    <RootNamespace>theoraplayer</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <ApplicationType>Windows Phone</ApplicationType>
+    <ApplicationTypeRevision>8.1</ApplicationTypeRevision>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="props\default.props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).prop')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).prop')" Project="props-generic\platform-$(Platform).props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props')" Project="props-generic\configurations.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug_Theora|Win32'">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='DebugS_Theora|Win32'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release_Theora|Win32'">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='ReleaseS_Theora|Win32'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug_Theora|ARM'">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='DebugS_Theora|ARM'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release_Theora|ARM'">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='ReleaseS_Theora|ARM'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\build-defaults.props')" Project="props-generic\build-defaults.props" />
+  <Import Project="props\configuration.props" />
+  <ItemGroup>
+    <ClCompile Include="..\..\src\AudioInterface.cpp" />
+    <ClCompile Include="..\..\src\AudioInterfaceFactory.cpp" />
+    <ClCompile Include="..\..\src\AudioPacketQueue.cpp" />
+    <ClCompile Include="..\..\src\DataSource.cpp" />
+    <ClCompile Include="..\..\src\Exception.cpp" />
+    <ClCompile Include="..\..\src\FileDataSource.cpp" />
+    <ClCompile Include="..\..\src\formats\Theora\VideoClip_Theora.cpp" />
+    <ClCompile Include="..\..\src\FrameQueue.cpp" />
+    <ClCompile Include="..\..\src\Manager.cpp" />
+    <ClCompile Include="..\..\src\MemoryDataSource.cpp" />
+    <ClCompile Include="..\..\src\Mutex.cpp" />
+    <ClCompile Include="..\..\src\theoraplayer.cpp" />
+    <ClCompile Include="..\..\src\Thread.cpp" />
+    <ClCompile Include="..\..\src\Timer.cpp" />
+    <ClCompile Include="..\..\src\Utility.cpp" />
+    <ClCompile Include="..\..\src\VideoClip.cpp" />
+    <ClCompile Include="..\..\src\VideoFrame.cpp" />
+    <ClCompile Include="..\..\src\WorkerThread.cpp" />
+    <ClCompile Include="..\..\src\YUV\android\cpu-features.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_common.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_gcc.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_neon.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_posix.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_win.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_argb.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_from.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_from_argb.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_jpeg.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_to_argb.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\convert_to_i420.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\cpu_id.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\mjpeg_decoder.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\mjpeg_validate.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\planar_functions.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_argb.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_mips.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_neon.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_any.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_common.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_gcc.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_mips.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_neon.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_posix.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_win.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_any.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb_neon.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_common.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_gcc.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_mips.cc">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_neon.cc">
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_posix.cc">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_win.cc">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\video_common.cc">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\yuv_libyuv.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\yuv_util.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\C\yuv420_grey_c.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\C\yuv420_rgb_c.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\C\yuv420_yuv_c.c">
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <None Include="..\..\src\YUV\libyuv\src\row_x86.asm">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\src\YUV\libyuv\src\x86inc.asm">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\theoraplayer\AudioInterface.h" />
+    <ClInclude Include="..\..\include\theoraplayer\AudioInterfaceFactory.h" />
+    <ClInclude Include="..\..\include\theoraplayer\AudioPacketQueue.h" />
+    <ClInclude Include="..\..\include\theoraplayer\DataSource.h" />
+    <ClInclude Include="..\..\include\theoraplayer\Exception.h" />
+    <ClInclude Include="..\..\include\theoraplayer\FileDataSource.h" />
+    <ClInclude Include="..\..\include\theoraplayer\FrameQueue.h" />
+    <ClInclude Include="..\..\include\theoraplayer\Manager.h" />
+    <ClInclude Include="..\..\include\theoraplayer\MemoryDataSource.h" />
+    <ClInclude Include="..\..\include\theoraplayer\PixelTransform.h" />
+    <ClInclude Include="..\..\include\theoraplayer\theoraplayer.h" />
+    <ClInclude Include="..\..\include\theoraplayer\theoraplayerExport.h" />
+    <ClInclude Include="..\..\include\theoraplayer\Timer.h" />
+    <ClInclude Include="..\..\include\theoraplayer\VideoClip.h" />
+    <ClInclude Include="..\..\include\theoraplayer\VideoFrame.h" />
+    <ClInclude Include="..\..\src\formats\Theora\VideoClip_Theora.h" />
+    <ClInclude Include="..\..\src\Mutex.h" />
+    <ClInclude Include="..\..\src\Thread.h" />
+    <ClInclude Include="..\..\src\Utility.h" />
+    <ClInclude Include="..\..\src\WorkerThread.h" />
+    <ClInclude Include="..\..\src\YUV\android\cpu-features.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\basic_types.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\compare.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert_argb.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert_from.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert_from_argb.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\cpu_id.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\mjpeg_decoder.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\planar_functions.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\rotate.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\rotate_argb.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\row.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\scale.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\scale_argb.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\scale_row.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\version.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\video_common.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\yuv_libyuv.h" />
+    <ClInclude Include="..\..\src\YUV\yuv_util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\fileproperties.rc">
+      <ExcludedFromBuild Condition="'$(ConfigurationType)'=='StaticLibrary'">true</ExcludedFromBuild>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

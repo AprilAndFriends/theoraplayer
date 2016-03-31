@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BA5FE66F-38DD-E034-F542-B1578C5FB950}</ProjectGuid>
+    <RootNamespace>vpxdec</RootNamespace>
+    <Keyword>ManagedCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v140_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v140_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)Win32\$(Configuration)\</OutDir>
+    <IntDir>Win32\$(Configuration)\vpxdec\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)Win32\$(Configuration)\</OutDir>
+    <IntDir>Win32\$(Configuration)\vpxdec\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>vp8;vp9;third_party/libyuv/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>vp8;vp9;third_party/libyuv/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="md5_utils.c">
+      <ObjectFileName>$(IntDir)md5_utils.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="args.c">
+      <ObjectFileName>$(IntDir)args.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="ivfdec.c">
+      <ObjectFileName>$(IntDir)ivfdec.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="tools_common.c">
+      <ObjectFileName>$(IntDir)tools_common.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="y4menc.c">
+      <ObjectFileName>$(IntDir)y4menc.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\cpu_id.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_cpu_id.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\planar_functions.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_planar_functions.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\row_any.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_row_any.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\row_common.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_row_common.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\row_gcc.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_row_gcc.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\row_mips.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_row_mips.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\row_neon.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_row_neon.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\row_neon64.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_row_neon64.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\row_win.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_row_win.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\scale.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_scale.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\scale_any.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_scale_any.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\scale_common.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_scale_common.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\scale_gcc.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_scale_gcc.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\scale_mips.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_scale_mips.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\scale_neon.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_scale_neon.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\scale_neon64.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_scale_neon64.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libyuv\source\scale_win.cc">
+      <ObjectFileName>$(IntDir)third_party_libyuv_source_scale_win.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libwebm\mkvparser.cpp">
+      <ObjectFileName>$(IntDir)third_party_libwebm_mkvparser.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="third_party\libwebm\mkvreader.cpp">
+      <ObjectFileName>$(IntDir)third_party_libwebm_mkvreader.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="webmdec.cc">
+      <ObjectFileName>$(IntDir)webmdec.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="vpxdec.c">
+      <ObjectFileName>$(IntDir)vpxdec.obj</ObjectFileName>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="md5_utils.h" />
+    <ClInclude Include="vpx_ports\mem_ops.h" />
+    <ClInclude Include="vpx_ports\mem_ops_aligned.h" />
+    <ClInclude Include="vpx_ports\msvc.h" />
+    <ClInclude Include="vpx_ports\vpx_timer.h" />
+    <ClInclude Include="vpx\vpx_integer.h" />
+    <ClInclude Include="args.h" />
+    <ClInclude Include="ivfdec.h" />
+    <ClInclude Include="tools_common.h" />
+    <ClInclude Include="y4menc.h" />
+    <ClInclude Include="third_party\libyuv\include\libyuv\basic_types.h" />
+    <ClInclude Include="third_party\libyuv\include\libyuv\convert.h" />
+    <ClInclude Include="third_party\libyuv\include\libyuv\convert_argb.h" />
+    <ClInclude Include="third_party\libyuv\include\libyuv\convert_from.h" />
+    <ClInclude Include="third_party\libyuv\include\libyuv\cpu_id.h" />
+    <ClInclude Include="third_party\libyuv\include\libyuv\planar_functions.h" />
+    <ClInclude Include="third_party\libyuv\include\libyuv\rotate.h" />
+    <ClInclude Include="third_party\libyuv\include\libyuv\row.h" />
+    <ClInclude Include="third_party\libyuv\include\libyuv\scale.h" />
+    <ClInclude Include="third_party\libyuv\include\libyuv\scale_row.h" />
+    <ClInclude Include="webmdec.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="examples.mk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="vpx.vcxproj">
+      <Project>{DCE19DAF-69AC-46DB-B14A-39F0FAA5DB74}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="UserMacros">
+    <LIBOGG_VERSION>1.2.0</LIBOGG_VERSION>
+    <LIBVORBIS_VERSION>1.3.1</LIBVORBIS_VERSION>
+  </PropertyGroup>
+  <ItemGroup>
+    <BuildMacro Include="LIBOGG_VERSION">
+      <Value>$(LIBOGG_VERSION)</Value>
+    </BuildMacro>
+    <BuildMacro Include="LIBVORBIS_VERSION">
+      <Value>$(LIBVORBIS_VERSION)</Value>
+    </BuildMacro>
+  </ItemGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <StringPooling>true</StringPooling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Link>
+      <ModuleDefinitionFile>../../lib/theora.def</ModuleDefinitionFile>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../../lib/x86_vc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>OC_X86_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>libogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)'=='Android'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../../lib/arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>OC_ARM_ASM;OC_ARM_ASM_EDSP=1;OC_ARM_ASM_MEDIA=1;OC_ARM_ASM_NEON=1;OC_ARM_CAN_UNALIGN=1;OC_ARM_CAN_UNALIGN_LDRD=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">
+    <Link>
+      <AdditionalDependencies>-logg;-ltremor;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+</Project>

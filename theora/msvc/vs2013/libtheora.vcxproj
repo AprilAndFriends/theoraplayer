@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS|Win32">
+      <Configuration>DebugS</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS|Win32">
+      <Configuration>ReleaseS</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Android">
+      <Configuration>Debug</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS|Android">
+      <Configuration>DebugS</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Android">
+      <Configuration>Release</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS|Android">
+      <Configuration>ReleaseS</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Android-x86">
+      <Configuration>Debug</Configuration>
+      <Platform>Android-x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS|Android-x86">
+      <Configuration>DebugS</Configuration>
+      <Platform>Android-x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Android-x86">
+      <Configuration>Release</Configuration>
+      <Platform>Android-x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS|Android-x86">
+      <Configuration>ReleaseS</Configuration>
+      <Platform>Android-x86</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{653F3841-3F26-49B9-AFCF-091DB4B67031}</ProjectGuid>
+    <RootNamespace>theora</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="props\default.props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props')" Project="..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props')" Project="..\..\..\theoraplayer\msvc\vs2013\props-generic\platform-$(Platform).props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013\props-generic\configurations.props')" Project="..\..\..\hltypes\msvc\vs2013\props-generic\configurations.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013\props-generic\configurations.props')" Project="..\..\..\theoraplayer\msvc\vs2013\props-generic\configurations.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013\props-generic\build-defaults.props')" Project="..\..\..\hltypes\msvc\vs2013\props-generic\build-defaults.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013\props-generic\build-defaults.props')" Project="..\..\..\theoraplayer\msvc\vs2013\props-generic\build-defaults.props" />
+  <Import Project="props\configuration.props" />
+  <ItemGroup>
+    <ClInclude Include="..\..\include\theora\codec.h" />
+    <ClInclude Include="..\..\include\theora\theora.h" />
+    <ClInclude Include="..\..\include\theora\theoradec.h" />
+    <ClInclude Include="..\..\include\theora\theoraenc.h" />
+    <ClInclude Include="..\..\lib\arm\armbits.h" />
+    <ClInclude Include="..\..\lib\arm\armcpu.h" />
+    <ClInclude Include="..\..\lib\arm\armint.h" />
+    <ClInclude Include="..\..\lib\collect.h" />
+    <ClInclude Include="..\..\lib\internal.h" />
+    <ClInclude Include="..\..\lib\encint.h" />
+    <ClInclude Include="..\..\lib\enquant.h" />
+    <ClInclude Include="..\..\lib\huffenc.h" />
+    <ClInclude Include="..\..\lib\mathops.h" />
+    <ClInclude Include="..\..\lib\modedec.h" />
+    <ClInclude Include="..\..\lib\apiwrapper.h" />
+    <ClInclude Include="..\..\lib\bitpack.h" />
+    <ClInclude Include="..\..\lib\dct.h" />
+    <ClInclude Include="..\..\lib\decint.h" />
+    <ClInclude Include="..\..\lib\dequant.h" />
+    <ClInclude Include="..\..\lib\huffdec.h" />
+    <ClInclude Include="..\..\lib\huffman.h" />
+    <ClInclude Include="..\..\lib\ocintrin.h" />
+    <ClInclude Include="..\..\lib\quant.h" />
+    <ClInclude Include="..\..\lib\x86_vc\x86cpu.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\lib\analyze.c">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm\armcpu.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm\armstate.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\collect.c" />
+    <ClCompile Include="..\..\lib\encapiwrapper.c">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\encfrag.c">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\encinfo.c">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\encode.c">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\encoder_disabled.c" />
+    <ClCompile Include="..\..\lib\enquant.c" />
+    <ClCompile Include="..\..\lib\fdct.c" />
+    <ClCompile Include="..\..\lib\huffenc.c" />
+    <ClCompile Include="..\..\lib\mathops.c" />
+    <ClCompile Include="..\..\lib\mcenc.c">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\rate.c" />
+    <ClCompile Include="..\..\lib\tokenize.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxencfrag.c">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxfdct.c" />
+    <ClCompile Include="..\..\lib\x86_vc\x86cpu.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\x86enc.c">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\apiwrapper.c" />
+    <ClCompile Include="..\..\lib\bitpack.c" />
+    <ClCompile Include="..\..\lib\decapiwrapper.c" />
+    <ClCompile Include="..\..\lib\decinfo.c" />
+    <ClCompile Include="..\..\lib\decode.c">
+      <ObjectFileName>$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName>$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\dequant.c" />
+    <ClCompile Include="..\..\lib\fragment.c" />
+    <ClCompile Include="..\..\lib\huffdec.c" />
+    <ClCompile Include="..\..\lib\idct.c">
+      <ObjectFileName>$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName>$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\info.c" />
+    <ClCompile Include="..\..\lib\internal.c" />
+    <ClCompile Include="..\..\lib\quant.c">
+      <ObjectFileName>$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <XMLDocumentationFileName>$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\state.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxfrag.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxidct.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxstate.c" />
+    <ClCompile Include="..\..\lib\x86_vc\x86state.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Android'">true</ExcludedFromBuild>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\lib\arm\armbits.asm">
+      <FileType>Document</FileType>
+      <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
+      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm\armfrag.asm">
+      <FileType>Document</FileType>
+      <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
+      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm\armidct.asm">
+      <FileType>Document</FileType>
+      <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
+      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm\armloop.asm">
+      <FileType>Document</FileType>
+      <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
+      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\lib\arm\armopts-gnu.s" />
+    <None Include="..\..\lib\theora.def" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

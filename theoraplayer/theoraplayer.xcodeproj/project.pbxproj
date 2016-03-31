@@ -1,0 +1,1915 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B4A28A151CACF582004ECC69 /* AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A001CACF582004ECC69 /* AudioInterface.cpp */; };
+		B4A28A161CACF582004ECC69 /* AudioInterfaceFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A011CACF582004ECC69 /* AudioInterfaceFactory.cpp */; };
+		B4A28A171CACF582004ECC69 /* AudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A021CACF582004ECC69 /* AudioPacketQueue.cpp */; };
+		B4A28A181CACF582004ECC69 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A031CACF582004ECC69 /* DataSource.cpp */; };
+		B4A28A191CACF582004ECC69 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A041CACF582004ECC69 /* Exception.cpp */; };
+		B4A28A1A1CACF582004ECC69 /* FileDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A051CACF582004ECC69 /* FileDataSource.cpp */; };
+		B4A28A1B1CACF582004ECC69 /* FrameQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A061CACF582004ECC69 /* FrameQueue.cpp */; };
+		B4A28A1C1CACF582004ECC69 /* Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A071CACF582004ECC69 /* Manager.cpp */; };
+		B4A28A1D1CACF582004ECC69 /* MemoryDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A081CACF582004ECC69 /* MemoryDataSource.cpp */; };
+		B4A28A1E1CACF582004ECC69 /* Mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A091CACF582004ECC69 /* Mutex.cpp */; };
+		B4A28A1F1CACF582004ECC69 /* Mutex.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28A0A1CACF582004ECC69 /* Mutex.h */; };
+		B4A28A201CACF582004ECC69 /* theoraplayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0B1CACF582004ECC69 /* theoraplayer.cpp */; };
+		B4A28A211CACF582004ECC69 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0C1CACF582004ECC69 /* Thread.cpp */; };
+		B4A28A221CACF582004ECC69 /* Thread.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28A0D1CACF582004ECC69 /* Thread.h */; };
+		B4A28A231CACF582004ECC69 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0E1CACF582004ECC69 /* Timer.cpp */; };
+		B4A28A241CACF582004ECC69 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0F1CACF582004ECC69 /* Utility.cpp */; };
+		B4A28A251CACF582004ECC69 /* Utility.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28A101CACF582004ECC69 /* Utility.h */; };
+		B4A28A261CACF582004ECC69 /* VideoClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A111CACF582004ECC69 /* VideoClip.cpp */; };
+		B4A28A271CACF582004ECC69 /* VideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A121CACF582004ECC69 /* VideoFrame.cpp */; };
+		B4A28A281CACF582004ECC69 /* WorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A131CACF582004ECC69 /* WorkerThread.cpp */; };
+		B4A28A291CACF582004ECC69 /* WorkerThread.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28A141CACF582004ECC69 /* WorkerThread.h */; };
+		B4A28A2A1CACF58E004ECC69 /* AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A001CACF582004ECC69 /* AudioInterface.cpp */; };
+		B4A28A2B1CACF58E004ECC69 /* AudioInterfaceFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A011CACF582004ECC69 /* AudioInterfaceFactory.cpp */; };
+		B4A28A2C1CACF58E004ECC69 /* AudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A021CACF582004ECC69 /* AudioPacketQueue.cpp */; };
+		B4A28A2D1CACF58E004ECC69 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A031CACF582004ECC69 /* DataSource.cpp */; };
+		B4A28A2E1CACF58E004ECC69 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A041CACF582004ECC69 /* Exception.cpp */; };
+		B4A28A2F1CACF58E004ECC69 /* FileDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A051CACF582004ECC69 /* FileDataSource.cpp */; };
+		B4A28A301CACF58E004ECC69 /* FrameQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A061CACF582004ECC69 /* FrameQueue.cpp */; };
+		B4A28A311CACF58E004ECC69 /* Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A071CACF582004ECC69 /* Manager.cpp */; };
+		B4A28A321CACF58E004ECC69 /* MemoryDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A081CACF582004ECC69 /* MemoryDataSource.cpp */; };
+		B4A28A331CACF58E004ECC69 /* Mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A091CACF582004ECC69 /* Mutex.cpp */; };
+		B4A28A341CACF58E004ECC69 /* theoraplayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0B1CACF582004ECC69 /* theoraplayer.cpp */; };
+		B4A28A351CACF58E004ECC69 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0C1CACF582004ECC69 /* Thread.cpp */; };
+		B4A28A361CACF58E004ECC69 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0E1CACF582004ECC69 /* Timer.cpp */; };
+		B4A28A371CACF58E004ECC69 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0F1CACF582004ECC69 /* Utility.cpp */; };
+		B4A28A381CACF58E004ECC69 /* VideoClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A111CACF582004ECC69 /* VideoClip.cpp */; };
+		B4A28A391CACF58E004ECC69 /* VideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A121CACF582004ECC69 /* VideoFrame.cpp */; };
+		B4A28A3A1CACF58E004ECC69 /* WorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A131CACF582004ECC69 /* WorkerThread.cpp */; };
+		B4A28A4C1CACF58F004ECC69 /* AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A001CACF582004ECC69 /* AudioInterface.cpp */; };
+		B4A28A4D1CACF58F004ECC69 /* AudioInterfaceFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A011CACF582004ECC69 /* AudioInterfaceFactory.cpp */; };
+		B4A28A4E1CACF58F004ECC69 /* AudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A021CACF582004ECC69 /* AudioPacketQueue.cpp */; };
+		B4A28A4F1CACF58F004ECC69 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A031CACF582004ECC69 /* DataSource.cpp */; };
+		B4A28A501CACF58F004ECC69 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A041CACF582004ECC69 /* Exception.cpp */; };
+		B4A28A511CACF58F004ECC69 /* FileDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A051CACF582004ECC69 /* FileDataSource.cpp */; };
+		B4A28A521CACF58F004ECC69 /* FrameQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A061CACF582004ECC69 /* FrameQueue.cpp */; };
+		B4A28A531CACF58F004ECC69 /* Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A071CACF582004ECC69 /* Manager.cpp */; };
+		B4A28A541CACF58F004ECC69 /* MemoryDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A081CACF582004ECC69 /* MemoryDataSource.cpp */; };
+		B4A28A551CACF58F004ECC69 /* Mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A091CACF582004ECC69 /* Mutex.cpp */; };
+		B4A28A561CACF58F004ECC69 /* theoraplayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0B1CACF582004ECC69 /* theoraplayer.cpp */; };
+		B4A28A571CACF58F004ECC69 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0C1CACF582004ECC69 /* Thread.cpp */; };
+		B4A28A581CACF58F004ECC69 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0E1CACF582004ECC69 /* Timer.cpp */; };
+		B4A28A591CACF58F004ECC69 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0F1CACF582004ECC69 /* Utility.cpp */; };
+		B4A28A5A1CACF58F004ECC69 /* VideoClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A111CACF582004ECC69 /* VideoClip.cpp */; };
+		B4A28A5B1CACF58F004ECC69 /* VideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A121CACF582004ECC69 /* VideoFrame.cpp */; };
+		B4A28A5C1CACF58F004ECC69 /* WorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A131CACF582004ECC69 /* WorkerThread.cpp */; };
+		B4A28A5D1CACF58F004ECC69 /* AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A001CACF582004ECC69 /* AudioInterface.cpp */; };
+		B4A28A5E1CACF58F004ECC69 /* AudioInterfaceFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A011CACF582004ECC69 /* AudioInterfaceFactory.cpp */; };
+		B4A28A5F1CACF58F004ECC69 /* AudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A021CACF582004ECC69 /* AudioPacketQueue.cpp */; };
+		B4A28A601CACF58F004ECC69 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A031CACF582004ECC69 /* DataSource.cpp */; };
+		B4A28A611CACF58F004ECC69 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A041CACF582004ECC69 /* Exception.cpp */; };
+		B4A28A621CACF58F004ECC69 /* FileDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A051CACF582004ECC69 /* FileDataSource.cpp */; };
+		B4A28A631CACF58F004ECC69 /* FrameQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A061CACF582004ECC69 /* FrameQueue.cpp */; };
+		B4A28A641CACF58F004ECC69 /* Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A071CACF582004ECC69 /* Manager.cpp */; };
+		B4A28A651CACF58F004ECC69 /* MemoryDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A081CACF582004ECC69 /* MemoryDataSource.cpp */; };
+		B4A28A661CACF58F004ECC69 /* Mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A091CACF582004ECC69 /* Mutex.cpp */; };
+		B4A28A671CACF58F004ECC69 /* theoraplayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0B1CACF582004ECC69 /* theoraplayer.cpp */; };
+		B4A28A681CACF58F004ECC69 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0C1CACF582004ECC69 /* Thread.cpp */; };
+		B4A28A691CACF58F004ECC69 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0E1CACF582004ECC69 /* Timer.cpp */; };
+		B4A28A6A1CACF58F004ECC69 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0F1CACF582004ECC69 /* Utility.cpp */; };
+		B4A28A6B1CACF58F004ECC69 /* VideoClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A111CACF582004ECC69 /* VideoClip.cpp */; };
+		B4A28A6C1CACF58F004ECC69 /* VideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A121CACF582004ECC69 /* VideoFrame.cpp */; };
+		B4A28A6D1CACF58F004ECC69 /* WorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A131CACF582004ECC69 /* WorkerThread.cpp */; };
+		B4A28A7F1CACF590004ECC69 /* AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A001CACF582004ECC69 /* AudioInterface.cpp */; };
+		B4A28A801CACF590004ECC69 /* AudioInterfaceFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A011CACF582004ECC69 /* AudioInterfaceFactory.cpp */; };
+		B4A28A811CACF590004ECC69 /* AudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A021CACF582004ECC69 /* AudioPacketQueue.cpp */; };
+		B4A28A821CACF590004ECC69 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A031CACF582004ECC69 /* DataSource.cpp */; };
+		B4A28A831CACF590004ECC69 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A041CACF582004ECC69 /* Exception.cpp */; };
+		B4A28A841CACF590004ECC69 /* FileDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A051CACF582004ECC69 /* FileDataSource.cpp */; };
+		B4A28A851CACF590004ECC69 /* FrameQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A061CACF582004ECC69 /* FrameQueue.cpp */; };
+		B4A28A861CACF590004ECC69 /* Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A071CACF582004ECC69 /* Manager.cpp */; };
+		B4A28A871CACF590004ECC69 /* MemoryDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A081CACF582004ECC69 /* MemoryDataSource.cpp */; };
+		B4A28A881CACF590004ECC69 /* Mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A091CACF582004ECC69 /* Mutex.cpp */; };
+		B4A28A891CACF590004ECC69 /* theoraplayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0B1CACF582004ECC69 /* theoraplayer.cpp */; };
+		B4A28A8A1CACF590004ECC69 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0C1CACF582004ECC69 /* Thread.cpp */; };
+		B4A28A8B1CACF590004ECC69 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0E1CACF582004ECC69 /* Timer.cpp */; };
+		B4A28A8C1CACF590004ECC69 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0F1CACF582004ECC69 /* Utility.cpp */; };
+		B4A28A8D1CACF590004ECC69 /* VideoClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A111CACF582004ECC69 /* VideoClip.cpp */; };
+		B4A28A8E1CACF590004ECC69 /* VideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A121CACF582004ECC69 /* VideoFrame.cpp */; };
+		B4A28A8F1CACF590004ECC69 /* WorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A131CACF582004ECC69 /* WorkerThread.cpp */; };
+		B4A28A901CACF590004ECC69 /* AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A001CACF582004ECC69 /* AudioInterface.cpp */; };
+		B4A28A911CACF590004ECC69 /* AudioInterfaceFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A011CACF582004ECC69 /* AudioInterfaceFactory.cpp */; };
+		B4A28A921CACF590004ECC69 /* AudioPacketQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A021CACF582004ECC69 /* AudioPacketQueue.cpp */; };
+		B4A28A931CACF590004ECC69 /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A031CACF582004ECC69 /* DataSource.cpp */; };
+		B4A28A941CACF590004ECC69 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A041CACF582004ECC69 /* Exception.cpp */; };
+		B4A28A951CACF590004ECC69 /* FileDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A051CACF582004ECC69 /* FileDataSource.cpp */; };
+		B4A28A961CACF590004ECC69 /* FrameQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A061CACF582004ECC69 /* FrameQueue.cpp */; };
+		B4A28A971CACF590004ECC69 /* Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A071CACF582004ECC69 /* Manager.cpp */; };
+		B4A28A981CACF590004ECC69 /* MemoryDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A081CACF582004ECC69 /* MemoryDataSource.cpp */; };
+		B4A28A991CACF590004ECC69 /* Mutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A091CACF582004ECC69 /* Mutex.cpp */; };
+		B4A28A9A1CACF590004ECC69 /* theoraplayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0B1CACF582004ECC69 /* theoraplayer.cpp */; };
+		B4A28A9B1CACF590004ECC69 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0C1CACF582004ECC69 /* Thread.cpp */; };
+		B4A28A9C1CACF590004ECC69 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0E1CACF582004ECC69 /* Timer.cpp */; };
+		B4A28A9D1CACF590004ECC69 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A0F1CACF582004ECC69 /* Utility.cpp */; };
+		B4A28A9E1CACF590004ECC69 /* VideoClip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A111CACF582004ECC69 /* VideoClip.cpp */; };
+		B4A28A9F1CACF590004ECC69 /* VideoFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A121CACF582004ECC69 /* VideoFrame.cpp */; };
+		B4A28AA01CACF590004ECC69 /* WorkerThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28A131CACF582004ECC69 /* WorkerThread.cpp */; };
+		B4A28AB41CACF5B5004ECC69 /* VideoClip_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28AB21CACF5B5004ECC69 /* VideoClip_Theora.cpp */; };
+		B4A28AB51CACF5B5004ECC69 /* VideoClip_Theora.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28AB31CACF5B5004ECC69 /* VideoClip_Theora.h */; };
+		B4A28AB61CACF5B7004ECC69 /* VideoClip_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28AB21CACF5B5004ECC69 /* VideoClip_Theora.cpp */; };
+		B4A28AB81CACF5B8004ECC69 /* VideoClip_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28AB21CACF5B5004ECC69 /* VideoClip_Theora.cpp */; };
+		B4A28AB91CACF5B8004ECC69 /* VideoClip_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28AB21CACF5B5004ECC69 /* VideoClip_Theora.cpp */; };
+		B4A28ABB1CACF5B9004ECC69 /* VideoClip_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28AB21CACF5B5004ECC69 /* VideoClip_Theora.cpp */; };
+		B4A28ABC1CACF5B9004ECC69 /* VideoClip_Theora.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28AB21CACF5B5004ECC69 /* VideoClip_Theora.cpp */; };
+		B4A28AF91CAD0B14004ECC69 /* AudioInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28AEF1CAD0B14004ECC69 /* AudioInterface.h */; };
+		B4A28AFA1CAD0B14004ECC69 /* AudioInterfaceFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28AF01CAD0B14004ECC69 /* AudioInterfaceFactory.h */; };
+		B4A28AFB1CAD0B14004ECC69 /* AudioPacketQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28AF11CAD0B14004ECC69 /* AudioPacketQueue.h */; };
+		B4A28AFC1CAD0B14004ECC69 /* DataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28AF21CAD0B14004ECC69 /* DataSource.h */; };
+		B4A28AFD1CAD0B14004ECC69 /* Exception.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28AF31CAD0B14004ECC69 /* Exception.h */; };
+		B4A28AFE1CAD0B14004ECC69 /* FileDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28AF41CAD0B14004ECC69 /* FileDataSource.h */; };
+		B4A28AFF1CAD0B14004ECC69 /* FrameQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28AF51CAD0B14004ECC69 /* FrameQueue.h */; };
+		B4A28B001CAD0B14004ECC69 /* Manager.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28AF61CAD0B14004ECC69 /* Manager.h */; };
+		B4A28B011CAD0B14004ECC69 /* MemoryDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28AF71CAD0B14004ECC69 /* MemoryDataSource.h */; };
+		B4A28B021CAD0B14004ECC69 /* PixelTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28AF81CAD0B14004ECC69 /* PixelTransform.h */; };
+		B4A28B071CAD0B1B004ECC69 /* theoraplayerExport.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28B031CAD0B1B004ECC69 /* theoraplayerExport.h */; };
+		B4A28B081CAD0B1B004ECC69 /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28B041CAD0B1B004ECC69 /* Timer.h */; };
+		B4A28B091CAD0B1B004ECC69 /* VideoClip.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28B051CAD0B1B004ECC69 /* VideoClip.h */; };
+		B4A28B0A1CAD0B1B004ECC69 /* VideoFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = B4A28B061CAD0B1B004ECC69 /* VideoFrame.h */; };
+		D139462D17C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139462E17C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139463017C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139463117C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139463317C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139463417C0ED450091F4A4 /* yuv_libyuv.c in Sources */ = {isa = PBXBuildFile; fileRef = D139462B17C0ED450091F4A4 /* yuv_libyuv.c */; };
+		D139463617C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D139463717C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D139463917C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D139463A17C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D139463C17C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D139463D17C0ED450091F4A4 /* yuv_libyuv.h in Headers */ = {isa = PBXBuildFile; fileRef = D139462C17C0ED450091F4A4 /* yuv_libyuv.h */; };
+		D13946CC17C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946CD17C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946CF17C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946D017C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946D217C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946D317C119B40091F4A4 /* yuv_util.c in Sources */ = {isa = PBXBuildFile; fileRef = D13946CA17C119B30091F4A4 /* yuv_util.c */; };
+		D13946D517C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D13946D617C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D13946D817C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D13946D917C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D13946DB17C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D13946DC17C119B40091F4A4 /* yuv_util.h in Headers */ = {isa = PBXBuildFile; fileRef = D13946CB17C119B30091F4A4 /* yuv_util.h */; };
+		D159BCB017C227F30030FAB6 /* convert_from.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05617C157CD00CA0FD2 /* convert_from.cc */; };
+		D159BCB117C227F40030FAB6 /* convert_from.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05617C157CD00CA0FD2 /* convert_from.cc */; };
+		D159BCB317C227F40030FAB6 /* convert_from.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05617C157CD00CA0FD2 /* convert_from.cc */; };
+		D159BCB417C227F50030FAB6 /* convert_from.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05617C157CD00CA0FD2 /* convert_from.cc */; };
+		D159BCB617C227F60030FAB6 /* convert_from.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05617C157CD00CA0FD2 /* convert_from.cc */; };
+		D159BCB717C227F60030FAB6 /* convert_from.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05617C157CD00CA0FD2 /* convert_from.cc */; };
+		D159BCB917C228310030FAB6 /* rotate_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06017C157CD00CA0FD2 /* rotate_argb.cc */; };
+		D159BCBA17C228320030FAB6 /* rotate_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06017C157CD00CA0FD2 /* rotate_argb.cc */; };
+		D159BCBC17C228330030FAB6 /* rotate_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06017C157CD00CA0FD2 /* rotate_argb.cc */; };
+		D159BCBD17C228330030FAB6 /* rotate_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06017C157CD00CA0FD2 /* rotate_argb.cc */; };
+		D159BCBF17C228340030FAB6 /* rotate_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06017C157CD00CA0FD2 /* rotate_argb.cc */; };
+		D159BCC017C228340030FAB6 /* rotate_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06017C157CD00CA0FD2 /* rotate_argb.cc */; };
+		D159BCC217C2286D0030FAB6 /* scale.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06F17C157CD00CA0FD2 /* scale.cc */; };
+		D159BCC317C2286D0030FAB6 /* scale.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06F17C157CD00CA0FD2 /* scale.cc */; };
+		D159BCC517C2286E0030FAB6 /* scale.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06F17C157CD00CA0FD2 /* scale.cc */; };
+		D159BCC617C2286E0030FAB6 /* scale.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06F17C157CD00CA0FD2 /* scale.cc */; };
+		D159BCC817C2286F0030FAB6 /* scale.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06F17C157CD00CA0FD2 /* scale.cc */; };
+		D159BCC917C2286F0030FAB6 /* scale.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06F17C157CD00CA0FD2 /* scale.cc */; };
+		D15D361017C386A600F40439 /* row_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06817C157CD00CA0FD2 /* row_posix.cc */; };
+		D15D361117C386A600F40439 /* row_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06817C157CD00CA0FD2 /* row_posix.cc */; };
+		D15D361317C386B100F40439 /* compare_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05117C157CD00CA0FD2 /* compare_posix.cc */; };
+		D15D361617C386B400F40439 /* compare_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05117C157CD00CA0FD2 /* compare_posix.cc */; };
+		D16775DA155C50280050EC64 /* TheoraPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C7155C50280050EC64 /* TheoraPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D16775DB155C50280050EC64 /* TheoraPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C7155C50280050EC64 /* TheoraPlayer.h */; };
+		D198F95F177A31FC002942E3 /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
+		D198F960177A31FC002942E3 /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
+		D198F961177A31FC002942E3 /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
+		D198F96B177A31FC002942E3 /* TheoraPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C7155C50280050EC64 /* TheoraPlayer.h */; };
+		D198F98B177A31FE002942E3 /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
+		D198F98C177A31FE002942E3 /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
+		D198F98D177A31FE002942E3 /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
+		D198F997177A31FE002942E3 /* TheoraPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C7155C50280050EC64 /* TheoraPlayer.h */; };
+		D1BCE05A18F3F7FE00C83470 /* scale_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE05818F3F7FE00C83470 /* scale_common.cc */; };
+		D1BCE05B18F3F7FE00C83470 /* scale_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE05818F3F7FE00C83470 /* scale_common.cc */; };
+		D1BCE05D18F3F7FE00C83470 /* scale_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE05818F3F7FE00C83470 /* scale_common.cc */; };
+		D1BCE05E18F3F7FE00C83470 /* scale_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE05818F3F7FE00C83470 /* scale_common.cc */; };
+		D1BCE06018F3F7FE00C83470 /* scale_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE05818F3F7FE00C83470 /* scale_common.cc */; };
+		D1BCE06118F3F7FE00C83470 /* scale_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE05818F3F7FE00C83470 /* scale_common.cc */; };
+		D1BCE06318F3F7FE00C83470 /* scale_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE05918F3F7FE00C83470 /* scale_posix.cc */; };
+		D1BCE06418F3F7FE00C83470 /* scale_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE05918F3F7FE00C83470 /* scale_posix.cc */; };
+		D1BCE06618F3F7FE00C83470 /* scale_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE05918F3F7FE00C83470 /* scale_posix.cc */; };
+		D1BCE06718F3F7FE00C83470 /* scale_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE05918F3F7FE00C83470 /* scale_posix.cc */; };
+		D1BCE06918F3F7FE00C83470 /* scale_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE05918F3F7FE00C83470 /* scale_posix.cc */; };
+		D1BCE06A18F3F7FE00C83470 /* scale_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1BCE05918F3F7FE00C83470 /* scale_posix.cc */; };
+		D1C3D07217C157CD00CA0FD2 /* compare_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D04F17C157CD00CA0FD2 /* compare_common.cc */; };
+		D1C3D07317C157CD00CA0FD2 /* compare_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D04F17C157CD00CA0FD2 /* compare_common.cc */; };
+		D1C3D07517C157CD00CA0FD2 /* compare_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D04F17C157CD00CA0FD2 /* compare_common.cc */; };
+		D1C3D07617C157CD00CA0FD2 /* compare_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D04F17C157CD00CA0FD2 /* compare_common.cc */; };
+		D1C3D07817C157CD00CA0FD2 /* compare_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D04F17C157CD00CA0FD2 /* compare_common.cc */; };
+		D1C3D07917C157CD00CA0FD2 /* compare_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D04F17C157CD00CA0FD2 /* compare_common.cc */; };
+		D1C3D08117C157CD00CA0FD2 /* compare_neon.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05017C157CD00CA0FD2 /* compare_neon.cc */; };
+		D1C3D08217C157CD00CA0FD2 /* compare_neon.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05017C157CD00CA0FD2 /* compare_neon.cc */; };
+		D1C3D08417C157CD00CA0FD2 /* compare_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05117C157CD00CA0FD2 /* compare_posix.cc */; };
+		D1C3D08517C157CD00CA0FD2 /* compare_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05117C157CD00CA0FD2 /* compare_posix.cc */; };
+		D1C3D08717C157CD00CA0FD2 /* compare_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05117C157CD00CA0FD2 /* compare_posix.cc */; };
+		D1C3D08817C157CD00CA0FD2 /* compare_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05117C157CD00CA0FD2 /* compare_posix.cc */; };
+		D1C3D09617C157CD00CA0FD2 /* compare.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05317C157CD00CA0FD2 /* compare.cc */; };
+		D1C3D09717C157CD00CA0FD2 /* compare.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05317C157CD00CA0FD2 /* compare.cc */; };
+		D1C3D09917C157CD00CA0FD2 /* compare.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05317C157CD00CA0FD2 /* compare.cc */; };
+		D1C3D09A17C157CD00CA0FD2 /* compare.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05317C157CD00CA0FD2 /* compare.cc */; };
+		D1C3D09C17C157CD00CA0FD2 /* compare.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05317C157CD00CA0FD2 /* compare.cc */; };
+		D1C3D09D17C157CD00CA0FD2 /* compare.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05317C157CD00CA0FD2 /* compare.cc */; };
+		D1C3D09F17C157CD00CA0FD2 /* convert_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05417C157CD00CA0FD2 /* convert_argb.cc */; };
+		D1C3D0A017C157CD00CA0FD2 /* convert_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05417C157CD00CA0FD2 /* convert_argb.cc */; };
+		D1C3D0A217C157CD00CA0FD2 /* convert_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05417C157CD00CA0FD2 /* convert_argb.cc */; };
+		D1C3D0A317C157CD00CA0FD2 /* convert_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05417C157CD00CA0FD2 /* convert_argb.cc */; };
+		D1C3D0A517C157CD00CA0FD2 /* convert_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05417C157CD00CA0FD2 /* convert_argb.cc */; };
+		D1C3D0A617C157CD00CA0FD2 /* convert_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05417C157CD00CA0FD2 /* convert_argb.cc */; };
+		D1C3D0C317C157CD00CA0FD2 /* convert_to_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05817C157CD00CA0FD2 /* convert_to_argb.cc */; };
+		D1C3D0C417C157CD00CA0FD2 /* convert_to_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05817C157CD00CA0FD2 /* convert_to_argb.cc */; };
+		D1C3D0C617C157CD00CA0FD2 /* convert_to_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05817C157CD00CA0FD2 /* convert_to_argb.cc */; };
+		D1C3D0C717C157CD00CA0FD2 /* convert_to_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05817C157CD00CA0FD2 /* convert_to_argb.cc */; };
+		D1C3D0C917C157CD00CA0FD2 /* convert_to_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05817C157CD00CA0FD2 /* convert_to_argb.cc */; };
+		D1C3D0CA17C157CD00CA0FD2 /* convert_to_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05817C157CD00CA0FD2 /* convert_to_argb.cc */; };
+		D1C3D0CC17C157CD00CA0FD2 /* convert_to_i420.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05917C157CD00CA0FD2 /* convert_to_i420.cc */; };
+		D1C3D0CD17C157CD00CA0FD2 /* convert_to_i420.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05917C157CD00CA0FD2 /* convert_to_i420.cc */; };
+		D1C3D0CF17C157CD00CA0FD2 /* convert_to_i420.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05917C157CD00CA0FD2 /* convert_to_i420.cc */; };
+		D1C3D0D017C157CD00CA0FD2 /* convert_to_i420.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05917C157CD00CA0FD2 /* convert_to_i420.cc */; };
+		D1C3D0D217C157CD00CA0FD2 /* convert_to_i420.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05917C157CD00CA0FD2 /* convert_to_i420.cc */; };
+		D1C3D0D317C157CD00CA0FD2 /* convert_to_i420.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05917C157CD00CA0FD2 /* convert_to_i420.cc */; };
+		D1C3D0D517C157CD00CA0FD2 /* convert.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05A17C157CD00CA0FD2 /* convert.cc */; };
+		D1C3D0D617C157CD00CA0FD2 /* convert.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05A17C157CD00CA0FD2 /* convert.cc */; };
+		D1C3D0D817C157CD00CA0FD2 /* convert.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05A17C157CD00CA0FD2 /* convert.cc */; };
+		D1C3D0D917C157CD00CA0FD2 /* convert.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05A17C157CD00CA0FD2 /* convert.cc */; };
+		D1C3D0DB17C157CD00CA0FD2 /* convert.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05A17C157CD00CA0FD2 /* convert.cc */; };
+		D1C3D0DC17C157CD00CA0FD2 /* convert.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05A17C157CD00CA0FD2 /* convert.cc */; };
+		D1C3D0DE17C157CD00CA0FD2 /* cpu_id.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05B17C157CD00CA0FD2 /* cpu_id.cc */; };
+		D1C3D0DF17C157CD00CA0FD2 /* cpu_id.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05B17C157CD00CA0FD2 /* cpu_id.cc */; };
+		D1C3D0E117C157CD00CA0FD2 /* cpu_id.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05B17C157CD00CA0FD2 /* cpu_id.cc */; };
+		D1C3D0E217C157CD00CA0FD2 /* cpu_id.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05B17C157CD00CA0FD2 /* cpu_id.cc */; };
+		D1C3D0E417C157CD00CA0FD2 /* cpu_id.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05B17C157CD00CA0FD2 /* cpu_id.cc */; };
+		D1C3D0E517C157CD00CA0FD2 /* cpu_id.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05B17C157CD00CA0FD2 /* cpu_id.cc */; };
+		D1C3D10217C157CD00CA0FD2 /* planar_functions.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05F17C157CD00CA0FD2 /* planar_functions.cc */; };
+		D1C3D10317C157CD00CA0FD2 /* planar_functions.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05F17C157CD00CA0FD2 /* planar_functions.cc */; };
+		D1C3D10517C157CD00CA0FD2 /* planar_functions.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05F17C157CD00CA0FD2 /* planar_functions.cc */; };
+		D1C3D10617C157CD00CA0FD2 /* planar_functions.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05F17C157CD00CA0FD2 /* planar_functions.cc */; };
+		D1C3D10817C157CD00CA0FD2 /* planar_functions.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05F17C157CD00CA0FD2 /* planar_functions.cc */; };
+		D1C3D10917C157CD00CA0FD2 /* planar_functions.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D05F17C157CD00CA0FD2 /* planar_functions.cc */; };
+		D1C3D12317C157CD00CA0FD2 /* rotate_neon.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06217C157CD00CA0FD2 /* rotate_neon.cc */; };
+		D1C3D12417C157CD00CA0FD2 /* rotate_neon.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06217C157CD00CA0FD2 /* rotate_neon.cc */; };
+		D1C3D12617C157CD00CA0FD2 /* rotate.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06317C157CD00CA0FD2 /* rotate.cc */; };
+		D1C3D12717C157CD00CA0FD2 /* rotate.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06317C157CD00CA0FD2 /* rotate.cc */; };
+		D1C3D12917C157CD00CA0FD2 /* rotate.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06317C157CD00CA0FD2 /* rotate.cc */; };
+		D1C3D12A17C157CD00CA0FD2 /* rotate.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06317C157CD00CA0FD2 /* rotate.cc */; };
+		D1C3D12C17C157CD00CA0FD2 /* rotate.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06317C157CD00CA0FD2 /* rotate.cc */; };
+		D1C3D12D17C157CD00CA0FD2 /* rotate.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06317C157CD00CA0FD2 /* rotate.cc */; };
+		D1C3D12F17C157CD00CA0FD2 /* row_any.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06417C157CD00CA0FD2 /* row_any.cc */; };
+		D1C3D13017C157CD00CA0FD2 /* row_any.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06417C157CD00CA0FD2 /* row_any.cc */; };
+		D1C3D13217C157CD00CA0FD2 /* row_any.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06417C157CD00CA0FD2 /* row_any.cc */; };
+		D1C3D13317C157CD00CA0FD2 /* row_any.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06417C157CD00CA0FD2 /* row_any.cc */; };
+		D1C3D13517C157CD00CA0FD2 /* row_any.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06417C157CD00CA0FD2 /* row_any.cc */; };
+		D1C3D13617C157CD00CA0FD2 /* row_any.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06417C157CD00CA0FD2 /* row_any.cc */; };
+		D1C3D13817C157CD00CA0FD2 /* row_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06517C157CD00CA0FD2 /* row_common.cc */; };
+		D1C3D13917C157CD00CA0FD2 /* row_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06517C157CD00CA0FD2 /* row_common.cc */; };
+		D1C3D13B17C157CD00CA0FD2 /* row_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06517C157CD00CA0FD2 /* row_common.cc */; };
+		D1C3D13C17C157CD00CA0FD2 /* row_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06517C157CD00CA0FD2 /* row_common.cc */; };
+		D1C3D13E17C157CD00CA0FD2 /* row_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06517C157CD00CA0FD2 /* row_common.cc */; };
+		D1C3D13F17C157CD00CA0FD2 /* row_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06517C157CD00CA0FD2 /* row_common.cc */; };
+		D1C3D15017C157CD00CA0FD2 /* row_neon.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06717C157CD00CA0FD2 /* row_neon.cc */; };
+		D1C3D15117C157CD00CA0FD2 /* row_neon.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06717C157CD00CA0FD2 /* row_neon.cc */; };
+		D1C3D15317C157CD00CA0FD2 /* row_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06817C157CD00CA0FD2 /* row_posix.cc */; };
+		D1C3D15417C157CD00CA0FD2 /* row_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06817C157CD00CA0FD2 /* row_posix.cc */; };
+		D1C3D15617C157CD00CA0FD2 /* row_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06817C157CD00CA0FD2 /* row_posix.cc */; };
+		D1C3D15717C157CD00CA0FD2 /* row_posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06817C157CD00CA0FD2 /* row_posix.cc */; };
+		D1C3D17417C157CD00CA0FD2 /* scale_argb_neon.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06B17C157CD00CA0FD2 /* scale_argb_neon.cc */; };
+		D1C3D17517C157CD00CA0FD2 /* scale_argb_neon.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06B17C157CD00CA0FD2 /* scale_argb_neon.cc */; };
+		D1C3D17717C157CD00CA0FD2 /* scale_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06C17C157CD00CA0FD2 /* scale_argb.cc */; };
+		D1C3D17817C157CD00CA0FD2 /* scale_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06C17C157CD00CA0FD2 /* scale_argb.cc */; };
+		D1C3D17A17C157CD00CA0FD2 /* scale_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06C17C157CD00CA0FD2 /* scale_argb.cc */; };
+		D1C3D17B17C157CD00CA0FD2 /* scale_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06C17C157CD00CA0FD2 /* scale_argb.cc */; };
+		D1C3D17D17C157CD00CA0FD2 /* scale_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06C17C157CD00CA0FD2 /* scale_argb.cc */; };
+		D1C3D17E17C157CD00CA0FD2 /* scale_argb.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06C17C157CD00CA0FD2 /* scale_argb.cc */; };
+		D1C3D18F17C157CD00CA0FD2 /* scale_neon.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06E17C157CD00CA0FD2 /* scale_neon.cc */; };
+		D1C3D19017C157CD00CA0FD2 /* scale_neon.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D06E17C157CD00CA0FD2 /* scale_neon.cc */; };
+		D1C3D19B17C157CD00CA0FD2 /* video_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D07017C157CD00CA0FD2 /* video_common.cc */; };
+		D1C3D19C17C157CD00CA0FD2 /* video_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D07017C157CD00CA0FD2 /* video_common.cc */; };
+		D1C3D19E17C157CD00CA0FD2 /* video_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D07017C157CD00CA0FD2 /* video_common.cc */; };
+		D1C3D19F17C157CD00CA0FD2 /* video_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D07017C157CD00CA0FD2 /* video_common.cc */; };
+		D1C3D1A117C157CD00CA0FD2 /* video_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D07017C157CD00CA0FD2 /* video_common.cc */; };
+		D1C3D1A217C157CD00CA0FD2 /* video_common.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1C3D07017C157CD00CA0FD2 /* video_common.cc */; };
+		D1CD00001696FC0B00609AB0 /* Theora.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFFB1696FC0100609AB0 /* Theora.framework */; };
+		D1CD00011696FC0B00609AB0 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF91696FBF700609AB0 /* Vorbis.framework */; };
+		D1CD00021696FC0B00609AB0 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF71696FBF400609AB0 /* Ogg.framework */; };
+		D1CD00051696FF9600609AB0 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CD00031696FF9400609AB0 /* CoreMedia.framework */; };
+		D1CDFF3A1696C77A00609AB0 /* TheoraPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C7155C50280050EC64 /* TheoraPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1CDFFB61696E1CA00609AB0 /* TheoraPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = D16775C7155C50280050EC64 /* TheoraPlayer.h */; };
+		D1CDFFF41696FBB200609AB0 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF01696FB8900609AB0 /* CoreVideo.framework */; };
+		D1CDFFF51696FBB200609AB0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFED1696FB7200609AB0 /* AVFoundation.framework */; };
+		D1CDFFF61696FBB200609AB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1CDFFF21696FBA800609AB0 /* Foundation.framework */; };
+		D1E2719916B46F640046C00C /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
+		D1E2719A16B46F640046C00C /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
+		D1E2719C16B46F640046C00C /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
+		D1E2719D16B46F640046C00C /* yuv420_grey_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718A16B46F640046C00C /* yuv420_grey_c.c */; };
+		D1E271A516B46F640046C00C /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
+		D1E271A616B46F640046C00C /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
+		D1E271A816B46F640046C00C /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
+		D1E271A916B46F640046C00C /* yuv420_yuv_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */; };
+		D1E271AC16B470210046C00C /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
+		D1E271AD16B470210046C00C /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
+		D1E271AF16B470210046C00C /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
+		D1E271B016B470210046C00C /* yuv420_rgb_c.c in Sources */ = {isa = PBXBuildFile; fileRef = D1E271AB16B470210046C00C /* yuv420_rgb_c.c */; };
+		D1F8E1AE1B847A8A009156C0 /* compare_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A61B847A89009156C0 /* compare_gcc.cc */; };
+		D1F8E1AF1B847A8A009156C0 /* compare_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A61B847A89009156C0 /* compare_gcc.cc */; };
+		D1F8E1B11B847A8A009156C0 /* compare_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A61B847A89009156C0 /* compare_gcc.cc */; };
+		D1F8E1B21B847A8A009156C0 /* compare_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A61B847A89009156C0 /* compare_gcc.cc */; };
+		D1F8E1B41B847A8A009156C0 /* compare_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A61B847A89009156C0 /* compare_gcc.cc */; };
+		D1F8E1B51B847A8A009156C0 /* compare_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A61B847A89009156C0 /* compare_gcc.cc */; };
+		D1F8E1B71B847A8A009156C0 /* compare_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A71B847A89009156C0 /* compare_neon64.cc */; };
+		D1F8E1B81B847A8A009156C0 /* compare_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A71B847A89009156C0 /* compare_neon64.cc */; };
+		D1F8E1BA1B847A8A009156C0 /* compare_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A71B847A89009156C0 /* compare_neon64.cc */; };
+		D1F8E1BB1B847A8A009156C0 /* compare_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A71B847A89009156C0 /* compare_neon64.cc */; };
+		D1F8E1BD1B847A8A009156C0 /* compare_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A71B847A89009156C0 /* compare_neon64.cc */; };
+		D1F8E1BE1B847A8A009156C0 /* compare_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A71B847A89009156C0 /* compare_neon64.cc */; };
+		D1F8E1C01B847A8A009156C0 /* rotate_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A81B847A89009156C0 /* rotate_neon64.cc */; };
+		D1F8E1C11B847A8A009156C0 /* rotate_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A81B847A89009156C0 /* rotate_neon64.cc */; };
+		D1F8E1C31B847A8A009156C0 /* rotate_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A81B847A89009156C0 /* rotate_neon64.cc */; };
+		D1F8E1C41B847A8A009156C0 /* rotate_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A81B847A89009156C0 /* rotate_neon64.cc */; };
+		D1F8E1C61B847A8A009156C0 /* rotate_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A81B847A89009156C0 /* rotate_neon64.cc */; };
+		D1F8E1C71B847A8A009156C0 /* rotate_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A81B847A89009156C0 /* rotate_neon64.cc */; };
+		D1F8E1C91B847A8A009156C0 /* row_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A91B847A89009156C0 /* row_gcc.cc */; };
+		D1F8E1CA1B847A8A009156C0 /* row_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A91B847A89009156C0 /* row_gcc.cc */; };
+		D1F8E1CC1B847A8A009156C0 /* row_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A91B847A89009156C0 /* row_gcc.cc */; };
+		D1F8E1CD1B847A8A009156C0 /* row_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A91B847A89009156C0 /* row_gcc.cc */; };
+		D1F8E1CF1B847A8A009156C0 /* row_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A91B847A89009156C0 /* row_gcc.cc */; };
+		D1F8E1D01B847A8A009156C0 /* row_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1A91B847A89009156C0 /* row_gcc.cc */; };
+		D1F8E1D21B847A8A009156C0 /* row_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AA1B847A89009156C0 /* row_neon64.cc */; };
+		D1F8E1D31B847A8A009156C0 /* row_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AA1B847A89009156C0 /* row_neon64.cc */; };
+		D1F8E1D51B847A8A009156C0 /* row_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AA1B847A89009156C0 /* row_neon64.cc */; };
+		D1F8E1D61B847A8A009156C0 /* row_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AA1B847A89009156C0 /* row_neon64.cc */; };
+		D1F8E1D81B847A8A009156C0 /* row_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AA1B847A89009156C0 /* row_neon64.cc */; };
+		D1F8E1D91B847A8A009156C0 /* row_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AA1B847A89009156C0 /* row_neon64.cc */; };
+		D1F8E1DB1B847A8A009156C0 /* scale_any.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AB1B847A89009156C0 /* scale_any.cc */; };
+		D1F8E1DC1B847A8A009156C0 /* scale_any.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AB1B847A89009156C0 /* scale_any.cc */; };
+		D1F8E1DE1B847A8A009156C0 /* scale_any.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AB1B847A89009156C0 /* scale_any.cc */; };
+		D1F8E1DF1B847A8A009156C0 /* scale_any.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AB1B847A89009156C0 /* scale_any.cc */; };
+		D1F8E1E11B847A8A009156C0 /* scale_any.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AB1B847A89009156C0 /* scale_any.cc */; };
+		D1F8E1E21B847A8A009156C0 /* scale_any.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AB1B847A89009156C0 /* scale_any.cc */; };
+		D1F8E1E41B847A8A009156C0 /* scale_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AC1B847A89009156C0 /* scale_gcc.cc */; };
+		D1F8E1E51B847A8A009156C0 /* scale_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AC1B847A89009156C0 /* scale_gcc.cc */; };
+		D1F8E1E71B847A8A009156C0 /* scale_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AC1B847A89009156C0 /* scale_gcc.cc */; };
+		D1F8E1E81B847A8A009156C0 /* scale_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AC1B847A89009156C0 /* scale_gcc.cc */; };
+		D1F8E1EA1B847A8A009156C0 /* scale_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AC1B847A89009156C0 /* scale_gcc.cc */; };
+		D1F8E1EB1B847A8A009156C0 /* scale_gcc.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AC1B847A89009156C0 /* scale_gcc.cc */; };
+		D1F8E1ED1B847A8A009156C0 /* scale_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AD1B847A89009156C0 /* scale_neon64.cc */; };
+		D1F8E1EE1B847A8A009156C0 /* scale_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AD1B847A89009156C0 /* scale_neon64.cc */; };
+		D1F8E1F01B847A8A009156C0 /* scale_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AD1B847A89009156C0 /* scale_neon64.cc */; };
+		D1F8E1F11B847A8A009156C0 /* scale_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AD1B847A89009156C0 /* scale_neon64.cc */; };
+		D1F8E1F31B847A8A009156C0 /* scale_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AD1B847A89009156C0 /* scale_neon64.cc */; };
+		D1F8E1F41B847A8A009156C0 /* scale_neon64.cc in Sources */ = {isa = PBXBuildFile; fileRef = D1F8E1AD1B847A89009156C0 /* scale_neon64.cc */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B4A28A001CACF582004ECC69 /* AudioInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioInterface.cpp; path = src/AudioInterface.cpp; sourceTree = "<group>"; };
+		B4A28A011CACF582004ECC69 /* AudioInterfaceFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioInterfaceFactory.cpp; path = src/AudioInterfaceFactory.cpp; sourceTree = "<group>"; };
+		B4A28A021CACF582004ECC69 /* AudioPacketQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AudioPacketQueue.cpp; path = src/AudioPacketQueue.cpp; sourceTree = "<group>"; };
+		B4A28A031CACF582004ECC69 /* DataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataSource.cpp; path = src/DataSource.cpp; sourceTree = "<group>"; };
+		B4A28A041CACF582004ECC69 /* Exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Exception.cpp; path = src/Exception.cpp; sourceTree = "<group>"; };
+		B4A28A051CACF582004ECC69 /* FileDataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileDataSource.cpp; path = src/FileDataSource.cpp; sourceTree = "<group>"; };
+		B4A28A061CACF582004ECC69 /* FrameQueue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FrameQueue.cpp; path = src/FrameQueue.cpp; sourceTree = "<group>"; };
+		B4A28A071CACF582004ECC69 /* Manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Manager.cpp; path = src/Manager.cpp; sourceTree = "<group>"; };
+		B4A28A081CACF582004ECC69 /* MemoryDataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MemoryDataSource.cpp; path = src/MemoryDataSource.cpp; sourceTree = "<group>"; };
+		B4A28A091CACF582004ECC69 /* Mutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Mutex.cpp; path = src/Mutex.cpp; sourceTree = "<group>"; };
+		B4A28A0A1CACF582004ECC69 /* Mutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mutex.h; path = src/Mutex.h; sourceTree = "<group>"; };
+		B4A28A0B1CACF582004ECC69 /* theoraplayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = theoraplayer.cpp; path = src/theoraplayer.cpp; sourceTree = "<group>"; };
+		B4A28A0C1CACF582004ECC69 /* Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Thread.cpp; path = src/Thread.cpp; sourceTree = "<group>"; };
+		B4A28A0D1CACF582004ECC69 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Thread.h; path = src/Thread.h; sourceTree = "<group>"; };
+		B4A28A0E1CACF582004ECC69 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = src/Timer.cpp; sourceTree = "<group>"; };
+		B4A28A0F1CACF582004ECC69 /* Utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utility.cpp; path = src/Utility.cpp; sourceTree = "<group>"; };
+		B4A28A101CACF582004ECC69 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility.h; path = src/Utility.h; sourceTree = "<group>"; };
+		B4A28A111CACF582004ECC69 /* VideoClip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VideoClip.cpp; path = src/VideoClip.cpp; sourceTree = "<group>"; };
+		B4A28A121CACF582004ECC69 /* VideoFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VideoFrame.cpp; path = src/VideoFrame.cpp; sourceTree = "<group>"; };
+		B4A28A131CACF582004ECC69 /* WorkerThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WorkerThread.cpp; path = src/WorkerThread.cpp; sourceTree = "<group>"; };
+		B4A28A141CACF582004ECC69 /* WorkerThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorkerThread.h; path = src/WorkerThread.h; sourceTree = "<group>"; };
+		B4A28AB21CACF5B5004ECC69 /* VideoClip_Theora.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VideoClip_Theora.cpp; path = src/formats/Theora/VideoClip_Theora.cpp; sourceTree = "<group>"; };
+		B4A28AB31CACF5B5004ECC69 /* VideoClip_Theora.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoClip_Theora.h; path = src/formats/Theora/VideoClip_Theora.h; sourceTree = "<group>"; };
+		B4A28AEF1CAD0B14004ECC69 /* AudioInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioInterface.h; path = include/theoraplayer/AudioInterface.h; sourceTree = "<group>"; };
+		B4A28AF01CAD0B14004ECC69 /* AudioInterfaceFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioInterfaceFactory.h; path = include/theoraplayer/AudioInterfaceFactory.h; sourceTree = "<group>"; };
+		B4A28AF11CAD0B14004ECC69 /* AudioPacketQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioPacketQueue.h; path = include/theoraplayer/AudioPacketQueue.h; sourceTree = "<group>"; };
+		B4A28AF21CAD0B14004ECC69 /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSource.h; path = include/theoraplayer/DataSource.h; sourceTree = "<group>"; };
+		B4A28AF31CAD0B14004ECC69 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Exception.h; path = include/theoraplayer/Exception.h; sourceTree = "<group>"; };
+		B4A28AF41CAD0B14004ECC69 /* FileDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileDataSource.h; path = include/theoraplayer/FileDataSource.h; sourceTree = "<group>"; };
+		B4A28AF51CAD0B14004ECC69 /* FrameQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FrameQueue.h; path = include/theoraplayer/FrameQueue.h; sourceTree = "<group>"; };
+		B4A28AF61CAD0B14004ECC69 /* Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Manager.h; path = include/theoraplayer/Manager.h; sourceTree = "<group>"; };
+		B4A28AF71CAD0B14004ECC69 /* MemoryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemoryDataSource.h; path = include/theoraplayer/MemoryDataSource.h; sourceTree = "<group>"; };
+		B4A28AF81CAD0B14004ECC69 /* PixelTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PixelTransform.h; path = include/theoraplayer/PixelTransform.h; sourceTree = "<group>"; };
+		B4A28B031CAD0B1B004ECC69 /* theoraplayerExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = theoraplayerExport.h; path = include/theoraplayer/theoraplayerExport.h; sourceTree = "<group>"; };
+		B4A28B041CAD0B1B004ECC69 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Timer.h; path = include/theoraplayer/Timer.h; sourceTree = "<group>"; };
+		B4A28B051CAD0B1B004ECC69 /* VideoClip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoClip.h; path = include/theoraplayer/VideoClip.h; sourceTree = "<group>"; };
+		B4A28B061CAD0B1B004ECC69 /* VideoFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoFrame.h; path = include/theoraplayer/VideoFrame.h; sourceTree = "<group>"; };
+		D1358BC218D7777200A36FDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1358BC318D7777800A36FDC /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = iOS.xcconfig; path = xcconfig/iOS.xcconfig; sourceTree = "<group>"; };
+		D1358BC418D7777800A36FDC /* Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Mac.xcconfig; path = xcconfig/Mac.xcconfig; sourceTree = "<group>"; };
+		D139462B17C0ED450091F4A4 /* yuv_libyuv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv_libyuv.c; path = src/YUV/libyuv/yuv_libyuv.c; sourceTree = "<group>"; };
+		D139462C17C0ED450091F4A4 /* yuv_libyuv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = yuv_libyuv.h; path = src/YUV/libyuv/yuv_libyuv.h; sourceTree = "<group>"; };
+		D13946CA17C119B30091F4A4 /* yuv_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv_util.c; path = src/YUV/yuv_util.c; sourceTree = "<group>"; };
+		D13946CB17C119B30091F4A4 /* yuv_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = yuv_util.h; path = src/YUV/yuv_util.h; sourceTree = "<group>"; };
+		D1473F2A150CA69B00B20490 /* theoraplayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = theoraplayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D159BCAB17C227940030FAB6 /* compare_win.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = compare_win.cc; path = src/YUV/libyuv/src/compare_win.cc; sourceTree = "<group>"; };
+		D159BCAC17C227940030FAB6 /* row_win.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = row_win.cc; path = src/YUV/libyuv/src/row_win.cc; sourceTree = "<group>"; };
+		D159BCAD17C227940030FAB6 /* row_x86.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = row_x86.asm; path = src/YUV/libyuv/src/row_x86.asm; sourceTree = "<group>"; };
+		D159BCAE17C227940030FAB6 /* x86inc.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; name = x86inc.asm; path = src/YUV/libyuv/src/x86inc.asm; sourceTree = "<group>"; };
+		D16775C7155C50280050EC64 /* TheoraPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheoraPlayer.h; path = include/theoraplayer/TheoraPlayer.h; sourceTree = "<group>"; };
+		D198F97B177A31FC002942E3 /* libtheoraplayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheoraplayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D198F9A7177A31FE002942E3 /* libtheoraplayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheoraplayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1BB6FAE150E9E7100EF9400 /* libtheoraplayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheoraplayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1BCE05718F3F7D800C83470 /* scale_row.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scale_row.h; path = src/YUV/libyuv/include/libyuv/scale_row.h; sourceTree = "<group>"; };
+		D1BCE05818F3F7FE00C83470 /* scale_common.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scale_common.cc; path = src/YUV/libyuv/src/scale_common.cc; sourceTree = "<group>"; };
+		D1BCE05918F3F7FE00C83470 /* scale_posix.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scale_posix.cc; path = src/YUV/libyuv/src/scale_posix.cc; sourceTree = "<group>"; };
+		D1BCE06C18F3F80800C83470 /* scale_win.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = scale_win.cc; path = src/YUV/libyuv/src/scale_win.cc; sourceTree = "<group>"; };
+		D1C3D04F17C157CD00CA0FD2 /* compare_common.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = compare_common.cc; path = src/YUV/libyuv/src/compare_common.cc; sourceTree = "<group>"; };
+		D1C3D05017C157CD00CA0FD2 /* compare_neon.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = compare_neon.cc; path = src/YUV/libyuv/src/compare_neon.cc; sourceTree = "<group>"; };
+		D1C3D05117C157CD00CA0FD2 /* compare_posix.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = compare_posix.cc; path = src/YUV/libyuv/src/compare_posix.cc; sourceTree = "<group>"; };
+		D1C3D05317C157CD00CA0FD2 /* compare.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = compare.cc; path = src/YUV/libyuv/src/compare.cc; sourceTree = "<group>"; };
+		D1C3D05417C157CD00CA0FD2 /* convert_argb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = convert_argb.cc; path = src/YUV/libyuv/src/convert_argb.cc; sourceTree = "<group>"; };
+		D1C3D05517C157CD00CA0FD2 /* convert_from_argb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = convert_from_argb.cc; path = src/YUV/libyuv/src/convert_from_argb.cc; sourceTree = "<group>"; };
+		D1C3D05617C157CD00CA0FD2 /* convert_from.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = convert_from.cc; path = src/YUV/libyuv/src/convert_from.cc; sourceTree = "<group>"; };
+		D1C3D05717C157CD00CA0FD2 /* convert_jpeg.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = convert_jpeg.cc; path = src/YUV/libyuv/src/convert_jpeg.cc; sourceTree = "<group>"; };
+		D1C3D05817C157CD00CA0FD2 /* convert_to_argb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = convert_to_argb.cc; path = src/YUV/libyuv/src/convert_to_argb.cc; sourceTree = "<group>"; };
+		D1C3D05917C157CD00CA0FD2 /* convert_to_i420.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = convert_to_i420.cc; path = src/YUV/libyuv/src/convert_to_i420.cc; sourceTree = "<group>"; };
+		D1C3D05A17C157CD00CA0FD2 /* convert.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = convert.cc; path = src/YUV/libyuv/src/convert.cc; sourceTree = "<group>"; };
+		D1C3D05B17C157CD00CA0FD2 /* cpu_id.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cpu_id.cc; path = src/YUV/libyuv/src/cpu_id.cc; sourceTree = "<group>"; };
+		D1C3D05D17C157CD00CA0FD2 /* mjpeg_decoder.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjpeg_decoder.cc; path = src/YUV/libyuv/src/mjpeg_decoder.cc; sourceTree = "<group>"; };
+		D1C3D05E17C157CD00CA0FD2 /* mjpeg_validate.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mjpeg_validate.cc; path = src/YUV/libyuv/src/mjpeg_validate.cc; sourceTree = "<group>"; };
+		D1C3D05F17C157CD00CA0FD2 /* planar_functions.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = planar_functions.cc; path = src/YUV/libyuv/src/planar_functions.cc; sourceTree = "<group>"; };
+		D1C3D06017C157CD00CA0FD2 /* rotate_argb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = rotate_argb.cc; path = src/YUV/libyuv/src/rotate_argb.cc; sourceTree = "<group>"; };
+		D1C3D06117C157CD00CA0FD2 /* rotate_mips.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = rotate_mips.cc; path = src/YUV/libyuv/src/rotate_mips.cc; sourceTree = "<group>"; };
+		D1C3D06217C157CD00CA0FD2 /* rotate_neon.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = rotate_neon.cc; path = src/YUV/libyuv/src/rotate_neon.cc; sourceTree = "<group>"; };
+		D1C3D06317C157CD00CA0FD2 /* rotate.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = rotate.cc; path = src/YUV/libyuv/src/rotate.cc; sourceTree = "<group>"; };
+		D1C3D06417C157CD00CA0FD2 /* row_any.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = row_any.cc; path = src/YUV/libyuv/src/row_any.cc; sourceTree = "<group>"; };
+		D1C3D06517C157CD00CA0FD2 /* row_common.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = row_common.cc; path = src/YUV/libyuv/src/row_common.cc; sourceTree = "<group>"; };
+		D1C3D06617C157CD00CA0FD2 /* row_mips.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = row_mips.cc; path = src/YUV/libyuv/src/row_mips.cc; sourceTree = "<group>"; };
+		D1C3D06717C157CD00CA0FD2 /* row_neon.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = row_neon.cc; path = src/YUV/libyuv/src/row_neon.cc; sourceTree = "<group>"; };
+		D1C3D06817C157CD00CA0FD2 /* row_posix.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = row_posix.cc; path = src/YUV/libyuv/src/row_posix.cc; sourceTree = "<group>"; };
+		D1C3D06B17C157CD00CA0FD2 /* scale_argb_neon.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scale_argb_neon.cc; path = src/YUV/libyuv/src/scale_argb_neon.cc; sourceTree = "<group>"; };
+		D1C3D06C17C157CD00CA0FD2 /* scale_argb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scale_argb.cc; path = src/YUV/libyuv/src/scale_argb.cc; sourceTree = "<group>"; };
+		D1C3D06D17C157CD00CA0FD2 /* scale_mips.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scale_mips.cc; path = src/YUV/libyuv/src/scale_mips.cc; sourceTree = "<group>"; };
+		D1C3D06E17C157CD00CA0FD2 /* scale_neon.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scale_neon.cc; path = src/YUV/libyuv/src/scale_neon.cc; sourceTree = "<group>"; };
+		D1C3D06F17C157CD00CA0FD2 /* scale.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scale.cc; path = src/YUV/libyuv/src/scale.cc; sourceTree = "<group>"; };
+		D1C3D07017C157CD00CA0FD2 /* video_common.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = video_common.cc; path = src/YUV/libyuv/src/video_common.cc; sourceTree = "<group>"; };
+		D1C3D1CE17C15BB400CA0FD2 /* libyuv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = libyuv.h; path = src/YUV/libyuv/include/libyuv.h; sourceTree = "<group>"; };
+		D1C3D1CF17C15BC100CA0FD2 /* basic_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = basic_types.h; path = src/YUV/libyuv/include/libyuv/basic_types.h; sourceTree = "<group>"; };
+		D1C3D1D017C15BC100CA0FD2 /* compare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = compare.h; path = src/YUV/libyuv/include/libyuv/compare.h; sourceTree = "<group>"; };
+		D1C3D1D117C15BC100CA0FD2 /* convert_argb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = convert_argb.h; path = src/YUV/libyuv/include/libyuv/convert_argb.h; sourceTree = "<group>"; };
+		D1C3D1D217C15BC100CA0FD2 /* convert_from_argb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = convert_from_argb.h; path = src/YUV/libyuv/include/libyuv/convert_from_argb.h; sourceTree = "<group>"; };
+		D1C3D1D317C15BC100CA0FD2 /* convert_from.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = convert_from.h; path = src/YUV/libyuv/include/libyuv/convert_from.h; sourceTree = "<group>"; };
+		D1C3D1D417C15BC100CA0FD2 /* convert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = convert.h; path = src/YUV/libyuv/include/libyuv/convert.h; sourceTree = "<group>"; };
+		D1C3D1D517C15BC100CA0FD2 /* cpu_id.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cpu_id.h; path = src/YUV/libyuv/include/libyuv/cpu_id.h; sourceTree = "<group>"; };
+		D1C3D1D717C15BC100CA0FD2 /* mjpeg_decoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = mjpeg_decoder.h; path = src/YUV/libyuv/include/libyuv/mjpeg_decoder.h; sourceTree = "<group>"; };
+		D1C3D1D817C15BC100CA0FD2 /* planar_functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = planar_functions.h; path = src/YUV/libyuv/include/libyuv/planar_functions.h; sourceTree = "<group>"; };
+		D1C3D1D917C15BC100CA0FD2 /* rotate_argb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = rotate_argb.h; path = src/YUV/libyuv/include/libyuv/rotate_argb.h; sourceTree = "<group>"; };
+		D1C3D1DA17C15BC100CA0FD2 /* rotate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = rotate.h; path = src/YUV/libyuv/include/libyuv/rotate.h; sourceTree = "<group>"; };
+		D1C3D1DB17C15BC100CA0FD2 /* row.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = row.h; path = src/YUV/libyuv/include/libyuv/row.h; sourceTree = "<group>"; };
+		D1C3D1DC17C15BC100CA0FD2 /* scale_argb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scale_argb.h; path = src/YUV/libyuv/include/libyuv/scale_argb.h; sourceTree = "<group>"; };
+		D1C3D1DD17C15BC100CA0FD2 /* scale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scale.h; path = src/YUV/libyuv/include/libyuv/scale.h; sourceTree = "<group>"; };
+		D1C3D1DE17C15BC100CA0FD2 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = version.h; path = src/YUV/libyuv/include/libyuv/version.h; sourceTree = "<group>"; };
+		D1C3D1DF17C15BC100CA0FD2 /* video_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = video_common.h; path = src/YUV/libyuv/include/libyuv/video_common.h; sourceTree = "<group>"; };
+		D1CD00031696FF9400609AB0 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		D1CDFF481696C77A00609AB0 /* theoraplayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = theoraplayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1CDFFC41696E1CA00609AB0 /* libtheoraplayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheoraplayer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1CDFFED1696FB7200609AB0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D1CDFFF01696FB8900609AB0 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		D1CDFFF21696FBA800609AB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D1CDFFF71696FBF400609AB0 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = ../__build__/products/Debug/Ogg.framework; sourceTree = "<group>"; };
+		D1CDFFF91696FBF700609AB0 /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = ../__build__/products/Debug/Vorbis.framework; sourceTree = "<group>"; };
+		D1CDFFFB1696FC0100609AB0 /* Theora.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Theora.framework; path = ../__build__/products/Debug/Theora.framework; sourceTree = "<group>"; };
+		D1E2718A16B46F640046C00C /* yuv420_grey_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv420_grey_c.c; path = src/YUV/C/yuv420_grey_c.c; sourceTree = "<group>"; };
+		D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv420_yuv_c.c; path = src/YUV/C/yuv420_yuv_c.c; sourceTree = "<group>"; };
+		D1E271AB16B470210046C00C /* yuv420_rgb_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = yuv420_rgb_c.c; path = src/YUV/C/yuv420_rgb_c.c; sourceTree = "<group>"; };
+		D1F4DA1D18FECACE007C1968 /* cpu-features.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "cpu-features.c"; path = "src/YUV/android/cpu-features.c"; sourceTree = "<group>"; };
+		D1F4DA1E18FECACE007C1968 /* cpu-features.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "cpu-features.h"; path = "src/YUV/android/cpu-features.h"; sourceTree = "<group>"; };
+		D1F8E1A61B847A89009156C0 /* compare_gcc.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = compare_gcc.cc; path = src/YUV/libyuv/src/compare_gcc.cc; sourceTree = "<group>"; };
+		D1F8E1A71B847A89009156C0 /* compare_neon64.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = compare_neon64.cc; path = src/YUV/libyuv/src/compare_neon64.cc; sourceTree = "<group>"; };
+		D1F8E1A81B847A89009156C0 /* rotate_neon64.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = rotate_neon64.cc; path = src/YUV/libyuv/src/rotate_neon64.cc; sourceTree = "<group>"; };
+		D1F8E1A91B847A89009156C0 /* row_gcc.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = row_gcc.cc; path = src/YUV/libyuv/src/row_gcc.cc; sourceTree = "<group>"; };
+		D1F8E1AA1B847A89009156C0 /* row_neon64.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = row_neon64.cc; path = src/YUV/libyuv/src/row_neon64.cc; sourceTree = "<group>"; };
+		D1F8E1AB1B847A89009156C0 /* scale_any.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scale_any.cc; path = src/YUV/libyuv/src/scale_any.cc; sourceTree = "<group>"; };
+		D1F8E1AC1B847A89009156C0 /* scale_gcc.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scale_gcc.cc; path = src/YUV/libyuv/src/scale_gcc.cc; sourceTree = "<group>"; };
+		D1F8E1AD1B847A89009156C0 /* scale_neon64.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scale_neon64.cc; path = src/YUV/libyuv/src/scale_neon64.cc; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D1473F26150CA69B00B20490 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CD00001696FC0B00609AB0 /* Theora.framework in Frameworks */,
+				D1CD00011696FC0B00609AB0 /* Vorbis.framework in Frameworks */,
+				D1CD00021696FC0B00609AB0 /* Ogg.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D198F963177A31FC002942E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D198F98F177A31FE002942E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1BB6FAB150E9E7100EF9400 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFF2F1696C77A00609AB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CDFFF41696FBB200609AB0 /* CoreVideo.framework in Frameworks */,
+				D1CDFFF51696FBB200609AB0 /* AVFoundation.framework in Frameworks */,
+				D1CDFFF61696FBB200609AB0 /* Foundation.framework in Frameworks */,
+				D1CD00051696FF9600609AB0 /* CoreMedia.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFFAE1696E1CA00609AB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D1358BC118D7776700A36FDC /* config */ = {
+			isa = PBXGroup;
+			children = (
+				D1358BC318D7777800A36FDC /* iOS.xcconfig */,
+				D1358BC418D7777800A36FDC /* Mac.xcconfig */,
+				D1358BC218D7777200A36FDC /* Info.plist */,
+			);
+			name = config;
+			sourceTree = "<group>";
+		};
+		D139462A17C0ED2F0091F4A4 /* libyuv */ = {
+			isa = PBXGroup;
+			children = (
+				D1C3D04E17C157AC00CA0FD2 /* include */,
+				D1C3D04D17C157A800CA0FD2 /* src */,
+				D139462B17C0ED450091F4A4 /* yuv_libyuv.c */,
+				D139462C17C0ED450091F4A4 /* yuv_libyuv.h */,
+			);
+			name = libyuv;
+			sourceTree = "<group>";
+		};
+		D1473F1E150CA69B00B20490 = {
+			isa = PBXGroup;
+			children = (
+				D1358BC118D7776700A36FDC /* config */,
+				D147401F150CAE9600B20490 /* include */,
+				D1473F42150CA6C000B20490 /* src */,
+				D1473F2C150CA69B00B20490 /* Frameworks */,
+				D1473F2B150CA69B00B20490 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D1473F2B150CA69B00B20490 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D1473F2A150CA69B00B20490 /* theoraplayer.framework */,
+				D1BB6FAE150E9E7100EF9400 /* libtheoraplayer.a */,
+				D1CDFF481696C77A00609AB0 /* theoraplayer.framework */,
+				D1CDFFC41696E1CA00609AB0 /* libtheoraplayer.a */,
+				D198F97B177A31FC002942E3 /* libtheoraplayer.a */,
+				D198F9A7177A31FE002942E3 /* libtheoraplayer.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D1473F2C150CA69B00B20490 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D1473F82150CA7F300B20490 /* mac */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D1473F42150CA6C000B20490 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				B4A28A001CACF582004ECC69 /* AudioInterface.cpp */,
+				B4A28A011CACF582004ECC69 /* AudioInterfaceFactory.cpp */,
+				B4A28A021CACF582004ECC69 /* AudioPacketQueue.cpp */,
+				B4A28A031CACF582004ECC69 /* DataSource.cpp */,
+				B4A28A041CACF582004ECC69 /* Exception.cpp */,
+				B4A28A051CACF582004ECC69 /* FileDataSource.cpp */,
+				B4A28A061CACF582004ECC69 /* FrameQueue.cpp */,
+				B4A28A071CACF582004ECC69 /* Manager.cpp */,
+				B4A28A081CACF582004ECC69 /* MemoryDataSource.cpp */,
+				B4A28A091CACF582004ECC69 /* Mutex.cpp */,
+				B4A28A0A1CACF582004ECC69 /* Mutex.h */,
+				B4A28A0B1CACF582004ECC69 /* theoraplayer.cpp */,
+				B4A28A0C1CACF582004ECC69 /* Thread.cpp */,
+				B4A28A0D1CACF582004ECC69 /* Thread.h */,
+				B4A28A0E1CACF582004ECC69 /* Timer.cpp */,
+				B4A28A0F1CACF582004ECC69 /* Utility.cpp */,
+				B4A28A101CACF582004ECC69 /* Utility.h */,
+				B4A28A111CACF582004ECC69 /* VideoClip.cpp */,
+				B4A28A121CACF582004ECC69 /* VideoFrame.cpp */,
+				B4A28A131CACF582004ECC69 /* WorkerThread.cpp */,
+				B4A28A141CACF582004ECC69 /* WorkerThread.h */,
+				D1E2718516B46F370046C00C /* YUV */,
+				D1CDFF921696CEFA00609AB0 /* Theora */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		D1473F82150CA7F300B20490 /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				D1CD00031696FF9400609AB0 /* CoreMedia.framework */,
+				D1CDFFFB1696FC0100609AB0 /* Theora.framework */,
+				D1CDFFF91696FBF700609AB0 /* Vorbis.framework */,
+				D1CDFFF71696FBF400609AB0 /* Ogg.framework */,
+				D1CDFFF01696FB8900609AB0 /* CoreVideo.framework */,
+				D1CDFFED1696FB7200609AB0 /* AVFoundation.framework */,
+				D1CDFFF21696FBA800609AB0 /* Foundation.framework */,
+			);
+			name = mac;
+			sourceTree = "<group>";
+		};
+		D147401F150CAE9600B20490 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				B4A28AEF1CAD0B14004ECC69 /* AudioInterface.h */,
+				B4A28AF01CAD0B14004ECC69 /* AudioInterfaceFactory.h */,
+				B4A28AF11CAD0B14004ECC69 /* AudioPacketQueue.h */,
+				B4A28AF21CAD0B14004ECC69 /* DataSource.h */,
+				B4A28AF31CAD0B14004ECC69 /* Exception.h */,
+				B4A28AF41CAD0B14004ECC69 /* FileDataSource.h */,
+				B4A28AF51CAD0B14004ECC69 /* FrameQueue.h */,
+				B4A28AF61CAD0B14004ECC69 /* Manager.h */,
+				B4A28AF71CAD0B14004ECC69 /* MemoryDataSource.h */,
+				B4A28AF81CAD0B14004ECC69 /* PixelTransform.h */,
+				D16775C7155C50280050EC64 /* TheoraPlayer.h */,
+				B4A28B031CAD0B1B004ECC69 /* theoraplayerExport.h */,
+				B4A28B041CAD0B1B004ECC69 /* Timer.h */,
+				B4A28B051CAD0B1B004ECC69 /* VideoClip.h */,
+				B4A28B061CAD0B1B004ECC69 /* VideoFrame.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		D1C3D04D17C157A800CA0FD2 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D1F8E1A61B847A89009156C0 /* compare_gcc.cc */,
+				D1F8E1A71B847A89009156C0 /* compare_neon64.cc */,
+				D1F8E1A81B847A89009156C0 /* rotate_neon64.cc */,
+				D1F8E1A91B847A89009156C0 /* row_gcc.cc */,
+				D1F8E1AA1B847A89009156C0 /* row_neon64.cc */,
+				D1F8E1AB1B847A89009156C0 /* scale_any.cc */,
+				D1F8E1AC1B847A89009156C0 /* scale_gcc.cc */,
+				D1F8E1AD1B847A89009156C0 /* scale_neon64.cc */,
+				D1C3D04F17C157CD00CA0FD2 /* compare_common.cc */,
+				D1C3D05017C157CD00CA0FD2 /* compare_neon.cc */,
+				D1C3D05117C157CD00CA0FD2 /* compare_posix.cc */,
+				D159BCAB17C227940030FAB6 /* compare_win.cc */,
+				D1C3D05317C157CD00CA0FD2 /* compare.cc */,
+				D1C3D05417C157CD00CA0FD2 /* convert_argb.cc */,
+				D1C3D05517C157CD00CA0FD2 /* convert_from_argb.cc */,
+				D1C3D05617C157CD00CA0FD2 /* convert_from.cc */,
+				D1C3D05717C157CD00CA0FD2 /* convert_jpeg.cc */,
+				D1C3D05817C157CD00CA0FD2 /* convert_to_argb.cc */,
+				D1C3D05917C157CD00CA0FD2 /* convert_to_i420.cc */,
+				D1C3D05A17C157CD00CA0FD2 /* convert.cc */,
+				D1C3D05B17C157CD00CA0FD2 /* cpu_id.cc */,
+				D1C3D05D17C157CD00CA0FD2 /* mjpeg_decoder.cc */,
+				D1C3D05E17C157CD00CA0FD2 /* mjpeg_validate.cc */,
+				D1C3D05F17C157CD00CA0FD2 /* planar_functions.cc */,
+				D1C3D06017C157CD00CA0FD2 /* rotate_argb.cc */,
+				D1C3D06117C157CD00CA0FD2 /* rotate_mips.cc */,
+				D1C3D06217C157CD00CA0FD2 /* rotate_neon.cc */,
+				D1C3D06317C157CD00CA0FD2 /* rotate.cc */,
+				D1C3D06417C157CD00CA0FD2 /* row_any.cc */,
+				D1C3D06517C157CD00CA0FD2 /* row_common.cc */,
+				D1C3D06617C157CD00CA0FD2 /* row_mips.cc */,
+				D1C3D06717C157CD00CA0FD2 /* row_neon.cc */,
+				D1C3D06817C157CD00CA0FD2 /* row_posix.cc */,
+				D159BCAC17C227940030FAB6 /* row_win.cc */,
+				D1C3D06B17C157CD00CA0FD2 /* scale_argb_neon.cc */,
+				D1C3D06C17C157CD00CA0FD2 /* scale_argb.cc */,
+				D1C3D06D17C157CD00CA0FD2 /* scale_mips.cc */,
+				D1C3D06E17C157CD00CA0FD2 /* scale_neon.cc */,
+				D1BCE06C18F3F80800C83470 /* scale_win.cc */,
+				D1C3D06F17C157CD00CA0FD2 /* scale.cc */,
+				D1BCE05818F3F7FE00C83470 /* scale_common.cc */,
+				D1BCE05918F3F7FE00C83470 /* scale_posix.cc */,
+				D1C3D07017C157CD00CA0FD2 /* video_common.cc */,
+				D159BCAD17C227940030FAB6 /* row_x86.asm */,
+				D159BCAE17C227940030FAB6 /* x86inc.asm */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		D1C3D04E17C157AC00CA0FD2 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				D1C3D1CD17C15BA900CA0FD2 /* libyuv */,
+				D1C3D1CE17C15BB400CA0FD2 /* libyuv.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		D1C3D1CD17C15BA900CA0FD2 /* libyuv */ = {
+			isa = PBXGroup;
+			children = (
+				D1C3D1CF17C15BC100CA0FD2 /* basic_types.h */,
+				D1C3D1D017C15BC100CA0FD2 /* compare.h */,
+				D1C3D1D117C15BC100CA0FD2 /* convert_argb.h */,
+				D1C3D1D217C15BC100CA0FD2 /* convert_from_argb.h */,
+				D1C3D1D317C15BC100CA0FD2 /* convert_from.h */,
+				D1C3D1D417C15BC100CA0FD2 /* convert.h */,
+				D1C3D1D517C15BC100CA0FD2 /* cpu_id.h */,
+				D1C3D1D717C15BC100CA0FD2 /* mjpeg_decoder.h */,
+				D1C3D1D817C15BC100CA0FD2 /* planar_functions.h */,
+				D1C3D1D917C15BC100CA0FD2 /* rotate_argb.h */,
+				D1C3D1DA17C15BC100CA0FD2 /* rotate.h */,
+				D1C3D1DB17C15BC100CA0FD2 /* row.h */,
+				D1C3D1DC17C15BC100CA0FD2 /* scale_argb.h */,
+				D1BCE05718F3F7D800C83470 /* scale_row.h */,
+				D1C3D1DD17C15BC100CA0FD2 /* scale.h */,
+				D1C3D1DE17C15BC100CA0FD2 /* version.h */,
+				D1C3D1DF17C15BC100CA0FD2 /* video_common.h */,
+			);
+			name = libyuv;
+			sourceTree = "<group>";
+		};
+		D1CDFF921696CEFA00609AB0 /* Theora */ = {
+			isa = PBXGroup;
+			children = (
+				B4A28AB21CACF5B5004ECC69 /* VideoClip_Theora.cpp */,
+				B4A28AB31CACF5B5004ECC69 /* VideoClip_Theora.h */,
+			);
+			name = Theora;
+			sourceTree = "<group>";
+		};
+		D1E2718516B46F370046C00C /* YUV */ = {
+			isa = PBXGroup;
+			children = (
+				D1F4DA1C18FECABC007C1968 /* android */,
+				D139462A17C0ED2F0091F4A4 /* libyuv */,
+				D1E2718716B46F4F0046C00C /* C */,
+				D13946CA17C119B30091F4A4 /* yuv_util.c */,
+				D13946CB17C119B30091F4A4 /* yuv_util.h */,
+			);
+			name = YUV;
+			sourceTree = "<group>";
+		};
+		D1E2718716B46F4F0046C00C /* C */ = {
+			isa = PBXGroup;
+			children = (
+				D1E271AB16B470210046C00C /* yuv420_rgb_c.c */,
+				D1E2718C16B46F640046C00C /* yuv420_yuv_c.c */,
+				D1E2718A16B46F640046C00C /* yuv420_grey_c.c */,
+			);
+			name = C;
+			sourceTree = "<group>";
+		};
+		D1F4DA1C18FECABC007C1968 /* android */ = {
+			isa = PBXGroup;
+			children = (
+				D1F4DA1D18FECACE007C1968 /* cpu-features.c */,
+				D1F4DA1E18FECACE007C1968 /* cpu-features.h */,
+			);
+			name = android;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D1473F27150CA69B00B20490 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4A28AF91CAD0B14004ECC69 /* AudioInterface.h in Headers */,
+				B4A28B091CAD0B1B004ECC69 /* VideoClip.h in Headers */,
+				B4A28AFC1CAD0B14004ECC69 /* DataSource.h in Headers */,
+				B4A28A251CACF582004ECC69 /* Utility.h in Headers */,
+				B4A28A291CACF582004ECC69 /* WorkerThread.h in Headers */,
+				B4A28A1F1CACF582004ECC69 /* Mutex.h in Headers */,
+				B4A28AFF1CAD0B14004ECC69 /* FrameQueue.h in Headers */,
+				D16775DA155C50280050EC64 /* TheoraPlayer.h in Headers */,
+				B4A28AB51CACF5B5004ECC69 /* VideoClip_Theora.h in Headers */,
+				B4A28AFA1CAD0B14004ECC69 /* AudioInterfaceFactory.h in Headers */,
+				D139463617C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				B4A28B081CAD0B1B004ECC69 /* Timer.h in Headers */,
+				B4A28B021CAD0B14004ECC69 /* PixelTransform.h in Headers */,
+				B4A28B001CAD0B14004ECC69 /* Manager.h in Headers */,
+				B4A28A221CACF582004ECC69 /* Thread.h in Headers */,
+				B4A28B011CAD0B14004ECC69 /* MemoryDataSource.h in Headers */,
+				B4A28B0A1CAD0B1B004ECC69 /* VideoFrame.h in Headers */,
+				B4A28AFB1CAD0B14004ECC69 /* AudioPacketQueue.h in Headers */,
+				B4A28AFE1CAD0B14004ECC69 /* FileDataSource.h in Headers */,
+				B4A28AFD1CAD0B14004ECC69 /* Exception.h in Headers */,
+				B4A28B071CAD0B1B004ECC69 /* theoraplayerExport.h in Headers */,
+				D13946D517C119B40091F4A4 /* yuv_util.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D198F964177A31FC002942E3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D198F96B177A31FC002942E3 /* TheoraPlayer.h in Headers */,
+				D139463917C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946D817C119B40091F4A4 /* yuv_util.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D198F990177A31FE002942E3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D198F997177A31FE002942E3 /* TheoraPlayer.h in Headers */,
+				D139463A17C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946D917C119B40091F4A4 /* yuv_util.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1BB6FAC150E9E7100EF9400 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D16775DB155C50280050EC64 /* TheoraPlayer.h in Headers */,
+				D139463C17C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946DB17C119B40091F4A4 /* yuv_util.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFF331696C77A00609AB0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CDFF3A1696C77A00609AB0 /* TheoraPlayer.h in Headers */,
+				D139463717C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946D617C119B40091F4A4 /* yuv_util.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFFAF1696E1CA00609AB0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1CDFFB61696E1CA00609AB0 /* TheoraPlayer.h in Headers */,
+				D139463D17C0ED450091F4A4 /* yuv_libyuv.h in Headers */,
+				D13946DC17C119B40091F4A4 /* yuv_util.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D1473F29150CA69B00B20490 /* theoraplayer (Theora) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1473F3F150CA69B00B20490 /* Build configuration list for PBXNativeTarget "theoraplayer (Theora)" */;
+			buildPhases = (
+				D1473F25150CA69B00B20490 /* Sources */,
+				D1473F26150CA69B00B20490 /* Frameworks */,
+				D1473F27150CA69B00B20490 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "theoraplayer (Theora)";
+			productName = theoraplayer;
+			productReference = D1473F2A150CA69B00B20490 /* theoraplayer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D198F950177A31FC002942E3 /* theoraplayer (Mac Theora) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D198F975177A31FC002942E3 /* Build configuration list for PBXNativeTarget "theoraplayer (Mac Theora)" */;
+			buildPhases = (
+				D198F951177A31FC002942E3 /* Sources */,
+				D198F963177A31FC002942E3 /* Frameworks */,
+				D198F964177A31FC002942E3 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "theoraplayer (Mac Theora)";
+			productName = libtheoraplayer;
+			productReference = D198F97B177A31FC002942E3 /* libtheoraplayer.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D198F97C177A31FE002942E3 /* theoraplayer (Mac) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D198F9A1177A31FE002942E3 /* Build configuration list for PBXNativeTarget "theoraplayer (Mac)" */;
+			buildPhases = (
+				D198F97D177A31FE002942E3 /* Sources */,
+				D198F98F177A31FE002942E3 /* Frameworks */,
+				D198F990177A31FE002942E3 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "theoraplayer (Mac)";
+			productName = libtheoraplayer;
+			productReference = D198F9A7177A31FE002942E3 /* libtheoraplayer.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D1BB6FAD150E9E7100EF9400 /* theoraplayer (iOS Theora) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1BB6FBC150E9E7100EF9400 /* Build configuration list for PBXNativeTarget "theoraplayer (iOS Theora)" */;
+			buildPhases = (
+				D1BB6FAA150E9E7100EF9400 /* Sources */,
+				D1BB6FAB150E9E7100EF9400 /* Frameworks */,
+				D1BB6FAC150E9E7100EF9400 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "theoraplayer (iOS Theora)";
+			productName = libtheoraplayer;
+			productReference = D1BB6FAE150E9E7100EF9400 /* libtheoraplayer.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D1CDFF221696C77A00609AB0 /* theoraplayer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1CDFF421696C77A00609AB0 /* Build configuration list for PBXNativeTarget "theoraplayer" */;
+			buildPhases = (
+				D1CDFF231696C77A00609AB0 /* Sources */,
+				D1CDFF2F1696C77A00609AB0 /* Frameworks */,
+				D1CDFF331696C77A00609AB0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = theoraplayer;
+			productName = theoraplayer;
+			productReference = D1CDFF481696C77A00609AB0 /* theoraplayer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D1CDFFA01696E1CA00609AB0 /* theoraplayer (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D1CDFFBE1696E1CA00609AB0 /* Build configuration list for PBXNativeTarget "theoraplayer (iOS)" */;
+			buildPhases = (
+				D1CDFFA11696E1CA00609AB0 /* Sources */,
+				D1CDFFAE1696E1CA00609AB0 /* Frameworks */,
+				D1CDFFAF1696E1CA00609AB0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "theoraplayer (iOS)";
+			productName = libtheoraplayer;
+			productReference = D1CDFFC41696E1CA00609AB0 /* libtheoraplayer.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D1473F20150CA69B00B20490 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+			};
+			buildConfigurationList = D1473F23150CA69B00B20490 /* Build configuration list for PBXProject "theoraplayer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D1473F1E150CA69B00B20490;
+			productRefGroup = D1473F2B150CA69B00B20490 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D1473F29150CA69B00B20490 /* theoraplayer (Theora) */,
+				D1CDFF221696C77A00609AB0 /* theoraplayer */,
+				D198F950177A31FC002942E3 /* theoraplayer (Mac Theora) */,
+				D198F97C177A31FE002942E3 /* theoraplayer (Mac) */,
+				D1BB6FAD150E9E7100EF9400 /* theoraplayer (iOS Theora) */,
+				D1CDFFA01696E1CA00609AB0 /* theoraplayer (iOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D1473F25150CA69B00B20490 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4A28A241CACF582004ECC69 /* Utility.cpp in Sources */,
+				D1F8E1D21B847A8A009156C0 /* row_neon64.cc in Sources */,
+				D1E2719916B46F640046C00C /* yuv420_grey_c.c in Sources */,
+				D1E271A516B46F640046C00C /* yuv420_yuv_c.c in Sources */,
+				D1E271AC16B470210046C00C /* yuv420_rgb_c.c in Sources */,
+				D1BCE05A18F3F7FE00C83470 /* scale_common.cc in Sources */,
+				D139462D17C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
+				B4A28A1C1CACF582004ECC69 /* Manager.cpp in Sources */,
+				D13946CC17C119B40091F4A4 /* yuv_util.c in Sources */,
+				B4A28A211CACF582004ECC69 /* Thread.cpp in Sources */,
+				D1C3D07217C157CD00CA0FD2 /* compare_common.cc in Sources */,
+				D1C3D08417C157CD00CA0FD2 /* compare_posix.cc in Sources */,
+				D1BCE06318F3F7FE00C83470 /* scale_posix.cc in Sources */,
+				D1C3D09617C157CD00CA0FD2 /* compare.cc in Sources */,
+				B4A28A1E1CACF582004ECC69 /* Mutex.cpp in Sources */,
+				B4A28A181CACF582004ECC69 /* DataSource.cpp in Sources */,
+				D1C3D09F17C157CD00CA0FD2 /* convert_argb.cc in Sources */,
+				D1C3D0C317C157CD00CA0FD2 /* convert_to_argb.cc in Sources */,
+				D1C3D0CC17C157CD00CA0FD2 /* convert_to_i420.cc in Sources */,
+				B4A28A281CACF582004ECC69 /* WorkerThread.cpp in Sources */,
+				D1F8E1DB1B847A8A009156C0 /* scale_any.cc in Sources */,
+				D1C3D0D517C157CD00CA0FD2 /* convert.cc in Sources */,
+				B4A28A1D1CACF582004ECC69 /* MemoryDataSource.cpp in Sources */,
+				B4A28AB41CACF5B5004ECC69 /* VideoClip_Theora.cpp in Sources */,
+				B4A28A271CACF582004ECC69 /* VideoFrame.cpp in Sources */,
+				D1C3D0DE17C157CD00CA0FD2 /* cpu_id.cc in Sources */,
+				B4A28A191CACF582004ECC69 /* Exception.cpp in Sources */,
+				D1F8E1ED1B847A8A009156C0 /* scale_neon64.cc in Sources */,
+				B4A28A231CACF582004ECC69 /* Timer.cpp in Sources */,
+				D1F8E1AE1B847A8A009156C0 /* compare_gcc.cc in Sources */,
+				D1C3D10217C157CD00CA0FD2 /* planar_functions.cc in Sources */,
+				D1F8E1C01B847A8A009156C0 /* rotate_neon64.cc in Sources */,
+				D1C3D12617C157CD00CA0FD2 /* rotate.cc in Sources */,
+				D1C3D12F17C157CD00CA0FD2 /* row_any.cc in Sources */,
+				D1C3D13817C157CD00CA0FD2 /* row_common.cc in Sources */,
+				B4A28A161CACF582004ECC69 /* AudioInterfaceFactory.cpp in Sources */,
+				D1F8E1C91B847A8A009156C0 /* row_gcc.cc in Sources */,
+				B4A28A1B1CACF582004ECC69 /* FrameQueue.cpp in Sources */,
+				D1C3D15317C157CD00CA0FD2 /* row_posix.cc in Sources */,
+				D1C3D17717C157CD00CA0FD2 /* scale_argb.cc in Sources */,
+				D1C3D19B17C157CD00CA0FD2 /* video_common.cc in Sources */,
+				B4A28A261CACF582004ECC69 /* VideoClip.cpp in Sources */,
+				D159BCB017C227F30030FAB6 /* convert_from.cc in Sources */,
+				D1F8E1B71B847A8A009156C0 /* compare_neon64.cc in Sources */,
+				D1F8E1E41B847A8A009156C0 /* scale_gcc.cc in Sources */,
+				D159BCB917C228310030FAB6 /* rotate_argb.cc in Sources */,
+				B4A28A171CACF582004ECC69 /* AudioPacketQueue.cpp in Sources */,
+				D159BCC217C2286D0030FAB6 /* scale.cc in Sources */,
+				B4A28A1A1CACF582004ECC69 /* FileDataSource.cpp in Sources */,
+				B4A28A151CACF582004ECC69 /* AudioInterface.cpp in Sources */,
+				B4A28A201CACF582004ECC69 /* theoraplayer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D198F951177A31FC002942E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4A28A591CACF58F004ECC69 /* Utility.cpp in Sources */,
+				D1F8E1D51B847A8A009156C0 /* row_neon64.cc in Sources */,
+				D198F95F177A31FC002942E3 /* yuv420_grey_c.c in Sources */,
+				D198F960177A31FC002942E3 /* yuv420_yuv_c.c in Sources */,
+				D198F961177A31FC002942E3 /* yuv420_rgb_c.c in Sources */,
+				D1BCE05D18F3F7FE00C83470 /* scale_common.cc in Sources */,
+				D139463017C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
+				B4A28A531CACF58F004ECC69 /* Manager.cpp in Sources */,
+				D13946CF17C119B40091F4A4 /* yuv_util.c in Sources */,
+				B4A28A571CACF58F004ECC69 /* Thread.cpp in Sources */,
+				D1C3D07517C157CD00CA0FD2 /* compare_common.cc in Sources */,
+				D1C3D08717C157CD00CA0FD2 /* compare_posix.cc in Sources */,
+				D1BCE06618F3F7FE00C83470 /* scale_posix.cc in Sources */,
+				D1C3D09917C157CD00CA0FD2 /* compare.cc in Sources */,
+				B4A28A551CACF58F004ECC69 /* Mutex.cpp in Sources */,
+				B4A28A4F1CACF58F004ECC69 /* DataSource.cpp in Sources */,
+				D1C3D0A217C157CD00CA0FD2 /* convert_argb.cc in Sources */,
+				D1C3D0C617C157CD00CA0FD2 /* convert_to_argb.cc in Sources */,
+				D1C3D0CF17C157CD00CA0FD2 /* convert_to_i420.cc in Sources */,
+				B4A28A5C1CACF58F004ECC69 /* WorkerThread.cpp in Sources */,
+				D1F8E1DE1B847A8A009156C0 /* scale_any.cc in Sources */,
+				D1C3D0D817C157CD00CA0FD2 /* convert.cc in Sources */,
+				B4A28A541CACF58F004ECC69 /* MemoryDataSource.cpp in Sources */,
+				B4A28AB81CACF5B8004ECC69 /* VideoClip_Theora.cpp in Sources */,
+				B4A28A5B1CACF58F004ECC69 /* VideoFrame.cpp in Sources */,
+				D1C3D0E117C157CD00CA0FD2 /* cpu_id.cc in Sources */,
+				B4A28A501CACF58F004ECC69 /* Exception.cpp in Sources */,
+				D1F8E1F01B847A8A009156C0 /* scale_neon64.cc in Sources */,
+				B4A28A581CACF58F004ECC69 /* Timer.cpp in Sources */,
+				D1F8E1B11B847A8A009156C0 /* compare_gcc.cc in Sources */,
+				D1C3D10517C157CD00CA0FD2 /* planar_functions.cc in Sources */,
+				D1F8E1C31B847A8A009156C0 /* rotate_neon64.cc in Sources */,
+				D1C3D12917C157CD00CA0FD2 /* rotate.cc in Sources */,
+				D1C3D13217C157CD00CA0FD2 /* row_any.cc in Sources */,
+				D1C3D13B17C157CD00CA0FD2 /* row_common.cc in Sources */,
+				B4A28A4D1CACF58F004ECC69 /* AudioInterfaceFactory.cpp in Sources */,
+				D1F8E1CC1B847A8A009156C0 /* row_gcc.cc in Sources */,
+				B4A28A521CACF58F004ECC69 /* FrameQueue.cpp in Sources */,
+				D1C3D15617C157CD00CA0FD2 /* row_posix.cc in Sources */,
+				D1C3D17A17C157CD00CA0FD2 /* scale_argb.cc in Sources */,
+				D1C3D19E17C157CD00CA0FD2 /* video_common.cc in Sources */,
+				B4A28A5A1CACF58F004ECC69 /* VideoClip.cpp in Sources */,
+				D159BCB317C227F40030FAB6 /* convert_from.cc in Sources */,
+				D1F8E1BA1B847A8A009156C0 /* compare_neon64.cc in Sources */,
+				D1F8E1E71B847A8A009156C0 /* scale_gcc.cc in Sources */,
+				D159BCBC17C228330030FAB6 /* rotate_argb.cc in Sources */,
+				B4A28A4E1CACF58F004ECC69 /* AudioPacketQueue.cpp in Sources */,
+				D159BCC517C2286E0030FAB6 /* scale.cc in Sources */,
+				B4A28A511CACF58F004ECC69 /* FileDataSource.cpp in Sources */,
+				B4A28A4C1CACF58F004ECC69 /* AudioInterface.cpp in Sources */,
+				B4A28A561CACF58F004ECC69 /* theoraplayer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D198F97D177A31FE002942E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4A28A6A1CACF58F004ECC69 /* Utility.cpp in Sources */,
+				D1F8E1D61B847A8A009156C0 /* row_neon64.cc in Sources */,
+				D198F98B177A31FE002942E3 /* yuv420_grey_c.c in Sources */,
+				D198F98C177A31FE002942E3 /* yuv420_yuv_c.c in Sources */,
+				D198F98D177A31FE002942E3 /* yuv420_rgb_c.c in Sources */,
+				D1BCE05E18F3F7FE00C83470 /* scale_common.cc in Sources */,
+				D139463117C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
+				B4A28A641CACF58F004ECC69 /* Manager.cpp in Sources */,
+				D13946D017C119B40091F4A4 /* yuv_util.c in Sources */,
+				B4A28A681CACF58F004ECC69 /* Thread.cpp in Sources */,
+				D1C3D07617C157CD00CA0FD2 /* compare_common.cc in Sources */,
+				D1C3D08817C157CD00CA0FD2 /* compare_posix.cc in Sources */,
+				D1BCE06718F3F7FE00C83470 /* scale_posix.cc in Sources */,
+				B4A28AB91CACF5B8004ECC69 /* VideoClip_Theora.cpp in Sources */,
+				D1C3D09A17C157CD00CA0FD2 /* compare.cc in Sources */,
+				B4A28A661CACF58F004ECC69 /* Mutex.cpp in Sources */,
+				B4A28A601CACF58F004ECC69 /* DataSource.cpp in Sources */,
+				D1C3D0A317C157CD00CA0FD2 /* convert_argb.cc in Sources */,
+				D1C3D0C717C157CD00CA0FD2 /* convert_to_argb.cc in Sources */,
+				D1C3D0D017C157CD00CA0FD2 /* convert_to_i420.cc in Sources */,
+				B4A28A6D1CACF58F004ECC69 /* WorkerThread.cpp in Sources */,
+				D1F8E1DF1B847A8A009156C0 /* scale_any.cc in Sources */,
+				D1C3D0D917C157CD00CA0FD2 /* convert.cc in Sources */,
+				B4A28A651CACF58F004ECC69 /* MemoryDataSource.cpp in Sources */,
+				B4A28A6C1CACF58F004ECC69 /* VideoFrame.cpp in Sources */,
+				D1C3D0E217C157CD00CA0FD2 /* cpu_id.cc in Sources */,
+				B4A28A611CACF58F004ECC69 /* Exception.cpp in Sources */,
+				D1F8E1F11B847A8A009156C0 /* scale_neon64.cc in Sources */,
+				B4A28A691CACF58F004ECC69 /* Timer.cpp in Sources */,
+				D1F8E1B21B847A8A009156C0 /* compare_gcc.cc in Sources */,
+				D1C3D10617C157CD00CA0FD2 /* planar_functions.cc in Sources */,
+				D1F8E1C41B847A8A009156C0 /* rotate_neon64.cc in Sources */,
+				D1C3D12A17C157CD00CA0FD2 /* rotate.cc in Sources */,
+				D1C3D13317C157CD00CA0FD2 /* row_any.cc in Sources */,
+				D1C3D13C17C157CD00CA0FD2 /* row_common.cc in Sources */,
+				B4A28A5E1CACF58F004ECC69 /* AudioInterfaceFactory.cpp in Sources */,
+				D1F8E1CD1B847A8A009156C0 /* row_gcc.cc in Sources */,
+				B4A28A631CACF58F004ECC69 /* FrameQueue.cpp in Sources */,
+				D1C3D15717C157CD00CA0FD2 /* row_posix.cc in Sources */,
+				D1C3D17B17C157CD00CA0FD2 /* scale_argb.cc in Sources */,
+				D1C3D19F17C157CD00CA0FD2 /* video_common.cc in Sources */,
+				B4A28A6B1CACF58F004ECC69 /* VideoClip.cpp in Sources */,
+				D159BCB417C227F50030FAB6 /* convert_from.cc in Sources */,
+				D1F8E1BB1B847A8A009156C0 /* compare_neon64.cc in Sources */,
+				D1F8E1E81B847A8A009156C0 /* scale_gcc.cc in Sources */,
+				D159BCBD17C228330030FAB6 /* rotate_argb.cc in Sources */,
+				B4A28A5F1CACF58F004ECC69 /* AudioPacketQueue.cpp in Sources */,
+				D159BCC617C2286E0030FAB6 /* scale.cc in Sources */,
+				B4A28A621CACF58F004ECC69 /* FileDataSource.cpp in Sources */,
+				B4A28A5D1CACF58F004ECC69 /* AudioInterface.cpp in Sources */,
+				B4A28A671CACF58F004ECC69 /* theoraplayer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1BB6FAA150E9E7100EF9400 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1F8E1B41B847A8A009156C0 /* compare_gcc.cc in Sources */,
+				B4A28A831CACF590004ECC69 /* Exception.cpp in Sources */,
+				B4A28A881CACF590004ECC69 /* Mutex.cpp in Sources */,
+				D1F8E1D81B847A8A009156C0 /* row_neon64.cc in Sources */,
+				D1BCE06018F3F7FE00C83470 /* scale_common.cc in Sources */,
+				D1F8E1C61B847A8A009156C0 /* rotate_neon64.cc in Sources */,
+				D1F8E1CF1B847A8A009156C0 /* row_gcc.cc in Sources */,
+				D1BCE06918F3F7FE00C83470 /* scale_posix.cc in Sources */,
+				D1F8E1E11B847A8A009156C0 /* scale_any.cc in Sources */,
+				B4A28A8D1CACF590004ECC69 /* VideoClip.cpp in Sources */,
+				B4A28A891CACF590004ECC69 /* theoraplayer.cpp in Sources */,
+				B4A28A811CACF590004ECC69 /* AudioPacketQueue.cpp in Sources */,
+				D1E2719C16B46F640046C00C /* yuv420_grey_c.c in Sources */,
+				D1F8E1F31B847A8A009156C0 /* scale_neon64.cc in Sources */,
+				D1E271A816B46F640046C00C /* yuv420_yuv_c.c in Sources */,
+				B4A28A8B1CACF590004ECC69 /* Timer.cpp in Sources */,
+				D1E271AF16B470210046C00C /* yuv420_rgb_c.c in Sources */,
+				B4A28A861CACF590004ECC69 /* Manager.cpp in Sources */,
+				B4A28A8F1CACF590004ECC69 /* WorkerThread.cpp in Sources */,
+				D139463317C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
+				D13946D217C119B40091F4A4 /* yuv_util.c in Sources */,
+				B4A28A7F1CACF590004ECC69 /* AudioInterface.cpp in Sources */,
+				B4A28ABB1CACF5B9004ECC69 /* VideoClip_Theora.cpp in Sources */,
+				D1C3D07817C157CD00CA0FD2 /* compare_common.cc in Sources */,
+				B4A28A8E1CACF590004ECC69 /* VideoFrame.cpp in Sources */,
+				B4A28A801CACF590004ECC69 /* AudioInterfaceFactory.cpp in Sources */,
+				D1C3D08117C157CD00CA0FD2 /* compare_neon.cc in Sources */,
+				D1C3D09C17C157CD00CA0FD2 /* compare.cc in Sources */,
+				D1C3D0A517C157CD00CA0FD2 /* convert_argb.cc in Sources */,
+				D1C3D0C917C157CD00CA0FD2 /* convert_to_argb.cc in Sources */,
+				D1C3D0D217C157CD00CA0FD2 /* convert_to_i420.cc in Sources */,
+				B4A28A871CACF590004ECC69 /* MemoryDataSource.cpp in Sources */,
+				D1C3D0DB17C157CD00CA0FD2 /* convert.cc in Sources */,
+				D1C3D0E417C157CD00CA0FD2 /* cpu_id.cc in Sources */,
+				D1C3D10817C157CD00CA0FD2 /* planar_functions.cc in Sources */,
+				D1C3D12317C157CD00CA0FD2 /* rotate_neon.cc in Sources */,
+				B4A28A841CACF590004ECC69 /* FileDataSource.cpp in Sources */,
+				D1C3D12C17C157CD00CA0FD2 /* rotate.cc in Sources */,
+				D1C3D13517C157CD00CA0FD2 /* row_any.cc in Sources */,
+				D1C3D13E17C157CD00CA0FD2 /* row_common.cc in Sources */,
+				D1C3D15017C157CD00CA0FD2 /* row_neon.cc in Sources */,
+				B4A28A851CACF590004ECC69 /* FrameQueue.cpp in Sources */,
+				D1C3D17417C157CD00CA0FD2 /* scale_argb_neon.cc in Sources */,
+				D1C3D17D17C157CD00CA0FD2 /* scale_argb.cc in Sources */,
+				D1C3D18F17C157CD00CA0FD2 /* scale_neon.cc in Sources */,
+				B4A28A8A1CACF590004ECC69 /* Thread.cpp in Sources */,
+				D1F8E1EA1B847A8A009156C0 /* scale_gcc.cc in Sources */,
+				D1C3D1A117C157CD00CA0FD2 /* video_common.cc in Sources */,
+				D159BCB617C227F60030FAB6 /* convert_from.cc in Sources */,
+				B4A28A821CACF590004ECC69 /* DataSource.cpp in Sources */,
+				D159BCBF17C228340030FAB6 /* rotate_argb.cc in Sources */,
+				D159BCC817C2286F0030FAB6 /* scale.cc in Sources */,
+				B4A28A8C1CACF590004ECC69 /* Utility.cpp in Sources */,
+				D1F8E1BD1B847A8A009156C0 /* compare_neon64.cc in Sources */,
+				D15D361017C386A600F40439 /* row_posix.cc in Sources */,
+				D15D361317C386B100F40439 /* compare_posix.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFF231696C77A00609AB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4A28A371CACF58E004ECC69 /* Utility.cpp in Sources */,
+				D1F8E1D31B847A8A009156C0 /* row_neon64.cc in Sources */,
+				D1E2719A16B46F640046C00C /* yuv420_grey_c.c in Sources */,
+				D1E271A616B46F640046C00C /* yuv420_yuv_c.c in Sources */,
+				D1E271AD16B470210046C00C /* yuv420_rgb_c.c in Sources */,
+				D1BCE05B18F3F7FE00C83470 /* scale_common.cc in Sources */,
+				D139462E17C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
+				B4A28A311CACF58E004ECC69 /* Manager.cpp in Sources */,
+				D13946CD17C119B40091F4A4 /* yuv_util.c in Sources */,
+				B4A28A351CACF58E004ECC69 /* Thread.cpp in Sources */,
+				D1C3D07317C157CD00CA0FD2 /* compare_common.cc in Sources */,
+				D1C3D08517C157CD00CA0FD2 /* compare_posix.cc in Sources */,
+				D1BCE06418F3F7FE00C83470 /* scale_posix.cc in Sources */,
+				B4A28AB61CACF5B7004ECC69 /* VideoClip_Theora.cpp in Sources */,
+				D1C3D09717C157CD00CA0FD2 /* compare.cc in Sources */,
+				B4A28A331CACF58E004ECC69 /* Mutex.cpp in Sources */,
+				B4A28A2D1CACF58E004ECC69 /* DataSource.cpp in Sources */,
+				D1C3D0A017C157CD00CA0FD2 /* convert_argb.cc in Sources */,
+				D1C3D0C417C157CD00CA0FD2 /* convert_to_argb.cc in Sources */,
+				D1C3D0CD17C157CD00CA0FD2 /* convert_to_i420.cc in Sources */,
+				B4A28A3A1CACF58E004ECC69 /* WorkerThread.cpp in Sources */,
+				D1F8E1DC1B847A8A009156C0 /* scale_any.cc in Sources */,
+				D1C3D0D617C157CD00CA0FD2 /* convert.cc in Sources */,
+				B4A28A321CACF58E004ECC69 /* MemoryDataSource.cpp in Sources */,
+				B4A28A391CACF58E004ECC69 /* VideoFrame.cpp in Sources */,
+				D1C3D0DF17C157CD00CA0FD2 /* cpu_id.cc in Sources */,
+				B4A28A2E1CACF58E004ECC69 /* Exception.cpp in Sources */,
+				D1F8E1EE1B847A8A009156C0 /* scale_neon64.cc in Sources */,
+				B4A28A361CACF58E004ECC69 /* Timer.cpp in Sources */,
+				D1F8E1AF1B847A8A009156C0 /* compare_gcc.cc in Sources */,
+				D1C3D10317C157CD00CA0FD2 /* planar_functions.cc in Sources */,
+				D1F8E1C11B847A8A009156C0 /* rotate_neon64.cc in Sources */,
+				D1C3D12717C157CD00CA0FD2 /* rotate.cc in Sources */,
+				D1C3D13017C157CD00CA0FD2 /* row_any.cc in Sources */,
+				D1C3D13917C157CD00CA0FD2 /* row_common.cc in Sources */,
+				B4A28A2B1CACF58E004ECC69 /* AudioInterfaceFactory.cpp in Sources */,
+				D1F8E1CA1B847A8A009156C0 /* row_gcc.cc in Sources */,
+				B4A28A301CACF58E004ECC69 /* FrameQueue.cpp in Sources */,
+				D1C3D15417C157CD00CA0FD2 /* row_posix.cc in Sources */,
+				D1C3D17817C157CD00CA0FD2 /* scale_argb.cc in Sources */,
+				D1C3D19C17C157CD00CA0FD2 /* video_common.cc in Sources */,
+				B4A28A381CACF58E004ECC69 /* VideoClip.cpp in Sources */,
+				D159BCB117C227F40030FAB6 /* convert_from.cc in Sources */,
+				D1F8E1B81B847A8A009156C0 /* compare_neon64.cc in Sources */,
+				D1F8E1E51B847A8A009156C0 /* scale_gcc.cc in Sources */,
+				D159BCBA17C228320030FAB6 /* rotate_argb.cc in Sources */,
+				B4A28A2C1CACF58E004ECC69 /* AudioPacketQueue.cpp in Sources */,
+				D159BCC317C2286D0030FAB6 /* scale.cc in Sources */,
+				B4A28A2F1CACF58E004ECC69 /* FileDataSource.cpp in Sources */,
+				B4A28A2A1CACF58E004ECC69 /* AudioInterface.cpp in Sources */,
+				B4A28A341CACF58E004ECC69 /* theoraplayer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1CDFFA11696E1CA00609AB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D1F8E1B51B847A8A009156C0 /* compare_gcc.cc in Sources */,
+				B4A28A941CACF590004ECC69 /* Exception.cpp in Sources */,
+				B4A28A991CACF590004ECC69 /* Mutex.cpp in Sources */,
+				D1F8E1D91B847A8A009156C0 /* row_neon64.cc in Sources */,
+				D1BCE06118F3F7FE00C83470 /* scale_common.cc in Sources */,
+				D1F8E1C71B847A8A009156C0 /* rotate_neon64.cc in Sources */,
+				D1F8E1D01B847A8A009156C0 /* row_gcc.cc in Sources */,
+				D1BCE06A18F3F7FE00C83470 /* scale_posix.cc in Sources */,
+				D1F8E1E21B847A8A009156C0 /* scale_any.cc in Sources */,
+				B4A28A9E1CACF590004ECC69 /* VideoClip.cpp in Sources */,
+				B4A28A9A1CACF590004ECC69 /* theoraplayer.cpp in Sources */,
+				B4A28A921CACF590004ECC69 /* AudioPacketQueue.cpp in Sources */,
+				D1E2719D16B46F640046C00C /* yuv420_grey_c.c in Sources */,
+				D1F8E1F41B847A8A009156C0 /* scale_neon64.cc in Sources */,
+				D1E271A916B46F640046C00C /* yuv420_yuv_c.c in Sources */,
+				B4A28A9C1CACF590004ECC69 /* Timer.cpp in Sources */,
+				D1E271B016B470210046C00C /* yuv420_rgb_c.c in Sources */,
+				B4A28A971CACF590004ECC69 /* Manager.cpp in Sources */,
+				B4A28AA01CACF590004ECC69 /* WorkerThread.cpp in Sources */,
+				D139463417C0ED450091F4A4 /* yuv_libyuv.c in Sources */,
+				D13946D317C119B40091F4A4 /* yuv_util.c in Sources */,
+				B4A28A901CACF590004ECC69 /* AudioInterface.cpp in Sources */,
+				D1C3D07917C157CD00CA0FD2 /* compare_common.cc in Sources */,
+				B4A28A9F1CACF590004ECC69 /* VideoFrame.cpp in Sources */,
+				B4A28A911CACF590004ECC69 /* AudioInterfaceFactory.cpp in Sources */,
+				D1C3D08217C157CD00CA0FD2 /* compare_neon.cc in Sources */,
+				D1C3D09D17C157CD00CA0FD2 /* compare.cc in Sources */,
+				D1C3D0A617C157CD00CA0FD2 /* convert_argb.cc in Sources */,
+				D1C3D0CA17C157CD00CA0FD2 /* convert_to_argb.cc in Sources */,
+				D1C3D0D317C157CD00CA0FD2 /* convert_to_i420.cc in Sources */,
+				B4A28A981CACF590004ECC69 /* MemoryDataSource.cpp in Sources */,
+				D1C3D0DC17C157CD00CA0FD2 /* convert.cc in Sources */,
+				D1C3D0E517C157CD00CA0FD2 /* cpu_id.cc in Sources */,
+				D1C3D10917C157CD00CA0FD2 /* planar_functions.cc in Sources */,
+				D1C3D12417C157CD00CA0FD2 /* rotate_neon.cc in Sources */,
+				B4A28A951CACF590004ECC69 /* FileDataSource.cpp in Sources */,
+				D1C3D12D17C157CD00CA0FD2 /* rotate.cc in Sources */,
+				D1C3D13617C157CD00CA0FD2 /* row_any.cc in Sources */,
+				D1C3D13F17C157CD00CA0FD2 /* row_common.cc in Sources */,
+				D1C3D15117C157CD00CA0FD2 /* row_neon.cc in Sources */,
+				B4A28A961CACF590004ECC69 /* FrameQueue.cpp in Sources */,
+				D1C3D17517C157CD00CA0FD2 /* scale_argb_neon.cc in Sources */,
+				D1C3D17E17C157CD00CA0FD2 /* scale_argb.cc in Sources */,
+				D1C3D19017C157CD00CA0FD2 /* scale_neon.cc in Sources */,
+				B4A28A9B1CACF590004ECC69 /* Thread.cpp in Sources */,
+				D1F8E1EB1B847A8A009156C0 /* scale_gcc.cc in Sources */,
+				D1C3D1A217C157CD00CA0FD2 /* video_common.cc in Sources */,
+				D159BCB717C227F60030FAB6 /* convert_from.cc in Sources */,
+				B4A28A931CACF590004ECC69 /* DataSource.cpp in Sources */,
+				B4A28ABC1CACF5B9004ECC69 /* VideoClip_Theora.cpp in Sources */,
+				D159BCC017C228340030FAB6 /* rotate_argb.cc in Sources */,
+				D159BCC917C2286F0030FAB6 /* scale.cc in Sources */,
+				B4A28A9D1CACF590004ECC69 /* Utility.cpp in Sources */,
+				D1F8E1BE1B847A8A009156C0 /* compare_neon64.cc in Sources */,
+				D15D361117C386A600F40439 /* row_posix.cc in Sources */,
+				D15D361617C386B400F40439 /* compare_posix.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D1473F43150CA6CE00B20490 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					_DEBUG,
+					"$(inherited)",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*]" = (
+					"$(LIBYUV_PREPROCESSOR_IOS)",
+					"$(inherited)",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = "$(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=macosx*]" = (
+					"$(LIBYUV_PREPROCESSOR_MAC)",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../ogg/include",
+					"$(SRCROOT)/../vorbis/include",
+					"$(SRCROOT)/../xal/lib/ogg/include",
+					"$(SRCROOT)/../xal/lib/vorbis/include",
+					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/src/YUV/libyuv/include",
+					"$(SRCROOT)/src/formats",
+				);
+				LIBYUV_PREPROCESSOR_IOS = "LIBYUV_NEON __ARM_NEON__";
+				LIBYUV_PREPROCESSOR_MAC = __SSSE3__;
+				ONLY_ACTIVE_ARCH = YES;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D1473F44150CA6CE00B20490 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_USE_THEORA,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		D1473F45150CA6D600B20490 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*]" = (
+					"$(LIBYUV_PREPROCESSOR_IOS)",
+					"$(inherited)",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = "$(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=macosx*]" = (
+					"$(LIBYUV_PREPROCESSOR_MAC)",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../ogg/include",
+					"$(SRCROOT)/../vorbis/include",
+					"$(SRCROOT)/../xal/lib/ogg/include",
+					"$(SRCROOT)/../xal/lib/vorbis/include",
+					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/src/YUV/libyuv/include",
+					"$(SRCROOT)/src/formats",
+				);
+				LIBYUV_PREPROCESSOR_IOS = "LIBYUV_NEON __ARM_NEON__";
+				LIBYUV_PREPROCESSOR_MAC = __SSSE3__;
+				SKIP_INSTALL = YES;
+			};
+			name = "App Store";
+		};
+		D1473F46150CA6D600B20490 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_USE_THEORA,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = "App Store";
+		};
+		D1473F47150CA6E200B20490 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphoneos*]" = (
+					"$(LIBYUV_PREPROCESSOR_IOS)",
+					"$(inherited)",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=iphonesimulator*]" = "$(inherited)";
+				"GCC_PREPROCESSOR_DEFINITIONS[sdk=macosx*]" = (
+					"$(LIBYUV_PREPROCESSOR_MAC)",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../ogg/include",
+					"$(SRCROOT)/../vorbis/include",
+					"$(SRCROOT)/../xal/lib/ogg/include",
+					"$(SRCROOT)/../xal/lib/vorbis/include",
+					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/src/YUV/libyuv/include",
+					"$(SRCROOT)/src/formats",
+				);
+				LIBYUV_PREPROCESSOR_IOS = "LIBYUV_NEON __ARM_NEON__";
+				LIBYUV_PREPROCESSOR_MAC = __SSSE3__;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D1473F48150CA6E200B20490 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_USE_THEORA,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		D198F977177A31FC002942E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_USE_THEORA,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				PRODUCT_NAME = theoraplayer;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D198F979177A31FC002942E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_USE_THEORA,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				PRODUCT_NAME = theoraplayer;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D198F97A177A31FC002942E3 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_USE_THEORA,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				PRODUCT_NAME = theoraplayer;
+				SKIP_INSTALL = YES;
+			};
+			name = "App Store";
+		};
+		D198F9A3177A31FE002942E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				PRODUCT_NAME = theoraplayer;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D198F9A5177A31FE002942E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				PRODUCT_NAME = theoraplayer;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D198F9A6177A31FE002942E3 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				PRODUCT_NAME = theoraplayer;
+				SKIP_INSTALL = YES;
+			};
+			name = "App Store";
+		};
+		D1BB6FB8150E9E7100EF9400 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
+					_USE_THEORA,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				PRODUCT_NAME = theoraplayer;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D1BB6FBA150E9E7100EF9400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
+					_USE_THEORA,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				PRODUCT_NAME = theoraplayer;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D1BB6FBB150E9E7100EF9400 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
+					_USE_THEORA,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				PRODUCT_NAME = theoraplayer;
+				SKIP_INSTALL = YES;
+			};
+			name = "App Store";
+		};
+		D1CDFF441696C77A00609AB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		D1CDFF461696C77A00609AB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		D1CDFF471696C77A00609AB0 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC418D7777800A36FDC /* Mac.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INFOPLIST_FILE = Info.plist;
+				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.lib${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = theoraplayer;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = "App Store";
+		};
+		D1CDFFC01696E1CA00609AB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				PRODUCT_NAME = theoraplayer;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D1CDFFC21696E1CA00609AB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				PRODUCT_NAME = theoraplayer;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D1CDFFC31696E1CA00609AB0 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1358BC318D7777800A36FDC /* iOS.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_IOS,
+					_YUV_LIBYUV,
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				PRODUCT_NAME = theoraplayer;
+				SKIP_INSTALL = YES;
+			};
+			name = "App Store";
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D1473F23150CA69B00B20490 /* Build configuration list for PBXProject "theoraplayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1473F43150CA6CE00B20490 /* Debug */,
+				D1473F47150CA6E200B20490 /* Release */,
+				D1473F45150CA6D600B20490 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D1473F3F150CA69B00B20490 /* Build configuration list for PBXNativeTarget "theoraplayer (Theora)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1473F44150CA6CE00B20490 /* Debug */,
+				D1473F48150CA6E200B20490 /* Release */,
+				D1473F46150CA6D600B20490 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D198F975177A31FC002942E3 /* Build configuration list for PBXNativeTarget "theoraplayer (Mac Theora)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D198F977177A31FC002942E3 /* Debug */,
+				D198F979177A31FC002942E3 /* Release */,
+				D198F97A177A31FC002942E3 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D198F9A1177A31FE002942E3 /* Build configuration list for PBXNativeTarget "theoraplayer (Mac)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D198F9A3177A31FE002942E3 /* Debug */,
+				D198F9A5177A31FE002942E3 /* Release */,
+				D198F9A6177A31FE002942E3 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D1BB6FBC150E9E7100EF9400 /* Build configuration list for PBXNativeTarget "theoraplayer (iOS Theora)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1BB6FB8150E9E7100EF9400 /* Debug */,
+				D1BB6FBA150E9E7100EF9400 /* Release */,
+				D1BB6FBB150E9E7100EF9400 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D1CDFF421696C77A00609AB0 /* Build configuration list for PBXNativeTarget "theoraplayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1CDFF441696C77A00609AB0 /* Debug */,
+				D1CDFF461696C77A00609AB0 /* Release */,
+				D1CDFF471696C77A00609AB0 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D1CDFFBE1696E1CA00609AB0 /* Build configuration list for PBXNativeTarget "theoraplayer (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1CDFFC01696E1CA00609AB0 /* Debug */,
+				D1CDFFC21696E1CA00609AB0 /* Release */,
+				D1CDFFC31696E1CA00609AB0 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D1473F20150CA69B00B20490 /* Project object */;
+}
