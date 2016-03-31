@@ -224,7 +224,7 @@ namespace theoraplayer
 				// TODOth - should dataSource be deleted as well? as it causes a memory leak when called through the createVideoClip() override
 				throw e;
 			}
-			clip->decodeNextFrame(); // ensure the first frame is always preloaded and have the main thread do it to prevent potential thread starvation
+			clip->_decodeNextFrame(); // ensure the first frame is always preloaded and have the main thread do it to prevent potential thread starvation
 			this->clips.push_back(clip);
 		}
 		else
@@ -279,8 +279,8 @@ namespace theoraplayer
 		Mutex::ScopeLock lock(this->workMutex);
 		foreach (VideoClip*, it, this->clips)
 		{
-			(*it)->update(timeDelta);
-			(*it)->decodedAudioCheck();
+			(*it)->_update(timeDelta);
+			(*it)->_decodedAudioCheck();
 		}
 		lock.release();
 #ifdef _SCHEDULING_DEBUG
@@ -338,9 +338,9 @@ namespace theoraplayer
 		{
 			foreach (VideoClip*, it, this->clips)
 			{
-				if (!(*it)->isBusy() && (i > 0 || (*it)->isPaused() || !(*it)->waitingForCache))
+				if (!(*it)->_isBusy() && (i > 0 || (*it)->isPaused() || !(*it)->waitingForCache))
 				{
-					readyFramesCount = (*it)->getNumReadyFrames();
+					readyFramesCount = (*it)->getReadyFramesCount();
 					if (readyFramesCount != (*it)->getFrameQueue()->getSize())
 					{
 						candidate.clip = (*it);

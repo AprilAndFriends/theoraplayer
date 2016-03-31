@@ -63,7 +63,7 @@ namespace seek
 		glBindTexture(GL_TEXTURE_2D, textureId);
 		if (!needsSeek)
 		{
-			theoraplayer::VideoFrame* frame = clip->getNextFrame();
+			theoraplayer::VideoFrame* frame = clip->fetchNextFrame();
 			if (frame != NULL)
 			{
 				glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, clip->getWidth(), frame->getHeight(), GL_RGB, GL_UNSIGNED_BYTE, frame->getBuffer());
@@ -73,7 +73,7 @@ namespace seek
 					++wrongSeeks;
 				}
 				++cFrame;
-				if (cFrame >= clip->getNumFrames())
+				if (cFrame >= clip->getFramesCount())
 				{
 					cFrame = 0;
 				}
@@ -83,8 +83,8 @@ namespace seek
 		}
 		float w = clip->getSubFrameWidth();
 		float h = clip->getSubFrameHeight();
-		float sx = clip->getSubFrameOffsetX();
-		float sy = clip->getSubFrameOffsetY();
+		float sx = clip->getSubFrameX();
+		float sy = clip->getSubFrameY();
 		float tw = potCeil(w);
 		float th = potCeil(h);
 		glEnable(GL_TEXTURE_2D);

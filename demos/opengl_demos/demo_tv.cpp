@@ -94,7 +94,7 @@ namespace tv
 		if (!started)
 		{
 			// let's wait until the system caches up a few frames on startup
-			if (clip->getNumReadyFrames() < clip->getNumPrecachedFrames() * 0.5f)
+			if (clip->getReadyFramesCount() < clip->getPrecachedFramesCount() * 0.5f)
 			{
 				return;
 			}
@@ -107,7 +107,7 @@ namespace tv
 		glBindTexture(GL_TEXTURE_2D, textureId);
 		glLoadIdentity();
 		gluLookAt(sin(angleX) * 400.0f - 200.0f, angleY, cos(angleX) * 400.0f, -200.0f, 150.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-		theoraplayer::VideoFrame* frame = clip->getNextFrame();
+		theoraplayer::VideoFrame* frame = clip->fetchNextFrame();
 		if (frame != NULL)
 		{
 			unsigned char* data = frame->getBuffer();
@@ -159,7 +159,7 @@ namespace tv
 		int dropped = clip->getDroppedFramesCount();
 		int displayed = clip->getDisplayedFramesCount();
 		float percent = 100 * ((float)dropped / displayed);
-		sprintf(out, " (%dx%d) %d precached, %d displayed, %d dropped (%.1f %%)", clip->getWidth(), clip->getHeight(), clip->getNumReadyFrames(), displayed, dropped, percent);
+		sprintf(out, " (%dx%d) %d precached, %d displayed, %d dropped (%.1f %%)", clip->getWidth(), clip->getHeight(), clip->getReadyFramesCount(), displayed, dropped, percent);
 	}
 
 	void onKeyPress(int key)

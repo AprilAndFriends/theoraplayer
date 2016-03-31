@@ -97,7 +97,7 @@ namespace lightMap
 		float y2 = 80.219f;
 		float z2 = 12.301f;
 		static int index = 0;
-		theoraplayer::VideoFrame* frame = clip->getNextFrame();
+		theoraplayer::VideoFrame* frame = clip->fetchNextFrame();
 		if (frame != NULL)
 		{
 			index = (int)frame->getFrameNumber();

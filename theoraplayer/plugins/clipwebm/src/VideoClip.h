@@ -38,10 +38,10 @@ namespace clipwebm
 		~VideoClip();
 
 		bool _readData();
-		bool decodeNextFrame();
-		void _restart();
-		float decodeAudio();
-		void decodedAudioCheck();
+		bool _decodeNextFrame();
+		void _executeRestart();
+		float _decodeAudio();
+		void _decodedAudioCheck();
 		std::string getDecoderName() { return FORMAT_NAME; }
 
 		static theoraplayer::VideoClip* create(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
@@ -58,7 +58,7 @@ namespace clipwebm
 		unsigned long lastDecodedFrameNumber;
 
 		void _load(theoraplayer::DataSource* source);
-		void _doSeek();
+		void _executeSeek();
 
 	};
 

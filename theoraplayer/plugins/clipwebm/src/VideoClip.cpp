@@ -49,7 +49,7 @@ namespace clipwebm
 		return true;
 	}
 
-	bool VideoClip::decodeNextFrame()
+	bool VideoClip::_decodeNextFrame()
 	{
 		theoraplayer::VideoFrame* frame = this->frameQueue->requestEmptyFrame();
 		if (frame == NULL)
@@ -80,7 +80,7 @@ namespace clipwebm
 				this->_setVideoFrameFrameNumber(frame, this->frameNumber);
 				++this->frameNumber;
 				this->lastDecodedFrameNumber = this->frameNumber;
-				if (this->lastDecodedFrameNumber >= (unsigned long)this->numFrames)
+				if (this->lastDecodedFrameNumber >= (unsigned long)this->framesCount)
 				{
 					shouldRestart = true;
 				}
@@ -95,7 +95,7 @@ namespace clipwebm
 		return true;
 	}
 
-	void VideoClip::_restart()
+	void VideoClip::_executeRestart()
 	{
 		bool paused = this->timer->isPaused();
 		if (!paused)
@@ -126,7 +126,7 @@ namespace clipwebm
 			theoraplayer::log("ERROR: Unable to guess webm framerate.");
 			return;
 		}
-		this->numFrames = webm_guess_duration(input.webmContext);
+		this->framesCount = webm_guess_duration(input.webmContext);
 		webm_rewind(input.webmContext);
 #ifdef _DEBUG
 		float fps = (float)input.vpxInputContext->framerate.numerator / (float)input.vpxInputContext->framerate.denominator;
@@ -136,12 +136,16 @@ namespace clipwebm
 		this->height = input.vpxInputContext->height;
 		this->subFrameWidth = input.vpxInputContext->width;
 		this->subFrameHeight = input.vpxInputContext->height;
-		this->subFrameOffsetX = 0;
-		this->subFrameOffsetY = 0;
-		this->stride = (this->stride == 1) ? potCeil(getWidth()) : getWidth();
+		this->subFrameX = 0;
+		this->subFrameY = 0;
+		this->stride = this->getWidth();
+		if (this->useStride)
+		{
+			this->stride = potCeil(this->stride);
+		}
 		this->fps = (float)input.vpxInputContext->framerate.numerator / (float)input.vpxInputContext->framerate.denominator;
 		this->frameDuration = 1.0f / this->fps;
-		this->duration = this->numFrames * this->frameDuration;
+		this->duration = this->framesCount * this->frameDuration;
 #ifdef _DEBUG
 		theoraplayer::log("Video duration: " + strf(this->duration));
 #endif
@@ -158,7 +162,7 @@ namespace clipwebm
 		}
 	}
 	
-	void VideoClip::decodedAudioCheck()
+	void VideoClip::_decodedAudioCheck()
 	{
 		if (this->audioInterface != NULL && !this->timer->isPaused())
 		{
@@ -166,12 +170,12 @@ namespace clipwebm
 		}
 	}
 
-	float VideoClip::decodeAudio()
+	float VideoClip::_decodeAudio()
 	{
 		return -1;
 	}
 
-	void VideoClip::_doSeek()
+	void VideoClip::_executeSeek()
 	{
 		float time = this->seekFrame / getFps();
 		this->timer->seek(time);
@@ -180,7 +184,7 @@ namespace clipwebm
 		{
 			this->timer->pause();
 		}
-		this->resetFrameQueue();
+		this->_resetFrameQueue();
 #ifdef _DEBUG
 		theoraplayer::log("Seek frame: " + str(this->seekFrame));
 #endif

@@ -66,7 +66,7 @@ namespace av
 		if (!started)
 		{
 			// let's wait until the system caches up a few frames on startup
-			if (clip->getNumReadyFrames() < 2)
+			if (clip->getReadyFramesCount() < 2)
 			{
 				return;
 			}
@@ -78,7 +78,7 @@ namespace av
 	void draw()
 	{
 		glBindTexture(GL_TEXTURE_2D, textureId);
-		theoraplayer::VideoFrame* frame = clip->getNextFrame();
+		theoraplayer::VideoFrame* frame = clip->fetchNextFrame();
 		if (frame != NULL)
 		{
 			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, clip->getWidth(), frame->getHeight(), textureFormat, GL_UNSIGNED_BYTE, frame->getBuffer());
@@ -114,7 +114,7 @@ namespace av
 			bufferSize = audioInterface->getQueuedAudioSize();
 		}
 		int dropped = clip->getDroppedFramesCount();
-		sprintf(out, "%d precached, %d dropped, buffered audio: %.2f s", clip->getNumReadyFrames(), dropped, bufferSize);
+		sprintf(out, "%d precached, %d dropped, buffered audio: %.2f s", clip->getReadyFramesCount(), dropped, bufferSize);
 	}
 
 	void onKeyPress(int key)

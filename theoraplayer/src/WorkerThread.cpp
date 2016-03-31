@@ -11,13 +11,13 @@
 #include "WorkerThread.h"
 #include "VideoClip.h"
 
-#ifdef _THREAD_NAMING
-static int threadCounter = 1;
-static theoraplayer::Mutex counterMutex;
-#endif
-
 namespace theoraplayer
 {
+#ifdef _THREAD_NAMING
+	static int threadCounter = 1;
+	static theoraplayer::Mutex counterMutex;
+#endif
+
 	WorkerThread::WorkerThread() : Thread(&WorkerThread::_work)
 	{
 		this->clip = NULL;
@@ -57,9 +57,9 @@ namespace theoraplayer
 			// if user requested seeking, do that then.
 			if (self->clip->seekFrame >= 0)
 			{
-				self->clip->_doSeek();
+				self->clip->_executeSeek();
 			}
-			decoded = self->clip->decodeNextFrame();
+			decoded = self->clip->_decodeNextFrame();
 			// TODOth - this is a potential hazard as assignedWorkerThread is set under a VideoManager::workMutex lock, but accessed here under a VideoClip::threadAccessMutex lock
 			if (self->clip->assignedWorkerThread == self)
 			{

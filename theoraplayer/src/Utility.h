@@ -35,6 +35,10 @@
 #define foreach_m(type, name, container) for (std::map< std::string, type >::iterator name = (container).begin(); name != (container).end(); ++name)
 #define foreachc_m(type, name, container) for (std::map< std::string, type >::const_iterator name = (container).begin(); name != (container).end(); ++name)
 
+#ifdef _USE_THEORA
+#define THEORA_DECODER_NAME "Theora"
+#endif
+
 namespace theoraplayer
 {
 	extern std::vector<VideoClip::Format> videoClipFormats;

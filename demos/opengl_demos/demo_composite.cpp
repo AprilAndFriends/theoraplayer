@@ -105,7 +105,7 @@ namespace composite
 		glPopMatrix();
 		// videos
 		glBindTexture(GL_TEXTURE_2D, textureIdWater);
-		theoraplayer::VideoFrame* frame = clipWater->getNextFrame();
+		theoraplayer::VideoFrame* frame = clipWater->fetchNextFrame();
 		if (frame != NULL)
 		{
 			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, frame->getWidth(), frame->getHeight(), GL_RGB, GL_UNSIGNED_BYTE, frame->getBuffer());
@@ -113,7 +113,7 @@ namespace composite
 		}
 		drawTexturedQuad(textureIdWater, 0.0f, 768.0f - 176.0f, 1024.0f, 176.0f, 1.0f, 176.0f / 256.0f);
 		glBindTexture(GL_TEXTURE_2D, textureIdEve);
-		frame = clipEve->getNextFrame();
+		frame = clipEve->fetchNextFrame();
 		if (frame != NULL)
 		{
 			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, frame->getWidth(), frame->getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, frame->getBuffer());

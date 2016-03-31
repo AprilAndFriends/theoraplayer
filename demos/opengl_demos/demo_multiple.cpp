@@ -61,7 +61,7 @@ namespace multiple
 	void _drawVideo(int x, int y, unsigned int textureId, theoraplayer::VideoClip* clip)
 	{
 		glBindTexture(GL_TEXTURE_2D, textureId);
-		theoraplayer::VideoFrame* frame = clip->getNextFrame();
+		theoraplayer::VideoFrame* frame = clip->fetchNextFrame();
 		if (frame != NULL)
 		{
 			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, clip->getWidth(), frame->getHeight(), uploadFormat, GL_UNSIGNED_BYTE, frame->getBuffer());
@@ -69,8 +69,8 @@ namespace multiple
 		}
 		float w = clip->getSubFrameWidth();
 		float h = clip->getSubFrameHeight();
-		float sx = clip->getSubFrameOffsetX();
-		float sy = clip->getSubFrameOffsetY();
+		float sx = clip->getSubFrameX();
+		float sy = clip->getSubFrameY();
 		float tw = potCeil(w);
 		float th = potCeil(h);
 		glEnable(GL_TEXTURE_2D);
@@ -105,7 +105,7 @@ namespace multiple
 		char temp[64] = { 0 };
 		for (int i = 0; i < MAX_VIDEOS; ++i)
 		{
-			sprintf(temp, "%d/%d ", clips[i]->getNumReadyFrames(), clips[i]->getNumPrecachedFrames());
+			sprintf(temp, "%d/%d ", clips[i]->getReadyFramesCount(), clips[i]->getPrecachedFramesCount());
 			strcat(newTitle, temp);
 		}
 		sprintf(temp, "(%d worker threads)", theoraplayer::manager->getWorkerThreadCount());

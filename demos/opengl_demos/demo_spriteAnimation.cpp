@@ -103,7 +103,7 @@ namespace spriteAnimation
 	void draw()
 	{
 		glBindTexture(GL_TEXTURE_2D, textureId);
-		theoraplayer::VideoFrame* frame = clips[cClip]->getNextFrame();
+		theoraplayer::VideoFrame* frame = clips[cClip]->fetchNextFrame();
 		if (frame != NULL)
 		{
 			unsigned char* src = frame->getBuffer();
@@ -138,7 +138,7 @@ namespace spriteAnimation
 		char temp[64] = { 0 };
 		for (int i = 0; i < MAX_VIDEOS; i++)
 		{
-			sprintf(temp, "%d/%d  ", clips[i]->getNumReadyFrames(), clips[i]->getNumPrecachedFrames());
+			sprintf(temp, "%d/%d  ", clips[i]->getReadyFramesCount(), clips[i]->getPrecachedFramesCount());
 			strcat(out, temp);
 		}
 		strcat(out, temp);

@@ -84,178 +84,7 @@ namespace clipavfoundation
 
 	VideoClip::~VideoClip()
 	{
-		this->unload();
-	}
-
-	void VideoClip::unload()
-	{
-		if (this->output != NULL || this->audioOutput != NULL || this->reader != NULL)
-		{
-			NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-			if (this->output != NULL)
-			{
-				[this->output release];
-				this->output = NULL;
-			}
-			if (this->audioOutput != NULL)
-			{
-				[this->audioOutput release];
-				this->audioOutput = NULL;
-			}
-			if (this->reader != NULL)
-			{
-				[this->reader release];
-				this->reader = NULL;
-			}
-			[pool release];
-		}
-	}
-
-	bool VideoClip::_readData()
-	{
-		return true;
-	}
-
-	bool VideoClip::decodeNextFrame()
-	{
-		if (this->reader == NULL || this->endOfFile)
-		{
-			return false;
-		}
-		AVAssetReaderStatus status = [this->reader status];
-		if (status == AVAssetReaderStatusFailed)
-		{
-			// This can happen on iOS when you suspend the app... Only happens on the device, iOS simulator seems to work fine.
-			theoraplayer::log("AVAssetReader reading failed, restarting...");
-			this->seekFrame = this->timer->getTime() * this->fps;
-			// just in case
-			if (this->seekFrame < 0)
-			{
-				this->seekFrame = 0;
-			}
-			if (this->seekFrame > this->duration * this->fps - 1)
-			{
-				this->seekFrame = this->duration * this->fps - 1;
-			}
-			this->_restart();
-			status = [this->reader status];
-			if (status == AVAssetReaderStatusFailed)
-			{
-				theoraplayer::log("AVAssetReader restart failed!");
-				return false;
-			}
-			theoraplayer::log("AVAssetReader restart succeeded!");
-		}
-		theoraplayer::VideoFrame* frame = this->frameQueue->requestEmptyFrame();
-		if (frame == NULL)
-		{
-			return false;
-		}
-		CMSampleBufferRef sampleBuffer = NULL;
-		NSAutoreleasePool* pool = NULL;
-		CMTime presentationTime;
-		if (this->audioInterface != NULL)
-		{
-			this->decodeAudio();
-		}
-		if (status == AVAssetReaderStatusReading)
-		{
-			pool = [[NSAutoreleasePool alloc] init];
-			while ((sampleBuffer = [this->output copyNextSampleBuffer]))
-			{
-				presentationTime = CMSampleBufferGetOutputPresentationTimeStamp(sampleBuffer);
-				frame->timeToDisplay = (float) CMTimeGetSeconds(presentationTime);
-				frame->iteration = iteration;
-				frame->_setFrameNumber(this->frameNumber);
-				++this->frameNumber;
-				if (frame->timeToDisplay < this->timer->getTime() && !this->restarted && this->frameNumber % 16 != 0)
-				{
-					// %16 operation is here to prevent a playback halt during video playback if the decoder can't keep up with demand.
-#ifdef _DEBUG_FRAMEDROP
-					theoraplayer::log(this->name + ": pre-dropped frame " + str(this->frameNumber - 1));
-#endif
-					++this->numDisplayedFrames;
-					++this->numDroppedFrames;
-					CMSampleBufferInvalidate(sampleBuffer);
-					CFRelease(sampleBuffer);
-					sampleBuffer = NULL;
-					continue; // drop frame
-				}
-				CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-				CVPixelBufferLockBaseAddress(imageBuffer, 0);
-				void* baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
-				mStride = (int)CVPixelBufferGetBytesPerRow(imageBuffer);
-				size_t width = CVPixelBufferGetWidth(imageBuffer);
-				size_t height = CVPixelBufferGetHeight(imageBuffer);
-				PixelTransform t;
-				memset(&t, 0, sizeof(PixelTransform));
-#ifdef _AVFOUNDATION_BGRX
-				if (this->outputMode == TH_BGRX || this->outputMode == TH_RGBA)
-				{
-					t.raw = (unsigned char*)baseAddress;
-					t.rawStride = mStride;
-				}
-				else
-#endif
-				{
-					CVPlanarPixelBufferInfo_YCbCrPlanar yuv = getYUVStruct(baseAddress);
-					t.y = (unsigned char*)baseAddress + yuv.componentInfoY.offset;  t.yStride = yuv.componentInfoY.rowBytes;
-					t.u = (unsigned char*)baseAddress + yuv.componentInfoCb.offset; t.uStride = yuv.componentInfoCb.rowBytes;
-					t.v = (unsigned char*)baseAddress + yuv.componentInfoCr.offset; t.vStride = yuv.componentInfoCr.rowBytes;
-				}
-#ifdef _AVFOUNDATION_BGRX
-				if (this->outputMode == TH_RGBA)
-				{
-					unsigned char* buffer = frame->getBuffer();
-					for (int i = 0; i < 1000; ++i)
-					{
-						bgrx2rgba(buffer, this->width / 2, this->height, &t);
-					}
-					frame->ready = true;
-				}
-				else
-#endif
-				{
-					frame->decode(&t);
-				}
-				CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
-				CMSampleBufferInvalidate(sampleBuffer);
-				CFRelease(sampleBuffer);
-				break; // TODO - should this really be a while loop instead of an if block?
-			}
-		}
-		if (pool != NULL)
-		{
-			[pool release];
-		}
-		if (!frame->ready) // in case the frame wasn't used
-		{
-			frame->inUse = false;
-		}
-		if (sampleBuffer == NULL && this->reader.status == AVAssetReaderStatusCompleted) // other cases could be app suspended
-		{
-			if (this->autoRestart)
-			{
-				++iteration;
-				this->_restart();
-			}
-			else
-			{
-				this->unload();
-				this->endOfFile = true;
-				theoraplayer::log(this->name + " finished playing.");
-			}
-			return false;
-		}
-		return true;
-	}
-
-	void VideoClip::_restart()
-	{
-		this->endOfFile = false;
-		this->unload();
-		this->load(this->stream);
-		this->restarted = true;
+		this->_unload();
 	}
 
 	void VideoClip::_load(theoraplayer::DataSource* source)
@@ -373,15 +202,146 @@ namespace clipavfoundation
 		this->loaded = true;
 	}
 	
-	void VideoClip::decodedAudioCheck()
+	bool VideoClip::_readData()
 	{
-		if (this->audioInterface != NULL && !this->timer->isPaused())
-		{
-			this->_flushSynchronizedAudioPackets(this->audioInterface, this->audioMutex);
-		}
+		return true;
 	}
 
-	float VideoClip::decodeAudio()
+	bool VideoClip::_decodeNextFrame()
+	{
+		if (this->reader == NULL || this->endOfFile)
+		{
+			return false;
+		}
+		AVAssetReaderStatus status = [this->reader status];
+		if (status == AVAssetReaderStatusFailed)
+		{
+			// This can happen on iOS when you suspend the app... Only happens on the device, iOS simulator seems to work fine.
+			theoraplayer::log("AVAssetReader reading failed, restarting...");
+			this->seekFrame = this->timer->getTime() * this->fps;
+			// just in case
+			if (this->seekFrame < 0)
+			{
+				this->seekFrame = 0;
+			}
+			if (this->seekFrame > this->duration * this->fps - 1)
+			{
+				this->seekFrame = this->duration * this->fps - 1;
+			}
+			this->_executeRestart();
+			status = [this->reader status];
+			if (status == AVAssetReaderStatusFailed)
+			{
+				theoraplayer::log("AVAssetReader restart failed!");
+				return false;
+			}
+			theoraplayer::log("AVAssetReader restart succeeded!");
+		}
+		theoraplayer::VideoFrame* frame = this->frameQueue->requestEmptyFrame();
+		if (frame == NULL)
+		{
+			return false;
+		}
+		CMSampleBufferRef sampleBuffer = NULL;
+		NSAutoreleasePool* pool = NULL;
+		CMTime presentationTime;
+		if (this->audioInterface != NULL)
+		{
+			this->_decodeAudio();
+		}
+		if (status == AVAssetReaderStatusReading)
+		{
+			pool = [[NSAutoreleasePool alloc] init];
+			while ((sampleBuffer = [this->output copyNextSampleBuffer]))
+			{
+				presentationTime = CMSampleBufferGetOutputPresentationTimeStamp(sampleBuffer);
+				frame->timeToDisplay = (float) CMTimeGetSeconds(presentationTime);
+				frame->iteration = iteration;
+				frame->_setFrameNumber(this->frameNumber);
+				++this->frameNumber;
+				if (frame->timeToDisplay < this->timer->getTime() && !this->restarted && this->frameNumber % 16 != 0)
+				{
+					// %16 operation is here to prevent a playback halt during video playback if the decoder can't keep up with demand.
+#ifdef _DEBUG_FRAMEDROP
+					theoraplayer::log(this->name + ": pre-dropped frame " + str(this->frameNumber - 1));
+#endif
+					++this->numDisplayedFrames;
+					++this->numDroppedFrames;
+					CMSampleBufferInvalidate(sampleBuffer);
+					CFRelease(sampleBuffer);
+					sampleBuffer = NULL;
+					continue; // drop frame
+				}
+				CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+				CVPixelBufferLockBaseAddress(imageBuffer, 0);
+				void* baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
+				mStride = (int)CVPixelBufferGetBytesPerRow(imageBuffer);
+				size_t width = CVPixelBufferGetWidth(imageBuffer);
+				size_t height = CVPixelBufferGetHeight(imageBuffer);
+				PixelTransform t;
+				memset(&t, 0, sizeof(PixelTransform));
+#ifdef _AVFOUNDATION_BGRX
+				if (this->outputMode == TH_BGRX || this->outputMode == TH_RGBA)
+				{
+					t.raw = (unsigned char*)baseAddress;
+					t.rawStride = mStride;
+				}
+				else
+#endif
+				{
+					CVPlanarPixelBufferInfo_YCbCrPlanar yuv = getYUVStruct(baseAddress);
+					t.y = (unsigned char*)baseAddress + yuv.componentInfoY.offset;  t.yStride = yuv.componentInfoY.rowBytes;
+					t.u = (unsigned char*)baseAddress + yuv.componentInfoCb.offset; t.uStride = yuv.componentInfoCb.rowBytes;
+					t.v = (unsigned char*)baseAddress + yuv.componentInfoCr.offset; t.vStride = yuv.componentInfoCr.rowBytes;
+				}
+#ifdef _AVFOUNDATION_BGRX
+				if (this->outputMode == TH_RGBA)
+				{
+					unsigned char* buffer = frame->getBuffer();
+					for (int i = 0; i < 1000; ++i)
+					{
+						bgrx2rgba(buffer, this->width / 2, this->height, &t);
+					}
+					frame->ready = true;
+				}
+				else
+#endif
+				{
+					frame->decode(&t);
+				}
+				CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+				CMSampleBufferInvalidate(sampleBuffer);
+				CFRelease(sampleBuffer);
+				break; // TODO - should this really be a while loop instead of an if block?
+			}
+		}
+		if (pool != NULL)
+		{
+			[pool release];
+		}
+		if (!frame->ready) // in case the frame wasn't used
+		{
+			frame->inUse = false;
+		}
+		if (sampleBuffer == NULL && this->reader.status == AVAssetReaderStatusCompleted) // other cases could be app suspended
+		{
+			if (this->autoRestart)
+			{
+				++iteration;
+				this->_executeRestart();
+			}
+			else
+			{
+				this->_unload();
+				this->endOfFile = true;
+				theoraplayer::log(this->name + " finished playing.");
+			}
+			return false;
+		}
+		return true;
+	}
+
+	float VideoClip::_decodeAudio()
 	{
 		if (this->restarted)
 		{
@@ -442,7 +402,15 @@ namespace clipavfoundation
 		return -1.0f;
 	}
 
-	void VideoClip::_doSeek()
+	void VideoClip::_decodedAudioCheck()
+	{
+		if (this->audioInterface != NULL && !this->timer->isPaused())
+		{
+			this->_flushSynchronizedAudioPackets(this->audioInterface, this->audioMutex);
+		}
+	}
+
+	void VideoClip::_executeSeek()
 	{
 		float time = this->seekFrame / getFps();
 		this->timer->seek(time);
@@ -451,7 +419,7 @@ namespace clipavfoundation
 		{
 			this->timer->pause();
 		}
-		this->resetFrameQueue();
+		this->_resetFrameQueue();
 #ifdef _DEBUG
 		theoraplayer::log("Seek frame: " + str(this->seekFrame));
 #endif
@@ -461,6 +429,38 @@ namespace clipavfoundation
 			this->timer->play();
 		}
 		this->seekFrame = -1;
+	}
+
+	void VideoClip::_executeRestart()
+	{
+		this->endOfFile = false;
+		this->_unload();
+		this->load(this->stream);
+		this->restarted = true;
+	}
+
+	void VideoClip::_unload()
+	{
+		if (this->output != NULL || this->audioOutput != NULL || this->reader != NULL)
+		{
+			NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+			if (this->output != NULL)
+			{
+				[this->output release];
+				this->output = NULL;
+			}
+			if (this->audioOutput != NULL)
+			{
+				[this->audioOutput release];
+				this->audioOutput = NULL;
+			}
+			if (this->reader != NULL)
+			{
+				[this->reader release];
+				this->reader = NULL;
+			}
+			[pool release];
+		}
 	}
 
 }

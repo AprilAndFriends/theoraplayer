@@ -40,7 +40,9 @@ namespace clipffmpeg
 {
 	static bool ffmpegInitialised = false;
 
-	static int readFunction(void* data, uint8_t* buf, int buf_size)
+	// utility functions
+
+	static int _readFunction(void* data, uint8_t* buf, int buf_size)
 	{
 #ifdef _FFMPEG_DEBUG
 		theoraplayer::log("reading " + str(buf_size) + " bytes");
@@ -49,7 +51,7 @@ namespace clipffmpeg
 		return src->read(buf, buf_size);
 	}
 
-	static int64_t seekFunction(void* data, int64_t offset, int whence)
+	static int64_t _seekFunction(void* data, int64_t offset, int whence)
 	{
 #ifdef _FFMPEG_DEBUG
 		theoraplayer::log("seeking: offset = " + str((long)offset) + ", whence = " + str(whence));
@@ -73,7 +75,7 @@ namespace clipffmpeg
 	static void avlog_theoraplayer(void* p, int level, const char* fmt, va_list vargs)
 	{
 		theoraplayer::log(fmt);
-		static char logstr[2048] = { 0 };
+		static char logstr[65536] = { 0 };
 		vsprintf(logstr, fmt, vargs);
 		theoraplayer::log("ffmpeg: " + std::string(logstr));
 	}
@@ -83,8 +85,6 @@ namespace clipffmpeg
 	static void _log(const char* s)
 	{
 		text += s;
-		//	theoraplayer::log(text);
-		//	text = "";
 	}
 
 	static void _log(const char c)
@@ -93,7 +93,7 @@ namespace clipffmpeg
 		_log(s);
 	}
 
-	static const AVCodec *next_codec_for_id(enum AVCodecID id, const AVCodec *prev, int encoder)
+	static const AVCodec *_nextCodecForId(enum AVCodecID id, const AVCodec *prev, int encoder)
 	{
 		while ((prev = av_codec_next(prev)))
 		{
@@ -105,14 +105,14 @@ namespace clipffmpeg
 		return NULL;
 	}
 
-	static int compare_codec_desc(const void *a, const void *b)
+	static int _compareCodecDesc(const void *a, const void *b)
 	{
 		const AVCodecDescriptor** da = (const AVCodecDescriptor**)a;
 		const AVCodecDescriptor** db = (const AVCodecDescriptor**)b;
 		return (*da)->type != (*db)->type ? (*da)->type - (*db)->type : strcmp((*da)->name, (*db)->name);
 	}
 
-	static unsigned get_codecs_sorted(const AVCodecDescriptor*** rcodecs)
+	static unsigned _getCodecsSorted(const AVCodecDescriptor*** rcodecs)
 	{
 		const AVCodecDescriptor* desc = NULL;
 		const AVCodecDescriptor** codecs;
@@ -134,40 +134,40 @@ namespace clipffmpeg
 			++i;
 		}
 		av_assert0(i == nb_codecs);
-		qsort(codecs, nb_codecs, sizeof(*codecs), compare_codec_desc);
+		qsort(codecs, nb_codecs, sizeof(*codecs), _compareCodecDesc);
 		*rcodecs = codecs;
 		return nb_codecs;
 	}
 
-	static char get_media_type_char(enum AVMediaType type)
+	static char _getMediaTypeChar(enum AVMediaType type)
 	{
 		switch (type)
 		{
-		case AVMEDIA_TYPE_VIDEO:    return 'V';
-		case AVMEDIA_TYPE_AUDIO:    return 'A';
-		case AVMEDIA_TYPE_DATA:     return 'D';
-		case AVMEDIA_TYPE_SUBTITLE: return 'S';
-		case AVMEDIA_TYPE_ATTACHMENT:return 'T';
-		default:                    return '?';
+		case AVMEDIA_TYPE_VIDEO:		return 'V';
+		case AVMEDIA_TYPE_AUDIO:		return 'A';
+		case AVMEDIA_TYPE_DATA:			return 'D';
+		case AVMEDIA_TYPE_SUBTITLE:		return 'S';
+		case AVMEDIA_TYPE_ATTACHMENT:	return 'T';
+		default:						return '?';
 		}
 	}
 
-	static void print_codecs_for_id(enum AVCodecID id, int encoder)
+	static void _printCodecsForId(enum AVCodecID id, int encoder)
 	{
 		const AVCodec *codec = NULL;
 		_log(encoder ? "encoders" : "decoders");
-		while ((codec = next_codec_for_id(id, codec, encoder)))
+		while ((codec = _nextCodecForId(id, codec, encoder)))
 		{
 			_log(codec->name);
 		}
 		_log(")");
 	}
 
-	int show_codecs(void *optctx, const char *opt, const char *arg)
+	static int _showCodecs(void *optctx, const char *opt, const char *arg)
 	{
 		const AVCodecDescriptor** codecs;
 		unsigned i;
-		unsigned nb_codecs = get_codecs_sorted(&codecs);
+		unsigned nb_codecs = _getCodecsSorted(&codecs);
 		char tmp[1024] = { 0 };
 		theoraplayer::log("Codecs:\n"
 			" D..... = Decoding supported\n"
@@ -188,7 +188,7 @@ namespace clipffmpeg
 			_log(" ");
 			_log(avcodec_find_decoder(desc->id) ? "D" : ".");
 			_log(avcodec_find_encoder(desc->id) ? "E" : ".");
-			_log(get_media_type_char(desc->type));
+			_log(_getMediaTypeChar(desc->type));
 			_log((desc->props & AV_CODEC_PROP_INTRA_ONLY) ? "I" : ".");
 			_log((desc->props & AV_CODEC_PROP_LOSSY) ? "L" : ".");
 			_log((desc->props & AV_CODEC_PROP_LOSSLESS) ? "S" : ".");
@@ -196,20 +196,20 @@ namespace clipffmpeg
 			_log(tmp);
 			/* print decoders/encoders when there's more than one or their
 			* names are different from codec name */
-			while ((codec = next_codec_for_id(desc->id, codec, 0)))
+			while ((codec = _nextCodecForId(desc->id, codec, 0)))
 			{
 				if (strcmp(codec->name, desc->name))
 				{
-					print_codecs_for_id(desc->id, 0);
+					_printCodecsForId(desc->id, 0);
 					break;
 				}
 			}
 			codec = NULL;
-			while ((codec = next_codec_for_id(desc->id, codec, 1)))
+			while ((codec = _nextCodecForId(desc->id, codec, 1)))
 			{
 				if (strcmp(codec->name, desc->name))
 				{
-					print_codecs_for_id(desc->id, 1);
+					_printCodecsForId(desc->id, 1);
 					break;
 				}
 			}
@@ -219,6 +219,8 @@ namespace clipffmpeg
 		av_log(0, 0, "%s", text.c_str());
 		return 0;
 	}
+
+	// actual class
 
 	VideoClip::VideoClip(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride) :
 		theoraplayer::VideoClip(dataSource, outputMode, precachedFramesCount, usePotStride),
@@ -238,81 +240,7 @@ namespace clipffmpeg
 
 	VideoClip::~VideoClip()
 	{
-		this->unload();
-	}
-
-	void VideoClip::unload()
-	{
-		if (this->inputBuffer != NULL)
-		{
-			//		av_free(this->inputBuffer);
-			this->inputBuffer = NULL;
-		}
-		if (this->avioContext != NULL)
-		{
-			av_free(this->avioContext);
-			this->avioContext = NULL;
-		}
-		if (this->frame != NULL)
-		{
-			av_free(this->frame);
-			this->frame = NULL;
-		}
-		if (this->codecContext)
-		{
-			avcodec_close(this->codecContext);
-			this->codecContext = NULL;
-		}
-		if (this->formatContext != NULL)
-		{
-			avformat_close_input(&this->formatContext);
-			this->formatContext = NULL;
-		}
-	}
-
-	bool VideoClip::_readData()
-	{
-		return true;
-	}
-
-	bool VideoClip::decodeNextFrame()
-	{
-		theoraplayer::VideoFrame* frame = this->frameQueue->requestEmptyFrame();
-		if (frame == NULL)
-		{
-			return false;
-		}
-		AVPacket packet;
-		int frameFinished;
-
-		while (av_read_frame(this->formatContext, &packet) >= 0)
-		{
-			if (packet.stream_index == this->videoStreamIndex)
-			{
-				avcodec_decode_video2(this->codecContext, this->frame, &frameFinished, &packet);
-				if (frameFinished != 0)
-				{
-					Theoraplayer_PixelTransform pixelTransform;
-					memset(&pixelTransform, 0, sizeof(Theoraplayer_PixelTransform));
-					pixelTransform.y = this->frame->data[0];	pixelTransform.yStride = this->frame->linesize[0];
-					pixelTransform.u = this->frame->data[1];	pixelTransform.uStride = this->frame->linesize[1];
-					pixelTransform.v = this->frame->data[2];	pixelTransform.vStride = this->frame->linesize[2];
-					frame->decode(&pixelTransform);
-					this->_setVideoFrameTimeToDisplay(frame, this->frameNumber / this->fps);
-					this->_setVideoFrameIteration(frame, this->iteration);
-					this->_setVideoFrameFrameNumber(frame, this->frameNumber);
-					++this->frameNumber;
-					av_packet_unref(&packet);
-					break;
-				}
-			}
-			av_packet_unref(&packet);
-		}
-		return true;
-	}
-
-	void VideoClip::_restart()
-	{
+		this->_unload();
 	}
 
 	void VideoClip::_load(theoraplayer::DataSource* source)
@@ -330,10 +258,10 @@ namespace clipffmpeg
 			av_log_set_level(AV_LOG_DEBUG);
 			av_log_set_callback(avlog_theoraplayer);
 			ffmpegInitialised = 1;
-			//show_codecs(0, 0, 0);
+			//_showCodecs(0, 0, 0);
 		}
 		this->inputBuffer = (unsigned char*)av_malloc(READ_BUFFER_SIZE);
-		this->avioContext = avio_alloc_context(this->inputBuffer, READ_BUFFER_SIZE, 0, source, &readFunction, NULL, &seekFunction);
+		this->avioContext = avio_alloc_context(this->inputBuffer, READ_BUFFER_SIZE, 0, source, &_readFunction, NULL, &_seekFunction);
 #ifdef _FFMPEG_DEBUG
 		theoraplayer::log(this->name + ": avio context created");
 #endif
@@ -400,7 +328,7 @@ namespace clipffmpeg
 		theoraplayer::log(this->name + ": Frame allocated");
 #endif
 		//AVRational rational = mCodecContext->time_base;
-		this->fps = 25; //TODOOOOOO!!!
+		this->fps = 25; // TODOth - implement this!
 		this->width = this->stride = this->codecContext->width;
 		this->height = this->codecContext->height;
 		this->frameDuration = 1.0f / this->fps;
@@ -412,7 +340,52 @@ namespace clipffmpeg
 		}
 	}
 	
-	void VideoClip::decodedAudioCheck()
+	bool VideoClip::_readData()
+	{
+		return true;
+	}
+
+	bool VideoClip::_decodeNextFrame()
+	{
+		theoraplayer::VideoFrame* frame = this->frameQueue->requestEmptyFrame();
+		if (frame == NULL)
+		{
+			return false;
+		}
+		AVPacket packet;
+		int frameFinished = 0;
+		while (av_read_frame(this->formatContext, &packet) >= 0)
+		{
+			if (packet.stream_index == this->videoStreamIndex)
+			{
+				avcodec_decode_video2(this->codecContext, this->frame, &frameFinished, &packet);
+				if (frameFinished != 0)
+				{
+					Theoraplayer_PixelTransform pixelTransform;
+					memset(&pixelTransform, 0, sizeof(Theoraplayer_PixelTransform));
+					pixelTransform.y = this->frame->data[0];	pixelTransform.yStride = this->frame->linesize[0];
+					pixelTransform.u = this->frame->data[1];	pixelTransform.uStride = this->frame->linesize[1];
+					pixelTransform.v = this->frame->data[2];	pixelTransform.vStride = this->frame->linesize[2];
+					frame->decode(&pixelTransform);
+					this->_setVideoFrameTimeToDisplay(frame, this->frameNumber / this->fps);
+					this->_setVideoFrameIteration(frame, this->iteration);
+					this->_setVideoFrameFrameNumber(frame, this->frameNumber);
+					++this->frameNumber;
+					av_packet_unref(&packet);
+					break;
+				}
+			}
+			av_packet_unref(&packet);
+		}
+		return true;
+	}
+
+	float VideoClip::_decodeAudio()
+	{
+		return -1.0f;
+	}
+
+	void VideoClip::_decodedAudioCheck()
 	{
 		if (this->audioInterface != NULL && !this->timer->isPaused())
 		{
@@ -420,13 +393,41 @@ namespace clipffmpeg
 		}
 	}
 
-	float VideoClip::decodeAudio()
+	void VideoClip::_executeSeek()
 	{
-		return -1.0f;
 	}
 
-	void VideoClip::_doSeek()
+	void VideoClip::_executeRestart()
 	{
+	}
+
+	void VideoClip::_unload()
+	{
+		if (this->inputBuffer != NULL)
+		{
+			//		av_free(this->inputBuffer);
+			this->inputBuffer = NULL;
+		}
+		if (this->avioContext != NULL)
+		{
+			av_free(this->avioContext);
+			this->avioContext = NULL;
+		}
+		if (this->frame != NULL)
+		{
+			av_free(this->frame);
+			this->frame = NULL;
+		}
+		if (this->codecContext)
+		{
+			avcodec_close(this->codecContext);
+			this->codecContext = NULL;
+		}
+		if (this->formatContext != NULL)
+		{
+			avformat_close_input(&this->formatContext);
+			this->formatContext = NULL;
+		}
 	}
 
 }

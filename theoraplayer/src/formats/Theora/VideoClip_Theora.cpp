@@ -67,6 +67,109 @@ namespace theoraplayer
 		}
 	}
 
+	void VideoClip_Theora::_load(DataSource* source)
+	{
+#ifdef _DEBUG
+		log("-----");
+#endif
+		this->stream = source;
+		this->_readTheoraVorbisHeaders();
+		this->info.TheoraDecoder = th_decode_alloc(&this->info.TheoraInfo, this->info.TheoraSetup);
+		this->width = this->info.TheoraInfo.frame_width;
+		this->height = this->info.TheoraInfo.frame_height;
+		this->subFrameWidth = this->info.TheoraInfo.pic_width;
+		this->subFrameHeight = this->info.TheoraInfo.pic_height;
+		this->subFrameX = this->info.TheoraInfo.pic_x;
+		this->subFrameY = this->info.TheoraInfo.pic_y;
+		this->stride = this->getWidth();
+		if (this->useStride)
+		{
+			this->stride = potCeil(this->stride);
+		}
+		this->fps = this->info.TheoraInfo.fps_numerator / (float)this->info.TheoraInfo.fps_denominator;
+#ifdef _DEBUG
+		log("width: " + str(this->width) + ", height: " + str(this->height) + ", fps: " + str((int)this->getFps()));
+#endif
+		this->frameQueue = new FrameQueue(this);
+		this->frameQueue->setSize(this->precachedFramesCount);
+		// find out the duration of the file by seeking to the end
+		// having ogg decode pages, extract the granule pos from
+		// the last theora page and seek back to beginning of the file
+		char* buffer = NULL;
+		int bytesRead = 0;
+		uint64_t streamSize = this->stream->getSize();
+		uint64_t seekPos = 0;
+		int result = 0;
+		ogg_int64_t granule = 0;
+		for (unsigned int i = 1; i <= 50; ++i)
+		{
+			ogg_sync_reset(&this->info.OggSyncState);
+			seekPos = (BUFFER_SIZE * i > streamSize ? 0 : streamSize - BUFFER_SIZE * i);
+			this->stream->seek(seekPos);
+			buffer = ogg_sync_buffer(&this->info.OggSyncState, BUFFER_SIZE * i);
+			bytesRead = this->stream->read(buffer, BUFFER_SIZE * i);
+			ogg_sync_wrote(&this->info.OggSyncState, bytesRead);
+			ogg_sync_pageseek(&this->info.OggSyncState, &this->info.OggPage);
+			while (true)
+			{
+				result = ogg_sync_pageout(&this->info.OggSyncState, &this->info.OggPage);
+				if (result == 0)
+				{
+					break;
+				}
+				// if page is not a theora page or page is unsynced(-1), skip it
+				if (result == -1 || ogg_page_serialno(&this->info.OggPage) != this->info.TheoraStreamState.serialno)
+				{
+					continue;
+				}
+				granule = ogg_page_granulepos(&this->info.OggPage);
+				if (granule >= 0)
+				{
+					this->framesCount = (int)th_granule_frame(this->info.TheoraDecoder, granule) + 1;
+				}
+				else if (this->framesCount > 0)
+				{
+					++this->framesCount; // append delta frames at the end to get the exact number
+				}
+			}
+			if (this->framesCount > 0 || streamSize < BUFFER_SIZE * i)
+			{
+				break;
+			}
+		}
+		if (this->framesCount < 0)
+		{
+			log("unable to determine file duration!");
+		}
+		else
+		{
+			this->duration = this->framesCount / this->fps;
+#ifdef _DEBUG
+			log("duration: " + strf(this->duration) + " seconds");
+#endif
+		}
+		// restore to beginning of stream.
+		ogg_sync_reset(&this->info.OggSyncState);
+		this->stream->seek(0);
+		if (this->vorbisStreams > 0) // if there is no audio interface factory defined, even though the video clip might have audio, it will be ignored
+		{
+			vorbis_synthesis_init(&this->info.VorbisDSPState, &this->info.VorbisInfo);
+			vorbis_block_init(&this->info.VorbisDSPState, &this->info.VorbisBlock);
+			this->audioChannelsCount = this->info.VorbisInfo.channels;
+			this->audioFrequency = (int) this->info.VorbisInfo.rate;
+			// create an audio interface instance if available
+			AudioInterfaceFactory* audioInterfaceFactory = theoraplayer::manager->getAudioInterfaceFactory();
+			if (audioInterfaceFactory != NULL)
+			{
+				this->setAudioInterface(audioInterfaceFactory->createInstance(this, this->audioChannelsCount, this->audioFrequency));
+			}
+		}
+		this->frameDuration = 1.0f / this->getFps();
+#ifdef _DEBUG
+		log("-----");
+#endif
+	}
+
 	bool VideoClip_Theora::_readData()
 	{
 		int audioEos = 0;
@@ -115,7 +218,7 @@ namespace theoraplayer
 		return true;
 	}
 
-	bool VideoClip_Theora::decodeNextFrame()
+	bool VideoClip_Theora::_decodeNextFrame()
 	{
 		if (this->endOfFile)
 		{
@@ -184,17 +287,250 @@ namespace theoraplayer
 		if (this->audioInterface != NULL)
 		{
 			Mutex::ScopeLock lock(this->audioMutex);
-			this->decodeAudio();
+			this->_decodeAudio();
 		}
 		if (shouldRestart)
 		{
 			++this->iteration;
-			this->_restart();
+			this->_executeRestart();
 		}
 		return true;
 	}
 
-	void VideoClip_Theora::_restart()
+	float VideoClip_Theora::_decodeAudio()
+	{
+		if (this->restarted)
+		{
+			return -1.0f;
+		}
+		ogg_packet opVorbis;
+		float** pcm;
+		int length = 0;
+		float timeStamp = -1.0f;
+		bool readPastTimestamp = false;
+		float factor = 1.0f / this->audioFrequency;
+		float videoTime = (float)this->lastDecodedFrameNumber / this->fps;
+		float min = this->frameQueue->getSize() / this->fps + 1.0f;
+		float audioTime = 0.0f;
+		while (true)
+		{
+			length = vorbis_synthesis_pcmout(&this->info.VorbisDSPState, &pcm);
+			if (length == 0)
+			{
+				if (ogg_stream_packetout(&this->info.VorbisStreamState, &opVorbis) > 0)
+				{
+					if (vorbis_synthesis(&this->info.VorbisBlock, &opVorbis) == 0)
+					{
+						if (timeStamp < 0 && opVorbis.granulepos >= 0)
+						{
+							timeStamp = (float)vorbis_granule_time(&this->info.VorbisDSPState, opVorbis.granulepos);
+						}
+						else if (timeStamp >= 0)
+						{
+							readPastTimestamp = true;
+						}
+						vorbis_synthesis_blockin(&this->info.VorbisDSPState, &this->info.VorbisBlock);
+					}
+					continue;
+				}
+				audioTime = this->readAudioSamples * factor;
+				// always buffer up of audio ahead of the frames
+				if (audioTime - videoTime >= min || !this->_readData())
+				{
+					break;
+				}
+			}
+			if (length > 0)
+			{
+				this->addAudioPacket(pcm, length, this->audioGain);
+				this->readAudioSamples += length;
+				if (readPastTimestamp)
+				{
+					timeStamp += (float)length / this->info.VorbisInfo.rate;
+				}
+				vorbis_synthesis_read(&this->info.VorbisDSPState, length); // tell vorbis we read a number of samples
+			}
+		}
+		return timeStamp;
+	}
+
+	void VideoClip_Theora::_decodedAudioCheck()
+	{
+		if (this->audioInterface != NULL && !this->timer->isPaused())
+		{
+			this->_flushSynchronizedAudioPackets(this->audioInterface, this->audioMutex);
+		}
+	}
+
+	void VideoClip_Theora::_executeSeek()
+	{
+#if _DEBUG
+		log(this->name + " [seek]: seeking to frame " + str(this->seekFrame));
+#endif
+		int frame = 0;
+		float time = this->seekFrame / getFps();
+		this->timer->seek(time);
+		bool paused = this->timer->isPaused();
+		if (!paused)
+		{
+			this->timer->pause(); // pause until seeking is done
+		}
+		this->endOfFile = false;
+		this->restarted = false;
+		this->_resetFrameQueue();
+		// reset the video decoder.
+		ogg_stream_reset(&this->info.TheoraStreamState);
+		th_decode_free(this->info.TheoraDecoder);
+		this->info.TheoraDecoder = th_decode_alloc(&this->info.TheoraInfo, this->info.TheoraSetup);
+		Mutex::ScopeLock audioMutexLock;
+		if (this->audioInterface != NULL)
+		{
+			audioMutexLock.acquire(this->audioMutex);
+			ogg_stream_reset(&this->info.VorbisStreamState);
+			vorbis_synthesis_restart(&this->info.VorbisDSPState);
+			this->destroyAllAudioPackets();
+		}
+		// first seek to desired frame, then figure out the location of the
+		// previous key frame and seek to it.
+		// then by setting the correct time, the decoder will skip N frames untill
+		// we get the frame we want.
+		frame = (int)this->_seekPage(this->seekFrame, 1); // find the key frame nearest to the target frame
+#ifdef _DEBUG
+	//		log(mName + " [seek]: nearest key frame for frame " + str(mSeekFrame) + " is frame: " + str(frame));
+#endif
+		this->_seekPage(std::max(0, frame - 1), 0);
+
+		ogg_packet opTheora;
+		ogg_int64_t granulePos;
+		bool granuleSet = false;
+		if (frame <= 1)
+		{
+			if (this->info.TheoraInfo.version_major == 3 && this->info.TheoraInfo.version_minor == 2 && this->info.TheoraInfo.version_subminor == 0)
+			{
+				granulePos = 0;
+			}
+			else
+			{
+				granulePos = 1; // because of difference in granule interpretation in theora streams 3.2.0 and newer ones
+			}
+			th_decode_ctl(this->info.TheoraDecoder, TH_DECCTL_SET_GRANPOS, &granulePos, sizeof(granulePos));
+			granuleSet = true;
+		}
+		// now that we've found the key frame that preceeds our desired frame, lets keep on decoding frames until we
+		// reach our target frame.
+		int status = 0;
+		while (this->seekFrame != 0)
+		{
+			if (ogg_stream_packetout(&this->info.TheoraStreamState, &opTheora) > 0)
+			{
+				if (!granuleSet)
+				{
+					// theora decoder requires to set the granule pos after seek to be able to determine the current frame
+					if (opTheora.granulepos < 0)
+					{
+						continue; // ignore prev delta frames until we hit a key frame
+					}
+					th_decode_ctl(this->info.TheoraDecoder, TH_DECCTL_SET_GRANPOS, &opTheora.granulepos, sizeof(opTheora.granulepos));
+					granuleSet = true;
+				}
+				status = th_decode_packetin(this->info.TheoraDecoder, &opTheora, &granulePos);
+				if (status != 0 && status != TH_DUPFRAME)
+				{
+					continue;
+				}
+				frame = (int)th_granule_frame(this->info.TheoraDecoder, granulePos);
+				if (frame >= this->seekFrame - 1)
+				{
+					break;
+				}
+			}
+			else if (!this->_readData())
+			{
+				log(this->name + " [seek]: fineseeking failed, _readData failed!");
+				return;
+			}
+		}
+#ifdef _DEBUG
+		//	log(mName + " [seek]: fineseeked to frame " + str(frame + 1) + ", requested: " + str(mSeekFrame));
+#endif
+		if (this->audioInterface != NULL)
+		{
+			// read audio data until we reach a timeStamp. this usually takes only one iteration, but just in case let's
+			// wrap it in a loop
+			float timeStamp = 0.0f;
+			while (true)
+			{
+				timeStamp = this->_decodeAudio();
+				if (timeStamp >= 0)
+				{
+					break;
+				}
+				this->_readData();
+			}
+			float rate = (float)this->audioFrequency * this->audioChannelsCount;
+			float queuedTime = this->getAudioPacketQueueLength();
+			int trimmedCount = 0;
+			// at this point there are only 2 possibilities: either we have too much packets and we have to delete
+			// the first N ones, or we don't have enough, so let's fill the gap with silence.
+			if (time > timeStamp - queuedTime)
+			{
+				while (this->audioPacketQueue != NULL)
+				{
+					if (time <= timeStamp - queuedTime + this->audioPacketQueue->samplesCount / rate)
+					{
+						trimmedCount = (int)((timeStamp - queuedTime + this->audioPacketQueue->samplesCount / rate - time) * rate);
+						if (this->audioPacketQueue->samplesCount - trimmedCount <= 0)
+						{
+							this->destroyAudioPacket(this->popAudioPacket()); // if there's no data to be left, just destroy it
+						}
+						else
+						{
+							for (int i = trimmedCount, j = 0; i < this->audioPacketQueue->samplesCount; ++i, ++j)
+							{
+								this->audioPacketQueue->pcmData[j] = this->audioPacketQueue->pcmData[i];
+							}
+							this->audioPacketQueue->samplesCount -= trimmedCount;
+						}
+						break;
+					}
+					queuedTime -= this->audioPacketQueue->samplesCount / rate;
+					this->destroyAudioPacket(this->popAudioPacket());
+				}
+			}
+			// expand the first packet with silence.
+			else if (this->audioPacketQueue != NULL)
+			{
+				int i = 0;
+				int j = 0;
+				int missingCount = (int)((timeStamp - queuedTime - time) * rate);
+				if (missingCount > 0)
+				{
+					float* samples = new float[missingCount + this->audioPacketQueue->samplesCount];
+					// TODOth - can this be done with a memset even though it's a float?
+					for (i = 0; i < missingCount; ++i)
+					{
+						samples[i] = 0;
+					}
+					for (j = 0; i < missingCount + this->audioPacketQueue->samplesCount; ++i, ++j)
+					{
+						samples[i] = this->audioPacketQueue->pcmData[j];
+					}
+					delete[] this->audioPacketQueue->pcmData;
+					this->audioPacketQueue->pcmData = samples;
+				}
+			}
+			this->lastDecodedFrameNumber = this->seekFrame;
+			this->readAudioSamples = (unsigned int)(timeStamp * this->audioFrequency);
+			audioMutexLock.release();
+		}
+		if (!paused)
+		{
+			this->timer->play();
+		}
+		this->seekFrame = -1;
+	}
+
+	void VideoClip_Theora::_executeRestart()
 	{
 		bool paused = this->timer->isPaused();
 		if (!paused)
@@ -232,106 +568,84 @@ namespace theoraplayer
 		}
 	}
 
-	void VideoClip_Theora::_load(DataSource* source)
+	long VideoClip_Theora::_seekPage(long targetFrame, bool returnKeyFrame)
 	{
-#ifdef _DEBUG
-		log("-----");
-#endif
-		this->stream = source;
-		this->readTheoraVorbisHeaders();
-		this->info.TheoraDecoder = th_decode_alloc(&this->info.TheoraInfo, this->info.TheoraSetup);
-		this->width = this->info.TheoraInfo.frame_width;
-		this->height = this->info.TheoraInfo.frame_height;
-		this->subFrameWidth = this->info.TheoraInfo.pic_width;
-		this->subFrameHeight = this->info.TheoraInfo.pic_height;
-		this->subFrameOffsetX = this->info.TheoraInfo.pic_x;
-		this->subFrameOffsetY = this->info.TheoraInfo.pic_y;
-		this->stride = (this->stride == 1) ? potCeil(this->getWidth()) : this->getWidth();
-		this->fps = this->info.TheoraInfo.fps_numerator / (float)this->info.TheoraInfo.fps_denominator;
-#ifdef _DEBUG
-		log("width: " + str(this->width) + ", height: " + str(this->height) + ", fps: " + str((int)this->getFps()));
-#endif
-		this->frameQueue = new FrameQueue(this);
-		this->frameQueue->setSize(this->precachedFramesCount);
-		// find out the duration of the file by seeking to the end
-		// having ogg decode pages, extract the granule pos from
-		// the last theora page and seek back to beginning of the file
+		uint64_t seekMin = 0;
+		uint64_t seekMax = this->stream->getSize();
+		long frame = 0;
+		ogg_int64_t granule = 0;
+		if (targetFrame == 0)
+		{
+			this->stream->seek(0);
+		}
 		char* buffer = NULL;
 		int bytesRead = 0;
-		uint64_t streamSize = this->stream->getSize();
-		uint64_t seekPos = 0;
-		int result = 0;
-		ogg_int64_t granule = 0;
-		for (unsigned int i = 1; i <= 50; ++i)
+		if (targetFrame != 0)
 		{
-			ogg_sync_reset(&this->info.OggSyncState);
-			seekPos = (BUFFER_SIZE * i > streamSize ? 0 : streamSize - BUFFER_SIZE * i);
-			this->stream->seek(seekPos);
-			buffer = ogg_sync_buffer(&this->info.OggSyncState, BUFFER_SIZE * i);
-			bytesRead = this->stream->read(buffer, BUFFER_SIZE * i);
-			ogg_sync_wrote(&this->info.OggSyncState, bytesRead);
-			ogg_sync_pageseek(&this->info.OggSyncState, &this->info.OggPage);
-			while (true)
+			for (int i = 0; i < 100; ++i)
 			{
-				result = ogg_sync_pageout(&this->info.OggSyncState, &this->info.OggPage);
-				if (result == 0)
+				ogg_sync_reset(&this->info.OggSyncState);
+				this->stream->seek(seekMin / 2 + seekMax / 2); // do a binary search
+				memset(&this->info.OggPage, 0, sizeof(ogg_page));
+				ogg_sync_pageseek(&this->info.OggSyncState, &this->info.OggPage);
+				while (i < 1000)
 				{
-					break;
-				}
-				// if page is not a theora page or page is unsynced(-1), skip it
-				if (result == -1 || ogg_page_serialno(&this->info.OggPage) != this->info.TheoraStreamState.serialno)
-				{
-					continue;
-				}
-				granule = ogg_page_granulepos(&this->info.OggPage);
-				if (granule >= 0)
-				{
-					this->numFrames = (int)th_granule_frame(this->info.TheoraDecoder, granule) + 1;
-				}
-				else if (this->numFrames > 0)
-				{
-					++this->numFrames; // append delta frames at the end to get the exact number
+					if (ogg_sync_pageout(&this->info.OggSyncState, &this->info.OggPage) == 1)
+					{
+						if (ogg_page_serialno(&this->info.OggPage) == this->info.TheoraStreamState.serialno)
+						{
+							granule = ogg_page_granulepos(&this->info.OggPage);
+							if (granule >= 0)
+							{
+								frame = (long)th_granule_frame(this->info.TheoraDecoder, granule);
+								if (frame < targetFrame && targetFrame - frame < 10)
+								{
+									// we're close enough, let's break this.
+									i = 1000;
+									break;
+								}
+								// we're not close enough, let's shorten the borders of the binary search
+								if (targetFrame - 1 > frame)
+								{
+									seekMin = seekMin / 2 + seekMax / 2;
+								}
+								else
+								{
+									seekMax = seekMin / 2 + seekMax / 2;
+								}
+								break;
+							}
+						}
+					}
+					else
+					{
+						buffer = ogg_sync_buffer(&this->info.OggSyncState, BUFFER_SIZE);
+						bytesRead = this->stream->read(buffer, BUFFER_SIZE);
+						if (bytesRead == 0)
+						{
+							break;
+						}
+						ogg_sync_wrote(&this->info.OggSyncState, bytesRead);
+					}
 				}
 			}
-			if (this->numFrames > 0 || streamSize < BUFFER_SIZE * i)
-			{
-				break;
-			}
 		}
-		if (this->numFrames < 0)
+		if (returnKeyFrame)
 		{
-			log("unable to determine file duration!");
+			return (long)(granule >> this->info.TheoraInfo.keyframe_granule_shift);
 		}
-		else
-		{
-			this->duration = this->numFrames / this->fps;
-#ifdef _DEBUG
-			log("duration: " + strf(this->duration) + " seconds");
-#endif
-		}
-		// restore to beginning of stream.
 		ogg_sync_reset(&this->info.OggSyncState);
-		this->stream->seek(0);
-		if (this->vorbisStreams > 0) // if there is no audio interface factory defined, even though the video clip might have audio, it will be ignored
+		memset(&this->info.OggPage, 0, sizeof(ogg_page));
+		ogg_sync_pageseek(&this->info.OggSyncState, &this->info.OggPage);
+		if (targetFrame == 0)
 		{
-			vorbis_synthesis_init(&this->info.VorbisDSPState, &this->info.VorbisInfo);
-			vorbis_block_init(&this->info.VorbisDSPState, &this->info.VorbisBlock);
-			this->audioChannelsCount = this->info.VorbisInfo.channels;
-			this->audioFrequency = (int) this->info.VorbisInfo.rate;
-			// create an audio interface instance if available
-			AudioInterfaceFactory* audioInterfaceFactory = theoraplayer::manager->getAudioInterfaceFactory();
-			if (audioInterfaceFactory != NULL)
-			{
-				this->setAudioInterface(audioInterfaceFactory->createInstance(this, this->audioChannelsCount, this->audioFrequency));
-			}
+			return -1;
 		}
-		this->frameDuration = 1.0f / this->getFps();
-#ifdef _DEBUG
-		log("-----");
-#endif
+		this->stream->seek((seekMin + seekMax) / 2); // do a binary search
+		return -1;
 	}
 
-	void VideoClip_Theora::readTheoraVorbisHeaders()
+	void VideoClip_Theora::_readTheoraVorbisHeaders()
 	{
 		ogg_packet tempOggPacket;
 		//init Vorbis/Theora Layer
@@ -423,7 +737,7 @@ namespace theoraplayer
 				}
 				++this->theoraStreams;
 			} // end while looking for more theora headers
-			// look 2nd vorbis header packets
+			  // look 2nd vorbis header packets
 			while (this->vorbisStreams < 3 && (result = ogg_stream_packetout(&this->info.VorbisStreamState, &tempOggPacket)))
 			{
 				if (result < 0)
@@ -436,7 +750,7 @@ namespace theoraplayer
 				}
 				++this->vorbisStreams;
 			} // end while looking for more vorbis headers
-			// Not finished with Headers, get some more file data
+			  // Not finished with Headers, get some more file data
 			if (ogg_sync_pageout(&this->info.OggSyncState, &this->info.OggPage) > 0)
 			{
 				if (this->theoraStreams > 0)
@@ -459,317 +773,7 @@ namespace theoraplayer
 				}
 			}
 		} // end while looking for all headers
-		//log("Vorbis Headers: " + str(mVorbisHeaders) + " Theora Headers : " + str(mTheoraHeaders));
-	}
-
-	void VideoClip_Theora::decodedAudioCheck()
-	{
-		if (this->audioInterface != NULL && !this->timer->isPaused())
-		{
-			this->_flushSynchronizedAudioPackets(this->audioInterface, this->audioMutex);
-		}
-	}
-
-	float VideoClip_Theora::decodeAudio()
-	{
-		if (this->restarted)
-		{
-			return -1.0f;
-		}
-		ogg_packet opVorbis;
-		float** pcm;
-		int length = 0;
-		float timestamp = -1.0f;
-		bool readPastTimestamp = false;
-		float factor = 1.0f / this->audioFrequency;
-		float videoTime = (float)this->lastDecodedFrameNumber / this->fps;
-		float min = this->frameQueue->getSize() / this->fps + 1.0f;
-		float audioTime = 0.0f;
-		while (true)
-		{
-			length = vorbis_synthesis_pcmout(&this->info.VorbisDSPState, &pcm);
-			if (length == 0)
-			{
-				if (ogg_stream_packetout(&this->info.VorbisStreamState, &opVorbis) > 0)
-				{
-					if (vorbis_synthesis(&this->info.VorbisBlock, &opVorbis) == 0)
-					{
-						if (timestamp < 0 && opVorbis.granulepos >= 0)
-						{
-							timestamp = (float)vorbis_granule_time(&this->info.VorbisDSPState, opVorbis.granulepos);
-						}
-						else if (timestamp >= 0)
-						{
-							readPastTimestamp = true;
-						}
-						vorbis_synthesis_blockin(&this->info.VorbisDSPState, &this->info.VorbisBlock);
-					}
-					continue;
-				}
-				audioTime = this->readAudioSamples * factor;
-				// always buffer up of audio ahead of the frames
-				if (audioTime - videoTime >= min || !this->_readData())
-				{
-					break;
-				}
-			}
-			if (length > 0)
-			{
-				this->addAudioPacket(pcm, length, this->audioGain);
-				this->readAudioSamples += length;
-				if (readPastTimestamp)
-				{
-					timestamp += (float)length / this->info.VorbisInfo.rate;
-				}
-				vorbis_synthesis_read(&this->info.VorbisDSPState, length); // tell vorbis we read a number of samples
-			}
-		}
-		return timestamp;
-	}
-
-	long VideoClip_Theora::seekPage(long targetFrame, bool returnKeyFrame)
-	{
-		uint64_t seekMin = 0;
-		uint64_t seekMax = this->stream->getSize();
-		long frame = 0;
-		ogg_int64_t granule = 0;
-		if (targetFrame == 0)
-		{
-			this->stream->seek(0);
-		}
-		char* buffer = NULL;
-		int bytesRead = 0;
-		if (targetFrame != 0)
-		{
-			for (int i = 0; i < 100; ++i)
-			{
-				ogg_sync_reset(&this->info.OggSyncState);
-				this->stream->seek(seekMin / 2 + seekMax / 2); // do a binary search
-				memset(&this->info.OggPage, 0, sizeof(ogg_page));
-				ogg_sync_pageseek(&this->info.OggSyncState, &this->info.OggPage);
-				while (i < 1000)
-				{
-					if (ogg_sync_pageout(&this->info.OggSyncState, &this->info.OggPage) == 1)
-					{
-						if (ogg_page_serialno(&this->info.OggPage) == this->info.TheoraStreamState.serialno)
-						{
-							granule = ogg_page_granulepos(&this->info.OggPage);
-							if (granule >= 0)
-							{
-								frame = (long)th_granule_frame(this->info.TheoraDecoder, granule);
-								if (frame < targetFrame && targetFrame - frame < 10)
-								{
-									// we're close enough, let's break this.
-									i = 1000;
-									break;
-								}
-								// we're not close enough, let's shorten the borders of the binary search
-								if (targetFrame - 1 > frame)
-								{
-									seekMin = seekMin / 2 + seekMax / 2;
-								}
-								else
-								{
-									seekMax = seekMin / 2 + seekMax / 2;
-								}
-								break;
-							}
-						}
-					}
-					else
-					{
-						buffer = ogg_sync_buffer(&this->info.OggSyncState, BUFFER_SIZE);
-						bytesRead = this->stream->read(buffer, BUFFER_SIZE);
-						if (bytesRead == 0)
-						{
-							break;
-						}
-						ogg_sync_wrote(&this->info.OggSyncState, bytesRead);
-					}
-				}
-			}
-		}
-		if (returnKeyFrame)
-		{
-			return (long)(granule >> this->info.TheoraInfo.keyframe_granule_shift);
-		}
-		ogg_sync_reset(&this->info.OggSyncState);
-		memset(&this->info.OggPage, 0, sizeof(ogg_page));
-		ogg_sync_pageseek(&this->info.OggSyncState, &this->info.OggPage);
-		if (targetFrame == 0)
-		{
-			return -1;
-		}
-		this->stream->seek((seekMin + seekMax) / 2); // do a binary search
-		return -1;
-	}
-
-	void VideoClip_Theora::_doSeek()
-	{
-#if _DEBUG
-		log(this->name + " [seek]: seeking to frame " + str(this->seekFrame));
-#endif
-		int frame = 0;
-		float time = this->seekFrame / getFps();
-		this->timer->seek(time);
-		bool paused = this->timer->isPaused();
-		if (!paused)
-		{
-			this->timer->pause(); // pause until seeking is done
-		}
-		this->endOfFile = false;
-		this->restarted = false;
-		this->resetFrameQueue();
-		// reset the video decoder.
-		ogg_stream_reset(&this->info.TheoraStreamState);
-		th_decode_free(this->info.TheoraDecoder);
-		this->info.TheoraDecoder = th_decode_alloc(&this->info.TheoraInfo, this->info.TheoraSetup);
-		Mutex::ScopeLock audioMutexLock;
-		if (this->audioInterface != NULL)
-		{
-			audioMutexLock.acquire(this->audioMutex);
-			ogg_stream_reset(&this->info.VorbisStreamState);
-			vorbis_synthesis_restart(&this->info.VorbisDSPState);
-			this->destroyAllAudioPackets();
-		}
-		// first seek to desired frame, then figure out the location of the
-		// previous key frame and seek to it.
-		// then by setting the correct time, the decoder will skip N frames untill
-		// we get the frame we want.
-		frame = (int)this->seekPage(this->seekFrame, 1); // find the key frame nearest to the target frame
-#ifdef _DEBUG
-	//		log(mName + " [seek]: nearest key frame for frame " + str(mSeekFrame) + " is frame: " + str(frame));
-#endif
-		this->seekPage(std::max(0, frame - 1), 0);
-
-		ogg_packet opTheora;
-		ogg_int64_t granulePos;
-		bool granuleSet = false;
-		if (frame <= 1)
-		{
-			if (this->info.TheoraInfo.version_major == 3 && this->info.TheoraInfo.version_minor == 2 && this->info.TheoraInfo.version_subminor == 0)
-			{
-				granulePos = 0;
-			}
-			else
-			{
-				granulePos = 1; // because of difference in granule interpretation in theora streams 3.2.0 and newer ones
-			}
-			th_decode_ctl(this->info.TheoraDecoder, TH_DECCTL_SET_GRANPOS, &granulePos, sizeof(granulePos));
-			granuleSet = true;
-		}
-		// now that we've found the key frame that preceeds our desired frame, lets keep on decoding frames until we
-		// reach our target frame.
-		int status = 0;
-		while (this->seekFrame != 0)
-		{
-			if (ogg_stream_packetout(&this->info.TheoraStreamState, &opTheora) > 0)
-			{
-				if (!granuleSet)
-				{
-					// theora decoder requires to set the granule pos after seek to be able to determine the current frame
-					if (opTheora.granulepos < 0)
-					{
-						continue; // ignore prev delta frames until we hit a key frame
-					}
-					th_decode_ctl(this->info.TheoraDecoder, TH_DECCTL_SET_GRANPOS, &opTheora.granulepos, sizeof(opTheora.granulepos));
-					granuleSet = true;
-				}
-				status = th_decode_packetin(this->info.TheoraDecoder, &opTheora, &granulePos);
-				if (status != 0 && status != TH_DUPFRAME)
-				{
-					continue;
-				}
-				frame = (int)th_granule_frame(this->info.TheoraDecoder, granulePos);
-				if (frame >= this->seekFrame - 1)
-				{
-					break;
-				}
-			}
-			else if (!this->_readData())
-			{
-				log(this->name + " [seek]: fineseeking failed, _readData failed!");
-				return;
-			}
-		}
-#ifdef _DEBUG
-		//	log(mName + " [seek]: fineseeked to frame " + str(frame + 1) + ", requested: " + str(mSeekFrame));
-#endif
-		if (this->audioInterface != NULL)
-		{
-			// read audio data until we reach a timestamp. this usually takes only one iteration, but just in case let's
-			// wrap it in a loop
-			float timestamp = 0.0f;
-			while (true)
-			{
-				timestamp = this->decodeAudio();
-				if (timestamp >= 0)
-				{
-					break;
-				}
-				this->_readData();
-			}
-			float rate = (float)this->audioFrequency * this->audioChannelsCount;
-			float queuedTime = this->getAudioPacketQueueLength();
-			int trimmedCount = 0;
-			// at this point there are only 2 possibilities: either we have too much packets and we have to delete
-			// the first N ones, or we don't have enough, so let's fill the gap with silence.
-			if (time > timestamp - queuedTime)
-			{
-				while (this->audioPacketQueue != NULL)
-				{
-					if (time <= timestamp - queuedTime + this->audioPacketQueue->samplesCount / rate)
-					{
-						trimmedCount = (int)((timestamp - queuedTime + this->audioPacketQueue->samplesCount / rate - time) * rate);
-						if (this->audioPacketQueue->samplesCount - trimmedCount <= 0)
-						{
-							this->destroyAudioPacket(this->popAudioPacket()); // if there's no data to be left, just destroy it
-						}
-						else
-						{
-							for (int i = trimmedCount, j = 0; i < this->audioPacketQueue->samplesCount; ++i, ++j)
-							{
-								this->audioPacketQueue->pcmData[j] = this->audioPacketQueue->pcmData[i];
-							}
-							this->audioPacketQueue->samplesCount -= trimmedCount;
-						}
-						break;
-					}
-					queuedTime -= this->audioPacketQueue->samplesCount / rate;
-					this->destroyAudioPacket(this->popAudioPacket());
-				}
-			}
-			// expand the first packet with silence.
-			else if (this->audioPacketQueue != NULL)
-			{
-				int i = 0;
-				int j = 0;
-				int missingCount = (int)((timestamp - queuedTime - time) * rate);
-				if (missingCount > 0)
-				{
-					float* samples = new float[missingCount + this->audioPacketQueue->samplesCount];
-					// TODOth - can this be done with a memset even though it's a float?
-					for (i = 0; i < missingCount; ++i)
-					{
-						samples[i] = 0;
-					}
-					for (j = 0; i < missingCount + this->audioPacketQueue->samplesCount; ++i, ++j)
-					{
-						samples[i] = this->audioPacketQueue->pcmData[j];
-					}
-					delete[] this->audioPacketQueue->pcmData;
-					this->audioPacketQueue->pcmData = samples;
-				}
-			}
-			this->lastDecodedFrameNumber = this->seekFrame;
-			this->readAudioSamples = (unsigned int)(timestamp * this->audioFrequency);
-			audioMutexLock.release();
-		}
-		if (!paused)
-		{
-			this->timer->play();
-		}
-		this->seekFrame = -1;
+		  //log("Vorbis Headers: " + str(mVorbisHeaders) + " Theora Headers : " + str(mTheoraHeaders));
 	}
 
 }

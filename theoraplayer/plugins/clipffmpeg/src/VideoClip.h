@@ -25,26 +25,21 @@ struct AVIOContext;
 
 #define FORMAT_NAME "FFmpeg"
 
+// taken from vpxdec.c
+struct VpxDecInputContext
+{
+	struct VpxInputContext* vpx_input_ctx;
+	struct WebmInputContext* webm_ctx;
+};
+
 namespace clipffmpeg
 {
-	struct VpxDecInputContext
-	{
-		struct VpxInputContext* vpx_input_ctx;
-		struct WebmInputContext* webm_ctx;
-	};
-
 	class VideoClip : public theoraplayer::VideoClip, public theoraplayer::AudioPacketQueue
 	{
 	public:
 		VideoClip(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
 		~VideoClip();
 
-		bool _readData();
-		bool decodeNextFrame();
-		void _restart();
-		void _load(theoraplayer::DataSource* source);
-		float decodeAudio();
-		void decodedAudioCheck();
 		std::string getDecoderName() { return FORMAT_NAME; }
 
 		static theoraplayer::VideoClip* create(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
@@ -60,8 +55,14 @@ namespace clipffmpeg
 		int videoStreamIndex;
 		int frameNumber;
 
-		void unload();
-		void _doSeek();
+		void _load(theoraplayer::DataSource* source);
+		bool _readData();
+		bool _decodeNextFrame();
+		float _decodeAudio();
+		void _decodedAudioCheck();
+		void _executeSeek();
+		void _executeRestart();
+		void _unload();
 
 	};
 

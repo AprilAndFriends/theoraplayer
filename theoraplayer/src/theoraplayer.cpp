@@ -31,7 +31,7 @@ namespace theoraplayer
 		theoraplayer::manager = new Manager(workerThreadCount);
 #ifdef _USE_THEORA
 		VideoClip::Format theora;
-		theora.name = "Theora";
+		theora.name = THEORA_DECODER_NAME;
 		theora.extension = ".ogv";
 		theora.createFunction = &VideoClip_Theora::create;
 		registerVideoClipFormat(theora);

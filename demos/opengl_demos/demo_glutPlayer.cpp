@@ -62,7 +62,7 @@ namespace glutPlayer
 		if (!started)
 		{
 			// let's wait until the system caches up a few frames on startup
-			if (clip->getNumReadyFrames() < clip->getNumPrecachedFrames() * 0.5f)
+			if (clip->getReadyFramesCount() < clip->getPrecachedFramesCount() * 0.5f)
 			{
 				return;
 			}
@@ -73,7 +73,7 @@ namespace glutPlayer
 	void draw()
 	{
 		glBindTexture(GL_TEXTURE_2D, textureId);
-		theoraplayer::VideoFrame* frame = clip->getNextFrame();
+		theoraplayer::VideoFrame* frame = clip->fetchNextFrame();
 		if (frame != NULL)
 		{
 			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, clip->getWidth(), clip->getHeight(), textureFormat, GL_UNSIGNED_BYTE, frame->getBuffer());
@@ -81,8 +81,8 @@ namespace glutPlayer
 		}
 		float w = clip->getSubFrameWidth();
 		float h = clip->getSubFrameHeight();
-		float sx = clip->getSubFrameOffsetX();
-		float sy = clip->getSubFrameOffsetY();
+		float sx = clip->getSubFrameX();
+		float sy = clip->getSubFrameY();
 		float tw = potCeil(w);
 		float th = potCeil(h);
 		glEnable(GL_TEXTURE_2D);
@@ -107,7 +107,7 @@ namespace glutPlayer
 		int dropped = clip->getDroppedFramesCount();
 		int displayed = clip->getDisplayedFramesCount();
 		float percent = 100 * ((float)dropped / displayed);
-		sprintf(out, " (%dx%d) %d precached, %d displayed, %d dropped (%.1f %%)", clip->getWidth(), clip->getHeight(), clip->getNumReadyFrames(), displayed, dropped, percent);
+		sprintf(out, " (%dx%d) %d precached, %d displayed, %d dropped (%.1f %%)", clip->getWidth(), clip->getHeight(), clip->getReadyFramesCount(), displayed, dropped, percent);
 	}
 
 	void onKeyPress(int key)

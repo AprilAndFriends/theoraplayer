@@ -31,9 +31,7 @@ namespace theoraplayer
 	class VideoFrame;
 	class AudioInterface;
 
-	/**
-		format of the VideoFrame pixels. Affects decoding time
-		*/
+	/// @brief Format of the VideoFrame pixels. Affects decoding time.
 	enum TheoraOutputMode
 	{
 		// A = full alpha (255), order of letters represents the byte order for a pixel
@@ -63,10 +61,7 @@ namespace theoraplayer
 		TH_XYUV = 21
 	};
 
-	/**
-		This object contains all data related to video playback, eg. the open source file,
-		the frame queue etc.
-		*/
+	/// @brief This object contains all data related to video playback, eg. the open source file, the frame queue etc.
 	class theoraplayerExport VideoClip
 	{
 	public:
@@ -82,231 +77,190 @@ namespace theoraplayer
 		friend class VideoFrame;
 		friend class WorkerThread;
 
-		std::string getName();
-		//! Returns the string name of the decoder backend (eg. Theora, AVFoundation)
+		std::string getName() { return this->name; }
+		/// @return The string name of the decoder backend (eg. Theora, AVFoundation)
 		virtual std::string getDecoderName() = 0;
 
-		//! benchmark function
-		int getDisplayedFramesCount() { return this->displayedFramesCount; }
-		//! benchmark function
-		int getDroppedFramesCount() { return this->droppedFramesCount; }
-
-		//! return width in pixels of the video clip
-		int getWidth();
-		//! return height in pixels of the video clip
-		int getHeight();
-		//! returns whether the clip has an alpha channel
-		bool hasAlphaChannel() { return this->useAlpha; }
-
-		//! Width of the actual picture inside a video frame (depending on implementation, this may be equal to mWidth or differ within a codec block size (usually 16))
-		int getSubFrameWidth();
-		//! Height of the actual picture inside a video frame (depending on implementation, this may be equal to mHeight or differ within a codec block size (usually 16))
-		int getSubFrameHeight();
-		//! X Offset of the actual picture inside a video frame (depending on implementation, this may be 0 or within a codec block size (usually 16))
-		int getSubFrameOffsetX();
-		//! Y Offset of the actual picture inside a video frame (depending on implementation, this may be 0 or differ within a codec block size (usually 16))
-		int getSubFrameOffsetY();
-		/**
-			\brief return stride in pixels
-
-			If you've specified usePower2Stride when creating the VideoClip object
-			then this value will be the next power of two size compared to width,
-			eg: w=376, stride=512.
-
-			Otherwise, stride will be equal to width
-			*/
-		int getStride() { return this->stride; }
-		//! retur the timer objet associated with this object
-		Timer* getTimer();
-
-		FrameQueue* getFrameQueue();
-		/**
-		\brief Returns the first available frame in the queue or NULL if no frames are available.
-
-		see FrameQueue::getFirstAvailableFrame() for more details
-		*/
-		VideoFrame* getNextFrame();
-
-		AudioInterface* getAudioInterface();
-
-		// TODOth - rename these
-		//! returns the size of the frame queue
-		int getNumPrecachedFrames();
-		//! returns the number of ready frames in the frame queue
-		int getNumReadyFrames();
-
-		float getAudioGain();
-
-		bool getAutoRestart() { return this->autoRestart; }
-
-		float getPriority();
-		//! Used by TheoraVideoManager to schedule work
-		float getPriorityIndex();
-
-		//! get the current time index from the timer object
-		float getTimePosition();
-		//! get the duration of the movie in seconds
-		float getDuration();
-		//! return the clips' frame rate, warning, fps can be a non integer number!
-		float getFps();
-		//! get the number of frames in this movie
-		int getNumFrames() { return this->numFrames; }
-
-		//! return the current output mode for this video object
-		TheoraOutputMode getOutputMode();
-
-		float getPlaybackSpeed();
-
-		//! replace the timer object with a new one
+		inline FrameQueue* getFrameQueue() { return this->frameQueue; }
+		inline AudioInterface* getAudioInterface() { return this->audioInterface; }
+		void setAudioInterface(AudioInterface* audioInterface);
+		/// @return Timer object associated with this clip.
+		inline Timer* getTimer() { return this->timer; }
+		/// @brief Replaces the current Timer object with a new one.
 		void setTimer(Timer* timer);
 
-		void setAudioInterface(AudioInterface* iface);
-
-		/**
-		\brief resize the frame queues
-
-		Warning: this call discards ready frames in the frame queue
-		*/
-		void setNumPrecachedFrames(int n);
-		//! if you want to adjust the audio gain. range [0,1]
+		/// @return Width in pixels of the clip.
+		int getWidth();
+		/// @return Height in pixels of the clip.
+		inline int getHeight() { return this->height; }
+		/// @return Whether the clip has an alpha channel.
+		inline bool hasAlphaChannel() { return this->useAlpha; }
+		/// @brief X Offset of the actual picture inside a video frame (depending on implementation, this may be 0 or within a codec block size (usually 16))
+		int getSubFrameX();
+		/// @brief Y Offset of the actual picture inside a video frame (depending on implementation, this may be 0 or differ within a codec block size (usually 16))
+		int getSubFrameY();
+		/// @brief Width of the actual picture inside a video frame (depending on implementation, this may be equal to mWidth or differ within a codec block size (usually 16))
+		int getSubFrameWidth();
+		/// @brief Height of the actual picture inside a video frame (depending on implementation, this may be equal to mHeight or differ within a codec block size (usually 16))
+		int getSubFrameHeight();
+		/// @brief Gets the stride in pixels count.
+		/// If usePower2Stride is used, when creating the VideoClip object, this value will be the next power of two size compared to width, eg: w=376, stride=512.
+		/// Otherwise, stride will be equal to width
+		inline int getStride() { return this->stride; }
+		/// @return Current time index from the timer object.
+		float getTimePosition();
+		/// @return Duration of the clip in seconds.
+		float getDuration() { return this->duration; }
+		/// @return The clip's frame rate.
+		float getFps() { return this->fps; }
+		/// @return Number of frames in this clip.
+		int getFramesCount() { return this->framesCount; }
+		float getAudioGain() { return this->audioGain; }
+		/// @brief Changes the audio gane in a range between 0 and 1 inclusively.
 		void setAudioGain(float gain);
-		//! if you want the video to automatically and smoothly restart when the last frame is reached
-		void setAutoRestart(bool value);
-		void setPriority(float priority);
-
-		/**
-		set a new output mode
-
-		Warning: this discards the frame queue. ready frames will be lost.
-		*/
-		void setOutputMode(TheoraOutputMode mode);
-
+		float getPlaybackSpeed();
 		void setPlaybackSpeed(float speed);
-
-		//! used by TheoraWorkerThread, do not call directly
-		virtual bool decodeNextFrame() = 0;
-
-		//! advance time. TheoraVideoManager calls this
-		void update(float timeDelta);
-		/**
-			\brief update timer to the display time of the next frame
-
-			useful if you want to grab frames instead of regular display
-			\return time advanced. 0 if no frames are ready
-			*/
-		float updateToNextFrame();
-
-		/**
-			\brief pop the frame from the front of the FrameQueue
-
-			see FrameQueue::pop() for more details
-			*/
-		void popFrame();
-
-
-		/**
-			check if there is enough audio data decoded to submit to the audio interface
-
-			TheoraWorkerThread calls this
-			*/
-		virtual void decodedAudioCheck() = 0;
+		/// @return Current output mode for this video object.
+		TheoraOutputMode getOutputMode() { return this->outputMode; }
+		/// @brief Set a new output mode.
+		/// @note This discards the frame queue and ready frames will be lost.
+		void setOutputMode(TheoraOutputMode mode);
+		inline bool isAutoRestart() { return this->autoRestart; }
+		/// @brief Whether the clip should automatically and smoothly restart when the last frame was reached.
+		void setAutoRestart(bool value);
+		float getPriority() { return this->priority; }
+		void setPriority(float priority) { this->priority = priority; }
+		/// @brief Used by Manager to schedule work.
+		float getPriorityIndex();
+		/// @return Size of the frame queue.
+		int getPrecachedFramesCount();
+		/// @brief Resizes the frame queue.
+		/// @note This call discards ready frames in the frame queue.
+		void setPrecachedFramesCount(int count);
+		/// @return Number of ready frames in the frame queue.
+		int getReadyFramesCount();
+		/// @brief Used for benchmarking.
+		inline int getDisplayedFramesCount() { return this->displayedFramesCount; }
+		/// @brief Used for benchmarking.
+		inline int getDroppedFramesCount() { return this->droppedFramesCount; }
 
 		bool isDone();
+		bool isPaused();
+
+		/// @brief Update timer to the display time of the next frame. This is useful if you want to grab frames instead of regular display.
+		/// @return The time advanced. 0 if no frames are ready.
+		/// @note On an abstract level, this works similar to seek, but on a practical level it's different.
+		float updateTimerToNextFrame();
+		/// @return The first available frame in the queue or NULL if no frames are available.
+		/// @see FrameQueue::getFirstAvailableFrame()
+		VideoFrame* fetchNextFrame();
+		/// @brief Pops the frame from the front of the frame queue.
+		/// @see FrameQueue::pop()
+		void popFrame();
+
 		void play();
 		void pause();
-		void restart();
-		bool isPaused();
 		void stop();
+		void restart();
 
-		//! seek to a given time position
+		/// @brief Seeks to a given time position.
 		void seek(float time);
-		//! seek to a given frame number
+		/// @brief Seeks to a given frame number
 		void seekToFrame(int frame);
-		//! wait max_time for the clip to cache a given percentage of frames, factor in range [0,1]. Returns actual precache factor
-		float waitForCache(float desired_cache_factor = 0.5f, float max_wait_time = 1.0f);
+		/// @brief Waits for the clip to cache a given ratio of frames.
+		/// @param[in] desiredCacheRatio The ratio of precached frames to wait for.
+		/// @param[in] maxWaitTime in range [0,1]. Returns actual precache factor
+		/// @param[in] factor in range [0,1]. Returns actual precache factor
+		float waitForCache(float desiredCacheFactor = 0.5f, float maxWaitTime = 1.0f);
 
 	protected:
+		std::string name;
 		FrameQueue* frameQueue;
 		AudioInterface* audioInterface;
 		DataSource* stream;
-
 		Timer* timer;
 		Timer* defaultTimer;
-
 		WorkerThread* assignedWorkerThread;
+		/// @brief Syncs audio decoding and extraction.
+		Mutex* audioMutex;
+		Mutex* threadAccessMutex;
+		/// @brief Counter used by TheoraVideoManager to schedule workload
+		int threadAccessCount;
 
 		bool useAlpha;
+		bool useStride;
+		int precachedFramesCount;
+		/// @brief Multiplier for audio samples in range between 0 and 1 inclusively.
+		float audioGain;
+		bool autoRestart;
+		TheoraOutputMode outputMode;
+		/// @brief User assigned priority.
+		/// @note Default value is 1.
+		float priority;
 
+		float duration;
+		float frameDuration;
+		int width;
+		int height;
+		int stride;
+		int framesCount;
+		float fps;
+		bool endOfFile;
 		bool waitingForCache;
+
+		int subFrameX;
+		int subFrameY;
+		int subFrameWidth;
+		int subFrameHeight;
+
+		/// @brief Contains desired seek position as a frame number. next worker thread will do the seeking and reset this var to -1
+		int seekFrame;
+		TheoraOutputMode requestedOutputMode;
+		bool firstFrameDisplayed;
+		bool restarted;
+		int iteration;
+		/// @brief Used to ensure smooth playback of looping clips.
+		int playbackIteration;
 
 		// benchmark vars
 		int droppedFramesCount;
 		int displayedFramesCount;
-		int precachedFramesCount;
 
-		int threadAccessCount; //! counter used by TheoraVideoManager to schedule workload
-
-		int seekFrame; //! stores desired seek position as a frame number. next worker thread will do the seeking and reset this var to -1
-		float duration, frameDuration;
-		float priority; //! User assigned priority. Default value is 1
-		std::string name;
-		int width, height, stride;
-		int numFrames;
-		float fps;
-
-		int subFrameWidth, subFrameHeight, subFrameOffsetX, subFrameOffsetY;
-		float audioGain; //! multiplier for audio samples. between 0 and 1
-
-		TheoraOutputMode outputMode, requestedOutputMode;
-		bool firstFrameDisplayed;
-		bool autoRestart;
-		bool endOfFile, restarted;
-		int iteration, playbackIteration; //! used to ensure smooth playback of looping videos
-
-		Mutex* audioMutex; //! syncs audio decoding and extraction
-		Mutex* threadAccessMutex;
-
-		VideoClip(DataSource* data_source, TheoraOutputMode output_mode, int nPrecachedFrames, bool usePower2Stride);
+		VideoClip(DataSource* dataSource, TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
 		virtual ~VideoClip();
 
-		/**
-		* Get the priority of a video clip. based on a forumula that includes user
-		* priority factor, whether the video is paused or not, how many precached
-		* frames it has etc.
-		* This function is used in TheoraVideoManager to efficiently distribute job
-		* assignments among worker threads
-		* @return priority number of this video clip
-		*/
-		int calculatePriority();
-		void readTheoraVorbisHeaders();
-		virtual void _doSeek() = 0; //! called by WorkerThread to seek to mSeekFrame
+		bool _isBusy();
+		float _getAbsPlaybackTime();
+
+		/// @bried Advance times. Manager calls this.
+		void _update(float timeDelta);
+
+		virtual void _load(DataSource* source) = 0;
 		virtual bool _readData() = 0;
-		bool isBusy();
+		/// @brief Used by WorkerThread, do not call directly
+		virtual bool _decodeNextFrame() = 0;
+		/// @brief Decodes audio from the vorbis stream and stores it in audio packets. This is an internal function of VideoClip, called
+		/// regularly if playing an audio enabled video clip.
+		/// @return Last decoded timestamp (if found in decoded packet's granule position).
+		virtual float _decodeAudio() = 0;
+		/// @brief Check if there is enough audio data decoded to submit to the audio interface. WorkerThread calls this.
+		virtual void _decodedAudioCheck() = 0;
+		/// @brief Called by WorkerThread to seek to seekFrame.
+		virtual void _executeSeek() = 0;
+		/// @brief Resets the decoder and stream but leaves the frame queue intact.
+		virtual void _executeRestart() = 0;
+
+		void _resetFrameQueue();
+		int _discardOutdatedFrames(float absTime);
 
 		void _lockAudioMutex();
 		void _unlockAudioMutex();
-
-		/**
-		* decodes audio from the vorbis stream and stores it in audio packets
-		* This is an internal function of VideoClip, called regularly if playing an
-		* audio enabled video clip.
-		* @return last decoded timestamp (if found in decoded packet's granule position)
-		*/
-		virtual float decodeAudio() = 0;
-
-		int _getNumReadyFrames();
-		void resetFrameQueue();
-		int discardOutdatedFrames(float absTime);
-		float getAbsPlaybackTime();
-		virtual void _load(DataSource* source) = 0;
 
 		void _setVideoFrameTimeToDisplay(VideoFrame* frame, float value);
 		void _setVideoFrameReady(VideoFrame* frame, bool value);
 		void _setVideoFrameInUse(VideoFrame* frame, bool value);
 		void _setVideoFrameIteration(VideoFrame* frame, int value);
 		void _setVideoFrameFrameNumber(VideoFrame* frame, int value);
-
-		virtual void _restart() = 0; // resets the decoder and stream but leaves the frame queue intact
 
 	};
 

@@ -72,7 +72,7 @@ namespace environment
 		//gluLookAt(0.0, 2000.0, 1000.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0);
 		//glRotatef(angle, 0.0f, 0.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, textureId);
-		theoraplayer::VideoFrame* frame = clip->getNextFrame();
+		theoraplayer::VideoFrame* frame = clip->fetchNextFrame();
 		if (frame != NULL)
 		{
 			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, clip->getWidth(), frame->getHeight(), GL_RGB, GL_UNSIGNED_BYTE, frame->getBuffer());

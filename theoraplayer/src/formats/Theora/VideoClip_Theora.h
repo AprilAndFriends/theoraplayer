@@ -21,6 +21,7 @@
 #include "AudioPacketQueue.h"
 
 #include "DataSource.h"
+#include "Utility.h"
 #include "VideoClip.h"
 
 namespace theoraplayer
@@ -47,31 +48,31 @@ namespace theoraplayer
 	class VideoClip_Theora : public VideoClip, public AudioPacketQueue
 	{
 	public:
-		VideoClip_Theora(DataSource* data_source, TheoraOutputMode output_mode, int nPrecachedFrames, bool usePower2Stride);
+		VideoClip_Theora(DataSource* dataSource, TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
 		~VideoClip_Theora();
 
-		bool _readData();
-		bool decodeNextFrame();
-		void _restart();
-		void _load(DataSource* source);
-		float decodeAudio();
-		void decodedAudioCheck();
-		std::string getDecoderName() { return "Theora"; }
+		std::string getDecoderName() { return THEORA_DECODER_NAME; }
 
 		static VideoClip* create(DataSource* dataSource, TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
 
 	protected:
-		// TODOth - the comment below seems incorrect
-		TheoraInfoStruct info; // a pointer is used to avoid having to include theora & vorbis headers
+		TheoraInfoStruct info;
 		int theoraStreams;
-		int vorbisStreams;	// Keeps track of Theora and Vorbis Streams
-
-		long seekPage(long targetFrame, bool returnKeyFrame);
-		void _doSeek();
-		void readTheoraVorbisHeaders();
-
+		/// @brief Keeps track of Theora and Vorbis Streams.
+		int vorbisStreams;
 		unsigned int readAudioSamples;
 		unsigned long lastDecodedFrameNumber;
+
+		void _load(DataSource* source);
+		bool _readData();
+		bool _decodeNextFrame();
+		float _decodeAudio();
+		void _decodedAudioCheck();
+		void _executeSeek();
+		void _executeRestart();
+
+		long _seekPage(long targetFrame, bool returnKeyFrame);
+		void _readTheoraVorbisHeaders();
 
 	};
 

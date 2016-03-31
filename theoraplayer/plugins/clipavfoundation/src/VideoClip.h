@@ -32,11 +32,6 @@ namespace clipavfoundation
 		VideoClip(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
 		~VideoClip();
 
-		bool _readData();
-		bool decodeNextFrame();
-		void _restart();
-		float decodeAudio();
-		void decodedAudioCheck();
 		std::string getDecoderName() { return FORMAT_NAME; }
 
 		static theoraplayer::VideoClip* create(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
@@ -49,9 +44,14 @@ namespace clipavfoundation
 		AVAssetReaderTrackOutput* audioOutput;
 		unsigned int readAudioSamples;
 
-		void unload();
 		void _load(theoraplayer::DataSource* source);
-		void _doSeek();
+		bool _readData();
+		bool _decodeNextFrame();
+		float _decodeAudio();
+		void _decodedAudioCheck();
+		void _executeSeek();
+		void _executeRestart();
+		void _unload();
 		
 	};
 
