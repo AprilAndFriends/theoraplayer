@@ -216,7 +216,7 @@ namespace clipffmeg
 			_log("\n");
 		}
 		av_free(codecs);
-		av_log(0, 0, "%s", text.cStr());
+		av_log(0, 0, "%s", text.c_str());
 		return 0;
 	}
 
@@ -295,20 +295,20 @@ namespace clipffmeg
 					PixelTransform t;
 					memset(&t, 0, sizeof(PixelTransform));
 
-					t.y = mFrame->data[0]; t.yStride = mFrame->linesize[0];
-					t.u = mFrame->data[1]; t.uStride = mFrame->linesize[1];
-					t.v = mFrame->data[2]; t.vStride = mFrame->linesize[2];
+					t.y = this->frame->data[0]; t.yStride = this->frame->linesize[0];
+					t.u = this->frame->data[1]; t.uStride = this->frame->linesize[1];
+					t.v = this->frame->data[2]; t.vStride = this->frame->linesize[2];
 
 					frame->decode(&t);
 					frame->timeToDisplay = this->frameNumber / this->fps;
 					frame->iteration = this->iteration;
 					frame->_setFrameNumber(this->frameNumber);
-					++this->frameNumber
-					av_free_packet(&packet);
+					++this->frameNumber;
+					av_packet_unref(&packet);
 					break;
 				}
 			}
-			av_free_packet(&packet);
+			av_packet_unref(&packet);
 		}
 		return true;
 	}
@@ -355,7 +355,7 @@ namespace clipffmeg
 		theoraplayer::log(this->name + ": avformat input opened");
 #endif
 		// Retrieve stream information
-		if (avformat_find_stream_info(mFormatContext, NULL) < 0)
+		if (avformat_find_stream_info(this->formatContext, NULL) < 0)
 		{
 			return; // Couldn't find stream information
 		}
@@ -364,11 +364,11 @@ namespace clipffmeg
 #endif
 
 		// Dump information about file onto standard error
-		/av_dump_format(mFormatContext, 0, "", 0);
+		//av_dump_format(mFormatContext, 0, "", 0);
 		// Find the first video stream
-		for (int i = 0; i < mFormatContext->nb_streams; ++i)
+		for (int i = 0; i < this->formatContext->nb_streams; ++i)
 		{
-			if (mFormatContext->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO)
+			if (this->formatContext->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO)
 			{
 				this->videoStreamIndex = i;
 				break;
@@ -397,7 +397,7 @@ namespace clipffmeg
 #ifdef _FFMPEG_DEBUG
 		theoraplayer::log(this->name + ": Codec opened");
 #endif
-		this->frame = avcodec_alloc_frame();
+		this->frame = av_frame_alloc();
 #ifdef _FFMPEG_DEBUG
 		theoraplayer::log(this->name + ": Frame allocated");
 #endif

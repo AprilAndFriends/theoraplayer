@@ -9,7 +9,7 @@
 #include <theoraplayer/Manager.h>
 #include <theoraplayer/theoraplayer.h>
 
-#include "clipffmeg.h"
+#include "clipffmpeg.h"
 #include "VideoClip.h"
 
 namespace clipffmeg

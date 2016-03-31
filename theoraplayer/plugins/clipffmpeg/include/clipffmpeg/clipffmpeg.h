@@ -15,7 +15,7 @@
 
 #include <string>
 
-#include "clipffmegExport.h"
+#include "clipffmpegExport.h"
 
 namespace clipffmeg
 {
