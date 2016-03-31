@@ -13,7 +13,7 @@
 
 #ifdef _THREAD_NAMING
 static int threadCounter = 1;
-static Mutex counterMutex;
+static theoraplayer::Mutex counterMutex;
 #endif
 
 namespace theoraplayer
