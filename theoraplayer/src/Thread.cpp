@@ -19,6 +19,7 @@
 
 #include "Exception.h"
 #include "Mutex.h"
+#include "theoraplayer.h"
 #include "Thread.h"
 
 #ifdef _WINRT
@@ -114,8 +115,7 @@ namespace theoraplayer
 	{
 		if (this->running)
 		{
-			// TODOth
-			//hlog::warn(logTag, "Thread still executing in destructor! Attempting 'stop', but this may be unsafe. The thread should be joined before deleting it.");
+			log("Thread still executing in destructor! Attempting 'stop', but this may be unsafe. The thread should be joined before deleting it.");
 			this->stop();
 		}
 		this->_clear();
@@ -125,8 +125,13 @@ namespace theoraplayer
 	{
 		if (this->running)
 		{
-			// TODOth
-			//hlog::errorf(logTag, "Thread '%s' already running, cannot start!", this->name.cStr());
+			char message[1024] = { '\0' };
+#ifdef _WIN32
+			sprintf(message, "WARNING: Thread '%s' '<0x%p>' already running, cannot start!", DEFAULT_THREAD_NAME, this);
+#else
+			sprintf(message, "WARNING: Thread '%s' '<%p>' already running, cannot start!", DEFAULT_THREAD_NAME, this);
+#endif
+			log(message);
 			return;
 		}
 		this->running = true;
@@ -180,8 +185,13 @@ namespace theoraplayer
 			}
 			catch (_Exception& e)
 			{
-				// TODOth
-				//theoraplayer::_platformPrint("FATAL", "Thread: " + this->name + "\n" + e.getMessage(), Log::LevelError);
+				char message[1024] = { '\0' };
+#ifdef _WIN32
+				sprintf(message, "FATAL: Thread '%s' '<0x%p>':", DEFAULT_THREAD_NAME, this);
+#else
+				sprintf(message, "FATAL: Thread '%s' '<%p>':", DEFAULT_THREAD_NAME, this);
+#endif
+				log(message + e.getMessage());
 				throw e;
 			}
 		}
@@ -325,15 +335,11 @@ namespace theoraplayer
 
 	Thread::Thread(const Thread& other) : runner(this)
 	{
-		// TODOth
-		//throw ObjectCannotCopyException("canno theoraplayer::Thread");
 		throw TheoraplayerException("Cannot copy theoraplayer::Thread object!");
 	}
 
 	Thread& Thread::operator=(Thread& other)
 	{
-		// TODOth
-		//throw ObjectCannotAssignException("theoraplayer::Thread");
 		throw TheoraplayerException("Cannot assign theoraplayer::Thread object!");
 		return (*this);
 	}

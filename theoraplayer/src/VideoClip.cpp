@@ -21,16 +21,14 @@
 #include "VideoClip.h"
 #include "VideoFrame.h"
 
-// TODOth - needs to be refactored
-
 namespace theoraplayer
 {
-	VideoClip::VideoClip(DataSource* dataSource, TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride) :
+	VideoClip::VideoClip(DataSource* dataSource, OutputMode outputMode, int precachedFramesCount, bool usePotStride) :
 		frameQueue(NULL), audioInterface(NULL), stream(NULL), timer(NULL), assignedWorkerThread(NULL), audioMutex(NULL),
 		threadAccessMutex(NULL), threadAccessCount(0), useAlpha(false), useStride(false), precachedFramesCount(4), audioGain(1.0f),
-		outputMode(TH_UNDEFINED), autoRestart(false), priority(1.0f), duration(-1.0f), frameDuration(0.0f), width(0), height(0),
+		outputMode(FORMAT_UNDEFINED), autoRestart(false), priority(1.0f), duration(-1.0f), frameDuration(0.0f), width(0), height(0),
 		stride(0), framesCount(-1), fps(1), endOfFile(false), waitingForCache(false), subFrameX(0), subFrameY(0), subFrameWidth(0),
-		subFrameHeight(0), seekFrame(-1), requestedOutputMode(TH_UNDEFINED), firstFrameDisplayed(false), restarted(false), iteration(0),
+		subFrameHeight(0), seekFrame(-1), requestedOutputMode(FORMAT_UNDEFINED), firstFrameDisplayed(false), restarted(false), iteration(0),
 		playbackIteration(0), droppedFramesCount(0), displayedFramesCount(0)
 	{
 		this->name = dataSource->toString();
@@ -141,19 +139,19 @@ namespace theoraplayer
 		this->timer->setSpeed(speed);
 	}
 
-	void VideoClip::setOutputMode(TheoraOutputMode value)
+	void VideoClip::setOutputMode(OutputMode value)
 	{
-		if (value == TH_UNDEFINED)
+		if (value == FORMAT_UNDEFINED)
 		{
-			throw TheoraplayerException("Invalid output mode: TH_UNDEFINED for video: " + this->name);
+			throw TheoraplayerException("Invalid output mode: FORMAT_UNDEFINED for video: " + this->name);
 		}
 		if (this->outputMode == value)
 		{
 			return;
 		}
 		this->requestedOutputMode = value;
-		this->useAlpha = (value == TH_RGBA || value == TH_ARGB || value == TH_BGRA || value == TH_ABGR ||
-			value == TH_GREY3A || value == TH_AGREY3 || value == TH_YUVA || value == TH_AYUV);
+		this->useAlpha = (value == FORMAT_RGBA || value == FORMAT_ARGB || value == FORMAT_BGRA || value == FORMAT_ABGR ||
+			value == FORMAT_GREY3A || value == FORMAT_AGREY3 || value == FORMAT_YUVA || value == FORMAT_AYUV);
 		if (this->assignedWorkerThread != NULL)
 		{
 			Mutex::ScopeLock lock(this->threadAccessMutex);

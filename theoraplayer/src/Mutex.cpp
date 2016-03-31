@@ -16,6 +16,7 @@
 
 #include "Exception.h"
 #include "Mutex.h"
+#include "theoraplayer.h"
 #include "Thread.h"
 
 namespace theoraplayer
@@ -31,15 +32,13 @@ namespace theoraplayer
 		Mutex* mutex = this->mutex;
 		if (this->release() && this->logUnhandledUnlocks && mutex != NULL)
 		{
-			// TODOth
-			/*
+			char message[1024] = { '\0' };
 #ifdef _WIN32
-			String address = hsprintf("<0x%p>", this);
+			sprintf(message, "WARNING: '<0x%p>' has been scope-unlocked automatically!", this);
 #else
-			String address = hsprintf("<%p>", this); // on Unix %p adds the 0x
+			sprintf(message, "WARNING: '<%p>' has been scope-unlocked automatically!", this);
 #endif
-			hlog::warnf("hmutex", "'%s' has been scope-unlocked automatically!", (mutex->name != "" ? mutex->name : address).cStr());
-			*/
+			log(message);
 		}
 	}
 
@@ -99,10 +98,13 @@ namespace theoraplayer
 		EnterCriticalSection((CRITICAL_SECTION*)this->handle);
 		if (this->locked)
 		{
-			// TODOth
-			/*
-			theoraplayer::_platformPrint("hmutex", hsprintf("'%s' is deadlocked!", (this->name != "" ? this->name : hsprintf("<0x%p>", this)).cStr()), 1000);
-			*/
+			char message[1024] = { '\0' };
+#ifdef _WIN32
+			sprintf(message, "WARNING: '<0x%p>' is deadlocked!", this);
+#else
+			sprintf(message, "WARNING: '<%p>'  is deadlocked!", this);
+#endif
+			log(message);
 			while (true) // simulating a deadlock
 			{
 				Thread::sleep(1.0f);
@@ -126,15 +128,11 @@ namespace theoraplayer
 	
 	Mutex::Mutex(const Mutex& other)
 	{
-		// TODOth
-		//throw ObjectCannotCopyException("canno theoraplayer::Mutex");
 		throw TheoraplayerException("Cannot copy theoraplayer::Mutex object!");
 	}
 
 	Mutex& Mutex::operator=(Mutex& other)
 	{
-		// TODOth
-		//throw ObjectCannotAssignException("theoraplayer::Mutex");
 		throw TheoraplayerException("Cannot assign theoraplayer::Mutex object!");
 		return (*this);
 	}

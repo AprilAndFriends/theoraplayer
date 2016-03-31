@@ -23,7 +23,7 @@
 
 namespace clipwebm
 {
-	VideoClip::VideoClip(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride) :
+	VideoClip::VideoClip(theoraplayer::DataSource* dataSource, theoraplayer::OutputMode outputMode, int precachedFramesCount, bool usePotStride) :
 		theoraplayer::VideoClip(dataSource, outputMode, precachedFramesCount, usePotStride),
 		AudioPacketQueue()
 	{
@@ -34,7 +34,7 @@ namespace clipwebm
 		this->frameNumber = 0;
 	}
 
-	theoraplayer::VideoClip* VideoClip::create(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride)
+	theoraplayer::VideoClip* VideoClip::create(theoraplayer::DataSource* dataSource, theoraplayer::OutputMode outputMode, int precachedFramesCount, bool usePotStride)
 	{
 		return new VideoClip(dataSource, outputMode, precachedFramesCount, usePotStride);
 	}

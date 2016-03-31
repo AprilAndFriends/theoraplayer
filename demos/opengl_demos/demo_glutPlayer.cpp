@@ -24,10 +24,10 @@ namespace glutPlayer
 	bool started = false;
 
 #ifdef MP4_VIDEO
-	theoraplayer::TheoraOutputMode outputMode = theoraplayer::TH_BGRX;
+	theoraplayer::OutputMode outputMode = theoraplayer::FORMAT_BGRX;
 	unsigned int textureFormat = GL_BGRA_EXT;
 #else
-	theoraplayer::TheoraOutputMode outputMode = theoraplayer::TH_RGB;
+	theoraplayer::OutputMode outputMode = theoraplayer::FORMAT_RGB;
 	unsigned int textureFormat = GL_RGB;
 #endif
 
@@ -44,7 +44,7 @@ namespace glutPlayer
 #endif
 		clip = theoraplayer::manager->createVideoClip("media/bunny", outputMode, 16);
 		//  use this if you want to preload the file into ram and stream from there
-		//	clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("../media/short"), theoraplayer::TH_RGB);
+		//	clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("../media/short"), theoraplayer::FORMAT_RGB);
 		clip->setAutoRestart(true);
 		textureId = createTexture(potCeil(clip->getWidth()), potCeil(clip->getHeight()), textureFormat);
 	}
@@ -124,15 +124,15 @@ namespace glutPlayer
 		}
 		if (key == 5)
 		{
-			clip->setOutputMode(theoraplayer::TH_RGB);
+			clip->setOutputMode(theoraplayer::FORMAT_RGB);
 		}
 		else if (key == 6)
 		{
-			clip->setOutputMode(theoraplayer::TH_YUV);
+			clip->setOutputMode(theoraplayer::FORMAT_YUV);
 		}
 		else if (key == 7)
 		{
-			clip->setOutputMode(theoraplayer::TH_GREY3);
+			clip->setOutputMode(theoraplayer::FORMAT_GREY3);
 		}
 	}
 

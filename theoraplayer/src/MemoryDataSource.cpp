@@ -32,42 +32,6 @@ namespace theoraplayer
 		this->data = NULL;
 		this->size = 0;
 		this->position = 0;
-		VideoClip::Format format;
-		// TODOth - change this, constructors must not throw exceptions (openSupportedFormatFile does not throw an exception)
-		FILE* file = openSupportedFormatFile(filename, format, this->fullFilename);
-		if (file == NULL)
-		{
-			std::string message = "Can't open or find video file: " + filename;
-			log(message);
-			throw TheoraplayerException(message);
-		}
-		this->formatName = format.name;
-#ifdef _WIN32
-		struct _stat64 s;
-		_fstati64(_fileno(file), &s);
-#else
-		struct stat s;
-		fstat(fileno(file), &s);
-#endif
-		this->size = (uint64_t)s.st_size;
-		if (this->size > 0xFFFFFFFF)
-		{
-			fclose(file);
-			// TODOth - change this, constructors must not throw exceptions
-			throw TheoraplayerException("TheoraMemoryFileDataSource doesn't support files larger than 4GB!");
-		}
-		this->data = new unsigned char[(unsigned int)this->size];
-		if (this->size < UINT_MAX)
-		{
-			fread(this->data, 1, (size_t)this->size, file);
-		}
-		else
-		{
-			fclose(file);
-			// TODOth - change this, constructors must not throw exceptions
-			throw TheoraplayerException("Unable to preload file to memory, file is too large.");
-		}
-		fclose(file);
 	}
 
 	MemoryDataSource::~MemoryDataSource()
@@ -78,8 +42,53 @@ namespace theoraplayer
 		}
 	}
 
+	// must not be called in the ctor, can throw exceptions
+	void MemoryDataSource::_loadFile()
+	{
+		if (this->data == NULL)
+		{
+			VideoClip::Format format;
+			FILE* file = openSupportedFormatFile(filename, format, this->fullFilename);
+			if (file == NULL)
+			{
+				std::string message = "Can't open or find video file: " + filename;
+				log(message);
+				throw TheoraplayerException(message);
+			}
+			this->formatName = format.name;
+#ifdef _WIN32
+			struct _stat64 s;
+			_fstati64(_fileno(file), &s);
+#else
+			struct stat s;
+			fstat(fileno(file), &s);
+#endif
+			this->size = (uint64_t)s.st_size;
+			if (this->size > 0xFFFFFFFF)
+			{
+				fclose(file);
+				throw TheoraplayerException("MemoryDataSource doesn't support files larger than 4GB!");
+			}
+			this->data = new unsigned char[(unsigned int)this->size];
+			if (this->size < UINT_MAX)
+			{
+				fread(this->data, 1, (size_t)this->size, file);
+			}
+			else
+			{
+				fclose(file);
+				throw TheoraplayerException("Unable to preload file to memory, file is too large.");
+			}
+			fclose(file);
+		}
+	}
+
 	int MemoryDataSource::read(void* output, int count)
 	{
+		if (this->size == 0)
+		{
+			this->_loadFile();
+		}
 		int result = (int)((this->position + count <= this->size) ? count : this->size - this->position);
 		if (result > 0)
 		{

@@ -53,8 +53,8 @@ namespace theoraplayer
 		/// @brief Searches registered clips by name
 		VideoClip* findVideoClipByName(const std::string& name);
 
-		VideoClip* createVideoClip(const std::string& filename, TheoraOutputMode outputMode = TH_RGB, int precachedFramesCountOverride = 0, bool usePotStride = false);
-		VideoClip* createVideoClip(DataSource* dataSource, TheoraOutputMode outputMode = TH_RGB, int precachedFramesCountOverride = 0, bool usePotStride = false);
+		VideoClip* createVideoClip(const std::string& filename, OutputMode outputMode = FORMAT_RGB, int precachedFramesCountOverride = 0, bool usePotStride = false);
+		VideoClip* createVideoClip(DataSource* dataSource, OutputMode outputMode = FORMAT_RGB, int precachedFramesCountOverride = 0, bool usePotStride = false);
 		void destroyVideoClip(VideoClip* clip);
 
 		void update(float timeDelta);

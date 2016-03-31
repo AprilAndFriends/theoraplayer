@@ -6,8 +6,12 @@
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
-#include "AudioInterface.h"
+#ifdef _USE_THEORA
+#include <theora/theoradec.h>
+#include <vorbis/vorbisfile.h>
+#endif
 
+#include "AudioInterface.h"
 #include "FileDataSource.h"
 #include "Exception.h"
 #include "FrameQueue.h"
@@ -17,18 +21,6 @@
 #include "VideoClip.h"
 #include "WorkerThread.h"
 
-#ifdef _USE_THEORA
-	#include "Theora/VideoClip_Theora.h"
-#endif
-#ifdef __WEBM
-	#include "WebM/VideoClip_WebM.h"
-#endif
-#ifdef __AVFOUNDATION
-	#include "AVFoundation/VideoClip_AVFoundation.h"
-#endif
-#ifdef __FFMPEG
-	#include "FFmpeg/VideoClip_FFmpeg.h"
-#endif
 #ifdef _ANDROID //libtheoraplayer addition for cpu feature detection
 	#include "cpu-features.h"
 #endif
@@ -67,10 +59,13 @@ namespace theoraplayer
 	}
 #endif
 
-	struct TheoraWorkCandidate
+	struct WorkCandidate
 	{
 		VideoClip* clip;
-		float priority, queuedTime, workTime, entitledTime;
+		float priority;
+		float queuedTime;
+		float workTime;
+		float entitledTime;
 	};
 
 	Manager* manager = NULL;
@@ -81,10 +76,10 @@ namespace theoraplayer
 		{
 			workerThreadCount = 1;
 		}
-		std::string message = "Initializing Theora Playback Library (" + this->getVersionString() + ")\n";
+		std::string message = "Initializing Theoraplayer Video Playback Library (" + this->getVersionString() + ")\n";
 #ifdef _USE_THEORA
 		message += "  - libtheora version: " + std::string(th_version_string()) + "\n" +
-			"  - libvorbis version: " + std::string(vorbis_version_string()) + "\n";
+			"  - libvorbis version: " + std::string(vorbis_version_string());
 #endif
 #ifdef _ANDROID
 		uint64_t features = libtheoraplayer_android_getCpuFeaturesExt();
@@ -189,12 +184,12 @@ namespace theoraplayer
 		return NULL;
 	}
 
-	VideoClip* Manager::createVideoClip(const std::string& filename, TheoraOutputMode outputMode, int precachedFramesCountOverride, bool usePotStride)
+	VideoClip* Manager::createVideoClip(const std::string& filename, OutputMode outputMode, int precachedFramesCountOverride, bool usePotStride)
 	{
 		return this->createVideoClip(new FileDataSource(filename), outputMode, precachedFramesCountOverride, usePotStride);
 	}
 
-	VideoClip* Manager::createVideoClip(DataSource* dataSource, TheoraOutputMode outputMode, int precachedFramesCountOverride, bool usePotStride)
+	VideoClip* Manager::createVideoClip(DataSource* dataSource, OutputMode outputMode, int precachedFramesCountOverride, bool usePotStride)
 	{
 		Mutex::ScopeLock lock(this->workMutex);
 		VideoClip* clip = NULL;
@@ -328,8 +323,8 @@ namespace theoraplayer
 		float maxQueuedTime = 0;
 		int totalAccessCount = 0;
 		int readyFramesCount = 0;
-		std::vector<TheoraWorkCandidate> candidates;
-		TheoraWorkCandidate candidate;
+		std::vector<WorkCandidate> candidates;
+		WorkCandidate candidate;
 		// first pass is for playing videos, but if no such videos are available for decoding
 		// paused videos are selected in the second pass.
 		// Note that paused videos that are waiting for cache are considered equal to playing
@@ -368,14 +363,14 @@ namespace theoraplayer
 		}
 		// normalize candidate values
 		float prioritySum = 0.0f;
-		foreach (TheoraWorkCandidate, it, candidates)
+		foreach (WorkCandidate, it, candidates)
 		{
 			it->workTime /= totalAccessCount;
 			// adjust user priorities to favor clips that have fewer frames queued
 			it->priority *= 1.0f - (it->queuedTime / maxQueuedTime) * 0.5f;
 			prioritySum += it->priority;
 		}
-		foreach (TheoraWorkCandidate, it, candidates)
+		foreach (WorkCandidate, it, candidates)
 		{
 			it->entitledTime = it->priority / prioritySum;
 		}
@@ -385,7 +380,7 @@ namespace theoraplayer
 		float maxDiff = -1.0f;
 		float diff = 0.0f;
 		VideoClip* selectedClip = NULL;
-		foreach (TheoraWorkCandidate, it, candidates)
+		foreach (WorkCandidate, it, candidates)
 		{
 			diff = it->entitledTime - it->workTime;
 			if (maxDiff < diff)
@@ -418,7 +413,7 @@ namespace theoraplayer
 				if (threadDiagnosticTimer > 2.0f)
 				{
 					threadDiagnosticTimer = 0.0f;
-					std::string message = "-----\nTheora Playback Library debug CPU time analysis (" + str(accessCount) + "):\n";
+					std::string message = "-----\nTheoraplayer Video Playback Library debug CPU time analysis (" + str(accessCount) + "):\n";
 					int percent;
 					foreach (VideoClip*, it, this->clips)
 					{

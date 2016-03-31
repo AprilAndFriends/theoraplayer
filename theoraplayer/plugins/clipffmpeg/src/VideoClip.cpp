@@ -222,7 +222,7 @@ namespace clipffmpeg
 
 	// actual class
 
-	VideoClip::VideoClip(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride) :
+	VideoClip::VideoClip(theoraplayer::DataSource* dataSource, theoraplayer::OutputMode outputMode, int precachedFramesCount, bool usePotStride) :
 		theoraplayer::VideoClip(dataSource, outputMode, precachedFramesCount, usePotStride),
 		AudioPacketQueue()
 	{
@@ -233,7 +233,7 @@ namespace clipffmpeg
 		this->videoStreamIndex = -1;
 	}
 
-	theoraplayer::VideoClip* VideoClip::create(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride)
+	theoraplayer::VideoClip* VideoClip::create(theoraplayer::DataSource* dataSource, theoraplayer::OutputMode outputMode, int precachedFramesCount, bool usePotStride)
 	{
 		return new VideoClip(dataSource, outputMode, precachedFramesCount, usePotStride);
 	}
@@ -318,8 +318,9 @@ namespace clipffmpeg
 		}
 		// Open codec
 		if (avcodec_open2(this->codecContext, this->codec, &optionsDict) < 0)
+		{
 			return; // Could not open codec
-
+		}
 #ifdef _FFMPEG_DEBUG
 		theoraplayer::log(this->name + ": Codec opened");
 #endif
@@ -333,7 +334,7 @@ namespace clipffmpeg
 		this->height = this->codecContext->height;
 		this->frameDuration = 1.0f / this->fps;
 		this->duration = (float)(this->formatContext->duration / AV_TIME_BASE);
-		if (this->frameQueue == NULL) // todo - why is this set in the backend class? it should be set in the base class, check other backends as well
+		if (this->frameQueue == NULL) // TODOth - maybe this should be moved to theoraplayer::VideoClip
 		{
 			this->frameQueue = new theoraplayer::FrameQueue(this);
 			this->frameQueue->setSize(this->precachedFramesCount);

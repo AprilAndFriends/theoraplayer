@@ -29,7 +29,7 @@
 
 namespace theoraplayer
 {
-	VideoClip_Theora::VideoClip_Theora(DataSource* data_source, TheoraOutputMode output_mode, int nPrecachedFrames, bool usePower2Stride) :
+	VideoClip_Theora::VideoClip_Theora(DataSource* data_source, OutputMode output_mode, int nPrecachedFrames, bool usePower2Stride) :
 		VideoClip(data_source, output_mode, nPrecachedFrames, usePower2Stride),
 		AudioPacketQueue()
 	{
@@ -41,7 +41,7 @@ namespace theoraplayer
 		this->lastDecodedFrameNumber = 0;
 	}
 
-	VideoClip* VideoClip_Theora::create(DataSource* dataSource, TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride)
+	VideoClip* VideoClip_Theora::create(DataSource* dataSource, OutputMode outputMode, int precachedFramesCount, bool usePotStride)
 	{
 		return new VideoClip_Theora(dataSource, outputMode, precachedFramesCount, usePotStride);
 	}
@@ -506,10 +506,9 @@ namespace theoraplayer
 				if (missingCount > 0)
 				{
 					float* samples = new float[missingCount + this->audioPacketQueue->samplesCount];
-					// TODOth - can this be done with a memset even though it's a float?
-					for (i = 0; i < missingCount; ++i)
+					if (missingCount > 0)
 					{
-						samples[i] = 0;
+						memset(samples, 0, missingCount * sizeof(float));
 					}
 					for (j = 0; i < missingCount + this->audioPacketQueue->samplesCount; ++i, ++j)
 					{

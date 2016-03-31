@@ -24,11 +24,11 @@ namespace multiple
 
 	// TODOth - should do this dynamically
 #ifdef MP4_VIDEO
-	theoraplayer::TheoraOutputMode outputMode = theoraplayer::TH_BGRX;
+	theoraplayer::OutputMode outputMode = theoraplayer::FORMAT_BGRX;
 	unsigned int textureFormat = GL_BGRA_EXT;
 	unsigned int uploadFormat = GL_BGRA_EXT;
 #else
-	theoraplayer::TheoraOutputMode outputMode = theoraplayer::TH_RGB;
+	theoraplayer::OutputMode outputMode = theoraplayer::FORMAT_RGB;
 	unsigned int textureFormat = GL_RGB;
 	unsigned int uploadFormat = GL_RGB;
 #endif
@@ -143,18 +143,18 @@ namespace multiple
 		// TODOth - this doesn't seem to work and should also be fixed in other places
 		if (key == 5 || key == 6 || key == 7)
 		{
-			theoraplayer::TheoraOutputMode mode;
+			theoraplayer::OutputMode mode;
 			if (key == 5)
 			{
-				mode = theoraplayer::TH_RGB;
+				mode = theoraplayer::FORMAT_RGB;
 			}
 			if (key == 6)
 			{
-				mode = theoraplayer::TH_YUV;
+				mode = theoraplayer::FORMAT_YUV;
 			}
 			if (key == 7)
 			{
-				mode = theoraplayer::TH_GREY3;
+				mode = theoraplayer::FORMAT_GREY3;
 			}
 			for (int i = 0; i < MAX_VIDEOS; ++i)
 			{

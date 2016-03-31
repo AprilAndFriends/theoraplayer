@@ -64,7 +64,7 @@ namespace clipavfoundation
 		return yuv;
 	}
 	
-	VideoClip::VideoClip(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride) :
+	VideoClip::VideoClip(theoraplayer::DataSource* dataSource, theoraplayer::OutputMode outputMode, int precachedFramesCount, bool usePotStride) :
 		theoraplayer::VideoClip(dataSource, outputMode, precachedFramesCount, usePotStride),
 		AudioPacketQueue()
 	{
@@ -77,7 +77,7 @@ namespace clipavfoundation
 		this->audioChannelsCount = 0;
 	}
 
-	theoraplayer::VideoClip* VideoClip::create(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride)
+	theoraplayer::VideoClip* VideoClip::create(theoraplayer::DataSource* dataSource, theoraplayer::OutputMode outputMode, int precachedFramesCount, bool usePotStride)
 	{
 		return new VideoClip(dataSource, outputMode, precachedFramesCount, usePotStride);
 	}
@@ -125,7 +125,7 @@ namespace clipavfoundation
 		NSArray* audioTracks = [asset tracksWithMediaType:AVMediaTypeAudio];
 		AVAssetTrack* audioTrack = (audioTracks.count > 0 ? [audioTracks objectAtIndex:0] : NULL);
 #ifdef _AVFOUNDATION_BGRX
-		bool yuvOutput = (this->outputMode != theoraplayer::TH_BGRX && this->outputMode != theoraplayer::TH_RGBA);
+		bool yuvOutput = (this->outputMode != theoraplayer::FORMAT_BGRX && this->outputMode != theoraplayer::FORMAT_RGBA);
 #else
 		bool yuvOutput = true;
 #endif
@@ -145,8 +145,8 @@ namespace clipavfoundation
 		mNumFrames = this->duration * this->fps;
 		if (this->frameQueue == NULL)
 		{
-			this->frameQueue = new TheoraFrameQueue(this);
-			this->frameQueue->setSize(this->numPrecachedFrames);
+			this->frameQueue = new FrameQueue(this);
+			this->frameQueue->setSize(this->precachedFramesCount);
 		}
 		if (this->seekFrame != -1)
 		{
@@ -281,7 +281,7 @@ namespace clipavfoundation
 				PixelTransform t;
 				memset(&t, 0, sizeof(PixelTransform));
 #ifdef _AVFOUNDATION_BGRX
-				if (this->outputMode == TH_BGRX || this->outputMode == TH_RGBA)
+				if (this->outputMode == FORMAT_BGRX || this->outputMode == FORMAT_RGBA)
 				{
 					t.raw = (unsigned char*)baseAddress;
 					t.rawStride = mStride;
@@ -295,7 +295,7 @@ namespace clipavfoundation
 					t.v = (unsigned char*)baseAddress + yuv.componentInfoCr.offset; t.vStride = yuv.componentInfoCr.rowBytes;
 				}
 #ifdef _AVFOUNDATION_BGRX
-				if (this->outputMode == TH_RGBA)
+				if (this->outputMode == FORMAT_RGBA)
 				{
 					unsigned char* buffer = frame->getBuffer();
 					for (int i = 0; i < 1000; ++i)

@@ -45,9 +45,9 @@ namespace tv
 	// TODOth - this demo is broken and needs to be fixed
 	void init()
 	{
-		clip = theoraplayer::manager->createVideoClip("media/bunny", theoraplayer::TH_RGB);
+		clip = theoraplayer::manager->createVideoClip("media/bunny", theoraplayer::FORMAT_RGB);
 		//  use this if you want to preload the file into ram and stream from there
-		//	clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("../media/short"), theoraplayer::TH_RGB);
+		//	clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("../media/short"), theoraplayer::FORMAT_RGB);
 		clip->setAutoRestart(true);
 		textureId = createTexture(potCeil(clip->getWidth()), potCeil(clip->getHeight()));
 		textureIdChair1 = loadTexture("media/tv_room/chair1.tga");
@@ -170,15 +170,15 @@ namespace tv
 		}
 		if (key == 5)
 		{
-			clip->setOutputMode(theoraplayer::TH_RGB);
+			clip->setOutputMode(theoraplayer::FORMAT_RGB);
 		}
 		if (key == 6)
 		{
-			clip->setOutputMode(theoraplayer::TH_YUV);
+			clip->setOutputMode(theoraplayer::FORMAT_YUV);
 		}
 		if (key == 7)
 		{
-			clip->setOutputMode(theoraplayer::TH_GREY3);
+			clip->setOutputMode(theoraplayer::FORMAT_GREY3);
 		}
 	}
 

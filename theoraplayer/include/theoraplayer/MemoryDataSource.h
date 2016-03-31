@@ -45,6 +45,9 @@ namespace theoraplayer
 		uint64_t position;
 		unsigned char* data;
 
+		void _loadFile();
+
 	};
+
 }
 #endif

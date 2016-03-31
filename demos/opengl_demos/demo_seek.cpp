@@ -30,7 +30,7 @@ namespace seek
 
 	void init()
 	{
-		clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/bunny"), theoraplayer::TH_RGB, 4);
+		clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/bunny"), theoraplayer::FORMAT_RGB, 4);
 		clip->setAutoRestart(true);
 		textureId = createTexture(potCeil(clip->getWidth()), potCeil(clip->getHeight()));
 	}

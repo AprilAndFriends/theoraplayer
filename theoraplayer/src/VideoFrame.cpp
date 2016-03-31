@@ -146,7 +146,7 @@ namespace theoraplayer
 			float diff = (clock() - time) * 1000.0f / CLOCKS_PER_SEC;
 			char s[128] = { '\0' };
 			sprintf(s, "%.2f", diff / N);
-			TheoraVideoManager::getSingleton().logMessage("YUV Decoding time: " + std::string(s) + " ms\n");
+			Manager::getSingleton().logMessage("YUV Decoding time: " + std::string(s) + " ms\n");
 #else
 			conversion_functions[this->clip->getOutputMode()](t);
 #endif

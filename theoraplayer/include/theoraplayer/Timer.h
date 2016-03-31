@@ -41,7 +41,7 @@ namespace theoraplayer
 			If you're using another synronization system, eg. an audio track,
 			then you can ignore this call or use it to perform other updates.
 
-			NOTE: this is called by TheoraVideoManager from the main thread
+			NOTE: this is called by Manager from the main thread
 		 */
 		virtual void update(float timeDelta);
 

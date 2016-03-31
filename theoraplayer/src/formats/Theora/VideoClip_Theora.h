@@ -19,7 +19,6 @@
 #include <vorbis/vorbisfile.h>
 
 #include "AudioPacketQueue.h"
-
 #include "DataSource.h"
 #include "Utility.h"
 #include "VideoClip.h"
@@ -48,12 +47,12 @@ namespace theoraplayer
 	class VideoClip_Theora : public VideoClip, public AudioPacketQueue
 	{
 	public:
-		VideoClip_Theora(DataSource* dataSource, TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
+		VideoClip_Theora(DataSource* dataSource, OutputMode outputMode, int precachedFramesCount, bool usePotStride);
 		~VideoClip_Theora();
 
 		std::string getDecoderName() { return THEORA_DECODER_NAME; }
 
-		static VideoClip* create(DataSource* dataSource, TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
+		static VideoClip* create(DataSource* dataSource, OutputMode outputMode, int precachedFramesCount, bool usePotStride);
 
 	protected:
 		TheoraInfoStruct info;

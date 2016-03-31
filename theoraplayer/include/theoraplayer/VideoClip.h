@@ -17,8 +17,6 @@
 
 #include "theoraplayerExport.h"
 
-// TODOth - needs to be refactored
-
 namespace theoraplayer
 {
 	// forward class declarations
@@ -32,33 +30,33 @@ namespace theoraplayer
 	class AudioInterface;
 
 	/// @brief Format of the VideoFrame pixels. Affects decoding time.
-	enum TheoraOutputMode
+	enum OutputMode
 	{
 		// A = full alpha (255), order of letters represents the byte order for a pixel
 		// A means the image is treated as if it contains an alpha channel, while X formats
 		// just mean that RGB frame is transformed to a 4 byte format
-		TH_UNDEFINED = 0,
-		TH_RGB = 1,
-		TH_RGBA = 2,
-		TH_RGBX = 3,
-		TH_ARGB = 4,
-		TH_XRGB = 5,
-		TH_BGR = 6,
-		TH_BGRA = 7,
-		TH_BGRX = 8,
-		TH_ABGR = 9,
-		TH_XBGR = 10,
-		TH_GREY = 11,
-		TH_GREY3 = 12,
-		TH_GREY3A = 13,
-		TH_GREY3X = 14,
-		TH_AGREY3 = 15,
-		TH_XGREY3 = 16,
-		TH_YUV = 17,
-		TH_YUVA = 18,
-		TH_YUVX = 19,
-		TH_AYUV = 20,
-		TH_XYUV = 21
+		FORMAT_UNDEFINED = 0,
+		FORMAT_RGB,
+		FORMAT_RGBA,
+		FORMAT_RGBX,
+		FORMAT_ARGB,
+		FORMAT_XRGB,
+		FORMAT_BGR,
+		FORMAT_BGRA,
+		FORMAT_BGRX,
+		FORMAT_ABGR,
+		FORMAT_XBGR,
+		FORMAT_GREY,
+		FORMAT_GREY3,
+		FORMAT_GREY3A,
+		FORMAT_GREY3X,
+		FORMAT_AGREY3,
+		FORMAT_XGREY3,
+		FORMAT_YUV,
+		FORMAT_YUVA,
+		FORMAT_YUVX,
+		FORMAT_AYUV,
+		FORMAT_XYUV
 	};
 
 	/// @brief This object contains all data related to video playback, eg. the open source file, the frame queue etc.
@@ -69,7 +67,7 @@ namespace theoraplayer
 		{
 			std::string name;
 			std::string extension;
-			VideoClip* (*createFunction)(DataSource*, TheoraOutputMode, int, bool);
+			VideoClip* (*createFunction)(DataSource*, OutputMode, int, bool);
 
 		};
 
@@ -121,10 +119,10 @@ namespace theoraplayer
 		float getPlaybackSpeed();
 		void setPlaybackSpeed(float speed);
 		/// @return Current output mode for this video object.
-		TheoraOutputMode getOutputMode() { return this->outputMode; }
+		OutputMode getOutputMode() { return this->outputMode; }
 		/// @brief Set a new output mode.
 		/// @note This discards the frame queue and ready frames will be lost.
-		void setOutputMode(TheoraOutputMode mode);
+		void setOutputMode(OutputMode mode);
 		inline bool isAutoRestart() { return this->autoRestart; }
 		/// @brief Whether the clip should automatically and smoothly restart when the last frame was reached.
 		void setAutoRestart(bool value);
@@ -184,7 +182,7 @@ namespace theoraplayer
 		/// @brief Syncs audio decoding and extraction.
 		Mutex* audioMutex;
 		Mutex* threadAccessMutex;
-		/// @brief Counter used by TheoraVideoManager to schedule workload
+		/// @brief Counter used by Manager to schedule workload
 		int threadAccessCount;
 
 		bool useAlpha;
@@ -193,7 +191,7 @@ namespace theoraplayer
 		/// @brief Multiplier for audio samples in range between 0 and 1 inclusively.
 		float audioGain;
 		bool autoRestart;
-		TheoraOutputMode outputMode;
+		OutputMode outputMode;
 		/// @brief User assigned priority.
 		/// @note Default value is 1.
 		float priority;
@@ -215,7 +213,7 @@ namespace theoraplayer
 
 		/// @brief Contains desired seek position as a frame number. next worker thread will do the seeking and reset this var to -1
 		int seekFrame;
-		TheoraOutputMode requestedOutputMode;
+		OutputMode requestedOutputMode;
 		bool firstFrameDisplayed;
 		bool restarted;
 		int iteration;
@@ -226,7 +224,7 @@ namespace theoraplayer
 		int droppedFramesCount;
 		int displayedFramesCount;
 
-		VideoClip(DataSource* dataSource, TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
+		VideoClip(DataSource* dataSource, OutputMode outputMode, int precachedFramesCount, bool usePotStride);
 		virtual ~VideoClip();
 
 		bool _isBusy();

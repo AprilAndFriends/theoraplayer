@@ -32,7 +32,7 @@ namespace theoraplayer
 		virtual ~_Exception();
 		/// @brief Gets the exception type.
 		/// @return The exception type.
-		inline virtual std::string getType() { return "TheoraPlayerException"; }
+		inline virtual std::string getType() { return "TheoraplayerException"; }
 		/// @brief Gets the exception message.
 		/// @return The exception message.
 		inline virtual std::string getMessage() { return this->message; }

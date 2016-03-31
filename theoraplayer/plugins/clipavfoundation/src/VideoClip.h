@@ -29,12 +29,12 @@ namespace clipavfoundation
 	class VideoClip : public theoraplayer::VideoClip, public theoraplayer::AudioPacketQueue
 	{
 	public:
-		VideoClip(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
+		VideoClip(theoraplayer::DataSource* dataSource, theoraplayer::OutputMode outputMode, int precachedFramesCount, bool usePotStride);
 		~VideoClip();
 
 		std::string getDecoderName() { return FORMAT_NAME; }
 
-		static theoraplayer::VideoClip* create(theoraplayer::DataSource* dataSource, theoraplayer::TheoraOutputMode outputMode, int precachedFramesCount, bool usePotStride);
+		static theoraplayer::VideoClip* create(theoraplayer::DataSource* dataSource, theoraplayer::OutputMode outputMode, int precachedFramesCount, bool usePotStride);
 
 	protected:
 		bool loaded;

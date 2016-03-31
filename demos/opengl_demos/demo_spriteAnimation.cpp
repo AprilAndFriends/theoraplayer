@@ -37,8 +37,8 @@ namespace spriteAnimation
 		std::string orientations[] = { "N", "NE", "E", "SE", "S", "SW", "W", "NW" };
 		for (int i = 0; i < MAX_VIDEOS; i++)
 		{
-			// Note - this demo isn't using TH_RGBA for now since the frames in this video are not mod 16 aligned.
-			clips[i] = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/brawe/brawe_" + orientations[i]), theoraplayer::TH_RGB, 8);
+			// Note - this demo isn't using FORMAT_RGBA for now since the frames in this video are not mod 16 aligned.
+			clips[i] = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/brawe/brawe_" + orientations[i]), theoraplayer::FORMAT_RGB, 8);
 			clips[i]->setAutoRestart(true);
 			if (i != 0)
 			{

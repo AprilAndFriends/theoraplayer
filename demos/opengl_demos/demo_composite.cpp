@@ -39,10 +39,10 @@ namespace composite
 	void init()
 	{
 		theoraplayer::manager->setWorkerThreadCount(2);
-		clipWater = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/locv/locv_water"), theoraplayer::TH_RGB, 4);
+		clipWater = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/locv/locv_water"), theoraplayer::FORMAT_RGB, 4);
 		clipWater->setPlaybackSpeed(0.5f);
 		clipWater->setAutoRestart(true);
-		clipEve = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/locv/locv_eve"), theoraplayer::TH_RGBA, 4);
+		clipEve = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/locv/locv_eve"), theoraplayer::FORMAT_RGBA, 4);
 		clipEve->setAutoRestart(true);
 		textureIdWater = createTexture(potCeil(clipWater->getWidth()), potCeil(clipWater->getHeight()));
 		textureIdEve = createTexture(potCeil(clipEve->getWidth()), potCeil(clipEve->getHeight()), GL_RGBA);

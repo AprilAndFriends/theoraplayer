@@ -66,7 +66,7 @@ namespace theoraplayer
 		/// @brief Removes the first N available frame from the queue. Use this every time you display a frameso you can get the next
 		/// one when the time comes. This function marks the frame on the front of the queue as unused and it's memory, then gets used
 		/// again in the decoding process. If you don't call this, the frame queue will fill up with precached frames up to the
-		/// specified amount in the TheoraVideoManager class and you won't be able to advance the video.
+		/// specified amount in the Manager class and you won't be able to advance the video.
 		void pop(int count = 1);
 		/// @brief This is a non-mutexed thread-unsafe version.
 		/// @see pop

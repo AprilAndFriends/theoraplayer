@@ -24,7 +24,7 @@ namespace theoraplayer
 	class theoraplayerExport AudioPacketQueue
 	{
 	public:
-		/// @brief This is an internal structure which VideoClip_Theora uses to store audio packets
+		/// @brief This is an internal structure which VideoClip uses to store audio packets
 		struct AudioPacket
 		{
 			float* pcmData;
