@@ -16,7 +16,6 @@
 				D1D89D8A1B710ED00053378D /* PBXTargetDependency */,
 				D1D89D8C1B710ED00053378D /* PBXTargetDependency */,
 				D1D89D8E1B710ED00053378D /* PBXTargetDependency */,
-				D1D89D901B710ED00053378D /* PBXTargetDependency */,
 			);
 			name = "Mac Dependencies";
 			productName = "Mac Dependencies";
@@ -24,6 +23,95 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B41FA82C1CAD349100456992 /* demo_av.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B5D1CAD2C3E004ECC69 /* demo_av.cpp */; };
+		B41FA8401CAD349400456992 /* demo_composite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B5F1CAD2C3E004ECC69 /* demo_composite.cpp */; };
+		B41FA8411CAD349700456992 /* demo_environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B611CAD2C3E004ECC69 /* demo_environment.cpp */; };
+		B41FA8421CAD349A00456992 /* demo_glutPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B631CAD2C3E004ECC69 /* demo_glutPlayer.cpp */; };
+		B41FA8431CAD349D00456992 /* demo_lightMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B651CAD2C3E004ECC69 /* demo_lightMap.cpp */; };
+		B41FA8441CAD349F00456992 /* demo_menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B671CAD2C3E004ECC69 /* demo_menu.cpp */; };
+		B41FA8451CAD34A200456992 /* demo_multiple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B691CAD2C3E004ECC69 /* demo_multiple.cpp */; };
+		B41FA8461CAD34A400456992 /* demo_seek.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B6B1CAD2C3E004ECC69 /* demo_seek.cpp */; };
+		B41FA8471CAD34A700456992 /* demo_spriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B6D1CAD2C3E004ECC69 /* demo_spriteAnimation.cpp */; };
+		B41FA8481CAD34AA00456992 /* demo_tv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B6F1CAD2C3E004ECC69 /* demo_tv.cpp */; };
+		B41FA8491CAD34CF00456992 /* libtheoraplayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139464F17C0EFAA0091F4A4 /* libtheoraplayer.a */; };
+		B41FA84A1CAD354D00456992 /* glut_basecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B591CAD26EC004ECC69 /* glut_basecode.cpp */; };
+		B41FA84B1CAD355400456992 /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
+		B41FA84C1CAD355700456992 /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
+		B41FA84D1CAD355700456992 /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
+		B41FA84E1CAD355B00456992 /* OpenAL_AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */; };
+		B41FA84F1CAD358300456992 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
+		B41FA87E1CAD4A9C00456992 /* libclipffmpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A28B2F1CAD1482004ECC69 /* libclipffmpeg.a */; };
+		B41FA87F1CAD4AA500456992 /* libclipwebm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A28B3B1CAD148A004ECC69 /* libclipwebm.a */; };
+		B41FA8801CAD4AAA00456992 /* libclipavfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A28B191CAD1477004ECC69 /* libclipavfoundation.a */; };
+		B4A28B5A1CAD26EC004ECC69 /* glut_basecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B591CAD26EC004ECC69 /* glut_basecode.cpp */; };
+		B4A28B711CAD2C3E004ECC69 /* demo_av.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B5D1CAD2C3E004ECC69 /* demo_av.cpp */; };
+		B4A28B721CAD2C3E004ECC69 /* demo_composite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B5F1CAD2C3E004ECC69 /* demo_composite.cpp */; };
+		B4A28B731CAD2C3E004ECC69 /* demo_environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B611CAD2C3E004ECC69 /* demo_environment.cpp */; };
+		B4A28B741CAD2C3E004ECC69 /* demo_glutPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B631CAD2C3E004ECC69 /* demo_glutPlayer.cpp */; };
+		B4A28B751CAD2C3E004ECC69 /* demo_lightMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B651CAD2C3E004ECC69 /* demo_lightMap.cpp */; };
+		B4A28B761CAD2C3E004ECC69 /* demo_menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B671CAD2C3E004ECC69 /* demo_menu.cpp */; };
+		B4A28B771CAD2C3E004ECC69 /* demo_multiple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B691CAD2C3E004ECC69 /* demo_multiple.cpp */; };
+		B4A28B781CAD2C3E004ECC69 /* demo_seek.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B6B1CAD2C3E004ECC69 /* demo_seek.cpp */; };
+		B4A28B791CAD2C3E004ECC69 /* demo_spriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B6D1CAD2C3E004ECC69 /* demo_spriteAnimation.cpp */; };
+		B4A28B7A1CAD2C3E004ECC69 /* demo_tv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B6F1CAD2C3E004ECC69 /* demo_tv.cpp */; };
+		B4A28B7F1CAD2D11004ECC69 /* demo_multiple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B691CAD2C3E004ECC69 /* demo_multiple.cpp */; };
+		B4A28B801CAD2D11004ECC69 /* demo_glutPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B631CAD2C3E004ECC69 /* demo_glutPlayer.cpp */; };
+		B4A28B811CAD2D11004ECC69 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F7F71698C842007E6835 /* util.cpp */; };
+		B4A28B821CAD2D11004ECC69 /* demo_menu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B671CAD2C3E004ECC69 /* demo_menu.cpp */; };
+		B4A28B831CAD2D11004ECC69 /* demo_spriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B6D1CAD2C3E004ECC69 /* demo_spriteAnimation.cpp */; };
+		B4A28B841CAD2D11004ECC69 /* demo_tv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B6F1CAD2C3E004ECC69 /* demo_tv.cpp */; };
+		B4A28B851CAD2D11004ECC69 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D127F8101698C882007E6835 /* objcUtil.mm */; };
+		B4A28B861CAD2D11004ECC69 /* demo_seek.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B6B1CAD2C3E004ECC69 /* demo_seek.cpp */; };
+		B4A28B871CAD2D11004ECC69 /* glut_basecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B591CAD26EC004ECC69 /* glut_basecode.cpp */; };
+		B4A28B881CAD2D11004ECC69 /* demo_lightMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B651CAD2C3E004ECC69 /* demo_lightMap.cpp */; };
+		B4A28B891CAD2D11004ECC69 /* demo_av.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B5D1CAD2C3E004ECC69 /* demo_av.cpp */; };
+		B4A28B8A1CAD2D11004ECC69 /* demo_environment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B611CAD2C3E004ECC69 /* demo_environment.cpp */; };
+		B4A28B8B1CAD2D11004ECC69 /* demo_composite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B5F1CAD2C3E004ECC69 /* demo_composite.cpp */; };
+		B4A28B8D1CAD2D11004ECC69 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946AD17C10DE20091F4A4 /* libogg.a */; };
+		B4A28B8E1CAD2D11004ECC69 /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946B017C10DE20091F4A4 /* libtheora.a */; };
+		B4A28B8F1CAD2D11004ECC69 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946BB17C10DE20091F4A4 /* libvorbis.a */; };
+		B4A28B901CAD2D11004ECC69 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D89D991B710F790053378D /* CoreVideo.framework */; };
+		B4A28B911CAD2D11004ECC69 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D89D971B710F720053378D /* CoreMedia.framework */; };
+		B4A28B921CAD2D11004ECC69 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D89D951B710F670053378D /* AVFoundation.framework */; };
+		B4A28B931CAD2D11004ECC69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
+		B4A28B941CAD2D11004ECC69 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
+		B4A28B951CAD2D11004ECC69 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
+		B4A28B971CAD2D11004ECC69 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9E169A43BB003A6CB5 /* icon.icns */; };
+		B4A28BA71CAD2D1F004ECC69 /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
+		B4A28BA81CAD2D1F004ECC69 /* OpenAL_AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */; };
+		B4A28BA91CAD2D1F004ECC69 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = D16A0EAF1698C5640016DF67 /* AppDelegate.mm */; };
+		B4A28BAA1CAD2D1F004ECC69 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = D16A0EB41698C5640016DF67 /* main.mm */; };
+		B4A28BAB1CAD2D1F004ECC69 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D16A0EB61698C5640016DF67 /* ViewController.mm */; };
+		B4A28BAC1CAD2D1F004ECC69 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F7F71698C842007E6835 /* util.cpp */; };
+		B4A28BAD1CAD2D1F004ECC69 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D127F8101698C882007E6835 /* objcUtil.mm */; };
+		B4A28BAE1CAD2D1F004ECC69 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8C81698D160007E6835 /* main.cpp */; };
+		B4A28BB01CAD2D1F004ECC69 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A48A5316C2F64A00318F58 /* OpenAL.framework */; };
+		B4A28BB11CAD2D1F004ECC69 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F09DEA169AB9D900DEEC63 /* GLKit.framework */; };
+		B4A28BB21CAD2D1F004ECC69 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D127F8C51698D0A3007E6835 /* CoreVideo.framework */; };
+		B4A28BB31CAD2D1F004ECC69 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D127F8C31698D09E007E6835 /* AVFoundation.framework */; };
+		B4A28BB41CAD2D1F004ECC69 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D127F8C11698D09A007E6835 /* CoreMedia.framework */; };
+		B4A28BB51CAD2D1F004ECC69 /* libtremor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D127F92116990218007E6835 /* libtremor.a */; };
+		B4A28BB61CAD2D1F004ECC69 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D098D4155F05C5009F6AAA /* libogg.a */; };
+		B4A28BB71CAD2D1F004ECC69 /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D098EF155F05D2009F6AAA /* libtheora.a */; };
+		B4A28BB81CAD2D1F004ECC69 /* libtheoraplayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F41EFE16977F6E00780A0E /* libtheoraplayer.a */; };
+		B4A28BB91CAD2D1F004ECC69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A0E7B1698C4B80016DF67 /* UIKit.framework */; };
+		B4A28BBA1CAD2D1F004ECC69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A0E7D1698C4B80016DF67 /* Foundation.framework */; };
+		B4A28BBB1CAD2D1F004ECC69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A0E7F1698C4B80016DF67 /* CoreGraphics.framework */; };
+		B4A28BBC1CAD2D1F004ECC69 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A0E831698C4B80016DF67 /* OpenGLES.framework */; };
+		B4A28BBE1CAD2D1F004ECC69 /* media in Resources */ = {isa = PBXBuildFile; fileRef = D16776D6155C57E90050EC64 /* media */; };
+		B4A28BBF1CAD2D1F004ECC69 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D127F8CA1698D3E6007E6835 /* Shader.fsh */; };
+		B4A28BC01CAD2D1F004ECC69 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D127F8CB1698D3E6007E6835 /* Shader.vsh */; };
+		B4A28BC11CAD2D1F004ECC69 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EB01698C5640016DF67 /* Default-568h@2x.png */; };
+		B4A28BC21CAD2D1F004ECC69 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EB11698C5640016DF67 /* Default.png */; };
+		B4A28BC31CAD2D1F004ECC69 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EB21698C5640016DF67 /* Default@2x.png */; };
+		B4A28BC41CAD2D1F004ECC69 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EC01698C6270016DF67 /* ViewController_iPad.xib */; };
+		B4A28BC51CAD2D1F004ECC69 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EC11698C6270016DF67 /* ViewController_iPhone.xib */; };
+		B4A28BC61CAD2D1F004ECC69 /* icon_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A8E169A3E4E003A6CB5 /* icon_iphone.png */; };
+		B4A28BC71CAD2D1F004ECC69 /* icon_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A90169A3E55003A6CB5 /* icon_iphone@2x.png */; };
+		B4A28BC81CAD2D1F004ECC69 /* icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A92169A3E65003A6CB5 /* icon_ipad.png */; };
+		B4A28BC91CAD2D1F004ECC69 /* icon_ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A94169A3E67003A6CB5 /* icon_ipad@2x.png */; };
+		B4A28BCA1CAD2D1F004ECC69 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9A169A4378003A6CB5 /* Default-Landscape.png */; };
+		B4A28BCB1CAD2D1F004ECC69 /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9B169A4378003A6CB5 /* Default-Landscape@2x.png */; };
 		D117630E177649D000269515 /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
 		D127F7F81698C842007E6835 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F7F71698C842007E6835 /* util.cpp */; };
 		D127F7F91698C842007E6835 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F7F71698C842007E6835 /* util.cpp */; };
@@ -37,17 +125,6 @@
 		D127F8011698C842007E6835 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F7F71698C842007E6835 /* util.cpp */; };
 		D127F8021698C842007E6835 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F7F71698C842007E6835 /* util.cpp */; };
 		D127F8031698C842007E6835 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F7F71698C842007E6835 /* util.cpp */; };
-		D127F8051698C84C007E6835 /* glutBasecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8041698C84C007E6835 /* glutBasecode.cpp */; };
-		D127F8061698C84C007E6835 /* glutBasecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8041698C84C007E6835 /* glutBasecode.cpp */; };
-		D127F8071698C84C007E6835 /* glutBasecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8041698C84C007E6835 /* glutBasecode.cpp */; };
-		D127F8081698C84C007E6835 /* glutBasecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8041698C84C007E6835 /* glutBasecode.cpp */; };
-		D127F8091698C84C007E6835 /* glutBasecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8041698C84C007E6835 /* glutBasecode.cpp */; };
-		D127F80A1698C84C007E6835 /* glutBasecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8041698C84C007E6835 /* glutBasecode.cpp */; };
-		D127F80B1698C84C007E6835 /* glutBasecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8041698C84C007E6835 /* glutBasecode.cpp */; };
-		D127F80C1698C84C007E6835 /* glutBasecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8041698C84C007E6835 /* glutBasecode.cpp */; };
-		D127F80D1698C84C007E6835 /* glutBasecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8041698C84C007E6835 /* glutBasecode.cpp */; };
-		D127F80E1698C84C007E6835 /* glutBasecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8041698C84C007E6835 /* glutBasecode.cpp */; };
-		D127F80F1698C84C007E6835 /* glutBasecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8041698C84C007E6835 /* glutBasecode.cpp */; };
 		D127F8111698C882007E6835 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D127F8101698C882007E6835 /* objcUtil.mm */; };
 		D127F8121698C882007E6835 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D127F8101698C882007E6835 /* objcUtil.mm */; };
 		D127F8131698C882007E6835 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D127F8101698C882007E6835 /* objcUtil.mm */; };
@@ -95,15 +172,7 @@
 		D1663361156ADAE8009E98F1 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
 		D1663362156ADAE8009E98F1 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
 		D1663363156ADAE8009E98F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6FAF150E9E7100EF9400 /* Foundation.framework */; };
-		D166336F156ADB6B009E98F1 /* video_lighting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1663359156ADADD009E98F1 /* video_lighting.cpp */; };
-		D167761A155C525F0050EC64 /* glut_player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1677619155C525F0050EC64 /* glut_player.cpp */; };
-		D16776B7155C55A60050EC64 /* av_player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776B6155C55A60050EC64 /* av_player.cpp */; };
 		D16776B9155C55B60050EC64 /* OpenAL_AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */; };
-		D16776C7155C56A70050EC64 /* composite_animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776C6155C56A70050EC64 /* composite_animation.cpp */; };
-		D16776C9155C56B20050EC64 /* multiple_videos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776C8155C56B20050EC64 /* multiple_videos.cpp */; };
-		D16776CB155C56C50050EC64 /* seek_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776CA155C56C50050EC64 /* seek_test.cpp */; };
-		D16776CD155C56D00050EC64 /* sprite_animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776CC155C56D00050EC64 /* sprite_animation.cpp */; };
-		D16776CF155C56D90050EC64 /* tv_room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776CE155C56D90050EC64 /* tv_room.cpp */; };
 		D16776D4155C571E0050EC64 /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
 		D16A0E7C1698C4B80016DF67 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A0E7B1698C4B80016DF67 /* UIKit.framework */; };
 		D16A0E7E1698C4B80016DF67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A0E7D1698C4B80016DF67 /* Foundation.framework */; };
@@ -122,7 +191,6 @@
 		D17613881561B21500F645DE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
 		D17613891561B21500F645DE /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
 		D176138A1561B21500F645DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6FAF150E9E7100EF9400 /* Foundation.framework */; };
-		D17613981561B2EE00F645DE /* environment_mapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D17613971561B2EE00F645DE /* environment_mapping.cpp */; };
 		D1A48A5116C2F64100318F58 /* OpenAL_AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */; };
 		D1A48A5416C2F64A00318F58 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A48A5316C2F64A00318F58 /* OpenAL.framework */; };
 		D1C0151415619DD400FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
@@ -135,7 +203,6 @@
 		D1C0151B15619E0700FBEF81 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
 		D1C0151C15619E0700FBEF81 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
 		D1C0151D15619E0700FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6FAF150E9E7100EF9400 /* Foundation.framework */; };
-		D1C0152115619EDC00FBEF81 /* lightmap_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1C0152015619EDC00FBEF81 /* lightmap_demo.cpp */; };
 		D1C0152215619EEE00FBEF81 /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
 		D1C0152415619EEE00FBEF81 /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
 		D1C134B1157972CF005E8A5B /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
@@ -143,13 +210,10 @@
 		D1C134B6157972CF005E8A5B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474059150CB0E700B20490 /* OpenGL.framework */; };
 		D1C134B7157972CF005E8A5B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474048150CAFEB00B20490 /* GLUT.framework */; };
 		D1C134B8157972CF005E8A5B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6FAF150E9E7100EF9400 /* Foundation.framework */; };
-		D1C134C615797387005E8A5B /* parallax_mapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1C134C515797387005E8A5B /* parallax_mapping.cpp */; };
 		D1D098F2155F077C009F6AAA /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
 		D1D098F3155F077C009F6AAA /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
-		D1D89D5C1B70FE7D0053378D /* multiple_videos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D16776C8155C56B20050EC64 /* multiple_videos.cpp */; };
 		D1D89D911B710F070053378D /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946AD17C10DE20091F4A4 /* libogg.a */; };
 		D1D89D921B710F070053378D /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946B017C10DE20091F4A4 /* libtheora.a */; };
-		D1D89D931B710F070053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139465117C0EFAA0091F4A4 /* libtheoraplayer_theora_avfoundation.a */; };
 		D1D89D941B710F070053378D /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946BB17C10DE20091F4A4 /* libvorbis.a */; };
 		D1D89D961B710F670053378D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D89D951B710F670053378D /* AVFoundation.framework */; };
 		D1D89D981B710F720053378D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D89D971B710F720053378D /* CoreMedia.framework */; };
@@ -186,43 +250,33 @@
 		D1D89DB81B710F9A0053378D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D89D951B710F670053378D /* AVFoundation.framework */; };
 		D1D89DB91B710FBC0053378D /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946AD17C10DE20091F4A4 /* libogg.a */; };
 		D1D89DBA1B710FBC0053378D /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946B017C10DE20091F4A4 /* libtheora.a */; };
-		D1D89DBB1B710FBC0053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139465117C0EFAA0091F4A4 /* libtheoraplayer_theora_avfoundation.a */; };
 		D1D89DBC1B710FBC0053378D /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946BB17C10DE20091F4A4 /* libvorbis.a */; };
 		D1D89DBD1B710FE10053378D /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946AD17C10DE20091F4A4 /* libogg.a */; };
 		D1D89DBE1B710FE10053378D /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946B017C10DE20091F4A4 /* libtheora.a */; };
-		D1D89DBF1B710FE10053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139465117C0EFAA0091F4A4 /* libtheoraplayer_theora_avfoundation.a */; };
 		D1D89DC01B710FE10053378D /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946BB17C10DE20091F4A4 /* libvorbis.a */; };
 		D1D89DC11B710FFB0053378D /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946AD17C10DE20091F4A4 /* libogg.a */; };
 		D1D89DC21B710FFB0053378D /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946B017C10DE20091F4A4 /* libtheora.a */; };
-		D1D89DC31B710FFB0053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139465117C0EFAA0091F4A4 /* libtheoraplayer_theora_avfoundation.a */; };
 		D1D89DC41B710FFB0053378D /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946BB17C10DE20091F4A4 /* libvorbis.a */; };
 		D1D89DC51B71100A0053378D /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946AD17C10DE20091F4A4 /* libogg.a */; };
 		D1D89DC61B71100A0053378D /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946B017C10DE20091F4A4 /* libtheora.a */; };
-		D1D89DC71B71100A0053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139465117C0EFAA0091F4A4 /* libtheoraplayer_theora_avfoundation.a */; };
 		D1D89DC81B71100A0053378D /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946BB17C10DE20091F4A4 /* libvorbis.a */; };
 		D1D89DC91B71101C0053378D /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946AD17C10DE20091F4A4 /* libogg.a */; };
 		D1D89DCA1B71101C0053378D /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946B017C10DE20091F4A4 /* libtheora.a */; };
-		D1D89DCB1B71101C0053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139465117C0EFAA0091F4A4 /* libtheoraplayer_theora_avfoundation.a */; };
 		D1D89DCC1B71101C0053378D /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946BB17C10DE20091F4A4 /* libvorbis.a */; };
 		D1D89DCD1B71102D0053378D /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946AD17C10DE20091F4A4 /* libogg.a */; };
 		D1D89DCE1B71102D0053378D /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946B017C10DE20091F4A4 /* libtheora.a */; };
-		D1D89DCF1B71102D0053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139465117C0EFAA0091F4A4 /* libtheoraplayer_theora_avfoundation.a */; };
 		D1D89DD11B7110340053378D /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946BB17C10DE20091F4A4 /* libvorbis.a */; };
 		D1D89DD21B7110430053378D /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946AD17C10DE20091F4A4 /* libogg.a */; };
 		D1D89DD31B7110440053378D /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946B017C10DE20091F4A4 /* libtheora.a */; };
-		D1D89DD41B7110440053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139465117C0EFAA0091F4A4 /* libtheoraplayer_theora_avfoundation.a */; };
 		D1D89DD51B7110440053378D /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946BB17C10DE20091F4A4 /* libvorbis.a */; };
 		D1D89DD61B7110510053378D /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946AD17C10DE20091F4A4 /* libogg.a */; };
 		D1D89DD71B7110510053378D /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946B017C10DE20091F4A4 /* libtheora.a */; };
-		D1D89DD81B7110510053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139465117C0EFAA0091F4A4 /* libtheoraplayer_theora_avfoundation.a */; };
 		D1D89DD91B7110510053378D /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946BB17C10DE20091F4A4 /* libvorbis.a */; };
 		D1D89DDA1B7110690053378D /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946AD17C10DE20091F4A4 /* libogg.a */; };
 		D1D89DDB1B7110690053378D /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946B017C10DE20091F4A4 /* libtheora.a */; };
-		D1D89DDC1B7110690053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139465117C0EFAA0091F4A4 /* libtheoraplayer_theora_avfoundation.a */; };
 		D1D89DDD1B7110690053378D /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946BB17C10DE20091F4A4 /* libvorbis.a */; };
 		D1D89DDE1B71107A0053378D /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946AD17C10DE20091F4A4 /* libogg.a */; };
 		D1D89DDF1B71107A0053378D /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946B017C10DE20091F4A4 /* libtheora.a */; };
-		D1D89DE01B71107A0053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139465117C0EFAA0091F4A4 /* libtheoraplayer_theora_avfoundation.a */; };
 		D1D89DE11B71107A0053378D /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D13946BB17C10DE20091F4A4 /* libvorbis.a */; };
 		D1E39A96169A3EC0003A6CB5 /* icon_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A8E169A3E4E003A6CB5 /* icon_iphone.png */; };
 		D1E39A97169A3EC2003A6CB5 /* icon_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A90169A3E55003A6CB5 /* icon_iphone@2x.png */; };
@@ -245,12 +299,96 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D127F90E169901DB007E6835 /* PBXContainerItemProxy */ = {
+		B4A28B161CAD1477004ECC69 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			containerPortal = B4A28B101CAD1477004ECC69 /* clipavfoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = clipavfoundation;
+		};
+		B4A28B181CAD1477004ECC69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A28B101CAD1477004ECC69 /* clipavfoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1F27B26177A2F7700E5C131;
+			remoteInfo = "clipavfoundation (Mac)";
+		};
+		B4A28B1A1CAD1477004ECC69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A28B101CAD1477004ECC69 /* clipavfoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1522F1C140F79500012F290;
+			remoteInfo = "clipavfoundation (iOS)";
+		};
+		B4A28B2C1CAD1482004ECC69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A28B261CAD1482004ECC69 /* clipffmpeg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = clipffmpeg;
+		};
+		B4A28B2E1CAD1482004ECC69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A28B261CAD1482004ECC69 /* clipffmpeg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1F27B26177A2F7700E5C131;
+			remoteInfo = "clipffmpeg (Mac)";
+		};
+		B4A28B301CAD1482004ECC69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A28B261CAD1482004ECC69 /* clipffmpeg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1522F1C140F79500012F290;
+			remoteInfo = "clipffmpeg (iOS)";
+		};
+		B4A28B381CAD148A004ECC69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A28B321CAD148A004ECC69 /* clipwebm.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = clipwebm;
+		};
+		B4A28B3A1CAD148A004ECC69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A28B321CAD148A004ECC69 /* clipwebm.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1F27B26177A2F7700E5C131;
+			remoteInfo = "clipwebm (Mac)";
+		};
+		B4A28B3C1CAD148A004ECC69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A28B321CAD148A004ECC69 /* clipwebm.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1522F1C140F79500012F290;
+			remoteInfo = "clipwebm (iOS)";
+		};
+		B4A28B7D1CAD2D11004ECC69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1473F20150CA69B00B20490 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D1CDFFC51696E1D700609AB0;
-			remoteInfo = "theoraplayer (iOS Theora AVFoundation)";
+			remoteGlobalIDString = D139463F17C0EFAA0091F4A4;
+			remoteInfo = "Mac Dependencies";
+		};
+		B4A28BA11CAD2D1F004ECC69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1BB6F2D150E99EE00EF9400;
+			remoteInfo = "ogg (iOS)";
+		};
+		B4A28BA31CAD2D1F004ECC69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D127F91616990217007E6835 /* Tremor.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1522F1B140F79500012F290;
+			remoteInfo = "tremor (iOS)";
+		};
+		B4A28BA51CAD2D1F004ECC69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1BB6F7D150E9CFD00EF9400;
+			remoteInfo = "theora (iOS)";
 		};
 		D127F910169901ED007E6835 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -300,13 +438,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = D198F9A7177A31FE002942E3;
 			remoteInfo = "theoraplayer (Mac AVFoundation)";
-		};
-		D139465017C0EFAA0091F4A4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D198F9D4177A3200002942E3;
-			remoteInfo = "theoraplayer (Mac Theora AVFoundation)";
 		};
 		D139465E17C0EFE70091F4A4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -427,13 +558,6 @@
 			remoteGlobalIDString = D1CDFF481696C77A00609AB0;
 			remoteInfo = "theoraplayer (AVFoundation)";
 		};
-		D1CDFF7C1696C88F00609AB0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D1CDFF701696C79700609AB0;
-			remoteInfo = "theoraplayer (Theora AVFoundation)";
-		};
 		D1D098D1155F05C5009F6AAA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */;
@@ -490,13 +614,6 @@
 			remoteGlobalIDString = D1F279B9177A2B3400E5C131;
 			remoteInfo = "theora (Mac)";
 		};
-		D1D89D8F1B710ED00053378D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D198F9A8177A3200002942E3;
-			remoteInfo = "theoraplayer (Mac Theora AVFoundation)";
-		};
 		D1F41EFD16977F6E00780A0E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
@@ -504,18 +621,37 @@
 			remoteGlobalIDString = D1CDFFC41696E1CA00609AB0;
 			remoteInfo = "theoraplayer (iOS AVFoundation)";
 		};
-		D1F41EFF16977F6E00780A0E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D1CDFFE91696E1D700609AB0;
-			remoteInfo = "theoraplayer (iOS Theora AVFoundation)";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B4A28B101CAD1477004ECC69 /* clipavfoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = clipavfoundation.xcodeproj; path = theoraplayer/plugins/clipavfoundation/clipavfoundation.xcodeproj; sourceTree = "<group>"; };
+		B4A28B261CAD1482004ECC69 /* clipffmpeg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = clipffmpeg.xcodeproj; path = theoraplayer/plugins/clipffmpeg/clipffmpeg.xcodeproj; sourceTree = "<group>"; };
+		B4A28B321CAD148A004ECC69 /* clipwebm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = clipwebm.xcodeproj; path = theoraplayer/plugins/clipwebm/clipwebm.xcodeproj; sourceTree = "<group>"; };
+		B4A28B591CAD26EC004ECC69 /* glut_basecode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glut_basecode.cpp; path = demos/basecode/glut/glut_basecode.cpp; sourceTree = "<group>"; };
+		B4A28B5D1CAD2C3E004ECC69 /* demo_av.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_av.cpp; path = demos/opengl_demos/demo_av.cpp; sourceTree = "<group>"; };
+		B4A28B5E1CAD2C3E004ECC69 /* demo_av.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_av.h; path = demos/opengl_demos/demo_av.h; sourceTree = "<group>"; };
+		B4A28B5F1CAD2C3E004ECC69 /* demo_composite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_composite.cpp; path = demos/opengl_demos/demo_composite.cpp; sourceTree = "<group>"; };
+		B4A28B601CAD2C3E004ECC69 /* demo_composite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_composite.h; path = demos/opengl_demos/demo_composite.h; sourceTree = "<group>"; };
+		B4A28B611CAD2C3E004ECC69 /* demo_environment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_environment.cpp; path = demos/opengl_demos/demo_environment.cpp; sourceTree = "<group>"; };
+		B4A28B621CAD2C3E004ECC69 /* demo_environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_environment.h; path = demos/opengl_demos/demo_environment.h; sourceTree = "<group>"; };
+		B4A28B631CAD2C3E004ECC69 /* demo_glutPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_glutPlayer.cpp; path = demos/opengl_demos/demo_glutPlayer.cpp; sourceTree = "<group>"; };
+		B4A28B641CAD2C3E004ECC69 /* demo_glutPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_glutPlayer.h; path = demos/opengl_demos/demo_glutPlayer.h; sourceTree = "<group>"; };
+		B4A28B651CAD2C3E004ECC69 /* demo_lightMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_lightMap.cpp; path = demos/opengl_demos/demo_lightMap.cpp; sourceTree = "<group>"; };
+		B4A28B661CAD2C3E004ECC69 /* demo_lightMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_lightMap.h; path = demos/opengl_demos/demo_lightMap.h; sourceTree = "<group>"; };
+		B4A28B671CAD2C3E004ECC69 /* demo_menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_menu.cpp; path = demos/opengl_demos/demo_menu.cpp; sourceTree = "<group>"; };
+		B4A28B681CAD2C3E004ECC69 /* demo_menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_menu.h; path = demos/opengl_demos/demo_menu.h; sourceTree = "<group>"; };
+		B4A28B691CAD2C3E004ECC69 /* demo_multiple.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_multiple.cpp; path = demos/opengl_demos/demo_multiple.cpp; sourceTree = "<group>"; };
+		B4A28B6A1CAD2C3E004ECC69 /* demo_multiple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_multiple.h; path = demos/opengl_demos/demo_multiple.h; sourceTree = "<group>"; };
+		B4A28B6B1CAD2C3E004ECC69 /* demo_seek.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_seek.cpp; path = demos/opengl_demos/demo_seek.cpp; sourceTree = "<group>"; };
+		B4A28B6C1CAD2C3E004ECC69 /* demo_seek.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_seek.h; path = demos/opengl_demos/demo_seek.h; sourceTree = "<group>"; };
+		B4A28B6D1CAD2C3E004ECC69 /* demo_spriteAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_spriteAnimation.cpp; path = demos/opengl_demos/demo_spriteAnimation.cpp; sourceTree = "<group>"; };
+		B4A28B6E1CAD2C3E004ECC69 /* demo_spriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_spriteAnimation.h; path = demos/opengl_demos/demo_spriteAnimation.h; sourceTree = "<group>"; };
+		B4A28B6F1CAD2C3E004ECC69 /* demo_tv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_tv.cpp; path = demos/opengl_demos/demo_tv.cpp; sourceTree = "<group>"; };
+		B4A28B701CAD2C3E004ECC69 /* demo_tv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_tv.h; path = demos/opengl_demos/demo_tv.h; sourceTree = "<group>"; };
+		B4A28B9D1CAD2D11004ECC69 /* Theora Player (Mac).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Theora Player (Mac).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4A28B9E1CAD2D12004ECC69 /* Theora Player (Mac).plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Theora Player (Mac).plist"; path = "/Users/dominik/projects/theoraplayer-refactor_2.0/Theora Player (Mac).plist"; sourceTree = "<absolute>"; };
+		B4A28BD01CAD2D1F004ECC69 /* Theora Player (iOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Theora Player (iOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D127F7F71698C842007E6835 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cpp; path = demos/basecode/util/util.cpp; sourceTree = "<group>"; };
-		D127F8041698C84C007E6835 /* glutBasecode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glutBasecode.cpp; path = demos/basecode/glut/glutBasecode.cpp; sourceTree = "<group>"; };
 		D127F8101698C882007E6835 /* objcUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = objcUtil.mm; path = demos/basecode/util/objcUtil.mm; sourceTree = "<group>"; };
 		D127F81D1698C901007E6835 /* objcUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = objcUtil.h; path = demos/basecode/util/objcUtil.h; sourceTree = "<group>"; };
 		D127F81E1698CA64007E6835 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = demos/basecode/util/util.h; sourceTree = "<group>"; };
@@ -536,21 +672,13 @@
 		D1474139150CB6F600B20490 /* sprite_animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sprite_animation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1474152150CB6F900B20490 /* seek_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seek_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D147416B150CB70D00B20490 /* tv_room.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tv_room.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1663359156ADADD009E98F1 /* video_lighting.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = video_lighting.cpp; path = demos/video_lighting/video_lighting.cpp; sourceTree = "<group>"; };
 		D166336C156ADAE8009E98F1 /* video_lighting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = video_lighting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = theoraplayer.xcodeproj; path = theoraplayer/theoraplayer.xcodeproj; sourceTree = "<group>"; };
-		D1677619155C525F0050EC64 /* glut_player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glut_player.cpp; path = demos/glut_player/glut_player.cpp; sourceTree = "<group>"; };
 		D167761B155C52B40050EC64 /* demo_basecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_basecode.h; path = demos/demo_basecode.h; sourceTree = "<group>"; };
 		D167761D155C52B40050EC64 /* ObjModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ObjModel.cpp; path = demos/ObjModel.cpp; sourceTree = "<group>"; };
 		D167761E155C52B40050EC64 /* ObjModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjModel.h; path = demos/ObjModel.h; sourceTree = "<group>"; };
 		D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenAL_AudioInterface.cpp; path = demos/OpenAL_AudioInterface.cpp; sourceTree = "<group>"; };
 		D1677620155C52B40050EC64 /* OpenAL_AudioInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenAL_AudioInterface.h; path = demos/OpenAL_AudioInterface.h; sourceTree = "<group>"; };
-		D16776B6155C55A60050EC64 /* av_player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = av_player.cpp; path = demos/av_player/av_player.cpp; sourceTree = "<group>"; };
-		D16776C6155C56A70050EC64 /* composite_animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = composite_animation.cpp; path = demos/composite_animation/composite_animation.cpp; sourceTree = "<group>"; };
-		D16776C8155C56B20050EC64 /* multiple_videos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = multiple_videos.cpp; path = demos/multiple_videos/multiple_videos.cpp; sourceTree = "<group>"; };
-		D16776CA155C56C50050EC64 /* seek_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = seek_test.cpp; path = demos/seek_test/seek_test.cpp; sourceTree = "<group>"; };
-		D16776CC155C56D00050EC64 /* sprite_animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sprite_animation.cpp; path = demos/sprite_animation/sprite_animation.cpp; sourceTree = "<group>"; };
-		D16776CE155C56D90050EC64 /* tv_room.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tv_room.cpp; path = demos/tv_room/tv_room.cpp; sourceTree = "<group>"; };
 		D16776D6155C57E90050EC64 /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = demos/media; sourceTree = "<group>"; };
 		D16A0E791698C4B80016DF67 /* simple_player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simple_player.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D16A0E7B1698C4B80016DF67 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -570,16 +698,13 @@
 		D16A0EC01698C6270016DF67 /* ViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController_iPad.xib; path = demos/basecode/ios/ViewController_iPad.xib; sourceTree = "<group>"; };
 		D16A0EC11698C6270016DF67 /* ViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController_iPhone.xib; path = demos/basecode/ios/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		D17613931561B21500F645DE /* environment_mapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = environment_mapping.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D17613971561B2EE00F645DE /* environment_mapping.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = environment_mapping.cpp; path = demos/environment_mapping/environment_mapping.cpp; sourceTree = "<group>"; };
 		D1A48A5316C2F64A00318F58 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/OpenAL.framework; sourceTree = DEVELOPER_DIR; };
 		D1BB6FAF150E9E7100EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D1C014F315619D4700FBEF81 /* lightmap_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lightmap_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C014F815619D4700FBEF81 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		D1C014F915619D4700FBEF81 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D1C014FA15619D4700FBEF81 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D1C0152015619EDC00FBEF81 /* lightmap_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lightmap_demo.cpp; path = demos/lightmap_demo/lightmap_demo.cpp; sourceTree = "<group>"; };
 		D1C134C1157972CF005E8A5B /* parallax_mapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = parallax_mapping.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1C134C515797387005E8A5B /* parallax_mapping.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parallax_mapping.cpp; path = demos/parallax_mapping/parallax_mapping.cpp; sourceTree = "<group>"; };
 		D1C2F5CD19F502B100A21F0D /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = iOS.xcconfig; path = xcconfig/iOS.xcconfig; sourceTree = "<group>"; };
 		D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Mac.xcconfig; path = xcconfig/Mac.xcconfig; sourceTree = "<group>"; };
 		D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Ogg.xcodeproj; path = ogg/macosx/Ogg.xcodeproj; sourceTree = "<group>"; };
@@ -607,13 +732,53 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B4A28B8C1CAD2D11004ECC69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B41FA8801CAD4AAA00456992 /* libclipavfoundation.a in Frameworks */,
+				B41FA87F1CAD4AA500456992 /* libclipwebm.a in Frameworks */,
+				B41FA87E1CAD4A9C00456992 /* libclipffmpeg.a in Frameworks */,
+				B41FA84F1CAD358300456992 /* OpenAL.framework in Frameworks */,
+				B41FA8491CAD34CF00456992 /* libtheoraplayer.a in Frameworks */,
+				B4A28B8D1CAD2D11004ECC69 /* libogg.a in Frameworks */,
+				B4A28B8E1CAD2D11004ECC69 /* libtheora.a in Frameworks */,
+				B4A28B8F1CAD2D11004ECC69 /* libvorbis.a in Frameworks */,
+				B4A28B901CAD2D11004ECC69 /* CoreVideo.framework in Frameworks */,
+				B4A28B911CAD2D11004ECC69 /* CoreMedia.framework in Frameworks */,
+				B4A28B921CAD2D11004ECC69 /* AVFoundation.framework in Frameworks */,
+				B4A28B931CAD2D11004ECC69 /* Foundation.framework in Frameworks */,
+				B4A28B941CAD2D11004ECC69 /* OpenGL.framework in Frameworks */,
+				B4A28B951CAD2D11004ECC69 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4A28BAF1CAD2D1F004ECC69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4A28BB01CAD2D1F004ECC69 /* OpenAL.framework in Frameworks */,
+				B4A28BB11CAD2D1F004ECC69 /* GLKit.framework in Frameworks */,
+				B4A28BB21CAD2D1F004ECC69 /* CoreVideo.framework in Frameworks */,
+				B4A28BB31CAD2D1F004ECC69 /* AVFoundation.framework in Frameworks */,
+				B4A28BB41CAD2D1F004ECC69 /* CoreMedia.framework in Frameworks */,
+				B4A28BB51CAD2D1F004ECC69 /* libtremor.a in Frameworks */,
+				B4A28BB61CAD2D1F004ECC69 /* libogg.a in Frameworks */,
+				B4A28BB71CAD2D1F004ECC69 /* libtheora.a in Frameworks */,
+				B4A28BB81CAD2D1F004ECC69 /* libtheoraplayer.a in Frameworks */,
+				B4A28BB91CAD2D1F004ECC69 /* UIKit.framework in Frameworks */,
+				B4A28BBA1CAD2D1F004ECC69 /* Foundation.framework in Frameworks */,
+				B4A28BBB1CAD2D1F004ECC69 /* CoreGraphics.framework in Frameworks */,
+				B4A28BBC1CAD2D1F004ECC69 /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D12C207E1534D58B00B4904B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D1D89DC51B71100A0053378D /* libogg.a in Frameworks */,
 				D1D89DC61B71100A0053378D /* libtheora.a in Frameworks */,
-				D1D89DC71B71100A0053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */,
 				D1D89DC81B71100A0053378D /* libvorbis.a in Frameworks */,
 				D1D89DA51B710F950053378D /* CoreMedia.framework in Frameworks */,
 				D1C0151815619DF200FBEF81 /* Foundation.framework in Frameworks */,
@@ -630,7 +795,6 @@
 			files = (
 				D1D89D911B710F070053378D /* libogg.a in Frameworks */,
 				D1D89D921B710F070053378D /* libtheora.a in Frameworks */,
-				D1D89D931B710F070053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */,
 				D1D89D941B710F070053378D /* libvorbis.a in Frameworks */,
 				D1D89D9A1B710F790053378D /* CoreVideo.framework in Frameworks */,
 				D1D89D981B710F720053378D /* CoreMedia.framework in Frameworks */,
@@ -647,7 +811,6 @@
 			files = (
 				D1D89DB91B710FBC0053378D /* libogg.a in Frameworks */,
 				D1D89DBA1B710FBC0053378D /* libtheora.a in Frameworks */,
-				D1D89DBB1B710FBC0053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */,
 				D1D89DBC1B710FBC0053378D /* libvorbis.a in Frameworks */,
 				D1D89D9D1B710F920053378D /* AVFoundation.framework in Frameworks */,
 				D1C0151515619DDB00FBEF81 /* Foundation.framework in Frameworks */,
@@ -665,7 +828,6 @@
 			files = (
 				D1D89DBD1B710FE10053378D /* libogg.a in Frameworks */,
 				D1D89DBE1B710FE10053378D /* libtheora.a in Frameworks */,
-				D1D89DBF1B710FE10053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */,
 				D1D89DC01B710FE10053378D /* libvorbis.a in Frameworks */,
 				D1D89DA01B710F930053378D /* AVFoundation.framework in Frameworks */,
 				D1C0151615619DE800FBEF81 /* Foundation.framework in Frameworks */,
@@ -683,7 +845,6 @@
 			files = (
 				D1D89DC11B710FFB0053378D /* libogg.a in Frameworks */,
 				D1D89DC21B710FFB0053378D /* libtheora.a in Frameworks */,
-				D1D89DC31B710FFB0053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */,
 				D1D89DC41B710FFB0053378D /* libvorbis.a in Frameworks */,
 				D1D89DA31B710F940053378D /* AVFoundation.framework in Frameworks */,
 				D1C0151715619DEE00FBEF81 /* Foundation.framework in Frameworks */,
@@ -701,7 +862,6 @@
 			files = (
 				D1D89DC91B71101C0053378D /* libogg.a in Frameworks */,
 				D1D89DCA1B71101C0053378D /* libtheora.a in Frameworks */,
-				D1D89DCB1B71101C0053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */,
 				D1D89DCC1B71101C0053378D /* libvorbis.a in Frameworks */,
 				D1D89DA91B710F960053378D /* AVFoundation.framework in Frameworks */,
 				D1C0151A15619DFA00FBEF81 /* Foundation.framework in Frameworks */,
@@ -719,7 +879,6 @@
 			files = (
 				D1D89DD21B7110430053378D /* libogg.a in Frameworks */,
 				D1D89DD31B7110440053378D /* libtheora.a in Frameworks */,
-				D1D89DD41B7110440053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */,
 				D1D89DD51B7110440053378D /* libvorbis.a in Frameworks */,
 				D1D89DAF1B710F970053378D /* AVFoundation.framework in Frameworks */,
 				D1C0151915619DF600FBEF81 /* Foundation.framework in Frameworks */,
@@ -737,7 +896,6 @@
 			files = (
 				D1D89DDA1B7110690053378D /* libogg.a in Frameworks */,
 				D1D89DDB1B7110690053378D /* libtheora.a in Frameworks */,
-				D1D89DDC1B7110690053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */,
 				D1D89DDD1B7110690053378D /* libvorbis.a in Frameworks */,
 				D1D89DB41B710F990053378D /* CoreMedia.framework in Frameworks */,
 				D1663361156ADAE8009E98F1 /* OpenGL.framework in Frameworks */,
@@ -775,7 +933,6 @@
 				D1D89DD11B7110340053378D /* libvorbis.a in Frameworks */,
 				D1D89DCD1B71102D0053378D /* libogg.a in Frameworks */,
 				D1D89DCE1B71102D0053378D /* libtheora.a in Frameworks */,
-				D1D89DCF1B71102D0053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */,
 				D1D89DAB1B710F960053378D /* CoreMedia.framework in Frameworks */,
 				D17613881561B21500F645DE /* OpenGL.framework in Frameworks */,
 				D17613891561B21500F645DE /* GLUT.framework in Frameworks */,
@@ -791,7 +948,6 @@
 			files = (
 				D1D89DD61B7110510053378D /* libogg.a in Frameworks */,
 				D1D89DD71B7110510053378D /* libtheora.a in Frameworks */,
-				D1D89DD81B7110510053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */,
 				D1D89DD91B7110510053378D /* libvorbis.a in Frameworks */,
 				D1D89DB11B710F980053378D /* CoreMedia.framework in Frameworks */,
 				D1C0151B15619E0700FBEF81 /* OpenGL.framework in Frameworks */,
@@ -808,7 +964,6 @@
 			files = (
 				D1D89DDE1B71107A0053378D /* libogg.a in Frameworks */,
 				D1D89DDF1B71107A0053378D /* libtheora.a in Frameworks */,
-				D1D89DE01B71107A0053378D /* libtheoraplayer_theora_avfoundation.a in Frameworks */,
 				D1D89DE11B71107A0053378D /* libvorbis.a in Frameworks */,
 				D1D89DB71B710F9A0053378D /* CoreMedia.framework in Frameworks */,
 				D1C134B6157972CF005E8A5B /* OpenGL.framework in Frameworks */,
@@ -822,6 +977,76 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B4A28B111CAD1477004ECC69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4A28B171CAD1477004ECC69 /* clipavfoundation.framework */,
+				B4A28B191CAD1477004ECC69 /* libclipavfoundation.a */,
+				B4A28B1B1CAD1477004ECC69 /* libclipavfoundation.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4A28B271CAD1482004ECC69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4A28B2D1CAD1482004ECC69 /* clipffmpeg.framework */,
+				B4A28B2F1CAD1482004ECC69 /* libclipffmpeg.a */,
+				B4A28B311CAD1482004ECC69 /* libclipffmpeg.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4A28B331CAD148A004ECC69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B4A28B391CAD148A004ECC69 /* clipwebm.framework */,
+				B4A28B3B1CAD148A004ECC69 /* libclipwebm.a */,
+				B4A28B3D1CAD148A004ECC69 /* libclipwebm.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4A28B5B1CAD2AFC004ECC69 /* media */ = {
+			isa = PBXGroup;
+			children = (
+				D1FB87A4157D4DFD0060641F /* per_pixel_lighting.vert */,
+				D1FB87A3157D4DFD0060641F /* per_pixel_lighting.frag */,
+				D1FB87A0157D4DFD0060641F /* normal_mapping.vert */,
+				D1FB879F157D4DFD0060641F /* normal_mapping.frag */,
+				D1FB87A2157D4DFD0060641F /* parallax_mapping.vert */,
+				D1FB87A1157D4DFD0060641F /* parallax_mapping.frag */,
+			);
+			name = media;
+			sourceTree = "<group>";
+		};
+		B4A28B5C1CAD2C28004ECC69 /* opengl_demos */ = {
+			isa = PBXGroup;
+			children = (
+				B4A28B5D1CAD2C3E004ECC69 /* demo_av.cpp */,
+				B4A28B5E1CAD2C3E004ECC69 /* demo_av.h */,
+				B4A28B5F1CAD2C3E004ECC69 /* demo_composite.cpp */,
+				B4A28B601CAD2C3E004ECC69 /* demo_composite.h */,
+				B4A28B611CAD2C3E004ECC69 /* demo_environment.cpp */,
+				B4A28B621CAD2C3E004ECC69 /* demo_environment.h */,
+				B4A28B631CAD2C3E004ECC69 /* demo_glutPlayer.cpp */,
+				B4A28B641CAD2C3E004ECC69 /* demo_glutPlayer.h */,
+				B4A28B651CAD2C3E004ECC69 /* demo_lightMap.cpp */,
+				B4A28B661CAD2C3E004ECC69 /* demo_lightMap.h */,
+				B4A28B671CAD2C3E004ECC69 /* demo_menu.cpp */,
+				B4A28B681CAD2C3E004ECC69 /* demo_menu.h */,
+				B4A28B691CAD2C3E004ECC69 /* demo_multiple.cpp */,
+				B4A28B6A1CAD2C3E004ECC69 /* demo_multiple.h */,
+				B4A28B6B1CAD2C3E004ECC69 /* demo_seek.cpp */,
+				B4A28B6C1CAD2C3E004ECC69 /* demo_seek.h */,
+				B4A28B6D1CAD2C3E004ECC69 /* demo_spriteAnimation.cpp */,
+				B4A28B6E1CAD2C3E004ECC69 /* demo_spriteAnimation.h */,
+				B4A28B6F1CAD2C3E004ECC69 /* demo_tv.cpp */,
+				B4A28B701CAD2C3E004ECC69 /* demo_tv.h */,
+			);
+			name = opengl_demos;
+			sourceTree = "<group>";
+		};
 		D127F7F61698C81C007E6835 /* util */ = {
 			isa = PBXGroup;
 			children = (
@@ -854,14 +1079,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D12C20781534D4A000B4904B /* composite_animation */ = {
-			isa = PBXGroup;
-			children = (
-				D16776C6155C56A70050EC64 /* composite_animation.cpp */,
-			);
-			name = composite_animation;
-			sourceTree = "<group>";
-		};
 		D1473F1E150CA69B00B20490 = {
 			isa = PBXGroup;
 			children = (
@@ -870,11 +1087,15 @@
 				D127F91616990217007E6835 /* Tremor.xcodeproj */,
 				D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */,
 				D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */,
+				B4A28B101CAD1477004ECC69 /* clipavfoundation.xcodeproj */,
+				B4A28B261CAD1482004ECC69 /* clipffmpeg.xcodeproj */,
+				B4A28B321CAD148A004ECC69 /* clipwebm.xcodeproj */,
 				D1C2F5C119F502A500A21F0D /* config */,
 				D196833A1B722B030082BAEC /* demos */,
 				D16776D6155C57E90050EC64 /* media */,
 				D1473F2C150CA69B00B20490 /* Frameworks */,
 				D1473F2B150CA69B00B20490 /* Products */,
+				B4A28B9E1CAD2D12004ECC69 /* Theora Player (Mac).plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -893,6 +1114,8 @@
 				D166336C156ADAE8009E98F1 /* video_lighting.app */,
 				D1C134C1157972CF005E8A5B /* parallax_mapping.app */,
 				D16A0E791698C4B80016DF67 /* simple_player.app */,
+				B4A28B9D1CAD2D11004ECC69 /* Theora Player (Mac).app */,
+				B4A28BD01CAD2D1F004ECC69 /* Theora Player (iOS).app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -928,74 +1151,15 @@
 			name = mac;
 			sourceTree = "<group>";
 		};
-		D1474107150CB6A700B20490 /* av_player */ = {
-			isa = PBXGroup;
-			children = (
-				D16776B6155C55A60050EC64 /* av_player.cpp */,
-			);
-			name = av_player;
-			sourceTree = "<group>";
-		};
-		D1474109150CB6BD00B20490 /* glut_player */ = {
-			isa = PBXGroup;
-			children = (
-				D1677619155C525F0050EC64 /* glut_player.cpp */,
-			);
-			name = glut_player;
-			sourceTree = "<group>";
-		};
-		D147416E150CB74200B20490 /* multiple_videos */ = {
-			isa = PBXGroup;
-			children = (
-				D16776C8155C56B20050EC64 /* multiple_videos.cpp */,
-			);
-			name = multiple_videos;
-			sourceTree = "<group>";
-		};
-		D147416F150CB74B00B20490 /* sprite_animation */ = {
-			isa = PBXGroup;
-			children = (
-				D16776CC155C56D00050EC64 /* sprite_animation.cpp */,
-			);
-			name = sprite_animation;
-			sourceTree = "<group>";
-		};
-		D1474170150CB75800B20490 /* seek_test */ = {
-			isa = PBXGroup;
-			children = (
-				D16776CA155C56C50050EC64 /* seek_test.cpp */,
-			);
-			name = seek_test;
-			sourceTree = "<group>";
-		};
-		D1474171150CB76400B20490 /* tv_room */ = {
-			isa = PBXGroup;
-			children = (
-				D16776CE155C56D90050EC64 /* tv_room.cpp */,
-			);
-			name = tv_room;
-			sourceTree = "<group>";
-		};
-		D1663358156ADACE009E98F1 /* video_lighting */ = {
-			isa = PBXGroup;
-			children = (
-				D1663359156ADADD009E98F1 /* video_lighting.cpp */,
-			);
-			name = video_lighting;
-			sourceTree = "<group>";
-		};
 		D1677575155C4F8F0050EC64 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				D167758B155C4F8F0050EC64 /* theoraplayer.framework */,
 				D1CDFF7B1696C88F00609AB0 /* theoraplayer.framework */,
-				D1CDFF7D1696C88F00609AB0 /* theoraplayer.framework */,
 				D139464D17C0EFAA0091F4A4 /* libtheoraplayer.a */,
-				D139464F17C0EFAA0091F4A4 /* libtheoraplayer_avfoundation.a */,
-				D139465117C0EFAA0091F4A4 /* libtheoraplayer_theora_avfoundation.a */,
+				D139464F17C0EFAA0091F4A4 /* libtheoraplayer.a */,
 				D167758D155C4F8F0050EC64 /* libtheoraplayer.a */,
 				D1F41EFE16977F6E00780A0E /* libtheoraplayer.a */,
-				D1F41F0016977F6E00780A0E /* libtheoraplayer.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1003,8 +1167,8 @@
 		D16A0EAA1698C5290016DF67 /* glut */ = {
 			isa = PBXGroup;
 			children = (
+				B4A28B591CAD26EC004ECC69 /* glut_basecode.cpp */,
 				D1E39A9E169A43BB003A6CB5 /* icon.icns */,
-				D127F8041698C84C007E6835 /* glutBasecode.cpp */,
 			);
 			name = glut;
 			sourceTree = "<group>";
@@ -1036,7 +1200,7 @@
 			name = ios;
 			sourceTree = "<group>";
 		};
-		D16D9DDF150CBC5D001BD35C /* common */ = {
+		D16D9DDF150CBC5D001BD35C /* basecode */ = {
 			isa = PBXGroup;
 			children = (
 				D127F7F61698C81C007E6835 /* util */,
@@ -1050,56 +1214,17 @@
 				D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */,
 				D1677620155C52B40050EC64 /* OpenAL_AudioInterface.h */,
 			);
-			name = common;
-			sourceTree = "<group>";
-		};
-		D17613961561B2AA00F645DE /* environment_mapping */ = {
-			isa = PBXGroup;
-			children = (
-				D17613971561B2EE00F645DE /* environment_mapping.cpp */,
-			);
-			name = environment_mapping;
+			name = basecode;
 			sourceTree = "<group>";
 		};
 		D196833A1B722B030082BAEC /* demos */ = {
 			isa = PBXGroup;
 			children = (
-				D1474109150CB6BD00B20490 /* glut_player */,
-				D1474107150CB6A700B20490 /* av_player */,
-				D147416E150CB74200B20490 /* multiple_videos */,
-				D147416F150CB74B00B20490 /* sprite_animation */,
-				D12C20781534D4A000B4904B /* composite_animation */,
-				D1474170150CB75800B20490 /* seek_test */,
-				D17613961561B2AA00F645DE /* environment_mapping */,
-				D1474171150CB76400B20490 /* tv_room */,
-				D1C0151F15619E2B00FBEF81 /* lightmap_demo */,
-				D1663358156ADACE009E98F1 /* video_lighting */,
-				D1C134C415797376005E8A5B /* parallax_mapping */,
-				D16D9DDF150CBC5D001BD35C /* common */,
+				B4A28B5C1CAD2C28004ECC69 /* opengl_demos */,
+				B4A28B5B1CAD2AFC004ECC69 /* media */,
+				D16D9DDF150CBC5D001BD35C /* basecode */,
 			);
 			name = demos;
-			sourceTree = "<group>";
-		};
-		D1C0151F15619E2B00FBEF81 /* lightmap_demo */ = {
-			isa = PBXGroup;
-			children = (
-				D1C0152015619EDC00FBEF81 /* lightmap_demo.cpp */,
-			);
-			name = lightmap_demo;
-			sourceTree = "<group>";
-		};
-		D1C134C415797376005E8A5B /* parallax_mapping */ = {
-			isa = PBXGroup;
-			children = (
-				D1C134C515797387005E8A5B /* parallax_mapping.cpp */,
-				D1FB87A4157D4DFD0060641F /* per_pixel_lighting.vert */,
-				D1FB87A3157D4DFD0060641F /* per_pixel_lighting.frag */,
-				D1FB87A0157D4DFD0060641F /* normal_mapping.vert */,
-				D1FB879F157D4DFD0060641F /* normal_mapping.frag */,
-				D1FB87A2157D4DFD0060641F /* parallax_mapping.vert */,
-				D1FB87A1157D4DFD0060641F /* parallax_mapping.frag */,
-			);
-			name = parallax_mapping;
 			sourceTree = "<group>";
 		};
 		D1C2F5C119F502A500A21F0D /* config */ = {
@@ -1143,6 +1268,45 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B4A28B7B1CAD2D11004ECC69 /* Theora Player (Mac) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B4A28B991CAD2D11004ECC69 /* Build configuration list for PBXNativeTarget "Theora Player (Mac)" */;
+			buildPhases = (
+				B4A28B7E1CAD2D11004ECC69 /* Sources */,
+				B4A28B8C1CAD2D11004ECC69 /* Frameworks */,
+				B4A28B961CAD2D11004ECC69 /* Resources */,
+				B4A28B981CAD2D11004ECC69 /* link media folder */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B4A28B7C1CAD2D11004ECC69 /* PBXTargetDependency */,
+			);
+			name = "Theora Player (Mac)";
+			productName = glut_player;
+			productReference = B4A28B9D1CAD2D11004ECC69 /* Theora Player (Mac).app */;
+			productType = "com.apple.product-type.application";
+		};
+		B4A28B9F1CAD2D1F004ECC69 /* Theora Player (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B4A28BCC1CAD2D1F004ECC69 /* Build configuration list for PBXNativeTarget "Theora Player (iOS)" */;
+			buildPhases = (
+				B4A28BA61CAD2D1F004ECC69 /* Sources */,
+				B4A28BAF1CAD2D1F004ECC69 /* Frameworks */,
+				B4A28BBD1CAD2D1F004ECC69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B4A28BA01CAD2D1F004ECC69 /* PBXTargetDependency */,
+				B4A28BA21CAD2D1F004ECC69 /* PBXTargetDependency */,
+				B4A28BA41CAD2D1F004ECC69 /* PBXTargetDependency */,
+			);
+			name = "Theora Player (iOS)";
+			productName = "simple_player (iOS)";
+			productReference = B4A28BD01CAD2D1F004ECC69 /* Theora Player (iOS).app */;
+			productType = "com.apple.product-type.application";
+		};
 		D12C207A1534D58B00B4904B /* composite_animation */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D12C20881534D58B00B4904B /* Build configuration list for PBXNativeTarget "composite_animation" */;
@@ -1309,7 +1473,6 @@
 				D127F913169901ED007E6835 /* PBXTargetDependency */,
 				D127F9231699021D007E6835 /* PBXTargetDependency */,
 				D127F911169901ED007E6835 /* PBXTargetDependency */,
-				D127F90F169901DB007E6835 /* PBXTargetDependency */,
 			);
 			name = "simple_player (iOS)";
 			productName = "simple_player (iOS)";
@@ -1379,7 +1542,7 @@
 		D1473F20150CA69B00B20490 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0730;
 			};
 			buildConfigurationList = D1473F23150CA69B00B20490 /* Build configuration list for PBXProject "theoraplayer_workspace" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1392,6 +1555,18 @@
 			productRefGroup = D1473F2B150CA69B00B20490 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = B4A28B111CAD1477004ECC69 /* Products */;
+					ProjectRef = B4A28B101CAD1477004ECC69 /* clipavfoundation.xcodeproj */;
+				},
+				{
+					ProductGroup = B4A28B271CAD1482004ECC69 /* Products */;
+					ProjectRef = B4A28B261CAD1482004ECC69 /* clipffmpeg.xcodeproj */;
+				},
+				{
+					ProductGroup = B4A28B331CAD148A004ECC69 /* Products */;
+					ProjectRef = B4A28B321CAD148A004ECC69 /* clipwebm.xcodeproj */;
+				},
 				{
 					ProductGroup = D1D098CA155F05C5009F6AAA /* Products */;
 					ProjectRef = D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */;
@@ -1428,11 +1603,76 @@
 				D1C134AF157972CF005E8A5B /* parallax_mapping */,
 				D16A0E781698C4B80016DF67 /* simple_player (iOS) */,
 				D139463F17C0EFAA0091F4A4 /* Mac Dependencies */,
+				B4A28B7B1CAD2D11004ECC69 /* Theora Player (Mac) */,
+				B4A28B9F1CAD2D1F004ECC69 /* Theora Player (iOS) */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		B4A28B171CAD1477004ECC69 /* clipavfoundation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = clipavfoundation.framework;
+			remoteRef = B4A28B161CAD1477004ECC69 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A28B191CAD1477004ECC69 /* libclipavfoundation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libclipavfoundation.a;
+			remoteRef = B4A28B181CAD1477004ECC69 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A28B1B1CAD1477004ECC69 /* libclipavfoundation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libclipavfoundation.a;
+			remoteRef = B4A28B1A1CAD1477004ECC69 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A28B2D1CAD1482004ECC69 /* clipffmpeg.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = clipffmpeg.framework;
+			remoteRef = B4A28B2C1CAD1482004ECC69 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A28B2F1CAD1482004ECC69 /* libclipffmpeg.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libclipffmpeg.a;
+			remoteRef = B4A28B2E1CAD1482004ECC69 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A28B311CAD1482004ECC69 /* libclipffmpeg.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libclipffmpeg.a;
+			remoteRef = B4A28B301CAD1482004ECC69 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A28B391CAD148A004ECC69 /* clipwebm.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = clipwebm.framework;
+			remoteRef = B4A28B381CAD148A004ECC69 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A28B3B1CAD148A004ECC69 /* libclipwebm.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libclipwebm.a;
+			remoteRef = B4A28B3A1CAD148A004ECC69 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B4A28B3D1CAD148A004ECC69 /* libclipwebm.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libclipwebm.a;
+			remoteRef = B4A28B3C1CAD148A004ECC69 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		D127F91F16990218007E6835 /* tremor.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1454,18 +1694,11 @@
 			remoteRef = D139464C17C0EFAA0091F4A4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D139464F17C0EFAA0091F4A4 /* libtheoraplayer_avfoundation.a */ = {
+		D139464F17C0EFAA0091F4A4 /* libtheoraplayer.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libtheoraplayer_avfoundation.a;
+			path = libtheoraplayer.a;
 			remoteRef = D139464E17C0EFAA0091F4A4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D139465117C0EFAA0091F4A4 /* libtheoraplayer_theora_avfoundation.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libtheoraplayer_theora_avfoundation.a;
-			remoteRef = D139465017C0EFAA0091F4A4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D13946AD17C10DE20091F4A4 /* libogg.a */ = {
@@ -1510,13 +1743,6 @@
 			remoteRef = D1CDFF7A1696C88F00609AB0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D1CDFF7D1696C88F00609AB0 /* theoraplayer.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = theoraplayer.framework;
-			remoteRef = D1CDFF7C1696C88F00609AB0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		D1D098D2155F05C5009F6AAA /* Ogg.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1559,16 +1785,38 @@
 			remoteRef = D1F41EFD16977F6E00780A0E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D1F41F0016977F6E00780A0E /* libtheoraplayer.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libtheoraplayer.a;
-			remoteRef = D1F41EFF16977F6E00780A0E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B4A28B961CAD2D11004ECC69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4A28B971CAD2D11004ECC69 /* icon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4A28BBD1CAD2D1F004ECC69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4A28BBE1CAD2D1F004ECC69 /* media in Resources */,
+				B4A28BBF1CAD2D1F004ECC69 /* Shader.fsh in Resources */,
+				B4A28BC01CAD2D1F004ECC69 /* Shader.vsh in Resources */,
+				B4A28BC11CAD2D1F004ECC69 /* Default-568h@2x.png in Resources */,
+				B4A28BC21CAD2D1F004ECC69 /* Default.png in Resources */,
+				B4A28BC31CAD2D1F004ECC69 /* Default@2x.png in Resources */,
+				B4A28BC41CAD2D1F004ECC69 /* ViewController_iPad.xib in Resources */,
+				B4A28BC51CAD2D1F004ECC69 /* ViewController_iPhone.xib in Resources */,
+				B4A28BC61CAD2D1F004ECC69 /* icon_iphone.png in Resources */,
+				B4A28BC71CAD2D1F004ECC69 /* icon_iphone@2x.png in Resources */,
+				B4A28BC81CAD2D1F004ECC69 /* icon_ipad.png in Resources */,
+				B4A28BC91CAD2D1F004ECC69 /* icon_ipad@2x.png in Resources */,
+				B4A28BCA1CAD2D1F004ECC69 /* Default-Landscape.png in Resources */,
+				B4A28BCB1CAD2D1F004ECC69 /* Default-Landscape@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D16A0E771698C4B80016DF67 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1681,6 +1929,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		B4A28B981CAD2D11004ECC69 /* link media folder */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "link media folder";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ ${CONFIGURATION} = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        echo \"${CONFIGURATION}\"\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		D1663365156ADAE8009E98F1 /* link media folder */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1849,14 +2112,62 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B4A28B7E1CAD2D11004ECC69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4A28B7F1CAD2D11004ECC69 /* demo_multiple.cpp in Sources */,
+				B4A28B801CAD2D11004ECC69 /* demo_glutPlayer.cpp in Sources */,
+				B41FA84B1CAD355400456992 /* tga.cpp in Sources */,
+				B41FA84C1CAD355700456992 /* ObjModel.cpp in Sources */,
+				B4A28B811CAD2D11004ECC69 /* util.cpp in Sources */,
+				B4A28B821CAD2D11004ECC69 /* demo_menu.cpp in Sources */,
+				B4A28B831CAD2D11004ECC69 /* demo_spriteAnimation.cpp in Sources */,
+				B4A28B841CAD2D11004ECC69 /* demo_tv.cpp in Sources */,
+				B4A28B851CAD2D11004ECC69 /* objcUtil.mm in Sources */,
+				B4A28B861CAD2D11004ECC69 /* demo_seek.cpp in Sources */,
+				B4A28B871CAD2D11004ECC69 /* glut_basecode.cpp in Sources */,
+				B41FA84E1CAD355B00456992 /* OpenAL_AudioInterface.cpp in Sources */,
+				B4A28B881CAD2D11004ECC69 /* demo_lightMap.cpp in Sources */,
+				B4A28B891CAD2D11004ECC69 /* demo_av.cpp in Sources */,
+				B4A28B8A1CAD2D11004ECC69 /* demo_environment.cpp in Sources */,
+				B4A28B8B1CAD2D11004ECC69 /* demo_composite.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4A28BA61CAD2D1F004ECC69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B41FA82C1CAD349100456992 /* demo_av.cpp in Sources */,
+				B41FA8421CAD349A00456992 /* demo_glutPlayer.cpp in Sources */,
+				B4A28BA71CAD2D1F004ECC69 /* tga.cpp in Sources */,
+				B4A28BA81CAD2D1F004ECC69 /* OpenAL_AudioInterface.cpp in Sources */,
+				B4A28BA91CAD2D1F004ECC69 /* AppDelegate.mm in Sources */,
+				B41FA8451CAD34A200456992 /* demo_multiple.cpp in Sources */,
+				B41FA8431CAD349D00456992 /* demo_lightMap.cpp in Sources */,
+				B41FA8401CAD349400456992 /* demo_composite.cpp in Sources */,
+				B41FA8441CAD349F00456992 /* demo_menu.cpp in Sources */,
+				B4A28BAA1CAD2D1F004ECC69 /* main.mm in Sources */,
+				B41FA8461CAD34A400456992 /* demo_seek.cpp in Sources */,
+				B41FA8411CAD349700456992 /* demo_environment.cpp in Sources */,
+				B41FA84A1CAD354D00456992 /* glut_basecode.cpp in Sources */,
+				B41FA84D1CAD355700456992 /* ObjModel.cpp in Sources */,
+				B41FA8481CAD34AA00456992 /* demo_tv.cpp in Sources */,
+				B4A28BAB1CAD2D1F004ECC69 /* ViewController.mm in Sources */,
+				B41FA8471CAD34A700456992 /* demo_spriteAnimation.cpp in Sources */,
+				B4A28BAC1CAD2D1F004ECC69 /* util.cpp in Sources */,
+				B4A28BAD1CAD2D1F004ECC69 /* objcUtil.mm in Sources */,
+				B4A28BAE1CAD2D1F004ECC69 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D12C207B1534D58B00B4904B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D16776C7155C56A70050EC64 /* composite_animation.cpp in Sources */,
 				D1D098F2155F077C009F6AAA /* tga.cpp in Sources */,
 				D127F7FD1698C842007E6835 /* util.cpp in Sources */,
-				D127F8091698C84C007E6835 /* glutBasecode.cpp in Sources */,
 				D127F8161698C882007E6835 /* objcUtil.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1865,10 +2176,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D167761A155C525F0050EC64 /* glut_player.cpp in Sources */,
+				B4A28B771CAD2C3E004ECC69 /* demo_multiple.cpp in Sources */,
+				B4A28B741CAD2C3E004ECC69 /* demo_glutPlayer.cpp in Sources */,
 				D127F7F81698C842007E6835 /* util.cpp in Sources */,
-				D127F8051698C84C007E6835 /* glutBasecode.cpp in Sources */,
+				B4A28B761CAD2C3E004ECC69 /* demo_menu.cpp in Sources */,
+				B4A28B791CAD2C3E004ECC69 /* demo_spriteAnimation.cpp in Sources */,
+				B4A28B7A1CAD2C3E004ECC69 /* demo_tv.cpp in Sources */,
 				D127F8111698C882007E6835 /* objcUtil.mm in Sources */,
+				B4A28B781CAD2C3E004ECC69 /* demo_seek.cpp in Sources */,
+				B4A28B5A1CAD26EC004ECC69 /* glut_basecode.cpp in Sources */,
+				B4A28B751CAD2C3E004ECC69 /* demo_lightMap.cpp in Sources */,
+				B4A28B711CAD2C3E004ECC69 /* demo_av.cpp in Sources */,
+				B4A28B731CAD2C3E004ECC69 /* demo_environment.cpp in Sources */,
+				B4A28B721CAD2C3E004ECC69 /* demo_composite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1877,9 +2197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D16776B9155C55B60050EC64 /* OpenAL_AudioInterface.cpp in Sources */,
-				D16776B7155C55A60050EC64 /* av_player.cpp in Sources */,
 				D127F7FA1698C842007E6835 /* util.cpp in Sources */,
-				D127F8061698C84C007E6835 /* glutBasecode.cpp in Sources */,
 				D127F8131698C882007E6835 /* objcUtil.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1888,9 +2206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D16776C9155C56B20050EC64 /* multiple_videos.cpp in Sources */,
 				D127F7FB1698C842007E6835 /* util.cpp in Sources */,
-				D127F8071698C84C007E6835 /* glutBasecode.cpp in Sources */,
 				D127F8141698C882007E6835 /* objcUtil.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1899,9 +2215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D16776CD155C56D00050EC64 /* sprite_animation.cpp in Sources */,
 				D127F7FC1698C842007E6835 /* util.cpp in Sources */,
-				D127F8081698C84C007E6835 /* glutBasecode.cpp in Sources */,
 				D127F8151698C882007E6835 /* objcUtil.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1910,9 +2224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D16776CB155C56C50050EC64 /* seek_test.cpp in Sources */,
 				D127F7FE1698C842007E6835 /* util.cpp in Sources */,
-				D127F80A1698C84C007E6835 /* glutBasecode.cpp in Sources */,
 				D127F8171698C882007E6835 /* objcUtil.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1922,10 +2234,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D16776D4155C571E0050EC64 /* ObjModel.cpp in Sources */,
-				D16776CF155C56D90050EC64 /* tv_room.cpp in Sources */,
 				D1D098F3155F077C009F6AAA /* tga.cpp in Sources */,
 				D127F8001698C842007E6835 /* util.cpp in Sources */,
-				D127F80C1698C84C007E6835 /* glutBasecode.cpp in Sources */,
 				D127F8191698C882007E6835 /* objcUtil.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1934,11 +2244,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D166336F156ADB6B009E98F1 /* video_lighting.cpp in Sources */,
 				D166335C156ADAE8009E98F1 /* tga.cpp in Sources */,
 				D166335E156ADAE8009E98F1 /* ObjModel.cpp in Sources */,
 				D127F8021698C842007E6835 /* util.cpp in Sources */,
-				D127F80E1698C84C007E6835 /* glutBasecode.cpp in Sources */,
 				D127F81B1698C882007E6835 /* objcUtil.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1947,7 +2255,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1D89D5C1B70FE7D0053378D /* multiple_videos.cpp in Sources */,
 				D117630E177649D000269515 /* tga.cpp in Sources */,
 				D1A48A5116C2F64100318F58 /* OpenAL_AudioInterface.cpp in Sources */,
 				D16A0EB91698C5640016DF67 /* AppDelegate.mm in Sources */,
@@ -1965,9 +2272,7 @@
 			files = (
 				D17613831561B21500F645DE /* tga.cpp in Sources */,
 				D17613851561B21500F645DE /* ObjModel.cpp in Sources */,
-				D17613981561B2EE00F645DE /* environment_mapping.cpp in Sources */,
 				D127F7FF1698C842007E6835 /* util.cpp in Sources */,
-				D127F80B1698C84C007E6835 /* glutBasecode.cpp in Sources */,
 				D127F8181698C882007E6835 /* objcUtil.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1978,9 +2283,7 @@
 			files = (
 				D1C0152215619EEE00FBEF81 /* tga.cpp in Sources */,
 				D1C0152415619EEE00FBEF81 /* ObjModel.cpp in Sources */,
-				D1C0152115619EDC00FBEF81 /* lightmap_demo.cpp in Sources */,
 				D127F8011698C842007E6835 /* util.cpp in Sources */,
-				D127F80D1698C84C007E6835 /* glutBasecode.cpp in Sources */,
 				D127F81A1698C882007E6835 /* objcUtil.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1991,9 +2294,7 @@
 			files = (
 				D1C134B1157972CF005E8A5B /* tga.cpp in Sources */,
 				D1C134B3157972CF005E8A5B /* ObjModel.cpp in Sources */,
-				D1C134C615797387005E8A5B /* parallax_mapping.cpp in Sources */,
 				D127F8031698C842007E6835 /* util.cpp in Sources */,
-				D127F80F1698C84C007E6835 /* glutBasecode.cpp in Sources */,
 				D127F81C1698C882007E6835 /* objcUtil.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2001,10 +2302,25 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D127F90F169901DB007E6835 /* PBXTargetDependency */ = {
+		B4A28B7C1CAD2D11004ECC69 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "theoraplayer (iOS Theora AVFoundation)";
-			targetProxy = D127F90E169901DB007E6835 /* PBXContainerItemProxy */;
+			target = D139463F17C0EFAA0091F4A4 /* Mac Dependencies */;
+			targetProxy = B4A28B7D1CAD2D11004ECC69 /* PBXContainerItemProxy */;
+		};
+		B4A28BA01CAD2D1F004ECC69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ogg (iOS)";
+			targetProxy = B4A28BA11CAD2D1F004ECC69 /* PBXContainerItemProxy */;
+		};
+		B4A28BA21CAD2D1F004ECC69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "tremor (iOS)";
+			targetProxy = B4A28BA31CAD2D1F004ECC69 /* PBXContainerItemProxy */;
+		};
+		B4A28BA41CAD2D1F004ECC69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theora (iOS)";
+			targetProxy = B4A28BA51CAD2D1F004ECC69 /* PBXContainerItemProxy */;
 		};
 		D127F911169901ED007E6835 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2091,14 +2407,177 @@
 			name = "theora (Mac)";
 			targetProxy = D1D89D8D1B710ED00053378D /* PBXContainerItemProxy */;
 		};
-		D1D89D901B710ED00053378D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "theoraplayer (Mac Theora AVFoundation)";
-			targetProxy = D1D89D8F1B710ED00053378D /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		B4A28B9A1CAD2D11004ECC69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_DEMO_GLUT_PLAYER,
+					_DEMO_SPRITE_ANIMATION,
+					_DEMO_MULTIPLE,
+					_DEMO_SEEK,
+					_DEMO_TV,
+					_DEMO_LIGHT_MAP,
+					_DEMO_AV,
+					_DEMO_COMPOSITE,
+					_DEMO_ENVIRONMENT,
+					_USE_WEBM,
+					_USE_FFMPEG,
+					_DEBUG,
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/theoraplayer/include",
+					"$(SRCROOT)/demos",
+					"$(SRCROOT)/theoraplayer/plugins/clipavfoundation/include",
+					"$(SRCROOT)/theoraplayer/plugins/clipffmpeg/include",
+					"$(SRCROOT)/theoraplayer/plugins/clipwebm/include",
+				);
+				INFOPLIST_FILE = "Theora Player (Mac).plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		B4A28B9B1CAD2D11004ECC69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_DEMO_GLUT_PLAYER,
+					_DEMO_SPRITE_ANIMATION,
+					_DEMO_MULTIPLE,
+					_DEMO_SEEK,
+					_DEMO_TV,
+					_DEMO_LIGHT_MAP,
+					_DEMO_AV,
+					_DEMO_COMPOSITE,
+					_DEMO_ENVIRONMENT,
+					_USE_WEBM,
+					_USE_FFMPEG,
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/theoraplayer/include",
+					"$(SRCROOT)/demos",
+					"$(SRCROOT)/theoraplayer/plugins/clipavfoundation/include",
+					"$(SRCROOT)/theoraplayer/plugins/clipffmpeg/include",
+					"$(SRCROOT)/theoraplayer/plugins/clipwebm/include",
+				);
+				INFOPLIST_FILE = "Theora Player (Mac).plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		B4A28B9C1CAD2D11004ECC69 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					_DEMO_GLUT_PLAYER,
+					_DEMO_SPRITE_ANIMATION,
+					_DEMO_MULTIPLE,
+					_DEMO_SEEK,
+					_DEMO_TV,
+					_DEMO_LIGHT_MAP,
+					_DEMO_AV,
+					_DEMO_COMPOSITE,
+					_DEMO_ENVIRONMENT,
+					_USE_WEBM,
+					_USE_FFMPEG,
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/theoraplayer/include",
+					"$(SRCROOT)/demos",
+					"$(SRCROOT)/theoraplayer/plugins/clipavfoundation/include",
+					"$(SRCROOT)/theoraplayer/plugins/clipffmpeg/include",
+					"$(SRCROOT)/theoraplayer/plugins/clipwebm/include",
+				);
+				INFOPLIST_FILE = "Theora Player (Mac).plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
+		B4A28BCD1CAD2D1F004ECC69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CD19F502B100A21F0D /* iOS.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MP4_VIDEO,
+					_IOS,
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Theora Player (iOS).plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		B4A28BCE1CAD2D1F004ECC69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CD19F502B100A21F0D /* iOS.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MP4_VIDEO,
+					_IOS,
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Theora Player (iOS).plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		B4A28BCF1CAD2D1F004ECC69 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1C2F5CD19F502B100A21F0D /* iOS.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MP4_VIDEO,
+					_IOS,
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Theora Player (iOS).plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
 		D12C208A1534D58B00B4904B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */;
@@ -2249,7 +2728,10 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/theoraplayer/include",
+					"$(SRCROOT)/demos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2261,7 +2743,10 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/theoraplayer/include",
+					"$(SRCROOT)/demos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2273,7 +2758,10 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/theoraplayer/include";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/theoraplayer/include",
+					"$(SRCROOT)/demos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2728,6 +3216,26 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B4A28B991CAD2D11004ECC69 /* Build configuration list for PBXNativeTarget "Theora Player (Mac)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4A28B9A1CAD2D11004ECC69 /* Debug */,
+				B4A28B9B1CAD2D11004ECC69 /* Release */,
+				B4A28B9C1CAD2D11004ECC69 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B4A28BCC1CAD2D1F004ECC69 /* Build configuration list for PBXNativeTarget "Theora Player (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4A28BCD1CAD2D1F004ECC69 /* Debug */,
+				B4A28BCE1CAD2D1F004ECC69 /* Release */,
+				B4A28BCF1CAD2D1F004ECC69 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		D12C20881534D58B00B4904B /* Build configuration list for PBXNativeTarget "composite_animation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
