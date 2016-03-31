@@ -11,6 +11,7 @@
 /// of this demo program.
 
 #ifdef _DEMO_COMPOSITE
+#include <math.h>
 #include <theoraplayer/Manager.h>
 #include <theoraplayer/MemoryDataSource.h>
 #include <theoraplayer/theoraplayer.h>

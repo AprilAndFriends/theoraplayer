@@ -9,6 +9,7 @@
 /// GNU General Public License(GPL).
 
 #ifdef _DEMO_TV
+#include <math.h>
 #include <theoraplayer/FrameQueue.h>
 #include <theoraplayer/Manager.h>
 #include <theoraplayer/MemoryDataSource.h>
