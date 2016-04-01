@@ -33,7 +33,7 @@ namespace theoraplayer
 	public:
 		friend class WorkerThread;
 
-		Manager(int workerThreadCount);
+		Manager();
 		virtual ~Manager();
 
 		int getWorkerThreadCount();

@@ -1,29 +1,33 @@
-/************************************************************************************
-This source file is part of the Theora Video Playback Library
-For latest info, see http://libtheoraplayer.googlecode.com
-*************************************************************************************
-Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
-This program is free software; you can redistribute it and/or modify it under
-the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
-*************************************************************************************/
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+/// 
+/// @section DESCRIPTION
+/// 
+/// Defines macros for DLL exports/imports.
+
 #ifndef APRILVIDEO_EXPORT_H
 #define APRILVIDEO_EXPORT_H
 
 	#ifdef _LIB
-		#define aprilVideoExport
-		#define aprilVideoFnExport
+		#define aprilvideoExport
+		#define aprilvideoFnExport
 	#else
 		#ifdef _WIN32
 			#ifdef APRILVIDEO_EXPORTS
-				#define aprilVideoExport __declspec(dllexport)
-				#define aprilVideoFnExport __declspec(dllexport)
+				#define aprilvideoExport __declspec(dllexport)
+				#define aprilvideoFnExport __declspec(dllexport)
 			#else
-				#define aprilVideoExport __declspec(dllimport)
-				#define aprilVideoFnExport __declspec(dllimport)
+				#define aprilvideoExport __declspec(dllimport)
+				#define aprilvideoFnExport __declspec(dllimport)
 			#endif
 		#else
-			#define aprilVideoExport __attribute__ ((visibility("default")))
-			#define aprilVideoFnExport __attribute__ ((visibility("default")))
+			#define aprilvideoExport __attribute__ ((visibility("default")))
+			#define aprilvideoFnExport __attribute__ ((visibility("default")))
 		#endif
 	#endif
 	#ifndef DEPRECATED_ATTRIBUTE

@@ -85,7 +85,7 @@ namespace theoraplayer
 
 	int VideoClip::getWidth()
 	{
-		return this->useAlpha ? this->width / 2 : this->width;
+		return (this->useAlpha ? this->width / 2 : this->width);
 	}
 
 	int VideoClip::getSubFrameX()

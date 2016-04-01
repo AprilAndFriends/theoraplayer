@@ -14,6 +14,7 @@
 #define THEORAPLAYER_H
 
 #include <string>
+#include <vector>
 
 #include "theoraplayerExport.h"
 #include "VideoClip.h"
@@ -27,6 +28,7 @@ namespace theoraplayer
 	theoraplayerFnExport void log(const std::string& message);
 	theoraplayerFnExport void registerVideoClipFormat(VideoClip::Format format);
 	theoraplayerFnExport void unregisterVideoClipFormat(const std::string& name);
+	theoraplayerFnExport std::vector<VideoClip::Format> getVideoClipFormats();
 
 }
 #endif

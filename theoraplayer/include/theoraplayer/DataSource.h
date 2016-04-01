@@ -28,11 +28,11 @@ namespace theoraplayer
 		DataSource();
 		virtual ~DataSource();
 
-		/// @return The name of the format used for creating a VideoClip
+		/// @return The name of the format used for creating a VideoClip.
 		virtual std::string getFormatName() = 0;
-		/// @return The size of the stream in bytes
+		/// @return The size of the stream in bytes.
 		virtual uint64_t getSize() = 0;
-		/// @return The current position of the source pointer
+		/// @return The current position of the source pointer.
 		virtual uint64_t getPosition() = 0;
 
 		/// @brief Reads bytesCount bytes from data source and returns number of read bytes

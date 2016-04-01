@@ -28,7 +28,7 @@ namespace theoraplayer
 
 	void init(int workerThreadCount)
 	{
-		theoraplayer::manager = new Manager(workerThreadCount);
+		theoraplayer::manager = new Manager();
 #ifdef _USE_THEORA
 		VideoClip::Format theora;
 		theora.name = THEORA_DECODER_NAME;
@@ -36,6 +36,7 @@ namespace theoraplayer
 		theora.createFunction = &VideoClip_Theora::create;
 		registerVideoClipFormat(theora);
 #endif
+		theoraplayer::manager->setWorkerThreadCount(workerThreadCount);
 	}
 
 	void destroy()
@@ -74,6 +75,11 @@ namespace theoraplayer
 				break;
 			}
 		}
+	}
+
+	std::vector<VideoClip::Format> getVideoClipFormats()
+	{
+		return videoClipFormats;
 	}
 
 }

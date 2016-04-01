@@ -24,6 +24,18 @@ namespace theoraplayer
 		this->data = data;
 		this->size = size;
 		this->position = 0;
+		foreach (VideoClip::Format, it, videoClipFormats)
+		{
+			if (stringEndsWith(filename, (*it).extension))
+			{
+				this->formatName = (*it).name;
+				break;
+			}
+		}
+		if (this->formatName == "")
+		{
+			log("WARNING: Could not determine format for: '" + filename + "'! Loading the file could fail!");
+		}
 	}
 
 	MemoryDataSource::MemoryDataSource(const std::string& filename)

@@ -52,10 +52,11 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\aprilvideo\aprilvideo.h" />
     <ClInclude Include="..\..\include\aprilvideo\aprilvideoExport.h" />
-    <ClInclude Include="..\..\include\aprilvideo\AudioVideoTimer.h" />
-    <ClInclude Include="..\..\include\aprilvideo\DataSource.h" />
     <ClInclude Include="..\..\include\aprilvideo\VideoObject.h" />
-    <ClInclude Include="..\..\include\aprilvideo\VideoTimer.h" />
+    <ClInclude Include="..\..\src\AudioVideoTimer.h" />
+    <ClInclude Include="..\..\src\DataSource.h" />
+    <ClInclude Include="..\..\src\Utility.h" />
+    <ClInclude Include="..\..\src\VideoTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\aprilvideo.cpp" />

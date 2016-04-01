@@ -1,13 +1,17 @@
-/************************************************************************************
-This source file is part of the Theora Video Playback Library
-For latest info, see http://libtheoraplayer.googlecode.com
-*************************************************************************************
-Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
-This program is free software; you can redistribute it and/or modify it under
-the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
-*************************************************************************************/
-#ifndef APRILVIDEO_APRILVIDEO_H
-#define APRILVIDEO_APRILVIDEO_H
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+/// 
+/// @section DESCRIPTION
+/// 
+/// Provides a public interface for aprilvideo.
+
+#ifndef APRILVIDEO_H
+#define APRILVIDEO_H
 
 #include <hltypes/hstring.h>
 
@@ -16,15 +20,18 @@ the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 namespace aprilvideo
 {
 	class VideoObject;
+
 	extern hstr logTag;
 
-	harray<VideoObject*> aprilVideoFnExport getActiveVideoObjects();
+	void aprilvideoFnExport init(int workerThreadCount = 1);
+	void aprilvideoFnExport destroy();
 
-	void aprilVideoFnExport setDebugModeEnabled(bool enabled);
-
-	void aprilVideoFnExport init(int num_worker_threads = 1);
-	void aprilVideoFnExport destroy();
+	void aprilvideoFnExport update(float timeDelta);
 	
-	bool aprilVideoFnExport isDebugModeEnabled();	
+	bool aprilvideoFnExport isDebugModeEnabled();
+	void aprilvideoFnExport setDebugModeEnabled(bool value);
+
+	harray<VideoObject*> aprilvideoFnExport getActiveVideoObjects();
+
 }
 #endif

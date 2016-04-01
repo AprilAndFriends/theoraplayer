@@ -70,12 +70,8 @@ namespace theoraplayer
 
 	Manager* manager = NULL;
 
-	Manager::Manager(int workerThreadCount) : defaultPrecachedFramesCount(8), workMutex(new Mutex()), audioInterfaceFactory(NULL)
+	Manager::Manager() : defaultPrecachedFramesCount(8), workMutex(new Mutex()), audioInterfaceFactory(NULL)
 	{
-		if (workerThreadCount < 1)
-		{
-			workerThreadCount = 1;
-		}
 		std::string message = "Initializing Theoraplayer Video Playback Library (" + this->getVersionString() + ")\n";
 #ifdef _USE_THEORA
 		message += "  - libtheora version: " + std::string(th_version_string()) + "\n" +
@@ -98,7 +94,6 @@ namespace theoraplayer
 		log(message + "------------------------------------");
 		// for CPU based yuv2rgb decoding
 		initYUVConversionModule();
-		this->_createWorkerThreads(workerThreadCount);
 	}
 
 	Manager::~Manager()

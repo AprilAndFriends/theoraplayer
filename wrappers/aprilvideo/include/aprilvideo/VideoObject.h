@@ -1,24 +1,33 @@
-/************************************************************************************
- This source file is part of the Theora Video Playback Library
- For latest info, see http://libtheoraplayer.googlecode.com
- *************************************************************************************
- Copyright (c) 2008-2014 Kresimir Spes (kspes@cateia.com)
- This program is free software; you can redistribute it and/or modify it under
- the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
- *************************************************************************************/
-#ifndef APRILVIDEO_OBJECT_H
-#define APRILVIDEO_OBJECT_H
+/// @file
+/// @version 2.0
+/// 
+/// @section LICENSE
+/// 
+/// This program is free software; you can redistribute it and/or modify it under
+/// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
+/// 
+/// @section DESCRIPTION
+/// 
+/// Provides an aprilui object for video rendering.
 
-#include <hltypes/hstring.h>
-#include <gtypes/Rectangle.h>
+#ifndef APRILVIDEO_VIDEO_OBJECT_H
+#define APRILVIDEO_VIDEO_OBJECT_H
+
 #include <april/aprilUtil.h>
 #include <april/Image.h>
 #include <aprilui/ObjectImageBox.h>
+#include <gtypes/Rectangle.h>
+#include <hltypes/henum.h>
+#include <hltypes/hltypesUtil.h>
+#include <hltypes/hstring.h>
 
-#include "aprilVideoExport.h"
+#include "aprilvideoExport.h"
 
-class TheoraVideoClip;
-class TheoraTimer;
+namespace theoraplayer
+{
+	class Timer;
+	class VideoClip;
+}
 
 namespace aprilui
 {
@@ -34,88 +43,121 @@ namespace xal
 
 namespace aprilvideo
 {
-	class aprilVideoExport VideoObject : public aprilui::ImageBox
+	class aprilvideoExport VideoObject : public aprilui::ImageBox
 	{
 		APRILUI_CLONEABLE(VideoObject);
 	public:
+		HL_ENUM_CLASS_DECLARE(PlaybackState,
+		(
+			HL_ENUM_DECLARE(PlaybackState, Undefined);
+			HL_ENUM_DECLARE(PlaybackState, Playing);
+			HL_ENUM_DECLARE(PlaybackState, Stopped);
+			HL_ENUM_DECLARE(PlaybackState, Paused);
+		));
+
 		VideoObject(chstr name);
-		static aprilui::Object* createInstance(chstr name);
 		~VideoObject();
 		inline hstr getClassName() const { return "aprilvideo.VideoObject"; }
-		
-		hstr getFullPath();
-		
-		aprilui::Texture* getTexture();
-		const harray<aprilui::Texture*>& getTextures();
-		float getTimePosition();
-		float getInitialPrecacheFactor() { return this->initialPrecacheFactor; }
-		float getPrecacheFactor();
-		int getNumReadyFrames();
-		int getNumPrecachedFrames();
-		hstr getClipName() { return this->clipName; }
-		int getClipWidth();
-		int getClipHeight();
-		hstr getProperty(chstr name);
-		harray<aprilui::PropertyDescription> getPropertyDescriptions();
-		
-		inline int getAlphaThreshold() { return this->alphaPauseThreshold; }
 
-		DEPRECATED_ATTRIBUTE inline int getAlphaTreshold() { return this->alphaPauseThreshold; }
-
+		static aprilui::Object* createInstance(chstr name);
+		
+		HL_DEFINE_GET(hstr, videoClipName, VideoClipName);
+		void setVideoClipName(chstr value);
+		HL_DEFINE_ISSET(videoClipUseAlpha, VideoClipUseAlpha);
+		HL_DEFINE_GET(int, pauseAlphaThreshold, PauseAlphaThreshold);
+		void setPauseAlphaThreshold(int value);
+		HL_DEFINE_IS(looping, Looping);
+		void setLooping(bool value);
+		HL_DEFINE_GET(float, initialPrecacheFactor, InitialPrecacheFactor);
 		void setInitialPrecacheFactor(float value);
+		HL_DEFINE_GET(float, initialPrecacheTimeout, InitialPrecacheTimeout);
 		void setInitialPrecacheTimeout(float value);
-		void setAlphaThreshold(int threshold);
-		bool setProperty(chstr name, chstr value);
-		DEPRECATED_ATTRIBUTE void setAlphaTreshold(int threshold) { setAlphaThreshold(threshold); }
-
-		void play();
-		void pause();
-		void stop();
-		void _createClip(bool waitForCache = true);
-		void updateFrame();
-
-		void notifyEvent(chstr type, aprilui::EventArgs* args);
-			
+		HL_DEFINE_GETSET(hstr, soundName, SoundName);
+		HL_DEFINE_GETSET(float, audioSyncOffset, AudioSyncOffset);
+		HL_DEFINE_GET(float, speed, Speed);
+		void setSpeed(float value);
+		float getTimePosition();
+		void setTimePosition(float value);
+		int getReadyFramesCount();
+		int getPrecachedFramesCount();
+		int getVideoClipWidth();
+		int getVideoClipHeight();
+		float getVideoClipDuration();
+		bool hasVideoClipAlphaChannel();
+		float getPrecacheFactor();
+		HL_DEFINE_GET(aprilui::Texture*, currentTexture, CurrentTexture);
+		HL_DEFINE_GET(harray<aprilui::Texture*>, textures, Textures);
 		bool isPlaying();
 		bool isStopped();
 		virtual bool isPaused();
-		/// @note This method checks the timer rather than alphaThreshold like isPaused()
-		bool _isVideoPaused();		
-		bool hasAlphaChannel();
-		bool _isClipCreated();
+		bool isVideoClipPaused();
+		bool isVideoClipCreated();
+		PlaybackState getPlaybackState();
+		void setPlaybackState(PlaybackState value);
+
+		harray<aprilui::PropertyDescription> getPropertyDescriptions();
+
+		hstr getProperty(chstr name);
+		bool setProperty(chstr name, chstr value);
+
+		void notifyEvent(chstr type, aprilui::EventArgs* args);
+
+		void play();
+		void stop();
+		void pause();
+		void updateFrame();
+		void createClip(bool waitForCache = true);
+
+		DEPRECATED_ATTRIBUTE inline void _createClip(bool waitForCache = true)	{ this->createClip(waitForCache); }
+		DEPRECATED_ATTRIBUTE inline bool _isVideoPaused()						{ return this->isVideoClipPaused(); }
+		DEPRECATED_ATTRIBUTE inline bool _isClipCreated()						{ return this->isVideoClipCreated(); }
+		DEPRECATED_ATTRIBUTE inline int getClipWidth()							{ return this->getVideoClipWidth(); }
+		DEPRECATED_ATTRIBUTE inline int getClipHeight()							{ return this->getVideoClipHeight(); }
+		DEPRECATED_ATTRIBUTE inline int getNumReadyFrames()						{ return this->getReadyFramesCount(); }
+		DEPRECATED_ATTRIBUTE inline int getNumPrecachedFrames()					{ return this->getPrecachedFramesCount(); }
+		DEPRECATED_ATTRIBUTE inline int getAlphaThreshold()						{ return this->getPauseAlphaThreshold(); }
+		DEPRECATED_ATTRIBUTE inline void setAlphaThreshold(int value)			{ this->setPauseAlphaThreshold(value); }
+		DEPRECATED_ATTRIBUTE inline int getAlphaTreshold()						{ return this->getPauseAlphaThreshold(); }
+		DEPRECATED_ATTRIBUTE inline void setAlphaTreshold(int value)			{ this->setPauseAlphaThreshold(value); }
 
 	protected:
-		bool prevDoneFlag;
-		bool useAlpha;
-		bool loop;
-		hstr clipName;
-		TheoraVideoClip* clip;
-		TheoraTimer* timer;
-		april::BlendMode blendMode;
-		harray<aprilui::Texture*> textures;
-		harray<aprilui::Image*> videoImages;
-		aprilui::Texture* texture;
-		aprilui::Image* videoImage;
-		float speed;
-		unsigned long prevFrameNumber;
-		bool seeked;
-		int alphaPauseThreshold;
-		unsigned char prevAlpha;
-		float initialPrecacheFactor, initialPrecacheTimeout;
-
+		hstr videoClipName;
+		bool videoClipUseAlpha;
+		int pauseAlphaThreshold;
+		bool looping;
+		float initialPrecacheFactor;
+		float initialPrecacheTimeout;
+		hstr soundName;
 		float audioSyncOffset;
-		hstr audioName;
-		xal::Player* audioPlayer;
+		april::BlendMode blendMode;
+		float speed;
+
+		theoraplayer::VideoClip* clip;
+		theoraplayer::Timer* timer;
+		aprilui::Texture* currentTexture;
+		harray<aprilui::Texture*> textures;
+		aprilui::Image* currentVideoImage;
+		harray<aprilui::Image*> videoImages;
 		xal::Sound* sound;
+		xal::Player* audioPlayer;
 
 		april::Image::Format _getTextureFormat();
 
 		void _update(float timeDelta);
 		void _draw();
 		
-		void destroyResources();
+		void _destroyResources();
+		hstr _findVideoClipResource(chstr filename);
+
 	private:
+		hstr _videoClipFilename;
+		bool _doneEventTriggered;
+		unsigned long _previousFrameNumber;
+		bool _seeked;
+
 		static harray<aprilui::PropertyDescription> _propertyDescriptions;
+
 	};
+
 }
 #endif

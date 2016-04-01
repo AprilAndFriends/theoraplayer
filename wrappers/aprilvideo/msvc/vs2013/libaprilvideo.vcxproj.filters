@@ -20,16 +20,19 @@
     <ClInclude Include="..\..\include\aprilvideo\aprilvideoExport.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\aprilvideo\AudioVideoTimer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\aprilvideo\DataSource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\aprilvideo\VideoObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\aprilvideo\VideoTimer.h">
+    <ClInclude Include="..\..\src\AudioVideoTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\DataSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\VideoTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

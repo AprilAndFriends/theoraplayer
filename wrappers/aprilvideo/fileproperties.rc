@@ -1,5 +1,5 @@
-#define VER_VERSION 1,1,0,0
-#define VER_VERSION_STR "1.1.0\0"
+#define VER_VERSION 2,0,0,0
+#define VER_VERSION_STR "2.0.0.0\0"
 #define VER_COMPANYNAME_STR "Cateia Games\0"
 #define VER_FILEDESCRIPTION_STR "APRIL Video\0"
 #define VER_LEGALCOPYRIGHT_STR "© K.I.D. d.o.o. Rijeka, Croatia\0"
