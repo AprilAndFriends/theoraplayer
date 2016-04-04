@@ -26,7 +26,7 @@ namespace theoraplayer
 	VideoClip::VideoClip(DataSource* dataSource, OutputMode outputMode, int precachedFramesCount, bool usePotStride) :
 		frameQueue(NULL), audioInterface(NULL), stream(NULL), timer(NULL), assignedWorkerThread(NULL), audioMutex(NULL),
 		threadAccessMutex(NULL), threadAccessCount(0), useAlpha(false), useStride(false), precachedFramesCount(4), audioGain(1.0f),
-		outputMode(FORMAT_UNDEFINED), autoRestart(false), priority(1.0f), duration(-1.0f), frameDuration(0.0f), width(0), height(0),
+		autoRestart(false), outputMode(FORMAT_UNDEFINED), priority(1.0f), duration(-1.0f), frameDuration(0.0f), width(0), height(0),
 		stride(0), framesCount(-1), fps(1), endOfFile(false), waitingForCache(false), subFrameX(0), subFrameY(0), subFrameWidth(0),
 		subFrameHeight(0), seekFrame(-1), requestedOutputMode(FORMAT_UNDEFINED), firstFrameDisplayed(false), restarted(false), iteration(0),
 		playbackIteration(0), droppedFramesCount(0), displayedFramesCount(0)

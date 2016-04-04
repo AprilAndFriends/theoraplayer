@@ -250,10 +250,13 @@ namespace theoraplayer
 		{
 			log(" - WorkerThread done, destroying clip now...");
 		}
-		ClipList::iterator it = std::find(this->clips.begin(), this->clips.end(), clip);
-		if (it != this->clips.end())
+		foreach (VideoClip*, it, this->clips)
 		{
-			this->clips.erase(it);
+			if ((*it) == clip)
+			{
+				this->clips.erase(it);
+				break;
+			}
 		}
 		// remove all it's references from the work log
 		this->workLog.remove(clip);
