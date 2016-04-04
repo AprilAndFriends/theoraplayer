@@ -318,11 +318,6 @@ namespace aprilvideo
 		return april::rendersys->getNativeTextureFormat(format);
 	}
 
-
-
-
-
-
 	harray<aprilui::PropertyDescription> VideoObject::getPropertyDescriptions()
 	{
 		if (VideoObject::_propertyDescriptions.size() == 0)
@@ -411,7 +406,7 @@ namespace aprilvideo
 			return "default";
 		}
 		if (name == "speed")						return this->getSpeed();
-		if (name == "time")							return this->getTimePosition();
+		if (name == "time_position")				return this->getTimePosition();
 		if (name == "video_clip_width")				return this->getVideoClipWidth();
 		if (name == "video_clip_height")			return this->getVideoClipHeight();
 		if (name == "video_clip_duration")			return this->getVideoClipDuration();
@@ -466,6 +461,11 @@ namespace aprilvideo
 		{
 			hlog::warn(logTag, "'duration' is deprecated. Use 'video_clip_duration' instead.");
 			return this->getVideoClipDuration();
+		}
+		if (name == "time")
+		{
+			hlog::warn(logTag, "'time' is deprecated. Use 'time_position' instead.");
+			return this->getTimePosition();
 		}
 		if (name == "state")
 		{
