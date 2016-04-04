@@ -200,28 +200,19 @@ namespace aprilvideo
 
 	int VideoObject::getVideoClipWidth()
 	{
-		if (this->clip == NULL && this->videoClipName != "")
-		{
-			this->createClip();
-		}
+		this->_tryCreateVideoClip();
 		return (this->clip != NULL ? this->clip->getWidth() : 0);
 	}
 
 	int VideoObject::getVideoClipHeight()
 	{
-		if (this->clip == NULL && this->videoClipName != "")
-		{
-			this->createClip();
-		}
+		this->_tryCreateVideoClip();
 		return (this->clip != NULL ? this->clip->getHeight() : 0);
 	}
 
 	float VideoObject::getVideoClipDuration()
 	{
-		if (this->clip == NULL && this->videoClipName != "")
-		{
-			this->createClip();
-		}
+		this->_tryCreateVideoClip();
 		return (this->clip != NULL ? this->clip->getDuration() : 0.0f);
 	}
 
@@ -601,13 +592,10 @@ namespace aprilvideo
 			this->clip->pause();
 		}
 	}
-	
+
 	void VideoObject::updateFrame()
 	{
-		if (this->clip == NULL && this->videoClipName != "")
-		{
-			this->createClip();
-		}
+		this->_tryCreateVideoClip();
 		if (this->clip != NULL)
 		{
 			theoraplayer::VideoFrame* frame = this->clip->fetchNextFrame();
@@ -704,7 +692,7 @@ namespace aprilvideo
 		}
 	}
 
-	void VideoObject::createClip(bool waitForCache)
+	void VideoObject::createVideoClip(bool waitForCache)
 	{
 		april::Image::Format textureFormat = this->_getTextureFormat();
 		this->_destroyResources();
@@ -891,6 +879,14 @@ namespace aprilvideo
 		this->update(0.0f); // to grab the first frame.
 	}
 	
+	void VideoObject::_tryCreateVideoClip()
+	{
+		if (this->clip == NULL && this->videoClipName != "")
+		{
+			this->createVideoClip();
+		}
+	}
+
 	void VideoObject::_destroyResources()
 	{
 		foreach (aprilui::Image*, it, this->videoImages)

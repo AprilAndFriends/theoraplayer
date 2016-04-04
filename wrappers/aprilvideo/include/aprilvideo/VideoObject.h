@@ -106,9 +106,10 @@ namespace aprilvideo
 		void stop();
 		void pause();
 		void updateFrame();
-		void createClip(bool waitForCache = true);
+		void createVideoClip(bool waitForCache = true);
 
-		DEPRECATED_ATTRIBUTE inline void _createClip(bool waitForCache = true)	{ this->createClip(waitForCache); }
+		DEPRECATED_ATTRIBUTE inline aprilui::Texture* getTexture()				{ return this->getCurrentTexture(); }
+		DEPRECATED_ATTRIBUTE inline void _createClip(bool waitForCache = true)	{ this->createVideoClip(waitForCache); }
 		DEPRECATED_ATTRIBUTE inline bool _isVideoPaused()						{ return this->isVideoClipPaused(); }
 		DEPRECATED_ATTRIBUTE inline bool _isClipCreated()						{ return this->isVideoClipCreated(); }
 		DEPRECATED_ATTRIBUTE inline int getClipWidth()							{ return this->getVideoClipWidth(); }
@@ -146,6 +147,7 @@ namespace aprilvideo
 		void _update(float timeDelta);
 		void _draw();
 		
+		void _tryCreateVideoClip();
 		void _destroyResources();
 		hstr _findVideoClipResource(chstr filename);
 
