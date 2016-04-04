@@ -284,7 +284,7 @@ namespace theoraplayer
 		ResumeThread(this->id);
 #else
 		// not available in WinRT
-		Log::warn(logTag, "Thread::resume() is not available on WinRT.");
+		log("WARNING: Thread::resume() is not available on WinRT.");
 #endif
 #endif
 	}
@@ -296,7 +296,7 @@ namespace theoraplayer
 		SuspendThread(this->id);
 #else
 		// not available in WinRT
-		Log::warn(logTag, "Thread::pause() is not available on WinRT.");
+		log("WARNING: Thread::pause() is not available on WinRT.");
 #endif
 #endif
 	}
