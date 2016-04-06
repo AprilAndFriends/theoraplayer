@@ -30,8 +30,8 @@ namespace theoraplayer
 
 	bool stringEndsWith(const std::string& string, const std::string& suffix)
 	{
-		int thisLength = string.size();
-		int stringLength = suffix.size();
+		int thisLength = (int)string.size();
+		int stringLength = (int)suffix.size();
 		if (stringLength > thisLength)
 		{
 			return false;

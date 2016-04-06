@@ -109,6 +109,13 @@ namespace theoraplayer
 	{
 		return this->clip->getHeight();
 	}
+	
+	void VideoFrame::_init(float timeToDisplay, int iteration, unsigned long frameNumber)
+	{
+		this->timeToDisplay = timeToDisplay;
+		this->iteration = iteration;
+		this->frameNumber = frameNumber;
+	}
 
 	void VideoFrame::decode(struct Theoraplayer_PixelTransform* t)
 	{

@@ -352,7 +352,7 @@
 				HEADER_SEARCH_PATHS = "${SRCROOT}/../../include";
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.googlecode.${PRODUCT_NAME:rfc1034Identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.clipavfoundation;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -389,7 +389,7 @@
 				HEADER_SEARCH_PATHS = "${SRCROOT}/../../include";
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.googlecode.${PRODUCT_NAME:rfc1034Identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.clipavfoundation;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -421,7 +421,7 @@
 				HEADER_SEARCH_PATHS = "${SRCROOT}/../../include";
 				INFOPLIST_FILE = Info.plist;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.googlecode.${PRODUCT_NAME:rfc1034Identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.clipavfoundation;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};

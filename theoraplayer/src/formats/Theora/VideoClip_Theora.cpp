@@ -266,7 +266,7 @@ namespace theoraplayer
 				}
 				this->_setVideoFrameTimeToDisplay(frame, time - this->frameDuration);
 				this->_setVideoFrameIteration(frame, this->iteration);
-				this->_setVideoFrameFrameNumber(frame, frameNumber);
+				this->_setVideoFrameFrameNumber(frame, (int)frameNumber);
 				this->lastDecodedFrameNumber = frameNumber;
 				th_decode_ycbcr_out(this->info.TheoraDecoder, buff);
 				Theoraplayer_PixelTransform pixelTransform;

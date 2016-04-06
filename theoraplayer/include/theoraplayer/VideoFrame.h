@@ -43,7 +43,11 @@ namespace theoraplayer
 
 		//! Called by VideoClip to decode a source buffer onto itself
 		virtual void decode(struct Theoraplayer_PixelTransform* t);
-
+		
+		void clearInUseFlag() { this->inUse = false; }
+		bool isReady() { return this->ready; }
+		float getTimeToDisplay() { return this->timeToDisplay; }
+		void _init(float timeToDisplay, int iteration, unsigned long frameNumber);
 	protected:
 		/// @brief Global time in seconds this frame should be displayed on.
 		float timeToDisplay;

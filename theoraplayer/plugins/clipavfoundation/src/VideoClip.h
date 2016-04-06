@@ -43,6 +43,7 @@ namespace clipavfoundation
 		AVAssetReaderTrackOutput* output;
 		AVAssetReaderTrackOutput* audioOutput;
 		unsigned int readAudioSamples;
+		unsigned long lastDecodedFrameNumber;
 
 		void _load(theoraplayer::DataSource* source);
 		bool _readData();

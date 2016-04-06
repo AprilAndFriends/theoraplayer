@@ -17,9 +17,15 @@
 #include <theoraplayer/Timer.h>
 #include <theoraplayer/VideoClip.h>
 #include <theoraplayer/VideoFrame.h>
+#include <theoraplayer/FileDataSource.h>
+#include <theoraplayer/MemoryDataSource.h>
+#include <theoraplayer/AudioInterfaceFactory.h>
+#include <Mutex.h>
 
 #include "Utility.h"
 #include "VideoClip.h"
+
+using namespace theoraplayer;
 
 namespace clipavfoundation
 {
@@ -138,11 +144,11 @@ namespace clipavfoundation
 			this->output.alwaysCopiesSampleData = NO;
 		}
 		this->fps = videoTrack.nominalFrameRate;
-		this->width = this->subFrameWidth = mStride = videoTrack.naturalSize.width;
+		this->width = this->subFrameWidth = this->stride = videoTrack.naturalSize.width;
 		this->height = this->subFrameHeight = videoTrack.naturalSize.height;
 		frameDuration = 1.0f / this->fps;
 		this->duration = (float)CMTimeGetSeconds(asset.duration);
-		mNumFrames = this->duration * this->fps;
+		this->framesCount = this->duration * this->fps;
 		if (this->frameQueue == NULL)
 		{
 			this->frameQueue = new FrameQueue(this);
@@ -255,18 +261,17 @@ namespace clipavfoundation
 			while ((sampleBuffer = [this->output copyNextSampleBuffer]))
 			{
 				presentationTime = CMSampleBufferGetOutputPresentationTimeStamp(sampleBuffer);
-				frame->timeToDisplay = (float) CMTimeGetSeconds(presentationTime);
-				frame->iteration = iteration;
-				frame->_setFrameNumber(this->frameNumber);
+				float timeToDisplay = (float) CMTimeGetSeconds(presentationTime);
+				frame->_init(timeToDisplay, iteration, this->frameNumber);
 				++this->frameNumber;
-				if (frame->timeToDisplay < this->timer->getTime() && !this->restarted && this->frameNumber % 16 != 0)
+				if (timeToDisplay < this->timer->getTime() && !this->restarted && this->frameNumber % 16 != 0)
 				{
 					// %16 operation is here to prevent a playback halt during video playback if the decoder can't keep up with demand.
 #ifdef _DEBUG_FRAMEDROP
 					theoraplayer::log(this->name + ": pre-dropped frame " + str(this->frameNumber - 1));
 #endif
-					++this->numDisplayedFrames;
-					++this->numDroppedFrames;
+					++this->displayedFramesCount;
+					++this->droppedFramesCount;
 					CMSampleBufferInvalidate(sampleBuffer);
 					CFRelease(sampleBuffer);
 					sampleBuffer = NULL;
@@ -275,11 +280,11 @@ namespace clipavfoundation
 				CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
 				CVPixelBufferLockBaseAddress(imageBuffer, 0);
 				void* baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
-				mStride = (int)CVPixelBufferGetBytesPerRow(imageBuffer);
-				size_t width = CVPixelBufferGetWidth(imageBuffer);
-				size_t height = CVPixelBufferGetHeight(imageBuffer);
-				PixelTransform t;
-				memset(&t, 0, sizeof(PixelTransform));
+				this->stride = (int)CVPixelBufferGetBytesPerRow(imageBuffer);
+//				size_t width = CVPixelBufferGetWidth(imageBuffer);
+//				size_t height = CVPixelBufferGetHeight(imageBuffer);
+				Theoraplayer_PixelTransform t;
+				memset(&t, 0, sizeof(Theoraplayer_PixelTransform));
 #ifdef _AVFOUNDATION_BGRX
 				if (this->outputMode == FORMAT_BGRX || this->outputMode == FORMAT_RGBA)
 				{
@@ -319,9 +324,9 @@ namespace clipavfoundation
 		{
 			[pool release];
 		}
-		if (!frame->ready) // in case the frame wasn't used
+		if (!frame->isReady()) // in case the frame wasn't used
 		{
-			frame->inUse = false;
+			frame->clearInUseFlag();
 		}
 		if (sampleBuffer == NULL && this->reader.status == AVAssetReaderStatusCompleted) // other cases could be app suspended
 		{
@@ -373,17 +378,17 @@ namespace clipavfoundation
 						AudioBufferList audioBufferList;
 						CMBlockBufferRef blockBuffer = NULL;
 						CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sampleBuffer, NULL, &audioBufferList, sizeof(audioBufferList), NULL, NULL, 0, &blockBuffer);
-						for (int y = 0; y < audioBufferList.numberBuffers; ++y)
+						for (int y = 0; y < audioBufferList.mNumberBuffers; ++y)
 						{
-							AudioBuffer audioBuffer = audioBufferList.buffers[y];
-							float *frame = (float*)audioBuffer.data;
+							AudioBuffer audioBuffer = audioBufferList.mBuffers[y];
+							float *frame = (float*)audioBuffer.mData;
 							if (!mutexLocked)
 							{
 								audioMutexLock.acquire(this->audioMutex);
 								mutexLocked = true;
 							}
-							this->addAudioPacket(frame, audioBuffer.dataByteSize / (this->audioChannelsCount * sizeof(float)), mAudioGain);
-							this->readAudioSamples += audioBuffer.dataByteSize / (sizeof(float));
+							this->addAudioPacket(frame, audioBuffer.mDataByteSize / (this->audioChannelsCount * sizeof(float)), this->audioGain);
+							this->readAudioSamples += audioBuffer.mDataByteSize / (sizeof(float));
 						}
 						CFRelease(blockBuffer);
 						CMSampleBufferInvalidate(sampleBuffer);
@@ -435,7 +440,7 @@ namespace clipavfoundation
 	{
 		this->endOfFile = false;
 		this->_unload();
-		this->load(this->stream);
+		this->_load(this->stream);
 		this->restarted = true;
 	}
 
