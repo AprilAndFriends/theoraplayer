@@ -316,6 +316,7 @@
 					"$(SRCROOT)/../aprilui/include",
 					"$(SRCROOT)/../xal/include",
 					"$(SRCROOT)/../theoraplayer/include",
+					"$(SRCROOT)/../theoraplayer/plugins/clipavfoundation/include",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				SKIP_INSTALL = YES;
@@ -362,6 +363,7 @@
 					"$(SRCROOT)/../aprilui/include",
 					"$(SRCROOT)/../xal/include",
 					"$(SRCROOT)/../theoraplayer/include",
+					"$(SRCROOT)/../theoraplayer/plugins/clipavfoundation/include",
 				);
 				SKIP_INSTALL = YES;
 			};
@@ -407,6 +409,7 @@
 					"$(SRCROOT)/../aprilui/include",
 					"$(SRCROOT)/../xal/include",
 					"$(SRCROOT)/../theoraplayer/include",
+					"$(SRCROOT)/../theoraplayer/plugins/clipavfoundation/include",
 				);
 				SKIP_INSTALL = YES;
 			};
