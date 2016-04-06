@@ -10,8 +10,9 @@
 #include <hltypes/hlog.h>
 #include <theoraplayer/theoraplayer.h>
 #include <theoraplayer/Manager.h>
+#ifdef _IOS
 #include <clipavfoundation/clipavfoundation.h>
-
+#endif
 #include "aprilvideo.h"
 #include "Utility.h"
 #include "VideoObject.h"
