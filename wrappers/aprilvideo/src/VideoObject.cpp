@@ -29,7 +29,7 @@
 
 #define DEFAULT_VIDEO_PATH "video"
 #define AUDIO_CATEGORY "video"
-#define TEXTURES_COUNT 2
+#define TEXTURES_COUNT 3
 
 //#define _TEXWRITE_BENCHMARK // uncomment this to benchmark texture upload speed
 
@@ -638,6 +638,7 @@ namespace aprilvideo
 				int index = (this->videoImages.indexOf(this->currentVideoImage) + 1) % this->videoImages.size();
 				this->currentTexture = this->textures[index];
 				this->currentVideoImage = this->videoImages[index];
+				this->currentVideoImage->setBlendMode(this->blendMode);
 				if (restoringTexture)
 				{
 					if (this->textures[index]->isLoaded())
