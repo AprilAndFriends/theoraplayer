@@ -443,19 +443,19 @@ namespace theoraplayer
 		if (popCount > 0)
 		{
 #ifdef _DEBUG_FRAMEDROP
-			std::string log = this->getName() + ": dropped frame ";
+			std::string message = this->getName() + ": dropped frame ";
 			int i = popCount;
 			foreach_l (VideoFrame*, it, queue)
 			{
-				log += str((int)(*it)->getFrameNumber());
+				message += str((int)(*it)->getFrameNumber());
 				if (i <= 1)
 				{
 					break;
 				}
-				log += ", ";
+				message += ", ";
 				--i;
 			}
-			th_writelog(log);
+			log(message);
 #endif
 			this->droppedFramesCount += popCount;
 			this->frameQueue->_pop(popCount);
