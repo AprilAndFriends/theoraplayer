@@ -12,9 +12,9 @@ namespace theoraplayer
 {
 	Timer::Timer()
 	{
-		this->time = 0;
-		this->paused = 0;
+		this->time = 0.0f;
 		this->speed = 1.0f;
+		this->paused = false;
 	}
 
 	Timer::~Timer()
@@ -29,24 +29,14 @@ namespace theoraplayer
 		}
 	}
 
-	float Timer::getTime()
-	{
-		return this->time;
-	}
-
-	void Timer::pause()
-	{
-		this->paused = true;
-	}
-
 	void Timer::play()
 	{
 		this->paused = false;
 	}
 
-	bool Timer::isPaused()
+	void Timer::pause()
 	{
-		return this->paused;
+		this->paused = true;
 	}
 
 	void Timer::stop()
@@ -56,16 +46,6 @@ namespace theoraplayer
 	void Timer::seek(float time)
 	{
 		this->time = time;
-	}
-
-	void Timer::setSpeed(float speed)
-	{
-		this->speed = speed;
-	}
-
-	float Timer::getSpeed()
-	{
-		return this->speed;
 	}
 
 }
