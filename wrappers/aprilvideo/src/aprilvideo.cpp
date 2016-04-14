@@ -41,9 +41,6 @@ namespace aprilvideo
 	void init(int workerThreadCount)
 	{
 		theoraplayer::init(workerThreadCount);
-#ifdef _IOS
-		clipavfoundation::init();
-#endif
 		theoraplayer::setLogFunction(&_theoraLogMessage);
 		APRILUI_REGISTER_OBJECT_TYPE(VideoObject);
 	}
