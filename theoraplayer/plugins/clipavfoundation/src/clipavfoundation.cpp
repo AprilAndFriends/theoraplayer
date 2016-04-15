@@ -14,7 +14,7 @@
 
 namespace clipavfoundation
 {
-	static bool initialized = false;
+//	static bool initialized = false;
 
 	void init()
 	{
