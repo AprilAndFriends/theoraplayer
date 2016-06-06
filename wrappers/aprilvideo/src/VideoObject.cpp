@@ -722,14 +722,28 @@ namespace aprilvideo
 			else if (textureFormat == april::Image::FORMAT_GRAYSCALE)	mode = theoraplayer::FORMAT_GREY;
 			int ram = april::getSystemInfo().ram;
 			int precached = 16;
-#if defined(_ANDROID) || defined(_WINRT) && !defined(_WINP8)
-			// Android and WinRT libtheoraplayer uses an optimized libtheora which is faster, but still slower than
-			// a native hardware accelerated codec. So (for now) we use a larger precache to counter it. Though, WinP8 can't handle this memory-wise.
+#if defined(_WINRT) && !defined(_WINP8)
+			// WinRT libtheoraplayer uses an optimized libtheora which is faster, but still slower than a native hardware accelerated codec.
+			// So (for now) we use a larger precache to counter it. Though, WinP8 can't handle this memory-wise.
 			if (ram > 512)
 			{
 				precached = 32;
 			}
-#else
+#elif defined(_ANDROID)
+			// Android requires a bit more sensitive precaching than other platforms
+			if (ram < 512)
+			{
+				precached = 4;
+			}
+			else if (ram < 1024)
+			{
+				precached = 6;
+			}
+			else if (ram < 1536)
+			{
+				precached = (path.contains("lowres") ? 16 : 8);
+			}
+#else // iOS and others
 			if (ram < 384)
 			{
 				precached = 6;
