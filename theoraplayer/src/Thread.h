@@ -30,7 +30,7 @@ namespace theoraplayer
 			~ThreadRunner();
 
 			/// @return Associated thread.
-			inline Thread* getThread() { return this->thread; }
+			inline Thread* getThread() const { return this->thread; }
 
 			/// @return Execute the thread's code.
 			void execute();
@@ -55,10 +55,10 @@ namespace theoraplayer
 		inline void setFunction(void(*value)(Thread*)) { this->function = value; }
 		/// @brief Gets whether this Thread was started.
 		/// @return True if this Thread was started.
-		inline bool isRunning() { return this->running; }
+		inline bool isRunning() const { return this->running; }
 		/// @brief Gets whether the thread is executing right now.
 		/// @return True if the thread is executing right now.
-		inline bool isExecuting() { return this->executing; }
+		inline bool isExecuting() const { return this->executing; }
 		/// @brief Starts the thread processing.
 		void start();
 		/// @brief Stops the thread processing.
