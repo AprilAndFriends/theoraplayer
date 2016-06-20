@@ -731,6 +731,7 @@ namespace aprilvideo
 			}
 #elif defined(_ANDROID)
 			// Android requires a bit more sensitive precaching than other platforms
+			precached = 8;
 			if (ram < 512)
 			{
 				precached = 4;
