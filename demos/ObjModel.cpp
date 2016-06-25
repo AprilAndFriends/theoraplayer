@@ -15,7 +15,11 @@
 #ifndef __APPLE__
 	#include <GL/gl.h>
 #else
-	#include <OpenGL/gl.h>
+    #ifdef _MAC
+        #include <OpenGL/gl.h>
+    #else
+        #include <OpenGLES/ES1/gl.h>
+    #endif
 #endif
 
 #include "ObjModel.h"

@@ -18,24 +18,13 @@
 
 namespace theoraplayer
 {
-	MemoryDataSource::MemoryDataSource(unsigned char* data, long size, const std::string& filename)
+    MemoryDataSource::MemoryDataSource(unsigned char* data, long size, const std::string& formatName, const std::string& filename)
 	{
 		this->filename = filename;
 		this->data = data;
 		this->size = size;
 		this->position = 0;
-		foreach (VideoClip::Format, it, videoClipFormats)
-		{
-			if (stringEndsWith(filename, (*it).extension))
-			{
-				this->formatName = (*it).name;
-				break;
-			}
-		}
-		if (this->formatName == "")
-		{
-			log("WARNING: Could not determine format for: '" + filename + "'! Loading the file could fail!");
-		}
+        this->formatName = formatName;
 	}
 
 	MemoryDataSource::MemoryDataSource(const std::string& filename)
@@ -44,6 +33,14 @@ namespace theoraplayer
 		this->data = NULL;
 		this->size = 0;
 		this->position = 0;
+        VideoClip::Format format;
+        // used for determining the file format, does not throw an exception inside the ctor
+        FILE* file = openSupportedFormatFile(this->filename, format, this->fullFilename);
+        if (file != NULL)
+        {
+            fclose(file);
+        }
+        this->formatName = format.name;
 	}
 
 	MemoryDataSource::~MemoryDataSource()

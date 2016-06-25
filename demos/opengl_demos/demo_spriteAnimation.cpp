@@ -14,6 +14,7 @@
 #include <theoraplayer/FrameQueue.h>
 #include <theoraplayer/Manager.h>
 #include <theoraplayer/MemoryDataSource.h>
+#include <theoraplayer/FileDataSource.h>
 #include <theoraplayer/theoraplayer.h>
 #include <theoraplayer/VideoClip.h>
 #include <theoraplayer/VideoFrame.h>

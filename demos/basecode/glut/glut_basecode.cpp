@@ -22,10 +22,13 @@ float my = 0.0f;
 
 Demo* currentDemo = &menu::demo;
 
+void reshape(int w, int h);
+
 void changeDemo(Demo* demo)
 {
 	destroy();
 	currentDemo = demo;
+    reshape(windowWidth, windowHeight);
 	init();
 }
 
@@ -42,19 +45,22 @@ void changeDemo(Demo* demo)
 #endif
 
 #ifndef __APPLE__
-#include <GL/glext.h>
-PFNGLCREATEPROGRAMPROC glCreateProgram = 0;
-PFNGLCREATESHADERPROC glCreateShader = 0;
-PFNGLLINKPROGRAMPROC glLinkProgram = 0;
-PFNGLSHADERSOURCEPROC glShaderSource = 0;
-PFNGLUSEPROGRAMPROC glUseProgram = 0;
-PFNGLCOMPILESHADERPROC glCompileShader = 0;
-PFNGLATTACHSHADERPROC glAttachShader = 0;
-PFNGLMULTITEXCOORD2FARBPROC glMultiTexCoord2fARB = 0;
-PFNGLACTIVETEXTUREARBPROC   glActiveTextureARB = 0;
-
+    #include <GL/glext.h>
+    PFNGLCREATEPROGRAMPROC glCreateProgram = 0;
+    PFNGLCREATESHADERPROC glCreateShader = 0;
+    PFNGLLINKPROGRAMPROC glLinkProgram = 0;
+    PFNGLSHADERSOURCEPROC glShaderSource = 0;
+    PFNGLUSEPROGRAMPROC glUseProgram = 0;
+    PFNGLCOMPILESHADERPROC glCompileShader = 0;
+    PFNGLATTACHSHADERPROC glAttachShader = 0;
+    PFNGLMULTITEXCOORD2FARBPROC glMultiTexCoord2fARB = 0;
+    PFNGLACTIVETEXTUREARBPROC   glActiveTextureARB = 0;
 #else
-#include <OpenGL/glext.h>
+    #ifdef _MAC
+        #include <OpenGL/glext.h>
+    #else
+
+    #endif
 #endif
 
 unsigned int program, shader;

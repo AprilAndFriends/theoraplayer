@@ -192,13 +192,13 @@ OpenAL_AudioInterfaceFactory::OpenAL_AudioInterfaceFactory()
 	// openal init is here used only to simplify samples for this plugin
 	// if you want to use this interface in your own program, you'll
 	// probably want to remove the openal init/destory lines
-	gDevice = alcOpenDevice("");
-	if (alcGetError(gDevice) == ALC_NO_ERROR)
+	gDevice = alcOpenDevice(NULL);
+	if (alcGetError(gDevice) != ALC_NO_ERROR)
 	{
 		return;
 	}
 	gContext = alcCreateContext(gDevice, NULL);
-	if (alcGetError(gDevice) == ALC_NO_ERROR)
+	if (alcGetError(gDevice) != ALC_NO_ERROR)
 	{
 		alcCloseDevice(gDevice);
 		gDevice = NULL;

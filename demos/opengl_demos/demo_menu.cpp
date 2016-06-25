@@ -11,6 +11,7 @@
 #include "demo_environment.h"
 #include "demo_glutPlayer.h"
 #include "demo_lightMap.h"
+#include "demo_lighting.h"
 #include "demo_menu.h"
 #include "demo_multiple.h"
 #include "demo_seek.h"
@@ -19,7 +20,7 @@
 #include "tga.h"
 #include "util.h"
 
-#define MAX_DEMOS 9 // change this if another demo is added
+#define MAX_DEMOS 10 // change this if another demo is added
 
 namespace menu
 {
@@ -45,14 +46,17 @@ namespace menu
 #ifdef _DEMO_LIGHT_MAP
 		ids[5] = loadTexture("media/button6.tga");
 #endif
-#ifdef _DEMO_AV
-		ids[6] = loadTexture("media/button7.tga");
+#ifdef _DEMO_LIGHTING
+        ids[6] = loadTexture("media/button7.tga");
 #endif
-#ifdef _DEMO_COMPOSITE
+#ifdef _DEMO_AV
 		ids[7] = loadTexture("media/button8.tga");
 #endif
-#ifdef _DEMO_ENVIRONMENT
+#ifdef _DEMO_COMPOSITE
 		ids[8] = loadTexture("media/button9.tga");
+#endif
+#ifdef _DEMO_ENVIRONMENT
+		ids[9] = loadTexture("media/button10.tga");
 #endif
 	}
 
@@ -66,7 +70,7 @@ namespace menu
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glLoadIdentity();
-		glColor3f(1.0f, 1.0f, 1.0f);
+//		glColor3f(1.0f, 1.0f, 1.0f);
 		glEnable(GL_TEXTURE_2D);
 		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_COLOR_MATERIAL);
@@ -112,14 +116,17 @@ namespace menu
 #ifdef _DEMO_LIGHT_MAP
 		case 6:		changeDemo(&lightMap::demo);		break;
 #endif
+#ifdef _DEMO_LIGHTING
+        case 7:		changeDemo(&lighting::demo);		break;
+#endif
 #ifdef _DEMO_AV
-		case 7:		changeDemo(&av::demo);				break;
+		case 8:		changeDemo(&av::demo);				break;
 #endif
 #ifdef _DEMO_COMPOSITE
-		case 8:		changeDemo(&composite::demo);		break;
+		case 9:		changeDemo(&composite::demo);		break;
 #endif
 #ifdef _DEMO_ENVIRONMENT
-		case 9:		changeDemo(&environment::demo);		break;
+		case 10:	changeDemo(&environment::demo);		break;
 #endif
 		default:	changeDemo(&menu::demo);			break;
 		}

@@ -18,158 +18,182 @@
 #include "ObjModel.h"
 #include "tga.h"
 #include "util.h"
+#include <math.h>
 
 namespace lightMap
 {
-	struct xyz
-	{
-		float x;
-		float y;
-		float z;
-	};
-
-	unsigned int textureIdLightMap = 0;
-	unsigned int textureIdDiffuseMap = 0;
-	theoraplayer::VideoClip* clip = NULL;
-	bool started = false;
-	bool diffuseEnabled = true;
-	bool lightingEnabled = true;
-	std::vector<xyz> cameraPosition;
-	ObjModel roomLight;
-	float angleX = 0.0f;
-	float angleY = 0.0f;
-
-	void init()
-	{
-		FILE* file = fopen("media/lighting/camera.txt", "r");
-		xyz pos;
-		while (!feof(file))
-		{
-			fscanf(file, "%f %f %f", &pos.x, &pos.y, &pos.z);
-			cameraPosition.push_back(pos);
-		}
-		fclose(file);
-		FOVY = 54.495f;
-		theoraplayer::manager->setWorkerThreadCount(1);
-		clip = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/lighting/lighting"), theoraplayer::FORMAT_RGB);
-		clip->setAutoRestart(true);
-		textureIdLightMap = createTexture(potCeil(clip->getWidth()), potCeil(clip->getHeight()));
-		textureIdDiffuseMap = loadTexture("media/lighting/diffuse_map.tga");
-		roomLight.load("media/lighting/room.obj", textureIdDiffuseMap);
-		glDisable(GL_CULL_FACE);
-		glCullFace(GL_BACK);
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_BLEND);
-		glDepthFunc(GL_LESS);
-		glEnable(GL_COLOR_MATERIAL);
-	}
-
-	void destroy()
-	{
-		glDisable(GL_DEPTH_TEST);
-		glDisable(GL_BLEND);
-		glDisable(GL_COLOR_MATERIAL);
-		theoraplayer::manager->destroyVideoClip(clip);
-		clip = NULL;
-		glDeleteTextures(1, &textureIdLightMap);
-		textureIdLightMap = 0;
-		glDeleteTextures(1, &textureIdDiffuseMap);
-		textureIdDiffuseMap = 0;
-	}
-
-	void update(float timeDelta)
-	{
-		float x = 0.0f;
-		float y = 0.0f;
-		getCursorPosition(x, y);
-		angleX = -4.0f * 3.14f * x / windowWidth;
-		angleY = 1500.0f * (y - 300.0f) / windowHeight;
-	}
-
-	void draw()
-	{
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		glLoadIdentity();
-		float x1 = 0.0f;
-		float y1 = 0.0f;
-		float z1 = 0.0f;
-		float x2 = -65.147f;
-		float y2 = 80.219f;
-		float z2 = 12.301f;
-		static int index = 0;
-		theoraplayer::VideoFrame* frame = clip->fetchNextFrame();
-		if (frame != NULL)
-		{
-			index = (int)frame->getFrameNumber();
-			unsigned char* buffer = frame->getBuffer();
-			int x = 0;
-			int length = frame->getWidth() * frame->getHeight() * 3;
-			for (int i = 0; i < length; ++i)
-			{
-				x = (*buffer) * 0.8f + 255 * 0.2f;
-				*buffer = (x > 255 ? 255 : x);
-				++buffer;
-			}
-			glBindTexture(GL_TEXTURE_2D, textureIdLightMap);
-			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, frame->getWidth(), frame->getHeight(), GL_RGB, GL_UNSIGNED_BYTE, frame->getBuffer());
-			clip->popFrame();
-		}
-		// TODOth - crashes here when demo ends, find out why (index = -1)
-		x1 = cameraPosition[index].x;
-		y1 = cameraPosition[index].y;
-		z1 = cameraPosition[index].z;
-		gluLookAt(x1, z1, -y1, x2, z2, -y2, 0.0f, 1.0f, 0.0f);
-		glBlendFunc(GL_ONE, GL_ZERO);
-		glEnable(GL_CULL_FACE);
-		diffuseEnabled ? glEnable(GL_TEXTURE_2D) : glDisable(GL_TEXTURE_2D);
-		roomLight.draw();
-		glDisable(GL_CULL_FACE);
-		if (lightingEnabled)
-		{
-			glEnable(GL_TEXTURE_2D);
-			glBindTexture(GL_TEXTURE_2D, textureIdLightMap);
-			glPushMatrix();
-			glLoadIdentity();
-			glMatrixMode(GL_PROJECTION);
-			glPushMatrix();
-			glLoadIdentity();
-			glDisable(GL_DEPTH_TEST);
-			glBlendFunc(GL_DST_COLOR, GL_ZERO);
-			glBegin(GL_QUADS);
-			glTexCoord2f(0.0f, 4.0f / 1024.0f);
-			glVertex3f(-1.0f, 1.0f, 0.0f);
-			glTexCoord2f(800.0f / 1024.0f, 4.0f / 1024.0f);
-			glVertex3f(1.0f, 1.0f, 0.0f);
-			glTexCoord2f(800.0f / 1024.0f, 604.0f / 1024.0f);
-			glVertex3f(1.0f, -1.0f, 0.0f);
-			glTexCoord2f(0.0f, 604.0f / 1024.0f);
-			glVertex3f(-1.0f, -1.0f, 0.0f);
-			glEnd();
-			glPopMatrix();
-			glMatrixMode(GL_MODELVIEW);
-			glPopMatrix();
-			glEnable(GL_DEPTH_TEST);
-		}
-	}
-
-	void setDebugTitle(char* out)
-	{
-		sprintf(out, "press SPACE to toggle diffuse map, ENTER to toggle lighting");
-	}
-
-	void onKeyPress(int key)
-	{
-		if (key == ' ')
-		{
-			diffuseEnabled = !diffuseEnabled;
-		}
-		if (key == 13)
-		{
-			lightingEnabled = !lightingEnabled; // 13 = ENTER key
-		}
-	}
-
+    unsigned int tex_id, diffuse_map;
+    theoraplayer::VideoClip *light[3];
+    std::string window_name="lightmap_demo";
+    bool started=1, textures_enabled = 1;
+    int window_w=1024,window_h=768;
+    
+    ObjModel room;
+    float anglex=0,angley=0;
+    unsigned char *light_data[3], *tex_data;
+    bool update_tex = 0;
+    bool light_switch[3] = {1, 0, 0};
+    float light_scale[3][3] = { {1, 1, 1}, {2, 0, 0}, {0, 2, 0}  };
+    int framew, frameh;
+    
+    void multiTexFunc(float u, float v)
+    {
+        glMultiTexCoord2fARB(GL_TEXTURE0_ARB, u, v);
+        glMultiTexCoord2fARB(GL_TEXTURE1_ARB, u, v);
+    }
+    
+    void draw()
+    {
+        glClearColor(27/255.0f, 188/255.0f, 224/255.0f, 1);
+        glBindTexture(GL_TEXTURE_2D,tex_id);
+        
+        glLoadIdentity();
+        gluLookAt(sin(anglex)*100-100,angley+50,cos(anglex)*100-100,  -100,50,-100,  0,1,0);
+        
+        theoraplayer::VideoFrame* f;
+        for (int i = 0; i < 3; i++)
+        {
+            f = light[i]->fetchNextFrame();
+            if (f)
+            {
+                memcpy(light_data[i], f->getBuffer(), framew * frameh * 3);
+                light[i]->popFrame();
+                update_tex = 1;
+            }
+        }
+        
+        if (update_tex)
+        {
+            int i, x, y;
+            memset(tex_data, light_switch[0] == 0 && light_switch[1] == 0 && light_switch[2] == 0 ? 255 : 0, framew * frameh * 3);
+            unsigned char *ptr[3] = { light_data[0], light_data[1], light_data[2] };
+            unsigned char *tex;
+            unsigned int r, g, b;
+            for (i = 0; i < 3; i++)
+            {
+                if (light_switch[i] == 0) continue;
+                tex = tex_data;
+                for (y = 0; y < frameh; y++)
+                {
+                    for (x = 0; x < framew; x++)
+                    {
+                        r = tex[0] + ptr[i][0] * light_scale[i][0];
+                        g = tex[1] + ptr[i][1] * light_scale[i][1];
+                        b = tex[2] + ptr[i][2] * light_scale[i][2];
+                        tex[0] = r > 255 ? 255 : r;
+                        tex[1] = g > 255 ? 255 : g;
+                        tex[2] = b > 255 ? 255 : b;
+                        tex += 3;
+                        ptr[i] += 3;
+                    }
+                }
+            }
+            glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, framew, frameh, GL_RGB, GL_UNSIGNED_BYTE, tex_data);
+            update_tex = 0;
+        }
+        
+        glActiveTextureARB(GL_TEXTURE0_ARB);
+        if (textures_enabled)
+            glEnable(GL_TEXTURE_2D);
+        else
+            glDisable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, diffuse_map);
+        glActiveTextureARB(GL_TEXTURE1_ARB);
+        glEnable(GL_TEXTURE_2D);
+        glTexEnvi(GL_TEXTURE_2D, GL_TEXTURE_ENV_MODE, GL_COMBINE);
+        glTexEnvi(GL_TEXTURE_2D, GL_COMBINE_RGB_ARB, GL_MODULATE);
+        glEnable(GL_CULL_FACE);
+        room.draw(multiTexFunc);
+        glDisable(GL_CULL_FACE);
+    }
+    
+    void update(float time_increase)
+    {
+        float x,y;
+        getCursorPosition(x, y);
+        anglex=-4*3.14f*x/window_w;
+        angley=1500*(y-300)/window_h;
+    }
+    
+    void onKeyPress(int key)
+    {
+        if (key == '1' || key == '2' || key == '3')
+        {
+            int i = key - '1';
+            light_switch[i] = !light_switch[i];
+            if (!light_switch[i]) light[i]->pause();
+            else light[i]->play();
+            update_tex = 1;
+        }
+        if (key == ' ')
+            textures_enabled = !textures_enabled;
+    }
+    
+    void setDebugTitle(char* out)
+    {
+        sprintf(out, "lights: %d, %d, %d (press keys 1,2,3 to toggle lights, space to toggle diffuse texture)", (int) light_switch[0], (int) light_switch[1], (int) light_switch[2]);
+    }
+    
+    void init()
+    {
+        light[0] = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/lightmap/light1"), theoraplayer::FORMAT_RGB);
+        light[1] = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/lightmap/light2"), theoraplayer::FORMAT_RGB);
+        light[2] = theoraplayer::manager->createVideoClip(new theoraplayer::MemoryDataSource("media/lightmap/light3"), theoraplayer::FORMAT_RGB);
+        light[0]->setAutoRestart(1); light[0]->setPlaybackSpeed(1.0f);
+        light[1]->setAutoRestart(1); light[1]->setPlaybackSpeed(0.935f);
+        light[2]->setAutoRestart(1); light[2]->setPlaybackSpeed(0.876f);
+        if (!light_switch[0]) light[0]->pause();
+        if (!light_switch[1]) light[1]->pause();
+        if (!light_switch[2]) light[2]->pause();
+        
+        
+        framew = light[0]->getWidth();
+        frameh = light[0]->getHeight();
+        int size = framew * frameh * 3;
+        light_data[0] = new unsigned char[size];
+        light_data[1] = new unsigned char[size];
+        light_data[2] = new unsigned char[size];
+        tex_data = new unsigned char[size];
+        
+        tex_id = createTexture(potCeil(framew), potCeil(frameh));
+        diffuse_map = loadTexture("media/lightmap/diffuse_map.tga");
+        
+        room.load("media/lightmap/room.obj", tex_id);
+        
+        glDisable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
+        glEnable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LESS);
+        glEnable(GL_COLOR_MATERIAL);
+        getMultiTextureExtensionFuncPointers();
+    }
+    
+    void destroy()
+    {
+        delete [] light_data[0];
+        delete [] light_data[1];
+        delete [] light_data[2];
+        delete [] tex_data;
+        
+        glEnable(GL_CULL_FACE);
+        glDisable(GL_DEPTH_TEST);
+        glDisable(GL_COLOR_MATERIAL);
+        theoraplayer::manager->destroyVideoClip(light[0]);
+        theoraplayer::manager->destroyVideoClip(light[1]);
+        theoraplayer::manager->destroyVideoClip(light[2]);
+        glDeleteTextures(1, &tex_id);
+        tex_id = 0;
+        glDeleteTextures(1, &diffuse_map);
+        diffuse_map = 0;
+        
+        glLoadIdentity();
+        
+        glActiveTextureARB(GL_TEXTURE0_ARB);
+        glDisable(GL_TEXTURE_2D);
+        glActiveTextureARB(GL_TEXTURE1_ARB);
+        glDisable(GL_TEXTURE_2D);
+    }
+    
 	Demo demo = { init, destroy, update, draw, setDebugTitle, onKeyPress, NULL };
-
 }
 #endif

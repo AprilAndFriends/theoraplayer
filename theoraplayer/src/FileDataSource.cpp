@@ -25,7 +25,7 @@ namespace theoraplayer
 		VideoClip::Format format;
 		// used for determining the file format, does not throw an exception inside the ctor
 		FILE* file = openSupportedFormatFile(this->filename, format, this->fullFilename);
-		if (this->filePtr != NULL)
+		if (file != NULL)
 		{
 			fclose(file);
 		}

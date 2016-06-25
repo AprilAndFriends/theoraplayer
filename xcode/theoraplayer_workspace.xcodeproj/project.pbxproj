@@ -36,13 +36,11 @@
 		B41FA8471CAD34A700456992 /* demo_spriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B6D1CAD2C3E004ECC69 /* demo_spriteAnimation.cpp */; };
 		B41FA8481CAD34AA00456992 /* demo_tv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B6F1CAD2C3E004ECC69 /* demo_tv.cpp */; };
 		B41FA8491CAD34CF00456992 /* libtheoraplayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139464F17C0EFAA0091F4A4 /* libtheoraplayer.a */; };
-		B41FA84A1CAD354D00456992 /* glut_basecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B591CAD26EC004ECC69 /* glut_basecode.cpp */; };
 		B41FA84B1CAD355400456992 /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
 		B41FA84C1CAD355700456992 /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
 		B41FA84D1CAD355700456992 /* ObjModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761D155C52B40050EC64 /* ObjModel.cpp */; };
 		B41FA84E1CAD355B00456992 /* OpenAL_AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */; };
 		B41FA84F1CAD358300456992 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
-		B41FA87E1CAD4A9C00456992 /* libclipffmpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A28B2F1CAD1482004ECC69 /* libclipffmpeg.a */; };
 		B41FA8801CAD4AAA00456992 /* libclipavfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A28B191CAD1477004ECC69 /* libclipavfoundation.a */; };
 		B4A28B5A1CAD26EC004ECC69 /* glut_basecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B591CAD26EC004ECC69 /* glut_basecode.cpp */; };
 		B4A28B711CAD2C3E004ECC69 /* demo_av.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B5D1CAD2C3E004ECC69 /* demo_av.cpp */; };
@@ -85,7 +83,6 @@
 		B4A28BAB1CAD2D1F004ECC69 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D16A0EB61698C5640016DF67 /* ViewController.mm */; };
 		B4A28BAC1CAD2D1F004ECC69 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F7F71698C842007E6835 /* util.cpp */; };
 		B4A28BAD1CAD2D1F004ECC69 /* objcUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = D127F8101698C882007E6835 /* objcUtil.mm */; };
-		B4A28BAE1CAD2D1F004ECC69 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8C81698D160007E6835 /* main.cpp */; };
 		B4A28BB01CAD2D1F004ECC69 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A48A5316C2F64A00318F58 /* OpenAL.framework */; };
 		B4A28BB11CAD2D1F004ECC69 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F09DEA169AB9D900DEEC63 /* GLKit.framework */; };
 		B4A28BB21CAD2D1F004ECC69 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D127F8C51698D0A3007E6835 /* CoreVideo.framework */; };
@@ -102,17 +99,13 @@
 		B4A28BBE1CAD2D1F004ECC69 /* media in Resources */ = {isa = PBXBuildFile; fileRef = D16776D6155C57E90050EC64 /* media */; };
 		B4A28BBF1CAD2D1F004ECC69 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D127F8CA1698D3E6007E6835 /* Shader.fsh */; };
 		B4A28BC01CAD2D1F004ECC69 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D127F8CB1698D3E6007E6835 /* Shader.vsh */; };
-		B4A28BC11CAD2D1F004ECC69 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EB01698C5640016DF67 /* Default-568h@2x.png */; };
 		B4A28BC21CAD2D1F004ECC69 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EB11698C5640016DF67 /* Default.png */; };
-		B4A28BC31CAD2D1F004ECC69 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EB21698C5640016DF67 /* Default@2x.png */; };
 		B4A28BC41CAD2D1F004ECC69 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EC01698C6270016DF67 /* ViewController_iPad.xib */; };
 		B4A28BC51CAD2D1F004ECC69 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EC11698C6270016DF67 /* ViewController_iPhone.xib */; };
 		B4A28BC61CAD2D1F004ECC69 /* icon_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A8E169A3E4E003A6CB5 /* icon_iphone.png */; };
 		B4A28BC71CAD2D1F004ECC69 /* icon_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A90169A3E55003A6CB5 /* icon_iphone@2x.png */; };
 		B4A28BC81CAD2D1F004ECC69 /* icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A92169A3E65003A6CB5 /* icon_ipad.png */; };
 		B4A28BC91CAD2D1F004ECC69 /* icon_ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A94169A3E67003A6CB5 /* icon_ipad@2x.png */; };
-		B4A28BCA1CAD2D1F004ECC69 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9A169A4378003A6CB5 /* Default-Landscape.png */; };
-		B4A28BCB1CAD2D1F004ECC69 /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9B169A4378003A6CB5 /* Default-Landscape@2x.png */; };
 		D117630E177649D000269515 /* tga.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1D098F0155F077C009F6AAA /* tga.cpp */; };
 		D127F7F81698C842007E6835 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F7F71698C842007E6835 /* util.cpp */; };
 		D127F7F91698C842007E6835 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F7F71698C842007E6835 /* util.cpp */; };
@@ -142,7 +135,6 @@
 		D127F8C21698D09B007E6835 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D127F8C11698D09A007E6835 /* CoreMedia.framework */; };
 		D127F8C41698D09E007E6835 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D127F8C31698D09E007E6835 /* AVFoundation.framework */; };
 		D127F8C61698D0A3007E6835 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D127F8C51698D0A3007E6835 /* CoreVideo.framework */; };
-		D127F8C91698D161007E6835 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D127F8C81698D160007E6835 /* main.cpp */; };
 		D127F8CE1698D40A007E6835 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D127F8CA1698D3E6007E6835 /* Shader.fsh */; };
 		D127F8CF1698D40A007E6835 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D127F8CB1698D3E6007E6835 /* Shader.vsh */; };
 		D127F8D01698DA45007E6835 /* media in Resources */ = {isa = PBXBuildFile; fileRef = D16776D6155C57E90050EC64 /* media */; };
@@ -180,9 +172,7 @@
 		D16A0E801698C4B80016DF67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A0E7F1698C4B80016DF67 /* CoreGraphics.framework */; };
 		D16A0E841698C4B80016DF67 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D16A0E831698C4B80016DF67 /* OpenGLES.framework */; };
 		D16A0EB91698C5640016DF67 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = D16A0EAF1698C5640016DF67 /* AppDelegate.mm */; };
-		D16A0EBA1698C5640016DF67 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EB01698C5640016DF67 /* Default-568h@2x.png */; };
 		D16A0EBB1698C5640016DF67 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EB11698C5640016DF67 /* Default.png */; };
-		D16A0EBC1698C5640016DF67 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EB21698C5640016DF67 /* Default@2x.png */; };
 		D16A0EBE1698C5640016DF67 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = D16A0EB41698C5640016DF67 /* main.mm */; };
 		D16A0EBF1698C5640016DF67 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D16A0EB61698C5640016DF67 /* ViewController.mm */; };
 		D16A0EC21698C6270016DF67 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16A0EC01698C6270016DF67 /* ViewController_iPad.xib */; };
@@ -194,6 +184,10 @@
 		D176138A1561B21500F645DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BB6FAF150E9E7100EF9400 /* Foundation.framework */; };
 		D1A48A5116C2F64100318F58 /* OpenAL_AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */; };
 		D1A48A5416C2F64A00318F58 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1A48A5316C2F64A00318F58 /* OpenAL.framework */; };
+		D1B9C5EA1D1E8E5700F9844A /* demo_lighting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B9C5E71D1E8E4400F9844A /* demo_lighting.cpp */; };
+		D1B9C5EB1D1E902E00F9844A /* libtheoraplayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139464D17C0EFAA0091F4A4 /* libtheoraplayer.a */; };
+		D1B9C5EC1D1E935400F9844A /* demo_lighting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B9C5E71D1E8E4400F9844A /* demo_lighting.cpp */; };
+		D1B9C5ED1D1E936400F9844A /* demo_lighting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B9C5E71D1E8E4400F9844A /* demo_lighting.cpp */; };
 		D1C0151415619DD400FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
 		D1C0151515619DDB00FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
 		D1C0151615619DE800FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
@@ -283,8 +277,6 @@
 		D1E39A97169A3EC2003A6CB5 /* icon_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A90169A3E55003A6CB5 /* icon_iphone@2x.png */; };
 		D1E39A98169A3ECB003A6CB5 /* icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A92169A3E65003A6CB5 /* icon_ipad.png */; };
 		D1E39A99169A3ECE003A6CB5 /* icon_ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A94169A3E67003A6CB5 /* icon_ipad@2x.png */; };
-		D1E39A9C169A4378003A6CB5 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9A169A4378003A6CB5 /* Default-Landscape.png */; };
-		D1E39A9D169A4378003A6CB5 /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9B169A4378003A6CB5 /* Default-Landscape@2x.png */; };
 		D1E39AA0169A4422003A6CB5 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9E169A43BB003A6CB5 /* icon.icns */; };
 		D1E39AA2169A4432003A6CB5 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9E169A43BB003A6CB5 /* icon.icns */; };
 		D1E39AA4169A4437003A6CB5 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = D1E39A9E169A43BB003A6CB5 /* icon.icns */; };
@@ -663,9 +655,8 @@
 		B4A28B6E1CAD2C3E004ECC69 /* demo_spriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_spriteAnimation.h; path = ../demos/opengl_demos/demo_spriteAnimation.h; sourceTree = "<group>"; };
 		B4A28B6F1CAD2C3E004ECC69 /* demo_tv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_tv.cpp; path = ../demos/opengl_demos/demo_tv.cpp; sourceTree = "<group>"; };
 		B4A28B701CAD2C3E004ECC69 /* demo_tv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_tv.h; path = ../demos/opengl_demos/demo_tv.h; sourceTree = "<group>"; };
-		B4A28B9D1CAD2D11004ECC69 /* Theora Player (Mac).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Theora Player (Mac).app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B4A28B9E1CAD2D12004ECC69 /* Theora Player (Mac).plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Theora Player (Mac).plist"; path = "/Users/dominik/projects/theoraplayer-refactor_2.0/Theora Player (Mac).plist"; sourceTree = "<absolute>"; };
-		B4A28BD01CAD2D1F004ECC69 /* Theora Player (iOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Theora Player (iOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4A28B9D1CAD2D11004ECC69 /* OpenGL Demos (Mac).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenGL Demos (Mac).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4A28BD01CAD2D1F004ECC69 /* OpenGL Demos (iOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenGL Demos (iOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D127F7F71698C842007E6835 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cpp; path = ../demos/basecode/util/util.cpp; sourceTree = "<group>"; };
 		D127F8101698C882007E6835 /* objcUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = objcUtil.mm; path = ../demos/basecode/util/objcUtil.mm; sourceTree = "<group>"; };
 		D127F81D1698C901007E6835 /* objcUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = objcUtil.h; path = ../demos/basecode/util/objcUtil.h; sourceTree = "<group>"; };
@@ -703,9 +694,7 @@
 		D16A0E831698C4B80016DF67 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
 		D16A0EAE1698C5640016DF67 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../demos/basecode/ios/AppDelegate.h; sourceTree = "<group>"; };
 		D16A0EAF1698C5640016DF67 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = ../demos/basecode/ios/AppDelegate.mm; sourceTree = "<group>"; };
-		D16A0EB01698C5640016DF67 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "demos/basecode/ios/Default-568h@2x.png"; sourceTree = "<group>"; };
 		D16A0EB11698C5640016DF67 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../demos/basecode/ios/Default.png; sourceTree = "<group>"; };
-		D16A0EB21698C5640016DF67 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "demos/basecode/ios/Default@2x.png"; sourceTree = "<group>"; };
 		D16A0EB31698C5640016DF67 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../demos/basecode/ios/Info.plist; sourceTree = "<group>"; };
 		D16A0EB41698C5640016DF67 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = ../demos/basecode/ios/main.mm; sourceTree = "<group>"; };
 		D16A0EB51698C5640016DF67 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ../demos/basecode/ios/ViewController.h; sourceTree = "<group>"; };
@@ -714,6 +703,8 @@
 		D16A0EC11698C6270016DF67 /* ViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController_iPhone.xib; path = ../demos/basecode/ios/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		D17613931561B21500F645DE /* environment_mapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = environment_mapping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1A48A5316C2F64A00318F58 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/OpenAL.framework; sourceTree = DEVELOPER_DIR; };
+		D1B9C5E71D1E8E4400F9844A /* demo_lighting.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_lighting.cpp; path = ../demos/opengl_demos/demo_lighting.cpp; sourceTree = "<group>"; };
+		D1B9C5E81D1E8E4400F9844A /* demo_lighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_lighting.h; path = ../demos/opengl_demos/demo_lighting.h; sourceTree = "<group>"; };
 		D1BB6FAF150E9E7100EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D1C014F315619D4700FBEF81 /* lightmap_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lightmap_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C014F815619D4700FBEF81 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -734,8 +725,6 @@
 		D1E39A90169A3E55003A6CB5 /* icon_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_iphone@2x.png"; sourceTree = "<group>"; };
 		D1E39A92169A3E65003A6CB5 /* icon_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_ipad.png; sourceTree = "<group>"; };
 		D1E39A94169A3E67003A6CB5 /* icon_ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_ipad@2x.png"; sourceTree = "<group>"; };
-		D1E39A9A169A4378003A6CB5 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape.png"; path = "demos/basecode/ios/Default-Landscape.png"; sourceTree = "<group>"; };
-		D1E39A9B169A4378003A6CB5 /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x.png"; path = "demos/basecode/ios/Default-Landscape@2x.png"; sourceTree = "<group>"; };
 		D1E39A9E169A43BB003A6CB5 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		D1F09DEA169AB9D900DEEC63 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/GLKit.framework; sourceTree = DEVELOPER_DIR; };
 		D1FB879F157D4DFD0060641F /* normal_mapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = normal_mapping.frag; path = ../demos/media/parallax/normal_mapping.frag; sourceTree = "<group>"; };
@@ -752,7 +741,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B41FA8801CAD4AAA00456992 /* libclipavfoundation.a in Frameworks */,
-				B41FA87E1CAD4A9C00456992 /* libclipffmpeg.a in Frameworks */,
 				B41FA8491CAD34CF00456992 /* libtheoraplayer.a in Frameworks */,
 				B4A28B8D1CAD2D11004ECC69 /* libogg.a in Frameworks */,
 				B4A28B8E1CAD2D11004ECC69 /* libtheora.a in Frameworks */,
@@ -810,6 +798,7 @@
 				D1D89D911B710F070053378D /* libogg.a in Frameworks */,
 				D1D89D921B710F070053378D /* libtheora.a in Frameworks */,
 				D1D89D941B710F070053378D /* libvorbis.a in Frameworks */,
+				D1B9C5EB1D1E902E00F9844A /* libtheoraplayer.a in Frameworks */,
 				D1D89D9A1B710F790053378D /* CoreVideo.framework in Frameworks */,
 				D1D89D981B710F720053378D /* CoreMedia.framework in Frameworks */,
 				D1D89D961B710F670053378D /* AVFoundation.framework in Frameworks */,
@@ -1045,6 +1034,8 @@
 				B4A28B621CAD2C3E004ECC69 /* demo_environment.h */,
 				B4A28B631CAD2C3E004ECC69 /* demo_glutPlayer.cpp */,
 				B4A28B641CAD2C3E004ECC69 /* demo_glutPlayer.h */,
+				D1B9C5E71D1E8E4400F9844A /* demo_lighting.cpp */,
+				D1B9C5E81D1E8E4400F9844A /* demo_lighting.h */,
 				B4A28B651CAD2C3E004ECC69 /* demo_lightMap.cpp */,
 				B4A28B661CAD2C3E004ECC69 /* demo_lightMap.h */,
 				B4A28B671CAD2C3E004ECC69 /* demo_menu.cpp */,
@@ -1109,7 +1100,6 @@
 				D16776D6155C57E90050EC64 /* media */,
 				D1473F2C150CA69B00B20490 /* Frameworks */,
 				D1473F2B150CA69B00B20490 /* Products */,
-				B4A28B9E1CAD2D12004ECC69 /* Theora Player (Mac).plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1128,8 +1118,8 @@
 				D166336C156ADAE8009E98F1 /* video_lighting.app */,
 				D1C134C1157972CF005E8A5B /* parallax_mapping.app */,
 				D16A0E791698C4B80016DF67 /* simple_player.app */,
-				B4A28B9D1CAD2D11004ECC69 /* Theora Player (Mac).app */,
-				B4A28BD01CAD2D1F004ECC69 /* Theora Player (iOS).app */,
+				B4A28B9D1CAD2D11004ECC69 /* OpenGL Demos (Mac).app */,
+				B4A28BD01CAD2D1F004ECC69 /* OpenGL Demos (iOS).app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1196,11 +1186,7 @@
 				D1E39A8E169A3E4E003A6CB5 /* icon_iphone.png */,
 				D127F8CA1698D3E6007E6835 /* Shader.fsh */,
 				D127F8CB1698D3E6007E6835 /* Shader.vsh */,
-				D16A0EB01698C5640016DF67 /* Default-568h@2x.png */,
 				D16A0EB11698C5640016DF67 /* Default.png */,
-				D16A0EB21698C5640016DF67 /* Default@2x.png */,
-				D1E39A9A169A4378003A6CB5 /* Default-Landscape.png */,
-				D1E39A9B169A4378003A6CB5 /* Default-Landscape@2x.png */,
 				D16A0EC01698C6270016DF67 /* ViewController_iPad.xib */,
 				D16A0EC11698C6270016DF67 /* ViewController_iPhone.xib */,
 				D16A0EB31698C5640016DF67 /* Info.plist */,
@@ -1282,9 +1268,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B4A28B7B1CAD2D11004ECC69 /* Theora Player (Mac) */ = {
+		B4A28B7B1CAD2D11004ECC69 /* OpenGL Demos (Mac) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B4A28B991CAD2D11004ECC69 /* Build configuration list for PBXNativeTarget "Theora Player (Mac)" */;
+			buildConfigurationList = B4A28B991CAD2D11004ECC69 /* Build configuration list for PBXNativeTarget "OpenGL Demos (Mac)" */;
 			buildPhases = (
 				B4A28B7E1CAD2D11004ECC69 /* Sources */,
 				B4A28B8C1CAD2D11004ECC69 /* Frameworks */,
@@ -1296,14 +1282,14 @@
 			dependencies = (
 				B4A28B7C1CAD2D11004ECC69 /* PBXTargetDependency */,
 			);
-			name = "Theora Player (Mac)";
+			name = "OpenGL Demos (Mac)";
 			productName = glut_player;
-			productReference = B4A28B9D1CAD2D11004ECC69 /* Theora Player (Mac).app */;
+			productReference = B4A28B9D1CAD2D11004ECC69 /* OpenGL Demos (Mac).app */;
 			productType = "com.apple.product-type.application";
 		};
-		B4A28B9F1CAD2D1F004ECC69 /* Theora Player (iOS) */ = {
+		B4A28B9F1CAD2D1F004ECC69 /* OpenGL Demos (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B4A28BCC1CAD2D1F004ECC69 /* Build configuration list for PBXNativeTarget "Theora Player (iOS)" */;
+			buildConfigurationList = B4A28BCC1CAD2D1F004ECC69 /* Build configuration list for PBXNativeTarget "OpenGL Demos (iOS)" */;
 			buildPhases = (
 				B4A28BA61CAD2D1F004ECC69 /* Sources */,
 				B4A28BAF1CAD2D1F004ECC69 /* Frameworks */,
@@ -1316,9 +1302,9 @@
 				B4A28BA21CAD2D1F004ECC69 /* PBXTargetDependency */,
 				B4A28BA41CAD2D1F004ECC69 /* PBXTargetDependency */,
 			);
-			name = "Theora Player (iOS)";
+			name = "OpenGL Demos (iOS)";
 			productName = "simple_player (iOS)";
-			productReference = B4A28BD01CAD2D1F004ECC69 /* Theora Player (iOS).app */;
+			productReference = B4A28BD01CAD2D1F004ECC69 /* OpenGL Demos (iOS).app */;
 			productType = "com.apple.product-type.application";
 		};
 		D12C207A1534D58B00B4904B /* composite_animation */ = {
@@ -1617,8 +1603,8 @@
 				D1C134AF157972CF005E8A5B /* parallax_mapping */,
 				D16A0E781698C4B80016DF67 /* simple_player (iOS) */,
 				D139463F17C0EFAA0091F4A4 /* Mac Dependencies */,
-				B4A28B7B1CAD2D11004ECC69 /* Theora Player (Mac) */,
-				B4A28B9F1CAD2D1F004ECC69 /* Theora Player (iOS) */,
+				B4A28B7B1CAD2D11004ECC69 /* OpenGL Demos (Mac) */,
+				B4A28B9F1CAD2D1F004ECC69 /* OpenGL Demos (iOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -1817,17 +1803,13 @@
 				B4A28BBE1CAD2D1F004ECC69 /* media in Resources */,
 				B4A28BBF1CAD2D1F004ECC69 /* Shader.fsh in Resources */,
 				B4A28BC01CAD2D1F004ECC69 /* Shader.vsh in Resources */,
-				B4A28BC11CAD2D1F004ECC69 /* Default-568h@2x.png in Resources */,
 				B4A28BC21CAD2D1F004ECC69 /* Default.png in Resources */,
-				B4A28BC31CAD2D1F004ECC69 /* Default@2x.png in Resources */,
 				B4A28BC41CAD2D1F004ECC69 /* ViewController_iPad.xib in Resources */,
 				B4A28BC51CAD2D1F004ECC69 /* ViewController_iPhone.xib in Resources */,
 				B4A28BC61CAD2D1F004ECC69 /* icon_iphone.png in Resources */,
 				B4A28BC71CAD2D1F004ECC69 /* icon_iphone@2x.png in Resources */,
 				B4A28BC81CAD2D1F004ECC69 /* icon_ipad.png in Resources */,
 				B4A28BC91CAD2D1F004ECC69 /* icon_ipad@2x.png in Resources */,
-				B4A28BCA1CAD2D1F004ECC69 /* Default-Landscape.png in Resources */,
-				B4A28BCB1CAD2D1F004ECC69 /* Default-Landscape@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1838,17 +1820,13 @@
 				D127F8D01698DA45007E6835 /* media in Resources */,
 				D127F8CE1698D40A007E6835 /* Shader.fsh in Resources */,
 				D127F8CF1698D40A007E6835 /* Shader.vsh in Resources */,
-				D16A0EBA1698C5640016DF67 /* Default-568h@2x.png in Resources */,
 				D16A0EBB1698C5640016DF67 /* Default.png in Resources */,
-				D16A0EBC1698C5640016DF67 /* Default@2x.png in Resources */,
 				D16A0EC21698C6270016DF67 /* ViewController_iPad.xib in Resources */,
 				D16A0EC31698C6270016DF67 /* ViewController_iPhone.xib in Resources */,
 				D1E39A96169A3EC0003A6CB5 /* icon_iphone.png in Resources */,
 				D1E39A97169A3EC2003A6CB5 /* icon_iphone@2x.png in Resources */,
 				D1E39A98169A3ECB003A6CB5 /* icon_ipad.png in Resources */,
 				D1E39A99169A3ECE003A6CB5 /* icon_ipad@2x.png in Resources */,
-				D1E39A9C169A4378003A6CB5 /* Default-Landscape.png in Resources */,
-				D1E39A9D169A4378003A6CB5 /* Default-Landscape@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1985,7 +1963,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ ${CONFIGURATION} = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        echo \"${CONFIGURATION}\"\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/../demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ ${CONFIGURATION} = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        echo \"${CONFIGURATION}\"\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D16776BB155C55C20050EC64 /* link media folder */ = {
@@ -2135,6 +2113,7 @@
 				B41FA84B1CAD355400456992 /* tga.cpp in Sources */,
 				B41FA84C1CAD355700456992 /* ObjModel.cpp in Sources */,
 				B4A28B811CAD2D11004ECC69 /* util.cpp in Sources */,
+				D1B9C5EC1D1E935400F9844A /* demo_lighting.cpp in Sources */,
 				B4A28B821CAD2D11004ECC69 /* demo_menu.cpp in Sources */,
 				B4A28B831CAD2D11004ECC69 /* demo_spriteAnimation.cpp in Sources */,
 				B4A28B841CAD2D11004ECC69 /* demo_tv.cpp in Sources */,
@@ -2165,14 +2144,13 @@
 				B4A28BAA1CAD2D1F004ECC69 /* main.mm in Sources */,
 				B41FA8461CAD34A400456992 /* demo_seek.cpp in Sources */,
 				B41FA8411CAD349700456992 /* demo_environment.cpp in Sources */,
-				B41FA84A1CAD354D00456992 /* glut_basecode.cpp in Sources */,
 				B41FA84D1CAD355700456992 /* ObjModel.cpp in Sources */,
+				D1B9C5ED1D1E936400F9844A /* demo_lighting.cpp in Sources */,
 				B41FA8481CAD34AA00456992 /* demo_tv.cpp in Sources */,
 				B4A28BAB1CAD2D1F004ECC69 /* ViewController.mm in Sources */,
 				B41FA8471CAD34A700456992 /* demo_spriteAnimation.cpp in Sources */,
 				B4A28BAC1CAD2D1F004ECC69 /* util.cpp in Sources */,
 				B4A28BAD1CAD2D1F004ECC69 /* objcUtil.mm in Sources */,
-				B4A28BAE1CAD2D1F004ECC69 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2262,6 +2240,7 @@
 				D166335E156ADAE8009E98F1 /* ObjModel.cpp in Sources */,
 				D127F8021698C842007E6835 /* util.cpp in Sources */,
 				D127F81B1698C882007E6835 /* objcUtil.mm in Sources */,
+				D1B9C5EA1D1E8E5700F9844A /* demo_lighting.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2276,7 +2255,6 @@
 				D16A0EBF1698C5640016DF67 /* ViewController.mm in Sources */,
 				D127F7F91698C842007E6835 /* util.cpp in Sources */,
 				D127F8121698C882007E6835 /* objcUtil.mm in Sources */,
-				D127F8C91698D161007E6835 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2440,12 +2418,14 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
 					_DEMO_GLUT_PLAYER,
 					_DEMO_SPRITE_ANIMATION,
 					_DEMO_MULTIPLE,
 					_DEMO_SEEK,
 					_DEMO_TV,
 					_DEMO_LIGHT_MAP,
+					_DEMO_LIGHTING,
 					_DEMO_AV,
 					_DEMO_COMPOSITE,
 					_DEMO_ENVIRONMENT,
@@ -2461,7 +2441,7 @@
 					"$(SRCROOT)/../theoraplayer/plugins/clipffmpeg/include",
 					"$(SRCROOT)/../theoraplayer/plugins/clipwebm/include",
 				);
-				INFOPLIST_FILE = "Theora Player (Mac).plist";
+				INFOPLIST_FILE = mac_demos.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2473,12 +2453,14 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
 					_DEMO_GLUT_PLAYER,
 					_DEMO_SPRITE_ANIMATION,
 					_DEMO_MULTIPLE,
 					_DEMO_SEEK,
 					_DEMO_TV,
 					_DEMO_LIGHT_MAP,
+					_DEMO_LIGHTING,
 					_DEMO_AV,
 					_DEMO_COMPOSITE,
 					_DEMO_ENVIRONMENT,
@@ -2494,7 +2476,7 @@
 					"$(SRCROOT)/../theoraplayer/plugins/clipffmpeg/include",
 					"$(SRCROOT)/../theoraplayer/plugins/clipwebm/include",
 				);
-				INFOPLIST_FILE = "Theora Player (Mac).plist";
+				INFOPLIST_FILE = mac_demos.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2506,12 +2488,14 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
 					_DEMO_GLUT_PLAYER,
 					_DEMO_SPRITE_ANIMATION,
 					_DEMO_MULTIPLE,
 					_DEMO_SEEK,
 					_DEMO_TV,
 					_DEMO_LIGHT_MAP,
+					_DEMO_LIGHTING,
 					_DEMO_AV,
 					_DEMO_COMPOSITE,
 					_DEMO_ENVIRONMENT,
@@ -2527,7 +2511,7 @@
 					"$(SRCROOT)/../theoraplayer/plugins/clipffmpeg/include",
 					"$(SRCROOT)/../theoraplayer/plugins/clipwebm/include",
 				);
-				INFOPLIST_FILE = "Theora Player (Mac).plist";
+				INFOPLIST_FILE = mac_demos.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2541,11 +2525,21 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
 					_IOS,
+					_DEMO_GLUT_PLAYER,
+					_DEMO_SPRITE_ANIMATION,
+					_DEMO_MULTIPLE,
+					_DEMO_SEEK,
+					_DEMO_TV,
+					_DEMO_LIGHT_MAP,
+					_DEMO_AV,
+					_DEMO_COMPOSITE,
+					_DEMO_ENVIRONMENT,
+					"___USE_WEBM",
+					"___USE_FFMPEG",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Theora Player (iOS).plist";
+				INFOPLIST_FILE = ios_demos.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2564,11 +2558,21 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
 					_IOS,
+					_DEMO_GLUT_PLAYER,
+					_DEMO_SPRITE_ANIMATION,
+					_DEMO_MULTIPLE,
+					_DEMO_SEEK,
+					_DEMO_TV,
+					_DEMO_LIGHT_MAP,
+					_DEMO_AV,
+					_DEMO_COMPOSITE,
+					_DEMO_ENVIRONMENT,
+					"___USE_WEBM",
+					"___USE_FFMPEG",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Theora Player (iOS).plist";
+				INFOPLIST_FILE = ios_demos.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -2588,11 +2592,21 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
 					_IOS,
+					_DEMO_GLUT_PLAYER,
+					_DEMO_SPRITE_ANIMATION,
+					_DEMO_MULTIPLE,
+					_DEMO_SEEK,
+					_DEMO_TV,
+					_DEMO_LIGHT_MAP,
+					_DEMO_AV,
+					_DEMO_COMPOSITE,
+					_DEMO_ENVIRONMENT,
+					"___USE_WEBM",
+					"___USE_FFMPEG",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Theora Player (iOS).plist";
+				INFOPLIST_FILE = ios_demos.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -2751,10 +2765,6 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/theoraplayer/include",
-					"$(SRCROOT)/demos",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2766,10 +2776,6 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/theoraplayer/include",
-					"$(SRCROOT)/demos",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2781,10 +2787,6 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/theoraplayer/include",
-					"$(SRCROOT)/demos",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2979,6 +2981,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_DEMO_LIGHTING,
 					MP4_VIDEO,
 					__3D_PROJECTION,
 					__ZBUFFER,
@@ -2995,6 +2999,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_DEMO_LIGHTING,
 					MP4_VIDEO,
 					__3D_PROJECTION,
 					__ZBUFFER,
@@ -3011,6 +3017,8 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					_MAC,
+					_DEMO_LIGHTING,
 					MP4_VIDEO,
 					__3D_PROJECTION,
 					__ZBUFFER,
@@ -3239,7 +3247,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B4A28B991CAD2D11004ECC69 /* Build configuration list for PBXNativeTarget "Theora Player (Mac)" */ = {
+		B4A28B991CAD2D11004ECC69 /* Build configuration list for PBXNativeTarget "OpenGL Demos (Mac)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B4A28B9A1CAD2D11004ECC69 /* Debug */,
@@ -3249,7 +3257,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		B4A28BCC1CAD2D1F004ECC69 /* Build configuration list for PBXNativeTarget "Theora Player (iOS)" */ = {
+		B4A28BCC1CAD2D1F004ECC69 /* Build configuration list for PBXNativeTarget "OpenGL Demos (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B4A28BCD1CAD2D1F004ECC69 /* Debug */,
