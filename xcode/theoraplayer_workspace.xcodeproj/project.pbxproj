@@ -18,6 +18,7 @@
 				D1D89D8E1B710ED00053378D /* PBXTargetDependency */,
 				D1B9C5E21D1E804C00F9844A /* PBXTargetDependency */,
 				D1B9C5E41D1E805100F9844A /* PBXTargetDependency */,
+				D1B9C5EF1D1E9EAD00F9844A /* PBXTargetDependency */,
 			);
 			name = "Mac Dependencies";
 			productName = "Mac Dependencies";
@@ -188,6 +189,7 @@
 		D1B9C5EB1D1E902E00F9844A /* libtheoraplayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D139464D17C0EFAA0091F4A4 /* libtheoraplayer.a */; };
 		D1B9C5EC1D1E935400F9844A /* demo_lighting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B9C5E71D1E8E4400F9844A /* demo_lighting.cpp */; };
 		D1B9C5ED1D1E936400F9844A /* demo_lighting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1B9C5E71D1E8E4400F9844A /* demo_lighting.cpp */; };
+		D1B9C6141D1EA09C00F9844A /* libclipwebm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A28B3B1CAD148A004ECC69 /* libclipwebm.a */; };
 		D1C0151415619DD400FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
 		D1C0151515619DDB00FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
 		D1C0151615619DE800FBEF81 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C014FA15619D4700FBEF81 /* Foundation.framework */; };
@@ -558,6 +560,34 @@
 			remoteGlobalIDString = D1F27B16177A2F7700E5C131;
 			remoteInfo = "clipavfoundation (Mac)";
 		};
+		D1B9C5EE1D1E9EAD00F9844A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A28B321CAD148A004ECC69 /* clipwebm.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1F27B16177A2F7700E5C131;
+			remoteInfo = "clipwebm (Mac)";
+		};
+		D1B9C60E1D1EA00200F9844A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1B9C5F81D1EA00200F9844A /* Vpx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D07F2C80486CC7A007CD1D0;
+			remoteInfo = Vpx;
+		};
+		D1B9C6101D1EA00200F9844A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1B9C5F81D1EA00200F9844A /* Vpx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1F279D4177A2B3400E5C131;
+			remoteInfo = "Vpx (Mac)";
+		};
+		D1B9C6121D1EA00200F9844A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1B9C5F81D1EA00200F9844A /* Vpx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D1BB6F7E150E9CFD00EF9400;
+			remoteInfo = "Vpx (iOS)";
+		};
 		D1CDFF7A1696C88F00609AB0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
@@ -705,6 +735,7 @@
 		D1A48A5316C2F64A00318F58 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/OpenAL.framework; sourceTree = DEVELOPER_DIR; };
 		D1B9C5E71D1E8E4400F9844A /* demo_lighting.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_lighting.cpp; path = ../demos/opengl_demos/demo_lighting.cpp; sourceTree = "<group>"; };
 		D1B9C5E81D1E8E4400F9844A /* demo_lighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_lighting.h; path = ../demos/opengl_demos/demo_lighting.h; sourceTree = "<group>"; };
+		D1B9C5F81D1EA00200F9844A /* Vpx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vpx.xcodeproj; path = ../vpx/macosx/Vpx.xcodeproj; sourceTree = "<group>"; };
 		D1BB6FAF150E9E7100EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D1C014F315619D4700FBEF81 /* lightmap_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lightmap_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1C014F815619D4700FBEF81 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -740,6 +771,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1B9C6141D1EA09C00F9844A /* libclipwebm.a in Frameworks */,
 				B41FA8801CAD4AAA00456992 /* libclipavfoundation.a in Frameworks */,
 				B41FA8491CAD34CF00456992 /* libtheoraplayer.a in Frameworks */,
 				B4A28B8D1CAD2D11004ECC69 /* libogg.a in Frameworks */,
@@ -1091,6 +1123,7 @@
 				D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */,
 				D127F91616990217007E6835 /* Tremor.xcodeproj */,
 				D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */,
+				D1B9C5F81D1EA00200F9844A /* Vpx.xcodeproj */,
 				D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */,
 				B4A28B101CAD1477004ECC69 /* clipavfoundation.xcodeproj */,
 				B4A28B261CAD1482004ECC69 /* clipffmpeg.xcodeproj */,
@@ -1225,6 +1258,16 @@
 				D16D9DDF150CBC5D001BD35C /* basecode */,
 			);
 			name = demos;
+			sourceTree = "<group>";
+		};
+		D1B9C5F91D1EA00200F9844A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D1B9C60F1D1EA00200F9844A /* Vpx.framework */,
+				D1B9C6111D1EA00200F9844A /* libVpx.a */,
+				D1B9C6131D1EA00200F9844A /* libVpx.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		D1C2F5C119F502A500A21F0D /* config */ = {
@@ -1587,6 +1630,10 @@
 					ProductGroup = D1D098D6155F05CB009F6AAA /* Products */;
 					ProjectRef = D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */;
 				},
+				{
+					ProductGroup = D1B9C5F91D1EA00200F9844A /* Products */;
+					ProjectRef = D1B9C5F81D1EA00200F9844A /* Vpx.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1734,6 +1781,27 @@
 			fileType = archive.ar;
 			path = libtheoraplayer.a;
 			remoteRef = D167758C155C4F8F0050EC64 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D1B9C60F1D1EA00200F9844A /* Vpx.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Vpx.framework;
+			remoteRef = D1B9C60E1D1EA00200F9844A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D1B9C6111D1EA00200F9844A /* libVpx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libVpx.a;
+			remoteRef = D1B9C6101D1EA00200F9844A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D1B9C6131D1EA00200F9844A /* libVpx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libVpx.a;
+			remoteRef = D1B9C6121D1EA00200F9844A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D1CDFF7B1696C88F00609AB0 /* theoraplayer.framework */ = {
@@ -2393,6 +2461,11 @@
 			isa = PBXTargetDependency;
 			name = "clipavfoundation (Mac)";
 			targetProxy = D1B9C5E31D1E805100F9844A /* PBXContainerItemProxy */;
+		};
+		D1B9C5EF1D1E9EAD00F9844A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "clipwebm (Mac)";
+			targetProxy = D1B9C5EE1D1E9EAD00F9844A /* PBXContainerItemProxy */;
 		};
 		D1D89D8A1B710ED00053378D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

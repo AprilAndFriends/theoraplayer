@@ -359,6 +359,7 @@
 					"${SRCROOT}/../../include",
 					"${SRCROOT}/../../src",
 					"${SRCROOT}/../../../vpx",
+					"${SRCROOT}/../../../vpx/third_party/libwebm",
 				);
 				PRODUCT_NAME = clipwebm;
 			};
@@ -394,6 +395,7 @@
 					"${SRCROOT}/../../include",
 					"${SRCROOT}/../../src",
 					"${SRCROOT}/../../../vpx",
+					"${SRCROOT}/../../../vpx/third_party/libwebm",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = clipwebm;
@@ -428,6 +430,7 @@
 					"${SRCROOT}/../../include",
 					"${SRCROOT}/../../src",
 					"${SRCROOT}/../../../vpx",
+					"${SRCROOT}/../../../vpx/third_party/libwebm",
 				);
 				PRODUCT_NAME = clipwebm;
 			};

@@ -18,6 +18,7 @@ namespace clipwebm
 
 	void init()
 	{
+        initialized = true;
 		theoraplayer::log("Initializing WebM VideoClip support for Theoraplayer.");
 		theoraplayer::VideoClip::Format format;
 		format.name = FORMAT_NAME;

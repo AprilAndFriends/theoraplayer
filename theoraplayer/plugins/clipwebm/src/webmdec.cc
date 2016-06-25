@@ -55,7 +55,7 @@ namespace clipwebm
 
 	void rewind_and_reset(struct WebmInputContext *const webm_ctx, struct VpxInputContext *const vpx_ctx)
 	{
-		MkvReader* const reader = reinterpret_cast<MkvReader*>(webm_ctx->reader);
+		//MkvReader* const reader = reinterpret_cast<MkvReader*>(webm_ctx->reader);
 		//reset(webm_ctx);
 	}
 
