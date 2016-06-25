@@ -16,6 +16,8 @@
 				D1D89D8A1B710ED00053378D /* PBXTargetDependency */,
 				D1D89D8C1B710ED00053378D /* PBXTargetDependency */,
 				D1D89D8E1B710ED00053378D /* PBXTargetDependency */,
+				D1B9C5E21D1E804C00F9844A /* PBXTargetDependency */,
+				D1B9C5E41D1E805100F9844A /* PBXTargetDependency */,
 			);
 			name = "Mac Dependencies";
 			productName = "Mac Dependencies";
@@ -41,7 +43,6 @@
 		B41FA84E1CAD355B00456992 /* OpenAL_AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */; };
 		B41FA84F1CAD358300456992 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1474102150CB4A700B20490 /* OpenAL.framework */; };
 		B41FA87E1CAD4A9C00456992 /* libclipffmpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A28B2F1CAD1482004ECC69 /* libclipffmpeg.a */; };
-		B41FA87F1CAD4AA500456992 /* libclipwebm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A28B3B1CAD148A004ECC69 /* libclipwebm.a */; };
 		B41FA8801CAD4AAA00456992 /* libclipavfoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A28B191CAD1477004ECC69 /* libclipavfoundation.a */; };
 		B4A28B5A1CAD26EC004ECC69 /* glut_basecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B591CAD26EC004ECC69 /* glut_basecode.cpp */; };
 		B4A28B711CAD2C3E004ECC69 /* demo_av.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A28B5D1CAD2C3E004ECC69 /* demo_av.cpp */; };
@@ -551,6 +552,20 @@
 			remoteGlobalIDString = D1BB6FAE150E9E7100EF9400;
 			remoteInfo = "theoraplayer (iOS)";
 		};
+		D1B9C5E11D1E804C00F9844A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D198F950177A31FC002942E3;
+			remoteInfo = "theoraplayer (Mac Theora)";
+		};
+		D1B9C5E31D1E805100F9844A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B4A28B101CAD1477004ECC69 /* clipavfoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1F27B16177A2F7700E5C131;
+			remoteInfo = "clipavfoundation (Mac)";
+		};
 		D1CDFF7A1696C88F00609AB0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
@@ -624,44 +639,44 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B4A28B101CAD1477004ECC69 /* clipavfoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = clipavfoundation.xcodeproj; path = theoraplayer/plugins/clipavfoundation/clipavfoundation.xcodeproj; sourceTree = "<group>"; };
-		B4A28B261CAD1482004ECC69 /* clipffmpeg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = clipffmpeg.xcodeproj; path = theoraplayer/plugins/clipffmpeg/clipffmpeg.xcodeproj; sourceTree = "<group>"; };
-		B4A28B321CAD148A004ECC69 /* clipwebm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = clipwebm.xcodeproj; path = theoraplayer/plugins/clipwebm/clipwebm.xcodeproj; sourceTree = "<group>"; };
-		B4A28B591CAD26EC004ECC69 /* glut_basecode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glut_basecode.cpp; path = demos/basecode/glut/glut_basecode.cpp; sourceTree = "<group>"; };
-		B4A28B5D1CAD2C3E004ECC69 /* demo_av.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_av.cpp; path = demos/opengl_demos/demo_av.cpp; sourceTree = "<group>"; };
-		B4A28B5E1CAD2C3E004ECC69 /* demo_av.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_av.h; path = demos/opengl_demos/demo_av.h; sourceTree = "<group>"; };
-		B4A28B5F1CAD2C3E004ECC69 /* demo_composite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_composite.cpp; path = demos/opengl_demos/demo_composite.cpp; sourceTree = "<group>"; };
-		B4A28B601CAD2C3E004ECC69 /* demo_composite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_composite.h; path = demos/opengl_demos/demo_composite.h; sourceTree = "<group>"; };
-		B4A28B611CAD2C3E004ECC69 /* demo_environment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_environment.cpp; path = demos/opengl_demos/demo_environment.cpp; sourceTree = "<group>"; };
-		B4A28B621CAD2C3E004ECC69 /* demo_environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_environment.h; path = demos/opengl_demos/demo_environment.h; sourceTree = "<group>"; };
-		B4A28B631CAD2C3E004ECC69 /* demo_glutPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_glutPlayer.cpp; path = demos/opengl_demos/demo_glutPlayer.cpp; sourceTree = "<group>"; };
-		B4A28B641CAD2C3E004ECC69 /* demo_glutPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_glutPlayer.h; path = demos/opengl_demos/demo_glutPlayer.h; sourceTree = "<group>"; };
-		B4A28B651CAD2C3E004ECC69 /* demo_lightMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_lightMap.cpp; path = demos/opengl_demos/demo_lightMap.cpp; sourceTree = "<group>"; };
-		B4A28B661CAD2C3E004ECC69 /* demo_lightMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_lightMap.h; path = demos/opengl_demos/demo_lightMap.h; sourceTree = "<group>"; };
-		B4A28B671CAD2C3E004ECC69 /* demo_menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_menu.cpp; path = demos/opengl_demos/demo_menu.cpp; sourceTree = "<group>"; };
-		B4A28B681CAD2C3E004ECC69 /* demo_menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_menu.h; path = demos/opengl_demos/demo_menu.h; sourceTree = "<group>"; };
-		B4A28B691CAD2C3E004ECC69 /* demo_multiple.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_multiple.cpp; path = demos/opengl_demos/demo_multiple.cpp; sourceTree = "<group>"; };
-		B4A28B6A1CAD2C3E004ECC69 /* demo_multiple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_multiple.h; path = demos/opengl_demos/demo_multiple.h; sourceTree = "<group>"; };
-		B4A28B6B1CAD2C3E004ECC69 /* demo_seek.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_seek.cpp; path = demos/opengl_demos/demo_seek.cpp; sourceTree = "<group>"; };
-		B4A28B6C1CAD2C3E004ECC69 /* demo_seek.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_seek.h; path = demos/opengl_demos/demo_seek.h; sourceTree = "<group>"; };
-		B4A28B6D1CAD2C3E004ECC69 /* demo_spriteAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_spriteAnimation.cpp; path = demos/opengl_demos/demo_spriteAnimation.cpp; sourceTree = "<group>"; };
-		B4A28B6E1CAD2C3E004ECC69 /* demo_spriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_spriteAnimation.h; path = demos/opengl_demos/demo_spriteAnimation.h; sourceTree = "<group>"; };
-		B4A28B6F1CAD2C3E004ECC69 /* demo_tv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_tv.cpp; path = demos/opengl_demos/demo_tv.cpp; sourceTree = "<group>"; };
-		B4A28B701CAD2C3E004ECC69 /* demo_tv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_tv.h; path = demos/opengl_demos/demo_tv.h; sourceTree = "<group>"; };
+		B4A28B101CAD1477004ECC69 /* clipavfoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = clipavfoundation.xcodeproj; path = ../theoraplayer/plugins/clipavfoundation/clipavfoundation.xcodeproj; sourceTree = "<group>"; };
+		B4A28B261CAD1482004ECC69 /* clipffmpeg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = clipffmpeg.xcodeproj; path = ../theoraplayer/plugins/clipffmpeg/clipffmpeg.xcodeproj; sourceTree = "<group>"; };
+		B4A28B321CAD148A004ECC69 /* clipwebm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = clipwebm.xcodeproj; path = ../theoraplayer/plugins/clipwebm/clipwebm.xcodeproj; sourceTree = "<group>"; };
+		B4A28B591CAD26EC004ECC69 /* glut_basecode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glut_basecode.cpp; path = ../demos/basecode/glut/glut_basecode.cpp; sourceTree = "<group>"; };
+		B4A28B5D1CAD2C3E004ECC69 /* demo_av.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_av.cpp; path = ../demos/opengl_demos/demo_av.cpp; sourceTree = "<group>"; };
+		B4A28B5E1CAD2C3E004ECC69 /* demo_av.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_av.h; path = ../demos/opengl_demos/demo_av.h; sourceTree = "<group>"; };
+		B4A28B5F1CAD2C3E004ECC69 /* demo_composite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_composite.cpp; path = ../demos/opengl_demos/demo_composite.cpp; sourceTree = "<group>"; };
+		B4A28B601CAD2C3E004ECC69 /* demo_composite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_composite.h; path = ../demos/opengl_demos/demo_composite.h; sourceTree = "<group>"; };
+		B4A28B611CAD2C3E004ECC69 /* demo_environment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_environment.cpp; path = ../demos/opengl_demos/demo_environment.cpp; sourceTree = "<group>"; };
+		B4A28B621CAD2C3E004ECC69 /* demo_environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_environment.h; path = ../demos/opengl_demos/demo_environment.h; sourceTree = "<group>"; };
+		B4A28B631CAD2C3E004ECC69 /* demo_glutPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_glutPlayer.cpp; path = ../demos/opengl_demos/demo_glutPlayer.cpp; sourceTree = "<group>"; };
+		B4A28B641CAD2C3E004ECC69 /* demo_glutPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_glutPlayer.h; path = ../demos/opengl_demos/demo_glutPlayer.h; sourceTree = "<group>"; };
+		B4A28B651CAD2C3E004ECC69 /* demo_lightMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_lightMap.cpp; path = ../demos/opengl_demos/demo_lightMap.cpp; sourceTree = "<group>"; };
+		B4A28B661CAD2C3E004ECC69 /* demo_lightMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_lightMap.h; path = ../demos/opengl_demos/demo_lightMap.h; sourceTree = "<group>"; };
+		B4A28B671CAD2C3E004ECC69 /* demo_menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_menu.cpp; path = ../demos/opengl_demos/demo_menu.cpp; sourceTree = "<group>"; };
+		B4A28B681CAD2C3E004ECC69 /* demo_menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_menu.h; path = ../demos/opengl_demos/demo_menu.h; sourceTree = "<group>"; };
+		B4A28B691CAD2C3E004ECC69 /* demo_multiple.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_multiple.cpp; path = ../demos/opengl_demos/demo_multiple.cpp; sourceTree = "<group>"; };
+		B4A28B6A1CAD2C3E004ECC69 /* demo_multiple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_multiple.h; path = ../demos/opengl_demos/demo_multiple.h; sourceTree = "<group>"; };
+		B4A28B6B1CAD2C3E004ECC69 /* demo_seek.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_seek.cpp; path = ../demos/opengl_demos/demo_seek.cpp; sourceTree = "<group>"; };
+		B4A28B6C1CAD2C3E004ECC69 /* demo_seek.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_seek.h; path = ../demos/opengl_demos/demo_seek.h; sourceTree = "<group>"; };
+		B4A28B6D1CAD2C3E004ECC69 /* demo_spriteAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_spriteAnimation.cpp; path = ../demos/opengl_demos/demo_spriteAnimation.cpp; sourceTree = "<group>"; };
+		B4A28B6E1CAD2C3E004ECC69 /* demo_spriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_spriteAnimation.h; path = ../demos/opengl_demos/demo_spriteAnimation.h; sourceTree = "<group>"; };
+		B4A28B6F1CAD2C3E004ECC69 /* demo_tv.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_tv.cpp; path = ../demos/opengl_demos/demo_tv.cpp; sourceTree = "<group>"; };
+		B4A28B701CAD2C3E004ECC69 /* demo_tv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_tv.h; path = ../demos/opengl_demos/demo_tv.h; sourceTree = "<group>"; };
 		B4A28B9D1CAD2D11004ECC69 /* Theora Player (Mac).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Theora Player (Mac).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4A28B9E1CAD2D12004ECC69 /* Theora Player (Mac).plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Theora Player (Mac).plist"; path = "/Users/dominik/projects/theoraplayer-refactor_2.0/Theora Player (Mac).plist"; sourceTree = "<absolute>"; };
 		B4A28BD01CAD2D1F004ECC69 /* Theora Player (iOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Theora Player (iOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D127F7F71698C842007E6835 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cpp; path = demos/basecode/util/util.cpp; sourceTree = "<group>"; };
-		D127F8101698C882007E6835 /* objcUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = objcUtil.mm; path = demos/basecode/util/objcUtil.mm; sourceTree = "<group>"; };
-		D127F81D1698C901007E6835 /* objcUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = objcUtil.h; path = demos/basecode/util/objcUtil.h; sourceTree = "<group>"; };
-		D127F81E1698CA64007E6835 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = demos/basecode/util/util.h; sourceTree = "<group>"; };
+		D127F7F71698C842007E6835 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cpp; path = ../demos/basecode/util/util.cpp; sourceTree = "<group>"; };
+		D127F8101698C882007E6835 /* objcUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = objcUtil.mm; path = ../demos/basecode/util/objcUtil.mm; sourceTree = "<group>"; };
+		D127F81D1698C901007E6835 /* objcUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = objcUtil.h; path = ../demos/basecode/util/objcUtil.h; sourceTree = "<group>"; };
+		D127F81E1698CA64007E6835 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = ../demos/basecode/util/util.h; sourceTree = "<group>"; };
 		D127F8C11698D09A007E6835 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
 		D127F8C31698D09E007E6835 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		D127F8C51698D0A3007E6835 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
-		D127F8C81698D160007E6835 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = demos/basecode/ios/main.cpp; sourceTree = "<group>"; };
-		D127F8CA1698D3E6007E6835 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = demos/basecode/ios/Shaders/Shader.fsh; sourceTree = "<group>"; };
-		D127F8CB1698D3E6007E6835 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = demos/basecode/ios/Shaders/Shader.vsh; sourceTree = "<group>"; };
-		D127F91616990217007E6835 /* Tremor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Tremor.xcodeproj; path = tremor/Tremor.xcodeproj; sourceTree = "<group>"; };
+		D127F8C81698D160007E6835 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../demos/basecode/ios/main.cpp; sourceTree = "<group>"; };
+		D127F8CA1698D3E6007E6835 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = ../demos/basecode/ios/Shaders/Shader.fsh; sourceTree = "<group>"; };
+		D127F8CB1698D3E6007E6835 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = ../demos/basecode/ios/Shaders/Shader.vsh; sourceTree = "<group>"; };
+		D127F91616990217007E6835 /* Tremor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Tremor.xcodeproj; path = ../tremor/Tremor.xcodeproj; sourceTree = "<group>"; };
 		D12C208E1534D58B00B4904B /* composite_animation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = composite_animation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1474024150CAF0D00B20490 /* glut_player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = glut_player.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1474048150CAFEB00B20490 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -673,30 +688,30 @@
 		D1474152150CB6F900B20490 /* seek_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seek_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D147416B150CB70D00B20490 /* tv_room.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tv_room.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D166336C156ADAE8009E98F1 /* video_lighting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = video_lighting.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = theoraplayer.xcodeproj; path = theoraplayer/theoraplayer.xcodeproj; sourceTree = "<group>"; };
-		D167761B155C52B40050EC64 /* demo_basecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_basecode.h; path = demos/demo_basecode.h; sourceTree = "<group>"; };
-		D167761D155C52B40050EC64 /* ObjModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ObjModel.cpp; path = demos/ObjModel.cpp; sourceTree = "<group>"; };
-		D167761E155C52B40050EC64 /* ObjModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjModel.h; path = demos/ObjModel.h; sourceTree = "<group>"; };
-		D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenAL_AudioInterface.cpp; path = demos/OpenAL_AudioInterface.cpp; sourceTree = "<group>"; };
-		D1677620155C52B40050EC64 /* OpenAL_AudioInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenAL_AudioInterface.h; path = demos/OpenAL_AudioInterface.h; sourceTree = "<group>"; };
-		D16776D6155C57E90050EC64 /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = demos/media; sourceTree = "<group>"; };
+		D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = theoraplayer.xcodeproj; path = ../theoraplayer/theoraplayer.xcodeproj; sourceTree = "<group>"; };
+		D167761B155C52B40050EC64 /* demo_basecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_basecode.h; path = ../demos/demo_basecode.h; sourceTree = "<group>"; };
+		D167761D155C52B40050EC64 /* ObjModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ObjModel.cpp; path = ../demos/ObjModel.cpp; sourceTree = "<group>"; };
+		D167761E155C52B40050EC64 /* ObjModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjModel.h; path = ../demos/ObjModel.h; sourceTree = "<group>"; };
+		D167761F155C52B40050EC64 /* OpenAL_AudioInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OpenAL_AudioInterface.cpp; path = ../demos/OpenAL_AudioInterface.cpp; sourceTree = "<group>"; };
+		D1677620155C52B40050EC64 /* OpenAL_AudioInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenAL_AudioInterface.h; path = ../demos/OpenAL_AudioInterface.h; sourceTree = "<group>"; };
+		D16776D6155C57E90050EC64 /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = ../demos/media; sourceTree = "<group>"; };
 		D16A0E791698C4B80016DF67 /* simple_player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simple_player.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D16A0E7B1698C4B80016DF67 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		D16A0E7D1698C4B80016DF67 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		D16A0E7F1698C4B80016DF67 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		D16A0E811698C4B80016DF67 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = Library/Frameworks/GLKit.framework; sourceTree = DEVELOPER_DIR; };
 		D16A0E831698C4B80016DF67 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
-		D16A0EAE1698C5640016DF67 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = demos/basecode/ios/AppDelegate.h; sourceTree = "<group>"; };
-		D16A0EAF1698C5640016DF67 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = demos/basecode/ios/AppDelegate.mm; sourceTree = "<group>"; };
+		D16A0EAE1698C5640016DF67 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../demos/basecode/ios/AppDelegate.h; sourceTree = "<group>"; };
+		D16A0EAF1698C5640016DF67 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = ../demos/basecode/ios/AppDelegate.mm; sourceTree = "<group>"; };
 		D16A0EB01698C5640016DF67 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "demos/basecode/ios/Default-568h@2x.png"; sourceTree = "<group>"; };
-		D16A0EB11698C5640016DF67 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = demos/basecode/ios/Default.png; sourceTree = "<group>"; };
+		D16A0EB11698C5640016DF67 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../demos/basecode/ios/Default.png; sourceTree = "<group>"; };
 		D16A0EB21698C5640016DF67 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "demos/basecode/ios/Default@2x.png"; sourceTree = "<group>"; };
-		D16A0EB31698C5640016DF67 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = demos/basecode/ios/Info.plist; sourceTree = "<group>"; };
-		D16A0EB41698C5640016DF67 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = demos/basecode/ios/main.mm; sourceTree = "<group>"; };
-		D16A0EB51698C5640016DF67 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = demos/basecode/ios/ViewController.h; sourceTree = "<group>"; };
-		D16A0EB61698C5640016DF67 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ViewController.mm; path = demos/basecode/ios/ViewController.mm; sourceTree = "<group>"; };
-		D16A0EC01698C6270016DF67 /* ViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController_iPad.xib; path = demos/basecode/ios/ViewController_iPad.xib; sourceTree = "<group>"; };
-		D16A0EC11698C6270016DF67 /* ViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController_iPhone.xib; path = demos/basecode/ios/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		D16A0EB31698C5640016DF67 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../demos/basecode/ios/Info.plist; sourceTree = "<group>"; };
+		D16A0EB41698C5640016DF67 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = ../demos/basecode/ios/main.mm; sourceTree = "<group>"; };
+		D16A0EB51698C5640016DF67 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ../demos/basecode/ios/ViewController.h; sourceTree = "<group>"; };
+		D16A0EB61698C5640016DF67 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ViewController.mm; path = ../demos/basecode/ios/ViewController.mm; sourceTree = "<group>"; };
+		D16A0EC01698C6270016DF67 /* ViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController_iPad.xib; path = ../demos/basecode/ios/ViewController_iPad.xib; sourceTree = "<group>"; };
+		D16A0EC11698C6270016DF67 /* ViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewController_iPhone.xib; path = ../demos/basecode/ios/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		D17613931561B21500F645DE /* environment_mapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = environment_mapping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1A48A5316C2F64A00318F58 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/OpenAL.framework; sourceTree = DEVELOPER_DIR; };
 		D1BB6FAF150E9E7100EF9400 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -705,13 +720,13 @@
 		D1C014F915619D4700FBEF81 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D1C014FA15619D4700FBEF81 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D1C134C1157972CF005E8A5B /* parallax_mapping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = parallax_mapping.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1C2F5CD19F502B100A21F0D /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = iOS.xcconfig; path = xcconfig/iOS.xcconfig; sourceTree = "<group>"; };
-		D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Mac.xcconfig; path = xcconfig/Mac.xcconfig; sourceTree = "<group>"; };
-		D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Ogg.xcodeproj; path = ogg/macosx/Ogg.xcodeproj; sourceTree = "<group>"; };
-		D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vorbis.xcodeproj; path = vorbis/macosx/Vorbis.xcodeproj; sourceTree = "<group>"; };
-		D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Theora.xcodeproj; path = theora/macosx/Theora.xcodeproj; sourceTree = "<group>"; };
-		D1D098F0155F077C009F6AAA /* tga.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tga.cpp; path = demos/tga.cpp; sourceTree = "<group>"; };
-		D1D098F1155F077C009F6AAA /* tga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tga.h; path = demos/tga.h; sourceTree = "<group>"; };
+		D1C2F5CD19F502B100A21F0D /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = iOS.xcconfig; path = ../xcconfig/iOS.xcconfig; sourceTree = "<group>"; };
+		D1C2F5CE19F502B100A21F0D /* Mac.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Mac.xcconfig; path = ../xcconfig/Mac.xcconfig; sourceTree = "<group>"; };
+		D1D098C9155F05C5009F6AAA /* Ogg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Ogg.xcodeproj; path = ../ogg/macosx/Ogg.xcodeproj; sourceTree = "<group>"; };
+		D1D098D5155F05CB009F6AAA /* Vorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Vorbis.xcodeproj; path = ../vorbis/macosx/Vorbis.xcodeproj; sourceTree = "<group>"; };
+		D1D098E1155F05D1009F6AAA /* Theora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Theora.xcodeproj; path = ../theora/macosx/Theora.xcodeproj; sourceTree = "<group>"; };
+		D1D098F0155F077C009F6AAA /* tga.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tga.cpp; path = ../demos/tga.cpp; sourceTree = "<group>"; };
+		D1D098F1155F077C009F6AAA /* tga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tga.h; path = ../demos/tga.h; sourceTree = "<group>"; };
 		D1D89D951B710F670053378D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D1D89D971B710F720053378D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D1D89D991B710F790053378D /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -723,12 +738,12 @@
 		D1E39A9B169A4378003A6CB5 /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x.png"; path = "demos/basecode/ios/Default-Landscape@2x.png"; sourceTree = "<group>"; };
 		D1E39A9E169A43BB003A6CB5 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		D1F09DEA169AB9D900DEEC63 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/GLKit.framework; sourceTree = DEVELOPER_DIR; };
-		D1FB879F157D4DFD0060641F /* normal_mapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = normal_mapping.frag; path = demos/media/parallax/normal_mapping.frag; sourceTree = "<group>"; };
-		D1FB87A0157D4DFD0060641F /* normal_mapping.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = normal_mapping.vert; path = demos/media/parallax/normal_mapping.vert; sourceTree = "<group>"; };
-		D1FB87A1157D4DFD0060641F /* parallax_mapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = parallax_mapping.frag; path = demos/media/parallax/parallax_mapping.frag; sourceTree = "<group>"; };
-		D1FB87A2157D4DFD0060641F /* parallax_mapping.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = parallax_mapping.vert; path = demos/media/parallax/parallax_mapping.vert; sourceTree = "<group>"; };
-		D1FB87A3157D4DFD0060641F /* per_pixel_lighting.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = per_pixel_lighting.frag; path = demos/media/parallax/per_pixel_lighting.frag; sourceTree = "<group>"; };
-		D1FB87A4157D4DFD0060641F /* per_pixel_lighting.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = per_pixel_lighting.vert; path = demos/media/parallax/per_pixel_lighting.vert; sourceTree = "<group>"; };
+		D1FB879F157D4DFD0060641F /* normal_mapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = normal_mapping.frag; path = ../demos/media/parallax/normal_mapping.frag; sourceTree = "<group>"; };
+		D1FB87A0157D4DFD0060641F /* normal_mapping.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = normal_mapping.vert; path = ../demos/media/parallax/normal_mapping.vert; sourceTree = "<group>"; };
+		D1FB87A1157D4DFD0060641F /* parallax_mapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = parallax_mapping.frag; path = ../demos/media/parallax/parallax_mapping.frag; sourceTree = "<group>"; };
+		D1FB87A2157D4DFD0060641F /* parallax_mapping.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = parallax_mapping.vert; path = ../demos/media/parallax/parallax_mapping.vert; sourceTree = "<group>"; };
+		D1FB87A3157D4DFD0060641F /* per_pixel_lighting.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = per_pixel_lighting.frag; path = ../demos/media/parallax/per_pixel_lighting.frag; sourceTree = "<group>"; };
+		D1FB87A4157D4DFD0060641F /* per_pixel_lighting.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = per_pixel_lighting.vert; path = ../demos/media/parallax/per_pixel_lighting.vert; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -737,13 +752,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B41FA8801CAD4AAA00456992 /* libclipavfoundation.a in Frameworks */,
-				B41FA87F1CAD4AA500456992 /* libclipwebm.a in Frameworks */,
 				B41FA87E1CAD4A9C00456992 /* libclipffmpeg.a in Frameworks */,
-				B41FA84F1CAD358300456992 /* OpenAL.framework in Frameworks */,
 				B41FA8491CAD34CF00456992 /* libtheoraplayer.a in Frameworks */,
 				B4A28B8D1CAD2D11004ECC69 /* libogg.a in Frameworks */,
 				B4A28B8E1CAD2D11004ECC69 /* libtheora.a in Frameworks */,
 				B4A28B8F1CAD2D11004ECC69 /* libvorbis.a in Frameworks */,
+				B41FA84F1CAD358300456992 /* OpenAL.framework in Frameworks */,
 				B4A28B901CAD2D11004ECC69 /* CoreVideo.framework in Frameworks */,
 				B4A28B911CAD2D11004ECC69 /* CoreMedia.framework in Frameworks */,
 				B4A28B921CAD2D11004ECC69 /* AVFoundation.framework in Frameworks */,
@@ -1941,7 +1955,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ ${CONFIGURATION} = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        echo \"${CONFIGURATION}\"\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
+			shellScript = "DATA_PATH=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/\"\nSRC_PATH=\"${PROJECT_DIR}/../demos/media\"\nDEST_PATH=\"${DATA_PATH}/Resources/media\"\n\nif [ ! -e \"${DEST_PATH}\" ] ; then\n    if [ ${CONFIGURATION} = Debug ] ; then\n        # creates a directory link to the demos media folder within the .app structure.\n        if [ ! -e \"${DEST_PATH}\" ] ; then\n            ln -s \"${SRC_PATH}\" \"${DEST_PATH}\"\n        fi\n    else\n        echo \"${CONFIGURATION}\"\n        mkdir \"${DEST_PATH}\"\n        cp \"${SRC_PATH}/bunny.ogv\" \"${DEST_PATH}\"\n    fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D1663365156ADAE8009E98F1 /* link media folder */ = {
@@ -2392,6 +2406,16 @@
 			target = D139463F17C0EFAA0091F4A4 /* Mac Dependencies */;
 			targetProxy = D139468717C0F0360091F4A4 /* PBXContainerItemProxy */;
 		};
+		D1B9C5E21D1E804C00F9844A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theoraplayer (Mac Theora)";
+			targetProxy = D1B9C5E11D1E804C00F9844A /* PBXContainerItemProxy */;
+		};
+		D1B9C5E41D1E805100F9844A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "clipavfoundation (Mac)";
+			targetProxy = D1B9C5E31D1E805100F9844A /* PBXContainerItemProxy */;
+		};
 		D1D89D8A1B710ED00053378D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "ogg (Mac)";
@@ -2425,17 +2449,17 @@
 					_DEMO_AV,
 					_DEMO_COMPOSITE,
 					_DEMO_ENVIRONMENT,
-					_USE_WEBM,
-					_USE_FFMPEG,
-					_DEBUG,
+					"___USE_WEBM",
+					"___USE_FFMPEG",
+					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/theoraplayer/include",
-					"$(SRCROOT)/demos",
-					"$(SRCROOT)/theoraplayer/plugins/clipavfoundation/include",
-					"$(SRCROOT)/theoraplayer/plugins/clipffmpeg/include",
-					"$(SRCROOT)/theoraplayer/plugins/clipwebm/include",
+					"$(SRCROOT)/../theoraplayer/include",
+					"$(SRCROOT)/../demos",
+					"$(SRCROOT)/../theoraplayer/plugins/clipavfoundation/include",
+					"$(SRCROOT)/../theoraplayer/plugins/clipffmpeg/include",
+					"$(SRCROOT)/../theoraplayer/plugins/clipwebm/include",
 				);
 				INFOPLIST_FILE = "Theora Player (Mac).plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2458,16 +2482,17 @@
 					_DEMO_AV,
 					_DEMO_COMPOSITE,
 					_DEMO_ENVIRONMENT,
-					_USE_WEBM,
-					_USE_FFMPEG,
+					"___USE_WEBM",
+					"___USE_FFMPEG",
+					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/theoraplayer/include",
-					"$(SRCROOT)/demos",
-					"$(SRCROOT)/theoraplayer/plugins/clipavfoundation/include",
-					"$(SRCROOT)/theoraplayer/plugins/clipffmpeg/include",
-					"$(SRCROOT)/theoraplayer/plugins/clipwebm/include",
+					"$(SRCROOT)/../theoraplayer/include",
+					"$(SRCROOT)/../demos",
+					"$(SRCROOT)/../theoraplayer/plugins/clipavfoundation/include",
+					"$(SRCROOT)/../theoraplayer/plugins/clipffmpeg/include",
+					"$(SRCROOT)/../theoraplayer/plugins/clipwebm/include",
 				);
 				INFOPLIST_FILE = "Theora Player (Mac).plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2490,16 +2515,17 @@
 					_DEMO_AV,
 					_DEMO_COMPOSITE,
 					_DEMO_ENVIRONMENT,
-					_USE_WEBM,
-					_USE_FFMPEG,
+					"___USE_WEBM",
+					"___USE_FFMPEG",
+					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/theoraplayer/include",
-					"$(SRCROOT)/demos",
-					"$(SRCROOT)/theoraplayer/plugins/clipavfoundation/include",
-					"$(SRCROOT)/theoraplayer/plugins/clipffmpeg/include",
-					"$(SRCROOT)/theoraplayer/plugins/clipwebm/include",
+					"$(SRCROOT)/../theoraplayer/include",
+					"$(SRCROOT)/../demos",
+					"$(SRCROOT)/../theoraplayer/plugins/clipavfoundation/include",
+					"$(SRCROOT)/../theoraplayer/plugins/clipffmpeg/include",
+					"$(SRCROOT)/../theoraplayer/plugins/clipwebm/include",
 				);
 				INFOPLIST_FILE = "Theora Player (Mac).plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2643,10 +2669,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					MP4_VIDEO,
-					_DEBUG,
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = _DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -2654,9 +2677,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../include",
-					"$(SRCROOT)/theoraplayer/include",
-					"$(SRCROOT)/demos",
+					"$(SRCROOT)/../../../include",
+					"$(SRCROOT)/../theoraplayer/include",
+					"$(SRCROOT)/../demos",
 				);
 				INFOPLIST_FILE = theoraplayer_workspace.xcodeproj/workspace.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
@@ -2676,16 +2699,16 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = MP4_VIDEO;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../include",
-					"$(SRCROOT)/theoraplayer/include",
-					"$(SRCROOT)/demos",
+					"$(SRCROOT)/../../../include",
+					"$(SRCROOT)/../theoraplayer/include",
+					"$(SRCROOT)/../demos",
 				);
 				INFOPLIST_FILE = theoraplayer_workspace.xcodeproj/workspace.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
@@ -2704,16 +2727,16 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = MP4_VIDEO;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../include",
-					"$(SRCROOT)/theoraplayer/include",
-					"$(SRCROOT)/demos",
+					"$(SRCROOT)/../../../include",
+					"$(SRCROOT)/../theoraplayer/include",
+					"$(SRCROOT)/../demos",
 				);
 				INFOPLIST_FILE = theoraplayer_workspace.xcodeproj/workspace.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
