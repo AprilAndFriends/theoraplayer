@@ -92,14 +92,6 @@ namespace theoraplayer
 		}
 	}
 
-	void MemoryDataSource::load()
-	{
-		if (this->size == 0)
-		{
-			this->_loadFile();
-		}
-	}
-
 	int MemoryDataSource::read(void* output, int count)
 	{
 		if (this->size == 0)
