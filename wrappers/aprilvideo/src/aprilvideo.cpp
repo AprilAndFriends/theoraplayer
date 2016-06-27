@@ -6,6 +6,7 @@
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
+#include <april/Platform.h>
 #include <aprilui/aprilui.h>
 #include <hltypes/hlog.h>
 #include <theoraplayer/theoraplayer.h>
@@ -20,7 +21,6 @@
 namespace aprilvideo
 {
 	hstr logTag = "aprilvideo";
-	static int preloadToRamSizeLimit = 64;
 	bool debugModeEnabled = false;
 	harray<VideoObject*> videoObjects;
 	hmutex videoObjectsMutex;
@@ -39,9 +39,8 @@ namespace aprilvideo
 		}
 	}
 
-	void init(int workerThreadCount, int _preloadToRamSizeLimit)
+	void init(int workerThreadCount)
 	{
-		preloadToRamSizeLimit = _preloadToRamSizeLimit;
 		theoraplayer::init(workerThreadCount);
 		theoraplayer::setLogFunction(&_theoraLogMessage);
 		APRILUI_REGISTER_OBJECT_TYPE(VideoObject);
@@ -59,7 +58,22 @@ namespace aprilvideo
 
 	int getPreloadToRamSizeLimit()
 	{
-		return preloadToRamSizeLimit;
+		int limit = 64;
+		int ram = april::getSystemInfo().ram;
+#ifdef _ANDROID
+		limit = 16;
+		if (ram < 1024)
+		{
+			limit = 8;
+		}
+#elif defined(_WINRT) && defined(_WINP8)
+		limit = 32;
+		if (ram < 1024)
+		{
+			limit = 16;
+		}
+#endif
+		return limit;
 	}
 	
 	bool isDebugModeEnabled()

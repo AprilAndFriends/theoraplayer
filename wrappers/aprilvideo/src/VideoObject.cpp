@@ -770,28 +770,22 @@ namespace aprilvideo
 					this->clip = theoraplayer::manager->createVideoClip(path.cStr(), mode, precached);
 				}
 			}
-			else if (!path.endsWith(".mp4") && ram > 256)
+			// additional performance optimization: preload file in RAM to speed up decoding, every CPU cycle counts on certain platforms
+			// but only for "reasonably" sized files
+			else if (!path.endsWith(".mp4") && ram > 256 && hresource::hinfo(path).size < getPreloadToRamSizeLimit() * 1024 * 1024)
 			{
-				// additional performance optimization: preload file in RAM to speed up decoding, every CPU cycle counts on certain platforms
-				// but only for "reasonably" sized files
-				if (hresource::hinfo(path).size < getPreloadToRamSizeLimit() * 1024 * 1024)
-				{
-					hlog::write(logTag, "Preloading video file to memory: " + path);
-					theoraplayer::MemoryDataSource* memoryDataSource = new theoraplayer::MemoryDataSource(path.cStr());
-					source = memoryDataSource;
-					memoryDataSource->load();
-				}
-				else
-				{
-					source = new DataSource(path);
-				}
+				hlog::write(logTag, "Preloading video file to memory: " + path);
+				theoraplayer::MemoryDataSource* memoryDataSource = new theoraplayer::MemoryDataSource(path.cStr());
+				source = memoryDataSource;
+				memoryDataSource->load();
 				this->clip = theoraplayer::manager->createVideoClip(source, mode, precached);
-				hlog::write(logTag, "Created video clip.");
 			}
 			else
 			{
-				this->clip = theoraplayer::manager->createVideoClip(new DataSource(path), mode, precached);
+				source = new DataSource(path);
+				this->clip = theoraplayer::manager->createVideoClip(source, mode, precached);
 			}
+			hlog::write(logTag, "Created video clip.");
 		}
 		catch (theoraplayer::_Exception& e)
 		{

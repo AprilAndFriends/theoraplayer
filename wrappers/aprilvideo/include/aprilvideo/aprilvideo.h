@@ -23,8 +23,7 @@ namespace aprilvideo
 
 	extern hstr logTag;
 
-	/// @param[in] preloadToRamSizeLimit Preloads smaller files than the given size (in MB) into RAM before decoding.
-	aprilvideoFnExport void init(int workerThreadCount = 1, int preloadToRamSizeLimit = 64);
+	aprilvideoFnExport void init(int workerThreadCount = 1);
 	aprilvideoFnExport void destroy();
 
 	aprilvideoFnExport void update(float timeDelta);
