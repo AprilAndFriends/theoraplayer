@@ -761,21 +761,13 @@ namespace aprilvideo
 #endif
 			if (path.endsWith(".mp4"))
 			{
-				try
+				if (april::window->getName() == "OpenKODE") // because mp4's are opened via apple's api, and that doesn't play nice with OpenKODE dir structure.
 				{
-					if (april::window->getName() == "OpenKODE") // because mp4's are opened via apple's api, and that doesn't play nice with OpenKODE dir structure.
-					{
-						this->clip = theoraplayer::manager->createVideoClip(hrdir::joinPath("res", path).cStr(), mode, precached);
-					}
-					else
-					{
-						this->clip = theoraplayer::manager->createVideoClip(path.cStr(), mode, precached);
-					}
+					this->clip = theoraplayer::manager->createVideoClip(hrdir::joinPath("res", path).cStr(), mode, precached);
 				}
-				catch (theoraplayer::_Exception& e)
+				else
 				{
-					// pass the exception further as a hexception so the general system can understand it
-					throw Exception(hstr(e.getMessage().c_str()));
+					this->clip = theoraplayer::manager->createVideoClip(path.cStr(), mode, precached);
 				}
 			}
 			else if (!path.endsWith(".mp4") && ram > 256)
