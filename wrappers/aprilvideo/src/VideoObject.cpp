@@ -785,9 +785,11 @@ namespace aprilvideo
 					{
 						hlog::write(logTag, "Preloading video file to memory: " + path);
 						unsigned char* data = new unsigned char[size];
+						file.readRaw(data, size);
 						file.close();
 						theoraplayer::MemoryDataSource* memoryDataSource = new theoraplayer::MemoryDataSource(data, size, this->_videoClipFormatName.cStr(), path.cStr());
 						source = memoryDataSource;
+						memoryDataSource->load();
 						this->clip = theoraplayer::manager->createVideoClip(source, mode, precached);
 					}
 				}

@@ -34,6 +34,7 @@ namespace theoraplayer
 
 		int read(void* output, int count);
 		void seek(uint64_t byteIndex);
+		void load();
 
 		inline std::string toString() { return "MEM:" + this->filename + " (format: " + this->formatName + ")"; }
 
