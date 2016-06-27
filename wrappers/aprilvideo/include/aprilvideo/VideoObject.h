@@ -149,10 +149,11 @@ namespace aprilvideo
 		
 		void _tryCreateVideoClip();
 		void _destroyResources();
-		hstr _findVideoClipResource(chstr filename);
+		void _findVideoClipResource(chstr filename);
 
 	private:
 		hstr _videoClipFilename;
+		hstr _videoClipFormatName;
 		bool _doneEventTriggered;
 		unsigned long _previousFrameNumber;
 		bool _seeked;

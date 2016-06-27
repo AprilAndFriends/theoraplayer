@@ -90,6 +90,8 @@ namespace aprilvideo
 		this->currentVideoImage = NULL;
 		this->sound = NULL;
 		this->audioPlayer = NULL;
+		this->_videoClipFilename = other._videoClipFilename;
+		this->_videoClipFormatName = other._videoClipFormatName;
 		this->_doneEventTriggered = other._doneEventTriggered;
 		this->_previousFrameNumber = 0UL;
 		this->_seeked = false;
@@ -114,7 +116,7 @@ namespace aprilvideo
 	void VideoObject::setVideoClipName(chstr value)
 	{
 		this->videoClipName = value;
-		this->_videoClipFilename = this->_findVideoClipResource(this->videoClipName);
+		this->_findVideoClipResource(this->videoClipName);
 		if (this->_videoClipFilename == "")
 		{
 			throw Exception("Unable to find video file: " + this->videoClipName);
@@ -772,18 +774,29 @@ namespace aprilvideo
 			}
 			// additional performance optimization: preload file in RAM to speed up decoding, every CPU cycle counts on certain platforms
 			// but only for "reasonably" sized files
-			else if (!path.endsWith(".mp4") && ram > 256 && hresource::hinfo(path).size < getPreloadToRamSizeLimit() * 1024 * 1024)
-			{
-				hlog::write(logTag, "Preloading video file to memory: " + path);
-				theoraplayer::MemoryDataSource* memoryDataSource = new theoraplayer::MemoryDataSource(path.cStr());
-				source = memoryDataSource;
-				memoryDataSource->load();
-				this->clip = theoraplayer::manager->createVideoClip(source, mode, precached);
-			}
 			else
 			{
-				source = new DataSource(path);
-				this->clip = theoraplayer::manager->createVideoClip(source, mode, precached);
+				if (!path.endsWith(".mp4") && ram > 256)
+				{
+					hresource file;
+					file.open(path);
+					int size = (int)file.size();
+					if (size < getPreloadToRamSizeLimit() * 1024 * 1024)
+					{
+						hlog::write(logTag, "Preloading video file to memory: " + path);
+						unsigned char* data = new unsigned char[size];
+						file.close();
+						theoraplayer::MemoryDataSource* memoryDataSource = new theoraplayer::MemoryDataSource(data, size, this->_videoClipFormatName.cStr(), path.cStr());
+						source = memoryDataSource;
+						memoryDataSource->load();
+						this->clip = theoraplayer::manager->createVideoClip(source, mode, precached);
+					}
+				}
+				if (source == NULL)
+				{
+					source = new DataSource(path);
+					this->clip = theoraplayer::manager->createVideoClip(source, mode, precached);
+				}
 			}
 			hlog::write(logTag, "Created video clip.");
 		}
@@ -926,7 +939,7 @@ namespace aprilvideo
 		}
 	}
 
-	hstr VideoObject::_findVideoClipResource(chstr filename)
+	void VideoObject::_findVideoClipResource(chstr filename)
 	{
 		hstr path = hrdir::normalize(hrdir::joinPath(hrdir::joinPath(this->dataset->getFilePath(), DEFAULT_VIDEO_PATH), filename));
 		std::vector<theoraplayer::VideoClip::Format> theoraplayerFormats = theoraplayer::getVideoClipFormats();
@@ -941,10 +954,11 @@ namespace aprilvideo
 			}
 			if (hresource::exists(result))
 			{
-				return result;
+				this->_videoClipFormatName = (*it).name.c_str();
+				this->_videoClipFilename = result;
+				return;
 			}
 		}
-		return "";
 	}
 
 }
