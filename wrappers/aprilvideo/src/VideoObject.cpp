@@ -788,7 +788,6 @@ namespace aprilvideo
 						file.close();
 						theoraplayer::MemoryDataSource* memoryDataSource = new theoraplayer::MemoryDataSource(data, size, this->_videoClipFormatName.cStr(), path.cStr());
 						source = memoryDataSource;
-						memoryDataSource->load();
 						this->clip = theoraplayer::manager->createVideoClip(source, mode, precached);
 					}
 				}
