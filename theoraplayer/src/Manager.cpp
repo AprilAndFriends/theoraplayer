@@ -211,7 +211,7 @@ namespace theoraplayer
 			catch (_Exception& e)
 			{
 				delete clip;
-				// TODOth - should dataSource be deleted as well? as it causes a memory leak when called through the createVideoClip() override
+				// don't delete dataSource, it should be deleted by the calling function
 				throw e;
 			}
 			clip->_decodeNextFrame(); // ensure the first frame is always preloaded and have the main thread do it to prevent potential thread starvation

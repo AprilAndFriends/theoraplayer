@@ -24,22 +24,23 @@ namespace aprilvideo
 	class DataSource : public theoraplayer::DataSource
 	{
 	public:
-		DataSource(chstr filename);
+		DataSource(chstr formatName, chstr filename);
 		~DataSource();
 
 		inline hstr getFilename() { return this->filename; }
-		std::string getFormatName() { return "HRESOURCE"; }
+		inline std::string getFormatName() { return this->formatName.cStr(); }
 		uint64_t getSize();
 		uint64_t getPosition();
 
 		int read(void* output, int bytesCount);
 		void seek(uint64_t byteIndex);
 
-		std::string toString() { return ("HRESOURCE:" + this->filename).cStr(); }
+		std::string toString() { return ("HRESOURCE:" + this->filename + " (format: " + this->formatName + ")").cStr(); }
 
 	protected:
 		hresource resource;
 		hstr filename;
+		hstr formatName;
 		uint64_t size;
 
 		void _openFile();

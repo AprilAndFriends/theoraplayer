@@ -789,13 +789,16 @@ namespace aprilvideo
 						file.close();
 						theoraplayer::MemoryDataSource* memoryDataSource = new theoraplayer::MemoryDataSource(data, size, this->_videoClipFormatName.cStr(), path.cStr());
 						source = memoryDataSource;
-						memoryDataSource->load();
 						this->clip = theoraplayer::manager->createVideoClip(source, mode, precached);
+					}
+					else
+					{
+						file.close();
 					}
 				}
 				if (source == NULL)
 				{
-					source = new DataSource(path);
+					source = new DataSource(this->_videoClipFormatName, path);
 					this->clip = theoraplayer::manager->createVideoClip(source, mode, precached);
 				}
 			}
@@ -810,7 +813,7 @@ namespace aprilvideo
 			// pass the exception further as a hexception so the general system can understand it
 			throw Exception(hstr(e.getMessage().c_str()));
 		}
-		if (this->clip->getWidth() == 0)
+		if (this->clip == NULL || this->clip->getWidth() == 0)
 		{
 			throw Exception("Failed to load video file: " + path);
 		}

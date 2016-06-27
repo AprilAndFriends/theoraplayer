@@ -10,8 +10,9 @@
 
 namespace aprilvideo
 {
-	DataSource::DataSource(chstr filename) : theoraplayer::DataSource()
+	DataSource::DataSource(chstr formatName, chstr filename) : theoraplayer::DataSource()
 	{
+		this->formatName = formatName;
 		this->filename = filename;
 		this->size = hresource::hinfo(this->filename).size;
 	}
@@ -26,7 +27,7 @@ namespace aprilvideo
 
 	int DataSource::read(void* output, int bytesCount)
 	{
-		if (this->resource.isOpen())
+		if (!this->resource.isOpen())
 		{
 			this->_openFile();
 		}
@@ -35,7 +36,7 @@ namespace aprilvideo
 
 	void DataSource::seek(uint64_t byteIndex)
 	{
-		if (this->resource.isOpen())
+		if (!this->resource.isOpen())
 		{
 			this->_openFile();
 		}
@@ -49,7 +50,7 @@ namespace aprilvideo
 
 	uint64_t DataSource::getPosition()
 	{
-		if (this->resource.isOpen())
+		if (!this->resource.isOpen())
 		{
 			this->_openFile();
 		}
