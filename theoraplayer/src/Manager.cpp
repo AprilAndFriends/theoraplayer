@@ -219,7 +219,7 @@ namespace theoraplayer
 		}
 		else
 		{
-			log("Failed creating video clip: " + dataSource->toString());
+			log("ERROR: Failed creating video clip: " + dataSource->toString());
 		}
 		lock.release();
 #ifdef _DECODING_BENCHMARK
