@@ -23,13 +23,15 @@ namespace aprilvideo
 
 	extern hstr logTag;
 
-	void aprilvideoFnExport init(int workerThreadCount = 1);
-	void aprilvideoFnExport destroy();
+	/// @param[in] preloadToRamSizeLimit Preloads smaller files than the given size (in MB) into RAM before decoding.
+	aprilvideoFnExport void init(int workerThreadCount = 1, int preloadToRamSizeLimit = 64);
+	aprilvideoFnExport void destroy();
 
-	void aprilvideoFnExport update(float timeDelta);
+	aprilvideoFnExport void update(float timeDelta);
 	
-	bool aprilvideoFnExport isDebugModeEnabled();
-	void aprilvideoFnExport setDebugModeEnabled(bool value);
+	aprilvideoFnExport int getPreloadToRamSizeLimit();
+	aprilvideoFnExport bool isDebugModeEnabled();
+	aprilvideoFnExport void setDebugModeEnabled(bool value);
 
 	harray<VideoObject*> aprilvideoFnExport getActiveVideoObjects();
 

@@ -706,6 +706,7 @@ namespace aprilvideo
 				path = hrdir::joinPath(archive, path);
 			}
 		}
+		theoraplayer::DataSource* source = NULL;
 		try
 		{
 			theoraplayer::OutputMode mode = theoraplayer::FORMAT_RGBA;
@@ -779,25 +780,20 @@ namespace aprilvideo
 			}
 			else if (!path.endsWith(".mp4") && ram > 256)
 			{
-				hresource r;
-				r.open(path);
-				unsigned long size = (unsigned long)r.size();
-				theoraplayer::DataSource* source = NULL;
-				// additional performance optimization: preload file in RAM to speed up decoding, every bit counts on Android/WinRT ARM
+				// additional performance optimization: preload file in RAM to speed up decoding, every CPU cycle counts on certain platforms
 				// but only for "reasonably" sized files
-				if (size < 64 * 1024 * 1024)
+				if (hresource::hinfo(path).size < getPreloadToRamSizeLimit() * 1024 * 1024)
 				{
 					hlog::write(logTag, "Preloading video file to memory: " + path);
-					unsigned char* data = new unsigned char[size];
-					r.readRaw(data, (int) size);
-					source = new theoraplayer::MemoryDataSource(data, size, path.cStr());
+					theoraplayer::MemoryDataSource* memoryDataSource = new theoraplayer::MemoryDataSource(path.cStr());
+					source = memoryDataSource;
+					memoryDataSource->load();
 				}
 				else
 				{
 					source = new DataSource(path);
 				}
 				this->clip = theoraplayer::manager->createVideoClip(source, mode, precached);
-				r.close();
 				hlog::write(logTag, "Created video clip.");
 			}
 			else
@@ -807,6 +803,10 @@ namespace aprilvideo
 		}
 		catch (theoraplayer::_Exception& e)
 		{
+			if (source != NULL)
+			{
+				delete source;
+			}
 			// pass the exception further as a hexception so the general system can understand it
 			throw Exception(hstr(e.getMessage().c_str()));
 		}

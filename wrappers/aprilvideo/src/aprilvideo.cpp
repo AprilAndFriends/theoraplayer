@@ -20,6 +20,7 @@
 namespace aprilvideo
 {
 	hstr logTag = "aprilvideo";
+	static int preloadToRamSizeLimit = 64;
 	bool debugModeEnabled = false;
 	harray<VideoObject*> videoObjects;
 	hmutex videoObjectsMutex;
@@ -38,8 +39,9 @@ namespace aprilvideo
 		}
 	}
 
-	void init(int workerThreadCount)
+	void init(int workerThreadCount, int _preloadToRamSizeLimit)
 	{
+		preloadToRamSizeLimit = _preloadToRamSizeLimit;
 		theoraplayer::init(workerThreadCount);
 		theoraplayer::setLogFunction(&_theoraLogMessage);
 		APRILUI_REGISTER_OBJECT_TYPE(VideoObject);
@@ -53,6 +55,11 @@ namespace aprilvideo
 	void update(float timeDelta)
 	{
 		theoraplayer::manager->update(timeDelta);
+	}
+
+	int getPreloadToRamSizeLimit()
+	{
+		return preloadToRamSizeLimit;
 	}
 	
 	bool isDebugModeEnabled()
