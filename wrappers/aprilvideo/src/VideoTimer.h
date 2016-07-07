@@ -29,7 +29,7 @@ namespace aprilvideo
 	public:
 		VideoTimer(VideoObject* object);
 
-		bool isPaused();
+		bool isPaused() const;
 
 	protected:
 		VideoObject* videoObject;

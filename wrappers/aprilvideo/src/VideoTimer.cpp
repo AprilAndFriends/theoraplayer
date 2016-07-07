@@ -16,7 +16,7 @@ namespace aprilvideo
 		this->videoObject = videoObject;
 	}
 
-	bool VideoTimer::isPaused()
+	bool VideoTimer::isPaused() const
 	{
 		return (theoraplayer::Timer::isPaused() || this->videoObject->isPaused());
 	}

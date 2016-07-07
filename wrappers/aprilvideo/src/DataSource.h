@@ -27,15 +27,15 @@ namespace aprilvideo
 		DataSource(chstr formatName, chstr filename);
 		~DataSource();
 
-		inline hstr getFilename() { return this->filename; }
-		inline std::string getFormatName() { return this->formatName.cStr(); }
+		inline hstr getFilename() const { return this->filename; }
+		inline std::string getFormatName() const { return this->formatName.cStr(); }
 		uint64_t getSize();
 		uint64_t getPosition();
 
 		int read(void* output, int bytesCount);
 		void seek(uint64_t byteIndex);
 
-		std::string toString() { return ("HRESOURCE:" + this->filename + " (format: " + this->formatName + ")").cStr(); }
+		std::string toString() const { return ("HRESOURCE:" + this->filename + " (format: " + this->formatName + ")").cStr(); }
 
 	protected:
 		hresource resource;
