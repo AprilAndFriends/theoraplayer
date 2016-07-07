@@ -83,32 +83,32 @@ namespace theoraplayer
 		this->timer = (timer == NULL ? this->defaultTimer : timer);
 	}
 
-	int VideoClip::getWidth()
+	int VideoClip::getWidth() const
 	{
 		return (this->useAlpha ? this->width / 2 : this->width);
 	}
 
-	int VideoClip::getSubFrameX()
+	int VideoClip::getSubFrameX() const
 	{
 		return (this->useAlpha ? 0 : this->subFrameX);
 	}
 
-	int VideoClip::getSubFrameY()
+	int VideoClip::getSubFrameY() const
 	{
 		return (this->useAlpha ? 0 : this->subFrameY);
 	}
 
-	int VideoClip::getSubFrameWidth()
+	int VideoClip::getSubFrameWidth() const
 	{
 		return this->useAlpha ? this->width / 2 : this->subFrameWidth;
 	}
 
-	int VideoClip::getSubFrameHeight()
+	int VideoClip::getSubFrameHeight() const
 	{
 		return this->useAlpha ? this->height : this->subFrameHeight;
 	}
 
-	float VideoClip::getTimePosition()
+	float VideoClip::getTimePosition() const
 	{
 		return this->timer->getTime();
 	}
@@ -129,7 +129,7 @@ namespace theoraplayer
 		}
 	}
 
-	float VideoClip::getPlaybackSpeed()
+	float VideoClip::getPlaybackSpeed() const
 	{
 		return this->timer->getSpeed();
 	}
@@ -170,7 +170,7 @@ namespace theoraplayer
 		}
 	}
 
-	float VideoClip::getPriorityIndex()
+	float VideoClip::getPriorityIndex() const
 	{
 		float priority = (float)getReadyFramesCount();
 		if (this->timer->isPaused())
@@ -180,7 +180,7 @@ namespace theoraplayer
 		return priority;
 	}
 
-	int VideoClip::getPrecachedFramesCount()
+	int VideoClip::getPrecachedFramesCount() const
 	{
 		return this->frameQueue->getSize();
 	}
@@ -193,7 +193,7 @@ namespace theoraplayer
 		}
 	}
 
-	int VideoClip::getReadyFramesCount()
+	int VideoClip::getReadyFramesCount() const
 	{
 		if (this->seekFrame != -1)
 		{
@@ -202,7 +202,7 @@ namespace theoraplayer
 		return this->frameQueue->getReadyCount();
 	}
 
-	bool VideoClip::isDone()
+	bool VideoClip::isDone() const
 	{
 		if (this->endOfFile)
 		{
@@ -215,17 +215,17 @@ namespace theoraplayer
 		return false;
 	}
 
-	bool VideoClip::isPaused()
+	bool VideoClip::isPaused() const
 	{
 		return this->timer->isPaused();
 	}
 
-	bool VideoClip::_isBusy()
+	bool VideoClip::_isBusy() const
 	{
 		return (this->assignedWorkerThread != NULL || this->outputMode != this->requestedOutputMode);
 	}
 
-	float VideoClip::_getAbsPlaybackTime()
+	float VideoClip::_getAbsPlaybackTime() const
 	{
 		return (this->timer->getTime() + this->playbackIteration * this->duration);
 	}

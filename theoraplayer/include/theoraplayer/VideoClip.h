@@ -75,75 +75,75 @@ namespace theoraplayer
 		friend class VideoFrame;
 		friend class WorkerThread;
 
-		std::string getName() { return this->name; }
+		std::string getName() const { return this->name; }
 		/// @return The string name of the decoder backend (eg. Theora, AVFoundation)
-		virtual std::string getDecoderName() = 0;
+		virtual std::string getDecoderName() const = 0;
 
-		inline FrameQueue* getFrameQueue() { return this->frameQueue; }
-		inline AudioInterface* getAudioInterface() { return this->audioInterface; }
+		inline FrameQueue* getFrameQueue() const { return this->frameQueue; }
+		inline AudioInterface* getAudioInterface() const { return this->audioInterface; }
 		void setAudioInterface(AudioInterface* audioInterface);
 		/// @return Timer object associated with this clip.
-		inline Timer* getTimer() { return this->timer; }
+		inline Timer* getTimer() const { return this->timer; }
 		/// @brief Replaces the current Timer object with a new one.
 		void setTimer(Timer* timer);
 
 		/// @return Width in pixels of the clip.
-		int getWidth();
+		int getWidth() const;
 		/// @return Height in pixels of the clip.
-		inline int getHeight() { return this->height; }
+		inline int getHeight() const { return this->height; }
 		/// @return Whether the clip has an alpha channel.
-		inline bool hasAlphaChannel() { return this->useAlpha; }
+		inline bool hasAlphaChannel() const { return this->useAlpha; }
 		/// @brief X Offset of the actual picture inside a video frame (depending on implementation, this may be 0 or within a codec block size (usually 16))
-		int getSubFrameX();
+		int getSubFrameX() const;
 		/// @brief Y Offset of the actual picture inside a video frame (depending on implementation, this may be 0 or differ within a codec block size (usually 16))
-		int getSubFrameY();
+		int getSubFrameY() const;
 		/// @brief Width of the actual picture inside a video frame (depending on implementation, this may be equal to mWidth or differ within a codec block size (usually 16))
-		int getSubFrameWidth();
+		int getSubFrameWidth() const;
 		/// @brief Height of the actual picture inside a video frame (depending on implementation, this may be equal to mHeight or differ within a codec block size (usually 16))
-		int getSubFrameHeight();
+		int getSubFrameHeight() const;
 		/// @brief Gets the stride in pixels count.
 		/// If usePower2Stride is used, when creating the VideoClip object, this value will be the next power of two size compared to width, eg: w=376, stride=512.
 		/// Otherwise, stride will be equal to width
-		inline int getStride() { return this->stride; }
+		inline int getStride() const { return this->stride; }
 		/// @return Current time index from the timer object.
-		float getTimePosition();
+		float getTimePosition() const;
 		/// @return Duration of the clip in seconds.
-		float getDuration() { return this->duration; }
+		inline float getDuration() const { return this->duration; }
 		/// @return The clip's frame rate.
-		float getFps() { return this->fps; }
+		float getFps() const { return this->fps; }
 		/// @return Number of frames in this clip.
-		int getFramesCount() { return this->framesCount; }
-		float getAudioGain() { return this->audioGain; }
+		inline int getFramesCount() const { return this->framesCount; }
+		inline float getAudioGain() const { return this->audioGain; }
 		/// @brief Changes the audio gane in a range between 0 and 1 inclusively.
 		void setAudioGain(float gain);
-		float getPlaybackSpeed();
+		float getPlaybackSpeed() const;
 		void setPlaybackSpeed(float speed);
 		/// @return Current output mode for this video object.
-		OutputMode getOutputMode() { return this->outputMode; }
+		OutputMode getOutputMode() const { return this->outputMode; }
 		/// @brief Set a new output mode.
 		/// @note This discards the frame queue and ready frames will be lost.
 		void setOutputMode(OutputMode mode);
-		inline bool isAutoRestart() { return this->autoRestart; }
+		inline bool isAutoRestart() const { return this->autoRestart; }
 		/// @brief Whether the clip should automatically and smoothly restart when the last frame was reached.
 		void setAutoRestart(bool value);
-		float getPriority() { return this->priority; }
+		inline float getPriority() const { return this->priority; }
 		void setPriority(float priority) { this->priority = priority; }
 		/// @brief Used by Manager to schedule work.
-		float getPriorityIndex();
+		float getPriorityIndex() const;
 		/// @return Size of the frame queue.
-		int getPrecachedFramesCount();
+		int getPrecachedFramesCount() const;
 		/// @brief Resizes the frame queue.
 		/// @note This call discards ready frames in the frame queue.
 		void setPrecachedFramesCount(int count);
 		/// @return Number of ready frames in the frame queue.
-		int getReadyFramesCount();
+		int getReadyFramesCount() const;
 		/// @brief Used for benchmarking.
-		inline int getDisplayedFramesCount() { return this->displayedFramesCount; }
+		inline int getDisplayedFramesCount() const { return this->displayedFramesCount; }
 		/// @brief Used for benchmarking.
-		inline int getDroppedFramesCount() { return this->droppedFramesCount; }
+		inline int getDroppedFramesCount() const { return this->droppedFramesCount; }
 
-		bool isDone();
-		bool isPaused();
+		bool isDone() const;
+		bool isPaused() const;
 
 		/// @brief Update timer to the display time of the next frame. This is useful if you want to grab frames instead of regular display.
 		/// @return The time advanced. 0 if no frames are ready.
@@ -227,8 +227,8 @@ namespace theoraplayer
 		VideoClip(DataSource* dataSource, OutputMode outputMode, int precachedFramesCount, bool usePotStride);
 		virtual ~VideoClip();
 
-		bool _isBusy();
-		float _getAbsPlaybackTime();
+		bool _isBusy() const;
+		float _getAbsPlaybackTime() const;
 
 		/// @bried Advance times. Manager calls this.
 		void _update(float timeDelta);

@@ -23,7 +23,7 @@ namespace theoraplayer
 		this->destroyAllAudioPackets();
 	}
 
-	float AudioPacketQueue::getAudioPacketQueueLength()
+	float AudioPacketQueue::getAudioPacketQueueLength() const
 	{
 		int count = 0;
 		for (AudioPacket* packet = this->audioPacketQueue; packet != NULL; packet = packet->next)

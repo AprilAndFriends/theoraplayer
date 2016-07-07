@@ -40,7 +40,7 @@ namespace clipffmpeg
 		VideoClip(theoraplayer::DataSource* dataSource, theoraplayer::OutputMode outputMode, int precachedFramesCount, bool usePotStride);
 		~VideoClip();
 
-		std::string getDecoderName() { return FORMAT_NAME; }
+		std::string getDecoderName() const { return FORMAT_NAME; }
 
 		static theoraplayer::VideoClip* create(theoraplayer::DataSource* dataSource, theoraplayer::OutputMode outputMode, int precachedFramesCount, bool usePotStride);
 

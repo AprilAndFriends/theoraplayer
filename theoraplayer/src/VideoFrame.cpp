@@ -95,17 +95,17 @@ namespace theoraplayer
 		}
 	}
 
-	int VideoFrame::getWidth()
+	int VideoFrame::getWidth() const
 	{
 		return this->clip->getWidth();
 	}
 
-	int VideoFrame::getStride()
+	int VideoFrame::getStride() const
 	{
 		return this->clip->stride;
 	}
 
-	int VideoFrame::getHeight()
+	int VideoFrame::getHeight() const
 	{
 		return this->clip->getHeight();
 	}

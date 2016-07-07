@@ -26,14 +26,14 @@ namespace theoraplayer
 		Timer();
 		virtual ~Timer();
 
-		virtual inline float getTime() { return this->time; }
+		virtual inline float getTime() const { return this->time; }
 		/// @return The update speed 1.0 is the default.
-		virtual inline float getSpeed() { return this->speed; }
+		virtual inline float getSpeed() const { return this->speed; }
 		/// @brief Sets playback speed.
 		/// 1.0 is the default. The speed factor multiplies time advance, thus setting the value higher will increase playback speed etc.
 		/// @note depending on Timer implementation, it may not support setting the speed.
 		virtual inline void setSpeed(float value) { this->speed = value; }
-		virtual inline bool isPaused() { return this->paused; }
+		virtual inline bool isPaused() const { return this->paused; }
 		/// @brief Advances the time.
 		/// If you're using another synronization system, eg. an audio track, then you can ignore this call or use it to perform other updates.
 		/// @note This is usually called by Manager from the main thread

@@ -50,6 +50,10 @@ namespace theoraplayer
 		Thread(void(*function)(Thread*));
 		/// @brief Destructor.
 		virtual ~Thread();
+
+		/// @brief Gets the current function.
+		/// @return The current function.
+		inline void (*getFunction())(Thread*) { return this->function; }
 		/// @brief Sets function.
 		/// @param[in] value New function.
 		inline void setFunction(void(*value)(Thread*)) { this->function = value; }
@@ -59,6 +63,7 @@ namespace theoraplayer
 		/// @brief Gets whether the thread is executing right now.
 		/// @return True if the thread is executing right now.
 		inline bool isExecuting() const { return this->executing; }
+
 		/// @brief Starts the thread processing.
 		void start();
 		/// @brief Stops the thread processing.

@@ -50,7 +50,7 @@ namespace theoraplayer
 		VideoClip_Theora(DataSource* dataSource, OutputMode outputMode, int precachedFramesCount, bool usePotStride);
 		~VideoClip_Theora();
 
-		std::string getDecoderName() { return THEORA_DECODER_NAME; }
+		std::string getDecoderName() const { return THEORA_DECODER_NAME; }
 
 		static VideoClip* create(DataSource* dataSource, OutputMode outputMode, int precachedFramesCount, bool usePotStride);
 

@@ -30,7 +30,7 @@ namespace theoraplayer
 		WorkerThread();
 		~WorkerThread();
 
-		inline VideoClip* getAssignedClip() { return this->clip; }
+		inline VideoClip* getAssignedClip() const { return this->clip; }
 
 	protected:
 		VideoClip* clip;

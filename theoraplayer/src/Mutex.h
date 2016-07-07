@@ -32,6 +32,7 @@ namespace theoraplayer
 			ScopeLock(Mutex* mutex = NULL, bool logUnhandledUnlocks = false);
 			/// @brief Destructor.
 			~ScopeLock();
+
 			/// @brief Locks the Mutex.
 			/// @param[in] mutex The mutex to lock.
 			/// @return True if lock succeeded. False if there is already an assigned Mutex.
@@ -53,6 +54,7 @@ namespace theoraplayer
 		Mutex();
 		/// @brief Destructor.
 		~Mutex();
+
 		/// @brief Locks the Mutex.
 		/// @note If another thread has lock, the caller thread will wait until the previous thread unlocks it.
 		void lock();

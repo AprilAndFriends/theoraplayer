@@ -38,7 +38,7 @@ namespace theoraplayer
 		AudioPacketQueue();
 		~AudioPacketQueue();
 
-		float getAudioPacketQueueLength();
+		float getAudioPacketQueueLength() const;
 
 		void addAudioPacket(float** buffer, int samplesCount, float gain = 1.0f);
 		void addAudioPacket(float* buffer, int samplesCount, float gain = 1.0f);

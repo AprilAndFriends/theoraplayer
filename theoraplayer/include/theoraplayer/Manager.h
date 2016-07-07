@@ -36,16 +36,16 @@ namespace theoraplayer
 		Manager();
 		virtual ~Manager();
 
-		int getWorkerThreadCount();
+		int getWorkerThreadCount() const;
 		void setWorkerThreadCount(int value);
-		inline int getDefaultPrecachedFramesCount() { return this->defaultPrecachedFramesCount; }
+		inline int getDefaultPrecachedFramesCount() const { return this->defaultPrecachedFramesCount; }
 		inline void setDefaultPrecachedFramesCount(int value) { this->defaultPrecachedFramesCount = value; }
 		/// @return The supported decoders (eg. Theora, AVFoundation...)
-		std::vector<std::string> getSupportedFormats();
+		std::vector<std::string> getSupportedFormats() const;
 		/// @return Nicely formated version string.
-		std::string getVersionString();
+		std::string getVersionString() const;
 		/// @return Version numbers.
-		void getVersion(int* major, int* minor, int* revision);
+		void getVersion(int* major, int* minor, int* revision) const;
 
 		inline AudioInterfaceFactory* getAudioInterfaceFactory() { return this->audioInterfaceFactory; }
 		inline void setAudioInterfaceFactory(AudioInterfaceFactory* value) { this->audioInterfaceFactory = value; }
@@ -63,11 +63,11 @@ namespace theoraplayer
 		typedef std::vector<VideoClip*> ClipList;
 		typedef std::vector<WorkerThread*> ThreadList;
 
-		//! stores pointers to worker threads which are decoding video and audio
+		/// @brief Stores pointers to worker threads which are decoding video and audio
 		ThreadList workerThreads;
-		//! stores pointers to created video clips
+		/// @brief Stores pointers to created video clips
 		ClipList clips;
-		//! stores pointer to clips that were docoded in the past in order to achieve fair scheduling
+		/// @brief Stores pointer to clips that were docoded in the past in order to achieve fair scheduling
 		std::list<VideoClip*> workLog;
 		int defaultPrecachedFramesCount;
 		Mutex* workMutex;
@@ -76,9 +76,7 @@ namespace theoraplayer
 		void _createWorkerThreads(int count);
 		void _destroyWorkerThreads();
 		void _destroyWorkerThreads(int count);
-		/**
-		* Called by WorkerThread to request a VideoClip instance to work on decoding
-		*/
+		/// @brief Called by WorkerThread to request a VideoClip instance to work on decoding
 		VideoClip* _requestWork(WorkerThread* caller);
 
 	};

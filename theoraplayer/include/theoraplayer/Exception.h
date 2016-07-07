@@ -30,12 +30,13 @@ namespace theoraplayer
 		_Exception(const std::string& message, const char* sourceFile, int lineNumber);
 		/// @brief Destructor.
 		virtual ~_Exception();
+
 		/// @brief Gets the exception type.
 		/// @return The exception type.
-		inline virtual std::string getType() { return "TheoraplayerException"; }
+		inline virtual std::string getType() const { return "TheoraplayerException"; }
 		/// @brief Gets the exception message.
 		/// @return The exception message.
-		inline virtual std::string getMessage() { return this->message; }
+		inline virtual std::string getMessage() const { return this->message; }
 
 	protected:
 		/// @brief Exception message.

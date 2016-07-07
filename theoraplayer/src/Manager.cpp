@@ -109,7 +109,7 @@ namespace theoraplayer
 		delete this->workMutex;
 	}
 
-	int Manager::getWorkerThreadCount()
+	int Manager::getWorkerThreadCount() const
 	{
 		return (int)this->workerThreads.size();
 	}
@@ -135,17 +135,17 @@ namespace theoraplayer
 		}
 	}
 
-	std::vector<std::string> Manager::getSupportedFormats()
+	std::vector<std::string> Manager::getSupportedFormats() const
 	{
 		std::vector<std::string> result;
-		foreach (VideoClip::Format, it, videoClipFormats)
+		foreachc (VideoClip::Format, it, videoClipFormats)
 		{
 			result.push_back((*it).name);
 		}
 		return result;
 	}
 
-	std::string Manager::getVersionString()
+	std::string Manager::getVersionString() const
 	{
 		int major = 0;
 		int minor = 0;
@@ -159,7 +159,7 @@ namespace theoraplayer
 		return result;
 	}
 
-	void Manager::getVersion(int* major, int* minor, int* revision)
+	void Manager::getVersion(int* major, int* minor, int* revision) const
 	{
 		*major = 2;
 		*minor = 0;

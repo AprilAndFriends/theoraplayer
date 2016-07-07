@@ -28,5 +28,6 @@ struct Theoraplayer_PixelTransform
 	unsigned int yStride;
 	unsigned int uStride;
 	unsigned int vStride;
+
 };
 #endif

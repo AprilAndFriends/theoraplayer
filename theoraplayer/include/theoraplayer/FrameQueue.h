@@ -30,9 +30,9 @@ namespace theoraplayer
 		FrameQueue(VideoClip* clip);
 		~FrameQueue();
 
-		Mutex* getMutex() { return this->mutex; }
+		Mutex* getMutex() const { return this->mutex; }
 		/// @return The number of used (but not ready) frames.
-		int getUsedCount();
+		int getUsedCount() const;
 
 		/// @brief Returns the first available frame in the queue or NULL if no frames are available.
 		/// @note This function DOES NOT remove the frame from the queue, you have to do it manually
@@ -40,19 +40,19 @@ namespace theoraplayer
 		VideoFrame* getFirstAvailableFrame();
 		/// @brief This is a non-mutexed thread-unsafe version.
 		/// @see getFirstAvailableFrame
-		VideoFrame* _getFirstAvailableFrame();
+		VideoFrame* _getFirstAvailableFrame() const;
 
 		/// @return The number of ready frames.
 		int getReadyCount();
 		/// @brief This is a non-mutexed thread-unsafe version.
 		/// @see getReadyCount
-		int _getReadyCount();
+		int _getReadyCount() const;
 
+		/// @return The size of the queue.
+		int getSize() const;
 		/// @brief set's the size of the frame queue.
 		/// @note Currently stored ready frames will be lost upon this call if the new size is less than the current one.
 		void setSize(int size);
-		/// @return The size of the queue.
-		int getSize();
 
 		/// @return Whether all frames in the queue are ready for display.
 		bool isFull();

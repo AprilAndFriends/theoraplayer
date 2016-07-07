@@ -44,6 +44,56 @@ namespace theoraplayer
 		return frame;
 	}
 
+	int FrameQueue::getUsedCount() const
+	{
+		Mutex::ScopeLock lock(this->mutex);
+		int result = 0;
+		foreachc_l (VideoFrame*, it, this->queue)
+		{
+			if ((*it)->inUse)
+			{
+				++result;
+			}
+		}
+		return result;
+	}
+
+	VideoFrame* FrameQueue::getFirstAvailableFrame()
+	{
+		Mutex::ScopeLock lock(this->mutex);
+		return this->_getFirstAvailableFrame();
+	}
+
+	VideoFrame* FrameQueue::_getFirstAvailableFrame() const
+	{
+		VideoFrame* frame = this->queue.front();
+		return (frame->ready ? frame : NULL);
+	}
+
+	int FrameQueue::getReadyCount()
+	{
+		Mutex::ScopeLock lock(this->mutex);
+		return this->_getReadyCount();
+	}
+
+	int FrameQueue::_getReadyCount() const
+	{
+		int result = 0;
+		foreachc_l(VideoFrame*, it, this->queue)
+		{
+			if ((*it)->ready)
+			{
+				++result;
+			}
+		}
+		return result;
+	}
+
+	int FrameQueue::getSize() const
+	{
+		return (int)this->queue.size();
+	}
+
 	void FrameQueue::setSize(int n)
 	{
 		Mutex::ScopeLock lock(this->mutex);
@@ -59,36 +109,23 @@ namespace theoraplayer
 		for (int i = 0; i < n; ++i)
 		{
 			frame = this->_createFrameInstance(this->parent);
-			if (frame != NULL)
-			{
-				this->queue.push_back(frame);
-			}
-			else
+			if (frame == NULL)
 			{
 				log("FrameQueue: unable to create " + str(n) + " frames, out of memory. Created " + str((int) this->queue.size()) + " frames.");
 				break;
 			}
+			this->queue.push_back(frame);
 		}
-		lock.release();
 	}
 
-	int FrameQueue::getSize()
+	bool FrameQueue::isFull()
 	{
-		return (int) this->queue.size();
+		return (this->getReadyCount() == (int)this->queue.size());
 	}
 
-	VideoFrame* FrameQueue::_getFirstAvailableFrame()
+	std::list<VideoFrame*>& FrameQueue::_getFrameQueue()
 	{
-		VideoFrame* frame = this->queue.front();
-		return (frame->ready ? frame : NULL);
-	}
-
-	VideoFrame* FrameQueue::getFirstAvailableFrame()
-	{
-		Mutex::ScopeLock lock(this->mutex);
-		VideoFrame* frame = this->_getFirstAvailableFrame();
-		lock.release();
-		return frame;
+		return this->queue;
 	}
 
 	void FrameQueue::clear()
@@ -98,7 +135,12 @@ namespace theoraplayer
 		{
 			(*it)->clear();
 		}
-		lock.release();
+	}
+
+	void FrameQueue::pop(int n)
+	{
+		Mutex::ScopeLock lock(this->mutex);
+		this->_pop(n);
 	}
 
 	void FrameQueue::_pop(int n)
@@ -113,16 +155,8 @@ namespace theoraplayer
 		}
 	}
 
-	void FrameQueue::pop(int n)
-	{
-		Mutex::ScopeLock lock(this->mutex);
-		this->_pop(n);
-		lock.release();
-	}
-
 	VideoFrame* FrameQueue::requestEmptyFrame()
 	{
-		VideoFrame* frame = NULL;
 		Mutex::ScopeLock lock(this->mutex);
 		foreach_l (VideoFrame*, it, this->queue)
 		{
@@ -130,58 +164,10 @@ namespace theoraplayer
 			{
 				(*it)->inUse = 1;
 				(*it)->ready = 0;
-				frame = (*it);
-				break;
+				return (*it);
 			}
 		}
-		lock.release();
-		return frame;
-	}
-
-	int FrameQueue::getUsedCount()
-	{
-		Mutex::ScopeLock lock(this->mutex);
-		int result = 0;
-		foreach_l (VideoFrame*, it, this->queue)
-		{
-			if ((*it)->inUse)
-			{
-				++result;
-			}
-		}
-		lock.release();
-		return result;
-	}
-
-	int FrameQueue::_getReadyCount()
-	{
-		int result = 0;
-		foreach_l (VideoFrame*, it, this->queue)
-		{
-			if ((*it)->ready)
-			{
-				++result;
-			}
-		}
-		return result;
-	}
-
-	int FrameQueue::getReadyCount()
-	{
-		Mutex::ScopeLock lock(this->mutex);
-		int result = this->_getReadyCount();
-		lock.release();
-		return result;
-	}
-
-	bool FrameQueue::isFull()
-	{
-		return (size_t)getReadyCount() == this->queue.size();
-	}
-
-	std::list<VideoFrame*>& FrameQueue::_getFrameQueue()
-	{
-		return this->queue;
+		return NULL;
 	}
 
 }

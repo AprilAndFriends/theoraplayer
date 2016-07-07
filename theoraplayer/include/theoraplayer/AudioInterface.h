@@ -29,9 +29,9 @@ namespace theoraplayer
 
 		virtual ~AudioInterface();
 
-		inline theoraplayer::VideoClip* getClip() { return this->clip; }
-		inline int getChannelsCount() { return this->channelsCount; }
-		inline int getFrequency() { return this->frequency; }
+		inline theoraplayer::VideoClip* getClip() const { return this->clip; }
+		inline int getChannelsCount() const { return this->channelsCount; }
+		inline int getFrequency() const { return this->frequency; }
 
 		/// @brief A function that the VideoClip object calls once more audio packets are decoded
 		/// @param[in] data contains one or two channels of float PCM data in the range [-1,1]

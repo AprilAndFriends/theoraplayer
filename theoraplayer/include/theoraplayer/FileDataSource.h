@@ -25,15 +25,15 @@ namespace theoraplayer
 		FileDataSource(const std::string& filename);
 		~FileDataSource();
 
-		inline std::string getFormatName() { return this->formatName; }
-		inline std::string getFilename() { return this->filename; }
+		inline std::string getFormatName() const { return this->formatName; }
+		inline std::string getFilename() const { return this->filename; }
 		uint64_t getSize();
 		uint64_t getPosition();
 
 		int read(void* output, int nBytes);
 		void seek(uint64_t byte_index);
 
-		inline std::string toString() { return this->filename + " (format: " + this->formatName + ")"; }
+		inline std::string toString() const { return this->filename + " (format: " + this->formatName + ")"; }
 
 	private:
 		FILE* filePtr;

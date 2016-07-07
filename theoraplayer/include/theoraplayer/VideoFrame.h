@@ -33,11 +33,11 @@ namespace theoraplayer
 		VideoFrame(VideoClip* clip);
 		virtual ~VideoFrame();
 
-		inline unsigned char* getBuffer() { return this->buffer; }
-		inline unsigned long getFrameNumber() { return this->frameNumber; }
-		int getWidth();
-		int getStride();
-		int getHeight();
+		inline unsigned char* getBuffer() const { return this->buffer; }
+		inline unsigned long getFrameNumber() const { return this->frameNumber; }
+		int getWidth() const;
+		int getStride() const;
+		int getHeight() const;
 
 		void clear();
 
@@ -45,9 +45,10 @@ namespace theoraplayer
 		virtual void decode(struct Theoraplayer_PixelTransform* t);
 		
 		void clearInUseFlag() { this->inUse = false; }
-		bool isReady() { return this->ready; }
-		float getTimeToDisplay() { return this->timeToDisplay; }
+		bool isReady() const { return this->ready; }
+		float getTimeToDisplay() const { return this->timeToDisplay; }
 		void _init(float timeToDisplay, int iteration, unsigned long frameNumber);
+
 	protected:
 		/// @brief Global time in seconds this frame should be displayed on.
 		float timeToDisplay;
