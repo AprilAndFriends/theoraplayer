@@ -33,10 +33,10 @@ namespace theoraplayer
 
 		/// @brief Gets the exception type.
 		/// @return The exception type.
-		inline virtual std::string getType() const { return "TheoraplayerException"; }
+		virtual inline std::string getType() const { return "TheoraplayerException"; }
 		/// @brief Gets the exception message.
 		/// @return The exception message.
-		inline virtual std::string getMessage() const { return this->message; }
+		virtual inline std::string getMessage() const { return this->message; }
 
 	protected:
 		/// @brief Exception message.
