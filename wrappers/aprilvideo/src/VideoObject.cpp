@@ -320,7 +320,7 @@ namespace aprilvideo
 		return april::rendersys->getNativeTextureFormat(format);
 	}
 
-	harray<aprilui::PropertyDescription> VideoObject::getPropertyDescriptions()
+	harray<aprilui::PropertyDescription> VideoObject::getPropertyDescriptions() const
 	{
 		if (VideoObject::_propertyDescriptions.size() == 0)
 		{
