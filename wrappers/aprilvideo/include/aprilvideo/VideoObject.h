@@ -76,23 +76,23 @@ namespace aprilvideo
 		HL_DEFINE_GETSET(float, audioSyncOffset, AudioSyncOffset);
 		HL_DEFINE_GET(float, speed, Speed);
 		void setSpeed(float value);
-		float getTimePosition();
+		float getTimePosition() const;
 		void setTimePosition(float value);
-		int getReadyFramesCount();
-		int getPrecachedFramesCount();
+		int getReadyFramesCount() const;
+		int getPrecachedFramesCount() const;
 		int getVideoClipWidth();
 		int getVideoClipHeight();
 		float getVideoClipDuration();
-		bool hasVideoClipAlphaChannel();
-		float getPrecacheFactor();
+		bool hasVideoClipAlphaChannel() const;
+		float getPrecacheFactor() const;
 		HL_DEFINE_GET(aprilui::Texture*, currentTexture, CurrentTexture);
 		HL_DEFINE_GET(harray<aprilui::Texture*>, textures, Textures);
-		bool isPlaying();
-		bool isStopped();
-		virtual bool isPaused();
-		bool isVideoClipPaused();
-		bool isVideoClipCreated();
-		PlaybackState getPlaybackState();
+		bool isPlaying() const;
+		bool isStopped() const;
+		virtual bool isPaused() const;
+		bool isVideoClipPaused() const;
+		bool isVideoClipCreated() const;
+		PlaybackState getPlaybackState() const;
 		void setPlaybackState(PlaybackState value);
 
 		harray<aprilui::PropertyDescription> getPropertyDescriptions();
@@ -108,17 +108,17 @@ namespace aprilvideo
 		void updateFrame();
 		void createVideoClip(bool waitForCache = true);
 
-		DEPRECATED_ATTRIBUTE inline aprilui::Texture* getTexture()				{ return this->getCurrentTexture(); }
+		DEPRECATED_ATTRIBUTE inline aprilui::Texture* getTexture() const		{ return this->getCurrentTexture(); }
 		DEPRECATED_ATTRIBUTE inline void _createClip(bool waitForCache = true)	{ this->createVideoClip(waitForCache); }
-		DEPRECATED_ATTRIBUTE inline bool _isVideoPaused()						{ return this->isVideoClipPaused(); }
-		DEPRECATED_ATTRIBUTE inline bool _isClipCreated()						{ return this->isVideoClipCreated(); }
+		DEPRECATED_ATTRIBUTE inline bool _isVideoPaused() const					{ return this->isVideoClipPaused(); }
+		DEPRECATED_ATTRIBUTE inline bool _isClipCreated() const					{ return this->isVideoClipCreated(); }
 		DEPRECATED_ATTRIBUTE inline int getClipWidth()							{ return this->getVideoClipWidth(); }
 		DEPRECATED_ATTRIBUTE inline int getClipHeight()							{ return this->getVideoClipHeight(); }
-		DEPRECATED_ATTRIBUTE inline int getNumReadyFrames()						{ return this->getReadyFramesCount(); }
-		DEPRECATED_ATTRIBUTE inline int getNumPrecachedFrames()					{ return this->getPrecachedFramesCount(); }
-		DEPRECATED_ATTRIBUTE inline int getAlphaThreshold()						{ return this->getPauseAlphaThreshold(); }
+		DEPRECATED_ATTRIBUTE inline int getNumReadyFrames() const				{ return this->getReadyFramesCount(); }
+		DEPRECATED_ATTRIBUTE inline int getNumPrecachedFrames() const			{ return this->getPrecachedFramesCount(); }
+		DEPRECATED_ATTRIBUTE inline int getAlphaThreshold() const				{ return this->getPauseAlphaThreshold(); }
 		DEPRECATED_ATTRIBUTE inline void setAlphaThreshold(int value)			{ this->setPauseAlphaThreshold(value); }
-		DEPRECATED_ATTRIBUTE inline int getAlphaTreshold()						{ return this->getPauseAlphaThreshold(); }
+		DEPRECATED_ATTRIBUTE inline int getAlphaTreshold() const				{ return this->getPauseAlphaThreshold(); }
 		DEPRECATED_ATTRIBUTE inline void setAlphaTreshold(int value)			{ this->setPauseAlphaThreshold(value); }
 
 	protected:
@@ -142,7 +142,7 @@ namespace aprilvideo
 		xal::Sound* sound;
 		xal::Player* audioPlayer;
 
-		april::Image::Format _getTextureFormat();
+		april::Image::Format _getTextureFormat() const;
 
 		void _update(float timeDelta);
 		void _draw();

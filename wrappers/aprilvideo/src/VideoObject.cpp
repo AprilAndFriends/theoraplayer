@@ -163,7 +163,7 @@ namespace aprilvideo
 		}
 	}
 
-	float VideoObject::getTimePosition()
+	float VideoObject::getTimePosition() const
 	{
 		return (this->clip != NULL ? this->clip->getTimePosition() : 0.0f);
 	}
@@ -185,17 +185,17 @@ namespace aprilvideo
 		}
 	}
 
-	int VideoObject::getReadyFramesCount()
+	int VideoObject::getReadyFramesCount() const
 	{
 		return (this->clip != NULL ? this->clip->getReadyFramesCount() : 0);
 	}
 
-	int VideoObject::getPrecachedFramesCount()
+	int VideoObject::getPrecachedFramesCount() const
 	{
 		return (this->clip != NULL ? this->clip->getPrecachedFramesCount() : 0);
 	}
 
-	bool VideoObject::hasVideoClipAlphaChannel()
+	bool VideoObject::hasVideoClipAlphaChannel() const
 	{
 		return (this->clip != NULL && this->clip->hasAlphaChannel());
 	}
@@ -218,22 +218,22 @@ namespace aprilvideo
 		return (this->clip != NULL ? this->clip->getDuration() : 0.0f);
 	}
 
-	float VideoObject::getPrecacheFactor()
+	float VideoObject::getPrecacheFactor() const
 	{
 		return (this->clip != NULL ? ((float)this->clip->getReadyFramesCount() / this->clip->getPrecachedFramesCount()) : 0.0f);
 	}
 
-	bool VideoObject::isPlaying()
+	bool VideoObject::isPlaying() const
 	{
 		return (this->clip != NULL && !this->isPaused() && !this->clip->isDone());
 	}
 
-	bool VideoObject::isStopped()
+	bool VideoObject::isStopped() const
 	{
 		return (this->clip == NULL || this->clip->isDone());
 	}
 
-	bool VideoObject::isPaused()
+	bool VideoObject::isPaused() const
 	{
 		if (this->clip == NULL)
 		{
@@ -254,17 +254,17 @@ namespace aprilvideo
 		return (this->getDerivedAlpha() < this->pauseAlphaThreshold);
 	}
 
-	bool VideoObject::isVideoClipPaused()
+	bool VideoObject::isVideoClipPaused() const
 	{
 		return (this->timer != NULL && this->timer->isPaused());
 	}
 
-	bool VideoObject::isVideoClipCreated()
+	bool VideoObject::isVideoClipCreated() const
 	{
 		return (this->clip != NULL);
 	}
 
-	VideoObject::PlaybackState VideoObject::getPlaybackState()
+	VideoObject::PlaybackState VideoObject::getPlaybackState() const
 	{
 		if (this->isPlaying())
 		{
@@ -310,7 +310,7 @@ namespace aprilvideo
 		throw Exception("VideoObject: Unable to set state property to '" + value.getName() + "'.");
 	}
 
-	april::Image::Format VideoObject::_getTextureFormat()
+	april::Image::Format VideoObject::_getTextureFormat() const
 	{
 		april::Image::Format format = april::Image::FORMAT_RGBX;
 		if (this->videoClipUseAlpha)
