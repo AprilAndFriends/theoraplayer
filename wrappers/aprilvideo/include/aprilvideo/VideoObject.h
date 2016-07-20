@@ -47,7 +47,7 @@ namespace aprilvideo
 	{
 		APRILUI_CLONEABLE(VideoObject);
 	public:
-		HL_ENUM_CLASS_DECLARE(PlaybackState,
+		HL_ENUM_CLASS_PREFIX_DECLARE(aprilvideoExport, PlaybackState,
 		(
 			HL_ENUM_DECLARE(PlaybackState, Undefined);
 			HL_ENUM_DECLARE(PlaybackState, Playing);
