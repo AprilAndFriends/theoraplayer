@@ -870,15 +870,15 @@ namespace aprilvideo
 			if (category == AUDIO_CATEGORY && !xal::manager->hasCategory(AUDIO_CATEGORY))
 			{
 #if defined(_WINRT) || defined(_ANDROID)
-				xal::manager->createCategory(AUDIO_CATEGORY, xal::ON_DEMAND, xal::DISK);
+				xal::manager->createCategory(AUDIO_CATEGORY, xal::BufferMode::OnDemand, xal::SourceMode::Disk);
 #else
 				if (april::getSystemInfo().ram >= 512)
 				{
-					xal::manager->createCategory(AUDIO_CATEGORY, xal::STREAMED, xal::RAM);
+					xal::manager->createCategory(AUDIO_CATEGORY, xal::BufferMode::Streamed, xal::SourceMode::Ram);
 				}
 				else
 				{
-					xal::manager->createCategory(AUDIO_CATEGORY, xal::STREAMED, xal::DISK);
+					xal::manager->createCategory(AUDIO_CATEGORY, xal::BufferMode::Streamed, xal::SourceMode::Disk);
 				}
 #endif
 			}
