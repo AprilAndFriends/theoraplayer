@@ -67,14 +67,12 @@
   <ItemDefinitionGroup>
     <CustomBuild>
       <Message>Assembling %(Filename)%(Extension)</Message>
-	  <TargetFileName>$(IntDir)%(Filename)_asm.obj</TargetFileName>
+	  <TargetFileName>$(IntDir)asm\%(FileName).obj</TargetFileName>
       <Outputs>%(TargetFileName)</Outputs>
-      <Command Condition="'$(WholeProgramOptimization)'!='true'">IF EXIST "$(IntDir)%(Filename)_asm.obj" del "$(IntDir)%(Filename)_asm.obj" /q
-vsyasm -Xvc -g cv8 -f win32 -I"../.." -o "$(IntDir)%(Filename)_asm.obj" "%(FullPath)"
-IF EXIST "$(IntDir)%(Filename).obj" ren "$(IntDir)%(Filename).obj" "%(Filename)_asm.obj"</Command>
-      <Command Condition="'$(WholeProgramOptimization)'=='true'">IF EXIST "$(IntDir)%(Filename)_asm.obj" del "$(IntDir)%(Filename)_asm.obj" /q
-vsyasm -Xvc -f win32 -I"../.." -o "$(IntDir)%(Filename)_asm.obj" "%(FullPath)"
-IF EXIST "$(IntDir)%(Filename).obj" ren "$(IntDir)%(Filename).obj" "%(Filename)_asm.obj"</Command>
+      <Command Condition="'$(WholeProgramOptimization)'!='true'">IF EXIST "$(IntDir)asm\%(Filename).obj" del "$(IntDir)asm\%(Filename).obj" /q
+vsyasm -Xvc -g cv8 -f win32 -I"../.." -o "$(IntDir)asm\%(Filename).obj" "%(FullPath)"</Command>
+      <Command Condition="'$(WholeProgramOptimization)'=='true'">IF EXIST "$(IntDir)asm\%(Filename).obj" del "$(IntDir)asm\%(Filename).obj" /q
+vsyasm -Xvc -f win32 -I"../.." -o "$(IntDir)asm\%(Filename).obj" "%(FullPath)"</Command>
     </CustomBuild>
   </ItemDefinitionGroup>
   <ItemGroup>
