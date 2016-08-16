@@ -21,7 +21,7 @@ namespace aprilvideo
 {
 	class VideoObject;
 
-	extern hstr logTag;
+	aprilvideoExport extern hstr logTag;
 
 	aprilvideoFnExport void init(int workerThreadCount = 1);
 	aprilvideoFnExport void destroy();
