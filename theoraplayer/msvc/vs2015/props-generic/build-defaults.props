@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(WholeProgramOptimization)'!='true'">
-    <OutDir>$(SolutionDir)bin\Debug\$(Platform)\</OutDir>
+    <OutDir>$(SolutionDir)bin\Debug\$(Platform)\lib\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\Debug\$(Platform)\lib\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(WholeProgramOptimization)'=='true'">
-    <OutDir>$(SolutionDir)bin\Release\$(Platform)\</OutDir>
+    <OutDir>$(SolutionDir)bin\Release\$(Platform)\lib\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\Release\$(Platform)\lib\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -15,6 +15,12 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
+    <PostBuildEvent>
+      <Command Condition="'$(ConfigurationType)'=='StaticLibrary'">xcopy $(TargetPath) $(OutDir)..\..\..\ /Y /V /D</Command>
+      <Command Condition="'$(ConfigurationType)'=='DynamicLibrary'">xcopy $(TargetPath) $(OutDir)..\..\..\ /Y /V /D
+xcopy $(OutDir)$(TargetName).lib $(OutDir)..\..\..\ /Y /V /D</Command>
+      <Command Condition="'$(ConfigurationType)'=='Application'">xcopy $(OutDir)..\..\*.dll $(OutDir) /Y /V /D</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(WholeProgramOptimization)'!='true'">
     <ClCompile>

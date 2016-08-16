@@ -1,26 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(WholeProgramOptimization)'!='true'">
-    <OutDir>$(SolutionDir)bin\Debug\$(Platform)\</OutDir>
+    <OutDir>$(SolutionDir)bin\Debug\$(Platform)\lib\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\Debug\$(Platform)\lib\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(WholeProgramOptimization)'=='true'">
-    <OutDir>$(SolutionDir)bin\Release\$(Platform)\</OutDir>
+    <OutDir>$(SolutionDir)bin\Release\$(Platform)\lib\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\Release\$(Platform)\lib\$(ProjectName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-	  <PreprocessorDefinitions Condition="'$(ConfigurationType)'=='StaticLibrary'">_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ConfigurationType)'=='StaticLibrary'">_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
+    <PostBuildEvent>
+      <Command Condition="'$(ConfigurationType)'=='StaticLibrary'">xcopy $(TargetPath) $(OutDir)..\..\..\ /Y /V /D</Command>
+      <Command Condition="'$(ConfigurationType)'=='DynamicLibrary'">xcopy $(TargetPath) $(OutDir)..\..\..\ /Y /V /D
+xcopy $(OutDir)$(TargetName).lib $(OutDir)..\..\..\ /Y /V /D</Command>
+      <Command Condition="'$(ConfigurationType)'=='Application'">xcopy $(OutDir)..\..\*.dll $(OutDir) /Y /V /D</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(WholeProgramOptimization)'!='true'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <OptimizationLevel>O0</OptimizationLevel>
-	  <PreprocessorDefinitions>_DEBUG;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -37,10 +43,10 @@
       <Optimization>Full</Optimization>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OptimizationLevel>O3</OptimizationLevel>
-	  <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-	  <FunctionLevelLinking>true</FunctionLevelLinking>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <GccExceptionHandling>true</GccExceptionHandling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
