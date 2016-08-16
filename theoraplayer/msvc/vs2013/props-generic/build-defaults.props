@@ -16,10 +16,10 @@
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <PostBuildEvent>
-      <Command Condition="'$(ConfigurationType)'=='StaticLibrary'">xcopy $(TargetPath) $(OutDir)..\..\..\ /Y /V /D</Command>
-      <Command Condition="'$(ConfigurationType)'=='DynamicLibrary'">xcopy $(TargetPath) $(OutDir)..\..\..\ /Y /V /D
-xcopy $(OutDir)$(TargetName).lib $(OutDir)..\..\..\ /Y /V /D</Command>
-      <Command Condition="'$(ConfigurationType)'=='Application'">xcopy $(OutDir)..\..\*.dll $(OutDir) /Y /V /D</Command>
+      <Command Condition="'$(ConfigurationType)'=='StaticLibrary'">xcopy $(TargetPath) $(OutDir)..\..\..\ /Y /V</Command>
+      <Command Condition="'$(ConfigurationType)'=='DynamicLibrary'">xcopy $(TargetPath) $(OutDir)..\..\..\ /Y /V
+xcopy $(OutDir)$(TargetName).lib $(OutDir)..\..\..\ /Y /V</Command>
+      <Command Condition="'$(ConfigurationType)'=='Application'">xcopy $(OutDir)..\..\*.dll $(OutDir) /Y /V</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(WholeProgramOptimization)'!='true'">
