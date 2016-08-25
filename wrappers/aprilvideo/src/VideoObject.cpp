@@ -831,7 +831,7 @@ namespace aprilvideo
 		for_iter (i, 0, TEXTURES_COUNT)
 		{
 			aprilTexture = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
-			this->currentTexture = new aprilui::Texture(NULL, aprilTexture->getFilename() + "_" + hstr(i + 1), aprilTexture);
+			this->currentTexture = new aprilui::Texture(aprilTexture->getFilename() + "_" + hstr(i + 1), aprilTexture);
 			this->currentVideoImage = new aprilui::Image(this->currentTexture, "aprilvideo_video_clip_image_" + hstr(i + 1),
 				grect((float)this->clip->getSubFrameX(), (float)this->clip->getSubFrameY(), (float)this->clip->getSubFrameWidth(), (float)this->clip->getSubFrameHeight()));
 			this->currentVideoImage->setBlendMode(this->blendMode);
