@@ -830,7 +830,7 @@ namespace aprilvideo
 		april::Texture* aprilTexture = NULL;
 		for_iter (i, 0, TEXTURES_COUNT)
 		{
-			aprilTexture = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::TYPE_VOLATILE);
+			aprilTexture = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::Type::Volatile);
 			hstr filename = aprilTexture->getFilename() + "_" + hstr(i + 1);
 			this->currentTexture = new aprilui::Texture(filename, filename, aprilTexture);
 			this->currentVideoImage = new aprilui::Image(this->currentTexture, "aprilvideo_video_clip_image_" + hstr(i + 1),
