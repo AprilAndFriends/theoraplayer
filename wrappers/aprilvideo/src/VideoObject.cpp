@@ -354,7 +354,7 @@ namespace aprilvideo
 		ImageBox::_update(timeDelta);
 		if (this->clip != NULL)
 		{
-			if (this->audioPlayer)
+			if (this->audioPlayer != NULL)
 			{
 				float pitch = this->audioPlayer->getPitch();
 				float desiredPitch = this->speed;
