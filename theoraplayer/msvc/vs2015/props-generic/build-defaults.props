@@ -12,6 +12,7 @@
     <ClCompile>
       <PreprocessorDefinitions Condition="'$(ConfigurationType)'=='StaticLibrary'">_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
@@ -41,7 +42,6 @@ xcopy $(OutDir)$(TargetName).lib $(OutDir)..\..\..\ /Y /V</Command>
   <ItemDefinitionGroup Condition="'$(WholeProgramOptimization)'=='true'">
     <ClCompile>
       <Optimization>Full</Optimization>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OptimizationLevel>O3</OptimizationLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
