@@ -180,7 +180,7 @@
     <ClCompile Include="..\..\src\YUV\libyuv\src\compare_common.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\compare_gcc.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\compare_neon.cc">
-      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
     <ClCompile Include="..\..\src\YUV\libyuv\src\compare_posix.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\compare_win.cc" />
@@ -199,14 +199,14 @@
     <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_argb.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_mips.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_neon.cc">
-      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_any.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_common.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_gcc.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_mips.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_neon.cc">
-      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_posix.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_win.cc" />
@@ -217,7 +217,7 @@
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_gcc.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_mips.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_neon.cc">
-      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_posix.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_win.cc" />

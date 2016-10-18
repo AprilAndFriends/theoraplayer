@@ -167,25 +167,25 @@
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
       <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
-      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
     <ClCompile Include="..\..\lib\arm\armfrag.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
       <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
-      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
     <ClCompile Include="..\..\lib\arm\armidct.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
       <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
-      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
     <ClCompile Include="..\..\lib\arm\armloop.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
       <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
-      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
