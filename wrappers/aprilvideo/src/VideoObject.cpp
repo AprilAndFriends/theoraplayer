@@ -702,7 +702,7 @@ namespace aprilvideo
 		hstr path = this->_videoClipFilename;
 		if (path.endsWith(".mp4"))
 		{
-			hstr archive = hresource::getArchive();
+			hstr archive = hresource::getMountedArchives().tryGet("", "");
 			if (archive != "")
 			{
 				path = hrdir::joinPath(archive, path);
