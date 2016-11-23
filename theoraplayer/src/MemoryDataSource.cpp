@@ -72,7 +72,7 @@ namespace theoraplayer
 			struct stat s;
 			fstat(fileno(file), &s);
 #endif
-			this->size = (uint64_t)s.st_size;
+			this->size = (int64_t)s.st_size;
 			if (this->size > 0xFFFFFFFF)
 			{
 				fclose(file);
@@ -107,7 +107,7 @@ namespace theoraplayer
 		return result;
 	}
 
-	void MemoryDataSource::seek(uint64_t byteIndex)
+	void MemoryDataSource::seek(int64_t byteIndex)
 	{
 		this->position = byteIndex;
 	}

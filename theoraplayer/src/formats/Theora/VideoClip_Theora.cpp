@@ -97,8 +97,8 @@ namespace theoraplayer
 		// the last theora page and seek back to beginning of the file
 		char* buffer = NULL;
 		int bytesRead = 0;
-		uint64_t streamSize = this->stream->getSize();
-		uint64_t seekPos = 0;
+		int64_t streamSize = this->stream->getSize();
+		int64_t seekPos = 0;
 		int result = 0;
 		ogg_int64_t granule = 0;
 		for (unsigned int i = 1; i <= 50; ++i)
@@ -569,8 +569,8 @@ namespace theoraplayer
 
 	long VideoClip_Theora::_seekPage(long targetFrame, bool returnKeyFrame)
 	{
-		uint64_t seekMin = 0;
-		uint64_t seekMax = this->stream->getSize();
+		int64_t seekMin = 0;
+		int64_t seekMax = this->stream->getSize();
 		long frame = 0;
 		ogg_int64_t granule = 0;
 		if (targetFrame == 0)

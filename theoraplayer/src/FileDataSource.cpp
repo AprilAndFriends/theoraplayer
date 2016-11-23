@@ -61,7 +61,7 @@ namespace theoraplayer
 			struct stat s;
 			fstat(fileno(this->filePtr), &s);
 #endif
-			this->length = (uint64_t)s.st_size;
+			this->length = (int64_t)s.st_size;
 		}
 	}
 
@@ -71,11 +71,11 @@ namespace theoraplayer
 		{
 			this->_openFile();
 		}
-		uint64_t n = fread(output, 1, nBytes, this->filePtr);
-		return (int) n;
+		int64_t n = (int64_t)fread(output, 1, nBytes, this->filePtr);
+		return (int)n;
 	}
 
-	void FileDataSource::seek(uint64_t byte_index)
+	void FileDataSource::seek(int64_t byte_index)
 	{
 		if (this->filePtr == NULL) 
 		{
@@ -91,7 +91,7 @@ namespace theoraplayer
 		fsetpos(this->filePtr, &fpos);
 	}
 
-	uint64_t FileDataSource::getSize()
+	int64_t FileDataSource::getSize()
 	{
 		if (this->filePtr == NULL)
 		{
@@ -100,20 +100,20 @@ namespace theoraplayer
 		return this->length;
 	}
 
-	uint64_t FileDataSource::getPosition()
+	int64_t FileDataSource::getPosition()
 	{
 		if (this->filePtr == NULL)
 		{
-			return 0;
+			return 0LL;
 		}
 #ifdef _LINUX
 		fpos_t pos;
 		fgetpos(mFilePtr, &pos);
-		return (uint64_t)pos.__pos;
+		return (int64_t)pos.__pos;
 #else
 		fpos_t pos;
 		fgetpos(this->filePtr, &pos);
-		return (uint64_t)pos;
+		return (int64_t)pos;
 #endif
 	}
 }

@@ -31,15 +31,15 @@ namespace theoraplayer
 		/// @return The name of the format used for creating a VideoClip.
 		virtual std::string getFormatName() const = 0;
 		/// @return The size of the stream in bytes.
-		virtual uint64_t getSize() = 0;
+		virtual int64_t getSize() = 0;
 		/// @return The current position of the source pointer.
-		virtual uint64_t getPosition() = 0;
+		virtual int64_t getPosition() = 0;
 
 		/// @brief Reads bytesCount bytes from data source and returns number of read bytes
 		/// @note If function returns less bytes then nBytes, the system assumes EOF is reached.
 		virtual int read(void* output, int bytesCount) = 0;
 		/// @brief Positions the source pointer to byteIndex from the start of the source.
-		virtual void seek(uint64_t byteIndex) = 0;
+		virtual void seek(int64_t byteIndex) = 0;
 		/// @return A string representation of the DataSource, eg 'File: source.ogg'
 		virtual std::string toString() const = 0;
 

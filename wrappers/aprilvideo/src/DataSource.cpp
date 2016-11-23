@@ -34,21 +34,21 @@ namespace aprilvideo
 		return this->resource.readRaw(output, bytesCount);
 	}
 
-	void DataSource::seek(uint64_t byteIndex)
+	void DataSource::seek(int64_t byteIndex)
 	{
 		if (!this->resource.isOpen())
 		{
 			this->_openFile();
 		}
-		this->resource.seek((int64_t)byteIndex, hresource::START);
+		this->resource.seek(byteIndex, hresource::START);
 	}
 
-	uint64_t DataSource::getSize()
+	int64_t DataSource::getSize()
 	{
 		return this->size;
 	}
 
-	uint64_t DataSource::getPosition()
+	int64_t DataSource::getPosition()
 	{
 		if (!this->resource.isOpen())
 		{

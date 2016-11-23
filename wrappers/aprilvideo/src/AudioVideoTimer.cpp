@@ -22,7 +22,7 @@ namespace aprilvideo
 	{
 		this->player = player;
 		this->syncOffset = syncOffset;
-		this->prevTickCount = 0ULL;
+		this->prevTickCount = 0LL;
 		this->prevTimePosition = -1.0f;
 		this->audioPosition = 0.0f;
 		this->syncDiff = 0.0f;
@@ -41,7 +41,7 @@ namespace aprilvideo
 			bool paused = this->isPaused();
 			bool playerPaused = this->player->isPaused();
 			// use our own time calculation because april's could be tampered with (speedup/slowdown)
-			uint64_t tickCount = htickCount();
+			int64_t tickCount = htickCount();
 			if (this->prevTickCount == 0)
 			{
 				this->prevTickCount = tickCount;

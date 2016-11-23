@@ -29,11 +29,11 @@ namespace aprilvideo
 
 		inline hstr getFilename() const { return this->filename; }
 		inline std::string getFormatName() const { return this->formatName.cStr(); }
-		uint64_t getSize();
-		uint64_t getPosition();
+		int64_t getSize();
+		int64_t getPosition();
 
 		int read(void* output, int bytesCount);
-		void seek(uint64_t byteIndex);
+		void seek(int64_t byteIndex);
 
 		std::string toString() const { return ("HRESOURCE:" + this->filename + " (format: " + this->formatName + ")").cStr(); }
 
@@ -41,7 +41,7 @@ namespace aprilvideo
 		hresource resource;
 		hstr filename;
 		hstr formatName;
-		uint64_t size;
+		int64_t size;
 
 		void _openFile();
 

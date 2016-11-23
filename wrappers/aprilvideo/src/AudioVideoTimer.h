@@ -35,7 +35,7 @@ namespace aprilvideo
 	private:
 		xal::Player* player;
 		float syncOffset;
-		uint64_t prevTickCount;
+		int64_t prevTickCount;
 		float prevTimePosition;
 		float audioPosition;
 		float syncDiff;

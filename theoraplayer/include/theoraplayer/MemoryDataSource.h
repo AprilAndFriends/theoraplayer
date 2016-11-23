@@ -29,11 +29,11 @@ namespace theoraplayer
 
 		inline std::string getFormatName() const { return this->formatName; }
 		inline std::string getFilename() const { return this->filename; }
-		inline uint64_t getSize() { return this->size; }
-		inline uint64_t getPosition() { return this->position; }
+		inline int64_t getSize() { return this->size; }
+		inline int64_t getPosition() { return this->position; }
 
 		int read(void* output, int count);
-		void seek(uint64_t byteIndex);
+		void seek(int64_t byteIndex);
 
 		inline std::string toString() const { return "MEM:" + this->filename + " (format: " + this->formatName + ")"; }
 
@@ -41,8 +41,8 @@ namespace theoraplayer
 		std::string filename;
 		std::string fullFilename;
 		std::string formatName;
-		uint64_t size;
-		uint64_t position;
+		int64_t size;
+		int64_t position;
 		unsigned char* data;
 
 		void _loadFile();
