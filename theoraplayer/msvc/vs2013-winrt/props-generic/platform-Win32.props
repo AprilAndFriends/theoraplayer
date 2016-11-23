@@ -9,6 +9,7 @@
     <ClCompile>
       <PreprocessorDefinitions>_WINRT;WINRT;_WIN32;WIN32;_X86;X86;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../..;../../src;../../../include;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <StringPooling>true</StringPooling>
       <CompileAsWinRT>true</CompileAsWinRT>
     </ClCompile>
     <Link>
