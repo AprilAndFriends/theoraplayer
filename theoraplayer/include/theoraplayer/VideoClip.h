@@ -145,6 +145,8 @@ namespace theoraplayer
 		bool isDone() const;
 		bool isPaused() const;
 
+		/// @bried Advance times. Manager calls this.
+		void update(float timeDelta);
 		/// @brief Update timer to the display time of the next frame. This is useful if you want to grab frames instead of regular display.
 		/// @return The time advanced. 0 if no frames are ready.
 		/// @note On an abstract level, this works similar to seek, but on a practical level it's different.
@@ -229,9 +231,6 @@ namespace theoraplayer
 
 		bool _isBusy() const;
 		float _getAbsPlaybackTime() const;
-
-		/// @bried Advance times. Manager calls this.
-		void _update(float timeDelta);
 
 		virtual void _load(DataSource* source) = 0;
 		virtual bool _readData() = 0;

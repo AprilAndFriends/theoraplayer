@@ -242,7 +242,7 @@ namespace theoraplayer
 		{
 			return 0.0f;
 		}
-		this->_update(time);
+		this->update(time);
 		return time;
 	}
 
@@ -371,7 +371,7 @@ namespace theoraplayer
 		return ((float)readyCount / frameQueueSize);
 	}
 
-	void VideoClip::_update(float timeDelta)
+	void VideoClip::update(float timeDelta)
 	{
 		if (this->timer->isPaused())
 		{
