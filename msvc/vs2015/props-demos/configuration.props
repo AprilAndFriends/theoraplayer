@@ -17,9 +17,9 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(OutDir)..\..\*.dll $(OutDir) /d /y
-xcopy ..\..\demos\dependencies\win32\glut\lib\*.dll $(OutDir) /d /y
-xcopy ..\..\demos\dependencies\win32\OpenAL\lib\*.dll $(OutDir) /d /y</Command>
+      <Command>xcopy "$(OutDir)..\..\*.dll" "$(OutDir)" /d /y
+xcopy "..\..\demos\dependencies\win32\glut\lib\*.dll" "$(OutDir)" /d /y
+xcopy "..\..\demos\dependencies\win32\OpenAL\lib\*.dll" "$(OutDir)" /d /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
 </Project>
