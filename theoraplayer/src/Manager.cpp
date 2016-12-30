@@ -272,7 +272,7 @@ namespace theoraplayer
 		Mutex::ScopeLock lock(this->workMutex);
 		foreach (VideoClip*, it, this->clips)
 		{
-			(*it)->_update(timeDelta);
+			(*it)->update(timeDelta);
 			(*it)->_decodedAudioCheck();
 		}
 		lock.release();
