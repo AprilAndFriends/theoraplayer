@@ -182,6 +182,9 @@ void ObjModel::draw(void (*textureFunction)(float, float))
 		return;
 	}
 	glBindTexture(GL_TEXTURE_2D, this->textureId);
+#ifdef _IOS
+    // TODO
+#else
 	glBegin(GL_TRIANGLES);
 	for (int i = 0; i < this->verticesCount; i++)
 	{
@@ -200,4 +203,5 @@ void ObjModel::draw(void (*textureFunction)(float, float))
 		glVertex3f(this->vertices[i].x, this->vertices[i].y, this->vertices[i].z);
 	}
 	glEnd();
+#endif
 }
