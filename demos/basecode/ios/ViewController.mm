@@ -167,6 +167,10 @@ GLfloat vertices[] =
 
 - (void)update
 {
+    // TEMP
+    int window_w = 512;
+    int window_h = 512;
+    // END TEMP
     GLKMatrix4 projectionMatrix = GLKMatrix4MakeOrtho(0, window_w, window_h, 0, -1.0f, 1.0f);
     GLKMatrix4 modelViewMatrix = GLKMatrix4Identity;
     

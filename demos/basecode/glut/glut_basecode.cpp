@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #ifdef _USE_WEBM
 #include <clipwebm/clipwebm.h>
 #endif
