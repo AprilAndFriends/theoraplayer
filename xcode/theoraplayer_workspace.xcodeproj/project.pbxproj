@@ -658,6 +658,13 @@
 			remoteGlobalIDString = D1CDFFC41696E1CA00609AB0;
 			remoteInfo = "theoraplayer (iOS AVFoundation)";
 		};
+		D1FAB3181E337D0B00340561 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1677574155C4F8F0050EC64 /* theoraplayer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D1BB6FAD150E9E7100EF9400;
+			remoteInfo = "theoraplayer (iOS Theora)";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -669,11 +676,11 @@
 		B4A28B5E1CAD2C3E004ECC69 /* demo_av.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_av.h; path = ../demos/opengl_demos/demo_av.h; sourceTree = "<group>"; };
 		B4A28B5F1CAD2C3E004ECC69 /* demo_composite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_composite.cpp; path = ../demos/opengl_demos/demo_composite.cpp; sourceTree = "<group>"; };
 		B4A28B601CAD2C3E004ECC69 /* demo_composite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_composite.h; path = ../demos/opengl_demos/demo_composite.h; sourceTree = "<group>"; };
-		B4A28B611CAD2C3E004ECC69 /* demo_environment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_environment.cpp; path = ../demos/opengl_demos/demo_environment.cpp; sourceTree = "<group>"; };
+		B4A28B611CAD2C3E004ECC69 /* demo_environment.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = demo_environment.cpp; path = ../demos/opengl_demos/demo_environment.cpp; sourceTree = "<group>"; };
 		B4A28B621CAD2C3E004ECC69 /* demo_environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_environment.h; path = ../demos/opengl_demos/demo_environment.h; sourceTree = "<group>"; };
 		B4A28B631CAD2C3E004ECC69 /* demo_glutPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_glutPlayer.cpp; path = ../demos/opengl_demos/demo_glutPlayer.cpp; sourceTree = "<group>"; };
 		B4A28B641CAD2C3E004ECC69 /* demo_glutPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_glutPlayer.h; path = ../demos/opengl_demos/demo_glutPlayer.h; sourceTree = "<group>"; };
-		B4A28B651CAD2C3E004ECC69 /* demo_lightMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_lightMap.cpp; path = ../demos/opengl_demos/demo_lightMap.cpp; sourceTree = "<group>"; };
+		B4A28B651CAD2C3E004ECC69 /* demo_lightMap.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = demo_lightMap.cpp; path = ../demos/opengl_demos/demo_lightMap.cpp; sourceTree = "<group>"; };
 		B4A28B661CAD2C3E004ECC69 /* demo_lightMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_lightMap.h; path = ../demos/opengl_demos/demo_lightMap.h; sourceTree = "<group>"; };
 		B4A28B671CAD2C3E004ECC69 /* demo_menu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demo_menu.cpp; path = ../demos/opengl_demos/demo_menu.cpp; sourceTree = "<group>"; };
 		B4A28B681CAD2C3E004ECC69 /* demo_menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo_menu.h; path = ../demos/opengl_demos/demo_menu.h; sourceTree = "<group>"; };
@@ -1128,9 +1135,9 @@
 				B4A28B101CAD1477004ECC69 /* clipavfoundation.xcodeproj */,
 				B4A28B261CAD1482004ECC69 /* clipffmpeg.xcodeproj */,
 				B4A28B321CAD148A004ECC69 /* clipwebm.xcodeproj */,
+				D16776D6155C57E90050EC64 /* media */,
 				D1C2F5C119F502A500A21F0D /* config */,
 				D196833A1B722B030082BAEC /* demos */,
-				D16776D6155C57E90050EC64 /* media */,
 				D1473F2C150CA69B00B20490 /* Frameworks */,
 				D1473F2B150CA69B00B20490 /* Products */,
 			);
@@ -1263,9 +1270,9 @@
 		D1B9C5F91D1EA00200F9844A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D1B9C60F1D1EA00200F9844A /* Vpx.framework */,
-				D1B9C6111D1EA00200F9844A /* libVpx.a */,
-				D1B9C6131D1EA00200F9844A /* libVpx.a */,
+				D1B9C60F1D1EA00200F9844A /* vpx.framework */,
+				D1B9C6111D1EA00200F9844A /* libvpx.a */,
+				D1B9C6131D1EA00200F9844A /* libvpx.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1344,6 +1351,7 @@
 				B4A28BA01CAD2D1F004ECC69 /* PBXTargetDependency */,
 				B4A28BA21CAD2D1F004ECC69 /* PBXTargetDependency */,
 				B4A28BA41CAD2D1F004ECC69 /* PBXTargetDependency */,
+				D1FAB3191E337D0B00340561 /* PBXTargetDependency */,
 			);
 			name = "OpenGL Demos (iOS)";
 			productName = "simple_player (iOS)";
@@ -1585,7 +1593,7 @@
 		D1473F20150CA69B00B20490 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 			};
 			buildConfigurationList = D1473F23150CA69B00B20490 /* Build configuration list for PBXProject "theoraplayer_workspace" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1783,24 +1791,24 @@
 			remoteRef = D167758C155C4F8F0050EC64 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D1B9C60F1D1EA00200F9844A /* Vpx.framework */ = {
+		D1B9C60F1D1EA00200F9844A /* vpx.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = Vpx.framework;
+			path = vpx.framework;
 			remoteRef = D1B9C60E1D1EA00200F9844A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D1B9C6111D1EA00200F9844A /* libVpx.a */ = {
+		D1B9C6111D1EA00200F9844A /* libvpx.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libVpx.a;
+			path = libvpx.a;
 			remoteRef = D1B9C6101D1EA00200F9844A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D1B9C6131D1EA00200F9844A /* libVpx.a */ = {
+		D1B9C6131D1EA00200F9844A /* libvpx.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libVpx.a;
+			path = libvpx.a;
 			remoteRef = D1B9C6121D1EA00200F9844A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -2482,6 +2490,11 @@
 			name = "theora (Mac)";
 			targetProxy = D1D89D8D1B710ED00053378D /* PBXContainerItemProxy */;
 		};
+		D1FAB3191E337D0B00340561 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "theoraplayer (iOS Theora)";
+			targetProxy = D1FAB3181E337D0B00340561 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -2604,17 +2617,15 @@
 					_DEMO_MULTIPLE,
 					_DEMO_SEEK,
 					_DEMO_TV,
-					_DEMO_LIGHT_MAP,
+					"___DEMO_LIGHT_MAP",
 					_DEMO_AV,
 					_DEMO_COMPOSITE,
-					_DEMO_ENVIRONMENT,
+					"___DEMO_ENVIRONMENT",
 					"___USE_WEBM",
 					"___USE_FFMPEG",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ios_demos.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2637,17 +2648,15 @@
 					_DEMO_MULTIPLE,
 					_DEMO_SEEK,
 					_DEMO_TV,
-					_DEMO_LIGHT_MAP,
+					"___DEMO_LIGHT_MAP",
 					_DEMO_AV,
 					_DEMO_COMPOSITE,
-					_DEMO_ENVIRONMENT,
+					"___DEMO_ENVIRONMENT",
 					"___USE_WEBM",
 					"___USE_FFMPEG",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ios_demos.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2671,17 +2680,15 @@
 					_DEMO_MULTIPLE,
 					_DEMO_SEEK,
 					_DEMO_TV,
-					_DEMO_LIGHT_MAP,
+					"___DEMO_LIGHT_MAP",
 					_DEMO_AV,
 					_DEMO_COMPOSITE,
-					_DEMO_ENVIRONMENT,
+					"___DEMO_ENVIRONMENT",
 					"___USE_WEBM",
 					"___USE_FFMPEG",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ios_demos.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2752,13 +2759,11 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = _DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -2784,10 +2789,8 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -2812,10 +2815,8 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
