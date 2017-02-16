@@ -16,7 +16,11 @@
 
 #include <ogg/ogg.h>
 #include <theora/theoradec.h>
+#if defined(_USE_TREMOR) || defined(THEORA_PLAYER_USE_TREMOR)
+#include <tremor/ivorbisfile.h>
+#else
 #include <vorbis/vorbisfile.h>
+#endif
 
 #include "AudioPacketQueue.h"
 #include "DataSource.h"

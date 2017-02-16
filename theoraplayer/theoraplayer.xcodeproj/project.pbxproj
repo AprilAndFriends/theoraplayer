@@ -1413,6 +1413,7 @@
 					"$(SRCROOT)/../xal/lib/ogg/include",
 					"$(SRCROOT)/../xal/lib/vorbis/include",
 					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/../",
 					"$(SRCROOT)/src/YUV/libyuv/include",
 					"$(SRCROOT)/src/formats",
 				);
@@ -1477,6 +1478,7 @@
 					"$(SRCROOT)/../xal/lib/ogg/include",
 					"$(SRCROOT)/../xal/lib/vorbis/include",
 					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/../",
 					"$(SRCROOT)/src/YUV/libyuv/include",
 					"$(SRCROOT)/src/formats",
 				);
@@ -1540,6 +1542,7 @@
 					"$(SRCROOT)/../xal/lib/ogg/include",
 					"$(SRCROOT)/../xal/lib/vorbis/include",
 					"$(SRCROOT)/../theora/include",
+					"$(SRCROOT)/../",
 					"$(SRCROOT)/src/YUV/libyuv/include",
 					"$(SRCROOT)/src/formats",
 				);
@@ -1682,6 +1685,7 @@
 					_IOS,
 					_USE_THEORA,
 					_YUV_LIBYUV,
+					"$(THEORA_PLAYER_IOS_EXTRA_PREPROCESSOR)",
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1700,6 +1704,7 @@
 					_IOS,
 					_USE_THEORA,
 					_YUV_LIBYUV,
+					"$(THEORA_PLAYER_IOS_EXTRA_PREPROCESSOR)",
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1718,6 +1723,7 @@
 					_IOS,
 					_USE_THEORA,
 					_YUV_LIBYUV,
+					"$(THEORA_PLAYER_IOS_EXTRA_PREPROCESSOR)",
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1792,6 +1798,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					_YUV_LIBYUV,
+					"$(THEORA_PLAYER_IOS_EXTRA_PREPROCESSOR)",
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1809,6 +1816,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					_YUV_LIBYUV,
+					"$(THEORA_PLAYER_IOS_EXTRA_PREPROCESSOR)",
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -1826,6 +1834,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_IOS,
 					_YUV_LIBYUV,
+					"$(THEORA_PLAYER_IOS_EXTRA_PREPROCESSOR)",
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
