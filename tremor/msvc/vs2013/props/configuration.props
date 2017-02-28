@@ -8,13 +8,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
     <Link>
-      <AdditionalDependencies>libhltypes.lib;libtinyxml.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libhltypes.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">
     <Link>
       <PreprocessorDefinitions Condition="'$(Platform)'=='Android'">_ARM_ASSEM_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalDependencies>-ltinyxml;-lhltypes;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>-lhltypes;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
 </Project>
