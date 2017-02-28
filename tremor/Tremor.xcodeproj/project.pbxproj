@@ -29,9 +29,9 @@
 		D176B29D1562F1AF00E26F82 /* floor1.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B26C1562F1AF00E26F82 /* floor1.c */; };
 		D176B29E1562F1AF00E26F82 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B26D1562F1AF00E26F82 /* info.c */; };
 		D176B29F1562F1AF00E26F82 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = D176B26D1562F1AF00E26F82 /* info.c */; };
-		D176B2A21562F1AF00E26F82 /* ivorbiscodec.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B26F1562F1AF00E26F82 /* ivorbiscodec.h */; };
+		D176B2A21562F1AF00E26F82 /* ivorbiscodec.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B26F1562F1AF00E26F82 /* ivorbiscodec.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D176B2A31562F1AF00E26F82 /* ivorbiscodec.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B26F1562F1AF00E26F82 /* ivorbiscodec.h */; };
-		D176B2A61562F1AF00E26F82 /* ivorbisfile.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2711562F1AF00E26F82 /* ivorbisfile.h */; };
+		D176B2A61562F1AF00E26F82 /* ivorbisfile.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2711562F1AF00E26F82 /* ivorbisfile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D176B2A71562F1AF00E26F82 /* ivorbisfile.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2711562F1AF00E26F82 /* ivorbisfile.h */; };
 		D176B2A81562F1AF00E26F82 /* lsp_lookup.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2721562F1AF00E26F82 /* lsp_lookup.h */; };
 		D176B2A91562F1AF00E26F82 /* lsp_lookup.h in Headers */ = {isa = PBXBuildFile; fileRef = D176B2721562F1AF00E26F82 /* lsp_lookup.h */; };
@@ -200,14 +200,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D176B2A21562F1AF00E26F82 /* ivorbiscodec.h in Headers */,
+				D176B2A61562F1AF00E26F82 /* ivorbisfile.h in Headers */,
 				D176B2861562F1AF00E26F82 /* asm_arm.h in Headers */,
 				D176B2891562F1AF00E26F82 /* backends.h in Headers */,
 				D176B28D1562F1AF00E26F82 /* block.h in Headers */,
 				D176B2921562F1AF00E26F82 /* codebook.h in Headers */,
 				D176B2941562F1AF00E26F82 /* codec_internal.h in Headers */,
 				D176B2961562F1AF00E26F82 /* config_types.h in Headers */,
-				D176B2A21562F1AF00E26F82 /* ivorbiscodec.h in Headers */,
-				D176B2A61562F1AF00E26F82 /* ivorbisfile.h in Headers */,
 				D176B2A81562F1AF00E26F82 /* lsp_lookup.h in Headers */,
 				D176B2AD1562F1AF00E26F82 /* mdct_lookup.h in Headers */,
 				D176B2B11562F1AF00E26F82 /* mdct.h in Headers */,

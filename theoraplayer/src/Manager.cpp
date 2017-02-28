@@ -8,7 +8,11 @@
 
 #ifdef _USE_THEORA
 #include <theora/theoradec.h>
+#if defined(_USE_TREMOR) || defined(THEORA_PLAYER_USE_TREMOR)
+#include <tremor/ivorbisfile.h>
+#else
 #include <vorbis/vorbisfile.h>
+#endif
 #endif
 
 #include "AudioInterface.h"
@@ -74,8 +78,12 @@ namespace theoraplayer
 	{
 		std::string message = "Initializing Theoraplayer Video Playback Library (" + this->getVersionString() + ")\n";
 #ifdef _USE_THEORA
-		message += "  - libtheora version: " + std::string(th_version_string()) + "\n" +
-			"  - libvorbis version: " + std::string(vorbis_version_string()) + "\n";
+		message += "  - libtheora version: " + std::string(th_version_string()) + "\n";
+#if defined(_USE_TREMOR)
+#else
+		message +=
+		"  - libvorbis version: " + std::string(vorbis_version_string()) + "\n";
+#endif
 #endif
 #ifdef _ANDROID
 		uint64_t features = libtheoraplayer_android_getCpuFeaturesExt();

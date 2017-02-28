@@ -36,24 +36,6 @@
 const char *vorbis_version_string(void){
   return GENERAL_VENDOR_STRING;
 }
-double vorbis_granule_time(vorbis_dsp_state *v,ogg_int64_t granulepos){
-  if(granulepos == -1) return -1;
-
-  /* We're not guaranteed a 64 bit unsigned type everywhere, so we
-     have to put the unsigned granpo in a signed type. */
-  if(granulepos>=0){
-    return((double)granulepos/v->vi->rate);
-  }else{
-    ogg_int64_t granuleoff=0xffffffff;
-    granuleoff<<=31;
-#ifdef __APPLE__ // cateia games note: added this to silence xcode warning on gcc compiler
-    granuleoff|=0x7ffffffffLL;	  
-#else
-    granuleoff|=0x7ffffffff;
-#endif
-    return(((double)granulepos+2+granuleoff+granuleoff)/v->vi->rate);
-  }
-}
 // END - added
 
 /* helpers */
