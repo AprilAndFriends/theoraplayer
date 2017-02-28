@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <memory.h>
 #include <string>
+#include <stdint.h>
 
 #include "AudioInterface.h"
 #include "AudioInterfaceFactory.h"
@@ -27,32 +28,22 @@
 
 #define BUFFER_SIZE 4096
 
+#ifdef _USE_TREMOR
 static inline int32_t CLIP_TO_15(int32_t x)
 {
-	uint32_t tmp = x + 32768;
-	return (tmp < 65536) ? x: (tmp < (1<<31)) ? 32767 : -32768;
-	
+	uint32_t tmp = x + SHRT_MAX;
+	return (tmp < USHRT_MAX) ? x : (tmp < (1u << 31)) ? SHRT_MAX : SHRT_MIN;
 }
 
-#if defined(_USE_TREMOR) || defined(THEORA_PLAYER_USE_TREMOR)
-double vorbis_granule_time(vorbis_dsp_state *v,ogg_int64_t granulepos){
-	if(granulepos == -1) return -1;
-	
-	/* We're not guaranteed a 64 bit unsigned type everywhere, so we
-	 have to put the unsigned granpo in a signed type. */
-	if(granulepos>=0){
-		return((double)granulepos/v->vi->rate);
-	}else{
-		ogg_int64_t granuleoff=0xffffffff;
-		granuleoff<<=31;
-#ifdef __APPLE__ // cateia games note: added this to silence xcode warning on gcc compiler
-		granuleoff|=0x7ffffffffLL;
-#else
-		granuleoff|=0x7ffffffff;
+#ifdef __cplusplus
+extern "C"
+{
 #endif
-		return(((double)granulepos+2+granuleoff+granuleoff)/v->vi->rate);
-	}
+	// defined in codec.h of vorbis, but tremor has not external definition anywhere
+	extern double vorbis_granule_time(vorbis_dsp_state* v, ogg_int64_t granulepos);
+#ifdef __cplusplus
 }
+#endif
 #endif
 
 namespace theoraplayer
@@ -332,7 +323,6 @@ namespace theoraplayer
 			return -1.0f;
 		}
 		ogg_packet opVorbis;
-#if defined(_USE_TREMOR) || defined(THEORA_PLAYER_USE_TREMOR)
 		int length = 0;
 		float timeStamp = -1.0f;
 		bool readPastTimestamp = false;
@@ -340,22 +330,23 @@ namespace theoraplayer
 		float videoTime = (float)this->lastDecodedFrameNumber / this->fps;
 		float min = this->frameQueue->getSize() / this->fps + 1.0f;
 		float audioTime = 0.0f;
+		float** pcm = new float*[audioChannelsCount];
+		pcm[0] = NULL;;
+#ifdef _USE_TREMOR
+		ogg_int32_t** pcmi = NULL;
+#endif
 		while (true)
 		{
-			float** pcm=nullptr;
-#if defined(_USE_TREMOR) || defined(THEORA_PLAYER_USE_TREMOR)
-			ogg_int32_t** pcmi=nullptr;
-
+#ifdef _USE_TREMOR
 			length = vorbis_synthesis_pcmout(&this->info.VorbisDSPState, &pcmi);
-			if (length>0)
+			if (length > 0)
 			{
-				pcm=new float*[audioChannelsCount];
-				for (int chan=0; chan<audioChannelsCount; ++chan)
+				for (int chan = 0; chan < audioChannelsCount; ++chan)
 				{
 					pcm[chan] = new float[length];
-					for (int vcp=0; vcp<length; ++vcp)
+					for (int vcp = 0; vcp < length; ++vcp)
 					{
-						pcm[chan][vcp]=CLIP_TO_15((*pcmi)[vcp]>>9)*1.0f/32767.0f;
+						pcm[chan][vcp] = CLIP_TO_15((*pcmi)[vcp] >> 9) * 1.0f / SHRT_MAX;
 					}
 				}
 			}
@@ -397,68 +388,18 @@ namespace theoraplayer
 				}
 				vorbis_synthesis_read(&this->info.VorbisDSPState, length); // tell vorbis we read a number of samples
 			}
-#if defined(_USE_TREMOR) || defined(THEORA_PLAYER_USE_TREMOR)
-			if (pcm)
+#ifdef _USE_TREMOR
+			if (pcm[0] != NULL)
 			{
-				for (int chan=0; chan<audioChannelsCount; ++chan)
+				for (int chan = 0; chan < audioChannelsCount; ++chan)
 				{
 					delete[] pcm[chan];
 				}
-				delete[] pcm;
+				pcm[0] = NULL;
 			}
 #endif
 		}
 		return timeStamp;
-#else
-		float** pcm;
-		int length = 0;
-		float timeStamp = -1.0f;
-		bool readPastTimestamp = false;
-		float factor = 1.0f / this->audioFrequency;
-		float videoTime = (float)this->lastDecodedFrameNumber / this->fps;
-		float min = this->frameQueue->getSize() / this->fps + 1.0f;
-		float audioTime = 0.0f;
-		while (true)
-		{
-			length = vorbis_synthesis_pcmout(&this->info.VorbisDSPState, &pcm);
-			if (length == 0)
-			{
-				if (ogg_stream_packetout(&this->info.VorbisStreamState, &opVorbis) > 0)
-				{
-					if (vorbis_synthesis(&this->info.VorbisBlock, &opVorbis) == 0)
-					{
-						if (timeStamp < 0 && opVorbis.granulepos >= 0)
-						{
-							timeStamp = (float)vorbis_granule_time(&this->info.VorbisDSPState, opVorbis.granulepos);
-						}
-						else if (timeStamp >= 0)
-						{
-							readPastTimestamp = true;
-						}
-						vorbis_synthesis_blockin(&this->info.VorbisDSPState, &this->info.VorbisBlock);
-					}
-					continue;
-				}
-				audioTime = this->readAudioSamples * factor;
-				// always buffer up of audio ahead of the frames
-				if (audioTime - videoTime >= min || !this->_readData())
-				{
-					break;
-				}
-			}
-			if (length > 0)
-			{
-				this->addAudioPacket(pcm, length, this->audioGain);
-				this->readAudioSamples += length;
-				if (readPastTimestamp)
-				{
-					timeStamp += (float)length / this->info.VorbisInfo.rate;
-				}
-				vorbis_synthesis_read(&this->info.VorbisDSPState, length); // tell vorbis we read a number of samples
-			}
-		}
-		return timeStamp;
-#endif
 	}
 
 	void VideoClip_Theora::_decodedAudioCheck()
