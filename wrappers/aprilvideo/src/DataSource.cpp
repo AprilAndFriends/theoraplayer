@@ -40,7 +40,7 @@ namespace aprilvideo
 		{
 			this->_openFile();
 		}
-		this->resource.seek(byteIndex, hresource::START);
+		this->resource.seek(byteIndex, hseek::Start);
 	}
 
 	int64_t DataSource::getSize()
