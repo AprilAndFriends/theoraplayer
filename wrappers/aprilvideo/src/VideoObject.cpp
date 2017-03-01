@@ -324,21 +324,21 @@ namespace aprilvideo
 	{
 		if (VideoObject::_propertyDescriptions.size() == 0)
 		{
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_clip_name", aprilui::PropertyDescription::STRING);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_clip_use_alpha", aprilui::PropertyDescription::BOOL);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("pause_alpha_threshold", aprilui::PropertyDescription::INT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("looping", aprilui::PropertyDescription::BOOL);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("initial_precache_factor", aprilui::PropertyDescription::FLOAT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("initial_precache_timeout", aprilui::PropertyDescription::FLOAT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("sound_name", aprilui::PropertyDescription::STRING);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("audio_sync_offset", aprilui::PropertyDescription::FLOAT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("blend_mode", aprilui::PropertyDescription::STRING);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("speed", aprilui::PropertyDescription::FLOAT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("time_position", aprilui::PropertyDescription::FLOAT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_clip_width", aprilui::PropertyDescription::INT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_clip_height", aprilui::PropertyDescription::INT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_clip_duration", aprilui::PropertyDescription::FLOAT);
-			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("playback_state", aprilui::PropertyDescription::STRING);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_clip_name", aprilui::PropertyDescription::Type::String);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_clip_use_alpha", aprilui::PropertyDescription::Type::Bool);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("pause_alpha_threshold", aprilui::PropertyDescription::Type::Int);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("looping", aprilui::PropertyDescription::Type::Bool);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("initial_precache_factor", aprilui::PropertyDescription::Type::Float);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("initial_precache_timeout", aprilui::PropertyDescription::Type::Float);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("sound_name", aprilui::PropertyDescription::Type::String);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("audio_sync_offset", aprilui::PropertyDescription::Type::Float);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("blend_mode", aprilui::PropertyDescription::Type::String);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("speed", aprilui::PropertyDescription::Type::Float);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("time_position", aprilui::PropertyDescription::Type::Float);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_clip_width", aprilui::PropertyDescription::Type::Int);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_clip_height", aprilui::PropertyDescription::Type::Int);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_clip_duration", aprilui::PropertyDescription::Type::Float);
+			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("playback_state", aprilui::PropertyDescription::Type::String);
 		}
 		return (aprilui::ImageBox::getPropertyDescriptions() + VideoObject::_propertyDescriptions);
 	}
