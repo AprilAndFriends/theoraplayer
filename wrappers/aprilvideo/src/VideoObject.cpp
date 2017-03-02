@@ -57,7 +57,7 @@ namespace aprilvideo
 		this->initialPrecacheFactor = 0.5f;
 #endif
 		this->audioSyncOffset = 0.0f;
-		this->blendMode = april::BM_DEFAULT;
+		this->blendMode = april::BlendMode::Alpha;
 		this->speed = 1.0f;
 		this->clip = NULL;
 		this->timer = NULL;
@@ -402,9 +402,9 @@ namespace aprilvideo
 		if (name == "audio_sync_offset")			return this->getAudioSyncOffset();
 		if (name == "blend_mode")
 		{
-			if (this->blendMode == april::BM_ADD)		return "add";
-			if (this->blendMode == april::BM_SUBTRACT)	return "subtract";
-			if (this->blendMode == april::BM_OVERWRITE)	return "overwrite";
+			if (this->blendMode == april::BlendMode::Add)		return "add";
+			if (this->blendMode == april::BlendMode::Subtract)	return "subtract";
+			if (this->blendMode == april::BlendMode::Overwrite)	return "overwrite";
 			return "default";
 		}
 		if (name == "speed")						return this->getSpeed();
@@ -490,11 +490,15 @@ namespace aprilvideo
 		else if (name == "blend_mode")
 		{
 			april::BlendMode mode;
-			if		(value == "default")	mode = april::BM_DEFAULT;
-			else if (value == "alpha")		mode = april::BM_ALPHA;
-			else if (value == "add")		mode = april::BM_ADD;
-			else if (value == "subtract")	mode = april::BM_SUBTRACT;
-			else if (value == "overwrite")	mode = april::BM_OVERWRITE;
+			if (value == "default")
+			{
+				hlog::warn(logTag, "'blend_mode=default' is deprecated. Use 'blend_mode=alpha' instead."); // DEPRECATED
+				mode = april::BlendMode::Alpha;
+			}
+			else if (value == "alpha")		mode = april::BlendMode::Alpha;
+			else if (value == "add")		mode = april::BlendMode::Add;
+			else if (value == "subtract")	mode = april::BlendMode::Subtract;
+			else if (value == "overwrite")	mode = april::BlendMode::Overwrite;
 			else
 			{
 				hlog::errorf(logTag, "Unknown VideoObject blend mode: %s", name.cStr());
