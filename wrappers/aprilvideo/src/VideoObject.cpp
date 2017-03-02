@@ -312,10 +312,10 @@ namespace aprilvideo
 
 	april::Image::Format VideoObject::_getTextureFormat() const
 	{
-		april::Image::Format format = april::Image::FORMAT_RGBX;
+		april::Image::Format format = april::Image::Format::RGBX;
 		if (this->videoClipUseAlpha)
 		{
-			format = april::Image::FORMAT_RGBA;
+			format = april::Image::Format::RGBA;
 		}
 		return april::rendersys->getNativeTextureFormat(format);
 	}
@@ -716,17 +716,17 @@ namespace aprilvideo
 		try
 		{
 			theoraplayer::OutputMode mode = theoraplayer::FORMAT_RGBA;
-			if		(textureFormat == april::Image::FORMAT_RGBA)		mode = theoraplayer::FORMAT_RGBA;
-			else if (textureFormat == april::Image::FORMAT_RGBX)		mode = theoraplayer::FORMAT_RGBX;
-			else if (textureFormat == april::Image::FORMAT_BGRA)		mode = theoraplayer::FORMAT_BGRA;
-			else if (textureFormat == april::Image::FORMAT_BGRX)		mode = theoraplayer::FORMAT_BGRX;
-			else if (textureFormat == april::Image::FORMAT_ARGB)		mode = theoraplayer::FORMAT_ARGB;
-			else if (textureFormat == april::Image::FORMAT_XRGB)		mode = theoraplayer::FORMAT_XRGB;
-			else if (textureFormat == april::Image::FORMAT_ABGR)		mode = theoraplayer::FORMAT_ABGR;
-			else if (textureFormat == april::Image::FORMAT_XBGR)		mode = theoraplayer::FORMAT_XBGR;
-			else if (textureFormat == april::Image::FORMAT_RGB)			mode = theoraplayer::FORMAT_RGBX;
-			else if (textureFormat == april::Image::FORMAT_BGR)			mode = theoraplayer::FORMAT_BGRX;
-			else if (textureFormat == april::Image::FORMAT_GRAYSCALE)	mode = theoraplayer::FORMAT_GREY;
+			if		(textureFormat == april::Image::Format::RGBA)		mode = theoraplayer::FORMAT_RGBA;
+			else if (textureFormat == april::Image::Format::RGBX)		mode = theoraplayer::FORMAT_RGBX;
+			else if (textureFormat == april::Image::Format::BGRA)		mode = theoraplayer::FORMAT_BGRA;
+			else if (textureFormat == april::Image::Format::BGRX)		mode = theoraplayer::FORMAT_BGRX;
+			else if (textureFormat == april::Image::Format::ARGB)		mode = theoraplayer::FORMAT_ARGB;
+			else if (textureFormat == april::Image::Format::XRGB)		mode = theoraplayer::FORMAT_XRGB;
+			else if (textureFormat == april::Image::Format::ABGR)		mode = theoraplayer::FORMAT_ABGR;
+			else if (textureFormat == april::Image::Format::XBGR)		mode = theoraplayer::FORMAT_XBGR;
+			else if (textureFormat == april::Image::Format::RGB)		mode = theoraplayer::FORMAT_RGBX;
+			else if (textureFormat == april::Image::Format::BGR)		mode = theoraplayer::FORMAT_BGRX;
+			else if (textureFormat == april::Image::Format::Greyscale)	mode = theoraplayer::FORMAT_GREY;
 			int ram = april::getSystemInfo().ram;
 			int precached = 16;
 #if defined(_WINRT) && !defined(_WINP8)
