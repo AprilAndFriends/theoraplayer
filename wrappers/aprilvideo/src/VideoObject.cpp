@@ -12,6 +12,7 @@
 #include <aprilui/Image.h>
 #include <aprilui/Texture.h>
 #include <hltypes/hrdir.h>
+#include <hltypes/hfile.h>
 #include <theoraplayer/Exception.h>
 #include <theoraplayer/FrameQueue.h>
 #include <theoraplayer/Manager.h>
@@ -767,14 +768,19 @@ namespace aprilvideo
 #endif
 			if (path.endsWith(".mp4"))
 			{
-				if (april::window->getName() == "OpenKODE") // because mp4's are opened via apple's api, and that doesn't play nice with OpenKODE dir structure.
+				hstr mp4Path = path;
+				if (hresource::getMountedArchives().size() > 0)
 				{
-					this->clip = theoraplayer::manager->createVideoClip(hrdir::joinPath("res", path).cStr(), mode, precached);
+					// Mp4 files can't be read from the zip file, paste them in the res/ folder
+					harray<hstr> pathElements = hrdir::splitPath(this->_videoClipFilename);
+					hstr filename = pathElements.last();
+					mp4Path = filename;
 				}
-				else
+				else if (april::window->getName() == "OpenKODE") // because mp4's are opened via apple's api, and that doesn't play nice with OpenKODE dir structure.
 				{
-					this->clip = theoraplayer::manager->createVideoClip(path.cStr(), mode, precached);
+					mp4Path = hrdir::joinPath("res", path);
 				}
+				this->clip = theoraplayer::manager->createVideoClip(mp4Path.cStr(), mode, precached);
 			}
 			// additional performance optimization: preload file in RAM to speed up decoding, every CPU cycle counts on certain platforms
 			// but only for "reasonably" sized files
