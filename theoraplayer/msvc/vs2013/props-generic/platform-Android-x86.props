@@ -14,7 +14,7 @@
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
     <ClCompile>
-      <PreprocessorDefinitions>_ANDROID;ANDROID;_X86;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_ANDROID;ANDROID;APP_UNIFIED_HEADERS;_X86;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../..;../../src;../../../include;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PositionIndependentCode>true</PositionIndependentCode>
     </ClCompile>
