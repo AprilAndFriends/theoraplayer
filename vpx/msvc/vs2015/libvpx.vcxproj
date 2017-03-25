@@ -115,6 +115,12 @@ vsyasm -Xvc -g cv8 -f win32 -I"../.." -o "$(IntDir)asm\%(Filename).obj" "%(FullP
       <Command Condition="'$(WholeProgramOptimization)'=='true'">IF EXIST "$(IntDir)asm\%(Filename).obj" del "$(IntDir)asm\%(Filename).obj" /q
 vsyasm -Xvc -f win32 -I"../.." -o "$(IntDir)asm\%(Filename).obj" "%(FullPath)"</Command>
     </CustomBuild>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\vpx\src\vpx_decoder.c" />

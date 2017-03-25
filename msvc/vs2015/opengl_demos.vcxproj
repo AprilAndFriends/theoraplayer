@@ -33,6 +33,16 @@
   <Import Condition="!exists('..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props')" Project="..\..\theoraplayer\msvc\vs2015\props-generic\build-defaults.props" />
   <Import Project="props-demos\build-defaults.props" />
   <Import Project="props-demos\configuration.props" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\demos\basecode\glut\glut_basecode.cpp" />
     <ClCompile Include="..\..\demos\basecode\util\util.cpp" />

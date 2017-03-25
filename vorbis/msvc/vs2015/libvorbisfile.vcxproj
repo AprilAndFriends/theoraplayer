@@ -48,6 +48,8 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>LIBVORBISFILE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>

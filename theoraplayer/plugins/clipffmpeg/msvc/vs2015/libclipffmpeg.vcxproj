@@ -68,6 +68,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>../../../../../libffmpeg/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Lib>
       <AdditionalLibraryDirectories>../../../../../libffmpeg/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -77,6 +78,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>../../../../../libffmpeg/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Lib>
       <AdditionalLibraryDirectories>../../../../../libffmpeg/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

@@ -110,6 +110,12 @@
       <AdditionalDependencies Condition="'$(Platform)'=='Win32'">libvpx.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">-lvpx;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='DebugS|Win32'">MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <ClCompile>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='ReleaseS|Win32'">MultiThreaded</RuntimeLibrary>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\md5_utils.c" />
