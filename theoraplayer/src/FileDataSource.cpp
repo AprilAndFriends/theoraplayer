@@ -108,7 +108,7 @@ namespace theoraplayer
 		}
 #ifdef _LINUX
 		fpos_t pos;
-		fgetpos(mFilePtr, &pos);
+		fgetpos(this->filePtr, &pos);
 		return (int64_t)pos.__pos;
 #else
 		fpos_t pos;
