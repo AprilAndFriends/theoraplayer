@@ -1,0 +1,8 @@
+# Visual Studio
+.vs/
+*.VC.db
+*.VC.opendb
+*.vcxproj.user
+
+# Output directories
+bin/
