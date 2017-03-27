@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Label="Globals">
-    <WindowsTargetPlatformVersion>10</WindowsTargetPlatformVersion>
-  </PropertyGroup>
   <PropertyGroup Label="Configuration">
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
@@ -20,9 +17,9 @@
     <Link>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v110_xp'">..\..\lib\lib\msvc110;..\..\lib\msvc110;..\..\..\lib\msvc110;..\..\..\..\lib\msvc110;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v120_xp'">..\..\lib\lib\msvc120;..\..\lib\msvc120;..\..\..\lib\msvc120;..\..\..\..\lib\msvc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v140_xp'">..\..\lib\lib\msvc140;..\..\lib\msvc140;..\..\..\lib\msvc140;..\..\..\..\lib\msvc140;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v110'">..\..\lib\lib\msvc110;..\..\lib\msvc110;..\..\..\lib\msvc110;..\..\..\..\lib\msvc110;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v120'">..\..\lib\lib\msvc120;..\..\lib\msvc120;..\..\..\lib\msvc120;..\..\..\..\lib\msvc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v140'">..\..\lib\lib\msvc140;..\..\lib\msvc140;..\..\..\lib\msvc140;..\..\..\..\lib\msvc140;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <SubSystem>Windows</SubSystem>
@@ -30,9 +27,9 @@
     <Lib>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v110_xp'">..\..\lib\lib\msvc110;..\..\lib\msvc110;..\..\..\lib\msvc110;..\..\..\..\lib\msvc110;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v120_xp'">..\..\lib\lib\msvc120;..\..\lib\msvc120;..\..\..\lib\msvc120;..\..\..\..\lib\msvc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v140_xp'">..\..\lib\lib\msvc140;..\..\lib\msvc140;..\..\..\lib\msvc140;..\..\..\..\lib\msvc140;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v110'">..\..\lib\lib\msvc110;..\..\lib\msvc110;..\..\..\lib\msvc110;..\..\..\..\lib\msvc110;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v120'">..\..\lib\lib\msvc120;..\..\lib\msvc120;..\..\..\lib\msvc120;..\..\..\..\lib\msvc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v140'">..\..\lib\lib\msvc140;..\..\lib\msvc140;..\..\..\lib\msvc140;..\..\..\..\lib\msvc140;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX86</TargetMachine>
       <SubSystem>Windows</SubSystem>
     </Lib>
