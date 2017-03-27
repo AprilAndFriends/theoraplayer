@@ -17,8 +17,8 @@
     <Link>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v110_xp'">..\..\lib\lib\msvc110_x64;..\..\lib\msvc110_x64;..\..\..\lib\msvc110_x64;..\..\..\..\lib\msvc110_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v120_xp'">..\..\lib\lib\msvc120_x64;..\..\lib\msvc120_x64;..\..\..\lib\msvc120_x64;..\..\..\..\lib\msvc120_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v110'))">..\..\lib\lib\msvc110_x64;..\..\lib\msvc110_x64;..\..\..\lib\msvc110_x64;..\..\..\..\lib\msvc110_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v120'))">..\..\lib\lib\msvc120_x64;..\..\lib\msvc120_x64;..\..\..\lib\msvc120_x64;..\..\..\..\lib\msvc120_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX64</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <SubSystem>Windows</SubSystem>
@@ -26,8 +26,8 @@
     <Lib>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v110_xp'">..\..\lib\lib\msvc110_x64;..\..\lib\msvc110_x64;..\..\..\lib\msvc110_x64;..\..\..\..\lib\msvc110_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(PlatformToolset)'=='v120_xp'">..\..\lib\lib\msvc120_x64;..\..\lib\msvc120_x64;..\..\..\lib\msvc120_x64;..\..\..\..\lib\msvc120_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v110'))">..\..\lib\lib\msvc110_x64;..\..\lib\msvc110_x64;..\..\..\lib\msvc110_x64;..\..\..\..\lib\msvc110_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v120'))">..\..\lib\lib\msvc120_x64;..\..\lib\msvc120_x64;..\..\..\lib\msvc120_x64;..\..\..\..\lib\msvc120_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX64</TargetMachine>
       <SubSystem>Windows</SubSystem>
     </Lib>
