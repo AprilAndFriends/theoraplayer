@@ -5,7 +5,7 @@
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Condition="(exists('..\..\lib\msvc\vs2015\$(Platform).props'))" Project="..\..\lib\msvc\vs2015\$(Platform).props"/>
   <Import Condition="(exists('..\..\msvc\vs2015\$(Platform).props'))" Project="..\..\msvc\vs2015\$(Platform).props"/>
