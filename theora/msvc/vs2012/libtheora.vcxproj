@@ -69,9 +69,12 @@
     <ClInclude Include="..\..\include\theora\theora.h" />
     <ClInclude Include="..\..\include\theora\theoradec.h" />
     <ClInclude Include="..\..\include\theora\theoraenc.h" />
-    <ClInclude Include="..\..\lib\arm_llvm\armbits.h" />
-    <ClInclude Include="..\..\lib\arm_llvm\armcpu.h" />
-    <ClInclude Include="..\..\lib\arm_llvm\armint.h" />
+    <ClInclude Include="..\..\lib\arm\armbits.h" />
+    <ClInclude Include="..\..\lib\arm\armcpu.h" />
+    <ClInclude Include="..\..\lib\arm\armint.h" />
+    <ClInclude Include="..\..\lib\arm_llvm_android\armbits.h" />
+    <ClInclude Include="..\..\lib\arm_llvm_android\armcpu.h" />
+    <ClInclude Include="..\..\lib\arm_llvm_android\armint.h" />
     <ClInclude Include="..\..\lib\collect.h" />
     <ClInclude Include="..\..\lib\internal.h" />
     <ClInclude Include="..\..\lib\encint.h" />
@@ -91,47 +94,29 @@
     <ClInclude Include="..\..\lib\x86_vc\x86cpu.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\lib\analyze.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
+    <ClCompile Include="..\..\lib\arm\armcpu.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Win32' or $(PlatformToolset.StartsWith('clang'))">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armcpu.c">
-      <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
+    <ClCompile Include="..\..\lib\arm\armstate.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Win32' or $(PlatformToolset.StartsWith('clang'))">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armstate.c">
-      <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
+    <ClCompile Include="..\..\lib\arm_llvm_android\armcpu.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Win32' or !$(PlatformToolset.StartsWith('clang'))">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm_llvm_android\armstate.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='Win32' or !$(PlatformToolset.StartsWith('clang'))">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\lib\collect.c" />
-    <ClCompile Include="..\..\lib\encapiwrapper.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\encfrag.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\encinfo.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\encode.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\lib\encoder_disabled.c" />
     <ClCompile Include="..\..\lib\enquant.c" />
     <ClCompile Include="..\..\lib\fdct.c" />
     <ClCompile Include="..\..\lib\huffenc.c" />
     <ClCompile Include="..\..\lib\mathops.c" />
-    <ClCompile Include="..\..\lib\mcenc.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\lib\rate.c" />
     <ClCompile Include="..\..\lib\tokenize.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxencfrag.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\lib\x86_vc\mmxfdct.c" />
     <ClCompile Include="..\..\lib\x86_vc\x86cpu.c">
       <ExcludedFromBuild Condition="'$(Platform)'=='Android'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\x86_vc\x86enc.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\lib\apiwrapper.c" />
     <ClCompile Include="..\..\lib\bitpack.c" />
@@ -163,28 +148,54 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\lib\arm_llvm\armbits.asm">
+    <ClCompile Include="..\..\lib\arm\armbits.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
-      <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android' or $(PlatformToolset.StartsWith('clang'))">true</ExcludedFromBuild>
       <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armfrag.asm">
+    <ClCompile Include="..\..\lib\arm\armfrag.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
-      <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android' or $(PlatformToolset.StartsWith('clang'))">true</ExcludedFromBuild>
       <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armidct.asm">
+    <ClCompile Include="..\..\lib\arm\armidct.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
-      <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android' or $(PlatformToolset.StartsWith('clang'))">true</ExcludedFromBuild>
       <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
-    <ClCompile Include="..\..\lib\arm_llvm\armloop.asm">
+    <ClCompile Include="..\..\lib\arm\armloop.asm">
       <FileType>Document</FileType>
       <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
-      <ExcludedFromBuild Condition="'$(Platform)'!='Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android' or $(PlatformToolset.StartsWith('clang'))">true</ExcludedFromBuild>
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\lib\arm_llvm_android\armbits.asm">
+      <FileType>Document</FileType>
+      <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android' or !$(PlatformToolset.StartsWith('clang'))">true</ExcludedFromBuild>
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm_llvm_android\armfrag.asm">
+      <FileType>Document</FileType>
+      <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android' or !$(PlatformToolset.StartsWith('clang'))">true</ExcludedFromBuild>
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm_llvm_android\armidct.asm">
+      <FileType>Document</FileType>
+      <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android' or !$(PlatformToolset.StartsWith('clang'))">true</ExcludedFromBuild>
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm_llvm_android\armloop.asm">
+      <FileType>Document</FileType>
+      <CompileAs Condition="'$(Platform)'=='Android'">CompileAsAsm</CompileAs>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android' or !$(PlatformToolset.StartsWith('clang'))">true</ExcludedFromBuild>
       <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
   </ItemGroup>

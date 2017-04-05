@@ -35,7 +35,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>../../lib/arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="$(PlatformToolset.StartsWith('clang'))">../../lib/arm_llvm_android;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="!$(PlatformToolset.StartsWith('clang'))">../../lib/arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>OC_ARM_ASM;OC_ARM_ASM_EDSP=1;OC_ARM_ASM_MEDIA=1;OC_ARM_ASM_NEON=1;OC_ARM_CAN_UNALIGN=1;OC_ARM_CAN_UNALIGN_LDRD=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
