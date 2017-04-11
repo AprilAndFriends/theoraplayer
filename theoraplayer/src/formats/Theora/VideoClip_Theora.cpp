@@ -212,6 +212,7 @@ namespace theoraplayer
 				if (!this->autoRestart)
 				{
 					this->endOfFile = true;
+					this->_resetFrameQueue();
 					log(this->name + " finished playing");
 				}
 				return false;

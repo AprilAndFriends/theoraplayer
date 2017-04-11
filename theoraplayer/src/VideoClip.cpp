@@ -232,12 +232,12 @@ namespace theoraplayer
 
 	float VideoClip::updateTimerToNextFrame()
 	{
-		VideoFrame* f = this->frameQueue->getFirstAvailableFrame();
-		if (f == NULL)
+		VideoFrame* frame = this->frameQueue->getFirstAvailableFrame();
+		if (frame == NULL)
 		{
 			return 0.0f;
 		}
-		float time = f->timeToDisplay - this->timer->getTime();
+		float time = frame->timeToDisplay - this->timer->getTime();
 		if (time <= 0.0f)
 		{
 			return 0.0f;
@@ -248,7 +248,6 @@ namespace theoraplayer
 
 	VideoFrame* VideoClip::fetchNextFrame()
 	{
-		VideoFrame* frame = NULL;
 		// if we are about to seek, then the current frame queue is invalidated
 		// (will be cleared when a worker thread does the actual seek)
 		if (this->seekFrame != -1)
@@ -258,7 +257,7 @@ namespace theoraplayer
 		Mutex::ScopeLock lock(this->frameQueue->getMutex());
 		float time = this->_getAbsPlaybackTime();
 		this->_discardOutdatedFrames(time);
-		frame = this->frameQueue->_getFirstAvailableFrame();
+		VideoFrame* frame = this->frameQueue->_getFirstAvailableFrame();
 		if (frame != NULL && frame->timeToDisplay + frame->iteration * this->duration > time && this->firstFrameDisplayed)
 		{
 			frame = NULL; // frame is ready but it's not yet time to display it, except when we haven't displayed any frames yet
