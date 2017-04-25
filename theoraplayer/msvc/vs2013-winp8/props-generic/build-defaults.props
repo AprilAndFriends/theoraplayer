@@ -35,9 +35,7 @@ xcopy "$(OutDir)$(TargetName).lib" "$(OutDir)..\..\..\" /Y /V</Command>
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary Condition="'$(ConfigurationType)'=='Application'">MultiThreadedDebugDLL</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(ConfigurationType)'=='DynamicLibrary'">MultiThreadedDebugDLL</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(ConfigurationType)'=='StaticLibrary'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -50,9 +48,7 @@ xcopy "$(OutDir)$(TargetName).lib" "$(OutDir)..\..\..\" /Y /V</Command>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <RuntimeLibrary Condition="'$(ConfigurationType)'=='Application'">MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(ConfigurationType)'=='DynamicLibrary'">MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeLibrary Condition="'$(ConfigurationType)'=='StaticLibrary'">MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>false</GenerateDebugInformation>
