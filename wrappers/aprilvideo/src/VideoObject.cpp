@@ -893,7 +893,15 @@ namespace aprilvideo
 				}
 #endif
 			}
-			this->sound = xal::manager->createSound(xal::manager->findAudioFile(hrdir::joinPath(hrdir::joinPath(this->dataset->getFilePath(), AUDIO_CATEGORY), this->soundName)), category);
+			// maybe sound was already created somewhere
+			if (xal::manager->hasSound(this->soundName))
+			{
+				this->sound = xal::manager->getSound(this->soundName);
+			}
+			else
+			{
+				this->sound = xal::manager->createSound(xal::manager->findAudioFile(hrdir::joinPath(hrdir::joinPath(this->dataset->getFilePath(), AUDIO_CATEGORY), this->soundName, true)), category);
+			}
 			if (this->sound != NULL)
 			{
 				this->audioPlayer = xal::manager->createPlayer(this->sound->getName());
