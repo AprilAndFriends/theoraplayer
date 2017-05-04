@@ -5,6 +5,10 @@
     <PlatformToolset>v120</PlatformToolset>
     <WindowsAppContainer>true</WindowsAppContainer>
   </PropertyGroup>
+  <Import Condition="(exists('..\..\lib\msvc\vs2013-winrt\$(Platform).props'))" Project="..\..\lib\msvc\vs2013-winrt\$(Platform).props"/>
+  <Import Condition="(exists('..\..\msvc\vs2013-winrt\$(Platform).props'))" Project="..\..\msvc\vs2013-winrt\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\msvc\vs2013-winrt\$(Platform).props'))" Project="..\..\..\msvc\vs2013-winrt\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\..\msvc\vs2013-winrt\$(Platform).props'))" Project="..\..\..\..\msvc\vs2013-winrt\$(Platform).props"/>
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>_WINRT;WINRT;_WIN32;WIN32;_X64;X64;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>

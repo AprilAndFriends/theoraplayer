@@ -5,6 +5,10 @@
     <PlatformToolset>v120_wp81</PlatformToolset>
     <WindowsAppContainer>true</WindowsAppContainer>
   </PropertyGroup>
+  <Import Condition="(exists('..\..\lib\msvc\vs2013-winp8\$(Platform).props'))" Project="..\..\lib\msvc\vs2013-winp8\$(Platform).props"/>
+  <Import Condition="(exists('..\..\msvc\vs2013-winp8\$(Platform).props'))" Project="..\..\msvc\vs2013-winp8\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\msvc\vs2013-winp8\$(Platform).props'))" Project="..\..\..\msvc\vs2013-winp8\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\..\msvc\vs2013-winp8\$(Platform).props'))" Project="..\..\..\..\msvc\vs2013-winp8\$(Platform).props"/>
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>_WINRT;WINRT;_WINP8;WINP8;_WINARM;WINARM;_ARM;ARM;__ARM__;__arm__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
