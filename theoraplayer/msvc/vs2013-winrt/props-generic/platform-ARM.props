@@ -13,6 +13,7 @@
     <ClCompile>
       <PreprocessorDefinitions>_WINRT;WINRT;_WINARM;WINARM;_ARM;ARM;__ARM__;__arm__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../..;../../src;../../../include;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <StringPooling>true</StringPooling>
       <CompileAsWinRT>true</CompileAsWinRT>
     </ClCompile>
     <Link>
