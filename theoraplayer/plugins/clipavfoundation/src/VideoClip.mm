@@ -262,7 +262,7 @@ namespace clipavfoundation
 			{
 				presentationTime = CMSampleBufferGetOutputPresentationTimeStamp(sampleBuffer);
 				float timeToDisplay = (float) CMTimeGetSeconds(presentationTime);
-				frame->_init(timeToDisplay, iteration, this->frameNumber);
+				frame->initSpecial(timeToDisplay, iteration, this->frameNumber);
 				++this->frameNumber;
 				if (timeToDisplay < this->timer->getTime() && !this->restarted && this->frameNumber % 16 != 0)
 				{

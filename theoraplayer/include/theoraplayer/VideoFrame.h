@@ -49,6 +49,8 @@ namespace theoraplayer
 		float getTimeToDisplay() const { return this->timeToDisplay; }
 
 		void clearInUseFlag() { this->inUse = false; }
+		
+		void initSpecial(float timeToDisplay, int iteration, unsigned long frameNumber);
 
 	protected:
 		/// @brief Global time in seconds this frame should be displayed on.
@@ -67,8 +69,6 @@ namespace theoraplayer
 		unsigned char* buffer;
 		/// @brief Current frame number.
 		unsigned long frameNumber;
-
-		void _init(float timeToDisplay, int iteration, unsigned long frameNumber);
 
 	};
 

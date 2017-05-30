@@ -110,7 +110,7 @@ namespace theoraplayer
 		return this->clip->getHeight();
 	}
 	
-	void VideoFrame::_init(float timeToDisplay, int iteration, unsigned long frameNumber)
+	void VideoFrame::initSpecial(float timeToDisplay, int iteration, unsigned long frameNumber)
 	{
 		this->timeToDisplay = timeToDisplay;
 		this->iteration = iteration;
