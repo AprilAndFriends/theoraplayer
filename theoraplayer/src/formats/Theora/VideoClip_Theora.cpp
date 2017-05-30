@@ -212,7 +212,6 @@ namespace theoraplayer
 				if (!this->autoRestart)
 				{
 					this->endOfFile = true;
-					this->_resetFrameQueue();
 					log(this->name + " finished playing");
 				}
 				return false;
@@ -695,9 +694,9 @@ namespace theoraplayer
 
 	void VideoClip_Theora::_readTheoraVorbisHeaders()
 	{
+		// init Vorbis/Theora Layer
 		ogg_packet tempOggPacket;
-		//init Vorbis/Theora Layer
-		//Ensure all structures get cleared out.
+		// ensure all structures get cleared out
 		memset(&this->info.OggSyncState, 0, sizeof(ogg_sync_state));
 		memset(&this->info.OggPage, 0, sizeof(ogg_page));
 		memset(&this->info.VorbisStreamState, 0, sizeof(ogg_stream_state));
@@ -772,7 +771,7 @@ namespace theoraplayer
 		int result = 0;
 		while ((this->theoraStreams > 0 && this->theoraStreams < 3) || (this->vorbisStreams && this->vorbisStreams < 3))
 		{
-			// Check 2nd'dary headers... Theora First
+			// check secondary headers... Theora first
 			while (this->theoraStreams > 0 && this->theoraStreams < 3 && (result = ogg_stream_packetout(&this->info.TheoraStreamState, &tempOggPacket)))
 			{
 				if (result < 0)
@@ -785,7 +784,7 @@ namespace theoraplayer
 				}
 				++this->theoraStreams;
 			} // end while looking for more theora headers
-			  // look 2nd vorbis header packets
+			// look 2nd vorbis header packets
 			while (this->vorbisStreams < 3 && (result = ogg_stream_packetout(&this->info.VorbisStreamState, &tempOggPacket)))
 			{
 				if (result < 0)
@@ -798,7 +797,7 @@ namespace theoraplayer
 				}
 				++this->vorbisStreams;
 			} // end while looking for more vorbis headers
-			  // Not finished with Headers, get some more file data
+			// not finished with headers, get some more file data
 			if (ogg_sync_pageout(&this->info.OggSyncState, &this->info.OggPage) > 0)
 			{
 				if (this->theoraStreams > 0)
@@ -821,7 +820,6 @@ namespace theoraplayer
 				}
 			}
 		} // end while looking for all headers
-		  //log("Vorbis Headers: " + str(mVorbisHeaders) + " Theora Headers : " + str(mTheoraHeaders));
 	}
 
 }

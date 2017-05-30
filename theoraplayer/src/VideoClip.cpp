@@ -172,7 +172,7 @@ namespace theoraplayer
 
 	float VideoClip::getPriorityIndex() const
 	{
-		float priority = (float)getReadyFramesCount();
+		float priority = (float)this->getReadyFramesCount();
 		if (this->timer->isPaused())
 		{
 			priority += this->getPrecachedFramesCount() / 2;
@@ -207,7 +207,7 @@ namespace theoraplayer
 		if (this->endOfFile)
 		{
 			VideoFrame* frame = this->frameQueue->getFirstAvailableFrame();
-			if (frame == NULL || frame->timeToDisplay >= this->duration) // in some cases, there could be a diference between the reported video duration and timestamp on the last frame(s)
+			if (frame == NULL || frame->timeToDisplay >= this->duration) // in some cases, there could be a difference between the reported video duration and timestamp on the last frame(s)
 			{
 				return true;
 			}

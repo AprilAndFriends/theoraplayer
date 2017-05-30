@@ -30,7 +30,7 @@
 
 #define DEFAULT_VIDEO_PATH "video"
 #define AUDIO_CATEGORY "video"
-#define TEXTURES_COUNT 3
+#define TEXTURES_COUNT 3 // triple buffering
 
 //#define _TEXWRITE_BENCHMARK // uncomment this to benchmark texture upload speed
 
@@ -378,12 +378,10 @@ namespace aprilvideo
 				}
 				this->_doneEventTriggered = done;
 			}
-			// TODOth - is this still needed?
-			//this->clip->update(timeDelta);
 			if (this->pauseAlphaThreshold < 0 && !this->isDerivedVisible() && !this->isPaused())
 			{
 				this->updateFrame();
-				if (isDebugModeEnabled())
+				if (aprilvideo::isDebugModeEnabled())
 				{
 					hlog::write(logTag, this->videoClipName + ": Video object is not visible, but alpha_pause_threshold is set to -1, updating frame");
 				}
@@ -622,8 +620,7 @@ namespace aprilvideo
 				if (frame == NULL)
 				{
 					hlog::write(logTag, this->videoClipName + ": Texture restored, waiting for video frame to decode to fill texture.");
-					int nReady = this->clip->getReadyFramesCount();
-					if (nReady == 0)
+					if (this->clip->getReadyFramesCount() == 0)
 					{
 						this->clip->waitForCache();
 					}
@@ -662,7 +659,7 @@ namespace aprilvideo
 				long t = clock();
 				int n = 256;
 				char message[1024] = { '\0' };
-				for (int i = 0; i < n; i++)
+				for (int i = 0; i < n; ++i)
 				{
 					this->currentTexture->getTexture()->write(0, 0, (int)size.x, (int)size.y, 0, 0, frame->getBuffer(), (int)size.x, (int)size.y, textureFormat);
 				}

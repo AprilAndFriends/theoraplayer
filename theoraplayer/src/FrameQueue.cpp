@@ -79,7 +79,7 @@ namespace theoraplayer
 	int FrameQueue::_getReadyCount() const
 	{
 		int result = 0;
-		foreachc_l(VideoFrame*, it, this->queue)
+		foreachc_l (VideoFrame*, it, this->queue)
 		{
 			if ((*it)->ready)
 			{
@@ -162,8 +162,8 @@ namespace theoraplayer
 		{
 			if (!(*it)->inUse)
 			{
-				(*it)->inUse = 1;
-				(*it)->ready = 0;
+				(*it)->inUse = true;
+				(*it)->ready = false;
 				return (*it);
 			}
 		}
