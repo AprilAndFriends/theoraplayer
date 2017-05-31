@@ -182,6 +182,7 @@
     <ClCompile Include="..\..\src\YUV\libyuv\src\compare_neon.cc">
       <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_neon64.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\compare_posix.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\compare_win.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\convert.cc" />
@@ -196,28 +197,50 @@
     <ClCompile Include="..\..\src\YUV\libyuv\src\mjpeg_validate.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\planar_functions.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\rotate.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_any.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_argb.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_common.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_dspr2.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_gcc.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_mips.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_msa.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_neon.cc">
       <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_neon64.cc">
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'=='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_win.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_any.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_common.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_dspr2.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_gcc.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_mips.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_msa.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_neon.cc">
       <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_neon64.cc">
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'=='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_posix.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_win.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_any.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb_neon.cc">
+      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+    </ClCompile>
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_common.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_dspr2.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_gcc.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_mips.cc" />
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_msa.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_neon.cc">
       <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'!='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_neon64.cc">
+      <ArmFloatingPointHardware Condition="'$(TargetArchitecture)'=='arm64-v8a' and '$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
     </ClCompile>
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_posix.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_win.cc" />
@@ -227,10 +250,6 @@
     <ClCompile Include="..\..\src\YUV\C\yuv420_grey_c.c" />
     <ClCompile Include="..\..\src\YUV\C\yuv420_rgb_c.c" />
     <ClCompile Include="..\..\src\YUV\C\yuv420_yuv_c.c" />
-    <None Include="..\..\src\YUV\libyuv\src\row_x86.asm" />
-    <None Include="..\..\src\YUV\libyuv\src\x86inc.asm">
-      <ExcludedFromBuild Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">true</ExcludedFromBuild>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\theoraplayer\AudioInterface.h" />
@@ -257,15 +276,18 @@
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\basic_types.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\compare.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\compare_row.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert_argb.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert_from.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\convert_from_argb.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\cpu_id.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\macros_msa.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\mjpeg_decoder.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\planar_functions.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\rotate.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\rotate_argb.h" />
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\rotate_row.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\row.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\scale.h" />
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\scale_argb.h" />

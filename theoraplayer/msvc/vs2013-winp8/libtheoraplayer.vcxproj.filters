@@ -237,6 +237,51 @@
     <ClCompile Include="..\..\src\AudioInterfaceFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_any.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_common.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_dspr2.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_gcc.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_msa.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_win.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_dspr2.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_msa.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_dspr2.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_msa.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\compare_neon64.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\rotate_neon64.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\row_neon64.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb_neon.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_neon64.cc">
+      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\YUV\yuv_util.h">
@@ -244,9 +289,6 @@
     </ClInclude>
     <ClInclude Include="..\..\src\YUV\libyuv\yuv_libyuv.h">
       <Filter>Source Files\internal\YUV\libyuv</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv.h">
-      <Filter>Source Files\internal\YUV\libyuv\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\basic_types.h">
       <Filter>Source Files\internal\YUV\libyuv\include\libyuv</Filter>
@@ -362,14 +404,18 @@
     <ClInclude Include="..\..\include\theoraplayer\MemoryDataSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\src\YUV\libyuv\src\row_x86.asm">
-      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
-    </None>
-    <None Include="..\..\src\YUV\libyuv\src\x86inc.asm">
-      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
-    </None>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\compare_row.h">
+      <Filter>Source Files\internal\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv.h">
+      <Filter>Source Files\internal\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\macros_msa.h">
+      <Filter>Source Files\internal\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\YUV\libyuv\include\libyuv\rotate_row.h">
+      <Filter>Source Files\internal\YUV\libyuv\include\libyuv</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\fileproperties.rc">

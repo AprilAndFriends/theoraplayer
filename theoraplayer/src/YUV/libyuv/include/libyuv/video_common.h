@@ -10,7 +10,7 @@
 
 // Common definitions for video, including fourcc and VideoFormat.
 
-#ifndef INCLUDE_LIBYUV_VIDEO_COMMON_H_  // NOLINT
+#ifndef INCLUDE_LIBYUV_VIDEO_COMMON_H_
 #define INCLUDE_LIBYUV_VIDEO_COMMON_H_
 
 #include "libyuv/basic_types.h"
@@ -28,13 +28,13 @@ extern "C" {
 // Needs to be a macro otherwise the OS X compiler complains when the kFormat*
 // constants are used in a switch.
 #ifdef __cplusplus
-#define FOURCC(a, b, c, d) ( \
-    (static_cast<uint32>(a)) | (static_cast<uint32>(b) << 8) | \
-    (static_cast<uint32>(c) << 16) | (static_cast<uint32>(d) << 24))
+#define FOURCC(a, b, c, d)                                    \
+  ((static_cast<uint32>(a)) | (static_cast<uint32>(b) << 8) | \
+   (static_cast<uint32>(c) << 16) | (static_cast<uint32>(d) << 24))
 #else
-#define FOURCC(a, b, c, d) ( \
-    ((uint32)(a)) | ((uint32)(b) << 8) | /* NOLINT */ \
-    ((uint32)(c) << 16) | ((uint32)(d) << 24))  /* NOLINT */
+#define FOURCC(a, b, c, d)                                 \
+  (((uint32)(a)) | ((uint32)(b) << 8) |       /* NOLINT */ \
+   ((uint32)(c) << 16) | ((uint32)(d) << 24)) /* NOLINT */
 #endif
 
 // Some pages discussing FourCC codes:
@@ -49,27 +49,27 @@ extern "C" {
 // Secondary formats are converted in 2 steps.
 // Auxilliary formats call primary converters.
 enum FourCC {
-  // 9 Primary YUV formats: 5 planar, 2 biplanar, 2 packed.
+  // 8 Primary YUV formats: 5 planar, 2 biplanar, 2 packed.
   FOURCC_I420 = FOURCC('I', '4', '2', '0'),
   FOURCC_I422 = FOURCC('I', '4', '2', '2'),
   FOURCC_I444 = FOURCC('I', '4', '4', '4'),
-  FOURCC_I411 = FOURCC('I', '4', '1', '1'),
+  FOURCC_I411 = FOURCC('I', '4', '1', '1'),  // deprecated.
   FOURCC_I400 = FOURCC('I', '4', '0', '0'),
   FOURCC_NV21 = FOURCC('N', 'V', '2', '1'),
   FOURCC_NV12 = FOURCC('N', 'V', '1', '2'),
   FOURCC_YUY2 = FOURCC('Y', 'U', 'Y', '2'),
   FOURCC_UYVY = FOURCC('U', 'Y', 'V', 'Y'),
 
-  // 2 Secondary YUV formats: row biplanar.
+  // 1 Secondary YUV format: row biplanar.
   FOURCC_M420 = FOURCC('M', '4', '2', '0'),
-  FOURCC_Q420 = FOURCC('Q', '4', '2', '0'), // deprecated.
+  FOURCC_Q420 = FOURCC('Q', '4', '2', '0'),  // deprecated.
 
   // 9 Primary RGB formats: 4 32 bpp, 2 24 bpp, 3 16 bpp.
   FOURCC_ARGB = FOURCC('A', 'R', 'G', 'B'),
   FOURCC_BGRA = FOURCC('B', 'G', 'R', 'A'),
   FOURCC_ABGR = FOURCC('A', 'B', 'G', 'R'),
   FOURCC_24BG = FOURCC('2', '4', 'B', 'G'),
-  FOURCC_RAW  = FOURCC('r', 'a', 'w', ' '),
+  FOURCC_RAW = FOURCC('r', 'a', 'w', ' '),
   FOURCC_RGBA = FOURCC('R', 'G', 'B', 'A'),
   FOURCC_RGBP = FOURCC('R', 'G', 'B', 'P'),  // rgb565 LE.
   FOURCC_RGBO = FOURCC('R', 'G', 'B', 'O'),  // argb1555 LE.
@@ -90,7 +90,8 @@ enum FourCC {
   FOURCC_YV24 = FOURCC('Y', 'V', '2', '4'),
   FOURCC_YU12 = FOURCC('Y', 'U', '1', '2'),  // Linux version of I420.
   FOURCC_J420 = FOURCC('J', '4', '2', '0'),
-  FOURCC_J400 = FOURCC('J', '4', '0', '0'),
+  FOURCC_J400 = FOURCC('J', '4', '0', '0'),  // unofficial fourcc
+  FOURCC_H420 = FOURCC('H', '4', '2', '0'),  // unofficial fourcc
 
   // 14 Auxiliary aliases.  CanonicalFourCC() maps these to canonical fourcc.
   FOURCC_IYUV = FOURCC('I', 'Y', 'U', 'V'),  // Alias for I420.
@@ -136,7 +137,7 @@ enum FourCCBpp {
   FOURCC_BPP_ABGR = 32,
   FOURCC_BPP_RGBA = 32,
   FOURCC_BPP_24BG = 24,
-  FOURCC_BPP_RAW  = 24,
+  FOURCC_BPP_RAW = 24,
   FOURCC_BPP_RGBP = 16,
   FOURCC_BPP_RGBO = 16,
   FOURCC_BPP_R444 = 16,
@@ -150,6 +151,7 @@ enum FourCCBpp {
   FOURCC_BPP_YU12 = 12,
   FOURCC_BPP_J420 = 12,
   FOURCC_BPP_J400 = 8,
+  FOURCC_BPP_H420 = 12,
   FOURCC_BPP_MJPG = 0,  // 0 means unknown.
   FOURCC_BPP_H264 = 0,
   FOURCC_BPP_IYUV = 12,
@@ -168,7 +170,7 @@ enum FourCCBpp {
   FOURCC_BPP_CM24 = 24,
 
   // Match any fourcc.
-  FOURCC_BPP_ANY  = 0,  // 0 means unknown.
+  FOURCC_BPP_ANY = 0,  // 0 means unknown.
 };
 
 // Converts fourcc aliases into canonical ones.
@@ -179,4 +181,4 @@ LIBYUV_API uint32 CanonicalFourCC(uint32 fourcc);
 }  // namespace libyuv
 #endif
 
-#endif  // INCLUDE_LIBYUV_VIDEO_COMMON_H_  NOLINT
+#endif  // INCLUDE_LIBYUV_VIDEO_COMMON_H_
