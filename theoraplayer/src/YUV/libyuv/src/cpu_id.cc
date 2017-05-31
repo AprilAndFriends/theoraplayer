@@ -201,10 +201,6 @@ LIBYUV_API SAFEBUFFERS int MipsCpuCaps(const char* cpuinfo_name,
   return 0;
 }
 
-// CPU detect function for SIMD instruction sets.
-LIBYUV_API
-int cpu_info_ = kCpuInit;  // cpu_info is not initialized yet.
-
 // Test environment variable for disabling CPU features. Any non-zero value
 // to disable. Zero ignored to make it easy to set the variable on/off.
 #if !defined(__native_client__) && !defined(_M_ARM)
