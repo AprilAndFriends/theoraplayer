@@ -2083,7 +2083,7 @@ struct {
   vec8 kVUToB;  // 128
   vec8 kVUToG;  // 144
   vec8 kVUToR;  // 160
-} static SIMD_ALIGNED(kYuvConstants) = {
+} static SIMD_ALIGNED(yuvconstants) = {
   { UB, VB, UB, VB, UB, VB, UB, VB, UB, VB, UB, VB, UB, VB, UB, VB },
   { UG, VG, UG, VG, UG, VG, UG, VG, UG, VG, UG, VG, UG, VG, UG, VG },
   { UR, VR, UR, VR, UR, VR, UR, VR, UR, VR, UR, VR, UR, VR, UR, VR },
@@ -2135,17 +2135,17 @@ struct {
 #define YUVTORGB                                                               \
     "movdqa     %%xmm0,%%xmm1                                   \n"            \
     "movdqa     %%xmm0,%%xmm2                                   \n"            \
-    "pmaddubsw  " MEMACCESS([kYuvConstants]) ",%%xmm0           \n"            \
-    "pmaddubsw  " MEMACCESS2(16, [kYuvConstants]) ",%%xmm1      \n"            \
-    "pmaddubsw  " MEMACCESS2(32, [kYuvConstants]) ",%%xmm2      \n"            \
-    "psubw      " MEMACCESS2(48, [kYuvConstants]) ",%%xmm0      \n"            \
-    "psubw      " MEMACCESS2(64, [kYuvConstants]) ",%%xmm1      \n"            \
-    "psubw      " MEMACCESS2(80, [kYuvConstants]) ",%%xmm2      \n"            \
+    "pmaddubsw  " MEMACCESS([yuvconstants]) ",%%xmm0           \n"            \
+    "pmaddubsw  " MEMACCESS2(16, [yuvconstants]) ",%%xmm1      \n"            \
+    "pmaddubsw  " MEMACCESS2(32, [yuvconstants]) ",%%xmm2      \n"            \
+    "psubw      " MEMACCESS2(48, [yuvconstants]) ",%%xmm0      \n"            \
+    "psubw      " MEMACCESS2(64, [yuvconstants]) ",%%xmm1      \n"            \
+    "psubw      " MEMACCESS2(80, [yuvconstants]) ",%%xmm2      \n"            \
     "movq       " MEMACCESS([y_buf]) ",%%xmm3                   \n"            \
     "lea        " MEMLEA(0x8, [y_buf]) ",%[y_buf]               \n"            \
     "punpcklbw  %%xmm4,%%xmm3                                   \n"            \
-    "psubsw     " MEMACCESS2(96, [kYuvConstants]) ",%%xmm3      \n"            \
-    "pmullw     " MEMACCESS2(112, [kYuvConstants]) ",%%xmm3     \n"            \
+    "psubsw     " MEMACCESS2(96, [yuvconstants]) ",%%xmm3      \n"            \
+    "pmullw     " MEMACCESS2(112, [yuvconstants]) ",%%xmm3     \n"            \
     "paddsw     %%xmm3,%%xmm0                                   \n"            \
     "paddsw     %%xmm3,%%xmm1                                   \n"            \
     "paddsw     %%xmm3,%%xmm2                                   \n"            \
@@ -2160,17 +2160,17 @@ struct {
 #define YVUTORGB                                                               \
     "movdqa     %%xmm0,%%xmm1                                   \n"            \
     "movdqa     %%xmm0,%%xmm2                                   \n"            \
-    "pmaddubsw  " MEMACCESS2(128, [kYuvConstants]) ",%%xmm0     \n"            \
-    "pmaddubsw  " MEMACCESS2(144, [kYuvConstants]) ",%%xmm1     \n"            \
-    "pmaddubsw  " MEMACCESS2(160, [kYuvConstants]) ",%%xmm2     \n"            \
-    "psubw      " MEMACCESS2(48, [kYuvConstants]) ",%%xmm0      \n"            \
-    "psubw      " MEMACCESS2(64, [kYuvConstants]) ",%%xmm1      \n"            \
-    "psubw      " MEMACCESS2(80, [kYuvConstants]) ",%%xmm2      \n"            \
+    "pmaddubsw  " MEMACCESS2(128, [yuvconstants]) ",%%xmm0     \n"            \
+    "pmaddubsw  " MEMACCESS2(144, [yuvconstants]) ",%%xmm1     \n"            \
+    "pmaddubsw  " MEMACCESS2(160, [yuvconstants]) ",%%xmm2     \n"            \
+    "psubw      " MEMACCESS2(48, [yuvconstants]) ",%%xmm0      \n"            \
+    "psubw      " MEMACCESS2(64, [yuvconstants]) ",%%xmm1      \n"            \
+    "psubw      " MEMACCESS2(80, [yuvconstants]) ",%%xmm2      \n"            \
     "movq       " MEMACCESS([y_buf]) ",%%xmm3                   \n"            \
     "lea        " MEMLEA(0x8, [y_buf]) ",%[y_buf]               \n"            \
     "punpcklbw  %%xmm4,%%xmm3                                   \n"            \
-    "psubsw     " MEMACCESS2(96, [kYuvConstants]) ",%%xmm3      \n"            \
-    "pmullw     " MEMACCESS2(112, [kYuvConstants]) ",%%xmm3     \n"            \
+    "psubsw     " MEMACCESS2(96, [yuvconstants]) ",%%xmm3      \n"            \
+    "pmullw     " MEMACCESS2(112, [yuvconstants]) ",%%xmm3     \n"            \
     "paddsw     %%xmm3,%%xmm0                                   \n"            \
     "paddsw     %%xmm3,%%xmm1                                   \n"            \
     "paddsw     %%xmm3,%%xmm2                                   \n"            \
@@ -2185,6 +2185,7 @@ void OMITFP I444ToARGBRow_SSSE3(const uint8* y_buf,
                                 const uint8* u_buf,
                                 const uint8* v_buf,
                                 uint8* dst_argb,
+								const struct YuvConstants* yuvconstants,
                                 int width) {
   asm volatile (
     "sub       %[u_buf],%[v_buf]               \n"
@@ -2209,7 +2210,7 @@ void OMITFP I444ToARGBRow_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_argb]"+r"(dst_argb),  // %[dst_argb]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants->kUVToB) // %[yuvconstants]
   : "memory", "cc"
 #if defined(__native_client__) && defined(__x86_64__)
     , "r14"
@@ -2224,6 +2225,7 @@ void OMITFP I422ToRGB24Row_SSSE3(const uint8* y_buf,
                                  const uint8* u_buf,
                                  const uint8* v_buf,
                                  uint8* dst_rgb24,
+								 const struct YuvConstants* yuvconstants,
                                  int width) {
 // fpic 32 bit gcc 4.2 on OSX runs out of GPR regs.
 #if defined(__i386__)
@@ -2263,7 +2265,7 @@ void OMITFP I422ToRGB24Row_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_rgb24]"+r"(dst_rgb24),  // %[dst_rgb24]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB)
+  : [yuvconstants]"r"(&yuvconstants->kUVToB)
 #if !defined(__i386__)
     , [kShuffleMaskARGBToRGB24_0]"m"(kShuffleMaskARGBToRGB24_0),
     [kShuffleMaskARGBToRGB24]"m"(kShuffleMaskARGBToRGB24)
@@ -2321,7 +2323,7 @@ void OMITFP I422ToRAWRow_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_raw]"+r"(dst_raw),  // %[dst_raw]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB)
+  : [yuvconstants]"r"(&yuvconstants.kUVToB)
 #if !defined(__i386__)
     , [kShuffleMaskARGBToRAW_0]"m"(kShuffleMaskARGBToRAW_0),
     [kShuffleMaskARGBToRAW]"m"(kShuffleMaskARGBToRAW)
@@ -2340,6 +2342,7 @@ void OMITFP I422ToARGBRow_SSSE3(const uint8* y_buf,
                                 const uint8* u_buf,
                                 const uint8* v_buf,
                                 uint8* dst_argb,
+								const struct YuvConstants* yuvconstants,
                                 int width) {
   asm volatile (
     "sub       %[u_buf],%[v_buf]               \n"
@@ -2364,7 +2367,7 @@ void OMITFP I422ToARGBRow_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_argb]"+r"(dst_argb),  // %[dst_argb]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants->kUVToB) // %[yuvconstants]
   : "memory", "cc"
 #if defined(__native_client__) && defined(__x86_64__)
     , "r14"
@@ -2403,7 +2406,7 @@ void OMITFP I411ToARGBRow_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_argb]"+r"(dst_argb),  // %[dst_argb]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants.kUVToB) // %[yuvconstants]
   : "memory", "cc"
 #if defined(__native_client__) && defined(__x86_64__)
     , "r14"
@@ -2417,6 +2420,7 @@ void OMITFP I411ToARGBRow_SSSE3(const uint8* y_buf,
 void OMITFP NV12ToARGBRow_SSSE3(const uint8* y_buf,
                                 const uint8* uv_buf,
                                 uint8* dst_argb,
+								const struct YuvConstants* yuvconstants,
                                 int width) {
   asm volatile (
     "pcmpeqb   %%xmm5,%%xmm5                   \n"
@@ -2439,7 +2443,7 @@ void OMITFP NV12ToARGBRow_SSSE3(const uint8* y_buf,
     [uv_buf]"+r"(uv_buf),    // %[uv_buf]
     [dst_argb]"+r"(dst_argb),  // %[dst_argb]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants->kUVToB) // %[yuvconstants]
   : "memory", "cc"
   // Does not use r14.
 #if defined(__SSE2__)
@@ -2451,6 +2455,7 @@ void OMITFP NV12ToARGBRow_SSSE3(const uint8* y_buf,
 void OMITFP NV21ToARGBRow_SSSE3(const uint8* y_buf,
                                 const uint8* uv_buf,
                                 uint8* dst_argb,
+								const struct YuvConstants* yuvconstants,
                                 int width) {
   asm volatile (
     "pcmpeqb   %%xmm5,%%xmm5                   \n"
@@ -2473,7 +2478,7 @@ void OMITFP NV21ToARGBRow_SSSE3(const uint8* y_buf,
     [uv_buf]"+r"(uv_buf),    // %[uv_buf]
     [dst_argb]"+r"(dst_argb),  // %[dst_argb]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants->kUVToB) // %[yuvconstants]
   : "memory", "cc"
   // Does not use r14.
 #if defined(__SSE2__)
@@ -2510,7 +2515,7 @@ void OMITFP I444ToARGBRow_Unaligned_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_argb]"+r"(dst_argb),  // %[dst_argb]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants.kUVToB) // %[yuvconstants]
   : "memory", "cc"
 #if defined(__native_client__) && defined(__x86_64__)
     , "r14"
@@ -2549,7 +2554,7 @@ void OMITFP I422ToARGBRow_Unaligned_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_argb]"+r"(dst_argb),  // %[dst_argb]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants.kUVToB) // %[yuvconstants]
   : "memory", "cc"
 #if defined(__native_client__) && defined(__x86_64__)
     , "r14"
@@ -2588,7 +2593,7 @@ void OMITFP I411ToARGBRow_Unaligned_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_argb]"+r"(dst_argb),  // %[dst_argb]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants.kUVToB) // %[yuvconstants]
   : "memory", "cc"
 #if defined(__native_client__) && defined(__x86_64__)
     , "r14"
@@ -2624,7 +2629,7 @@ void OMITFP NV12ToARGBRow_Unaligned_SSSE3(const uint8* y_buf,
     [uv_buf]"+r"(uv_buf),    // %[uv_buf]
     [dst_argb]"+r"(dst_argb),  // %[dst_argb]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants.kUVToB) // %[yuvconstants]
   : "memory", "cc"
   // Does not use r14.
 #if defined(__SSE2__)
@@ -2658,7 +2663,7 @@ void OMITFP NV21ToARGBRow_Unaligned_SSSE3(const uint8* y_buf,
     [uv_buf]"+r"(uv_buf),    // %[uv_buf]
     [dst_argb]"+r"(dst_argb),  // %[dst_argb]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants.kUVToB) // %[yuvconstants]
   : "memory", "cc"
   // Does not use r14.
 #if defined(__SSE2__)
@@ -2696,7 +2701,7 @@ void OMITFP I422ToBGRARow_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_bgra]"+r"(dst_bgra),  // %[dst_bgra]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants.kUVToB) // %[yuvconstants]
   : "memory", "cc"
 #if defined(__native_client__) && defined(__x86_64__)
     , "r14"
@@ -2735,7 +2740,7 @@ void OMITFP I422ToABGRRow_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_abgr]"+r"(dst_abgr),  // %[dst_abgr]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants.kUVToB) // %[yuvconstants]
   : "memory", "cc"
 #if defined(__native_client__) && defined(__x86_64__)
     , "r14"
@@ -2750,6 +2755,7 @@ void OMITFP I422ToRGBARow_SSSE3(const uint8* y_buf,
                                 const uint8* u_buf,
                                 const uint8* v_buf,
                                 uint8* dst_rgba,
+								const struct YuvConstants* yuvconstants,
                                 int width) {
   asm volatile (
     "sub       %[u_buf],%[v_buf]               \n"
@@ -2775,7 +2781,7 @@ void OMITFP I422ToRGBARow_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_rgba]"+r"(dst_rgba),  // %[dst_rgba]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants->kUVToB) // %[yuvconstants]
   : "memory", "cc"
 #if defined(__native_client__) && defined(__x86_64__)
     , "r14"
@@ -2815,7 +2821,7 @@ void OMITFP I422ToBGRARow_Unaligned_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_bgra]"+r"(dst_bgra),  // %[dst_bgra]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants.kUVToB) // %[yuvconstants]
   : "memory", "cc"
 #if defined(__native_client__) && defined(__x86_64__)
     , "r14"
@@ -2854,7 +2860,7 @@ void OMITFP I422ToABGRRow_Unaligned_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_abgr]"+r"(dst_abgr),  // %[dst_abgr]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants.kUVToB) // %[yuvconstants]
   : "memory", "cc"
 #if defined(__native_client__) && defined(__x86_64__)
     , "r14"
@@ -2894,7 +2900,7 @@ void OMITFP I422ToRGBARow_Unaligned_SSSE3(const uint8* y_buf,
     [v_buf]"+r"(v_buf),    // %[v_buf]
     [dst_rgba]"+r"(dst_rgba),  // %[dst_rgba]
     [width]"+rm"(width)    // %[width]
-  : [kYuvConstants]"r"(&kYuvConstants.kUVToB) // %[kYuvConstants]
+  : [yuvconstants]"r"(&yuvconstants.kUVToB) // %[yuvconstants]
   : "memory", "cc"
 #if defined(__native_client__) && defined(__x86_64__)
     , "r14"
