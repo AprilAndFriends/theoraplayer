@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug_Theora' or
+                                  '$(Configuration)'=='DebugS_Theora' or
+                                  '$(Configuration)'=='Release_Theora' or
+                                  '$(Configuration)'=='ReleaseS_Theora'">
+    <ClCompile>
+      <PreprocessorDefinitions>_USE_THEORA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>libtheora.lib;libogg.lib;libvorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>__SSSE3__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+</Project>

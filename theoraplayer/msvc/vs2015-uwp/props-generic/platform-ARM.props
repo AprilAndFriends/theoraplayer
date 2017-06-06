@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Configuration">
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+    <WindowsAppContainer>true</WindowsAppContainer>
+  </PropertyGroup>
+  <Import Condition="(exists('..\..\lib\msvc\vs2015-uwp\$(Platform).props'))" Project="..\..\lib\msvc\vs2015-uwp\$(Platform).props"/>
+  <Import Condition="(exists('..\..\msvc\vs2015-uwp\$(Platform).props'))" Project="..\..\msvc\vs2015-uwp\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\msvc\vs2015-uwp\$(Platform).props'))" Project="..\..\..\msvc\vs2015-uwp\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\..\msvc\vs2015-uwp\$(Platform).props'))" Project="..\..\..\..\msvc\vs2015-uwp\$(Platform).props"/>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>_WINUWP;WINUWP;_WINRT;WINRT;_WINARM;WINARM;_ARM;ARM;__ARM__;__arm__;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../..;../../src;../../../include;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <StringPooling>true</StringPooling>
+      <CompileAsWinRT>true</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib\lib\msvc140-uwp\$(Platform);..\..\lib\msvc140-uwp\$(Platform);..\..\..\lib\msvc140-uwp\$(Platform);..\..\..\..\lib\msvc140-uwp\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <TargetMachine>MachineARM</TargetMachine>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib\lib\msvc140-uwp\$(Platform);..\..\lib\msvc140-uwp\$(Platform);..\..\..\lib\msvc140-uwp\$(Platform);..\..\..\..\lib\msvc140-uwp\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <TargetMachine>MachineARM</TargetMachine>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </Lib>
+  </ItemDefinitionGroup>
+</Project>
