@@ -299,10 +299,6 @@
       <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
       <CompileAsWinRT>false</CompileAsWinRT>
     </ClCompile>
-    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb_neon.cc">
-      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">false</ExcludedFromBuild>
-      <CompileAsWinRT>false</CompileAsWinRT>
-    </ClCompile>
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_common.cc">
       <CompileAsWinRT>false</CompileAsWinRT>
     </ClCompile>

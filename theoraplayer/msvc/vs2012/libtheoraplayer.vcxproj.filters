@@ -276,9 +276,6 @@
     <ClCompile Include="..\..\src\YUV\libyuv\src\row_neon64.cc">
       <Filter>Source Files\internal\YUV\libyuv\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb_neon.cc">
-      <Filter>Source Files\internal\YUV\libyuv\src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_neon64.cc">
       <Filter>Source Files\internal\YUV\libyuv\src</Filter>
     </ClCompile>

@@ -228,9 +228,6 @@
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_any.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb.cc" />
-    <ClCompile Include="..\..\src\YUV\libyuv\src\scale_argb_neon.cc">
-      <ArmFloatingPointHardware Condition="'$(Platform)'=='Android'">neon</ArmFloatingPointHardware>
-    </ClCompile>
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_common.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_dspr2.cc" />
     <ClCompile Include="..\..\src\YUV\libyuv\src\scale_gcc.cc" />
