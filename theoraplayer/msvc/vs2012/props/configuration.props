@@ -25,7 +25,7 @@
     </ClCompile>
     <ClCompile Condition="'$(WholeProgramOptimization)'=='true'">
       <PreprocessorDefinitions Condition="'$(Platform)'=='Android'">LIBYUV_NEON;__ARM_NEON__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Platform)'=='Android-x86'">__SSSE2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Platform)'=='Android-x86'">__SSE2__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
 </Project>
