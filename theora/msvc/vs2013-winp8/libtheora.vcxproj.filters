@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\..\lib\analyze.c" />
+    <Filter Include="arm">
+      <UniqueIdentifier>{e0f5425c-79d4-46a0-9af1-f83fc6a4cd1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="x86_vc">
+      <UniqueIdentifier>{124d3858-946c-4735-8905-7756e827818c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="..\..\lib\collect.c" />
-    <ClCompile Include="..\..\lib\encapiwrapper.c" />
-    <ClCompile Include="..\..\lib\encfrag.c" />
-    <ClCompile Include="..\..\lib\encinfo.c" />
-    <ClCompile Include="..\..\lib\encode.c" />
     <ClCompile Include="..\..\lib\encoder_disabled.c" />
     <ClCompile Include="..\..\lib\enquant.c" />
     <ClCompile Include="..\..\lib\fdct.c" />
     <ClCompile Include="..\..\lib\huffenc.c" />
     <ClCompile Include="..\..\lib\mathops.c" />
-    <ClCompile Include="..\..\lib\mcenc.c" />
     <ClCompile Include="..\..\lib\rate.c" />
     <ClCompile Include="..\..\lib\tokenize.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxencfrag.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxfdct.c" />
     <ClCompile Include="..\..\lib\apiwrapper.c" />
     <ClCompile Include="..\..\lib\bitpack.c" />
     <ClCompile Include="..\..\lib\decapiwrapper.c" />
@@ -30,9 +30,6 @@
     <ClCompile Include="..\..\lib\internal.c" />
     <ClCompile Include="..\..\lib\quant.c" />
     <ClCompile Include="..\..\lib\state.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxfrag.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxidct.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxstate.c" />
     <ClCompile Include="..\..\lib\arm\armcpu.c">
       <Filter>arm</Filter>
     </ClCompile>
@@ -40,13 +37,34 @@
       <Filter>arm</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lib\x86_vc\x86cpu.c">
-      <Filter>x86</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\x86_vc\x86enc.c">
-      <Filter>x86</Filter>
+      <Filter>x86_vc</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lib\x86_vc\x86state.c">
-      <Filter>x86</Filter>
+      <Filter>x86_vc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm\armbits.asm">
+      <Filter>arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm\armfrag.asm">
+      <Filter>arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm\armidct.asm">
+      <Filter>arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\arm\armloop.asm">
+      <Filter>arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxfdct.c">
+      <Filter>x86_vc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxfrag.c">
+      <Filter>x86_vc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxidct.c">
+      <Filter>x86_vc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxstate.c">
+      <Filter>x86_vc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,16 +98,8 @@
       <Filter>arm</Filter>
     </ClInclude>
     <ClInclude Include="..\..\lib\x86_vc\x86cpu.h">
-      <Filter>x86</Filter>
+      <Filter>x86_vc</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="arm">
-      <UniqueIdentifier>{e0f5425c-79d4-46a0-9af1-f83fc6a4cd1a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="x86">
-      <UniqueIdentifier>{124d3858-946c-4735-8905-7756e827818c}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\lib\theora.def" />

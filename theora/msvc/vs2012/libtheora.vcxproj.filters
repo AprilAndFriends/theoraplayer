@@ -4,11 +4,14 @@
     <Filter Include="arm">
       <UniqueIdentifier>{e0f5425c-79d4-46a0-9af1-f83fc6a4cd1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="x86">
-      <UniqueIdentifier>{124d3858-946c-4735-8905-7756e827818c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="arm_llvm_android">
       <UniqueIdentifier>{4b390c00-919b-47b6-995f-9b9701f5723a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="x86_vc">
+      <UniqueIdentifier>{124d3858-946c-4735-8905-7756e827818c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="x86">
+      <UniqueIdentifier>{688da7d2-493d-4f6c-8a51-b5d76843f534}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -20,7 +23,6 @@
     <ClCompile Include="..\..\lib\mathops.c" />
     <ClCompile Include="..\..\lib\rate.c" />
     <ClCompile Include="..\..\lib\tokenize.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxfdct.c" />
     <ClCompile Include="..\..\lib\apiwrapper.c" />
     <ClCompile Include="..\..\lib\bitpack.c" />
     <ClCompile Include="..\..\lib\decapiwrapper.c" />
@@ -34,9 +36,6 @@
     <ClCompile Include="..\..\lib\internal.c" />
     <ClCompile Include="..\..\lib\quant.c" />
     <ClCompile Include="..\..\lib\state.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxfrag.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxidct.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxstate.c" />
     <ClCompile Include="..\..\lib\arm\armcpu.c">
       <Filter>arm</Filter>
     </ClCompile>
@@ -44,10 +43,10 @@
       <Filter>arm</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lib\x86_vc\x86cpu.c">
-      <Filter>x86</Filter>
+      <Filter>x86_vc</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lib\x86_vc\x86state.c">
-      <Filter>x86</Filter>
+      <Filter>x86_vc</Filter>
     </ClCompile>
     <ClCompile Include="..\..\lib\arm\armbits.asm">
       <Filter>arm</Filter>
@@ -78,6 +77,42 @@
     </ClCompile>
     <ClCompile Include="..\..\lib\arm_llvm_android\armstate.c">
       <Filter>arm_llvm_android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxfdct.c">
+      <Filter>x86_vc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxfrag.c">
+      <Filter>x86_vc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxidct.c">
+      <Filter>x86_vc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxstate.c">
+      <Filter>x86_vc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\mmxfdct.c">
+      <Filter>x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\mmxfrag.c">
+      <Filter>x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\mmxidct.c">
+      <Filter>x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\mmxstate.c">
+      <Filter>x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\sse2fdct.c">
+      <Filter>x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\sse2idct.c">
+      <Filter>x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\x86cpu.c">
+      <Filter>x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\x86state.c">
+      <Filter>x86</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,7 +146,7 @@
       <Filter>arm</Filter>
     </ClInclude>
     <ClInclude Include="..\..\lib\x86_vc\x86cpu.h">
-      <Filter>x86</Filter>
+      <Filter>x86_vc</Filter>
     </ClInclude>
     <ClInclude Include="..\..\lib\arm_llvm_android\armbits.h">
       <Filter>arm_llvm_android</Filter>
@@ -121,6 +156,21 @@
     </ClInclude>
     <ClInclude Include="..\..\lib\arm_llvm_android\armint.h">
       <Filter>arm_llvm_android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\x86\mmxloop.h">
+      <Filter>x86</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\x86\sse2trans.h">
+      <Filter>x86</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\x86\x86cpu.h">
+      <Filter>x86</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\x86\x86int.h">
+      <Filter>x86</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\x86\x86zigzag.h">
+      <Filter>x86</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@
 @********************************************************************
 @ Original implementation:
 @  Copyright (C) 2009 Robin Watts for Pinknoise Productions Ltd
-@ last mod: $Id: armfrag.s 17874 2011-02-24 14:49:11Z tterribe $
+@ last mod: $Id:
 @********************************************************************
 
     .text;   .p2align 2

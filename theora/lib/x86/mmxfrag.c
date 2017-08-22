@@ -11,7 +11,7 @@
  ********************************************************************
 
   function:
-    last mod: $Id: mmxfrag.c 17410 2010-09-21 21:53:48Z tterribe $
+    last mod: $Id$
 
  ********************************************************************/
 
@@ -99,7 +99,7 @@ void oc_frag_copy_list_mmx(unsigned char *_dst_frame,
  const unsigned char *_src_frame,int _ystride,
  const ptrdiff_t *_fragis,ptrdiff_t _nfragis,const ptrdiff_t *_frag_buf_offs){
   ptrdiff_t fragii;
-  for(fragii=0;fragii<_nfragis;fragii++){
+  for(fragii=0;fragii<_nfragis;++fragii){
     ptrdiff_t frag_buf_off;
     frag_buf_off=_frag_buf_offs[_fragis[fragii]];
     OC_FRAG_COPY_MMX(_dst_frame+frag_buf_off,

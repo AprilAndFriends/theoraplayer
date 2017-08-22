@@ -11,7 +11,7 @@
  ********************************************************************
 
   function:
-    last mod: $Id: mmxidct.c 17728 2010-12-07 10:28:07Z tterribe $
+    last mod: $Id$
 
  ********************************************************************/
 
@@ -315,7 +315,7 @@ static void oc_idct8x8_slow_mmx(ogg_int16_t _y[64],ogg_int16_t _x[64]){
      [c]"m"OC_CONST_ARRAY_OPERAND(ogg_int16_t,OC_IDCT_CONSTS,128)
   );
   __asm__ __volatile__("pxor %%mm0,%%mm0\n\t"::);
-  for(i=0;i<4;i++){
+  for(i=0;i<4;++i){
     __asm__ __volatile__(
       "movq %%mm0,"OC_MEM_OFFS(0x00,x)"\n\t"
       "movq %%mm0,"OC_MEM_OFFS(0x08,x)"\n\t"

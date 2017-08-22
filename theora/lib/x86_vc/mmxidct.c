@@ -11,7 +11,7 @@
  ********************************************************************
 
   function:
-    last mod: $Id: mmxidct.c 17728 2010-12-07 10:28:07Z tterribe $
+    last mod: $Id$
 
  ********************************************************************/
 
@@ -340,7 +340,7 @@ static void oc_idct8x8_slow(ogg_int16_t _y[64],ogg_int16_t _x[64]){
 #undef  X
   }
   __asm pxor mm0,mm0;
-  for(i=0;i<4;i++){
+  for(i=0;i<4;++i){
     ogg_int16_t *x;
     x=_x+16*i;
 #define X ecx

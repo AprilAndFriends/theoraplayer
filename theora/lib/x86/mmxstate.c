@@ -11,7 +11,7 @@
  ********************************************************************
 
   function:
-    last mod: $Id: mmxstate.c 17563 2010-10-25 17:40:54Z tterribe $
+    last mod: $Id$
 
  ********************************************************************/
 
@@ -50,7 +50,7 @@ void oc_state_frag_recon_mmx(const oc_theora_state *_state,ptrdiff_t _fragi,
       :
       :[p]"r"((unsigned)p)
     );
-    for(i=0;i<4;i++){
+    for(i=0;i<4;++i){
       __asm__ __volatile__(
         "movq %%mm0,"OC_MEM_OFFS(0x00,y)"\n\t"
         "movq %%mm0,"OC_MEM_OFFS(0x08,y)"\n\t"
@@ -150,7 +150,7 @@ void oc_state_loop_filter_frag_rows_mmx(const oc_theora_state *_state,
           OC_LOOP_FILTER_V(OC_LOOP_FILTER8_MMX,ref+(ystride<<3),ystride,ll);
         }
       }
-      fragi++;
+      ++fragi;
     }
     fragi0+=nhfrags;
   }
@@ -217,7 +217,7 @@ void oc_state_loop_filter_frag_rows_mmxext(const oc_theora_state *_state,
           OC_LOOP_FILTER_V(OC_LOOP_FILTER8_MMXEXT,ref+(ystride<<3),ystride,_bv);
         }
       }
-      fragi++;
+      ++fragi;
     }
     fragi0+=nhfrags;
   }

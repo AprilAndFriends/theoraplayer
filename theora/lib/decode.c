@@ -11,7 +11,7 @@
  ********************************************************************
 
   function:
-    last mod: $Id: decode.c 18268 2012-05-08 02:51:57Z tterribe $
+    last mod: $Id$
 
  ********************************************************************/
 
@@ -1203,6 +1203,9 @@ static void oc_dec_residual_tokens_unpack(oc_dec_ctx *_dec){
 
 
 static int oc_dec_postprocess_init(oc_dec_ctx *_dec){
+  /*musl libc malloc()/realloc() calls might use floating point, so make sure
+     we've cleared the MMX state for them.*/
+  oc_restore_fpu(&_dec->state);
   /*pp_level 0: disabled; free any memory used and return*/
   if(_dec->pp_level<=OC_PP_LEVEL_DISABLED){
     if(_dec->dc_qis!=NULL){
@@ -2968,6 +2971,7 @@ int th_decode_packetin(th_dec_ctx *_dec,const ogg_packet *_op,
     /*If telemetry ioctls are active, we need to draw to the output buffer.*/
     if(telemetry){
       oc_render_telemetry(_dec,stripe_buf,telemetry);
+      oc_ycbcr_buffer_flip(_dec->pp_frame_buf,stripe_buf);
       /*If we had a striped decoding callback, we skipped calling it above
          (because the telemetry wasn't rendered yet).
         Call it now with the whole frame.*/

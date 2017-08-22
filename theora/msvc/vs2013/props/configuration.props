@@ -26,7 +26,6 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>../../lib/x86_vc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>OC_X86_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -39,8 +38,14 @@
       <AdditionalIncludeDirectories Condition="!$(PlatformToolset.StartsWith('clang'))">../../lib/arm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>OC_ARM_ASM;OC_ARM_ASM_EDSP=1;OC_ARM_ASM_MEDIA=1;OC_ARM_ASM_NEON=1;OC_ARM_CAN_UNALIGN=1;OC_ARM_CAN_UNALIGN_LDRD=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>-logg;-ltremor;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Platform)'=='Android' or '$(Platform)'=='Android-x86'">
+  <ItemDefinitionGroup Condition="'$(Platform)'=='Android-x86'">
+    <ClCompile>
+      <PreprocessorDefinitions>OC_X86_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <Link>
       <AdditionalDependencies>-logg;-ltremor;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>

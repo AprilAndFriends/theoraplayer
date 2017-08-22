@@ -11,7 +11,7 @@
  ********************************************************************
 
   function:
-    last mod: $Id: mmxidct.c 16503 2009-08-22 18:14:02Z giles $
+    last mod: $Id:
 
  ********************************************************************/
 
@@ -233,7 +233,7 @@ static void oc_idct8x8_slow_sse2(ogg_int16_t _y[64],ogg_int16_t _x[64]){
   );
   __asm__ __volatile__("pxor %%xmm0,%%xmm0\n\t"::);
   /*Clear input data for next block (decoder only).*/
-  for(i=0;i<2;i++){
+  for(i=0;i<2;++i){
     __asm__ __volatile__(
       "movdqa %%xmm0,"OC_MEM_OFFS(0x00,x)"\n\t"
       "movdqa %%xmm0,"OC_MEM_OFFS(0x10,x)"\n\t"

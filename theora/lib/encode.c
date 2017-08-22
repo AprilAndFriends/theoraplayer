@@ -11,7 +11,7 @@
  ********************************************************************
 
   function:
-  last mod: $Id: encode.c 17821 2011-02-09 22:08:34Z giles $
+  last mod: $Id$
 
  ********************************************************************/
 #include <stdlib.h>
@@ -907,6 +907,9 @@ static void oc_enc_drop_frame_pack(oc_enc_ctx *_enc){
 }
 
 static void oc_enc_frame_pack(oc_enc_ctx *_enc){
+  /*musl libc malloc()/realloc() calls might use floating point, so make sure
+     we've cleared the MMX state for them.*/
+  oc_restore_fpu(&_enc->state);
   oggpackB_reset(&_enc->opb);
   /*Only proceed if we have some coded blocks.*/
   if(_enc->state.ntotal_coded_fragis>0){

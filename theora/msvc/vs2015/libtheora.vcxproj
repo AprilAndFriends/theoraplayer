@@ -92,6 +92,11 @@
     <ClInclude Include="..\..\lib\ocintrin.h" />
     <ClInclude Include="..\..\lib\quant.h" />
     <ClInclude Include="..\..\lib\x86_vc\x86cpu.h" />
+    <ClInclude Include="..\..\lib\x86\mmxloop.h" />
+    <ClInclude Include="..\..\lib\x86\sse2trans.h" />
+    <ClInclude Include="..\..\lib\x86\x86cpu.h" />
+    <ClInclude Include="..\..\lib\x86\x86int.h" />
+    <ClInclude Include="..\..\lib\x86\x86zigzag.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\lib\arm\armcpu.c">
@@ -114,10 +119,6 @@
     <ClCompile Include="..\..\lib\mathops.c" />
     <ClCompile Include="..\..\lib\rate.c" />
     <ClCompile Include="..\..\lib\tokenize.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxfdct.c" />
-    <ClCompile Include="..\..\lib\x86_vc\x86cpu.c">
-      <ExcludedFromBuild Condition="'$(Platform)'=='Android'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\lib\apiwrapper.c" />
     <ClCompile Include="..\..\lib\bitpack.c" />
     <ClCompile Include="..\..\lib\decapiwrapper.c" />
@@ -140,11 +141,47 @@
       <XMLDocumentationFileName>$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
     </ClCompile>
     <ClCompile Include="..\..\lib\state.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxfrag.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxidct.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxstate.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxfdct.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxfrag.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxidct.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxstate.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\x86cpu.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\lib\x86_vc\x86state.c">
-      <ExcludedFromBuild Condition="'$(Platform)'=='Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Platform)'!='Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\mmxfdct.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android-x86'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\mmxfrag.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android-x86'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\mmxidct.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android-x86'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\mmxstate.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android-x86'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\sse2fdct.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android-x86'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\sse2idct.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android-x86'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\x86cpu.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android-x86'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86\x86state.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='Android-x86'">true</ExcludedFromBuild>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

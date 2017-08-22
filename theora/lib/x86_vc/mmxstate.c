@@ -11,7 +11,7 @@
  ********************************************************************
 
   function:
-    last mod: $Id: mmxstate.c 17563 2010-10-25 17:40:54Z tterribe $
+    last mod: $Id$
 
  ********************************************************************/
 
@@ -167,7 +167,7 @@ void oc_state_loop_filter_frag_rows_mmx(const oc_theora_state *_state,
 #undef D
 #undef D_WORD
       }
-      fragi++;
+      ++fragi;
     }
     fragi0+=nhfrags;
   }

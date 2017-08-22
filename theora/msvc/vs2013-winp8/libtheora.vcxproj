@@ -82,9 +82,6 @@
     <ClInclude Include="..\..\lib\x86_vc\x86cpu.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\lib\analyze.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\lib\arm\armcpu.c">
       <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -92,38 +89,13 @@
       <ExcludedFromBuild Condition="'$(Platform)'=='Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\lib\collect.c" />
-    <ClCompile Include="..\..\lib\encapiwrapper.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\encfrag.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\encinfo.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\encode.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\lib\encoder_disabled.c" />
     <ClCompile Include="..\..\lib\enquant.c" />
     <ClCompile Include="..\..\lib\fdct.c" />
     <ClCompile Include="..\..\lib\huffenc.c" />
     <ClCompile Include="..\..\lib\mathops.c" />
-    <ClCompile Include="..\..\lib\mcenc.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\lib\rate.c" />
     <ClCompile Include="..\..\lib\tokenize.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxencfrag.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\x86_vc\mmxfdct.c" />
-    <ClCompile Include="..\..\lib\x86_vc\x86cpu.c">
-      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\x86_vc\x86enc.c">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\lib\apiwrapper.c" />
     <ClCompile Include="..\..\lib\bitpack.c" />
     <ClCompile Include="..\..\lib\decapiwrapper.c" />
@@ -146,9 +118,21 @@
       <XMLDocumentationFileName>$(IntDir)%(Filename)1.xdc</XMLDocumentationFileName>
     </ClCompile>
     <ClCompile Include="..\..\lib\state.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxfrag.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxidct.c" />
-    <ClCompile Include="..\..\lib\x86_vc\mmxstate.c" />
+    <ClCompile Include="..\..\lib\x86_vc\mmxfdct.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxfrag.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxidct.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\mmxstate.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\x86_vc\x86cpu.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\lib\x86_vc\x86state.c">
       <ExcludedFromBuild Condition="'$(Platform)'=='ARM'">true</ExcludedFromBuild>
     </ClCompile>
