@@ -100,14 +100,21 @@ namespace theoraplayer
 		this->subFrameHeight = this->info.TheoraInfo.pic_height;
 		this->subFrameX = this->info.TheoraInfo.pic_x;
 		this->subFrameY = this->info.TheoraInfo.pic_y;
-		this->stride = this->getWidth();
+		this->stride = this->width;
 		if (this->useStride)
 		{
 			this->stride = potCeil(this->stride);
 		}
 		this->fps = this->info.TheoraInfo.fps_numerator / (float)this->info.TheoraInfo.fps_denominator;
 #ifdef _DEBUG
-		log("width: " + str(this->width) + ", height: " + str(this->height) + ", fps: " + str((int)this->getFps()));
+		if (this->stride <= this->width)
+		{
+			log("width: " + str(this->width) + ", stride: " + str(this->stride) + ", height: " + str(this->height) + ", fps: " + str((int)this->getFps()));
+		}
+		else
+		{
+			log("width: " + str(this->width) + ", height: " + str(this->height) + ", fps: " + str((int)this->getFps()));
+		}
 #endif
 		this->frameQueue = new FrameQueue(this);
 		this->frameQueue->setSize(this->precachedFramesCount);
