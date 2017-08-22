@@ -634,9 +634,8 @@ namespace aprilvideo
 			}
 			if (frame != NULL)
 			{
-				gvec2 size;
-				size.x = frame->getWidth();
-				size.y = frame->getHeight();
+				int frameWidth = frame->getStride();
+				int frameHeight = frame->getHeight();
 				april::Image::Format textureFormat = this->_getTextureFormat();
 				// switch textures each frame to optimize GPU pipeline
 				int index = (this->videoImages.indexOf(this->currentVideoImage) + 1) % this->videoImages.size();
@@ -661,13 +660,13 @@ namespace aprilvideo
 				char message[1024] = { '\0' };
 				for (int i = 0; i < n; ++i)
 				{
-					this->currentTexture->getTexture()->write(0, 0, (int)size.x, (int)size.y, 0, 0, frame->getBuffer(), (int)size.x, (int)size.y, textureFormat);
+					this->currentTexture->getTexture()->write(0, 0, frameWidth, frameHeight, 0, 0, frame->getBuffer(), frameWidth, frameHeight, textureFormat);
 				}
 				float diff = ((float)(clock() - t) * 1000.0f) / CLOCKS_PER_SEC;
-				sprintf(message, "BENCHMARK: uploading n %dx%d video frames to texture took %.1fms (%.2fms average per frame)\n", (int)size.x, (int)size.y, diff, diff / n);
+				sprintf(message, "BENCHMARK: uploading n %dx%d video frames to texture took %.1fms (%.2fms average per frame)\n", frameWidth, frameHeight, diff, diff / n);
 				hlog::write(logTag, message);
 #else
-				this->currentTexture->getTexture()->write(0, 0, (int)size.x, (int)size.y, 0, 0, frame->getBuffer(), (int)size.x, (int)size.y, textureFormat);
+				this->currentTexture->getTexture()->write(0, 0, frameWidth, frameHeight, 0, 0, frame->getBuffer(), frameWidth, frameHeight, textureFormat);
 #endif
 				if (pop)
 				{
@@ -709,6 +708,12 @@ namespace aprilvideo
 			{
 				path = hrdir::joinPath(archive, path);
 			}
+		}
+		bool usePotStride = false;
+		april::RenderSystem::Caps caps = april::rendersys->getCaps();
+		if (!caps.npotTexturesLimited && !caps.npotTextures)
+		{
+			usePotStride = true;
 		}
 		theoraplayer::DataSource* source = NULL;
 		try
@@ -777,7 +782,7 @@ namespace aprilvideo
 				{
 					mp4Path = hrdir::joinPath("res", path);
 				}
-				this->clip = theoraplayer::manager->createVideoClip(mp4Path.cStr(), mode, precached);
+				this->clip = theoraplayer::manager->createVideoClip(mp4Path.cStr(), mode, precached, usePotStride);
 			}
 			// additional performance optimization: preload file in RAM to speed up decoding, every CPU cycle counts on certain platforms
 			// but only for "reasonably" sized files
@@ -796,7 +801,7 @@ namespace aprilvideo
 						file.close();
 						theoraplayer::MemoryDataSource* memoryDataSource = new theoraplayer::MemoryDataSource(data, size, this->_videoClipFormatName.cStr(), path.cStr());
 						source = memoryDataSource;
-						this->clip = theoraplayer::manager->createVideoClip(source, mode, precached);
+						this->clip = theoraplayer::manager->createVideoClip(source, mode, precached, usePotStride);
 					}
 					else
 					{
@@ -806,7 +811,7 @@ namespace aprilvideo
 				if (source == NULL)
 				{
 					source = new DataSource(this->_videoClipFormatName, path);
-					this->clip = theoraplayer::manager->createVideoClip(source, mode, precached);
+					this->clip = theoraplayer::manager->createVideoClip(source, mode, precached, usePotStride);
 				}
 			}
 			hlog::write(logTag, "Created video clip.");
@@ -827,8 +832,7 @@ namespace aprilvideo
 		this->clip->setAutoRestart(this->looping);
 		int tw = this->clip->getWidth();
 		int th = this->clip->getHeight();
-		april::RenderSystem::Caps caps = april::rendersys->getCaps();
-		if (!caps.npotTexturesLimited && !caps.npotTextures)
+		if (usePotStride)
 		{
 			tw = hpotCeil(tw);
 			th = hpotCeil(th);
