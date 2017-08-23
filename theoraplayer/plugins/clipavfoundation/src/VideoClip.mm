@@ -149,6 +149,11 @@ namespace clipavfoundation
 		frameDuration = 1.0f / this->fps;
 		this->duration = (float)CMTimeGetSeconds(asset.duration);
 		this->framesCount = this->duration * this->fps;
+		this->stride = this->width;
+		if (this->useStride)
+		{
+			this->stride = potCeil(this->stride);
+		}
 		if (this->frameQueue == NULL)
 		{
 			this->frameQueue = new FrameQueue(this);
@@ -199,7 +204,14 @@ namespace clipavfoundation
 #ifdef _DEBUG
 		else if (!this->loaded)
 		{
-			theoraplayer::log("-----\nwidth: " + str(this->width) + ", height: " + str(this->height) + ", fps: " + str((int) getFPS()));
+			if (this->stride <= this->width)
+			{
+				theoraplayer::log("-----\nwidth: " + str(this->width) + ", stride: " + str(this->stride) + ", height: " + str(this->height) + ", fps: " + str((int)this->getFps()));
+			}
+			else
+			{
+				theoraplayer::log("-----\nwidth: " + str(this->width) + ", height: " + str(this->height) + ", fps: " + str((int)this->getFps()));
+			}
 			theoraplayer::log("duration: " + strf(this->duration) + " seconds\n-----");
 		}
 #endif
@@ -280,9 +292,6 @@ namespace clipavfoundation
 				CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
 				CVPixelBufferLockBaseAddress(imageBuffer, 0);
 				void* baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
-				this->stride = (int)CVPixelBufferGetBytesPerRow(imageBuffer);
-//				size_t width = CVPixelBufferGetWidth(imageBuffer);
-//				size_t height = CVPixelBufferGetHeight(imageBuffer);
 				Theoraplayer_PixelTransform t;
 				memset(&t, 0, sizeof(Theoraplayer_PixelTransform));
 #ifdef _AVFOUNDATION_BGRX
