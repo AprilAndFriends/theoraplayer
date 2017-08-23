@@ -74,22 +74,22 @@ namespace theoraplayer
 		// number of bytes based on output mode
 		int bytemap[] = { 0, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4, 1, 3, 4, 4, 4, 4, 3, 4, 4, 4, 4 };
 		this->bpp = bytemap[this->clip->getOutputMode()];
-		int bufferSize = this->clip->getStride() * this->clip->getHeight() * this->bpp;
+		unsigned int size = this->clip->getStride() * this->clip->height * this->bpp;
 		try
 		{
-			this->buffer = new unsigned char[bufferSize];
+			this->buffer = new unsigned char[size];
 		}
 		catch (std::bad_alloc)
 		{
 			this->buffer = NULL;
 			return;
 		}
-		memset(this->buffer, 0, bufferSize);
+		memset(this->buffer, 255, size);
 	}
 
 	VideoFrame::~VideoFrame()
 	{
-		if (this->buffer != NULL)
+		if (this->buffer)
 		{
 			delete[] this->buffer;
 		}
@@ -102,7 +102,7 @@ namespace theoraplayer
 
 	int VideoFrame::getStride() const
 	{
-		return this->clip->getStride();
+		return this->clip->stride;
 	}
 
 	int VideoFrame::getHeight() const
@@ -141,14 +141,14 @@ namespace theoraplayer
 		else
 		{
 			t->out = this->buffer;
-			t->w = this->clip->getStride();
+			t->w = this->clip->getWidth();
 			t->h = this->clip->getHeight();
 #ifdef YUV_TEST // when benchmarking yuv conversion functions during development, do a timed average
 #define N 1000
 			clock_t time = clock();
 			for (int i = 0; i < N; ++i)
 			{
-				conversion_functions[this->clip->getOutputMode()](t);
+				conversion_functions[mParent->getOutputMode()](t);
 			}
 			float diff = (clock() - time) * 1000.0f / CLOCKS_PER_SEC;
 			char s[128] = { '\0' };
