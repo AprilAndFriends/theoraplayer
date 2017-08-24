@@ -38,6 +38,7 @@ namespace theoraplayer
 		int getWidth() const;
 		int getStride() const;
 		int getHeight() const;
+		bool hasAlphaChannel() const;
 
 		void clear();
 

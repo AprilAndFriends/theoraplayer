@@ -109,7 +109,12 @@ namespace theoraplayer
 	{
 		return this->clip->getHeight();
 	}
-	
+
+	int VideoFrame::hasAlphaChannel() const
+	{
+		return this->clip->hasAlphaChannel();
+	}
+
 	void VideoFrame::initSpecial(float timeToDisplay, int iteration, unsigned long frameNumber)
 	{
 		this->timeToDisplay = timeToDisplay;
@@ -142,6 +147,10 @@ namespace theoraplayer
 		{
 			t->out = this->buffer;
 			t->w = this->clip->getStride();
+			if (this->clip->hasAlphaChannel())
+			{
+				t->w /= 2;
+			}
 			t->h = this->clip->getHeight();
 #ifdef YUV_TEST // when benchmarking yuv conversion functions during development, do a timed average
 #define N 1000
