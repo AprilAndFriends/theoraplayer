@@ -110,7 +110,7 @@ namespace theoraplayer
 		return this->clip->getHeight();
 	}
 
-	int VideoFrame::hasAlphaChannel() const
+	bool VideoFrame::hasAlphaChannel() const
 	{
 		return this->clip->hasAlphaChannel();
 	}
