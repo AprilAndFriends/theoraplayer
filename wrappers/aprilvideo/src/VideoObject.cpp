@@ -761,11 +761,11 @@ namespace aprilvideo
 #else // iOS and others
 			if (ram < 384)
 			{
-				precached = 6;
+				precached = 4;
 			}
 			else if (ram < 512)
 			{
-				precached = 8;
+				precached = 6;
 			}
 			else if (ram < 1024)
 			{
@@ -792,7 +792,7 @@ namespace aprilvideo
 			// but only for "reasonably" sized files
 			else
 			{
-				if (!path.endsWith(".mp4") && ram > 256)
+				if (!path.endsWith(".mp4") && ram > 512)
 				{
 					hresource file;
 					file.open(path);
