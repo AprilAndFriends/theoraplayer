@@ -8,6 +8,7 @@
 
 #include <april/april.h>
 #include <april/Platform.h>
+#include <april/SystemDelegate.h>
 #include <aprilui/Dataset.h>
 #include <aprilui/Image.h>
 #include <aprilui/Texture.h>
@@ -703,6 +704,7 @@ namespace aprilvideo
 	void VideoObject::createVideoClip(bool waitForCache)
 	{
 		april::Image::Format textureFormat = this->_getTextureFormat();
+		april::SystemInfo sysInfo = april::getSystemInfo();
 		this->_destroyResources();
 		hstr path = this->_videoClipFilename;
 		if (path.endsWith(".mp4"))
@@ -734,7 +736,7 @@ namespace aprilvideo
 			else if (textureFormat == april::Image::Format::RGB)		mode = theoraplayer::FORMAT_RGBX;
 			else if (textureFormat == april::Image::Format::BGR)		mode = theoraplayer::FORMAT_BGRX;
 			else if (textureFormat == april::Image::Format::Greyscale)	mode = theoraplayer::FORMAT_GREY;
-			int ram = april::getSystemInfo().ram;
+			int ram = sysInfo.ram;
 			int precached = 16;
 #if defined(_WINRT) && !defined(_WINP8)
 			// WinRT libtheoraplayer uses an optimized libtheora which is faster, but still slower than a native hardware accelerated codec.
@@ -770,6 +772,18 @@ namespace aprilvideo
 			else if (ram < 1024)
 			{
 				precached = (path.contains("lowres") ? 16 : 8);
+			}
+#endif
+			
+#ifdef _IOS
+			if (sysInfo.architectureBits == 32)
+			{
+				hlog::write(logTag, "Low end device detected, sending memory warning before creating a new video instance");
+				april::SystemDelegate* delegate = april::window->getSystemDelegate();
+				if (delegate != NULL)
+				{
+					delegate->onLowMemoryWarning();
+				}
 			}
 #endif
 			if (path.endsWith(".mp4"))
@@ -888,7 +902,7 @@ namespace aprilvideo
 #if defined(_WINRT) || defined(_ANDROID)
 				xal::manager->createCategory(AUDIO_CATEGORY, xal::BufferMode::OnDemand, xal::SourceMode::Disk);
 #else
-				if (april::getSystemInfo().ram >= 512)
+				if (sysInfo.ram >= 512)
 				{
 					xal::manager->createCategory(AUDIO_CATEGORY, xal::BufferMode::Streamed, xal::SourceMode::Ram);
 				}
