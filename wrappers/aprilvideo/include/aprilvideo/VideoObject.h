@@ -58,9 +58,10 @@ namespace aprilvideo
 		VideoObject(chstr name);
 		~VideoObject();
 		inline hstr getClassName() const { return "aprilvideo.VideoObject"; }
-
 		static aprilui::Object* createInstance(chstr name);
 		
+		harray<aprilui::PropertyDescription> getPropertyDescriptions() const;
+
 		HL_DEFINE_GET(hstr, videoClipName, VideoClipName);
 		void setVideoClipName(chstr value);
 		HL_DEFINE_ISSET(videoClipUseAlpha, VideoClipUseAlpha);
@@ -94,8 +95,6 @@ namespace aprilvideo
 		bool isVideoClipCreated() const;
 		PlaybackState getPlaybackState() const;
 		void setPlaybackState(PlaybackState value);
-
-		harray<aprilui::PropertyDescription> getPropertyDescriptions() const;
 
 		hstr getProperty(chstr name);
 		bool setProperty(chstr name, chstr value);
