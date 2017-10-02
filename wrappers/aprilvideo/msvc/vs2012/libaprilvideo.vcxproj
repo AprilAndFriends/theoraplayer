@@ -54,6 +54,7 @@
     <ProjectGuid>{388E4B0F-0860-40C7-AAA0-FD6F79E7AB3E}</ProjectGuid>
     <RootNamespace>aprilvideo</RootNamespace>
   </PropertyGroup>
+  <Import Project="..\..\..\hltypes\msvc\vs2012\props-generic\system.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props\default.props" />
   <Import Project="..\..\..\hltypes\msvc\vs2012\props-generic\platform-$(Platform).props" />
