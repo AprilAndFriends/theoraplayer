@@ -5,10 +5,10 @@
     <PlatformToolset>v120_wp81</PlatformToolset>
     <WindowsAppContainer>true</WindowsAppContainer>
   </PropertyGroup>
-  <Import Condition="(exists('..\..\lib\msvc\vs2013-winp8\$(Platform).props'))" Project="..\..\lib\msvc\vs2013-winp8\$(Platform).props"/>
-  <Import Condition="(exists('..\..\msvc\vs2013-winp8\$(Platform).props'))" Project="..\..\msvc\vs2013-winp8\$(Platform).props"/>
-  <Import Condition="(exists('..\..\..\msvc\vs2013-winp8\$(Platform).props'))" Project="..\..\..\msvc\vs2013-winp8\$(Platform).props"/>
-  <Import Condition="(exists('..\..\..\..\msvc\vs2013-winp8\$(Platform).props'))" Project="..\..\..\..\msvc\vs2013-winp8\$(Platform).props"/>
+  <Import Condition="(exists('..\..\lib\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\lib\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <Import Condition="(exists('..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>_WINRT;WINRT;_WINP8;WINP8;_WIN32;WIN32;_X64;X64;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -17,16 +17,14 @@
       <CompileAsWinRT>true</CompileAsWinRT>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform)-WinP8;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform)-WinP8;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories>..\..\lib\lib\msvc120-winp8\$(Platform);..\..\lib\msvc120-winp8\$(Platform);..\..\..\lib\msvc120-winp8\$(Platform);..\..\..\..\lib\msvc120-winp8\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);..\..\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);..\..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX64</TargetMachine>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform)-WinP8;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform)-WinP8;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories>..\..\lib\lib\msvc120-winp8\$(Platform);..\..\lib\msvc120-winp8\$(Platform);..\..\..\lib\msvc120-winp8\$(Platform);..\..\..\..\lib\msvc120-winp8\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);..\..\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);..\..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX64</TargetMachine>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </Lib>

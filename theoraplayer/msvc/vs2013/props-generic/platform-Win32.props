@@ -4,10 +4,10 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
-  <Import Condition="(exists('..\..\lib\msvc\vs2015\$(Platform).props'))" Project="..\..\lib\msvc\vs2015\$(Platform).props"/>
-  <Import Condition="(exists('..\..\msvc\vs2015\$(Platform).props'))" Project="..\..\msvc\vs2015\$(Platform).props"/>
-  <Import Condition="(exists('..\..\..\msvc\vs2015\$(Platform).props'))" Project="..\..\..\msvc\vs2015\$(Platform).props"/>
-  <Import Condition="(exists('..\..\..\..\msvc\vs2015\$(Platform).props'))" Project="..\..\..\..\msvc\vs2015\$(Platform).props"/>
+  <Import Condition="(exists('..\..\lib\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\lib\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <Import Condition="(exists('..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>_WIN32;WIN32;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -15,8 +15,7 @@
       <StringPooling>true</StringPooling>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v110'))">..\..\lib\lib\msvc110;..\..\lib\msvc110;..\..\..\lib\msvc110;..\..\..\..\lib\msvc110;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v120'))">..\..\lib\lib\msvc120;..\..\lib\msvc120;..\..\..\lib\msvc120;..\..\..\..\lib\msvc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX86</TargetMachine>
@@ -24,8 +23,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v110'))">..\..\lib\lib\msvc110;..\..\lib\msvc110;..\..\..\lib\msvc110;..\..\..\..\lib\msvc110;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v120'))">..\..\lib\lib\msvc120;..\..\lib\msvc120;..\..\..\lib\msvc120;..\..\..\..\lib\msvc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX86</TargetMachine>

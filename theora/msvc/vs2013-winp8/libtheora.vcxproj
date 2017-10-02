@@ -42,6 +42,8 @@
     <ApplicationType>Windows Phone</ApplicationType>
     <ApplicationTypeRevision>8.1</ApplicationTypeRevision>
   </PropertyGroup>
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winp8\props-generic\system.props')" Project="..\..\..\hltypes\msvc\vs2013-winp8\props-generic\system.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winp8\props-generic\system.props')" Project="..\..\..\theoraplayer\msvc\vs2013-winp8\props-generic\system.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props\default.props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winp8\props-generic\platform-$(Platform).props')" Project="..\..\..\hltypes\msvc\vs2013-winp8\props-generic\platform-$(Platform).props" />

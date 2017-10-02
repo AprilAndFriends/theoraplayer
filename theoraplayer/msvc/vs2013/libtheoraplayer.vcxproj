@@ -102,10 +102,12 @@
     <ProjectGuid>{ABE6907D-00FF-4198-8D36-65115AF1D868}</ProjectGuid>
     <RootNamespace>theoraplayer</RootNamespace>
   </PropertyGroup>
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013\props-generic\system.props')" Project="..\..\..\hltypes\msvc\vs2013\props-generic\system.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013\props-generic\system.props')" Project="props-generic\system.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props\default.props" />
-  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).prop')" Project="..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).prop')" Project="props-generic\platform-$(Platform).props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props')" Project="..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props')" Project="props-generic\platform-$(Platform).props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2013\props-generic\configurations.props')" Project="..\..\..\hltypes\msvc\vs2013\props-generic\configurations.props" />
   <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013\props-generic\configurations.props')" Project="props-generic\configurations.props" />
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug_Theora|Win32'">

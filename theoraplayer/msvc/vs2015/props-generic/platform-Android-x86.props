@@ -7,10 +7,10 @@
     <AndroidSdkLevel>25</AndroidSdkLevel>
     <AndroidNdkLevel>15</AndroidNdkLevel>
   </PropertyGroup>
-  <Import Condition="(exists('..\..\lib\msvc\vs2015\$(Platform).props'))" Project="..\..\lib\msvc\vs2015\$(Platform).props"/>
-  <Import Condition="(exists('..\..\msvc\vs2015\$(Platform).props'))" Project="..\..\msvc\vs2015\$(Platform).props"/>
-  <Import Condition="(exists('..\..\..\msvc\vs2015\$(Platform).props'))" Project="..\..\..\msvc\vs2015\$(Platform).props"/>
-  <Import Condition="(exists('..\..\..\..\msvc\vs2015\$(Platform).props'))" Project="..\..\..\..\msvc\vs2015\$(Platform).props"/>
+  <Import Condition="(exists('..\..\lib\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\lib\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <Import Condition="(exists('..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
   <ItemDefinitionGroup>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -31,14 +31,12 @@
       <RuntimeTypeInfoEnum></RuntimeTypeInfoEnum>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories>lib\lib\android;lib\android;..\lib\android;..\..\lib\android;lib\lib\android\x86;lib\android\x86;..\lib\android\x86;..\..\lib\android\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SystemLibraryDependencies>dl;z;GLESv2;%(SystemLibraryDependencies)</SystemLibraryDependencies>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories>lib\lib\android;lib\android;..\lib\android;..\..\lib\android;lib\lib\android\x86;lib\android\x86;..\lib\android\x86;..\..\lib\android\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>

@@ -1,20 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Condition="'$(WholeProgramOptimization)'!='true'">
-    <OutDir>$(SolutionDir)bin\Debug\$(Platform)-WinP8\lib\$(ProjectName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)bin\Debug\$(Platform)-WinP8\lib\$(ProjectName)\$(Configuration)\</IntDir>
+  <PropertyGroup Condition="'$(ConfigurationType)'!='Application'">
+    <IntDir>$(HLTypesOutputDir)\lib\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(HLTypesOutputDir)\lib\$(ProjectName)\$(Configuration)\</OutDir>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(WholeProgramOptimization)'=='true'">
-    <OutDir>$(SolutionDir)bin\Release\$(Platform)-WinP8\lib\$(ProjectName)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)bin\Release\$(Platform)-WinP8\lib\$(ProjectName)\$(Configuration)\</IntDir>
+  <PropertyGroup Condition="'$(ConfigurationType)'=='Application'">
+    <IntDir>$(HLTypesOutputDir)\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir>$(HLTypesOutputDir)\$(ProjectName)\$(Configuration)\</OutDir>
   </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(WholeProgramOptimization)'!='true'">
+  <PropertyGroup Label="Configuration" Condition="'$(HLTypesConfigurationType)'=='Debug'">
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
-  <PropertyGroup Label="Configuration" Condition="'$(WholeProgramOptimization)'=='true'">
+  <PropertyGroup Label="Configuration" Condition="'$(HLTypesConfigurationType)'!='Debug'">
     <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
   <ItemDefinitionGroup>
+    <BuildLog>
+      <Path>$(IntDir)$(MSBuildProjectName).log</Path>
+    </BuildLog>
     <ClCompile>
       <PreprocessorDefinitions Condition="'$(ConfigurationType)'=='StaticLibrary'">_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
@@ -31,7 +34,7 @@ xcopy "$(OutDir)$(TargetName).lib" "$(OutDir)..\..\..\" /Y /V</Command>
       <Command Condition="'$(ConfigurationType)'=='Application'">xcopy "$(OutDir)..\..\*.dll" "$(OutDir)" /Y /V</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(WholeProgramOptimization)'!='true'">
+  <ItemDefinitionGroup Condition="'$(HLTypesConfigurationType)'=='Debug'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -42,7 +45,7 @@ xcopy "$(OutDir)$(TargetName).lib" "$(OutDir)..\..\..\" /Y /V</Command>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(WholeProgramOptimization)'=='true'">
+  <ItemDefinitionGroup Condition="'$(HLTypesConfigurationType)'!='Debug'">
     <ClCompile>
       <Optimization>Full</Optimization>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>

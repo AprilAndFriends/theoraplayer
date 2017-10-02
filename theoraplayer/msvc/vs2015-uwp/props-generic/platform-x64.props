@@ -5,10 +5,10 @@
     <PlatformToolset>v140</PlatformToolset>
     <WindowsAppContainer>true</WindowsAppContainer>
   </PropertyGroup>
-  <Import Condition="(exists('..\..\lib\msvc\vs2015-uwp\$(Platform).props'))" Project="..\..\lib\msvc\vs2015-uwp\$(Platform).props"/>
-  <Import Condition="(exists('..\..\msvc\vs2015-uwp\$(Platform).props'))" Project="..\..\msvc\vs2015-uwp\$(Platform).props"/>
-  <Import Condition="(exists('..\..\..\msvc\vs2015-uwp\$(Platform).props'))" Project="..\..\..\msvc\vs2015-uwp\$(Platform).props"/>
-  <Import Condition="(exists('..\..\..\..\msvc\vs2015-uwp\$(Platform).props'))" Project="..\..\..\..\msvc\vs2015-uwp\$(Platform).props"/>
+  <Import Condition="(exists('..\..\lib\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\lib\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <Import Condition="(exists('..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <Import Condition="(exists('..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>_WINUWP;WINUWP;_WINRT;WINRT;_WIN32;WIN32;_X64;X64;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -17,16 +17,14 @@
       <CompileAsWinRT>true</CompileAsWinRT>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform)-UWP;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform)-UWP;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories>..\..\lib\lib\msvc140-uwp\$(Platform);..\..\lib\msvc140-uwp\$(Platform);..\..\..\lib\msvc140-uwp\$(Platform);..\..\..\..\lib\msvc140-uwp\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);..\..\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);..\..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX64</TargetMachine>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'!='true'">$(SolutionDir)bin\Debug\$(Platform)-UWP;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="'$(WholeProgramOptimization)'=='true'">$(SolutionDir)bin\Release\$(Platform)-UWP;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories>..\..\lib\lib\msvc140-uwp\$(Platform);..\..\lib\msvc140-uwp\$(Platform);..\..\..\lib\msvc140-uwp\$(Platform);..\..\..\..\lib\msvc140-uwp\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);..\..\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);..\..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory)\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX64</TargetMachine>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </Lib>

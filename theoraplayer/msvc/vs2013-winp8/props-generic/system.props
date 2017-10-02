@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <HLTypesPlatformSuffix>-WinP8</HLTypesPlatformSuffix>
+    <HLTypesDefaultPlatformLibDirectory>msvc120-winp8</HLTypesDefaultPlatformLibDirectory>
+    <HLTypesMsvcType>vs2013-winp8</HLTypesMsvcType>
+    <HLTypesConfigurationType Condition="$(Configuration.StartsWith('Debug'))">Debug</HLTypesConfigurationType>
+    <HLTypesConfigurationType Condition="!$(Configuration.StartsWith('Debug'))">Release</HLTypesConfigurationType>
+    <HLTypesOutputDir>$(SolutionDir)bin\$(HLTypesConfigurationType)\$(Platform)$(HLTypesPlatformSuffix)</HLTypesOutputDir>
+    <IntermediateOutputPath>$(HLTypesOutputDir)\lib\$(ProjectName)\$(Configuration)\</IntermediateOutputPath>
+    <IntDir>$(IntermediateOutputPath)</IntDir>
+    <OutDir>$(IntermediateOutputPath)</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <BuildLog>
+      <Path>$(IntDir)$(MSBuildProjectName).log</Path>
+    </BuildLog>
+  </ItemDefinitionGroup>
+</Project>
