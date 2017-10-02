@@ -7,13 +7,10 @@
     <HLTypesConfigurationType Condition="$(Configuration.StartsWith('Debug'))">Debug</HLTypesConfigurationType>
     <HLTypesConfigurationType Condition="!$(Configuration.StartsWith('Debug'))">Release</HLTypesConfigurationType>
     <HLTypesOutputDir>$(SolutionDir)bin\$(HLTypesConfigurationType)\$(Platform)$(HLTypesPlatformSuffix)</HLTypesOutputDir>
-    <IntermediateOutputPath>$(HLTypesOutputDir)\lib\$(ProjectName)\$(Configuration)\</IntermediateOutputPath>
-    <IntDir>$(IntermediateOutputPath)</IntDir>
-    <OutDir>$(IntermediateOutputPath)</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <BuildLog>
-      <Path>$(IntDir)$(MSBuildProjectName).log</Path>
+      <Path>$(HLTypesOutputDir)\lib\$(ProjectName)\$(Configuration)\$(MSBuildProjectName).log</Path>
     </BuildLog>
   </ItemDefinitionGroup>
 </Project>
