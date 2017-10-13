@@ -107,29 +107,29 @@ namespace aprilvideo
 		void updateFrame();
 		void createVideoClip(bool waitForCache = true);
 
-		DEPRECATED_ATTRIBUTE("Deprecated API. Use getCurrentTexture() instead.")
+		HL_DEPRECATED("Deprecated API. Use getCurrentTexture() instead.")
 			inline aprilui::Texture* getTexture() const			{ return this->getCurrentTexture(); }
-		DEPRECATED_ATTRIBUTE("Deprecated API. Use createVideoClip() instead.")
+		HL_DEPRECATED("Deprecated API. Use createVideoClip() instead.")
 			inline void _createClip(bool waitForCache = true)	{ this->createVideoClip(waitForCache); }
-		DEPRECATED_ATTRIBUTE("Deprecated API. Use isVideoClipPaused() instead.")
+		HL_DEPRECATED("Deprecated API. Use isVideoClipPaused() instead.")
 			inline bool _isVideoPaused() const					{ return this->isVideoClipPaused(); }
-		DEPRECATED_ATTRIBUTE("Deprecated API. Use isVideoClipCreated() instead.")
+		HL_DEPRECATED("Deprecated API. Use isVideoClipCreated() instead.")
 			inline bool _isClipCreated() const					{ return this->isVideoClipCreated(); }
-		DEPRECATED_ATTRIBUTE("Deprecated API. Use getVideoClipWidth() instead.")
+		HL_DEPRECATED("Deprecated API. Use getVideoClipWidth() instead.")
 			inline int getClipWidth()							{ return this->getVideoClipWidth(); }
-		DEPRECATED_ATTRIBUTE("Deprecated API. Use getVideoClipHeight() instead.")
+		HL_DEPRECATED("Deprecated API. Use getVideoClipHeight() instead.")
 			inline int getClipHeight()							{ return this->getVideoClipHeight(); }
-		DEPRECATED_ATTRIBUTE("Deprecated API. Use getReadyFramesCount() instead.")
+		HL_DEPRECATED("Deprecated API. Use getReadyFramesCount() instead.")
 			inline int getNumReadyFrames() const				{ return this->getReadyFramesCount(); }
-		DEPRECATED_ATTRIBUTE("Deprecated API. Use getPrecachedFramesCount() instead.")
+		HL_DEPRECATED("Deprecated API. Use getPrecachedFramesCount() instead.")
 			inline int getNumPrecachedFrames() const			{ return this->getPrecachedFramesCount(); }
-		DEPRECATED_ATTRIBUTE("Deprecated API. Use getPauseAlphaThreshold() instead.")
+		HL_DEPRECATED("Deprecated API. Use getPauseAlphaThreshold() instead.")
 			inline int getAlphaThreshold() const				{ return this->getPauseAlphaThreshold(); }
-		DEPRECATED_ATTRIBUTE("Deprecated API. Use setPauseAlphaThreshold() instead.")
+		HL_DEPRECATED("Deprecated API. Use setPauseAlphaThreshold() instead.")
 			inline void setAlphaThreshold(int value)			{ this->setPauseAlphaThreshold(value); }
-		DEPRECATED_ATTRIBUTE("Deprecated API. Use getPauseAlphaThreshold() instead.")
+		HL_DEPRECATED("Deprecated API. Use getPauseAlphaThreshold() instead.")
 			inline int getAlphaTreshold() const					{ return this->getPauseAlphaThreshold(); }
-		DEPRECATED_ATTRIBUTE("Deprecated API. Use setPauseAlphaThreshold() instead.")
+		HL_DEPRECATED("Deprecated API. Use setPauseAlphaThreshold() instead.")
 			inline void setAlphaTreshold(int value)				{ this->setPauseAlphaThreshold(value); }
 
 	protected:
