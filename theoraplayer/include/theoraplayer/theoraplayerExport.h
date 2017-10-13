@@ -33,8 +33,10 @@
 	#ifndef DEPRECATED_ATTRIBUTE
 		#ifdef _MSC_VER
 			#define DEPRECATED_ATTRIBUTE(message) __declspec(deprecated(message))
-		#else
+		#elif !defined(__APPLE__) || __has_extension(attribute_deprecated_with_message) || (defined(__GNUC) && ((GNUC >= 5) || ((GNUC == 4) && (GNUC_MINOR__ >= 5))))
 			#define DEPRECATED_ATTRIBUTE(message) __attribute__((deprecated(message)))
+		#else
+			#define DEPRECATED_ATTRIBUTE(message) __attribute__((deprecated))
 		#endif
 	#endif
 
