@@ -28,6 +28,11 @@ namespace theoraplayer
 
 	void init(int workerThreadCount)
 	{
+#ifdef _USE_THEORA
+		log("Initializing theoraplayer with theora support.");
+#else
+		log("Initializing theoraplayer without any formats.");
+#endif
 		theoraplayer::manager = new Manager();
 #ifdef _USE_THEORA
 		VideoClip::Format theora;
