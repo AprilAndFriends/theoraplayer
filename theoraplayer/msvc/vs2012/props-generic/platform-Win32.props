@@ -16,14 +16,14 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories>..\..\lib\lib\msvc110;..\..\lib\msvc110;..\..\..\lib\msvc110;..\..\..\..\lib\msvc110;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>lib\lib\$(HLTypesDefaultPlatformLibDirectory);lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories>..\..\lib\lib\msvc110;..\..\lib\msvc110;..\..\..\lib\msvc110;..\..\..\..\lib\msvc110;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>lib\lib\$(HLTypesDefaultPlatformLibDirectory);lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX86</TargetMachine>
       <SubSystem>Windows</SubSystem>
     </Lib>

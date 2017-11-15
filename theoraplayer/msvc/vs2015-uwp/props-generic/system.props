@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <HLTypesPlatformSuffix>-UWP</HLTypesPlatformSuffix>
-    <HLTypesDefaultPlatformLibDirectory>msvc140-uwp</HLTypesDefaultPlatformLibDirectory>
+    <HLTypesDefaultPlatformLibDirectory>msvc140-uwp\$(Platform)</HLTypesDefaultPlatformLibDirectory>
     <HLTypesMsvcType>vs2015-uwp</HLTypesMsvcType>
     <HLTypesConfigurationType Condition="$(Configuration.StartsWith('Debug'))">Debug</HLTypesConfigurationType>
     <HLTypesConfigurationType Condition="!$(Configuration.StartsWith('Debug'))">Release</HLTypesConfigurationType>

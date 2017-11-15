@@ -11,6 +11,10 @@
   <Import Condition="(exists('..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
   <Import Condition="(exists('..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
   <Import Condition="(exists('..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <PropertyGroup>
+    <HLTypesDefaultPlatformLibDirectory Condition="$(PlatformToolset.StartsWith('v110'))">msvc110</HLTypesDefaultPlatformLibDirectory>
+    <HLTypesDefaultPlatformLibDirectory Condition="$(PlatformToolset.StartsWith('v120'))">msvc120</HLTypesDefaultPlatformLibDirectory>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>_WIN32;WIN32;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -19,18 +23,14 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v110'))">..\..\lib\lib\msvc110;..\..\lib\msvc110;..\..\..\lib\msvc110;..\..\..\..\lib\msvc110;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v120'))">..\..\lib\lib\msvc120;..\..\lib\msvc120;..\..\..\lib\msvc120;..\..\..\..\lib\msvc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v140'))">..\..\lib\lib\msvc140;..\..\lib\msvc140;..\..\..\lib\msvc140;..\..\..\..\lib\msvc140;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>lib\lib\$(HLTypesDefaultPlatformLibDirectory);lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v110'))">..\..\lib\lib\msvc110;..\..\lib\msvc110;..\..\..\lib\msvc110;..\..\..\..\lib\msvc110;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v120'))">..\..\lib\lib\msvc120;..\..\lib\msvc120;..\..\..\lib\msvc120;..\..\..\..\lib\msvc120;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v140'))">..\..\lib\lib\msvc140;..\..\lib\msvc140;..\..\..\lib\msvc140;..\..\..\..\lib\msvc140;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>lib\lib\$(HLTypesDefaultPlatformLibDirectory);lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX86</TargetMachine>
       <SubSystem>Windows</SubSystem>
     </Lib>

@@ -8,6 +8,9 @@
   <Import Condition="(exists('..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
   <Import Condition="(exists('..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
   <Import Condition="(exists('..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <PropertyGroup>
+    <HLTypesDefaultPlatformLibDirectory Condition="$(PlatformToolset.StartsWith('v110'))">msvc110_x64</HLTypesDefaultPlatformLibDirectory>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <PreprocessorDefinitions>_WIN32;WIN32;_WIN64;WIN64;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -16,16 +19,14 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v110'))">..\..\lib\lib\msvc110_x64;..\..\lib\msvc110_x64;..\..\..\lib\msvc110_x64;..\..\..\..\lib\msvc110_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v120'))">..\..\lib\lib\msvc120_x64;..\..\lib\msvc120_x64;..\..\..\lib\msvc120_x64;..\..\..\..\lib\msvc120_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>lib\lib\$(HLTypesDefaultPlatformLibDirectory);lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX64</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v110'))">..\..\lib\lib\msvc110_x64;..\..\lib\msvc110_x64;..\..\..\lib\msvc110_x64;..\..\..\..\lib\msvc110_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories Condition="$(PlatformToolset.StartsWith('v120'))">..\..\lib\lib\msvc120_x64;..\..\lib\msvc120_x64;..\..\..\lib\msvc120_x64;..\..\..\..\lib\msvc120_x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>lib\lib\$(HLTypesDefaultPlatformLibDirectory);lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX64</TargetMachine>
       <SubSystem>Windows</SubSystem>
     </Lib>

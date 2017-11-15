@@ -8,6 +8,9 @@
   <Import Condition="(exists('..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
   <Import Condition="(exists('..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
   <Import Condition="(exists('..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
+  <PropertyGroup>
+    <HLTypesDefaultPlatformLibDirectory>android\x86</HLTypesDefaultPlatformLibDirectory>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -29,12 +32,12 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories>lib\lib\android;lib\android;..\lib\android;..\..\lib\android;lib\lib\android\x86;lib\android\x86;..\lib\android\x86;..\..\lib\android\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>lib\lib\$(HLTypesDefaultPlatformLibDirectory);lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SystemLibraryDependencies>dl;z;GLESv2;%(SystemLibraryDependencies)</SystemLibraryDependencies>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalLibraryDirectories>lib\lib\android;lib\android;..\lib\android;..\..\lib\android;lib\lib\android\x86;lib\android\x86;..\lib\android\x86;..\..\lib\android\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>lib\lib\$(HLTypesDefaultPlatformLibDirectory);lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
 </Project>
