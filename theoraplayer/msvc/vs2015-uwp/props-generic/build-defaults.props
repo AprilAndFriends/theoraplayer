@@ -27,9 +27,13 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
-    <Link Condition="'$(ConfigurationType)'!='Application'">
-      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+    <Link>
+      <GenerateWindowsMetadata Condition="'$(ConfigurationType)'!='Application'">false</GenerateWindowsMetadata>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
     <PostBuildEvent>
       <Command Condition="'$(ConfigurationType)'=='StaticLibrary'">xcopy "$(TargetPath)" "$(OutDir)..\..\..\" /Y /V</Command>
       <Command Condition="'$(ConfigurationType)'=='DynamicLibrary'">xcopy "$(TargetPath)" "$(OutDir)..\..\..\" /Y /V

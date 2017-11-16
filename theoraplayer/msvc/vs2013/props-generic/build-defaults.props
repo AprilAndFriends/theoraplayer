@@ -19,6 +19,12 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
     <PostBuildEvent>
       <Command Condition="'$(ConfigurationType)'=='StaticLibrary'">xcopy "$(TargetPath)" "$(OutDir)..\..\..\" /Y /V</Command>
       <Command Condition="'$(ConfigurationType)'=='DynamicLibrary'">xcopy "$(TargetPath)" "$(OutDir)..\..\..\" /Y /V
