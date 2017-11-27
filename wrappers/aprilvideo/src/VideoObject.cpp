@@ -704,6 +704,7 @@ namespace aprilvideo
 	void VideoObject::createVideoClip(bool waitForCache)
 	{
 		april::Image::Format textureFormat = this->_getTextureFormat();
+		hlog::write(logTag, "april::getSystemInfo() in VideoObject::createVideoClip()");
 		april::SystemInfo sysInfo = april::getSystemInfo();
 		this->_destroyResources();
 		hstr path = this->_videoClipFilename;
