@@ -59,7 +59,6 @@ namespace aprilvideo
 	int getPreloadToRamSizeLimit()
 	{
 		int limit = 64;
-		hlog::write(logTag, "april::getSystemInfo() in aprilvideo::getPreloadToRamSizeLimit()");
 		int ram = april::getSystemInfo().ram;
 #ifdef _ANDROID
 		limit = 16;
