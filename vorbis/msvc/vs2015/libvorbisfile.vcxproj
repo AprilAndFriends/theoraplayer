@@ -22,10 +22,12 @@
     <ProjectGuid>{CEBDE98B-A6AA-46E6-BC79-FAAF823DB9EC}</ProjectGuid>
     <RootNamespace>vorbisfile</RootNamespace>
   </PropertyGroup>
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\system.props')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\system.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\system.props')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\system.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props\default.props" />
-  <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).prop')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).prop')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\platform-$(Platform).props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\platform-$(Platform).props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>

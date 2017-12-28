@@ -54,10 +54,12 @@
     <ProjectGuid>{3D1576F4-0991-473C-82D7-F22252CA4754}</ProjectGuid>
     <RootNamespace>clipwebm</RootNamespace>
   </PropertyGroup>
+  <Import Condition="exists('..\..\..\..\..\hltypes\msvc\vs2015\props-generic\system.props')" Project="..\..\..\..\..\hltypes\msvc\vs2015\props-generic\system.props" />
+  <Import Condition="!exists('..\..\..\..\..\hltypes\msvc\vs2015\props-generic\system.props')" Project="..\..\..\..\msvc\vs2015\props-generic\system.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props\default.props" />
-  <Import Condition="exists('..\..\..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).prop')" Project="..\..\..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props" />
-  <Import Condition="!exists('..\..\..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).prop')" Project="..\..\..\..\msvc\vs2015\props-generic\platform-$(Platform).props" />
+  <Import Condition="exists('..\..\..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props')" Project="..\..\..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props')" Project="..\..\..\..\msvc\vs2015\props-generic\platform-$(Platform).props" />
   <Import Condition="exists('..\..\..\..\..\hltypes\msvc\vs2015\props-generic\configurations.props')" Project="..\..\..\..\..\hltypes\msvc\vs2015\props-generic\configurations.props" />
   <Import Condition="!exists('..\..\..\..\..\hltypes\msvc\vs2015\props-generic\configurations.props')" Project="..\..\..\..\msvc\vs2015\props-generic\configurations.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />

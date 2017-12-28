@@ -22,10 +22,12 @@
     <ProjectGuid>{C874310F-9F73-4530-A591-86E98C2B192F}</ProjectGuid>
     <RootNamespace>opengl_demos</RootNamespace>
   </PropertyGroup>
+  <Import Condition="exists('..\..\hltypes\msvc\vs2013\props-generic\system.props')" Project="..\..\hltypes\msvc\vs2013\props-generic\system.props" />
+  <Import Condition="!exists('..\..\hltypes\msvc\vs2013\props-generic\system.props')" Project="..\..\theoraplayer\msvc\vs2013\props-generic\system.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props-demos\default.props" />
-  <Import Condition="exists('..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).prop')" Project="..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props" />
-  <Import Condition="!exists('..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).prop')" Project="..\..\theoraplayer\msvc\vs2013\props-generic\platform-$(Platform).props" />
+  <Import Condition="exists('..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props')" Project="..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props')" Project="..\..\theoraplayer\msvc\vs2013\props-generic\platform-$(Platform).props" />
   <Import Project="props-demos\configurations.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Condition="exists('..\..\hltypes\msvc\vs2013\props-generic\build-defaults.props')" Project="..\..\hltypes\msvc\vs2013\props-generic\build-defaults.props" />

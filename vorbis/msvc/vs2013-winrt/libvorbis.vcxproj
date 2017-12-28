@@ -42,10 +42,12 @@
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>8.1</ApplicationTypeRevision>
   </PropertyGroup>
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\system.props')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\system.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\system.props')" Project="..\..\..\theoraplayer\msvc\vs2013-winrt\props-generic\system.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props\default.props" />
-  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).prop')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).prop')" Project="..\..\..\theoraplayer\msvc\vs2013-winrt\props-generic\platform-$(Platform).props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).props')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\platform-$(Platform).props')" Project="..\..\..\theoraplayer\msvc\vs2013-winrt\props-generic\platform-$(Platform).props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props')" Project="..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props" />
   <Import Condition="!exists('..\..\..\hltypes\msvc\vs2013-winrt\props-generic\configurations.props')" Project="..\..\..\theoraplayer\msvc\vs2013-winrt\props-generic\configurations.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />

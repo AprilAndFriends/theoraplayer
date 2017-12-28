@@ -54,10 +54,12 @@
     <ProjectGuid>{3AF88816-148E-442F-A5E1-52AE684D9753}</ProjectGuid>
     <RootNamespace>clipavfoundation</RootNamespace>
   </PropertyGroup>
+  <Import Condition="exists('..\..\..\..\..\hltypes\msvc\vs2013\props-generic\system.props')" Project="..\..\..\..\..\hltypes\msvc\vs2013\props-generic\system.props" />
+  <Import Condition="!exists('..\..\..\..\..\hltypes\msvc\vs2013\props-generic\system.props')" Project="..\..\..\..\msvc\vs2013\props-generic\system.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props\default.props" />
-  <Import Condition="exists('..\..\..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).prop')" Project="..\..\..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props" />
-  <Import Condition="!exists('..\..\..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).prop')" Project="..\..\..\..\msvc\vs2013\props-generic\platform-$(Platform).props" />
+  <Import Condition="exists('..\..\..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props')" Project="..\..\..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\..\..\hltypes\msvc\vs2013\props-generic\platform-$(Platform).props')" Project="..\..\..\..\msvc\vs2013\props-generic\platform-$(Platform).props" />
   <Import Condition="exists('..\..\..\..\..\hltypes\msvc\vs2013\props-generic\configurations.props')" Project="..\..\..\..\..\hltypes\msvc\vs2013\props-generic\configurations.props" />
   <Import Condition="!exists('..\..\..\..\..\hltypes\msvc\vs2013\props-generic\configurations.props')" Project="..\..\..\..\msvc\vs2013\props-generic\configurations.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />

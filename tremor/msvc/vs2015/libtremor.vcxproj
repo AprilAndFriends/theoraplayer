@@ -54,10 +54,12 @@
     <ProjectGuid>{7A8E774E-DD94-43B8-8758-6F9F656CC8D2}</ProjectGuid>
     <RootNamespace>tremor</RootNamespace>
   </PropertyGroup>
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\system.props')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\system.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\system.props')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\system.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props\default.props" />
-  <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).prop')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).prop')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\platform-$(Platform).props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\platform-$(Platform).props" />
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ConfigurationType>StaticLibrary</ConfigurationType>
   </PropertyGroup>

@@ -54,10 +54,12 @@
     <ProjectGuid>{15CBFEFF-7965-41F5-B4E2-21E8795C9159}</ProjectGuid>
     <RootNamespace>ogg</RootNamespace>
   </PropertyGroup>
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\system.props')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\system.props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\system.props')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\system.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="props\default.props" />
-  <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).prop')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props" />
-  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).prop')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\platform-$(Platform).props" />
+  <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props" />
+  <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\platform-$(Platform).props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\configurations.props')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\configurations.props" />
   <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\configurations.props')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\configurations.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
