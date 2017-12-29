@@ -859,7 +859,12 @@ namespace aprilvideo
 		april::Texture* aprilTexture = NULL;
 		for_iter (i, 0, TEXTURES_COUNT)
 		{
+			// TODO - remove this once APRIL 5.x has been merged into trunk, you should have a compilation error here once this happens
+#ifdef __APRIL_5_x_API
+			aprilTexture = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat);
+#else
 			aprilTexture = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::Type::Volatile);
+#endif
 			hstr filename = aprilTexture->getFilename() + "_" + hstr(i + 1);
 			this->currentTexture = new aprilui::Texture(filename, filename, aprilTexture);
 			this->currentVideoImage = new aprilui::Image(this->currentTexture, "aprilvideo_video_clip_image_" + hstr(i + 1),
