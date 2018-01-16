@@ -127,9 +127,9 @@ namespace theoraplayer
 		if (t->raw != NULL)
 		{
 			unsigned int bufferStride = this->clip->getWidth() * this->bpp;
-			if (bufferStride == t->rawStride)
+			if (bufferStride == t->stride)
 			{
-				memcpy(this->buffer, t->raw, t->rawStride * this->clip->getHeight());
+				memcpy(this->buffer, t->raw, t->stride * this->clip->getHeight());
 			}
 			else
 			{
@@ -137,7 +137,7 @@ namespace theoraplayer
 				unsigned char* src = t->raw;
 				int i;
 				int h = this->clip->getHeight();
-				for (i = 0; i < h; ++i, buff += bufferStride, src += t->rawStride)
+				for (i = 0; i < h; ++i, buff += bufferStride, src += t->stride)
 				{
 					memcpy(buff, src, bufferStride);
 				}
@@ -146,10 +146,11 @@ namespace theoraplayer
 		else
 		{
 			t->out = this->buffer;
-			t->w = this->clip->getStride();
+			t->w = this->clip->getWidth();
+			t->stride = this->clip->getStride();
 			if (this->clip->hasAlphaChannel())
 			{
-				t->w /= 2;
+				t->stride /= 2;
 			}
 			t->h = this->clip->getHeight();
 #ifdef YUV_TEST // when benchmarking yuv conversion functions during development, do a timed average

@@ -24,7 +24,7 @@ struct Theoraplayer_PixelTransform
 	unsigned char* out;
 	unsigned int w;
 	unsigned int h;
-	unsigned int rawStride;
+	unsigned int stride;
 	unsigned int yStride;
 	unsigned int uStride;
 	unsigned int vStride;
