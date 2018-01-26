@@ -605,36 +605,16 @@ namespace aprilvideo
 		if (this->clip != NULL)
 		{
 			theoraplayer::VideoFrame* frame = this->clip->fetchNextFrame();
-			bool pop = true;
-			bool restoringTexture = false;
-			if (!this->currentTexture->isLoaded())
-			{
-				restoringTexture = true;
-				hlog::write(logTag, this->videoClipName + ": Textures unloaded, reloading");
-				int i = 1;
-				foreach (aprilui::Texture*, it, this->textures)
-				{
-					hlog::write(logTag, this->videoClipName + ": Reloading texture " + hstr(i));
-					(*it)->load();
-					++i;
-				}
-				if (frame == NULL)
-				{
-					hlog::write(logTag, this->videoClipName + ": Texture restored, waiting for video frame to decode to fill texture.");
-					if (this->clip->getReadyFramesCount() == 0)
-					{
-						this->clip->waitForCache();
-					}
-					frame = this->clip->getFrameQueue()->getFirstAvailableFrame();
-					pop = false;
-				}
-				else
-				{
-					hlog::write(logTag, this->videoClipName + ": Texture restored, using current frame to fill restored texture content.");
-				}
-			}
 			if (frame != NULL)
 			{
+				for_iter (i, 0, this->textures.size())
+				{
+					if (!this->textures[i]->isLoaded())
+					{
+						hlog::write(logTag, this->videoClipName + ": Reloading texture " + hstr(i));
+						this->textures[i]->loadAsync();
+					}
+				}
 				int frameWidth = frame->getStride();
 				int frameHeight = frame->getHeight();
 				if (frame->hasAlphaChannel())
@@ -647,17 +627,6 @@ namespace aprilvideo
 				this->currentTexture = this->textures[index];
 				this->currentVideoImage = this->videoImages[index];
 				this->currentVideoImage->setBlendMode(this->blendMode);
-				if (restoringTexture)
-				{
-					if (this->textures[index]->isLoaded())
-					{
-						hlog::write(logTag, this->videoClipName + ": Verified that new texture is loaded.");
-					}
-					else
-					{
-						hlog::error(logTag, this->videoClipName + ": New texture is not loaded!");
-					}
-				}
 				this->image = this->currentVideoImage;
 #ifdef _TEXWRITE_BENCHMARK
 				long t = clock();
@@ -673,10 +642,7 @@ namespace aprilvideo
 #else
 				this->currentTexture->getTexture()->write(0, 0, frameWidth, frameHeight, 0, 0, frame->getBuffer(), frameWidth, frameHeight, textureFormat);
 #endif
-				if (pop)
-				{
-					this->clip->popFrame();
-				}
+				this->clip->popFrame();
 				if (this->looping)
 				{
 					unsigned long number = frame->getFrameNumber();
@@ -692,10 +658,6 @@ namespace aprilvideo
 						this->triggerEvent("PlaybackDone");
 					}
 					this->_previousFrameNumber = number;
-				}
-				if (restoringTexture)
-				{
-					hlog::write(logTag, this->videoClipName + ": Successfully uploaded video frame to restored texture.");
 				}
 			}
 		}
