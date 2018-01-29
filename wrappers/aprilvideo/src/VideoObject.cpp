@@ -605,7 +605,6 @@ namespace aprilvideo
 		if (this->clip != NULL)
 		{
 			theoraplayer::VideoFrame* frame = this->clip->fetchNextFrame();
-#ifdef __APRIL_5_x_API
 			if (frame != NULL)
 			{
 				for_iter (i, 0, this->textures.size())
@@ -661,101 +660,6 @@ namespace aprilvideo
 					this->_previousFrameNumber = number;
 				}
 			}
-#else
-			bool pop = true;
-			bool restoringTexture = false;
-			if (!this->currentTexture->isLoaded())
-			{
-				restoringTexture = true;
-				hlog::write(logTag, this->videoClipName + ": Textures unloaded, reloading");
-				int i = 1;
-				foreach (aprilui::Texture*, it, this->textures)
-				{
-					hlog::write(logTag, this->videoClipName + ": Reloading texture " + hstr(i));
-					(*it)->load();
-					++i;
-				}
-				if (frame == NULL)
-				{
-					hlog::write(logTag, this->videoClipName + ": Texture restored, waiting for video frame to decode to fill texture.");
-					if (this->clip->getReadyFramesCount() == 0)
-					{
-						this->clip->waitForCache();
-					}
-					frame = this->clip->getFrameQueue()->getFirstAvailableFrame();
-					pop = false;
-				}
-				else
-				{
-					hlog::write(logTag, this->videoClipName + ": Texture restored, using current frame to fill restored texture content.");
-				}
-			}
-			if (frame != NULL)
-			{
-				int frameWidth = frame->getStride();
-				int frameHeight = frame->getHeight();
-				if (frame->hasAlphaChannel())
-				{
-					frameWidth /= 2;
-				}
-				april::Image::Format textureFormat = this->_getTextureFormat();
-				// switch textures each frame to optimize GPU pipeline
-				int index = (this->videoImages.indexOf(this->currentVideoImage) + 1) % this->videoImages.size();
-				this->currentTexture = this->textures[index];
-				this->currentVideoImage = this->videoImages[index];
-				this->currentVideoImage->setBlendMode(this->blendMode);
-				if (restoringTexture)
-				{
-					if (this->textures[index]->isLoaded())
-					{
-						hlog::write(logTag, this->videoClipName + ": Verified that new texture is loaded.");
-					}
-					else
-					{
-						hlog::error(logTag, this->videoClipName + ": New texture is not loaded!");
-					}
-				}
-				this->image = this->currentVideoImage;
-#ifdef _TEXWRITE_BENCHMARK
-				long t = clock();
-				int n = 256;
-				char message[1024] = { '\0' };
-				for (int i = 0; i < n; ++i)
-				{
-					this->currentTexture->getTexture()->write(0, 0, frameWidth, frameHeight, 0, 0, frame->getBuffer(), frameWidth, frameHeight, textureFormat);
-				}
-				float diff = ((float)(clock() - t) * 1000.0f) / CLOCKS_PER_SEC;
-				sprintf(message, "BENCHMARK: uploading n %dx%d video frames to texture took %.1fms (%.2fms average per frame)\n", frameWidth, frameHeight, diff, diff / n);
-				hlog::write(logTag, message);
-#else
-				this->currentTexture->getTexture()->write(0, 0, frameWidth, frameHeight, 0, 0, frame->getBuffer(), frameWidth, frameHeight, textureFormat);
-#endif
-				if (pop)
-				{
-					this->clip->popFrame();
-				}
-				if (this->looping)
-				{
-					unsigned long number = frame->getFrameNumber();
-					if (this->_seeked)
-					{
-						this->_seeked = false;
-					}
-					else if (number < this->_previousFrameNumber)
-					{
-#ifdef _PLAYBACK_DONE_DEBUG
-						hlog::writef(logTag, "PlaybackDone(looping): %s", this->videoClipName.cStr());
-#endif
-						this->triggerEvent("PlaybackDone");
-					}
-					this->_previousFrameNumber = number;
-				}
-				if (restoringTexture)
-				{
-					hlog::write(logTag, this->videoClipName + ": Successfully uploaded video frame to restored texture.");
-				}
-			}
-#endif
 		}
 	}
 
@@ -915,15 +819,11 @@ namespace aprilvideo
 		}
 		hlog::write(logTag, "Creating video textures for " + this->videoClipName);
 		april::Texture* aprilTexture = NULL;
+		hstr filename;
 		for_iter (i, 0, TEXTURES_COUNT)
 		{
-			// TODO - remove this once APRIL 5.x has been merged into trunk, you should have a compilation error here once this happens
-#ifdef __APRIL_5_x_API
 			aprilTexture = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat);
-#else
-			aprilTexture = april::rendersys->createTexture(tw, th, april::Color::Clear, textureFormat, april::Texture::Type::Volatile);
-#endif
-			hstr filename = aprilTexture->getFilename() + "_" + hstr(i + 1);
+			filename = aprilTexture->getFilename() + "_" + hstr(i + 1);
 			this->currentTexture = new aprilui::Texture(filename, filename, aprilTexture);
 			this->currentVideoImage = new aprilui::Image(this->currentTexture, "aprilvideo_video_clip_image_" + hstr(i + 1),
 				grect((float)this->clip->getSubFrameX(), (float)this->clip->getSubFrameY(), (float)this->clip->getSubFrameWidth(), (float)this->clip->getSubFrameHeight()));
