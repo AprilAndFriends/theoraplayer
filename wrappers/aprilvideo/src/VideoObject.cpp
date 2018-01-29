@@ -608,19 +608,13 @@ namespace aprilvideo
 #ifdef __APRIL_5_x_API
 			if (frame != NULL)
 			{
-				bool anyLoads = false;
 				for_iter (i, 0, this->textures.size())
 				{
-					if (!this->textures[i]->isLoaded())
+					if (this->textures[i]->isUnloaded())
 					{
 						hlog::write(logTag, this->videoClipName + ": Reloading texture " + hstr(i));
 						this->textures[i]->loadAsync();
-						anyLoads = true;
 					}
-				}
-				if (anyLoads)
-				{
-					hthread::sleep(0.001f);
 				}
 				int frameWidth = frame->getStride();
 				int frameHeight = frame->getHeight();
