@@ -126,8 +126,8 @@ namespace theoraplayer
 		if (this->running)
 		{
 			char message[1024] = { '\0' };
-#ifdef _WIN32
-			sprintf(message, "WARNING: Thread '%s' '<0x%p>' already running, cannot start!", DEFAULT_THREAD_NAME, this);
+#if defined(_WIN32) && !defined(_WINRT)
+			sprintf(message, "WARNING: Thread '%s' '<0x%p>' already running, cannot start!", DEFAULT_THREAD_NAME, this); // only basic Win32 doesn't add 0x to %p
 #else
 			sprintf(message, "WARNING: Thread '%s' '<%p>' already running, cannot start!", DEFAULT_THREAD_NAME, this);
 #endif
@@ -186,8 +186,8 @@ namespace theoraplayer
 			catch (_Exception& e)
 			{
 				char message[1024] = { '\0' };
-#ifdef _WIN32
-				sprintf(message, "FATAL: Thread '%s' '<0x%p>':", DEFAULT_THREAD_NAME, this);
+#if defined(_WIN32) && !defined(_WINRT)
+				sprintf(message, "FATAL: Thread '%s' '<0x%p>':", DEFAULT_THREAD_NAME, this); // only basic Win32 doesn't add 0x to %p
 #else
 				sprintf(message, "FATAL: Thread '%s' '<%p>':", DEFAULT_THREAD_NAME, this);
 #endif

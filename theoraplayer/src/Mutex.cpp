@@ -33,8 +33,8 @@ namespace theoraplayer
 		if (this->release() && this->logUnhandledUnlocks && mutex != NULL)
 		{
 			char message[1024] = { '\0' };
-#ifdef _WIN32
-			sprintf(message, "WARNING: '<0x%p>' has been scope-unlocked automatically!", this);
+#if defined(_WIN32) && !defined(_WINRT)
+			sprintf(message, "WARNING: '<0x%p>' has been scope-unlocked automatically!", this); // only basic Win32 doesn't add 0x to %p
 #else
 			sprintf(message, "WARNING: '<%p>' has been scope-unlocked automatically!", this);
 #endif
@@ -99,10 +99,10 @@ namespace theoraplayer
 		if (this->locked)
 		{
 			char message[1024] = { '\0' };
-#ifdef _WIN32
-			sprintf(message, "WARNING: '<0x%p>' is deadlocked!", this);
+#if defined(_WIN32) && !defined(_WINRT)
+			sprintf(message, "WARNING: '<0x%p>' is deadlocked!", this); // only basic Win32 doesn't add 0x to %p
 #else
-			sprintf(message, "WARNING: '<%p>'  is deadlocked!", this);
+			sprintf(message, "WARNING: '<%p>' is deadlocked!", this);
 #endif
 			log(message);
 			while (true) // simulating a deadlock
