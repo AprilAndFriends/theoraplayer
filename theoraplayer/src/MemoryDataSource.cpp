@@ -18,13 +18,14 @@
 
 namespace theoraplayer
 {
-    MemoryDataSource::MemoryDataSource(unsigned char* data, long size, const std::string& formatName, const std::string& filename)
+    MemoryDataSource::MemoryDataSource(unsigned char* data, long size, const std::string& formatName, const std::string& filename, bool deleteData)
 	{
 		this->filename = filename;
 		this->data = data;
 		this->size = size;
 		this->position = 0;
-        this->formatName = formatName;
+		this->formatName = formatName;
+		this->deleteData = deleteData;
 	}
 
 	MemoryDataSource::MemoryDataSource(const std::string& filename)
@@ -45,7 +46,7 @@ namespace theoraplayer
 
 	MemoryDataSource::~MemoryDataSource()
 	{
-		if (this->data != NULL)
+		if (this->deleteData && this->data != NULL)
 		{
 			delete[] this->data;
 		}
