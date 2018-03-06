@@ -18,13 +18,14 @@
 
 namespace theoraplayer
 {
-    MemoryDataSource::MemoryDataSource(unsigned char* data, long size, const std::string& formatName, const std::string& filename)
+	MemoryDataSource::MemoryDataSource(unsigned char* data, long size, const std::string& formatName, const std::string& filename, bool deleteData)
 	{
 		this->filename = filename;
 		this->data = data;
 		this->size = size;
 		this->position = 0;
-        this->formatName = formatName;
+		this->formatName = formatName;
+		this->deleteData = deleteData;
 	}
 
 	MemoryDataSource::MemoryDataSource(const std::string& filename)
@@ -33,19 +34,19 @@ namespace theoraplayer
 		this->data = NULL;
 		this->size = 0;
 		this->position = 0;
-        VideoClip::Format format;
-        // used for determining the file format, does not throw an exception inside the ctor
-        FILE* file = openSupportedFormatFile(this->filename, format, this->fullFilename);
-        if (file != NULL)
-        {
-            fclose(file);
-        }
-        this->formatName = format.name;
+		VideoClip::Format format;
+		// used for determining the file format, does not throw an exception inside the ctor
+		FILE* file = openSupportedFormatFile(this->filename, format, this->fullFilename);
+		if (file != NULL)
+		{
+			fclose(file);
+		}
+		this->formatName = format.name;
 	}
 
 	MemoryDataSource::~MemoryDataSource()
 	{
-		if (this->data != NULL)
+		if (this->deleteData && this->data != NULL)
 		{
 			delete[] this->data;
 		}

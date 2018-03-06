@@ -23,7 +23,7 @@ namespace theoraplayer
 	class theoraplayerExport MemoryDataSource : public DataSource
 	{
 	public:
-		MemoryDataSource(unsigned char* data, long size, const std::string& formatName, const std::string& filename = "memory");
+		MemoryDataSource(unsigned char* data, long size, const std::string& formatName, const std::string& filename = "memory", bool deleteData = true);
 		MemoryDataSource(const std::string& filename);
 		~MemoryDataSource();
 
@@ -44,6 +44,7 @@ namespace theoraplayer
 		int64_t size;
 		int64_t position;
 		unsigned char* data;
+		bool deleteData;
 
 		void _loadFile();
 
