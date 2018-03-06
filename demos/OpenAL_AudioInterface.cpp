@@ -7,6 +7,7 @@
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 #include <stdio.h>
+#include <string.h> // For memset
 
 #include "OpenAL_AudioInterface.h"
 

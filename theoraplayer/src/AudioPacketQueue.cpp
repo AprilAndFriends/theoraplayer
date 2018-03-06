@@ -7,6 +7,7 @@
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
 #include <stdlib.h>
+#include <string.h>
 
 #include "AudioInterface.h"
 #include "AudioPacketQueue.h"
