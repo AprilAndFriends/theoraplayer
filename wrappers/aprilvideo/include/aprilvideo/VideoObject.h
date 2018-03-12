@@ -66,19 +66,19 @@ namespace aprilvideo
 		void setVideoClipName(chstr value);
 		HL_DEFINE_ISSET(videoClipUseAlpha, VideoClipUseAlpha);
 		HL_DEFINE_GET(int, pauseAlphaThreshold, PauseAlphaThreshold);
-		void setPauseAlphaThreshold(int value);
+		void setPauseAlphaThreshold(const int& value);
 		HL_DEFINE_IS(looping, Looping);
-		void setLooping(bool value);
+		void setLooping(const bool& value);
 		HL_DEFINE_GET(float, initialPrecacheFactor, InitialPrecacheFactor);
-		void setInitialPrecacheFactor(float value);
+		void setInitialPrecacheFactor(const float& value);
 		HL_DEFINE_GET(float, initialPrecacheTimeout, InitialPrecacheTimeout);
-		void setInitialPrecacheTimeout(float value);
+		void setInitialPrecacheTimeout(const float& value);
 		HL_DEFINE_GETSET(hstr, soundName, SoundName);
 		HL_DEFINE_GETSET(float, audioSyncOffset, AudioSyncOffset);
 		HL_DEFINE_GET(float, speed, Speed);
-		void setSpeed(float value);
+		void setSpeed(const float& value);
 		float getTimePosition() const;
-		void setTimePosition(float value);
+		void setTimePosition(const float& value);
 		int getReadyFramesCount() const;
 		int getPrecachedFramesCount() const;
 		int getVideoClipWidth();
@@ -153,6 +153,9 @@ namespace aprilvideo
 		xal::Sound* sound;
 		xal::Player* audioPlayer;
 
+		hmap<hstr, aprilui::PropertyDescription::Accessor*>& _getGetters() const;
+		hmap<hstr, aprilui::PropertyDescription::Accessor*>& _getSetters() const;
+
 		april::Image::Format _getTextureFormat() const;
 
 		void _update(float timeDelta);
@@ -170,6 +173,8 @@ namespace aprilvideo
 		bool _seeked;
 
 		static harray<aprilui::PropertyDescription> _propertyDescriptions;
+		static hmap<hstr, aprilui::PropertyDescription::Accessor*> _getters;
+		static hmap<hstr, aprilui::PropertyDescription::Accessor*> _setters;
 
 	};
 

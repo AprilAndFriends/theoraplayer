@@ -46,6 +46,8 @@ namespace aprilvideo
 	));
 
 	harray<aprilui::PropertyDescription> VideoObject::_propertyDescriptions;
+	hmap<hstr, aprilui::PropertyDescription::Accessor*> VideoObject::_getters;
+	hmap<hstr, aprilui::PropertyDescription::Accessor*> VideoObject::_setters;
 
 	VideoObject::VideoObject(chstr name) : aprilui::ImageBox(name)
 	{
@@ -119,6 +121,7 @@ namespace aprilvideo
 	{
 		if (VideoObject::_propertyDescriptions.size() == 0)
 		{
+			VideoObject::_propertyDescriptions = aprilui::ImageBox::getPropertyDescriptions();
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_clip_name", aprilui::PropertyDescription::Type::String);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_clip_use_alpha", aprilui::PropertyDescription::Type::Bool);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("pause_alpha_threshold", aprilui::PropertyDescription::Type::Int);
@@ -135,7 +138,52 @@ namespace aprilvideo
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("video_clip_duration", aprilui::PropertyDescription::Type::Float);
 			VideoObject::_propertyDescriptions += aprilui::PropertyDescription("playback_state", aprilui::PropertyDescription::Type::String);
 		}
-		return (aprilui::ImageBox::getPropertyDescriptions() + VideoObject::_propertyDescriptions);
+		return VideoObject::_propertyDescriptions;
+	}
+
+	hmap<hstr, aprilui::PropertyDescription::Accessor*>& VideoObject::_getGetters() const
+	{
+		if (VideoObject::_getters.size() == 0)
+		{
+			VideoObject::_getters = aprilui::ImageBox::_getGetters();
+			VideoObject::_getters["video_clip_name"] = new aprilui::PropertyDescription::Get<VideoObject, hstr>(&VideoObject::getVideoClipName);
+			VideoObject::_getters["video_clip_use_alpha"] = new aprilui::PropertyDescription::Get<VideoObject, bool>(&VideoObject::isVideoClipUseAlpha);
+			VideoObject::_getters["pause_alpha_threshold"] = new aprilui::PropertyDescription::Get<VideoObject, int>(&VideoObject::getPauseAlphaThreshold);
+			VideoObject::_getters["looping"] = new aprilui::PropertyDescription::Get<VideoObject, bool>(&VideoObject::isLooping);
+			VideoObject::_getters["initial_precache_factor"] = new aprilui::PropertyDescription::Get<VideoObject, float>(&VideoObject::getInitialPrecacheFactor);
+			VideoObject::_getters["initial_precache_timeout"] = new aprilui::PropertyDescription::Get<VideoObject, float>(&VideoObject::getInitialPrecacheTimeout);
+			VideoObject::_getters["sound_name"] = new aprilui::PropertyDescription::Get<VideoObject, hstr>(&VideoObject::getSoundName);
+			VideoObject::_getters["audio_sync_offset"] = new aprilui::PropertyDescription::Get<VideoObject, float>(&VideoObject::getAudioSyncOffset);
+			//VideoObject::_getters["blend_mode"] = new aprilui::PropertyDescription::Get<VideoObject, hstr>(&VideoObject::getBl);
+			VideoObject::_getters["speed"] = new aprilui::PropertyDescription::Get<VideoObject, float>(&VideoObject::getSpeed);
+			VideoObject::_getters["time_position"] = new aprilui::PropertyDescription::Get<VideoObject, float>(&VideoObject::getTimePosition);
+			VideoObject::_getters["video_clip_width"] = new aprilui::PropertyDescription::Get<VideoObject, int>(&VideoObject::getVideoClipWidth);
+			VideoObject::_getters["video_clip_height"] = new aprilui::PropertyDescription::Get<VideoObject, int>(&VideoObject::getVideoClipHeight);
+			VideoObject::_getters["video_clip_duration"] = new aprilui::PropertyDescription::Get<VideoObject, float>(&VideoObject::getVideoClipDuration);
+			//VideoObject::_getters["playback_state"] = new aprilui::PropertyDescription::Get<VideoObject, hstr>(&VideoObject::getPlaybackState);
+		}
+		return VideoObject::_getters;
+	}
+
+	hmap<hstr, aprilui::PropertyDescription::Accessor*>& VideoObject::_getSetters() const
+	{
+		if (VideoObject::_setters.size() == 0)
+		{
+			VideoObject::_setters = aprilui::ImageBox::_getSetters();
+			VideoObject::_setters["video_clip_name"] = new aprilui::PropertyDescription::Set<VideoObject, hstr>(&VideoObject::setVideoClipName);
+			VideoObject::_setters["video_clip_use_alpha"] = new aprilui::PropertyDescription::Set<VideoObject, bool>(&VideoObject::setVideoClipUseAlpha);
+			VideoObject::_setters["pause_alpha_threshold"] = new aprilui::PropertyDescription::Set<VideoObject, int>(&VideoObject::setPauseAlphaThreshold);
+			VideoObject::_setters["looping"] = new aprilui::PropertyDescription::Set<VideoObject, bool>(&VideoObject::setLooping);
+			VideoObject::_setters["initial_precache_factor"] = new aprilui::PropertyDescription::Set<VideoObject, float>(&VideoObject::setInitialPrecacheFactor);
+			VideoObject::_setters["initial_precache_timeout"] = new aprilui::PropertyDescription::Set<VideoObject, float>(&VideoObject::setInitialPrecacheTimeout);
+			VideoObject::_setters["sound_name"] = new aprilui::PropertyDescription::Set<VideoObject, hstr>(&VideoObject::setSoundName);
+			VideoObject::_setters["audio_sync_offset"] = new aprilui::PropertyDescription::Set<VideoObject, float>(&VideoObject::setAudioSyncOffset);
+			//VideoObject::_setters["blend_mode"] = new aprilui::PropertyDescription::Set<VideoObject, hstr>(&VideoObject::setBl);
+			VideoObject::_setters["speed"] = new aprilui::PropertyDescription::Set<VideoObject, float>(&VideoObject::setSpeed);
+			VideoObject::_setters["time_position"] = new aprilui::PropertyDescription::Set<VideoObject, float>(&VideoObject::setTimePosition);
+			//VideoObject::_setters["playback_state"] = new aprilui::PropertyDescription::Set<VideoObject, hstr>(&VideoObject::setPlaybackState);
+		}
+		return VideoObject::_setters;
 	}
 
 	void VideoObject::setVideoClipName(chstr value)
@@ -148,13 +196,13 @@ namespace aprilvideo
 		}
 	}
 
-	void VideoObject::setPauseAlphaThreshold(int value)
+	void VideoObject::setPauseAlphaThreshold(const int& value)
 	{
 		// TODOth - this hack should be reconsidered or refactored
 		this->pauseAlphaThreshold = hclamp(value, -1, 255); // -1 indicates a situation where the user wants the video playing all the time
 	}
 
-	void VideoObject::setLooping(bool value)
+	void VideoObject::setLooping(const bool& value)
 	{
 		if (this->looping != value)
 		{
@@ -166,17 +214,17 @@ namespace aprilvideo
 		}
 	}
 
-	void VideoObject::setInitialPrecacheFactor(float value)
+	void VideoObject::setInitialPrecacheFactor(const float& value)
 	{
 		this->initialPrecacheFactor = hclamp(value, 0.0f, 1.0f);
 	}
 
-	void VideoObject::setInitialPrecacheTimeout(float value)
+	void VideoObject::setInitialPrecacheTimeout(const float& value)
 	{
 		this->initialPrecacheTimeout = hmax(value, 0.0f);
 	}
 
-	void VideoObject::setSpeed(float value)
+	void VideoObject::setSpeed(const float& value)
 	{
 		if (this->speed != value)
 		{
@@ -193,7 +241,7 @@ namespace aprilvideo
 		return (this->clip != NULL ? this->clip->getTimePosition() : 0.0f);
 	}
 
-	void VideoObject::setTimePosition(float value)
+	void VideoObject::setTimePosition(const float& value)
 	{
 		if (this->clip == NULL && this->videoClipName != "")
 		{
@@ -392,86 +440,73 @@ namespace aprilvideo
 	
 	hstr VideoObject::getProperty(chstr name)
 	{
-		if (name == "video_clip_name")				return this->getVideoClipName();
-		if (name == "video_clip_use_alpha")			return this->isVideoClipUseAlpha();
-		if (name == "pause_alpha_threshold")		return this->getPauseAlphaThreshold();
-		if (name == "looping")						return this->isLooping();
-		if (name == "initial_precache_factor")		return this->getInitialPrecacheFactor();
-		if (name == "initial_precache_timeout")		return this->getInitialPrecacheTimeout();
-		if (name == "sound_name")					return this->getSoundName();
-		if (name == "audio_sync_offset")			return this->getAudioSyncOffset();
 		if (name == "blend_mode")
 		{
 			if (this->blendMode == april::BlendMode::Add)		return "add";
 			if (this->blendMode == april::BlendMode::Subtract)	return "subtract";
 			if (this->blendMode == april::BlendMode::Overwrite)	return "overwrite";
-			return "default";
+			return "alpha";
 		}
-		if (name == "speed")						return this->getSpeed();
-		if (name == "time_position")				return this->getTimePosition();
-		if (name == "video_clip_width")				return this->getVideoClipWidth();
-		if (name == "video_clip_height")			return this->getVideoClipHeight();
-		if (name == "video_clip_duration")			return this->getVideoClipDuration();
-		if (name == "playback_state")				return this->getPlaybackState().getName();
+		if (name == "playback_state")	return this->getPlaybackState().getName();
 		// DEPRECATED
 		if (name == "video")
 		{
-			hlog::warn(logTag, "'video' is deprecated. Use 'video_clip_name' instead.");
+			hlog::error(logTag, "'video' is deprecated. Use 'video_clip_name' instead.");
 			return this->getVideoClipName();
 		}
 		if (name == "video_alpha")
 		{
-			hlog::warn(logTag, "'video_alpha' is deprecated. Use 'video_clip_use_alpha' instead.");
+			hlog::error(logTag, "'video_alpha' is deprecated. Use 'video_clip_use_alpha' instead.");
 			return this->isVideoClipUseAlpha();
 		}
 		if (name == "alpha_pause_treshold")
 		{
-			hlog::warn(logTag, "'alpha_pause_treshold' is deprecated. Use 'pause_alpha_threshold' instead.");
+			hlog::error(logTag, "'alpha_pause_treshold' is deprecated. Use 'pause_alpha_threshold' instead.");
 			return this->getPauseAlphaThreshold();
 		}
 		if (name == "alpha_pause_threshold")
 		{
-			hlog::warn(logTag, "'alpha_pause_treshold' is deprecated. Use 'pause_alpha_threshold' instead.");
+			hlog::error(logTag, "'alpha_pause_treshold' is deprecated. Use 'pause_alpha_threshold' instead.");
 			return this->getPauseAlphaThreshold();
 		}
 		if (name == "loop")
 		{
-			hlog::warn(logTag, "'loop' is deprecated. Use 'looping' instead.");
+			hlog::error(logTag, "'loop' is deprecated. Use 'looping' instead.");
 			return this->isLooping();
 		}
 		if (name == "audio")
 		{
-			hlog::warn(logTag, "'audio' is deprecated. Use 'sound_name' instead.");
+			hlog::error(logTag, "'audio' is deprecated. Use 'sound_name' instead.");
 			return this->getSoundName();
 		}
 		if (name == "sync_offset")
 		{
-			hlog::warn(logTag, "'sync_offset' is deprecated. Use 'audio_sync_offset' instead.");
+			hlog::error(logTag, "'sync_offset' is deprecated. Use 'audio_sync_offset' instead.");
 			return this->getAudioSyncOffset();
 		}
 		if (name == "videoWidth")
 		{
-			hlog::warn(logTag, "'videoWidth' is deprecated. Use 'video_clip_width' instead.");
+			hlog::error(logTag, "'videoWidth' is deprecated. Use 'video_clip_width' instead.");
 			return this->getVideoClipWidth();
 		}
 		if (name == "videoHeight")
 		{
-			hlog::warn(logTag, "'videoHeight' is deprecated. Use 'video_clip_height' instead.");
+			hlog::error(logTag, "'videoHeight' is deprecated. Use 'video_clip_height' instead.");
 			return this->getVideoClipHeight();
 		}
 		if (name == "duration")
 		{
-			hlog::warn(logTag, "'duration' is deprecated. Use 'video_clip_duration' instead.");
+			hlog::error(logTag, "'duration' is deprecated. Use 'video_clip_duration' instead.");
 			return this->getVideoClipDuration();
 		}
 		if (name == "time")
 		{
-			hlog::warn(logTag, "'time' is deprecated. Use 'time_position' instead.");
+			hlog::error(logTag, "'time' is deprecated. Use 'time_position' instead.");
 			return this->getTimePosition();
 		}
 		if (name == "state")
 		{
-			hlog::warn(logTag, "'state' is deprecated. Use 'playback_state' instead.");
+			hlog::error(logTag, "'state' is deprecated. Use 'playback_state' instead.");
 			return this->getPlaybackState().getName();
 		}
 		return ImageBox::getProperty(name);
@@ -479,20 +514,12 @@ namespace aprilvideo
 	
 	bool VideoObject::setProperty(chstr name, chstr value)
 	{
-		if		(name == "video_clip_name")				this->setVideoClipName(value);
-		else if (name == "video_clip_use_alpha")		this->setVideoClipUseAlpha(value);
-		else if (name == "pause_alpha_threshold")		this->setPauseAlphaThreshold(value);
-		else if (name == "looping")						this->setLooping(value);
-		else if (name == "initial_precache_factor")		this->setInitialPrecacheFactor(value);
-		else if (name == "initial_precache_timeout")	this->setInitialPrecacheTimeout(value);
-		else if (name == "sound_name")					this->setSoundName(value);
-		else if (name == "audio_sync_offset")			this->setAudioSyncOffset(value);
-		else if (name == "blend_mode")
+		if (name == "blend_mode")
 		{
 			april::BlendMode mode;
 			if (value == "default")
 			{
-				hlog::warn(logTag, "'blend_mode=default' is deprecated. Use 'blend_mode=alpha' instead."); // DEPRECATED
+				hlog::error(logTag, "'blend_mode=default' is deprecated. Use 'blend_mode=alpha' instead."); // DEPRECATED
 				mode = april::BlendMode::Alpha;
 			}
 			else if (value == "alpha")		mode = april::BlendMode::Alpha;
@@ -502,65 +529,76 @@ namespace aprilvideo
 			else
 			{
 				hlog::errorf(logTag, "Unknown VideoObject blend mode: %s", name.cStr());
-				return true;
+				return false;
 			}
 			this->blendMode = mode;
 			if (this->currentVideoImage != NULL)
 			{
 				this->currentVideoImage->setBlendMode(mode);
 			}
+			return true;
 		}
-		else if (name == "speed")						this->setSpeed(value);
-		else if (name == "time_position")				this->setTimePosition(value);
-		else if (name == "playback_state")				this->setPlaybackState(PlaybackState::fromName(value));
-		// DEPRECATED
-		else if (name == "video")
+		if (name == "playback_state")
 		{
-			hlog::warn(logTag, "'video=' is deprecated. Use 'video_clip_name=' instead.");
-			this->setVideoClipName(value);
-		}
-		else if (name == "video_alpha")
-		{
-			hlog::warn(logTag, "'video_alpha=' is deprecated. Use 'video_clip_use_alpha=' instead.");
-			this->setVideoClipUseAlpha(value);
-		}
-		else if (name == "alpha_pause_threshold")
-		{
-			hlog::warn(logTag, "'alpha_pause_threshold=' is deprecated. Use 'pause_alpha_threshold=' instead.");
-			this->setPauseAlphaThreshold(value);
-		}
-		else if (name == "alpha_pause_treshold")
-		{
-			hlog::warn(logTag, "'alpha_pause_treshold=' is deprecated. Use 'pause_alpha_threshold=' instead.");
-			this->setPauseAlphaThreshold(value);
-		}
-		else if (name == "loop")
-		{
-			hlog::warn(logTag, "'loop=' is deprecated. Use 'looping=' instead.");
-			this->setLooping(value);
-		}
-		else if (name == "audio")
-		{
-			hlog::warn(logTag, "'audio=' is deprecated. Use 'sound_name=' instead.");
-			this->setSoundName(value);
-		}
-		else if (name == "sync_offset")
-		{
-			hlog::warn(logTag, "'sync_offset=' is deprecated. Use 'audio_sync_offset=' instead.");
-			this->setAudioSyncOffset(value);
-		}
-		else if (name == "time")
-		{
-			hlog::warn(logTag, "'time=' is deprecated. Use 'time_position=' instead.");
-			this->setTimePosition(value);
-		}
-		else if (name == "state")
-		{
-			hlog::warn(logTag, "'state=' is deprecated. Use 'playback_state=' instead.");
 			this->setPlaybackState(PlaybackState::fromName(value));
+			return true;
 		}
-		else return aprilui::ImageBox::setProperty(name, value);
-		return true;
+		// DEPRECATED
+		if (name == "video")
+		{
+			hlog::error(logTag, "'video=' is deprecated. Use 'video_clip_name=' instead.");
+			this->setVideoClipName(value);
+			return true;
+		}
+		if (name == "video_alpha")
+		{
+			hlog::error(logTag, "'video_alpha=' is deprecated. Use 'video_clip_use_alpha=' instead.");
+			this->setVideoClipUseAlpha(value);
+			return true;
+		}
+		if (name == "alpha_pause_threshold")
+		{
+			hlog::error(logTag, "'alpha_pause_threshold=' is deprecated. Use 'pause_alpha_threshold=' instead.");
+			this->setPauseAlphaThreshold(value);
+			return true;
+		}
+		if (name == "alpha_pause_treshold")
+		{
+			hlog::error(logTag, "'alpha_pause_treshold=' is deprecated. Use 'pause_alpha_threshold=' instead.");
+			this->setPauseAlphaThreshold(value);
+			return true;
+		}
+		if (name == "loop")
+		{
+			hlog::error(logTag, "'loop=' is deprecated. Use 'looping=' instead.");
+			this->setLooping(value);
+			return true;
+		}
+		if (name == "audio")
+		{
+			hlog::error(logTag, "'audio=' is deprecated. Use 'sound_name=' instead.");
+			this->setSoundName(value);
+			return true;
+		}
+		if (name == "sync_offset")
+		{
+			hlog::error(logTag, "'sync_offset=' is deprecated. Use 'audio_sync_offset=' instead.");
+			this->setAudioSyncOffset(value);
+			return true;
+		}
+		if (name == "time")
+		{
+			hlog::error(logTag, "'time=' is deprecated. Use 'time_position=' instead.");
+			this->setTimePosition(value);
+			return true;
+		}
+		if (name == "state")
+		{
+			hlog::error(logTag, "'state=' is deprecated. Use 'playback_state=' instead.");
+			this->setPlaybackState(PlaybackState::fromName(value));
+			return true;
+		}
+		return aprilui::ImageBox::setProperty(name, value);
 	}
 	
 	void VideoObject::notifyEvent(chstr type, aprilui::EventArgs* args)
