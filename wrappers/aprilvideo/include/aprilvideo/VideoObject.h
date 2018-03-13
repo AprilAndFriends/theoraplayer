@@ -60,7 +60,7 @@ namespace aprilvideo
 		inline hstr getClassName() const { return "aprilvideo.VideoObject"; }
 		static aprilui::Object* createInstance(chstr name);
 		
-		harray<aprilui::PropertyDescription> getPropertyDescriptions() const;
+		hmap<hstr, aprilui::PropertyDescription>& getPropertyDescriptions() const;
 
 		HL_DEFINE_GET(hstr, videoClipName, VideoClipName);
 		void setVideoClipName(chstr value);
@@ -172,7 +172,7 @@ namespace aprilvideo
 		unsigned long _previousFrameNumber;
 		bool _seeked;
 
-		static harray<aprilui::PropertyDescription> _propertyDescriptions;
+		static hmap<hstr, aprilui::PropertyDescription> _propertyDescriptions;
 		static hmap<hstr, aprilui::PropertyDescription::Accessor*> _getters;
 		static hmap<hstr, aprilui::PropertyDescription::Accessor*> _setters;
 
