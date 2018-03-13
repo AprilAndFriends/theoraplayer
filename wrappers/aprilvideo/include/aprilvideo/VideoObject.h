@@ -76,7 +76,7 @@ namespace aprilvideo
 		HL_DEFINE_GETSET(hstr, soundName, SoundName);
 		HL_DEFINE_GETSET(float, audioSyncOffset, AudioSyncOffset);
 		HL_DEFINE_GET(float, speed, Speed);
-		void setSpeed(const float& value);
+		virtual void setSpeed(const float& value);
 		float getTimePosition() const;
 		void setTimePosition(const float& value);
 		int getReadyFramesCount() const;
