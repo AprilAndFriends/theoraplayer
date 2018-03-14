@@ -49,6 +49,54 @@
       <Configuration>ReleaseS</Configuration>
       <Platform>Android-x86</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Encoder|Win32">
+      <Configuration>Debug_Encoder</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS_Encoder|Win32">
+      <Configuration>DebugS_Encoder</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Encoder|Win32">
+      <Configuration>Release_Encoder</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS_Encoder|Win32">
+      <Configuration>ReleaseS_Encoder</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Encoder|Android">
+      <Configuration>Debug_Encoder</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS_Encoder|Android">
+      <Configuration>DebugS_Encoder</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Encoder|Android">
+      <Configuration>Release_Encoder</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS_Encoder|Android">
+      <Configuration>ReleaseS_Encoder</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug_Encoder|Android-x86">
+      <Configuration>Debug_Encoder</Configuration>
+      <Platform>Android-x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugS_Encoder|Android-x86">
+      <Configuration>DebugS_Encoder</Configuration>
+      <Platform>Android-x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_Encoder|Android-x86">
+      <Configuration>Release_Encoder</Configuration>
+      <Platform>Android-x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseS_Encoder|Android-x86">
+      <Configuration>ReleaseS_Encoder</Configuration>
+      <Platform>Android-x86</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{653F3841-3F26-49B9-AFCF-091DB4B67031}</ProjectGuid>
@@ -62,6 +110,48 @@
   <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\platform-$(Platform).props')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\platform-$(Platform).props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\configurations.props')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\configurations.props" />
   <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\configurations.props')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\configurations.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug_Encoder|Win32'">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='DebugS_Encoder|Win32'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release_Encoder|Win32'">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='ReleaseS_Encoder|Win32'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug_Encoder|Android'">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='DebugS_Encoder|Android'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release_Encoder|Android'">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='ReleaseS_Encoder|Android'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug_Encoder|Android-x86'">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='DebugS_Encoder|Android-x86'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release_Encoder|Android-x86'">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='ReleaseS_Encoder|Android-x86'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Condition="exists('..\..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props')" Project="..\..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props" />
   <Import Condition="!exists('..\..\..\hltypes\msvc\vs2015\props-generic\build-defaults.props')" Project="..\..\..\theoraplayer\msvc\vs2015\props-generic\build-defaults.props" />
@@ -114,8 +204,24 @@
       <ExcludedFromBuild Condition="'$(Platform)'=='Win32' or !$(PlatformToolset.StartsWith('clang'))">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\lib\collect.c" />
-    <ClCompile Include="..\..\lib\encoder_disabled.c" />
-    <ClCompile Include="..\..\lib\enquant.c" />
+    <ClCompile Include="..\..\lib\encapiwrapper.c">
+      <ExcludedFromBuild Condition="!$(Configuration.EndsWith('_Encoder'))">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\encfrag.c">
+      <ExcludedFromBuild Condition="!$(Configuration.EndsWith('_Encoder'))">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\encinfo.c">
+      <ExcludedFromBuild Condition="!$(Configuration.EndsWith('_Encoder'))">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\encode.c">
+      <ExcludedFromBuild Condition="!$(Configuration.EndsWith('_Encoder'))">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\encoder_disabled.c">
+      <ExcludedFromBuild Condition="$(Configuration.EndsWith('_Encoder'))">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\enquant.c">
+      <ExcludedFromBuild Condition="!$(Configuration.EndsWith('_Encoder'))">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\lib\fdct.c" />
     <ClCompile Include="..\..\lib\huffenc.c" />
     <ClCompile Include="..\..\lib\mathops.c" />

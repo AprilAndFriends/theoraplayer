@@ -114,6 +114,10 @@
     <ClCompile Include="..\..\lib\x86\x86state.c">
       <Filter>x86</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\lib\encapiwrapper.c" />
+    <ClCompile Include="..\..\lib\encfrag.c" />
+    <ClCompile Include="..\..\lib\encinfo.c" />
+    <ClCompile Include="..\..\lib\encode.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\theora\codec.h" />
