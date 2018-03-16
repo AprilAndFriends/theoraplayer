@@ -18,6 +18,7 @@
 #include "encint.h"
 
 const th_quant_info TH_VP31_QUANT_INFO;
+const th_huff_code TH_VP31_HUFF_CODES[TH_NHUFFMAN_TABLES][TH_NDCT_TOKENS];
 
 th_enc_ctx *th_encode_alloc(const th_info *_info){
   return NULL;
