@@ -45,7 +45,7 @@ typedef struct oc_token_checkpoint    oc_token_checkpoint;
 
 /*Encoder-specific accelerated functions.*/
 # if defined(OC_X86_ASM)
-#  if defined(_MSC_VER)
+#  if defined(_MSC_VER) && !defined(_ANDROID)
 #   include "x86_vc/x86enc.h"
 #  else
 #   include "x86/x86enc.h"
