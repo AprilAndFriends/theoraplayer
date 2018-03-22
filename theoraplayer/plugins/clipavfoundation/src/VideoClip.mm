@@ -139,10 +139,7 @@ namespace clipavfoundation
 		NSDictionary* videoOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:(yuvOutput) ? kCVPixelFormatType_420YpCbCr8Planar : kCVPixelFormatType_32BGRA], kCVPixelBufferPixelFormatTypeKey, nil];
 		this->output = [[AVAssetReaderTrackOutput alloc] initWithTrack:videoTrack outputSettings:videoOptions];
 		[this->reader addOutput:this->output];
-		if ([this->output respondsToSelector:@selector(setAlwaysCopiesSampleData:)]) // Not supported on iOS versions older than 5.0
-		{
-			this->output.alwaysCopiesSampleData = NO;
-		}
+		this->output.alwaysCopiesSampleData = NO;
 		this->fps = videoTrack.nominalFrameRate;
 		this->width = this->subFrameWidth = this->stride = videoTrack.naturalSize.width;
 		this->height = this->subFrameHeight = videoTrack.naturalSize.height;
