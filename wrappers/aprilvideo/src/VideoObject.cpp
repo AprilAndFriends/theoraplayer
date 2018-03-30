@@ -778,14 +778,10 @@ namespace aprilvideo
 #ifdef _IOS
 			if (sysInfo.architectureBits == 32)
 			{
-				hlog::write(logTag, "Low end device detected, sending memory warning before creating a new video instance");
-				april::SystemDelegate* delegate = april::window->getSystemDelegate();
-				if (delegate != NULL)
-				{
-					delegate->onLowMemoryWarning();
-				}
+				hlog::write(logTag, "Low end device detected, queueing memory warning before creating a new video instance.");
+				april::window->queueLowMemoryWarning();
 			}
-#endif
+#endif																																																															
 			if (path.endsWith(".mp4"))
 			{
 				hstr mp4Path = path;
@@ -811,7 +807,7 @@ namespace aprilvideo
 					hresource file;
 					file.open(path);
 					int size = (int)file.size();
-					if (size < getPreloadToRamSizeLimit() * 1024 * 1024)
+					if (size < aprilvideo::getPreloadToRamSizeLimit() * 1024 * 1024)
 					{
 						hlog::write(logTag, "Preloading video file to memory: " + path);
 						unsigned char* data = new unsigned char[size];
