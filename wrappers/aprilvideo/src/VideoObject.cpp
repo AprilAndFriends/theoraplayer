@@ -774,14 +774,6 @@ namespace aprilvideo
 				precached = (path.contains("lowres") ? 16 : 8);
 			}
 #endif
-			
-#ifdef _IOS
-			if (sysInfo.architectureBits == 32)
-			{
-				hlog::write(logTag, "Low end device detected, queueing memory warning before creating a new video instance.");
-				april::window->queueLowMemoryWarning();
-			}
-#endif																																																															
 			if (path.endsWith(".mp4"))
 			{
 				hstr mp4Path = path;
@@ -851,6 +843,13 @@ namespace aprilvideo
 			tw = hpotCeil(tw);
 			th = hpotCeil(th);
 		}
+#ifdef _IOS
+		if (sysInfo.architectureBits == 32 && tw * th >= 384 * 384)
+		{
+			hlog::write(logTag, "Low end device detected, queueing memory warning before creating a new video instance.");
+			april::window->queueLowMemoryWarning();
+		}
+#endif
 		hlog::write(logTag, "Creating video textures for " + this->videoClipName);
 		april::Texture* aprilTexture = NULL;
 		hstr filename;
