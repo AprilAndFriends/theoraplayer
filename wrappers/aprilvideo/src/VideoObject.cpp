@@ -62,6 +62,8 @@ namespace aprilvideo
 #endif
 		this->audioSyncOffset = 0.0f;
 		this->blendMode = april::BlendMode::Alpha;
+		this->colorMode = april::ColorMode::Multiply;
+		this->colorModeFactor = 1.0f;
 		this->speed = 1.0f;
 		this->clip = NULL;
 		this->timer = NULL;
@@ -87,6 +89,8 @@ namespace aprilvideo
 		this->initialPrecacheTimeout = other.initialPrecacheTimeout;
 		this->audioSyncOffset = 0.0f;
 		this->blendMode = other.blendMode;
+		this->colorMode = other.colorMode;
+		this->colorModeFactor = other.colorModeFactor;
 		this->speed = other.speed;
 		this->clip = NULL;
 		this->timer = NULL;
@@ -130,7 +134,9 @@ namespace aprilvideo
 			VideoObject::_propertyDescriptions["initial_precache_timeout"] = aprilui::PropertyDescription("initial_precache_timeout", aprilui::PropertyDescription::Type::Float);
 			VideoObject::_propertyDescriptions["sound_name"] = aprilui::PropertyDescription("sound_name", aprilui::PropertyDescription::Type::String);
 			VideoObject::_propertyDescriptions["audio_sync_offset"] = aprilui::PropertyDescription("audio_sync_offset", aprilui::PropertyDescription::Type::Float);
-			VideoObject::_propertyDescriptions["blend_mode"] = aprilui::PropertyDescription("blend_mode", aprilui::PropertyDescription::Type::String);
+			VideoObject::_propertyDescriptions["blend_mode"] = aprilui::PropertyDescription("blend_mode", aprilui::PropertyDescription::Type::Enum);
+			VideoObject::_propertyDescriptions["color_mode"] = aprilui::PropertyDescription("color_mode", aprilui::PropertyDescription::Type::Enum);
+			VideoObject::_propertyDescriptions["color_mode_factor"] = aprilui::PropertyDescription("color_mode_factor", aprilui::PropertyDescription::Type::Float);
 			VideoObject::_propertyDescriptions["speed"] = aprilui::PropertyDescription("speed", aprilui::PropertyDescription::Type::Float);
 			VideoObject::_propertyDescriptions["time_position"] = aprilui::PropertyDescription("time_position", aprilui::PropertyDescription::Type::Float);
 			VideoObject::_propertyDescriptions["video_clip_width"] = aprilui::PropertyDescription("video_clip_width", aprilui::PropertyDescription::Type::Int);
@@ -154,7 +160,9 @@ namespace aprilvideo
 			VideoObject::_getters["initial_precache_timeout"] = new aprilui::PropertyDescription::Get<VideoObject, float>(&VideoObject::getInitialPrecacheTimeout);
 			VideoObject::_getters["sound_name"] = new aprilui::PropertyDescription::Get<VideoObject, hstr>(&VideoObject::getSoundName);
 			VideoObject::_getters["audio_sync_offset"] = new aprilui::PropertyDescription::Get<VideoObject, float>(&VideoObject::getAudioSyncOffset);
-			//VideoObject::_getters["blend_mode"] = new aprilui::PropertyDescription::Get<VideoObject, hstr>(&VideoObject::getBl);
+			//VideoObject::_getters["blend_mode"] = new aprilui::PropertyDescription::GetEnum<VideoObject>(&VideoObject::getBlendMode);
+			//VideoObject::_getters["color_mode"] = new aprilui::PropertyDescription::GetEnum<VideoObject>(&VideoObject::getColorMode);
+			VideoObject::_getters["color_mode_factor"] = new aprilui::PropertyDescription::Get<VideoObject, float>(&VideoObject::getColorModeFactor);
 			VideoObject::_getters["speed"] = new aprilui::PropertyDescription::Get<VideoObject, float>(&VideoObject::getSpeed);
 			VideoObject::_getters["time_position"] = new aprilui::PropertyDescription::Get<VideoObject, float>(&VideoObject::getTimePosition);
 			VideoObject::_getters["video_clip_width"] = new aprilui::PropertyDescription::Get<VideoObject, int>(&VideoObject::getVideoClipWidth);
@@ -178,7 +186,9 @@ namespace aprilvideo
 			VideoObject::_setters["initial_precache_timeout"] = new aprilui::PropertyDescription::Set<VideoObject, float>(&VideoObject::setInitialPrecacheTimeout);
 			VideoObject::_setters["sound_name"] = new aprilui::PropertyDescription::Set<VideoObject, hstr>(&VideoObject::setSoundName);
 			VideoObject::_setters["audio_sync_offset"] = new aprilui::PropertyDescription::Set<VideoObject, float>(&VideoObject::setAudioSyncOffset);
-			//VideoObject::_setters["blend_mode"] = new aprilui::PropertyDescription::Set<VideoObject, hstr>(&VideoObject::setBl);
+			//VideoObject::_setters["blend_mode"] = new aprilui::PropertyDescription::SetEnum<VideoObject>(&VideoObject::setBlendMode);
+			//VideoObject::_setters["color_mode"] = new aprilui::PropertyDescription::SetEnum<VideoObject>(&VideoObject::setColorMode);
+			VideoObject::_setters["color_mode_factor"] = new aprilui::PropertyDescription::Set<VideoObject, float>(&VideoObject::setColorModeFactor);
 			VideoObject::_setters["speed"] = new aprilui::PropertyDescription::Set<VideoObject, float>(&VideoObject::setSpeed);
 			VideoObject::_setters["time_position"] = new aprilui::PropertyDescription::Set<VideoObject, float>(&VideoObject::setTimePosition);
 			//VideoObject::_setters["playback_state"] = new aprilui::PropertyDescription::Set<VideoObject, hstr>(&VideoObject::setPlaybackState);
@@ -222,6 +232,15 @@ namespace aprilvideo
 	void VideoObject::setInitialPrecacheTimeout(const float& value)
 	{
 		this->initialPrecacheTimeout = hmax(value, 0.0f);
+	}
+
+	void VideoObject::setColorModeFactor(const float& value)
+	{
+		this->colorModeFactor = value;
+		if (this->currentVideoImage != NULL)
+		{
+			this->currentVideoImage->setColorModeFactor(value);
+		}
 	}
 
 	void VideoObject::setSpeed(const float& value)
@@ -447,6 +466,15 @@ namespace aprilvideo
 			if (this->blendMode == april::BlendMode::Overwrite)	return "overwrite";
 			return "alpha";
 		}
+		if (name == "color_mode")
+		{
+			if (this->colorMode == april::ColorMode::Multiply)		return "multiply";
+			if (this->colorMode == april::ColorMode::AlphaMap)		return "alpha_map";
+			if (this->colorMode == april::ColorMode::Lerp)			return "lerp";
+			if (this->colorMode == april::ColorMode::Desaturate)	return "desaturate";
+			if (this->colorMode == april::ColorMode::Sepia)			return "sepia";
+			return "";
+		}
 		if (name == "playback_state")	return this->getPlaybackState().getName();
 		// DEPRECATED
 		if (name == "video")
@@ -535,6 +563,26 @@ namespace aprilvideo
 			if (this->currentVideoImage != NULL)
 			{
 				this->currentVideoImage->setBlendMode(mode);
+			}
+			return true;
+		}
+		if (name == "color_mode")
+		{
+			april::ColorMode mode;
+			if (value == "multiply")		mode = april::ColorMode::Multiply;
+			else if (value == "alpha_map")	mode = april::ColorMode::AlphaMap;
+			else if (value == "lerp")		mode = april::ColorMode::Lerp;
+			else if (value == "desaturate")	mode = april::ColorMode::Desaturate;
+			else if (value == "sepia")		mode = april::ColorMode::Sepia;
+			else
+			{
+				hlog::errorf(logTag, "Unknown VideoObject color mode: %s", name.cStr());
+				return false;
+			}
+			this->colorMode = mode;
+			if (this->currentVideoImage != NULL)
+			{
+				this->currentVideoImage->setColorMode(mode);
 			}
 			return true;
 		}
@@ -665,6 +713,8 @@ namespace aprilvideo
 				this->currentTexture = this->textures[index];
 				this->currentVideoImage = this->videoImages[index];
 				this->currentVideoImage->setBlendMode(this->blendMode);
+				this->currentVideoImage->setColorMode(this->colorMode);
+				this->currentVideoImage->setColorModeFactor(this->colorModeFactor);
 				this->image = this->currentVideoImage;
 #ifdef _TEXWRITE_BENCHMARK
 				long t = clock();
@@ -861,6 +911,8 @@ namespace aprilvideo
 			this->currentVideoImage = new aprilui::Image(this->currentTexture, "aprilvideo_video_clip_image_" + hstr(i + 1),
 				grect((float)this->clip->getSubFrameX(), (float)this->clip->getSubFrameY(), (float)this->clip->getSubFrameWidth(), (float)this->clip->getSubFrameHeight()));
 			this->currentVideoImage->setBlendMode(this->blendMode);
+			this->currentVideoImage->setColorMode(this->colorMode);
+			this->currentVideoImage->setColorModeFactor(this->colorModeFactor);
 			this->textures += this->currentTexture;
 			this->videoImages += this->currentVideoImage;
 		}

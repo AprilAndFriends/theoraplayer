@@ -75,6 +75,8 @@ namespace aprilvideo
 		void setInitialPrecacheTimeout(const float& value);
 		HL_DEFINE_GETSET(hstr, soundName, SoundName);
 		HL_DEFINE_GETSET(float, audioSyncOffset, AudioSyncOffset);
+		HL_DEFINE_GET(float, colorModeFactor, ColorModeFactor);
+		void setColorModeFactor(const float& value);
 		HL_DEFINE_GET(float, speed, Speed);
 		virtual void setSpeed(const float& value);
 		float getTimePosition() const;
@@ -107,31 +109,6 @@ namespace aprilvideo
 		void updateFrame();
 		void createVideoClip(bool waitForCache = true);
 
-		HL_DEPRECATED("Deprecated API. Use getCurrentTexture() instead.")
-			inline aprilui::Texture* getTexture() const			{ return this->getCurrentTexture(); }
-		HL_DEPRECATED("Deprecated API. Use createVideoClip() instead.")
-			inline void _createClip(bool waitForCache = true)	{ this->createVideoClip(waitForCache); }
-		HL_DEPRECATED("Deprecated API. Use isVideoClipPaused() instead.")
-			inline bool _isVideoPaused() const					{ return this->isVideoClipPaused(); }
-		HL_DEPRECATED("Deprecated API. Use isVideoClipCreated() instead.")
-			inline bool _isClipCreated() const					{ return this->isVideoClipCreated(); }
-		HL_DEPRECATED("Deprecated API. Use getVideoClipWidth() instead.")
-			inline int getClipWidth()							{ return this->getVideoClipWidth(); }
-		HL_DEPRECATED("Deprecated API. Use getVideoClipHeight() instead.")
-			inline int getClipHeight()							{ return this->getVideoClipHeight(); }
-		HL_DEPRECATED("Deprecated API. Use getReadyFramesCount() instead.")
-			inline int getNumReadyFrames() const				{ return this->getReadyFramesCount(); }
-		HL_DEPRECATED("Deprecated API. Use getPrecachedFramesCount() instead.")
-			inline int getNumPrecachedFrames() const			{ return this->getPrecachedFramesCount(); }
-		HL_DEPRECATED("Deprecated API. Use getPauseAlphaThreshold() instead.")
-			inline int getAlphaThreshold() const				{ return this->getPauseAlphaThreshold(); }
-		HL_DEPRECATED("Deprecated API. Use setPauseAlphaThreshold() instead.")
-			inline void setAlphaThreshold(int value)			{ this->setPauseAlphaThreshold(value); }
-		HL_DEPRECATED("Deprecated API. Use getPauseAlphaThreshold() instead.")
-			inline int getAlphaTreshold() const					{ return this->getPauseAlphaThreshold(); }
-		HL_DEPRECATED("Deprecated API. Use setPauseAlphaThreshold() instead.")
-			inline void setAlphaTreshold(int value)				{ this->setPauseAlphaThreshold(value); }
-
 	protected:
 		hstr videoClipName;
 		bool videoClipUseAlpha;
@@ -142,6 +119,8 @@ namespace aprilvideo
 		hstr soundName;
 		float audioSyncOffset;
 		april::BlendMode blendMode;
+		april::ColorMode colorMode;
+		float colorModeFactor;
 		float speed;
 
 		theoraplayer::VideoClip* clip;
