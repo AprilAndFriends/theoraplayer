@@ -82,7 +82,7 @@ namespace theoraplayer
 			this->_openFile();
 		}
 		// fpos_t is not a scalar in Linux, for more info refer here: https://code.google.com/p/libtheoraplayer/issues/detail?id=6
-#ifdef _LINUX
+#if defined(_LINUX) && !defined(__MINGW32__)
 		fpos_t fpos = { 0 };
 		fpos.__pos = byte_index;
 #else
@@ -106,7 +106,7 @@ namespace theoraplayer
 		{
 			return 0LL;
 		}
-#ifdef _LINUX
+#if defined(_LINUX) && !defined(__MINGW32__)
 		fpos_t pos;
 		fgetpos(this->filePtr, &pos);
 		return (int64_t)pos.__pos;
