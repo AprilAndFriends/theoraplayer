@@ -909,7 +909,7 @@ namespace aprilvideo
 			filename = aprilTexture->getFilename() + "_" + hstr(i + 1);
 			this->currentTexture = new aprilui::Texture(filename, filename, aprilTexture);
 			this->currentVideoImage = new aprilui::Image(this->currentTexture, "aprilvideo_video_clip_image_" + hstr(i + 1),
-				grect((float)this->clip->getSubFrameX(), (float)this->clip->getSubFrameY(), (float)this->clip->getSubFrameWidth(), (float)this->clip->getSubFrameHeight()));
+				grectf((float)this->clip->getSubFrameX(), (float)this->clip->getSubFrameY(), (float)this->clip->getSubFrameWidth(), (float)this->clip->getSubFrameHeight()));
 			this->currentVideoImage->setBlendMode(this->blendMode);
 			this->currentVideoImage->setColorMode(this->colorMode);
 			this->currentVideoImage->setColorModeFactor(this->colorModeFactor);
