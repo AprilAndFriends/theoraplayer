@@ -28,8 +28,8 @@ namespace aprilvideo
 		this->syncDiff = 0.0f;
 		this->syncDiffFactor = 0.0f;
 		this->timeDiff = 0.0f;
-		static hstr audiosystem = xal::manager->getName(); // XAL_AS_DISABLED audio system doesn't sync audio & video
-		this->disabledAudio = (audiosystem == XAL_AS_DISABLED || !xal::manager->isEnabled());
+		static hstr audiosystem = xal::manager->getName(); // AudioSystemType::Disabled audio system doesn't sync audio & video
+		this->disabledAudio = (audiosystem == xal::AudioSystemType::Disabled.getName() || !xal::manager->isEnabled());
 		this->startedPlaying = false;
 	}
 	
