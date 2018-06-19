@@ -60,7 +60,7 @@ namespace aprilvideo
 	{
 		int limit = 64;
 		int ram = april::getSystemInfo().ram;
-#ifdef _ANDROID
+#ifdef __ANDROID__
 		limit = 16;
 		if (ram < 1024)
 		{

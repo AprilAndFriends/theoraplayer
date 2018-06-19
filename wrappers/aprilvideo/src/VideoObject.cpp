@@ -55,7 +55,7 @@ namespace aprilvideo
 		this->pauseAlphaThreshold = 0;
 		this->looping = true;
 		this->initialPrecacheTimeout = 0.5f;
-#if defined(_ANDROID) || defined(_WINRT)
+#if defined(__ANDROID__) || defined(_WINRT)
 		this->initialPrecacheFactor = 0.9f; // slower devices, better to precache more
 #else
 		this->initialPrecacheFactor = 0.5f;
@@ -795,7 +795,7 @@ namespace aprilvideo
 			{
 				precached = 32;
 			}
-#elif defined(_ANDROID)
+#elif defined(__ANDROID__)
 			// Android requires a bit more sensitive precaching than other platforms
 			precached = 8;
 			if (ram < 512)
@@ -947,7 +947,7 @@ namespace aprilvideo
 			}
 			if (category == AUDIO_CATEGORY && !xal::manager->hasCategory(AUDIO_CATEGORY))
 			{
-#if defined(_WINRT) || defined(_ANDROID)
+#if defined(_WINRT) || defined(__ANDROID__)
 				xal::manager->createCategory(AUDIO_CATEGORY, xal::BufferMode::OnDemand, xal::SourceMode::Disk);
 #else
 				if (sysInfo.ram >= 512)
