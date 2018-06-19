@@ -57,7 +57,7 @@
  * NDK r4: Initial release
  */
 
-#ifdef _ANDROID
+#ifdef __ANDROID__
 #if defined(__le32__)
 
 // When users enter this, we should only provide interface and
@@ -93,7 +93,7 @@ static const int  android_cpufeatures_debug = 0;
 #  define DEFAULT_CPU_FAMILY  ANDROID_CPU_FAMILY_UNKNOWN
 #endif
 
-#ifndef _ANDROID
+#ifndef __ANDROID__
 #define  D(...) \
     do { \
         if (android_cpufeatures_debug) { \

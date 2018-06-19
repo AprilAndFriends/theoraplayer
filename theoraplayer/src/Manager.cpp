@@ -25,7 +25,7 @@
 #include "VideoClip.h"
 #include "WorkerThread.h"
 
-#ifdef _ANDROID //libtheoraplayer addition for cpu feature detection
+#ifdef __ANDROID__ //libtheoraplayer addition for cpu feature detection
 	#include "cpu-features.h"
 #endif
 
@@ -83,7 +83,7 @@ namespace theoraplayer
 		message += "  - libvorbis version: " + std::string(vorbis_version_string()) + "\n";
 #endif
 #endif
-#ifdef _ANDROID
+#ifdef __ANDROID__
 		uint64_t features = libtheoraplayer_android_getCpuFeaturesExt();
 		char s[128] = { 0 };
 		sprintf(s, "  - Android: CPU Features: %u\n", (unsigned int)features);
