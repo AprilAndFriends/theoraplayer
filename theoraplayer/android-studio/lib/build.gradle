@@ -1,0 +1,23 @@
+apply plugin: "com.android.library"
+apply from: "../../../hltypes/android-studio/generic/default.gradle"
+apply from: "../../../hltypes/android-studio/generic/native.gradle"
+apply from: "../../../hltypes/android-studio/generic/cpp.gradle"
+
+android {
+	defaultConfig {
+		versionCode 2000
+		versionName "2.0.0"
+	}
+	externalNativeBuild {
+		cmake {
+			path "CMakeLists.txt"
+		}
+	}
+}
+
+dependencies {
+	implementation project(":theora")
+	implementation project(":tremor")
+	implementation project(":ogg")
+	implementation fileTree(include: ["*.jar"], dir: "libs")
+}
