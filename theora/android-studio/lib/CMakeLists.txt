@@ -4,7 +4,7 @@ enable_language(ASM)
 
 project(theora)
 
-include("../../../hltypes/android-studio/generic/cmake-preprocessors.txt")
+include("../../../hltypes/android-studio/generic/CMakeLists.txt")
 
 # defining manually so source files don't need to be changed
 file(
