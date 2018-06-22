@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.4.1)
 set(CMAKE_VERBOSE_MAKEFILE on)
+enable_language(ASM)
 
 project(theora)
 
@@ -32,12 +33,12 @@ file(
 if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
 	file(
 		GLOB CppSrcPlatform
-		"../../lib/arm_llvm_android/armcpu.c"
-		"../../lib/arm_llvm_android/armstate.c"
-		"../../lib/arm_llvm_android/armbits.asm"
-		"../../lib/arm_llvm_android/armfrag.asm"
-		"../../lib/arm_llvm_android/armidct.asm"
-		"../../lib/arm_llvm_android/armloop.asm"
+		"../../lib/arm_android_studio/armcpu.c"
+		"../../lib/arm_android_studio/armstate.c"
+		"../../lib/arm_android_studio/armbits.asm"
+		"../../lib/arm_android_studio/armfrag.asm"
+		"../../lib/arm_android_studio/armidct.asm"
+		"../../lib/arm_android_studio/armloop.asm"
 	)
 else()
 	file(
@@ -65,9 +66,11 @@ include_directories(AFTER "../../../ogg/include")
 
 add_definitions(
 	-DTHEORA_EXPORTS
+	-Wno-shift-negative-value
 )
 
 if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DANDROID_ARM_NEON=TRUE")
 	add_definitions(
 		-DOC_ARM_ASM
 		-DOC_ARM_ASM_EDSP=1
