@@ -8,6 +8,7 @@ include("../../../hltypes/android-studio/generic/cmake-preprocessors.txt")
 file(
 	GLOB_RECURSE CppSrc
 	"../../src/*.c"
+	"../../src/*.cc"
 	"../../src/*.cpp"
 )
 
