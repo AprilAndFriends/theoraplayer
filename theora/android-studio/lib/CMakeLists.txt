@@ -70,7 +70,6 @@ add_definitions(
 )
 
 if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DANDROID_ARM_NEON=TRUE")
 	add_definitions(
 		-DOC_ARM_ASM
 		-DOC_ARM_ASM_EDSP=1
