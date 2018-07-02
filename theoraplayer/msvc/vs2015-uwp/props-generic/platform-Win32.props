@@ -21,6 +21,7 @@
       <AdditionalLibraryDirectories>lib\lib\$(HLTypesDefaultPlatformLibDirectory);lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\$(HLTypesDefaultPlatformLibDirectory);..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\..\lib\$(HLTypesDefaultPlatformLibDirectory);..\..\..\..\lib\lib\$(HLTypesDefaultPlatformLibDirectory);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <TargetMachine>MachineX86</TargetMachine>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <LargeAddressAware>true</LargeAddressAware>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(HLTypesOutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
