@@ -5,7 +5,7 @@
       <PreprocessorDefinitions>APRILVIDEO_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../../include/aprilvideo;../../../hltypes/include;../../../gtypes/include;../../../april/include;../../../aprilui/include;../../../xal/include;../../../theoraplayer/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level3</WarningLevel>
-      <DisableSpecificWarnings>4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
 </Project>
