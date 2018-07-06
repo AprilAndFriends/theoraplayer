@@ -59,16 +59,15 @@ namespace aprilvideo
 	int getPreloadToRamSizeLimit()
 	{
 		int limit = 64;
-		int ram = april::getSystemInfo().ram;
 #ifdef __ANDROID__
 		limit = 16;
-		if (ram < 1024)
+		if (april::getSystemInfo().ram < 1024)
 		{
 			limit = 8;
 		}
 #elif defined(_WINRT) && defined(_WINP8)
 		limit = 32;
-		if (ram < 1024)
+		if (april::getSystemInfo().ram < 1024)
 		{
 			limit = 16;
 		}
