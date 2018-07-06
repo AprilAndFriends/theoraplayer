@@ -16,11 +16,11 @@ android {
 }
 
 dependencies {
-	implementation project(":theoraplayer")
-	implementation project(":xal")
-	implementation project(":aprilui")
-	implementation project(":april")
 	implementation project(":hltypes")
 	implementation project(":gtypes")
+	implementation project(":april")
+	implementation project(":aprilui")
+	implementation project(":xal")
+	implementation project(":theoraplayer")
 	implementation fileTree(include: ["*.jar"], dir: "libs")
 }
