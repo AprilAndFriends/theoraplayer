@@ -1,0 +1,31 @@
+apply plugin: "com.android.application"
+apply from: "../../../../hltypes/android-studio/generic/default.gradle"
+apply from: "../../../../hltypes/android-studio/generic/native.gradle"
+apply from: "../../../../hltypes/android-studio/generic/cpp.gradle"
+
+android {
+	defaultConfig {
+		applicationId "com.april.demoSimple"
+		versionCode 5000
+		versionName "5.0.0"
+	}
+	externalNativeBuild {
+		cmake {
+			path "CMakeLists.txt"
+		}
+	}
+	sourceSets {
+		main {
+			assets.srcDirs = ["../../../demos/media"]
+		}
+	}
+}
+
+dependencies {
+	implementation project(":hltypes")
+	implementation project(":gtypes")
+	implementation project(":jpeg")
+	implementation project(":png")
+	implementation project(":april")
+	implementation fileTree(include: ["*.jar"], dir: "libs")
+}

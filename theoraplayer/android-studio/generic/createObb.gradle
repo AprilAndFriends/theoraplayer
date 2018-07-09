@@ -1,0 +1,22 @@
+task createObb(type: Zip) {
+	destinationDir file("$buildDir/outputs/obb")
+	entryCompression ZipEntryCompression.STORED
+	archiveName "main.${android.defaultConfig.versionCode}.${android.defaultConfig.applicationId}.obb"
+}
+
+class PrepareObb extends DefaultTask {
+    String manifestFilename = "obb.manifest"
+}
+
+task prepareObb(type: PrepareObb) {
+	doLast {
+		new File("$buildDir/generated/obb_support").mkdirs()
+		File obbFile = new File("${createObb.destinationDir}/${createObb.archiveName}")
+		new File("$buildDir/generated/obb_support/${manifestFilename}").text = """${createObb.archiveName}
+${obbFile.size()}"""
+		android.sourceSets.main.assets.srcDirs += ["$buildDir/generated/obb_support"]
+	}
+}
+
+prepareObb.dependsOn createObb
+preBuild.dependsOn prepareObb

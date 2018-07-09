@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		package="com.april.demoSimple">
+		
+	<application android:label="Demo Simple"
+			android:icon="@mipmap/icon"
+			android:theme="@style/AprilSplashScreen">
+		<activity android:name=".Main"
+				android:label="Demo Simple"
+				android:screenOrientation="sensorLandscape"
+				android:launchMode="singleTask">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+				<category android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
+		</activity>
+	</application>
+	
+</manifest> 
