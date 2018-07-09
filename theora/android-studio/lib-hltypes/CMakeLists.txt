@@ -59,7 +59,7 @@ add_library(theora STATIC ${CppSrc} ${CppSrcPlatform})
 include_directories(AFTER "../../include")
 include_directories(AFTER "../../lib")
 include_directories(AFTER "../../lib/arm_llvm_android")
-include_directories(AFTER "../../../xal/lib/vorbis/include")
+include_directories(AFTER "../../../xal/lib") # tremor
 include_directories(AFTER "../../../xal/lib/ogg/include")
 
 add_definitions(
