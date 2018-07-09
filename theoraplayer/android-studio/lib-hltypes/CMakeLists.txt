@@ -15,7 +15,6 @@ file(
 add_library(theoraplayer STATIC ${CppSrc})
 
 include_directories(AFTER "../../include/theoraplayer")
-include_directories(AFTER "../../src")
 include_directories(AFTER "../../src/formats")
 include_directories(AFTER "../../src/YUV")
 include_directories(AFTER "../../src/YUV/C")

@@ -26,6 +26,10 @@ else()
 	)
 endif()
 
+include_directories(AFTER "../..")
+include_directories(AFTER "../../src")
+include_directories(AFTER "../../../include")
+
 find_library(libandroid_support android_support)
 find_library(libunwind unwind)
 find_library(liblog log)
@@ -35,5 +39,18 @@ find_library(libdl dl)
 find_library(libandroid android)
 find_library(libGLESv2 GLESv2)
 find_library(libOpenSLES OpenSLES)
+
+link_directories(
+	"lib/android/${ANDROID_ABI}"
+	"lib/lib/android/${ANDROID_ABI}"
+	"../lib/android/${ANDROID_ABI}"
+	"../lib/lib/android/${ANDROID_ABI}"
+	"../../lib/android/${ANDROID_ABI}"
+	"../../lib/lib/android/${ANDROID_ABI}"
+	"../../../lib/android/${ANDROID_ABI}"
+	"../../../lib/lib/android/${ANDROID_ABI}"
+	"../../../../lib/android/${ANDROID_ABI}"
+	"../../../../lib/lib/android/${ANDROID_ABI}"
+)
 
 set(SYSTEM_LIBS ${liblog} ${libz} ${libc} ${libdl} ${libandroid} ${libGLESv2})
