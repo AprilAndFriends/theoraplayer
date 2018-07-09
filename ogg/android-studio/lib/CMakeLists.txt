@@ -3,7 +3,7 @@ set(CMAKE_VERBOSE_MAKEFILE on)
 
 project(ogg)
 
-include("../../../../../hltypes/android-studio/generic/CMakeLists.txt")
+include("../../../theoraplayer/android-studio/generic/CMakeLists.txt")
 
 # defining manually so source files don't need to be changed
 file(

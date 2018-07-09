@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-		package="com.april.demoSimple">
+		package="com.theoraplayer.dummy">
 		
-	<application android:label="Demo Simple"
-			android:icon="@mipmap/icon"
-			android:theme="@style/AprilSplashScreen">
+	<application android:label="Dummy">
 		<activity android:name=".Main"
-				android:label="Demo Simple"
+				android:label="Dummy"
 				android:screenOrientation="sensorLandscape"
 				android:launchMode="singleTask">
 			<intent-filter>

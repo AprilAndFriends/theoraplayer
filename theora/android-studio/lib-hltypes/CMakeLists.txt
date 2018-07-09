@@ -4,7 +4,7 @@ enable_language(ASM)
 
 project(theora)
 
-include("../../../theoraplayer/android-studio/generic/CMakeLists.txt")
+include("../../../hltypes/android-studio/generic/CMakeLists.txt")
 
 # defining manually so source files don't need to be changed
 file(
@@ -59,8 +59,8 @@ add_library(theora STATIC ${CppSrc} ${CppSrcPlatform})
 include_directories(AFTER "../../include/theora")
 include_directories(AFTER "../../lib")
 include_directories(AFTER "../../lib/arm_llvm_android")
-include_directories(AFTER "../../../vorbis/include")
-include_directories(AFTER "../../../ogg/include")
+include_directories(AFTER "../../../xal/lib/vorbis/include")
+include_directories(AFTER "../../../xal/lib/ogg/include")
 
 add_definitions(
 	-DTHEORA_EXPORTS

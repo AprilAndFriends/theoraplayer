@@ -3,7 +3,7 @@ set(CMAKE_VERBOSE_MAKEFILE on)
 
 project(theoraplayer)
 
-include("../generic/CMakeLists.txt")
+include("../../../hltypes/android-studio/generic/CMakeLists.txt")
 
 file(
 	GLOB_RECURSE CppSrc
@@ -23,8 +23,8 @@ include_directories(AFTER "../../src/YUV/libyuv")
 include_directories(AFTER "../../src/YUV/libyuv/include")
 include_directories(AFTER "../../src/YUV/android")
 include_directories(AFTER "../../../theora/include")
-include_directories(AFTER "../../..") # tremor
-include_directories(AFTER "../../../ogg/include")
+include_directories(AFTER "../../../xal/lib") # tremor
+include_directories(AFTER "../../../xal/lib/ogg/include")
 
 add_definitions(
 	-DTHEORAPLAYER_EXPORTS

@@ -1,7 +1,7 @@
 apply plugin: "com.android.library"
-apply from: "../../../theoraplayer/android-studio/generic/default.gradle"
-apply from: "../../../theoraplayer/android-studio/generic/native.gradle"
-apply from: "../../../theoraplayer/android-studio/generic/c.gradle"
+apply from: "../../../hltypes/android-studio/generic/default.gradle"
+apply from: "../../../hltypes/android-studio/generic/native.gradle"
+apply from: "../../../hltypes/android-studio/generic/c.gradle"
 
 android {
 	defaultConfig {
