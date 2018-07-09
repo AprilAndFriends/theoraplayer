@@ -14,7 +14,6 @@ file(
 add_library(aprilvideo STATIC ${CppSrc})
 
 include_directories(AFTER "../../include/aprilvideo")
-include_directories(AFTER "../../src")
 include_directories(AFTER "../../../theoraplayer/include")
 include_directories(AFTER "../../../xal/include")
 include_directories(AFTER "../../../aprilui/include")
