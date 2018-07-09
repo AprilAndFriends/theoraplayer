@@ -30,16 +30,6 @@ include_directories(AFTER "../..")
 include_directories(AFTER "../../src")
 include_directories(AFTER "../../../include")
 
-find_library(libandroid_support android_support)
-find_library(libunwind unwind)
-find_library(liblog log)
-find_library(libz z)
-find_library(libc c)
-find_library(libdl dl)
-find_library(libandroid android)
-find_library(libGLESv2 GLESv2)
-find_library(libOpenSLES OpenSLES)
-
 link_directories(
 	"lib/android/${ANDROID_ABI}"
 	"lib/lib/android/${ANDROID_ABI}"
@@ -52,5 +42,15 @@ link_directories(
 	"../../../../lib/android/${ANDROID_ABI}"
 	"../../../../lib/lib/android/${ANDROID_ABI}"
 )
+
+find_library(libandroid_support android_support)
+find_library(libunwind unwind)
+find_library(liblog log)
+find_library(libz z)
+find_library(libc c)
+find_library(libdl dl)
+find_library(libandroid android)
+find_library(libGLESv2 GLESv2)
+find_library(libOpenSLES OpenSLES)
 
 set(SYSTEM_LIBS ${liblog} ${libz} ${libc} ${libdl} ${libandroid} ${libGLESv2})
