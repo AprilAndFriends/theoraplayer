@@ -15,6 +15,9 @@ add_definitions(
 	-Wstrict-overflow=0
 )
 
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -D_DEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG")
+
 # these are for compatibility, will be removed later once the code base has been cleaned up
 if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
 	add_definitions(
@@ -48,9 +51,8 @@ find_library(libunwind unwind)
 find_library(liblog log)
 find_library(libz z)
 find_library(libc c)
-find_library(libdl dl)
 find_library(libandroid android)
 find_library(libGLESv2 GLESv2)
 find_library(libOpenSLES OpenSLES)
 
-set(SYSTEM_LIBS ${liblog} ${libz} ${libc} ${libdl} ${libandroid} ${libGLESv2})
+set(SYSTEM_LIBS ${liblog} ${libz} ${libc} ${libandroid} ${libGLESv2})
