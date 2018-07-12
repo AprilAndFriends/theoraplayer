@@ -33,6 +33,9 @@ add_definitions(
 )
 
 if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
+	string(REPLACE " -mfpu=vfpv3-d16" "" CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+	string(REPLACE " -mfpu=vfpv3-d16" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+	string(REPLACE " -mfpu=vfpv3-d16" "" CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS}")
 	add_definitions(
 		-DLIBYUV_NEON
 		-D__ARM_NEON__
