@@ -2,14 +2,6 @@ android {
 	defaultConfig {
 		externalNativeBuild {
 			cmake {
-				//cFlags "-x c"
-				//cppFlags "-std=c++11 -frtti -fexceptions"
-				//cppFlags "-std=c++11 -frtti -fexceptions -funswitch-loops -mfpu=vfpv3-d16 -fpic -fstack-protector -x c -Wall -Wno-parentheses -Wno-overloaded-virtual -Wstrict-overflow=0 -fstrict-aliasing -ffunction-sections -fomit-frame-pointer -finline-limit=300"
-				
-//-funswitch-loops -mfpu=vfpv3-d16 -fpic -fstack-protector -x c -Wall -Wno-parentheses -Wno-overloaded-virtual -Wstrict-overflow=0 -fstrict-aliasing
-
-
-//-funwind-tables -O3 -mfloat-abi=softfp -ffunction-sections -fomit-frame-pointer -finline-limit=300 -no-canonical-prefixes -g3
 			}
 		}
 	}
