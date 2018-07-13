@@ -19,5 +19,5 @@ dependencies {
 	implementation project(":theora")
 	implementation project(":tremor")
 	implementation project(":ogg")
-	implementation fileTree(include: ["*.jar"], dir: "libs")
+	api fileTree(include: ["*.jar"], dir: "libs")
 }

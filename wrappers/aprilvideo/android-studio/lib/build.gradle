@@ -22,5 +22,5 @@ dependencies {
 	implementation project(":aprilui")
 	implementation project(":xal")
 	implementation project(":theoraplayer")
-	implementation fileTree(include: ["*.jar"], dir: "libs")
+	api fileTree(include: ["*.jar"], dir: "libs")
 }
