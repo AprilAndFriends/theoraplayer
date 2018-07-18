@@ -11,7 +11,7 @@
   <Import Condition="(exists('..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props'))" Project="..\..\..\..\msvc\$(HLTypesMsvcType)\$(Platform).props"/>
   <ItemDefinitionGroup>
     <ClCompile>
-      <PreprocessorDefinitions>_WINUWP;WINUWP;_WINRT;WINRT;_WIN32;WIN32;_X86;X86;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_UWP;_WINRT;WINRT;_WIN32;WIN32;_X86;X86;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../..;../../src;../../../include;../../../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <StringPooling>true</StringPooling>
       <CompileAsWinRT>true</CompileAsWinRT>
