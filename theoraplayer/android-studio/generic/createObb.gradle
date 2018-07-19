@@ -1,5 +1,5 @@
 task createObb(type: Zip) {
-	destinationDir file("$buildDir/outputs/obb")
+	destinationDir file("$buildDir/outputs/obb/${android.defaultConfig.applicationId}")
 	entryCompression ZipEntryCompression.STORED
 	archiveName "main.${android.defaultConfig.versionCode}.${android.defaultConfig.applicationId}.obb"
 }
