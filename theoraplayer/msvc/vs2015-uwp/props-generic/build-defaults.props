@@ -31,9 +31,11 @@
     <Link>
       <GenerateWindowsMetadata Condition="'$(ConfigurationType)'!='Application'">false</GenerateWindowsMetadata>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4221 /ignore:4264 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/ignore:4221 /ignore:4264 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <PostBuildEvent>
       <Command Condition="'$(ConfigurationType)'=='StaticLibrary'">xcopy "$(TargetPath)" "$(OutDir)..\..\..\" /Y /V</Command>
