@@ -25,7 +25,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <SDLCheck Condition="'%(CompileAs)' == 'CompileAsC'"></SDLCheck>
+      <SDLCheck Condition="'%(ClCompile.CompileAs)'=='CompileAsC'"></SDLCheck>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <DisableSpecificWarnings>4251;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
