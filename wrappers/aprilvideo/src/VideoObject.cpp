@@ -693,36 +693,6 @@ namespace aprilvideo
 			theoraplayer::VideoFrame* frame = this->clip->fetchNextFrame();
 			if (frame != NULL)
 			{
-				for_iter (i, 0, this->textures.size())
-				{
-					if (this->textures[i]->isUnloaded())
-					{
-						hlog::write(logTag, this->videoClipName + ": Reloading texture " + hstr(i));
-						this->textures[i]->loadAsync();
-					}
-				}
-				int frameWidth = frame->getStride();
-				int frameHeight = frame->getHeight();
-				if (frame->hasAlphaChannel())
-				{
-					frameWidth /= 2;
-				}
-
-				for_iter (i, 0, this->textures.size())
-				{
-					if (this->textures[i]->isUnloaded())
-					{
-						hlog::write(logTag, this->videoClipName + ": Reloading texture " + hstr(i));
-						this->textures[i]->loadAsync();
-					}
-				}
-				frameWidth = frame->getStride();
-				frameHeight = frame->getHeight();
-				if (frame->hasAlphaChannel())
-				{
-					frameWidth /= 2;
-				}
-
 				april::Image::Format textureFormat = this->_getTextureFormat();
 				// switch textures each frame to optimize GPU pipeline
 				int index = (this->videoImages.indexOf(this->currentVideoImage) + 1) % this->videoImages.size();
@@ -732,8 +702,8 @@ namespace aprilvideo
 				this->currentVideoImage->setColorMode(this->colorMode);
 				this->currentVideoImage->setColorModeFactor(this->colorModeFactor);
 				this->image = this->currentVideoImage;
-				frameWidth = frame->getStride();
-				frameHeight = frame->getHeight();
+				int frameWidth = frame->getStride();
+				int frameHeight = frame->getHeight();
 				if (frame->hasAlphaChannel())
 				{
 					frameWidth /= 2;
