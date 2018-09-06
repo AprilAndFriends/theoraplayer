@@ -712,7 +712,7 @@ namespace aprilvideo
 				long t = clock();
 				int n = 256;
 				char message[1024] = { '\0' };
-				for (int i = 0; i < n; ++i)
+				for_iter (i, 0, n)
 				{
 					this->currentTexture->getTexture()->write(0, 0, frameWidth, frameHeight, 0, 0, frame->getBuffer(), frameWidth, frameHeight, textureFormat);
 				}
