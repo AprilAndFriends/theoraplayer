@@ -1,8 +1,8 @@
 /// @file
 /// @version 2.0
-/// 
+///
 /// @section LICENSE
-/// 
+///
 /// This program is free software; you can redistribute it and/or modify it under
 /// the terms of the BSD license: http://opensource.org/licenses/BSD-3-Clause
 
@@ -417,7 +417,7 @@ namespace aprilvideo
 		this->updateFrame();
 		ImageBox::_draw();
 	}
-	
+
 	void VideoObject::_update(float timeDelta)
 	{
 		ImageBox::_update(timeDelta);
@@ -456,7 +456,7 @@ namespace aprilvideo
 			}
 		}
 	}
-	
+
 	hstr VideoObject::getProperty(chstr name)
 	{
 		if (name == "blend_mode")
@@ -539,7 +539,7 @@ namespace aprilvideo
 		}
 		return ImageBox::getProperty(name);
 	}
-	
+
 	bool VideoObject::setProperty(chstr name, chstr value)
 	{
 		if (name == "blend_mode")
@@ -648,7 +648,7 @@ namespace aprilvideo
 		}
 		return aprilui::ImageBox::setProperty(name, value);
 	}
-	
+
 	void VideoObject::notifyEvent(chstr type, aprilui::EventArgs* args)
 	{
 		if (type == aprilui::Event::AttachedToObject)
@@ -668,7 +668,7 @@ namespace aprilvideo
 			this->clip->play();
 		}
 	}
-	
+
 	void VideoObject::stop()
 	{
 		if (this->clip != NULL)
@@ -693,6 +693,37 @@ namespace aprilvideo
 			theoraplayer::VideoFrame* frame = this->clip->fetchNextFrame();
 			if (frame != NULL)
 			{
+				for_iter (i, 0, this->textures.size())
+				{
+					if (this->textures[i]->isUnloaded())
+					{
+						hlog::write(logTag, this->videoClipName + ": Reloading texture " + hstr(i));
+						this->textures[i]->loadAsync();
+					}
+				}
+				int frameWidth = frame->getStride();
+				int frameHeight = frame->getHeight();
+				if (frame->hasAlphaChannel())
+				{
+					frameWidth /= 2;
+				}
+
+				for_iter (i, 0, this->textures.size())
+				{
+					if (this->textures[i]->isUnloaded())
+					{
+						hlog::write(logTag, this->videoClipName + ": Reloading texture " + hstr(i));
+						this->textures[i]->loadAsync();
+					}
+				}
+				frameWidth = frame->getStride();
+				frameHeight = frame->getHeight();
+				if (frame->hasAlphaChannel())
+				{
+					frameWidth /= 2;
+				}
+
+
 				april::Image::Format textureFormat = this->_getTextureFormat();
 				// switch textures each frame to optimize GPU pipeline
 				int index = (this->videoImages.indexOf(this->currentVideoImage) + 1) % this->videoImages.size();
@@ -702,8 +733,8 @@ namespace aprilvideo
 				this->currentVideoImage->setColorMode(this->colorMode);
 				this->currentVideoImage->setColorModeFactor(this->colorModeFactor);
 				this->image = this->currentVideoImage;
-				int frameWidth = frame->getStride();
-				int frameHeight = frame->getHeight();
+				frameWidth = frame->getStride();
+				frameHeight = frame->getHeight();
 				if (frame->hasAlphaChannel())
 				{
 					frameWidth /= 2;
@@ -979,7 +1010,7 @@ namespace aprilvideo
 		this->clip->setPlaybackSpeed(this->speed);
 		this->update(0.0f); // to grab the first frame.
 	}
-	
+
 	void VideoObject::_tryCreateVideoClip()
 	{
 		if (this->clip == NULL && this->videoClipName != "")
