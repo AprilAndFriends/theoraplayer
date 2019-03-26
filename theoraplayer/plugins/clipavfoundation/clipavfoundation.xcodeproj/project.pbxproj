@@ -257,18 +257,18 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1020;
 			};
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "clipavfoundation" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
 				en,
+				de,
+				Base,
+				fr,
+				ja,
 			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* libclipavfoundation */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
