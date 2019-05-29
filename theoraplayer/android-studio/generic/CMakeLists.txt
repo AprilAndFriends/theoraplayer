@@ -37,7 +37,7 @@ string(REPLACE " -fstack-protector-strong" "" CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 string(REPLACE " -fstack-protector-strong" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 string(REPLACE " -fstack-protector-strong" "" CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS}")
 
-if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
+if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm" OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch64")
 	add_definitions(
 		-D_ARM
 	)
@@ -47,7 +47,7 @@ if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
 	string(REPLACE " -mthumb" "" CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS}")
 else()
 	add_definitions(
-		-D_ARM
+		-D_X86
 	)
 endif()
 

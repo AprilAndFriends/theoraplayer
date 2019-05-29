@@ -1,17 +1,13 @@
 android {
-	compileSdkVersion 26
+	compileSdkVersion 28
 	
 	defaultConfig {
-		minSdkVersion 15
+		minSdkVersion 16
 		targetSdkVersion 28
 		versionCode 1
 		versionName "1"
 	}
 	
 	sourceSets.main.jni.srcDirs = []
-}
-
-dependencies {
-	implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 

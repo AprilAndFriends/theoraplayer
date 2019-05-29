@@ -3,16 +3,69 @@ android
 	defaultConfig {
 		externalNativeBuild {
 			cmake {
-				arguments += ["-DANDROID_TOOLCHAIN=clang", "-DANDROID_NATIVE_API_LEVEL=15", "-DANDROID_PLATFORM=android-15", "-DANDROID_CPP_FEATURES=rtti exceptions", "-DANDROID_STL=c++_static"]
+				arguments += ["-DANDROID_TOOLCHAIN=clang", "-DANDROID_NATIVE_API_LEVEL=16", "-DANDROID_PLATFORM=android-16", "-DANDROID_CPP_FEATURES=rtti exceptions", "-DANDROID_STL=c++_static"]
 				cFlags += ["-fsigned-char"]
 				cppFlags += ["-fsigned-char"]
-				abiFilters "armeabi-v7a", "x86"
 			}
 		}
 	}
 	externalNativeBuild {
 		cmake {
+			version "3.10.2"
 			path "CMakeLists.txt"
+		}
+	}
+	buildTypes {
+		debug {
+			externalNativeBuild {
+				cmake {
+					cFlags += ["-DDEBUG", "-D_DEBUG"]
+					cppFlags += ["-DDEBUG", "-D_DEBUG"]
+				}
+			}
+		}
+	}
+	flavorDimensions "architecture"
+	productFlavors {
+		univ {
+			dimension "architecture"
+			externalNativeBuild {
+				cmake {
+					abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+				}
+			}
+		}
+		armv7a {
+			dimension "architecture"
+			externalNativeBuild {
+				cmake {
+					abiFilters "armeabi-v7a"
+				}
+			}
+		}
+		arm64 {
+			dimension "architecture"
+			externalNativeBuild {
+				cmake {
+					abiFilters "arm64-v8a"
+				}
+			}
+		}
+		x86 {
+			dimension "architecture"
+			externalNativeBuild {
+				cmake {
+					abiFilters "x86"
+				}
+			}
+		}
+		x64 {
+			dimension "architecture"
+			externalNativeBuild {
+				cmake {
+					abiFilters "x86_64"
+				}
+			}
 		}
 	}
 }
