@@ -22,7 +22,7 @@ namespace aprilvideo
 	{
 		this->player = player;
 		this->syncOffset = syncOffset;
-		this->prevTickCount = 0LL;
+		this->prevTickCount = (int64_t)0;
 		this->prevTimePosition = -1.0f;
 		this->audioPosition = 0.0f;
 		this->syncDiff = 0.0f;
