@@ -104,7 +104,7 @@ namespace theoraplayer
 	{
 		if (this->filePtr == NULL)
 		{
-			return 0LL;
+			return (int64_t)0;
 		}
 #if defined(_LINUX) && !defined(__MINGW32__)
 		fpos_t pos;
