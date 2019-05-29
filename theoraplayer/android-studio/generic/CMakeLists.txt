@@ -47,7 +47,7 @@ if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
 	string(REPLACE " -mthumb" "" CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS}")
 else()
 	add_definitions(
-		-D_X86
+		-D_ARM
 	)
 endif()
 
