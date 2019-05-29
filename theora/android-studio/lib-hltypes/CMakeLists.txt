@@ -30,17 +30,17 @@ file(
     "../../lib/state.c"
 )
 
-if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm" OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch64")
+if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
 	file(
 		GLOB CppSrcPlatform
 		"../../lib/arm_android_studio/armcpu.c"
 		"../../lib/arm_android_studio/armstate.c"
-		#"../../lib/arm_android_studio/armbits.asm"
-		#"../../lib/arm_android_studio/armfrag.asm"
-		#"../../lib/arm_android_studio/armidct.asm"
-		#"../../lib/arm_android_studio/armloop.asm"
+		"../../lib/arm_android_studio/armbits.asm"
+		"../../lib/arm_android_studio/armfrag.asm"
+		"../../lib/arm_android_studio/armidct.asm"
+		"../../lib/arm_android_studio/armloop.asm"
 	)
-else()
+elseif (${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86" AND NOT ${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86_64")
 	file(
 		GLOB CppSrcPlatform
 		"../../lib/x86/mmxfdct.c"
@@ -67,23 +67,26 @@ add_definitions(
 	-Wno-shift-negative-value
 )
 
-if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm" OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch64")
+if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
+	string(REPLACE " -mfpu=vfpv3-d16" "" CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+	string(REPLACE " -mfpu=vfpv3-d16" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+	string(REPLACE " -mfpu=vfpv3-d16" "" CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS}")
+	add_definitions(
+		-DOC_ARM_ASM
+		-DOC_ARM_ASM_EDSP=1
+		-DOC_ARM_ASM_MEDIA=1
+		-DOC_ARM_ASM_NEON=1
+		-DOC_ARM_CAN_UNALIGN=1
+		-DOC_ARM_CAN_UNALIGN_LDRD=0
+		-mfpu=neon
+	)
+elseif (${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch64")
 	string(REPLACE " -mfpu=vfpv3-d16" "" CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 	string(REPLACE " -mfpu=vfpv3-d16" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 	string(REPLACE " -mfpu=vfpv3-d16" "" CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS}")
 	add_definitions(
 		-mfpu=neon
 	)
-	if (NOT ${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch64")
-		add_definitions(
-			-DOC_ARM_ASM
-			-DOC_ARM_ASM_EDSP=1
-			-DOC_ARM_ASM_MEDIA=1
-			-DOC_ARM_ASM_NEON=1
-			-DOC_ARM_CAN_UNALIGN=1
-			-DOC_ARM_CAN_UNALIGN_LDRD=0
-		)
-	endif()
 elseif (NOT ${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86_64")
 	add_definitions(
 		-DOC_X86_ASM
