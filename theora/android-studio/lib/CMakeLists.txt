@@ -4,7 +4,7 @@ enable_language(ASM)
 
 project(theora)
 
-include("../../../theoraplayer/android-studio/generic/CMakeLists.txt")
+include("../../../hltypes/android-studio/generic/CMakeLists.txt")
 
 # defining manually so source files don't need to be changed
 file(
@@ -30,7 +30,7 @@ file(
     "../../lib/state.c"
 )
 
-if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
+if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm" OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch")
 	file(
 		GLOB CppSrcPlatform
 		"../../lib/arm_android_studio/armcpu.c"
@@ -59,27 +59,34 @@ add_library(theora STATIC ${CppSrc} ${CppSrcPlatform})
 include_directories(AFTER "../../include")
 include_directories(AFTER "../../lib")
 include_directories(AFTER "../../lib/arm_llvm_android")
-include_directories(AFTER "../../..") # tremor
-include_directories(AFTER "../../../ogg/include")
+include_directories(AFTER "../../../xal/lib") # tremor
+include_directories(AFTER "../../../xal/lib/ogg/include")
 
 add_definitions(
 	-DTHEORA_EXPORTS
 	-Wno-shift-negative-value
 )
 
-if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
+if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm" OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch")
 	string(REPLACE " -mfpu=vfpv3-d16" "" CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 	string(REPLACE " -mfpu=vfpv3-d16" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 	string(REPLACE " -mfpu=vfpv3-d16" "" CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS}")
-	add_definitions(
-		-DOC_ARM_ASM
-		-DOC_ARM_ASM_EDSP=1
-		-DOC_ARM_ASM_MEDIA=1
-		-DOC_ARM_ASM_NEON=1
-		-DOC_ARM_CAN_UNALIGN=1
-		-DOC_ARM_CAN_UNALIGN_LDRD=0
-		-mfpu=neon
-	)
+	message("*** ARM ***")
+	if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch")
+		add_definitions(
+
+		)
+	else()
+		add_definitions(
+			-DOC_ARM_ASM
+			-DOC_ARM_ASM_EDSP=1
+			-DOC_ARM_ASM_MEDIA=1
+			-DOC_ARM_ASM_NEON=1
+			-DOC_ARM_CAN_UNALIGN=1
+			-DOC_ARM_CAN_UNALIGN_LDRD=0
+			-mfpu=neon
+		)
+	endif()
 else()
 	add_definitions(
 		-DOC_X86_ASM
