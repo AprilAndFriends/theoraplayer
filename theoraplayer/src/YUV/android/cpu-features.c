@@ -573,9 +573,9 @@ android_cpuInitFamily(void)
 #elif defined(__mips__)
     g_cpuFamily = ANDROID_CPU_FAMILY_MIPS;
 #elif defined(__aarch64__)
-    g_cpuFamily = ANDROID_CPU_FAMILY_ARM64;
+    g_cpuFamily = ANDROID_CPU_FAMILY_ARM;
 #elif defined(__x86_64__)
-    g_cpuFamily = ANDROID_CPU_FAMILY_X86_64;
+    g_cpuFamily = ANDROID_CPU_FAMILY_X86;
 #else
     g_cpuFamily = ANDROID_CPU_FAMILY_UNKNOWN;
 #endif
