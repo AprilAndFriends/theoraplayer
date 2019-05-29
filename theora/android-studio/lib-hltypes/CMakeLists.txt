@@ -40,7 +40,7 @@ if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm")
 		"../../lib/arm_android_studio/armidct.asm"
 		"../../lib/arm_android_studio/armloop.asm"
 	)
-elseif (${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86" AND NOT ${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86_64")
+elseif (NOT ${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch64") # i686 and x86_64
 	file(
 		GLOB CppSrcPlatform
 		"../../lib/x86/mmxfdct.c"
@@ -87,7 +87,7 @@ elseif (${CMAKE_SYSTEM_PROCESSOR} MATCHES "aarch64")
 	add_definitions(
 		-mfpu=neon
 	)
-elseif (NOT ${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86_64")
+else() # i686 and x86_64
 	add_definitions(
 		-DOC_X86_ASM
 	)
