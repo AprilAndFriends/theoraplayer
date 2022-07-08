@@ -100,7 +100,7 @@ uint64_t TheoraFileDataSource::getPosition()
 	}
 #ifdef _LINUX
 	fpos_t pos;
-	fgetpos(mFilePtr, &pos);
+	fgetpos(this->filePtr, &pos);
 	return (uint64_t) pos.__pos;
 #else
 	fpos_t pos;
